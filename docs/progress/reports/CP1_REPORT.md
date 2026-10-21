@@ -127,3 +127,9 @@ eeba9b0 CP1 D3: JSON schemas and validation helpers
 59aab92 CP1 D1: Python package skeleton, .gitignore
 ddfae3f CP1: start, record session branch and task list
 ```
+
+## Correction (added in CP2, task 0)
+
+Criterion 9 ("`docs/results/CP1_LINKER_RESULTS.md` contains only observed numbers") was **not met in the repository at review time**: the file was never committed. The `.gitignore` pattern `results/` matched every directory named `results`, including `docs/results/`, so `git add` skipped the file silently, and the CP1 session did not check `git ls-files` before marking the criterion Met. The CP1 document was also assembled by hand from the score output rather than generated.
+
+Fix: commit `c67edde` changes the pattern to `/results/` (top-level only) and adds `python -m vulntrace results render --doc cp1`, which generates the document from `results/cp1/linker_score.json`. The regenerated document is committed together with this correction; an integration test (`test_committed_cp1_results_doc_matches_a_fresh_run`) checks that its tables match a fresh scoring run. The CP1 numbers did not change (18 cases, 17 agreements, 0 false NOT_REACHABLE, 0 false REACHABLE, 1 error).
