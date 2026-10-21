@@ -92,4 +92,14 @@ Models of any kind, embeddings, the vector store, retrieval, the agent, lifting,
 
 ## Review notes
 
-(The supervising assistant adds notes here if the state becomes `CHANGES_REQUESTED`.)
+**Supervisor review, 21 Oct 2026 - APPROVED** (branch `claude/lucid-fermi-9esjyw` at `d076dd9`, fast-forwarded into `main`).
+
+Checked by the supervisor: `pytest tests/unit tests/contract` -> 251 passed; CI green on the branch tip (GitHub Actions); D4_cases.json counts match the report exactly (103/2/14/1 statuses, 34/48/38 size buckets, 38 large, no duplicate IDs); no vulndb content or bulky data tracked. Not re-run by the supervisor: Go tests and integration tests (sandbox cannot reach the Go proxy); these rest on CI.
+
+Findings the next checkpoints must respect (not blocking):
+
+1. **Pseudo-replication in D4.** Nine post-cutoff rclone advisories (GO-2026-6181..6199) share one identical 445-candidate range. Treat them as one cluster: report results with and without them, and bootstrap by cluster (module + range) wherever D4 numbers are quoted. The "38 large cases" is therefore about 30 distinct ranges.
+2. **Date skew.** 87 of 120 D4 cases are post-2026-06-30 (all post-cutoff cases are forced in). 14 cases have no `created` date and are counted as pre-cutoff. Any contamination claim must say this.
+3. **TRUNCATED ranges cap at 500 commits.** All 14 truncated cases have commit_count 500, so B-ID only searched 500 commits there. B-ID recall (0.295) is a lower bound on those cases; report B-ID with and without TRUNCATED.
+4. **Ceiling is real.** 31 of 119 cases have a core symbol that is unchanged in the range (57 symbols EXISTS_UNCHANGED): the labelled vulnerable function is not the function the fix edited. Mode 2 recall is capped (about 26% of cases) unless retrieval expands to callers/callees or lifting. CP4/CP5 must report recall both against the candidate set and overall.
+5. The implementer's own note that a passing test suite hid a silent selection bug (caught only by reading the code) is accepted as honest; CP4 must include a test that the selection logic really shuffles and really includes forced cases.
