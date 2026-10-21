@@ -1,0 +1,1819 @@
+{
+  "cases": [
+    {
+      "candidate_count": 0,
+      "commit_count": 0,
+      "created": "2021-04-14",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "miekg",
+        "repo": "dns",
+        "sha": "43913f2f4fbd7dcff930b8a809e709591e4dd79e"
+      },
+      "id": "GO-2020-0006",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "PSEUDO_VERSION_UNRESOLVED"
+    },
+    {
+      "candidate_count": 81,
+      "commit_count": 33,
+      "created": "2021-04-14",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "pion",
+        "repo": "dtls",
+        "sha": "fd73a5df2ff0e1fb6ae6a51e2777d7a16cc4f4e0"
+      },
+      "id": "GO-2020-0038",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 23,
+      "commit_count": 21,
+      "created": "2021-04-14",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gin-gonic",
+        "repo": "gin",
+        "sha": "5929d521715610c9dd14898ebbe1d188d5de8937"
+      },
+      "id": "GO-2021-0052",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 7,
+      "commit_count": 3,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "sigstore",
+        "repo": "cosign",
+        "sha": "96d410a6580e4e81d24d112a0855c70ca3fb5b49"
+      },
+      "id": "GO-2022-0326",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 13805,
+      "commit_count": 500,
+      "created": "2022-07-01",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "aws",
+        "repo": "aws-sdk-go",
+        "sha": "35fa6ddf45c061e0f08d3a3b5119f8f4da38f6d1"
+      },
+      "id": "GO-2022-0391",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 4,
+      "commit_count": 1,
+      "created": "2022-07-01",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "ntbosscher",
+        "repo": "gobase",
+        "sha": "a8d40bce9c429d324122d18c446924dab809e812"
+      },
+      "id": "GO-2022-0400",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 1,
+      "commit_count": 1,
+      "created": "2022-07-01",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "pion",
+        "repo": "dtls",
+        "sha": "d2f797183a9f044ce976e6df6f362662ca722412"
+      },
+      "id": "GO-2022-0462",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 1,
+      "commit_count": 2,
+      "created": "2022-07-30",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "flyteorg",
+        "repo": "flyteadmin",
+        "sha": "a1ec282d02706e074bc4986fd0412e5da3b9d00a"
+      },
+      "id": "GO-2022-0519",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 3,
+      "commit_count": 8,
+      "created": "2022-08-15",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "microcosm-cc",
+        "repo": "bluemonday",
+        "sha": "c788a2a4d42e081ad54a31368478820bb4a42fb4"
+      },
+      "id": "GO-2022-0588",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 543,
+      "commit_count": 66,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "codenotary",
+        "repo": "immudb",
+        "sha": "cade04756ff3f0a3b9e8d24149062744574adf5d"
+      },
+      "id": "GO-2022-1118",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 7,
+      "commit_count": 1,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "helm",
+        "repo": "helm",
+        "sha": "293b50c65d4d56187cd4e2f390f0ada46b4c4737"
+      },
+      "id": "GO-2023-1547",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 58,
+      "commit_count": 26,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "hashicorp",
+        "repo": "go-getter",
+        "sha": "0edab85348271c843782993345b07b1ac98912e6"
+      },
+      "id": "GO-2023-1578",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 8,
+      "commit_count": 6,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "russellhaering",
+        "repo": "gosaml2",
+        "sha": "f9d66040241093e8702649baff50cc70d2c683c0"
+      },
+      "id": "GO-2023-1602",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 5,
+      "commit_count": 2,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "crewjam",
+        "repo": "saml",
+        "sha": "8e9236867d176ad6338c870a84e2039aef8a5021"
+      },
+      "id": "GO-2023-1664",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 20,
+      "commit_count": 3,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "openfga",
+        "repo": "openfga",
+        "sha": "087ce392595f3c319ab3028b5089118ea4063452"
+      },
+      "id": "GO-2023-1872",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 279,
+      "commit_count": 28,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "Consensys",
+        "repo": "gnark",
+        "sha": "59a4087261a6c73f13e80d695c17b398c3d0934f"
+      },
+      "id": "GO-2023-2098",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 132,
+      "commit_count": 35,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gofiber",
+        "repo": "fiber",
+        "sha": "8c3916dbf4ad2ed427d02c6eb63ae8b2fa8f019a"
+      },
+      "id": "GO-2023-2116",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 2,
+      "commit_count": 3,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "go-resty",
+        "repo": "resty",
+        "sha": "577fed8730d79f583eb48dfc81674164e1fc471e"
+      },
+      "id": "GO-2023-2328",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 10,
+      "commit_count": 15,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "mojocn",
+        "repo": "base64Captcha",
+        "sha": "9b11012caca58925f1e47c770f79f2fa47e3ad13"
+      },
+      "id": "GO-2023-2386",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 15,
+      "commit_count": 7,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "golang",
+        "repo": "crypto",
+        "sha": "9d2ee975ef9fe627bf0a6f01c1f69e8ef1d4f05d"
+      },
+      "id": "GO-2023-2402",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 74,
+      "commit_count": 7,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "hashicorp",
+        "repo": "nomad",
+        "sha": "b3209cbc6921e703b0e9984ce70c10b378665834"
+      },
+      "id": "GO-2024-2538",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 88,
+      "commit_count": 86,
+      "created": null,
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "hashicorp",
+        "repo": "nomad",
+        "sha": "a8789d3872bbf1b1f420f28b0f7ad8532a41d5e3"
+      },
+      "id": "GO-2024-2671",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 52,
+      "commit_count": 8,
+      "created": "2024-05-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "containers",
+        "repo": "image",
+        "sha": "132678b47bae29c710589012668cb85859d88385"
+      },
+      "id": "GO-2024-2842",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 20,
+      "commit_count": 27,
+      "created": "2024-09-13",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "cometbft",
+        "repo": "cometbft",
+        "sha": "3937e00a339ee6b861d75997b4f6c87d867b74f2"
+      },
+      "id": "GO-2024-3112",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 271,
+      "commit_count": 16,
+      "created": "2024-09-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "osrg",
+        "repo": "gobgp",
+        "sha": "419c50dfac578daa4d11256904d0dc182f1a9b22"
+      },
+      "id": "GO-2024-3124",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 1098,
+      "commit_count": 8,
+      "created": "2025-02-26",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "cosmos",
+        "repo": "cosmos-sdk",
+        "sha": "0a98b65b24900a0e608866c78f172cf8e4140aea"
+      },
+      "id": "GO-2025-3476",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 14,
+      "commit_count": 1,
+      "created": "2025-03-25",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "getkin",
+        "repo": "kin-openapi",
+        "sha": "67f0b233ffc01332f7d993f79490fbea5f4455f1"
+      },
+      "id": "GO-2025-3533",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 8,
+      "commit_count": 7,
+      "created": "2025-04-10",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "nats-io",
+        "repo": "nats-server",
+        "sha": "3e7e4645a24e829a36b4210f2d7c34dea7f7a424"
+      },
+      "id": "GO-2025-3600",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 2,
+      "commit_count": 5,
+      "created": "2025-06-10",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "pion",
+        "repo": "interceptor",
+        "sha": "fa5b35ea867389cec33a9c82fffbd459ca8958e5"
+      },
+      "id": "GO-2025-3748",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 5,
+      "commit_count": 6,
+      "created": "2026-01-16",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "go-pg",
+        "repo": "pg",
+        "sha": "eff50a43724e52347559687a6945c116afbb41c1"
+      },
+      "id": "GO-2025-3764",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 1,
+      "commit_count": 1,
+      "created": "2025-11-03",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "quic-go",
+        "repo": "quic-go",
+        "sha": "bc5bccf10fd02728eef150683eb4dfaa5c0e749c"
+      },
+      "id": "GO-2025-4017",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 15487,
+      "commit_count": 500,
+      "created": "2026-03-31",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "elastic",
+        "repo": "beats",
+        "sha": "941098459db6556b837194f40c076b08d51137cb"
+      },
+      "id": "GO-2026-4789",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 170,
+      "commit_count": 210,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "distribution",
+        "repo": "distribution",
+        "sha": "078b0783f239b4115d1a979e66f08832084e9d1d"
+      },
+      "id": "GO-2026-4942",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 21,
+      "commit_count": 1,
+      "created": "2026-07-21",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "cloudsoda",
+        "repo": "go-smb2",
+        "sha": "7b96c35f5f4babfc9d68a60baf5e85f2303d4a4b"
+      },
+      "id": "GO-2026-5051",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 1,
+      "commit_count": 3,
+      "created": "2026-06-22",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "SSLMate",
+        "repo": "go-pkcs12",
+        "sha": "03c441f6b0267f695ca02464133c0b373bf4dd55"
+      },
+      "id": "GO-2026-5052",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 121,
+      "commit_count": 343,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gofiber",
+        "repo": "fiber",
+        "sha": "050ff1ff18511c1475b8ec627460216aaecddd4e"
+      },
+      "id": "GO-2026-5069",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 100,
+      "commit_count": 67,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "ipld",
+        "repo": "go-ipld-prime",
+        "sha": "e43bf4a27055fe8d895671a731ee5041e2d983a9"
+      },
+      "id": "GO-2026-5073",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 1,
+      "commit_count": 1,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gomarkdown",
+        "repo": "markdown",
+        "sha": "759bbc3e32073c3bc4e25969c132fc520eda2778"
+      },
+      "id": "GO-2026-5208",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 132,
+      "commit_count": 61,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gohugoio",
+        "repo": "hugo",
+        "sha": "e41a06447daa3071a01f333fdcec0a5153c3c8d1"
+      },
+      "id": "GO-2026-5313",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 12,
+      "commit_count": 6,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "yuin",
+        "repo": "goldmark",
+        "sha": "cb46bbc4eca29d55aa9721e04ad207c23ccc44f9"
+      },
+      "id": "GO-2026-5320",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 132,
+      "commit_count": 61,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gohugoio",
+        "repo": "hugo",
+        "sha": "f8b5fa09a64950c32b803821ede411ebfe772b7a"
+      },
+      "id": "GO-2026-5380",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 1,
+      "commit_count": 2,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "slack-go",
+        "repo": "slack",
+        "sha": "34ad5c052e446f58505ae8d81a2a72821de107cc"
+      },
+      "id": "GO-2026-5410",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 125,
+      "commit_count": 44,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "osrg",
+        "repo": "gobgp",
+        "sha": "76d911046344a3923cbe573364197aa081944592"
+      },
+      "id": "GO-2026-5427",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 2,
+      "commit_count": 2,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "helm",
+        "repo": "helm",
+        "sha": "4e7994d4467182f535b6797c94b5b0e994a91436"
+      },
+      "id": "GO-2026-5435",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 263,
+      "commit_count": 3,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "MontFerret",
+        "repo": "ferret",
+        "sha": "160ebad6bd50f153453e120f6d909f5b83322917"
+      },
+      "id": "GO-2026-5452",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 11,
+      "commit_count": 29,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "bettercap",
+        "repo": "bettercap",
+        "sha": "0eaa375c5e5446bfba94a290eff92967a5deac9e"
+      },
+      "id": "GO-2026-5463",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 8,
+      "commit_count": 11,
+      "created": "2026-07-21",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "9e3e68d00c3ecf475a1432fc206400cfb4df7e3f"
+      },
+      "id": "GO-2026-5466",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 4,
+      "commit_count": 7,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gohugoio",
+        "repo": "hugo",
+        "sha": "479fe6c654937a850b65e74551dc4e857d52898f"
+      },
+      "id": "GO-2026-5504",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 49,
+      "commit_count": 65,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "open-telemetry",
+        "repo": "opentelemetry-go",
+        "sha": "aa1894e09e3fe66860c7885cb40f98901b35277f"
+      },
+      "id": "GO-2026-5506",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 251,
+      "commit_count": 46,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "osrg",
+        "repo": "gobgp",
+        "sha": "d2d2be3e4e7915d407e662e5d388d9f8ae8a8f7b"
+      },
+      "id": "GO-2026-5525",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 12,
+      "commit_count": 4,
+      "created": "2026-07-21",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "dgraph-io",
+        "repo": "dgraph",
+        "sha": "b15c87e9353e36618bf8e0df3bd945c0ce7105ef"
+      },
+      "id": "GO-2026-5529",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 1,
+      "commit_count": 29,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "Azure",
+        "repo": "go-ntlmssp",
+        "sha": "bd8579c18d41bf5d91a5f74b1117c958f635b866"
+      },
+      "id": "GO-2026-5543",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 22,
+      "commit_count": 31,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "pocketbase",
+        "repo": "pocketbase",
+        "sha": "44bf55097af90c4c9dc240a8ea0d81923763a60e"
+      },
+      "id": "GO-2026-5548",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 16,
+      "commit_count": 5,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "helm",
+        "repo": "helm",
+        "sha": "05fa37973dc9e42b76e1d2883494c87174b6074f"
+      },
+      "id": "GO-2026-5566",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 13,
+      "commit_count": 8,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gohugoio",
+        "repo": "hugo",
+        "sha": "ce1a7e0bce3713af40496ded3c2c0ceeed49231d"
+      },
+      "id": "GO-2026-5569",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 46,
+      "commit_count": 19,
+      "created": "2026-07-21",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "48da1774f4999d1d46543308b9a7fe75585dbfc4"
+      },
+      "id": "GO-2026-5596",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 19,
+      "commit_count": 8,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gohugoio",
+        "repo": "hugo",
+        "sha": "a00b5c72ac57afe26df6688ece3ca544a56df372"
+      },
+      "id": "GO-2026-5606",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 125,
+      "commit_count": 44,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "osrg",
+        "repo": "gobgp",
+        "sha": "f9f7b55ec258e514be0264871fa645a2c3edad11"
+      },
+      "id": "GO-2026-5665",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 16,
+      "commit_count": 5,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "helm",
+        "repo": "helm",
+        "sha": "36c8539e99bc42d7aef9b87d136254662d04f027"
+      },
+      "id": "GO-2026-5666",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 6,
+      "commit_count": 1,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "quic-go",
+        "repo": "quic-go",
+        "sha": "c56e8c79d1627cc1ed6005b421b4b0adadd83665"
+      },
+      "id": "GO-2026-5676",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 132,
+      "commit_count": 61,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gohugoio",
+        "repo": "hugo",
+        "sha": "86fbb0f7a8bbb93e2e916390de9e5a4f24bf9f50"
+      },
+      "id": "GO-2026-5681",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 125,
+      "commit_count": 44,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "osrg",
+        "repo": "gobgp",
+        "sha": "bc77597d42335c78464bc8e15a471d887bbdf260"
+      },
+      "id": "GO-2026-5699",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 125,
+      "commit_count": 44,
+      "created": "2026-07-07",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "osrg",
+        "repo": "gobgp",
+        "sha": "362cce3e325f56e7a4f792ccb9689b3bdda9e682"
+      },
+      "id": "GO-2026-5713",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 140,
+      "commit_count": 49,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gohugoio",
+        "repo": "hugo",
+        "sha": "a54c398b93821865547a9e21c73aad8a1d7f7bc1"
+      },
+      "id": "GO-2026-5740",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 13,
+      "commit_count": 3,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "ollama",
+        "repo": "ollama",
+        "sha": "88d57d0483cca907e0b23a968c83627a20b21047"
+      },
+      "id": "GO-2026-5748",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 1,
+      "commit_count": 1,
+      "created": "2026-07-21",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "klauspost",
+        "repo": "compress",
+        "sha": "8668e357e776d5152ed62f33c17f21b8690664fa"
+      },
+      "id": "GO-2026-5841",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 26,
+      "commit_count": 24,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "oras-project",
+        "repo": "oras-go",
+        "sha": "cc323e564d90c6b5b4bdd71d3c8d2ee2713b37e5"
+      },
+      "id": "GO-2026-5879",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 9,
+      "commit_count": 8,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "oras-project",
+        "repo": "oras-go",
+        "sha": "b11f777f8d405c5023c4b307cfdc5068dfc3d406"
+      },
+      "id": "GO-2026-5880",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 26,
+      "commit_count": 24,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "oras-project",
+        "repo": "oras-go",
+        "sha": "4683c46ef078091544f5f55fd25102f002806991"
+      },
+      "id": "GO-2026-5882",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 26,
+      "commit_count": 24,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "oras-project",
+        "repo": "oras-go",
+        "sha": "3c2e884e12ea52b6bff60c97f1edb7df7d0e0909"
+      },
+      "id": "GO-2026-5884",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 26,
+      "commit_count": 24,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "oras-project",
+        "repo": "oras-go",
+        "sha": "7a9f4b0b9558821b0422152ebe21ae56930fe764"
+      },
+      "id": "GO-2026-5885",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 253,
+      "commit_count": 43,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "osrg",
+        "repo": "gobgp",
+        "sha": "4a319a6c25630fb3cdbda3e9ccfe56e702bdaaa0"
+      },
+      "id": "GO-2026-5954",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 172,
+      "commit_count": 31,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "osrg",
+        "repo": "gobgp",
+        "sha": "f02ca397821f6ca182ef4eb492c3cbc459552d7c"
+      },
+      "id": "GO-2026-5955",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 162,
+      "commit_count": 40,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "qax-os",
+        "repo": "excelize",
+        "sha": "875b959ba62fc9bf45bb0de547ae7c7f7549835c"
+      },
+      "id": "GO-2026-5960",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 125,
+      "commit_count": 44,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "osrg",
+        "repo": "gobgp",
+        "sha": "9ce8936672ebc07df524da77fa4c6ae26d92be6d"
+      },
+      "id": "GO-2026-5971",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 161,
+      "commit_count": 65,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "aquasecurity",
+        "repo": "trivy",
+        "sha": "441251e51ae46cbcf7f436547e0a5766b25328b4"
+      },
+      "id": "GO-2026-5983",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 37,
+      "commit_count": 10,
+      "created": "2026-07-21",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "forgekeep",
+        "repo": "nebula-mesh",
+        "sha": "514006029e09f1991122b86a80e7b25970bcfa98"
+      },
+      "id": "GO-2026-5987",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 37,
+      "commit_count": 10,
+      "created": "2026-07-22",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "forgekeep",
+        "repo": "nebula-mesh",
+        "sha": "bc387086cc0e4b9c1654468b7391af19cacfe367"
+      },
+      "id": "GO-2026-5989",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 40,
+      "commit_count": 3,
+      "created": "2026-07-23",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "grpc",
+        "repo": "grpc-go",
+        "sha": "4ea465d4ab98013f72a142fe0fc89c19770b2935"
+      },
+      "id": "GO-2026-6061",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 5,
+      "commit_count": 4,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "getkin",
+        "repo": "kin-openapi",
+        "sha": "f0407d53b0730280266f454b755010e7eeb985da"
+      },
+      "id": "GO-2026-6095",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 5,
+      "commit_count": 4,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "getkin",
+        "repo": "kin-openapi",
+        "sha": "68ac2affa325514d7d6e731204d6a1edf6bdff64"
+      },
+      "id": "GO-2026-6112",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 8,
+      "commit_count": 19,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "etcd-io",
+        "repo": "etcd",
+        "sha": "6643f80602461a6095c9b294b6512fd9719bef41"
+      },
+      "id": "GO-2026-6114",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 10,
+      "commit_count": 10,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "gotd",
+        "repo": "td",
+        "sha": "9d5d1f31ea5022d9798d84ccce15de2e91ba6baa"
+      },
+      "id": "GO-2026-6138",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 18,
+      "commit_count": 2,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "prebid",
+        "repo": "prebid-server",
+        "sha": "494ac271cd4b5024df9123ef25ca3cff96390be3"
+      },
+      "id": "GO-2026-6139",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 0,
+      "commit_count": 1,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "pion",
+        "repo": "stun",
+        "sha": "cfe8f95bcae610be653f084e6e81743ed1bf4176"
+      },
+      "id": "GO-2026-6163",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "EMPTY"
+    },
+    {
+      "candidate_count": 1,
+      "commit_count": 500,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "pion",
+        "repo": "dtls",
+        "sha": "49458d604a4f3ebce1bf9587a0f3e5f3f6b4a55e"
+      },
+      "id": "GO-2026-6165",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 445,
+      "commit_count": 500,
+      "created": "2026-08-18",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "ff43a1e3ae17627c80e523a0ca7445f96516d199"
+      },
+      "id": "GO-2026-6181",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 445,
+      "commit_count": 500,
+      "created": "2026-08-18",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "e122fba1a57641b63a580aa26c026903a84e2e88"
+      },
+      "id": "GO-2026-6182",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 445,
+      "commit_count": 500,
+      "created": "2026-08-18",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "5871d98c368751a6d992ed64f8cd22cb78c44cee"
+      },
+      "id": "GO-2026-6183",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 445,
+      "commit_count": 500,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "cc5a189f00efe68ed0ddb32d3237b42549a9f264"
+      },
+      "id": "GO-2026-6184",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 61,
+      "commit_count": 49,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "1a746732441e8158f32fab35924b23701e719a8c"
+      },
+      "id": "GO-2026-6185",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 445,
+      "commit_count": 500,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "6a69713864b1d8f6edbc03d8af735f9624576d6e"
+      },
+      "id": "GO-2026-6186",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 445,
+      "commit_count": 500,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "1df2b70753286c1dfe8366078cbedfdf7f96472c"
+      },
+      "id": "GO-2026-6187",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 445,
+      "commit_count": 500,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "7543a7a87884aca957590b20b0714078d51af87b"
+      },
+      "id": "GO-2026-6188",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 61,
+      "commit_count": 49,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "83d1e62aa9e0dbd10a5d7eb34c117ae997268cdf"
+      },
+      "id": "GO-2026-6189",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 61,
+      "commit_count": 49,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "e58f09739a35774ca82b5211d2377ac0f2051500"
+      },
+      "id": "GO-2026-6190",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 61,
+      "commit_count": 49,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "1154afebee986180b489084d38e2a0c578751498"
+      },
+      "id": "GO-2026-6191",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 61,
+      "commit_count": 49,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "015fd0eba1cb138eef081517795fed47a2873f2d"
+      },
+      "id": "GO-2026-6195",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 445,
+      "commit_count": 500,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "59b513b0e74fd2943ccbb8891d5ce00f860e6d26"
+      },
+      "id": "GO-2026-6197",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 445,
+      "commit_count": 500,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rclone",
+        "repo": "rclone",
+        "sha": "21d8cd3b92cd81d987f485051d454ea675d91a2b"
+      },
+      "id": "GO-2026-6199",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 27,
+      "commit_count": 17,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "go-git",
+        "repo": "go-git",
+        "sha": "008a78f2dd86f52544ddff8b8e8ddeecdf3f7aab"
+      },
+      "id": "GO-2026-6213",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 2,
+      "commit_count": 6,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "hyperledger",
+        "repo": "fabric-ca",
+        "sha": "d379df823534d56dec0166a6da8f0415e3beee24"
+      },
+      "id": "GO-2026-6234",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 1,
+      "commit_count": 1,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "insomniacslk",
+        "repo": "dhcp",
+        "sha": "c76316d4aa825673b208730779843d0711021e81"
+      },
+      "id": "GO-2026-6237",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 210,
+      "commit_count": 76,
+      "created": "2026-08-17",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "cilium",
+        "repo": "ebpf",
+        "sha": "533dfc82fd228bfadf42ea7180c39de7d9af47fa"
+      },
+      "id": "GO-2026-6238",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 16,
+      "commit_count": 116,
+      "created": "2026-08-27",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "crossplane",
+        "repo": "crossplane-runtime",
+        "sha": "bee99c6cd6ca81878acca2940a2f0a02169fc208"
+      },
+      "id": "GO-2026-6302",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 14,
+      "commit_count": 4,
+      "created": "2026-09-09",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "grpc",
+        "repo": "grpc-go",
+        "sha": "7354d9c8debb4bcf2225bf429857078de310c176"
+      },
+      "id": "GO-2026-6348",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 779,
+      "commit_count": 500,
+      "created": "2026-09-09",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "VictoriaMetrics",
+        "repo": "VictoriaMetrics",
+        "sha": "710c920d6083327042a309e449fae4383617d817"
+      },
+      "id": "GO-2026-6366",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "TRUNCATED"
+    },
+    {
+      "candidate_count": 162,
+      "commit_count": 40,
+      "created": "2026-09-15",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "qax-os",
+        "repo": "excelize",
+        "sha": "93f0b3caed37f21ef5079e3259c6c21dcfe68453"
+      },
+      "id": "GO-2026-6452",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 162,
+      "commit_count": 40,
+      "created": "2026-09-15",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "qax-os",
+        "repo": "excelize",
+        "sha": "93f0b3caed37f21ef5079e3259c6c21dcfe68453"
+      },
+      "id": "GO-2026-6453",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 25,
+      "commit_count": 14,
+      "created": "2026-10-05",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "pocketbase",
+        "repo": "pocketbase",
+        "sha": "30b4184305904fae0d1b78216c4e3cc34700b220"
+      },
+      "id": "GO-2026-6489",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 36,
+      "commit_count": 24,
+      "created": "2026-09-22",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "caddyserver",
+        "repo": "caddy",
+        "sha": "176b043b0104cee3f894023cd5a598ac29e404bb"
+      },
+      "id": "GO-2026-6512",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 0,
+      "commit_count": 1,
+      "created": "2026-09-22",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "hatchet-dev",
+        "repo": "hatchet",
+        "sha": "f90464189ad642251e09412d0f99fde353036428"
+      },
+      "id": "GO-2026-6535",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "EMPTY"
+    },
+    {
+      "candidate_count": 154,
+      "commit_count": 21,
+      "created": "2026-10-06",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "snowflakedb",
+        "repo": "gosnowflake",
+        "sha": "52e397ecd02f741dda99994fad9d42154149ef6a"
+      },
+      "id": "GO-2026-6665",
+      "large": true,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 68,
+      "commit_count": 34,
+      "created": "2026-10-09",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "qax-os",
+        "repo": "excelize",
+        "sha": "22f76f9acb94b85b3eb9c4365ab4f750cebbc565"
+      },
+      "id": "GO-2026-6684",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 81,
+      "commit_count": 45,
+      "created": "2026-10-09",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "qax-os",
+        "repo": "excelize",
+        "sha": "01a9ff32fb3c1f873cf01205e1b8a3285b0e1d23"
+      },
+      "id": "GO-2026-6685",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 57,
+      "commit_count": 159,
+      "created": "2026-10-09",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "moby",
+        "repo": "sys",
+        "sha": "85a71bbe1faa36c552a960e6a5f3d0cfb632fbbe"
+      },
+      "id": "GO-2026-6686",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 79,
+      "commit_count": 44,
+      "created": "2026-10-09",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "qax-os",
+        "repo": "excelize",
+        "sha": "8ffeb07ec9a350410f6922313f6b7e4f5cc79241"
+      },
+      "id": "GO-2026-6687",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 56,
+      "commit_count": 31,
+      "created": "2026-10-09",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "qax-os",
+        "repo": "excelize",
+        "sha": "5f636f9dcde55911f14290060b017f0cc88cd694"
+      },
+      "id": "GO-2026-6689",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 84,
+      "commit_count": 48,
+      "created": "2026-10-09",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "qax-os",
+        "repo": "excelize",
+        "sha": "6258dcebc4e2a2aed985c38a08098dfd908521d1"
+      },
+      "id": "GO-2026-6695",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    },
+    {
+      "candidate_count": 18,
+      "commit_count": 33,
+      "created": "2026-10-09",
+      "fix_commit": {
+        "host": "github.com",
+        "owner": "rabbitmq",
+        "repo": "amqp091-go",
+        "sha": "6723e8cff8710f0a6bf5fb4af375e285052535b3"
+      },
+      "id": "GO-2026-6700",
+      "large": false,
+      "review_status": "REVIEWED",
+      "status": "AVAILABLE"
+    }
+  ],
+  "dataset": "D4",
+  "eligible_count": 500,
+  "explored_count": 120,
+  "large_found": 38,
+  "large_target": 25,
+  "pool_exhausted": false,
+  "sample_count": 120,
+  "seed": 20261021,
+  "status_counts": {
+    "AVAILABLE": 103,
+    "EMPTY": 2,
+    "PSEUDO_VERSION_UNRESOLVED": 1,
+    "TRUNCATED": 14
+  },
+  "target": 120
+}
