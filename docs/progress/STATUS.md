@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP4 - Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker**
-- State: `IN_PROGRESS` (fixing CHANGES_REQUESTED: see the review notes at the end of checkpoints/CP4.md; the first Colab run was invalid; fix list FIX-1..FIX-6)
+- State: `AWAITING_REVIEW` (fix round FIX-1..FIX-6 done; the owner must re-run the notebook in Colab; see CP4_REPORT, fix-round section)
 - Branch in use: `claude/vulntrace-ai-build-9qhbjg`
 - Specification: [checkpoints/CP4.md](../implementation/checkpoints/CP4.md)
 
@@ -18,7 +18,7 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 | CP1 | Ground truth and linker presence | APPROVED (1 fix carried to CP2 task 0) | claude/vulntrace-checkpoint-continue-ia7tx5 | [CP1_REPORT](reports/CP1_REPORT.md) |
 | CP2 | Go call-graph helper and verdict rule | APPROVED | claude/optimistic-shannon-397w1q | [CP2_REPORT](reports/CP2_REPORT.md) |
 | CP3 | Advisory dataset, fix evidence, release ranges, baselines (+ CI) | APPROVED | claude/lucid-fermi-9esjyw | [CP3_REPORT](reports/CP3_REPORT.md) |
-| CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | IN_PROGRESS (fix round) | claude/vulntrace-ai-build-9qhbjg | [CP4_REPORT](reports/CP4_REPORT.md) |
+| CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | AWAITING_REVIEW (fix round done) | claude/vulntrace-ai-build-9qhbjg | [CP4_REPORT](reports/CP4_REPORT.md) |
 | CP5 | Local LLM layer, root-cause selection, HyDE, lifting, Colab runs | NOT_RELEASED | - | - |
 | CP6 | LangGraph investigation agent | NOT_RELEASED | - | - |
 | CP7 | End-to-end triage, verifier, real apps, demo | NOT_RELEASED | - | - |
@@ -51,9 +51,11 @@ Session branch note: this fix session runs in a container whose assigned branch 
 - [x] FIX-3 `git_error` in evidence (+schema), top-3 errors in summary
 - [x] FIX-4 Notebook: local cache/evidence, gate cell
 - [x] FIX-5 `eval/evidence_gate.py`, used by both commands and the notebook
-- [~] FIX-6 Tests (unit: test_materialize_resume, test_evidence_gate; full-suite run pending)
+- [x] FIX-6 Tests; full suite: 399 passed, 11 skipped
 
 ## Handoff notes
+
+Fix round done on `claude/vulntrace-ai-build-9qhbjg`. Next: owner re-runs `notebooks/cp4_retrieval_colab.ipynb` (gate cell will stop it if evidence is wrong; if so run `!python -m vulntrace dataset diagnose --case GO-2020-0038` and send the output). Then a session replaces `docs/results/cp4/` as described below. Root cause of the first failure is unproven.
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 

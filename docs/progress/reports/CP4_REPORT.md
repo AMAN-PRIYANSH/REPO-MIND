@@ -388,3 +388,56 @@ e34b77d CP4: set IN_PROGRESS on claude/vulntrace-ai-build-9qhbjg; copy task list
 Every commit above was pushed to `origin/claude/vulntrace-ai-build-9qhbjg` right after it was made, and no push
 failed. No pull request was opened, as the session instructions say: the supervising assistant merges after
 review.
+
+---
+
+# Fix round (CHANGES_REQUESTED, FIX-1..FIX-6)
+
+Session branch note: this session's container was assigned `claude/vulntrace-ai-build-v2kb3a`; it was fast-forwarded to
+`claude/vulntrace-ai-build-9qhbjg` (`6a75cb7`) and pushed to `claude/vulntrace-ai-build-9qhbjg`, as the review notes and the
+owner instructed. CP5 was not started. The retrieval results in `docs/results/` were not touched.
+
+## Environment (fix session)
+
+Linux 6.18; Python 3.13.16 (project-local venv outside the repo, `pip install -e ".[dev,db]"`); go1.24.7; git 2.43.0;
+Docker 29.9.1 installed but **no PostgreSQL/pgvector reachable**, so the 9 pgvector contract tests skipped. GitHub reachable
+(`git ls-remote` worked). Hugging Face and Google Drive/Colab not available here.
+
+## Deliverables
+
+| Fix | State | What |
+|---|---|---|
+| FIX-1 diagnose | done, **root cause NOT established** | `python -m vulntrace dataset diagnose --case ID` builds one case without writing to `data/` and prints every git command with exit code and stderr. Run on `GO-2020-0038` with the cache on local disk (ext filesystem): `AVAILABLE`, 81 candidates, 99 git calls, 2 exit-128 (`git show` of files absent in the old tree, expected), no differences from the case list. This shows the code works on local disk. It does **not** show that Drive was the cause: there is no Drive here. The Colab run with the fixed notebook is the test. |
+| FIX-2 resume rule | done | `is_complete(case_id, data_dir, expected)` also requires status and counts to match the case list; the "reused" path copies only a result that matches the target's expected status/counts; a failed result is never registered as a reuse source. Same rule for D1. |
+| FIX-3 git errors | done | `git_error` (first stderr line) is stored in the release-range file for TAG_NOT_FOUND / PSEUDO_VERSION_UNRESOLVED (schema gained an optional `git_error`); the summary has `top_git_errors` and the CLI prints the top 3. |
+| FIX-4 notebook | done, **not run in Colab** | git/vulndb cache `/content/cache`, evidence `/content/data` (local); Drive keeps embeddings, materialise summary, results. New gate cell raises `SystemExit` if the evidence differs in >3 cases or has 0 candidates. |
+| FIX-5 refuse empty runs | done | `eval/evidence_gate.py`; `eval retrieval` and `index build` exit 2 and write nothing; notebook gate uses the same functions. |
+| FIX-6 tests | done | see below |
+
+## Test evidence
+
+- `python -m pytest tests -q` (full, incl. Go and git integration): `399 passed, 11 skipped in 154.26s`. Skips: 9 pgvector
+  (no database here), the opt-in network smoke test, and one more opt-in/model test (not individually inspected beyond the
+  list printed by `-rs`, which showed the pgvector and network ones above).
+- New tests: `tests/unit/test_materialize_resume.py`, `tests/unit/test_evidence_gate.py` (29 passed together with the
+  touched notebook/D1/schema tests, run alone).
+- CI status of the pushed commits was **not checked** in this session.
+
+## Design deviations
+
+- `schemas/release_range.schema.json` gained an optional `git_error` property (needed to store the error in the evidence file).
+- Three existing assertions were changed because the required behaviour changed (not to hide a failure): the D1 and D4
+  resume tests (a mismatching result is now rebuilt on a re-run) and the notebook test (data on local disk).
+- A case whose true result legitimately differs from the case list (1 known in D4, 1 in D1) is now rebuilt on every resume
+  instead of skipped; slower, not wrong.
+- `dataset materialize` still exits 0 when cases differ; the gate (notebook / eval commands) is what stops the run.
+
+## Limitations
+
+- The cause of the first invalid Colab run is still unproven; Drive is only a hypothesis.
+- No Colab run, no GPU, no real models here. Criterion 6 still needs the owner's new Colab run.
+
+## Git
+
+Commits on `claude/vulntrace-ai-build-9qhbjg` after `6a75cb7`: `5dfde4e` (set IN_PROGRESS), `5ed5fb3` (FIX-1..6), plus this
+report's commit; pushes succeeded.
