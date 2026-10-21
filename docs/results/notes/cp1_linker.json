@@ -1,0 +1,11 @@
+{
+  "case_notes": {
+    "generic_target": "ERROR with UNSUPPORTED_SYMBOL_FORM by design. The target is written as the generic form `ParseAny[T]`; the linker method has no verified rule for mapping generic symbols to binary names (they appear as instantiation-specific names such as `ParseAny[go.shape.string]`), so it refuses instead of guessing.",
+    "inlined_small": "Flips to ABSENT with inlining enabled. `ParseTiny` is a one-line function; the compiler inlines it into main and the linker then drops the unused out-of-line copy. This is why scoring uses only the `-gcflags=all=-l` run (ADR-013).",
+    "method_value_receiver": "Flips to ABSENT with inlining enabled. The target `Impl.Run` is a one-line method; when it is inlined at its only (static) call site and no interface or reflection use keeps it, the linker drops the method symbol. Explanation inferred from the code; the binary was not disassembled.",
+    "method_pointer_receiver": "Flips to ABSENT with inlining enabled, for the same reason as `method_value_receiver` (one-line `(*PImpl).Run`, static call only). Explanation inferred from the code; the binary was not disassembled.",
+    "unsafe_func_pointer": "Not a real test of `unsafe`. The program takes the function value `vulnlib.Parse` before converting it through `unsafe.Pointer`, and taking a function value keeps the symbol in the binary, so the result says nothing about `unsafe`-hidden calls (CP1 review note).",
+    "build_tag_excluded": "Trivial agreement: the excluded file is never compiled, so no method can see the call.",
+    "test_file_only": "Trivial agreement: `_test.go` files are not part of the built program."
+  }
+}

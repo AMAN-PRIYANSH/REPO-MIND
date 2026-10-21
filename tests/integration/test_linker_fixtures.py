@@ -70,3 +70,14 @@ def test_scoring_does_not_use_network(report):
     from vulntrace.env import go_env
     assert go_env()["GOPROXY"] == "off"
     assert report["counts"]["cases"] > 0
+
+
+def test_committed_cp1_results_doc_matches_a_fresh_run():
+    """The tables in docs/results/CP1_LINKER_RESULTS.md come from code, not by hand."""
+    from vulntrace.eval.results_doc import load_notes, render_cp1_doc
+    from vulntrace.paths import REPO_ROOT
+
+    fresh = render_cp1_doc(score_linker(FIXTURES_DIR, compare_inlining=True), load_notes("cp1_linker"), "x")
+    committed = (REPO_ROOT / "docs" / "results" / "CP1_LINKER_RESULTS.md").read_text(encoding="utf-8")
+    table = lambda text: [ln for ln in text.splitlines() if ln.startswith("|") or ln.startswith("Cases:")]
+    assert table(committed) == table(fresh)

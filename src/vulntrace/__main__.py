@@ -22,6 +22,12 @@ def build_parser() -> argparse.ArgumentParser:
     sc.add_argument("--fixtures-dir", default=str(FIXTURES_DIR))
     sc.add_argument("--compare-inlining", action="store_true",
                     help="also build without -gcflags=all=-l and report both (not used for scoring)")
+    rs = sub.add_parser("results", help="committed results documents")
+    rsub = rs.add_subparsers(dest="results_command", required=True)
+    rr = rsub.add_parser("render", help="generate a docs/results/ document from a score report file")
+    rr.add_argument("--doc", required=True, choices=["cp1"])
+    rr.add_argument("--input", required=True, help="score report JSON written by `fixtures score`")
+    rr.add_argument("--out", required=True, help="Markdown file to write")
     return p
 
 
@@ -33,8 +39,22 @@ def _cmd_doctor() -> int:
     return rep.exit_code
 
 
-def _cmd_score(args) -> int:
+def _cmd_render(args) -> int:
+    from vulntrace.eval.results_doc import render
+
+    if not Path(args.input).is_file():
+        print(f"error: no such report file: {args.input}", file=sys.stderr)
+        return EXIT_INVALID_INPUT
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(render(args.doc, Path(args.input)), encoding="utf-8")
+    print(f"wrote {out}")
+    return EXIT_OK
+
+
+def _cmd_score(args, argv: list[str]) -> int:
     from vulntrace.eval.fixture_score import render_markdown, score_linker, write_report
+    from vulntrace.eval.run_info import run_info
 
     fixtures_dir = Path(args.fixtures_dir)
     if not (fixtures_dir / "manifest.json").is_file():
@@ -44,6 +64,7 @@ def _cmd_score(args) -> int:
         print("error: go toolchain not found (run `python -m vulntrace doctor`)", file=sys.stderr)
         return EXIT_MISSING_PREREQUISITE
     report = score_linker(fixtures_dir, compare_inlining=args.compare_inlining)
+    report["run"] = run_info(argv)
     jp, mp = write_report(report, Path(args.out))
     c = report["counts"]
     print(render_markdown(report))
@@ -54,6 +75,7 @@ def _cmd_score(args) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
     try:
         args = build_parser().parse_args(argv)
     except SystemExit as exc:
@@ -62,7 +84,9 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "doctor":
             return _cmd_doctor()
         if args.command == "fixtures" and args.fixtures_command == "score":
-            return _cmd_score(args)
+            return _cmd_score(args, argv)
+        if args.command == "results" and args.results_command == "render":
+            return _cmd_render(args)
     except Exception as exc:  # unexpected
         print(f"unexpected error: {exc!r}", file=sys.stderr)
         return EXIT_UNEXPECTED
