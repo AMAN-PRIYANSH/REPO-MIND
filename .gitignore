@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+env/
+build/
+dist/
+
+# Secrets and local config
+.env
+.env.*
+
+# Raw run outputs and generated data
+results/
+data/*
+!data/.gitkeep
+
+# Model files and built binaries
+*.gguf
+*.safetensors
+*.bin
+*.onnx
+*.pt
+*.exe
+*.test
+*.out
