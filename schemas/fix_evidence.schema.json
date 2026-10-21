@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fix_evidence.schema.json",
+  "title": "FixEvidence",
+  "description": "Mode 1 evidence (docs/design/DATA_MODEL.md), produced by CP3 deliverable 3 from a VulnCase's fix_commits.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "status", "commits", "unfetchable_commits", "candidates",
+               "hunks", "non_go_files_changed", "test_files_changed", "estimated_tokens"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "case_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["AVAILABLE", "UNAVAILABLE", "EMPTY"]},
+    "commits": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["sha", "parent_sha"],
+        "properties": {"sha": {"type": "string", "minLength": 7}, "parent_sha": {"type": "string", "minLength": 7}}
+      }
+    },
+    "unfetchable_commits": {
+      "description": "A fix commit that could not be fetched or diffed. Always recorded here, never silently dropped.",
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["host", "owner", "repo", "sha", "error"],
+        "properties": {
+          "host": {"type": "string", "minLength": 1}, "owner": {"type": "string", "minLength": 1},
+          "repo": {"type": "string", "minLength": 1}, "sha": {"type": "string", "minLength": 1},
+          "error": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "candidates": {"type": "array", "items": {"$ref": "#/$defs/candidate"}},
+    "hunks": {"type": "array", "items": {"$ref": "#/$defs/hunk"}},
+    "non_go_files_changed": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "test_files_changed": {"type": "integer", "minimum": 0},
+    "estimated_tokens": {"type": "integer", "minimum": 0}
+  },
+  "$defs": {
+    "line_range": {
+      "type": "object", "additionalProperties": false, "required": ["file", "start", "end"],
+      "properties": {
+        "file": {"type": "string", "minLength": 1},
+        "start": {"type": "integer", "minimum": 1},
+        "end": {"type": "integer", "minimum": 1}
+      }
+    },
+    "candidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["candidate_id", "package_dir", "symbol", "side", "old_range", "new_range", "hunk_ids"],
+      "properties": {
+        "candidate_id": {"type": "string", "pattern": "^c[0-9]+$"},
+        "package_dir": {"type": "string"},
+        "symbol": {"type": "string", "minLength": 1},
+        "side": {"enum": ["OLD", "NEW", "BOTH"]},
+        "old_range": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/line_range"}]},
+        "new_range": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/line_range"}]},
+        "hunk_ids": {"type": "array", "items": {"type": "string", "pattern": "^h[0-9]+$"}}
+      },
+      "allOf": [
+        {"if": {"properties": {"side": {"const": "OLD"}}}, "then": {"properties": {"new_range": {"type": "null"}}}},
+        {"if": {"properties": {"side": {"const": "NEW"}}}, "then": {"properties": {"old_range": {"type": "null"}}}},
+        {"if": {"properties": {"side": {"const": "BOTH"}}},
+         "then": {"properties": {"old_range": {"type": "object"}, "new_range": {"type": "object"}}}}
+      ]
+    },
+    "hunk": {
+      "type": "object", "additionalProperties": false,
+      "required": ["hunk_id", "file", "old_start", "old_lines", "new_start", "new_lines", "text"],
+      "properties": {
+        "hunk_id": {"type": "string", "pattern": "^h[0-9]+$"},
+        "file": {"type": "string", "minLength": 1},
+        "old_start": {"type": "integer", "minimum": 0},
+        "old_lines": {"type": "integer", "minimum": 0},
+        "new_start": {"type": "integer", "minimum": 0},
+        "new_lines": {"type": "integer", "minimum": 0},
+        "text": {"type": "string"}
+      }
+    }
+  }
+}
