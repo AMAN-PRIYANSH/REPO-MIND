@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fixture_manifest.schema.json",
+  "title": "FixtureManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "module_dir", "vulnerable_package", "cases"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "module_dir": {"type": "string", "minLength": 1},
+    "vulnerable_package": {"type": "string", "minLength": 1},
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "category", "main_package", "targets", "truth", "rationale"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "category": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+          "main_package": {"type": "string", "minLength": 1},
+          "targets": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"$ref": "#/$defs/target"}
+          },
+          "truth": {"enum": ["REACHABLE", "NOT_REACHABLE"]},
+          "rationale": {"type": "string", "minLength": 10}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "symbol"],
+      "properties": {
+        "package": {"type": "string", "minLength": 1},
+        "symbol": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "method_result.schema.json",
+  "title": "MethodResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "method", "target", "main_package", "result", "details", "error", "duration_ms"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "method": {"enum": ["LINKER_PRESENCE", "CALLGRAPH_VTA"]},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "symbol"],
+      "properties": {
+        "package": {"type": "string", "minLength": 1},
+        "symbol": {"type": "string", "minLength": 1}
+      }
+    },
+    "main_package": {"type": "string", "minLength": 1},
+    "result": {"enum": ["PRESENT", "ABSENT", "PATH_FOUND", "NO_PATH", "ERROR"]},
+    "details": {"type": "object"},
+    "error": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "message"],
+          "properties": {
+            "code": {"type": "string", "minLength": 1},
+            "message": {"type": "string"}
+          }
+        }
+      ]
+    },
+    "duration_ms": {"type": "integer", "minimum": 0}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"method": {"const": "LINKER_PRESENCE"}}},
+      "then": {"properties": {"result": {"enum": ["PRESENT", "ABSENT", "ERROR"]}}}
+    },
+    {
+      "if": {"properties": {"method": {"const": "CALLGRAPH_VTA"}}},
+      "then": {"properties": {"result": {"enum": ["PATH_FOUND", "NO_PATH", "ERROR"]}}}
+    },
+    {
+      "if": {"properties": {"result": {"const": "ERROR"}}},
+      "then": {"properties": {"error": {"type": "object"}}},
+      "else": {"properties": {"error": {"type": "null"}}}
+    }
+  ]
+}
