@@ -1,0 +1,1380 @@
+{
+  "action_counts": {
+    "built": 150
+  },
+  "case_count": 150,
+  "cases": [
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "seccomp/libseccomp-golang@06e7a29f36a34b8cf419aeb87b979ee508e58f9e",
+      "differences": [],
+      "id": "GO-2020-0007",
+      "seconds": 1.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "robbert229/jwt@ca1404ee6e83fcbafb66b09ed0d543850a15b654",
+      "differences": [],
+      "id": "GO-2020-0023",
+      "seconds": 0.7,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 10,
+      "cluster_key": "google/fscrypt@3022c1603d968c22f147b4a2c49c4637dd1be91b",
+      "differences": [],
+      "id": "GO-2020-0027",
+      "seconds": 1.17,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "go-aah/aah@881dc9f71d1f7a4e8a9a39df9c5c081d3a2da1ec",
+      "differences": [],
+      "id": "GO-2020-0033",
+      "seconds": 1.97,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "pion/dtls@fd73a5df2ff0e1fb6ae6a51e2777d7a16cc4f4e0",
+      "differences": [],
+      "id": "GO-2020-0038",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 14,
+      "cluster_key": "gin-gonic/gin@03e5e05ae089bc989f1ca41841f05504d29e3fd9,gin-gonic/gin@5929d521715610c9dd14898ebbe1d188d5de8937,gin-gonic/gin@bfc8ca285eb46dad60e037d57c545cd260636711",
+      "differences": [],
+      "id": "GO-2021-0052",
+      "seconds": 1.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "go-yaml/yaml@bb4e33bf68bf89cad44d386192cbed201f35b241",
+      "differences": [],
+      "id": "GO-2021-0061",
+      "seconds": 0.75,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "evanphx/json-patch@4c9aadca8f89e349c999f04e28199e96e81aba03",
+      "differences": [],
+      "id": "GO-2021-0076",
+      "seconds": 0.81,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "facebook/fbthrift@c461c1bd1a3e130b181aa9c854da3030cd4b5156",
+      "differences": [],
+      "id": "GO-2021-0088",
+      "seconds": 2.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "holiman/uint256@6785da6e3eea403260a5760029e722aa4ff1716d",
+      "differences": [],
+      "id": "GO-2021-0103",
+      "seconds": 0.91,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "cloudflare/cfrpki@a8db4e009ef217484598ba1fd1c595b54e0f6422",
+      "differences": [],
+      "id": "GO-2022-0246",
+      "seconds": 2.09,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "open-policy-agent/opa@932e4ffc37a590ace79e9b75ca4340288c220239",
+      "differences": [],
+      "id": "GO-2022-0316",
+      "seconds": 14.38,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "quay/claircore@691f2023a1720a0579e688b69a2f4bfe1f4b7821",
+      "differences": [],
+      "id": "GO-2022-0346",
+      "seconds": 1.27,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 6,
+      "cluster_key": "distribution/distribution@b59a6f827947f9e0e67df0cfb571046de4733586",
+      "differences": [],
+      "id": "GO-2022-0379",
+      "seconds": 0.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "Masterminds/goutils@869801f20f9f1e7ecdbdb6422049d8241270d5e1",
+      "differences": [],
+      "id": "GO-2022-0411",
+      "seconds": 0.73,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "pion/dtls@a6397ff7282bc56dc37a68ea9211702edb4de1de",
+      "differences": [],
+      "id": "GO-2022-0461",
+      "seconds": 0.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "microcosm-cc/bluemonday@c788a2a4d42e081ad54a31368478820bb4a42fb4",
+      "differences": [],
+      "id": "GO-2022-0588",
+      "seconds": 0.05,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 0,
+      "cluster_key": "kubernetes/kube-state-metrics@03122fe3e2df49a9a7298b8af921d3c37c430f7f",
+      "differences": [],
+      "id": "GO-2022-0621",
+      "seconds": 1.93,
+      "status": "EMPTY"
+    },
+    {
+      "action": "built",
+      "candidate_count": 9,
+      "cluster_key": "rancher/rancher@0ddffe484adccb9e37d9432e8e625d8ebbfb0088",
+      "differences": [],
+      "id": "GO-2022-0755",
+      "seconds": 2.1,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "microcosm-cc/bluemonday@524f142fe46e945b7dcd291d7805c4b7dcf75bee",
+      "differences": [],
+      "id": "GO-2022-0762",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 7,
+      "cluster_key": "go-yaml/yaml@f221b8435cfb71e54062f6c6e99e9ade30b124d5",
+      "differences": [],
+      "id": "GO-2022-0956",
+      "seconds": 0.74,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 22,
+      "cluster_key": "helm/helm@6ce9ba60b73013857e2e7c73d3f86ed70bc1ac9a",
+      "differences": [],
+      "id": "GO-2022-1040",
+      "seconds": 0.16,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 5,
+      "cluster_key": "sajari/docconv@42bcff666855ab978e67a9041d0cdea552f20301",
+      "differences": [],
+      "id": "GO-2022-1188",
+      "seconds": 1.07,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "ipfs/go-unixfs@467d139a640ecee4f2e74643dafcc58bb3b54175",
+      "differences": [],
+      "id": "GO-2023-1557",
+      "seconds": 0.9,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 5,
+      "cluster_key": "crewjam/saml@8e9236867d176ad6338c870a84e2039aef8a5021",
+      "differences": [],
+      "id": "GO-2023-1664",
+      "seconds": 0.07,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "libp2p/go-libp2p@0cce607219f3710addc7e18672cffd1f1d912fbb",
+      "differences": [],
+      "id": "GO-2023-2000",
+      "seconds": 1.13,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "libp2p/go-libp2p@45d3c6fff662ddd6938982e7e9309ad5fa2ad8dd",
+      "differences": [],
+      "id": "GO-2023-2024",
+      "seconds": 1.07,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "gomarkdown/markdown@14b16010c2ee7ff33a940a541d993bd043a88940",
+      "differences": [],
+      "id": "GO-2023-2074",
+      "seconds": 0.08,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "SagerNet/sing@5b05b5c147d9650e8accb4441e216c72a61f4859",
+      "differences": [],
+      "id": "GO-2023-2077",
+      "seconds": 0.76,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 28,
+      "cluster_key": "Consensys/gnark-crypto@ec6be1a037f7c496d595c541a8a8d31c47bcfa3d",
+      "differences": [],
+      "id": "GO-2023-2101",
+      "seconds": 2.85,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "sigstore/cosign@8ac891ff0e29ddc67965423bee8f826219c6eb0f",
+      "differences": [],
+      "id": "GO-2023-2181",
+      "seconds": 0.95,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "Consensys/gnark@f528807119e9443df94b8c01fe8ee65abe3c75d8",
+      "differences": [],
+      "id": "GO-2023-2333",
+      "seconds": 0.94,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 5,
+      "cluster_key": "dvsekhvalnov/jose2go@a4584e9dd7128608fedbc67892eba9697f0d5317",
+      "differences": [],
+      "id": "GO-2023-2409",
+      "seconds": 0.74,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "elastic/beats@9bd7de84ab9c31bb4e1c0a348a7b7c26817a0996",
+      "differences": [],
+      "id": "GO-2023-2413",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "cloudflare/circl@75ef91e8a2f438e6ce2b6e620d236add8be1887d",
+      "differences": [],
+      "id": "GO-2024-2453",
+      "seconds": 1.19,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "0xJacky/nginx-ui@827e76c46e63c52114a62a899f61313039c754e3",
+      "differences": [],
+      "id": "GO-2024-2464",
+      "seconds": 1.48,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "jackc/pgx@dfd198003a03dbb96e4607b0d3a0bb9a7398ccb7",
+      "differences": [],
+      "id": "GO-2024-2567",
+      "seconds": 1.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 6,
+      "cluster_key": "gofiber/fiber@f0cd3b44b086544a37886232d0530601f2406c23",
+      "differences": [],
+      "id": "GO-2024-2574",
+      "seconds": 0.97,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "zeromicro/go-zero@d9d79e930dff6218a873f4f02115df61c38b15db",
+      "differences": [],
+      "id": "GO-2024-2604",
+      "seconds": 1.0,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "cloudevents/sdk-go@de2f28370b0d2a0f64f92c0c6139fa4b8a7c3851",
+      "differences": [],
+      "id": "GO-2024-2618",
+      "seconds": 0.93,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 21,
+      "cluster_key": "lestrrat-go/jwx@d01027d74c7376d66037a10f4f64af9af26a7e34,lestrrat-go/jwx@d43f2ceb7f0c13714dfe8854d6439766e86faa76",
+      "differences": [],
+      "id": "GO-2024-2632",
+      "seconds": 2.1,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 5,
+      "cluster_key": "quic-go/quic-go@4a99b816ae3ab03ae5449d15aac45147c85ed47a",
+      "differences": [],
+      "id": "GO-2024-2682",
+      "seconds": 1.0,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 0,
+      "cluster_key": "1Panel-dev/1Panel@e037b69f52799e110af8e98f39a3627ad0285ea6",
+      "differences": [],
+      "id": "GO-2024-2830",
+      "seconds": 1.64,
+      "status": "EMPTY"
+    },
+    {
+      "action": "built",
+      "candidate_count": 5,
+      "cluster_key": "containerd/containerd@e9af808591ee1468f9b0ad6a0d41fdf93ee0c1bc",
+      "differences": [],
+      "id": "GO-2024-2846",
+      "seconds": 2.21,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "gin-contrib/cors@27b723a473efd80d5a498fa9f5933c80204c850d",
+      "differences": [],
+      "id": "GO-2024-2955",
+      "seconds": 0.91,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 8,
+      "cluster_key": "gofiber/fiber@7926e5bf4da03e54f62d27d53229d35b264cba8e",
+      "differences": [],
+      "id": "GO-2024-2959",
+      "seconds": 0.89,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "grpc/grpc-go@ab292411ddc0f3b7a7786754d1fe05264c3021eb",
+      "differences": [],
+      "id": "GO-2024-2978",
+      "seconds": 1.24,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 50,
+      "cluster_key": "moby/moby@411e817ddf710ff8e08fa193da80cb78af708191,moby/moby@42f40b1d6dd7562342f832b9cd2adf9e668eeb76,moby/moby@65cc597cea28cdc25bea3b8a86384b4251872919,moby/moby@852759a7df454cbf88db4e954c919becd48faa9b,moby/moby@a31260625655cff9ae226b51757915e275e304b0,moby/moby@a79fabbfe84117696a19671f4aa88b82d0f64fc1,moby/moby@ae160b4edddb72ef4bd71f66b975a1a1cc434f00,moby/moby@ae2b3666c517c96cbc2adf1af5591a6b00d4ec0f,moby/moby@cc13f952511154a2866bddbb7dddebfe9e83b801,moby/moby@fc274cd2ff4cf3b48c91697fb327dd1fb95588fb",
+      "differences": [],
+      "id": "GO-2024-3005",
+      "seconds": 36.77,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "canonical/lxd@5cdc9a35b9c51e981b1e70330bde0413ccacc7fd",
+      "differences": [],
+      "id": "GO-2024-3313",
+      "seconds": 1.97,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 7,
+      "cluster_key": "FiloSottile/age@482cf6fc9babd3ab06f6606762aac10447222201",
+      "differences": [],
+      "id": "GO-2024-3344",
+      "seconds": 0.85,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 18,
+      "cluster_key": "getkin/kin-openapi@67f0b233ffc01332f7d993f79490fbea5f4455f1",
+      "differences": [],
+      "id": "GO-2025-3533",
+      "seconds": 0.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "nats-io/nats-server@3e7e4645a24e829a36b4210f2d7c34dea7f7a424",
+      "differences": [],
+      "id": "GO-2025-3600",
+      "seconds": 1.62,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "refraction-networking/utls@f8892761e2a4d29054264651d3a86fda83bc83f9",
+      "differences": [],
+      "id": "GO-2025-3638",
+      "seconds": 1.09,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "quic-go/quic-go@b90058aba5f65f48e0e150c89bbaa21a72dda4de",
+      "differences": [],
+      "id": "GO-2025-3735",
+      "seconds": 0.9,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 8,
+      "cluster_key": "go-pg/pg@eff50a43724e52347559687a6945c116afbb41c1",
+      "differences": [],
+      "id": "GO-2025-3764",
+      "seconds": 0.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 28,
+      "cluster_key": "cometbft/cometbft@be5677c3e58f998b7f67bb6186dd2c9b81a041a1,cometbft/cometbft@dcb1f265b59477be40804f7ccdc4fb30612d6a4f",
+      "differences": [],
+      "id": "GO-2025-4025",
+      "seconds": 4.44,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 8,
+      "cluster_key": "dvsekhvalnov/jose2go@0a0673dd7f2820a446de5b04b9094b2291d77d5d",
+      "differences": [],
+      "id": "GO-2025-4123",
+      "seconds": 0.77,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "VictoriaMetrics/VictoriaMetrics@51b44afd34d2c9a392d4ebedeeb5b4a7f5beca24",
+      "differences": [],
+      "id": "GO-2025-4161",
+      "seconds": 4.59,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 5,
+      "cluster_key": "elastic/beats@0025fbfe668936eb8fa65b838508faf3c3c04387,elastic/beats@6e42552a23cec734e7977ebd3eb7fb797ddce456,elastic/beats@c7664c91a5a68c2df782bfeffe4fb7f42ff2ad1a",
+      "differences": [
+        "candidate_count 4 -> 5"
+      ],
+      "id": "GO-2026-4360",
+      "seconds": 0.11,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "gofiber/fiber@eb874b6f6c5896b968d9b0ab2b56ac7052cb0ee1",
+      "differences": [],
+      "id": "GO-2026-4471",
+      "seconds": 0.94,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "osrg/gobgp@583080a7258e22cc884162e15b078771aa2c2c80",
+      "differences": [],
+      "id": "GO-2026-4736",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "distribution/distribution@078b0783f239b4115d1a979e66f08832084e9d1d",
+      "differences": [],
+      "id": "GO-2026-4942",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 26,
+      "cluster_key": "cloudsoda/go-smb2@7b96c35f5f4babfc9d68a60baf5e85f2303d4a4b",
+      "differences": [],
+      "id": "GO-2026-5051",
+      "seconds": 0.13,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 9,
+      "cluster_key": "gofiber/fiber@050ff1ff18511c1475b8ec627460216aaecddd4e,gofiber/fiber@9a0d12c07ed895b84c72987f9288b04137afe5de",
+      "differences": [],
+      "id": "GO-2026-5069",
+      "seconds": 0.12,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "ipld/go-ipld-prime@e43bf4a27055fe8d895671a731ee5041e2d983a9",
+      "differences": [],
+      "id": "GO-2026-5073",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "gomarkdown/markdown@759bbc3e32073c3bc4e25969c132fc520eda2778",
+      "differences": [],
+      "id": "GO-2026-5208",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 5,
+      "cluster_key": "gohugoio/hugo@e41a06447daa3071a01f333fdcec0a5153c3c8d1",
+      "differences": [],
+      "id": "GO-2026-5313",
+      "seconds": 0.08,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "yuin/goldmark@cb46bbc4eca29d55aa9721e04ad207c23ccc44f9",
+      "differences": [],
+      "id": "GO-2026-5320",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 6,
+      "cluster_key": "gohugoio/hugo@f8b5fa09a64950c32b803821ede411ebfe772b7a",
+      "differences": [],
+      "id": "GO-2026-5380",
+      "seconds": 0.09,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "slack-go/slack@34ad5c052e446f58505ae8d81a2a72821de107cc",
+      "differences": [],
+      "id": "GO-2026-5410",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "osrg/gobgp@76d911046344a3923cbe573364197aa081944592",
+      "differences": [],
+      "id": "GO-2026-5427",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "helm/helm@4e7994d4467182f535b6797c94b5b0e994a91436",
+      "differences": [],
+      "id": "GO-2026-5435",
+      "seconds": 0.1,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 283,
+      "cluster_key": "MontFerret/ferret@160ebad6bd50f153453e120f6d909f5b83322917",
+      "differences": [],
+      "id": "GO-2026-5452",
+      "seconds": 1.66,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "bettercap/bettercap@0eaa375c5e5446bfba94a290eff92967a5deac9e",
+      "differences": [],
+      "id": "GO-2026-5463",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "rclone/rclone@9e3e68d00c3ecf475a1432fc206400cfb4df7e3f",
+      "differences": [],
+      "id": "GO-2026-5466",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "gohugoio/hugo@479fe6c654937a850b65e74551dc4e857d52898f",
+      "differences": [],
+      "id": "GO-2026-5504",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 17,
+      "cluster_key": "open-telemetry/opentelemetry-go@aa1894e09e3fe66860c7885cb40f98901b35277f",
+      "differences": [],
+      "id": "GO-2026-5506",
+      "seconds": 0.12,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "osrg/gobgp@d2d2be3e4e7915d407e662e5d388d9f8ae8a8f7b",
+      "differences": [],
+      "id": "GO-2026-5525",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 0,
+      "cluster_key": "dgraph-io/dgraph@b15c87e9353e36618bf8e0df3bd945c0ce7105ef",
+      "differences": [],
+      "id": "GO-2026-5529",
+      "seconds": 0.04,
+      "status": "EMPTY"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "Azure/go-ntlmssp@bd8579c18d41bf5d91a5f74b1117c958f635b866",
+      "differences": [],
+      "id": "GO-2026-5543",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 0,
+      "cluster_key": "pocketbase/pocketbase@44bf55097af90c4c9dc240a8ea0d81923763a60e",
+      "differences": [],
+      "id": "GO-2026-5548",
+      "seconds": 0.01,
+      "status": "EMPTY"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "helm/helm@05fa37973dc9e42b76e1d2883494c87174b6074f",
+      "differences": [],
+      "id": "GO-2026-5566",
+      "seconds": 0.05,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "gohugoio/hugo@ce1a7e0bce3713af40496ded3c2c0ceeed49231d",
+      "differences": [],
+      "id": "GO-2026-5569",
+      "seconds": 0.05,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 10,
+      "cluster_key": "rclone/rclone@48da1774f4999d1d46543308b9a7fe75585dbfc4,rclone/rclone@9222ed2c5a7678de7fa620214b0858311c707a29",
+      "differences": [],
+      "id": "GO-2026-5596",
+      "seconds": 0.14,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 8,
+      "cluster_key": "gohugoio/hugo@a00b5c72ac57afe26df6688ece3ca544a56df372",
+      "differences": [],
+      "id": "GO-2026-5606",
+      "seconds": 0.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "osrg/gobgp@f9f7b55ec258e514be0264871fa645a2c3edad11",
+      "differences": [],
+      "id": "GO-2026-5665",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "helm/helm@36c8539e99bc42d7aef9b87d136254662d04f027",
+      "differences": [],
+      "id": "GO-2026-5666",
+      "seconds": 0.08,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 6,
+      "cluster_key": "quic-go/quic-go@c56e8c79d1627cc1ed6005b421b4b0adadd83665",
+      "differences": [],
+      "id": "GO-2026-5676",
+      "seconds": 1.12,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "gohugoio/hugo@86fbb0f7a8bbb93e2e916390de9e5a4f24bf9f50",
+      "differences": [],
+      "id": "GO-2026-5681",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "osrg/gobgp@bc77597d42335c78464bc8e15a471d887bbdf260",
+      "differences": [],
+      "id": "GO-2026-5699",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "osrg/gobgp@362cce3e325f56e7a4f792ccb9689b3bdda9e682,osrg/gobgp@9ce8936672ebc07df524da77fa4c6ae26d92be6d",
+      "differences": [],
+      "id": "GO-2026-5713",
+      "seconds": 0.27,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 36,
+      "cluster_key": "gohugoio/hugo@a54c398b93821865547a9e21c73aad8a1d7f7bc1",
+      "differences": [],
+      "id": "GO-2026-5740",
+      "seconds": 0.25,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "ollama/ollama@88d57d0483cca907e0b23a968c83627a20b21047",
+      "differences": [],
+      "id": "GO-2026-5748",
+      "seconds": 2.58,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "klauspost/compress@8668e357e776d5152ed62f33c17f21b8690664fa",
+      "differences": [],
+      "id": "GO-2026-5841",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "oras-project/oras-go@cc323e564d90c6b5b4bdd71d3c8d2ee2713b37e5",
+      "differences": [],
+      "id": "GO-2026-5879",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "oras-project/oras-go@b11f777f8d405c5023c4b307cfdc5068dfc3d406",
+      "differences": [],
+      "id": "GO-2026-5880",
+      "seconds": 0.99,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "oras-project/oras-go@4683c46ef078091544f5f55fd25102f002806991",
+      "differences": [],
+      "id": "GO-2026-5882",
+      "seconds": 0.05,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "oras-project/oras-go@3c2e884e12ea52b6bff60c97f1edb7df7d0e0909",
+      "differences": [],
+      "id": "GO-2026-5884",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "oras-project/oras-go@7a9f4b0b9558821b0422152ebe21ae56930fe764",
+      "differences": [],
+      "id": "GO-2026-5885",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "osrg/gobgp@4a319a6c25630fb3cdbda3e9ccfe56e702bdaaa0",
+      "differences": [],
+      "id": "GO-2026-5954",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 5,
+      "cluster_key": "osrg/gobgp@f02ca397821f6ca182ef4eb492c3cbc459552d7c",
+      "differences": [],
+      "id": "GO-2026-5955",
+      "seconds": 0.14,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 5,
+      "cluster_key": "qax-os/excelize@875b959ba62fc9bf45bb0de547ae7c7f7549835c",
+      "differences": [],
+      "id": "GO-2026-5960",
+      "seconds": 0.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "osrg/gobgp@9ce8936672ebc07df524da77fa4c6ae26d92be6d",
+      "differences": [],
+      "id": "GO-2026-5971",
+      "seconds": 0.13,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 34,
+      "cluster_key": "aquasecurity/trivy@441251e51ae46cbcf7f436547e0a5766b25328b4",
+      "differences": [],
+      "id": "GO-2026-5983",
+      "seconds": 0.12,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 8,
+      "cluster_key": "forgekeep/nebula-mesh@514006029e09f1991122b86a80e7b25970bcfa98",
+      "differences": [],
+      "id": "GO-2026-5987",
+      "seconds": 0.12,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 5,
+      "cluster_key": "forgekeep/nebula-mesh@bc387086cc0e4b9c1654468b7391af19cacfe367",
+      "differences": [],
+      "id": "GO-2026-5989",
+      "seconds": 0.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 46,
+      "cluster_key": "grpc/grpc-go@4ea465d4ab98013f72a142fe0fc89c19770b2935",
+      "differences": [],
+      "id": "GO-2026-6061",
+      "seconds": 0.13,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "getkin/kin-openapi@f0407d53b0730280266f454b755010e7eeb985da",
+      "differences": [],
+      "id": "GO-2026-6095",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "getkin/kin-openapi@68ac2affa325514d7d6e731204d6a1edf6bdff64",
+      "differences": [],
+      "id": "GO-2026-6112",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "etcd-io/etcd@6643f80602461a6095c9b294b6512fd9719bef41",
+      "differences": [],
+      "id": "GO-2026-6114",
+      "seconds": 1.7,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "gotd/td@9d5d1f31ea5022d9798d84ccce15de2e91ba6baa",
+      "differences": [],
+      "id": "GO-2026-6138",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 17,
+      "cluster_key": "prebid/prebid-server@494ac271cd4b5024df9123ef25ca3cff96390be3",
+      "differences": [],
+      "id": "GO-2026-6139",
+      "seconds": 0.25,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "pion/stun@cfe8f95bcae610be653f084e6e81743ed1bf4176",
+      "differences": [],
+      "id": "GO-2026-6163",
+      "seconds": 0.72,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 0,
+      "cluster_key": "pion/dtls@49458d604a4f3ebce1bf9587a0f3e5f3f6b4a55e",
+      "differences": [],
+      "id": "GO-2026-6165",
+      "seconds": 0.01,
+      "status": "UNAVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "rclone/rclone@ff43a1e3ae17627c80e523a0ca7445f96516d199",
+      "differences": [],
+      "id": "GO-2026-6181",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "rclone/rclone@e122fba1a57641b63a580aa26c026903a84e2e88",
+      "differences": [],
+      "id": "GO-2026-6182",
+      "seconds": 0.05,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "rclone/rclone@5871d98c368751a6d992ed64f8cd22cb78c44cee",
+      "differences": [],
+      "id": "GO-2026-6183",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "rclone/rclone@cc5a189f00efe68ed0ddb32d3237b42549a9f264",
+      "differences": [],
+      "id": "GO-2026-6184",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "rclone/rclone@1a746732441e8158f32fab35924b23701e719a8c,rclone/rclone@d11efe0d58fe6a2d6d90675bb9d8ee5840c51e1d",
+      "differences": [],
+      "id": "GO-2026-6185",
+      "seconds": 0.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 17,
+      "cluster_key": "rclone/rclone@6a69713864b1d8f6edbc03d8af735f9624576d6e",
+      "differences": [],
+      "id": "GO-2026-6186",
+      "seconds": 0.06,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "rclone/rclone@1df2b70753286c1dfe8366078cbedfdf7f96472c",
+      "differences": [],
+      "id": "GO-2026-6187",
+      "seconds": 0.05,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "rclone/rclone@7543a7a87884aca957590b20b0714078d51af87b,rclone/rclone@9328763d1b73db71e97c0332b19e3747abeb9191",
+      "differences": [],
+      "id": "GO-2026-6188",
+      "seconds": 0.14,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 25,
+      "cluster_key": "rclone/rclone@83d1e62aa9e0dbd10a5d7eb34c117ae997268cdf,rclone/rclone@c89b766cf417fddbe7eace40d31262ecb85bfa93",
+      "differences": [],
+      "id": "GO-2026-6189",
+      "seconds": 0.19,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "rclone/rclone@e58f09739a35774ca82b5211d2377ac0f2051500",
+      "differences": [],
+      "id": "GO-2026-6190",
+      "seconds": 0.07,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 18,
+      "cluster_key": "rclone/rclone@1154afebee986180b489084d38e2a0c578751498,rclone/rclone@874a804f5289517defdd7de68b2a374837080265",
+      "differences": [],
+      "id": "GO-2026-6191",
+      "seconds": 0.08,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "rclone/rclone@015fd0eba1cb138eef081517795fed47a2873f2d,rclone/rclone@dade21c1616035b044df0eef7ee6a85aeb06a139",
+      "differences": [],
+      "id": "GO-2026-6195",
+      "seconds": 0.07,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 7,
+      "cluster_key": "rclone/rclone@59b513b0e74fd2943ccbb8891d5ce00f860e6d26",
+      "differences": [],
+      "id": "GO-2026-6197",
+      "seconds": 0.07,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "rclone/rclone@21d8cd3b92cd81d987f485051d454ea675d91a2b",
+      "differences": [],
+      "id": "GO-2026-6199",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 42,
+      "cluster_key": "go-git/go-git@008a78f2dd86f52544ddff8b8e8ddeecdf3f7aab,go-git/go-git@661d1c7f101d34e002a3cfcf8dbea5b7421d07ac",
+      "differences": [],
+      "id": "GO-2026-6213",
+      "seconds": 1.36,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "hyperledger/fabric-ca@d379df823534d56dec0166a6da8f0415e3beee24",
+      "differences": [],
+      "id": "GO-2026-6234",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 0,
+      "cluster_key": "insomniacslk/dhcp@c76316d4aa825673b208730779843d0711021e81",
+      "differences": [],
+      "id": "GO-2026-6237",
+      "seconds": 0.01,
+      "status": "UNAVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "cilium/ebpf@533dfc82fd228bfadf42ea7180c39de7d9af47fa",
+      "differences": [],
+      "id": "GO-2026-6238",
+      "seconds": 0.05,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "crossplane/crossplane-runtime@bee99c6cd6ca81878acca2940a2f0a02169fc208",
+      "differences": [],
+      "id": "GO-2026-6302",
+      "seconds": 0.85,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 12,
+      "cluster_key": "grpc/grpc-go@7354d9c8debb4bcf2225bf429857078de310c176",
+      "differences": [],
+      "id": "GO-2026-6348",
+      "seconds": 1.64,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 4,
+      "cluster_key": "VictoriaMetrics/VictoriaMetrics@710c920d6083327042a309e449fae4383617d817",
+      "differences": [],
+      "id": "GO-2026-6366",
+      "seconds": 0.08,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 6,
+      "cluster_key": "qax-os/excelize@93f0b3caed37f21ef5079e3259c6c21dcfe68453",
+      "differences": [],
+      "id": "GO-2026-6452",
+      "seconds": 0.09,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 6,
+      "cluster_key": "qax-os/excelize@93f0b3caed37f21ef5079e3259c6c21dcfe68453",
+      "differences": [],
+      "id": "GO-2026-6453",
+      "seconds": 0.09,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 27,
+      "cluster_key": "pocketbase/pocketbase@30b4184305904fae0d1b78216c4e3cc34700b220,pocketbase/pocketbase@f1618ee59b6d1c0308bb474c827a2b1f24b12a95",
+      "differences": [],
+      "id": "GO-2026-6489",
+      "seconds": 1.59,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "caddyserver/caddy@176b043b0104cee3f894023cd5a598ac29e404bb",
+      "differences": [],
+      "id": "GO-2026-6512",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "hatchet-dev/hatchet@f90464189ad642251e09412d0f99fde353036428",
+      "differences": [],
+      "id": "GO-2026-6535",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 51,
+      "cluster_key": "snowflakedb/gosnowflake@52e397ecd02f741dda99994fad9d42154149ef6a",
+      "differences": [],
+      "id": "GO-2026-6665",
+      "seconds": 0.35,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 7,
+      "cluster_key": "qax-os/excelize@22f76f9acb94b85b3eb9c4365ab4f750cebbc565",
+      "differences": [],
+      "id": "GO-2026-6684",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "qax-os/excelize@01a9ff32fb3c1f873cf01205e1b8a3285b0e1d23",
+      "differences": [],
+      "id": "GO-2026-6685",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 6,
+      "cluster_key": "moby/sys@85a71bbe1faa36c552a960e6a5f3d0cfb632fbbe",
+      "differences": [],
+      "id": "GO-2026-6686",
+      "seconds": 0.05,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "qax-os/excelize@8ffeb07ec9a350410f6922313f6b7e4f5cc79241",
+      "differences": [],
+      "id": "GO-2026-6687",
+      "seconds": 0.03,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 3,
+      "cluster_key": "qax-os/excelize@5f636f9dcde55911f14290060b017f0cc88cd694",
+      "differences": [],
+      "id": "GO-2026-6689",
+      "seconds": 0.05,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 1,
+      "cluster_key": "qax-os/excelize@6258dcebc4e2a2aed985c38a08098dfd908521d1",
+      "differences": [],
+      "id": "GO-2026-6695",
+      "seconds": 0.05,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 2,
+      "cluster_key": "rabbitmq/amqp091-go@6723e8cff8710f0a6bf5fb4af375e285052535b3",
+      "differences": [],
+      "id": "GO-2026-6700",
+      "seconds": 0.04,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 67,
+      "cluster_key": "0xJacky/nginx-ui@23d1934099b05b2a01589b48129dc3d3159d91c2",
+      "differences": [],
+      "id": "GO-2026-6773",
+      "seconds": 3.61,
+      "status": "AVAILABLE"
+    },
+    {
+      "action": "built",
+      "candidate_count": 67,
+      "cluster_key": "0xJacky/nginx-ui@23d1934099b05b2a01589b48129dc3d3159d91c2",
+      "differences": [],
+      "id": "GO-2026-6786",
+      "seconds": 0.59,
+      "status": "AVAILABLE"
+    }
+  ],
+  "dataset": "D1",
+  "differences": [
+    {
+      "differences": [
+        "candidate_count 4 -> 5"
+      ],
+      "id": "GO-2026-4360"
+    }
+  ],
+  "expected_status_counts": {
+    "AVAILABLE": 144,
+    "EMPTY": 4,
+    "UNAVAILABLE": 2
+  },
+  "status_counts": {
+    "AVAILABLE": 144,
+    "EMPTY": 4,
+    "UNAVAILABLE": 2
+  },
+  "wall_seconds": 288.5
+}
