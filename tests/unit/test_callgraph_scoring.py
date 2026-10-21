@@ -82,8 +82,17 @@ def test_score_combined_disagreement_and_agreement(tmp_path):
         cs.score_combined(suite, binary=Path("fake"), vta_runner=vta_runner, linker_runner=linker_runner(False)))
 
 
+def naive_runner(argv, timeout):
+    return 0, (RESP / "naive_no_path.json").read_text(), ""
+
+
 def test_write_score_and_markdown(tmp_path):
-    rep = cs.score_callgraph(tiny_suite(tmp_path), cs.NAIVE_METHOD, binary=Path("fake"), runner=vta_runner)
+    rep = cs.score_callgraph(tiny_suite(tmp_path), cs.NAIVE_METHOD, binary=Path("fake"), runner=naive_runner)
     jp, mp = cs.write_score(rep, tmp_path / "out")
     assert jp.name == "naive_score.json" and json.loads(jp.read_text())["method"] == "CALLGRAPH_NAIVE"
-    assert "| direct_call | DIRECT | REACHABLE | PATH_FOUND | REACHABLE | AGREE |" in mp.read_text()
+    assert "| direct_call | DIRECT | REACHABLE | NO_PATH | NOT_REACHABLE | FALSE_NOT_REACHABLE |" in mp.read_text()
+
+
+def test_reach_response_for_a_naive_request_is_an_error(tmp_path):
+    rep = cs.score_callgraph(tiny_suite(tmp_path), cs.NAIVE_METHOD, binary=Path("fake"), runner=vta_runner)
+    assert {r["error"]["code"] for c in rep["cases"] for r in c["method_results"]} == {"BAD_RESPONSE"}
