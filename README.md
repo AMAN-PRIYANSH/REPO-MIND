@@ -74,12 +74,17 @@ Decisions:
 - **Assumption** - believed true but not yet checked.
 - **Proposal** - a design choice to be validated during implementation.
 
-## Development (CP1)
+## Development (CP1-CP2)
 
 ```
 python -m venv .venv && .venv/bin/pip install -e ".[dev]"
-python -m pytest tests/unit          # needs only Python
-python -m pytest tests/integration   # needs Go; skips with a message if missing
+python -m pytest tests/unit tests/contract   # needs only Python
+python -m pytest tests/integration           # needs Go; skips with a message if missing
+(cd helper && GOTOOLCHAIN=local GOPROXY=off go test ./...)
 python -m vulntrace doctor
+python -m vulntrace helper fetch             # once: downloads the helper's Go dependencies (network)
+python -m vulntrace helper build             # offline build into ~/.cache/vulntrace (never into the repo)
 python -m vulntrace fixtures score --method linker [--out results/cp1] [--compare-inlining]
+python -m vulntrace fixtures score --method naive|vta|combined [--out results/cp2] [--timeout 300]
+python -m vulntrace results render --doc cp1|cp2 --input <report or dir> --out docs/results/<file>.md
 ```

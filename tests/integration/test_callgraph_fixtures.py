@@ -139,3 +139,15 @@ def test_funcs_lists_declarations_with_lines(helper):
         assert lines[f["start"] - 1].startswith("func "), f
         assert lines[f["end"] - 1].rstrip().endswith("}"), f
 
+
+
+def test_committed_cp2_results_doc_matches_fresh_runs(vta, naive, combined):
+    """The tables in docs/results/CP2_CALLGRAPH_RESULTS.md come from code, not by hand."""
+    from vulntrace.eval.fixture_score import score_linker
+    from vulntrace.eval.results_doc import cp2_comparable_lines, load_notes, render_cp2_doc
+    from vulntrace.paths import REPO_ROOT
+
+    reports = {"R1": naive, "R2": score_linker(FIXTURES_DIR), "R3": vta, "R4": combined}
+    fresh = render_cp2_doc(reports, load_notes("cp2_callgraph"), "x")
+    committed = (REPO_ROOT / "docs" / "results" / "CP2_CALLGRAPH_RESULTS.md").read_text(encoding="utf-8")
+    assert cp2_comparable_lines(committed) == cp2_comparable_lines(fresh)
