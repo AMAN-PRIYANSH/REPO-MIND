@@ -5,8 +5,8 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP1 - Ground truth and linker presence**
-- State: `READY` (released, not started)
-- Branch in use: (none yet - the first session writes its own `claude/...` session branch here; see `CLAUDE.md` section 5)
+- State: `IN_PROGRESS`
+- Branch in use: `claude/vulntrace-checkpoint-continue-ia7tx5`
 - Specification: [checkpoints/CP1.md](../implementation/checkpoints/CP1.md)
 
 State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
@@ -15,7 +15,7 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 | CP | Title | State | Branch | Report |
 |---|---|---|---|---|
-| CP1 | Ground truth and linker presence | READY | - | - |
+| CP1 | Ground truth and linker presence | IN_PROGRESS | claude/vulntrace-checkpoint-continue-ia7tx5 | - |
 | CP2 | Go call-graph helper and verdict rule | NOT_RELEASED | - | - |
 | CP3 | Advisory dataset, fix evidence, release-range candidates, baselines | NOT_RELEASED | - | - |
 | CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | NOT_RELEASED | - | - |
@@ -28,7 +28,15 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-- [ ] (not started)
+- [ ] D1 Python package skeleton (pyproject, src/vulntrace, tests, .gitignore)
+- [ ] D2 `doctor` command
+- [ ] D3 Schemas (fixture_manifest, method_result)
+- [ ] D4 Fixture suite (>=12 cases, inlining case, manifest.json)
+- [ ] D5 Linker-presence method
+- [ ] D6 Scoring command (`fixtures score --method linker`)
+- [ ] D7 Tests (unit + integration)
+- [ ] D8 Results document `docs/results/CP1_LINKER_RESULTS.md`
+- [ ] Report `docs/progress/reports/CP1_REPORT.md`, state -> AWAITING_REVIEW
 
 ## Handoff notes
 
