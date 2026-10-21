@@ -1,6 +1,12 @@
 import pytest
 
-from vulntrace.dataset.govers import InvalidVersion, parse_version, pseudo_version_commit, smallest_fixed_above
+from vulntrace.dataset.govers import (
+    InvalidVersion,
+    parse_version,
+    pseudo_version_commit,
+    pseudo_version_parts,
+    smallest_fixed_above,
+)
 
 
 def test_plain_version():
@@ -62,6 +68,12 @@ def test_pseudo_version_with_nonstandard_hash_length_still_resolves():
     commit hash is not exactly the spec's 12 hex digits (11, 13 and 14 were observed)."""
     assert pseudo_version_commit("0.7.1-0.20250129155113-4c6e03c463141") == "4c6e03c463141"  # 13 chars
     assert pseudo_version_commit("1.9.10-0.20251005005631-6de168c9454") == "6de168c9454"  # 11 chars
+
+
+def test_pseudo_version_parts_gives_timestamp_and_hash():
+    assert pseudo_version_parts("0.0.0-20160722212129-ac0cc4484ad4") == ("20160722212129", "ac0cc4484ad4")
+    assert pseudo_version_parts("1.4.3-0.20191129212618-4f2e80285f2e") == ("20191129212618", "4f2e80285f2e")
+    assert pseudo_version_parts("1.0.0") is None
 
 
 def test_pseudo_version_missing_commit_hash_is_unresolved():

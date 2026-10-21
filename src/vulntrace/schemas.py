@@ -15,6 +15,7 @@ _FILES = {
     "verdict": "verdict.schema.json",
     "vuln_case": "vuln_case.schema.json",
     "fix_evidence": "fix_evidence.schema.json",
+    "release_range": "release_range.schema.json",
 }
 
 

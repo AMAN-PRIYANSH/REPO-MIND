@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "release_range.schema.json",
+  "title": "ReleaseRange",
+  "description": "Mode 2 evidence (docs/design/DATA_MODEL.md), produced by CP3 deliverable 4 from a VulnCase module's vulnerable_at/fixed_in pair.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "module", "from", "to", "candidates", "commits",
+               "non_go_files_changed", "test_files_changed", "status"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "case_id": {"type": "string", "minLength": 1},
+    "module": {"type": "string", "minLength": 1},
+    "from": {"$ref": "#/$defs/endpoint"},
+    "to": {"$ref": "#/$defs/endpoint"},
+    "candidates": {"type": "array", "items": {"$ref": "#/$defs/candidate"}},
+    "commits": {"type": "array", "items": {"$ref": "#/$defs/commit"}},
+    "non_go_files_changed": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "test_files_changed": {"type": "integer", "minimum": 0},
+    "status": {"enum": ["AVAILABLE", "TAG_NOT_FOUND", "PSEUDO_VERSION_UNRESOLVED", "EMPTY", "TRUNCATED"]}
+  },
+  "$defs": {
+    "endpoint": {
+      "type": "object", "additionalProperties": false, "required": ["version", "ref", "commit"],
+      "properties": {
+        "version": {"type": "string", "minLength": 1},
+        "ref": {"oneOf": [{"type": "null"}, {"type": "string", "minLength": 1}]},
+        "commit": {"oneOf": [{"type": "null"}, {"type": "string", "minLength": 7}]}
+      }
+    },
+    "line_range": {
+      "type": "object", "additionalProperties": false, "required": ["file", "start", "end"],
+      "properties": {
+        "file": {"type": "string", "minLength": 1},
+        "start": {"type": "integer", "minimum": 1},
+        "end": {"type": "integer", "minimum": 1}
+      }
+    },
+    "candidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["candidate_id", "package_dir", "symbol", "side", "old_range", "new_range"],
+      "properties": {
+        "candidate_id": {"type": "string", "pattern": "^r[0-9]+$"},
+        "package_dir": {"type": "string"},
+        "symbol": {"type": "string", "minLength": 1},
+        "side": {"enum": ["OLD", "NEW", "BOTH"]},
+        "old_range": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/line_range"}]},
+        "new_range": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/line_range"}]}
+      },
+      "allOf": [
+        {"if": {"properties": {"side": {"const": "OLD"}}}, "then": {"properties": {"new_range": {"type": "null"}}}},
+        {"if": {"properties": {"side": {"const": "NEW"}}}, "then": {"properties": {"old_range": {"type": "null"}}}},
+        {"if": {"properties": {"side": {"const": "BOTH"}}},
+         "then": {"properties": {"old_range": {"type": "object"}, "new_range": {"type": "object"}}}}
+      ]
+    },
+    "commit": {
+      "type": "object", "additionalProperties": false, "required": ["sha", "subject", "touches_candidates"],
+      "properties": {
+        "sha": {"type": "string", "minLength": 7},
+        "subject": {"type": "string"},
+        "touches_candidates": {"type": "array", "items": {"type": "string", "pattern": "^r[0-9]+$"}}
+      }
+    }
+  }
+}

@@ -101,14 +101,24 @@ def parse_version(v: str) -> GoVersion:
 
 
 def pseudo_version_commit(v: str) -> str | None:
-    """The 12-hex-digit abbreviated commit hash embedded in a pseudo-version, or None if `v`
-    is not a pseudo-version. Verified against the examples in golang/vulndb reports, e.g.
+    """The abbreviated commit hash embedded in a pseudo-version, or None if `v` is not a
+    pseudo-version. Verified against the examples in golang/vulndb reports, e.g.
     "0.0.0-20160722212129-ac0cc4484ad4" -> "ac0cc4484ad4"."""
+    parts = pseudo_version_parts(v)
+    return parts[1] if parts else None
+
+
+def pseudo_version_parts(v: str) -> tuple[str, str] | None:
+    """(timestamp "YYYYMMDDHHMMSS", abbreviated commit hash) embedded in a pseudo-version,
+    or None if `v` is not one. The timestamp is the commit's own committer time (Go pseudo-
+    version spec), so release_range.py uses it to bound a `--shallow-since` fetch: the
+    hash alone is never enough to `git fetch` an unadvertised object by id (git's wire
+    protocol needs the full 40-character SHA, not an abbreviation)."""
     base = v.strip()
     if base.endswith("+incompatible"):
         base = base[: -len("+incompatible")]
     m = _PSEUDO_SUFFIX.search(base)
-    return m.group(2) if m else None
+    return (m.group(1), m.group(2)) if m else None
 
 
 def smallest_fixed_above(vulnerable_at: str, fixed_candidates: list[str]) -> str | None:

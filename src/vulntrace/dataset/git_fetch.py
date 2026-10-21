@@ -8,6 +8,7 @@ section 2); all network use lives here, in Python, as an explicit step.
 """
 
 import os
+import re
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -127,6 +128,52 @@ def resolve_tag(repo_dir: Path, tag: str, runner=subprocess.run) -> str | None:
     """The commit SHA a tag or ref points to, or None if it does not exist locally."""
     p = _run(runner, ["git", "rev-parse", f"{tag}^{{commit}}"], repo_dir)
     return p.stdout.strip() if p.returncode == 0 else None
+
+
+def deepen(host: str, owner: str, repo: str, ref: str, depth: int, cache_root: Path | None = None,
+          runner=subprocess.run, timeout: float = DEFAULT_TIMEOUT_S, remote_url: str | None = None) -> Path:
+    """Extend the cache clone's shallow history to `depth` commits back from `ref` (git
+    supports re-fetching an already-shallow clone with a larger --depth to deepen it in
+    place). Raises GitFetchError on a transport failure."""
+    repo_dir = repo_cache_dir(host, owner, repo, cache_root)
+    _ensure_repo_initialised(repo_dir, host, owner, repo, runner, remote_url)
+    fetch = _run(runner, ["git", "fetch", f"--depth={depth}", "origin", ref], repo_dir, timeout=timeout)
+    if fetch.returncode != 0:
+        raise GitFetchError("FETCH_FAILED", f"git fetch --depth={depth} {ref}: " + (fetch.stderr or fetch.stdout).strip())
+    return repo_dir
+
+
+def fetch_since(host: str, owner: str, repo: str, since: str, cache_root: Path | None = None,
+                runner=subprocess.run, timeout: float = DEFAULT_TIMEOUT_S, remote_url: str | None = None) -> Path:
+    """Fetch every branch's history back to `since` (any date `git`'s `--shallow-since`
+    accepts, e.g. "2020-01-02"). Used to resolve a pseudo-version's abbreviated commit hash:
+    git's wire protocol cannot fetch an unadvertised object by an abbreviated id, only a
+    full 40-character SHA, so the hash alone is not fetchable directly - this pulls enough
+    connected history (bounded by date, not by a possibly-huge commit count) for the
+    abbreviation to be resolved locally instead.
+
+    Every branch, not just the default one: observed on a real pseudo-version (jwt-go,
+    GO-2020-0017's /v4 module) whose commit lives only on a release branch (`release_4_0_0`)
+    that was never merged to `master` - fetching only "HEAD" never finds such a commit, no
+    matter how far back `since` goes. Raises GitFetchError on a transport failure."""
+    repo_dir = repo_cache_dir(host, owner, repo, cache_root)
+    _ensure_repo_initialised(repo_dir, host, owner, repo, runner, remote_url)
+    refspec = "+refs/heads/*:refs/remotes/origin/*"
+    fetch = _run(runner, ["git", "fetch", f"--shallow-since={since}", "origin", refspec], repo_dir, timeout=timeout)
+    if fetch.returncode != 0:
+        raise GitFetchError("FETCH_FAILED", f"git fetch --shallow-since={since} (all branches): "
+                            + (fetch.stderr or fetch.stdout).strip())
+    return repo_dir
+
+
+def resolve_abbreviated(repo_dir: Path, short_sha: str, runner=subprocess.run) -> str | None:
+    """The full SHA a locally-known abbreviated commit id resolves to, or None if it is
+    absent or ambiguous."""
+    p = _run(runner, ["git", "rev-parse", short_sha + "^{commit}"], repo_dir)
+    if p.returncode != 0:
+        return None
+    sha = p.stdout.strip()
+    return sha if re.fullmatch(r"[0-9a-f]{40}", sha) else None
 
 
 def fetch_ref(host: str, owner: str, repo: str, ref: str, depth: int | None = None,

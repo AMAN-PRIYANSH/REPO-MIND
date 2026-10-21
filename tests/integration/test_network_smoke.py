@@ -9,6 +9,7 @@ import shutil
 import pytest
 
 from vulntrace.dataset.fix_evidence import build_fix_evidence
+from vulntrace.dataset.release_range import STATUS_AVAILABLE, build_release_range
 from vulntrace.methods.helper import HelperError, ensure_helper
 from vulntrace.schemas import validate
 
@@ -39,3 +40,17 @@ def test_real_fix_commit_fetches_and_extracts_evidence(helper, tmp_path):
     assert ev["commits"] == [{"sha": fix_commit["sha"], "parent_sha": "32acca36b99f04b2b52d117d57bb17e17cbd35a8"}]
     symbols = {c["symbol"] for c in ev["candidates"]}
     assert "MapClaims.VerifyAudience" in symbols
+
+
+def test_real_release_range_resolves_pseudo_version_and_tag(helper, tmp_path):
+    """GO-2020-0017's jwt-go/v4 module: vulnerable_at is a real pseudo-version, fixed_in a
+    real pre-release tag (v4.0.0-preview1)."""
+    rr = build_release_range(
+        "GO-2020-0017", "github.com/dgrijalva/jwt-go/v4", "4.0.0-20190408202314-32acca36b99f", "4.0.0-preview1",
+        "github.com", "dgrijalva", "jwt-go", binary=helper, cache_root=tmp_path / "cache",
+    )
+    validate("release_range", rr)
+    assert rr["status"] == STATUS_AVAILABLE
+    assert rr["from"]["commit"] == "32acca36b99f04b2b52d117d57bb17e17cbd35a8"
+    assert rr["to"]["commit"] == "a58974ee87a68abcf6cfb2315224e89135cf3311"
+    assert "MapClaims.VerifyAudience" in {c["symbol"] for c in rr["candidates"]}
