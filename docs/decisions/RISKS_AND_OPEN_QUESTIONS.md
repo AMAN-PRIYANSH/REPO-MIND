@@ -43,6 +43,7 @@
 | R12 | Building untrusted code causes harm | Security | Low | High | ADR-014 settings; never execute targets. |
 | R13 | Prompt injection in advisory or commit text | Security | Medium | Low | Closed-set answers validated by code; read-only tools; budgets. |
 | R14 | Accidental paid usage (paid API, Fable or 1M-context model in Claude Code) | Cost | Low | High | CLAUDE.md rule; endpoint check test; model guidance per checkpoint. |
+| R16 | `golang.org/x/tools` pinned to v0.42.0 because newer releases need Go 1.25; analysis may differ from current x/tools | Technical | Observed | Low | Record versions in every result; revisit if the environment moves to Go 1.25+. |
 | R15 | Over-claiming results | Integrity | Medium | High | Evaluation gates; numbers generated from result files only. |
 
 ## Verified facts vs assumptions (summary)

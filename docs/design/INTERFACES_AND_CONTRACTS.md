@@ -90,6 +90,7 @@ Error codes: `BAD_REQUEST`, `CONTRACT_MISMATCH`, `LOAD_FAILED`, `TYPE_ERRORS`, `
 - Python checks `contract_version`; a different major version is a hard error.
 - The helper never accesses the network. Module downloads, if needed, happen in a separate, explicit Python step that the user has allowed.
 - `TARGET_NOT_FOUND` is not the same as `NO_PATH`. A symbol that does not exist in the loaded program must not become `NOT_REACHABLE`.
+- Exception (added after CP2 review): if the target's **package** is not part of the loaded program at all (no package in the build imports it, directly or indirectly), the helper returns `NO_PATH` with `details.package_not_in_program = true`, because no code from that package can run. This is distinct from `TARGET_NOT_FOUND`, which is reserved for a package that is loaded but lacks the symbol (usually a naming problem) and stays an `ERROR`. A `NOT_REACHABLE` verdict still requires the linker to agree (`ABSENT`). Go plugins are out of scope.
 
 ## 3. Linker-presence contract (CP1, Python only)
 

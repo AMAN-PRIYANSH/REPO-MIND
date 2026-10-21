@@ -18,7 +18,7 @@ Only CP1 has a full specification now. Each later specification is written by th
 |---|---|---|---|
 | CP1 | Sonnet 5.5 | medium | Routine Python, small Go fixtures |
 | CP2 | Opus 5.5 | high | Go SSA/VTA analysis code is subtle |
-| CP3 | Sonnet 5.5 | medium | Data parsing and git plumbing |
+| CP3 | Sonnet 5.5 | high | Data parsing, git edge cases, CI setup |
 | CP4 | Opus 5.5 | high | Retrieval architecture, interfaces, evaluation harness |
 | CP5 | Sonnet 5.5 | high | LLM client, validation, caching, notebooks |
 | CP6 | Opus 5.5 | high | Agent design, tools, budgets, failure handling |
@@ -41,7 +41,7 @@ Full spec: [checkpoints/CP1.md](checkpoints/CP1.md).
 - Verdict rule (two-method agreement) and verdict schema; fixtures extended to about 20 cases.
 - Gate: R1-R4 scored on the fixture suite; zero false `NOT_REACHABLE` for the combined rule, or each exception explained.
 
-### CP3 - Advisory dataset, fix evidence, release-range candidates, baselines (week 2)
+### CP3 - Advisory dataset, fix evidence, release-range candidates, baselines, CI (week 2)
 
 - vulndb report reader at a pinned commit; `VulnCase` builder.
 - Fix-commit evidence (Mode 1) and release-range candidate extraction (Mode 2: functions changed between `vulnerable_at` and the first fixed tag), including pseudo-version handling.

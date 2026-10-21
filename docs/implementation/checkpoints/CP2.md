@@ -96,4 +96,23 @@ Lifting (`lift` mode, CP5), the evidence verifier (CP7), advisories, git fetchin
 
 ## Review notes
 
-(The supervising assistant adds notes here if the state becomes `CHANGES_REQUESTED`.)
+**Supervisor review, 21 Oct 2026 - APPROVED.**
+
+Checked on a clean checkout of `claude/optimistic-shannon-397w1q` at `bd53912`:
+
+- Re-run by the supervisor: `pytest tests/unit tests/contract` → 138 passed.
+- **Not** re-run by the supervisor: `go test ./...` in `helper/` and the 22 integration tests. The supervisor's sandbox cannot reach the Go module proxy (`proxy.golang.org` refused), so `golang.org/x/tools` could not be downloaded. These rest on the implementer's evidence plus code reading. CP3 task 0 adds GitHub Actions CI so every later checkpoint is verified in a neutral environment.
+- Truth labels of the four new fixtures checked by reading the code: correct. The devirtualisation fix kept truth labels unchanged.
+- `verdict.py` matches the rule table row for row.
+- Results: combined rule has 0 false NOT_REACHABLE and 0 false REACHABLE on 22 cases, with 6 `CANT_DETERMINE`. VTA alone is unsafe on reflection and `unsafe`; linker alone is unsafe on present-but-unreachable cases. This is the central design claim, now demonstrated on fixtures.
+
+Accepted from the implementer:
+
+- `golang.org/x/tools` pinned at v0.42.0 because later versions need Go 1.25 (environment has 1.24.7). Recorded in risks.
+- The CP1 review note on `unsafe_func_pointer` was partly wrong: it is a real `unsafe` test for VTA. Correction accepted.
+- Proposal to distinguish "package not in program" from "symbol not found": accepted; contract updated (interfaces section 2) and implemented in CP3 task 0.
+
+Noted, not blocking:
+
+- One commit (`35c50b9`) was pushed with a failing unit test because a pipe hid the exit code; fixed in the next commit and reported honestly.
+- A draft pull request (#1) was opened although the wrapper says not to. Harmless; it closes when `main` contains the branch.
