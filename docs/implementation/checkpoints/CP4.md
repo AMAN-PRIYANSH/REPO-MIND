@@ -105,4 +105,27 @@ Any LLM call, HyDE, closed-set selection, lifting, caller/callee expansion, the 
 
 ## Review notes
 
-(The supervising assistant adds notes here if the state becomes `CHANGES_REQUESTED`.)
+**Supervisor review, 22 Oct 2026 - CHANGES_REQUESTED (small fix, then a valid Colab run).**
+
+What the supervisor found: the first Colab bundle (`cp4_results.zip`) is invalid. Inside it: 0 chunks, every case has 0 candidates, every rank is `None`. Colab's own D4 materialisation produced 0 AVAILABLE cases (62 TAG_NOT_FOUND, 31 EMPTY, 18 TRUNCATED, 9 PSEUDO_VERSION_UNRESOLVED; expected 103 AVAILABLE), and 119 of 120 cases differed from `D4_cases.json`. The notebook did not stop; it wrote empty results. The BM25 results made in the Claude Code session on real evidence are not affected.
+
+Two bugs are visible in `src/vulntrace/dataset/materialize.py` (read by the supervisor, not yet fixed):
+
+- `is_complete()` treats any case whose files exist as finished, **whatever its status**. A failed result (TAG_NOT_FOUND, EMPTY) is therefore skipped on every re-run and also copied by the "reused" path to every case with the same range. In the Colab log, 21 cases were `skipped` at the very start and 26 were `reused`.
+- git failures are turned into `None` (for example `return p.stdout.strip() if p.returncode == 0 else None`) and end as `TAG_NOT_FOUND`, so the real git error message is never shown. A git problem in Colab is therefore reported as "tag not found".
+
+The root cause of the first failure is **not proven**. Suspected: the git cache sat on the Google Drive mount (`VULNTRACE_CACHE` on Drive). Drive is a network file system and git is known to behave badly on it. Do not assume this; FIX-1 finds out.
+
+Fix list (all small; do not start CP5; do not re-select D4 cases):
+
+- **FIX-1 Diagnose.** Add a command or notebook cell that runs ONE case (for example `GO-2020-0038`) with the cache on local disk and prints every git command's stderr. Report what it shows.
+- **FIX-2 Resume rule.** Skip a case only if its stored result matches the expected status and counts in `D4_cases.json`. A mismatching or failed result must be rebuilt. Same rule for the "reused" path (never copy a failed result).
+- **FIX-3 No silent git errors.** Keep the status values, but record the first line of the git error in the evidence file and print the three most common error messages at the end of the summary.
+- **FIX-4 Notebook.** Put `VULNTRACE_CACHE` (git and vulndb cache) on local Colab disk (`/content/cache`). Only embeddings and the final result JSON go on Drive. After the materialise cell add a gate cell that stops the notebook with a clear message if the materialised statuses differ from `D4_cases.json` in more than 3 cases.
+- **FIX-5 Refuse empty runs.** `eval retrieval` and `index build` must exit with an error and write nothing when the total number of chunks is 0, or when the evidence statuses differ from the case list beyond the same threshold. Put the check in one tested function that the notebook gate also uses.
+- **FIX-6 Tests.** Unit tests (no network, no Go) for FIX-2 (a failed result is rebuilt; a good one is skipped), for FIX-5 and for the gate function. Full unit and contract tests must still pass, and CI must be green.
+
+After the fix: the owner re-runs the notebook in Colab and hands the new zip to the supervisor. The supervisor will check the zip for chunk counts and statuses before reading any metric. Do not edit or "improve" retrieval results.
+
+Branch rule for this fix session: work directly on branch `claude/vulntrace-ai-build-9qhbjg` (check it out; it already exists; do not create another branch). If the session runs on the owner's laptop and cannot run Go or Docker, say which tests were not run and why.
+

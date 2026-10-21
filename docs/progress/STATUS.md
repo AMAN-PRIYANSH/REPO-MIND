@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP4 - Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker**
-- State: `AWAITING_REVIEW` (acceptance criterion 6 not met: real dense/hybrid/rerank runs need the owner's Colab run)
+- State: `CHANGES_REQUESTED` (see the review notes at the end of checkpoints/CP4.md: the first Colab run was invalid; fix list FIX-1..FIX-6)
 - Branch in use: `claude/vulntrace-ai-build-9qhbjg`
 - Specification: [checkpoints/CP4.md](../implementation/checkpoints/CP4.md)
 
@@ -18,7 +18,7 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 | CP1 | Ground truth and linker presence | APPROVED (1 fix carried to CP2 task 0) | claude/vulntrace-checkpoint-continue-ia7tx5 | [CP1_REPORT](reports/CP1_REPORT.md) |
 | CP2 | Go call-graph helper and verdict rule | APPROVED | claude/optimistic-shannon-397w1q | [CP2_REPORT](reports/CP2_REPORT.md) |
 | CP3 | Advisory dataset, fix evidence, release ranges, baselines (+ CI) | APPROVED | claude/lucid-fermi-9esjyw | [CP3_REPORT](reports/CP3_REPORT.md) |
-| CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | AWAITING_REVIEW (criterion 6 not met) | claude/vulntrace-ai-build-9qhbjg | [CP4_REPORT](reports/CP4_REPORT.md) |
+| CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | CHANGES_REQUESTED | claude/vulntrace-ai-build-9qhbjg | [CP4_REPORT](reports/CP4_REPORT.md) |
 | CP5 | Local LLM layer, root-cause selection, HyDE, lifting, Colab runs | NOT_RELEASED | - | - |
 | CP6 | LangGraph investigation agent | NOT_RELEASED | - | - |
 | CP7 | End-to-end triage, verifier, real apps, demo | NOT_RELEASED | - | - |
