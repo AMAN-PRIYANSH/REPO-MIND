@@ -52,3 +52,69 @@ def test_notes_file_is_valid_json_of_strings():
     notes = load_notes("cp1_linker")
     assert notes and all(isinstance(k, str) and isinstance(v, str) and v for k, v in notes.items())
     json.dumps(notes)
+
+
+def _case(cid, truth, predicted, outcome, results, reason_codes=None):
+    c = {"id": cid, "category": cid.upper(), "truth": truth, "predicted": predicted, "outcome": outcome,
+         "method_results": results}
+    if reason_codes is not None:
+        c["reason_codes"] = reason_codes
+    return c
+
+
+def _r(result, code=None, path=None, stats=None):
+    return {"result": result, "error": {"code": code, "message": ""} if code else None, "duration_ms": 5,
+            "details": {"path": path, "stats": stats, "matched_binary_symbols": []}}
+
+
+def _cp2_reports():
+    stats = {"packages_loaded": 3, "callgraph_nodes": 10, "callgraph_edges": 12, "duration_ms": 4, "peak_rss_kb": 2048}
+    path = {"entry": {"package": "m", "symbol": "main"}, "target": {"package": "p", "symbol": "F"},
+            "edges": [{"caller": "m.main", "callee": "a/p.F", "call_site": {"file": "x.go", "line": 1}, "kind": "DYNAMIC"}]}
+    counts = lambda **kw: {"cases": 2, "agreements": 0, "false_not_reachable": 0, "false_reachable": 0,  # noqa: E731
+                           "cant_determine": 0, "errors": 0, **kw}
+    env = {"go_version": "go1.24.7", "goos": "linux", "goarch": "amd64", "x_tools_version": "v0.42.0"}
+    return {
+        "R1": {"counts": counts(agreements=2), "environment": env, "cases": [
+            _case("a", "REACHABLE", "REACHABLE", "AGREE", [_r("PATH_FOUND")]),
+            _case("b", "NOT_REACHABLE", "NOT_REACHABLE", "AGREE", [_r("NO_PATH")])]},
+        "R2": {"counts": counts(agreements=1, false_reachable=1), "environment": env, "cases": [
+            _case("a", "REACHABLE", "REACHABLE", "AGREE", [_r("PRESENT")]),
+            _case("b", "NOT_REACHABLE", "REACHABLE", "FALSE_REACHABLE", [_r("PRESENT")])]},
+        "R3": {"counts": counts(agreements=2), "environment": env, "cases": [
+            _case("a", "REACHABLE", "REACHABLE", "AGREE", [_r("PATH_FOUND", path=path, stats=stats)]),
+            _case("b", "NOT_REACHABLE", "NOT_REACHABLE", "AGREE", [_r("NO_PATH", stats=dict(stats, callgraph_nodes=20))])]},
+        "R4": {"counts": counts(agreements=1, cant_determine=1, cant_determine_by_reason={"METHOD_DISAGREEMENT": 1}),
+               "environment": env, "confusion": {"REACHABLE": {"REACHABLE": 1, "NOT_REACHABLE": 0, "CANT_DETERMINE": 0},
+                                                 "NOT_REACHABLE": {"REACHABLE": 0, "NOT_REACHABLE": 0, "CANT_DETERMINE": 1}},
+               "cases": [_case("a", "REACHABLE", "REACHABLE", "AGREE", {}, []),
+                         _case("b", "NOT_REACHABLE", "CANT_DETERMINE", "CANT_DETERMINE", {}, ["METHOD_DISAGREEMENT"])]},
+    }
+
+
+def test_cp2_doc_tables_come_from_the_reports():
+    from vulntrace.eval.results_doc import cp2_cases_needing_notes, render_cp2_doc
+
+    reps = _cp2_reports()
+    assert cp2_cases_needing_notes(reps) == ["b"]
+    doc = render_cp2_doc(reps, {"b": "linker keeps it."}, "results/x")
+    assert "| R2 | Linker presence | 2 | 0 | 1 | 1 | 0 | 0 |" in doc
+    assert "| b | B | NOT_REACHABLE | NO_PATH | PRESENT | NO_PATH | CANT_DETERMINE | METHOD_DISAGREEMENT |" in doc
+    assert "| a | main → p.F [DYNAMIC] |" in doc
+    assert "Largest fixture by call-graph size: `b` (20 nodes" in doc
+    assert "- `b` (R1 AGREE; R2 FALSE_REACHABLE; R3 AGREE; R4 CANT_DETERMINE (METHOD_DISAGREEMENT)): linker keeps it." in doc
+    assert MISSING_NOTE in render_cp2_doc(reps, {}, "results/x")
+
+
+def test_cp2_reports_must_cover_the_same_cases(tmp_path):
+    import pytest
+
+    from vulntrace.eval.results_doc import CP2_FILES, load_cp2_reports
+
+    reps = _cp2_reports()
+    reps["R1"]["cases"] = reps["R1"]["cases"][:1]
+    for k, f in CP2_FILES.items():
+        (tmp_path / f).write_text(json.dumps(reps[k]))
+    with pytest.raises(ValueError):
+        load_cp2_reports(tmp_path)
+

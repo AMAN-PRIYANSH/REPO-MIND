@@ -31,8 +31,9 @@ def build_parser() -> argparse.ArgumentParser:
     rs = sub.add_parser("results", help="committed results documents")
     rsub = rs.add_subparsers(dest="results_command", required=True)
     rr = rsub.add_parser("render", help="generate a docs/results/ document from a score report file")
-    rr.add_argument("--doc", required=True, choices=["cp1"])
-    rr.add_argument("--input", required=True, help="score report JSON written by `fixtures score`")
+    rr.add_argument("--doc", required=True, choices=["cp1", "cp2"])
+    rr.add_argument("--input", required=True,
+                    help="cp1: linker score JSON; cp2: directory with the naive, linker, vta and combined score JSON")
     rr.add_argument("--out", required=True, help="Markdown file to write")
     return p
 
@@ -66,8 +67,8 @@ def _cmd_helper(args) -> int:
 def _cmd_render(args) -> int:
     from vulntrace.eval.results_doc import render
 
-    if not Path(args.input).is_file():
-        print(f"error: no such report file: {args.input}", file=sys.stderr)
+    if not Path(args.input).exists():
+        print(f"error: no such report file or directory: {args.input}", file=sys.stderr)
         return EXIT_INVALID_INPUT
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
