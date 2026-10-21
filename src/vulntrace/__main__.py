@@ -17,8 +17,10 @@ def build_parser() -> argparse.ArgumentParser:
     fx = sub.add_parser("fixtures", help="synthetic reachability suite")
     fsub = fx.add_subparsers(dest="fixtures_command", required=True)
     sc = fsub.add_parser("score", help="run a method over the suite and write a scored report")
-    sc.add_argument("--method", required=True, choices=["linker"])
-    sc.add_argument("--out", default="results/cp1", help="output directory (default: results/cp1)")
+    sc.add_argument("--method", required=True, choices=["linker", "vta", "naive", "combined"])
+    sc.add_argument("--out", default=None,
+                    help="output directory (default: results/cp1 for linker, results/cp2 otherwise)")
+    sc.add_argument("--timeout", type=float, default=300.0, help="helper timeout per case in seconds (default 300)")
     sc.add_argument("--fixtures-dir", default=str(FIXTURES_DIR))
     sc.add_argument("--compare-inlining", action="store_true",
                     help="also build without -gcflags=all=-l and report both (not used for scoring)")
@@ -85,13 +87,36 @@ def _cmd_score(args, argv: list[str]) -> int:
     if shutil.which("go") is None:
         print("error: go toolchain not found (run `python -m vulntrace doctor`)", file=sys.stderr)
         return EXIT_MISSING_PREREQUISITE
-    report = score_linker(fixtures_dir, compare_inlining=args.compare_inlining)
-    report["run"] = run_info(argv)
-    jp, mp = write_report(report, Path(args.out))
+    if args.method == "linker":
+        report = score_linker(fixtures_dir, compare_inlining=args.compare_inlining)
+        report["run"] = run_info(argv)
+        jp, mp = write_report(report, Path(args.out or "results/cp1"))
+        md = render_markdown(report)
+    else:
+        from vulntrace.eval import callgraph_score as cs
+        from vulntrace.methods.helper import HelperError, ensure_helper
+
+        if args.compare_inlining:
+            print("error: --compare-inlining applies to --method linker only", file=sys.stderr)
+            return EXIT_INVALID_INPUT
+        try:
+            binary = ensure_helper()
+        except HelperError as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            return EXIT_MISSING_PREREQUISITE
+        if args.method == "combined":
+            report = cs.score_combined(fixtures_dir, binary=binary, timeout=args.timeout)
+        else:
+            method = cs.VTA_METHOD if args.method == "vta" else cs.NAIVE_METHOD
+            report = cs.score_callgraph(fixtures_dir, method, binary=binary, timeout=args.timeout)
+        report["run"] = run_info(argv)
+        jp, mp = cs.write_score(report, Path(args.out or "results/cp2"))
+        md = cs.render_markdown(report)
     c = report["counts"]
-    print(render_markdown(report))
-    print(f"agreements={c['agreements']} false_not_reachable={c['false_not_reachable']} "
-          f"false_reachable={c['false_reachable']} errors={c['errors']} (of {c['cases']} cases)")
+    print(md)
+    print(f"false_not_reachable={c['false_not_reachable']} false_reachable={c['false_reachable']} "
+          f"agreements={c['agreements']} cant_determine={c.get('cant_determine', 0)} errors={c['errors']} "
+          f"(of {c['cases']} cases)")
     print(f"wrote {jp} and {mp}")
     return EXIT_OK
 

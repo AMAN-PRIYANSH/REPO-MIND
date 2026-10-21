@@ -91,10 +91,13 @@ def score_linker(fixtures_dir: Path, compare_inlining: bool = False, runner=None
     return report
 
 
+TIMING_KEYS = frozenset({"duration_ms", "peak_rss_kb", "created_at"})
+
+
 def strip_timing(report: Any) -> Any:
-    """Copy of a report without duration fields (for determinism checks)."""
+    """Copy of a report without timing and memory fields (for determinism checks)."""
     if isinstance(report, dict):
-        return {k: strip_timing(v) for k, v in report.items() if k != "duration_ms"}
+        return {k: strip_timing(v) for k, v in report.items() if k not in TIMING_KEYS}
     if isinstance(report, list):
         return [strip_timing(v) for v in report]
     return report
