@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install vulntrace (dev extras)
+        run: |
+          set -o pipefail
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Unit and contract tests (Python only, no Go needed)
+        run: |
+          set -o pipefail
+          python -m pytest tests/unit tests/contract -v
+
+      - name: Go unit tests (helper/)
+        working-directory: helper
+        env:
+          GOTOOLCHAIN: local
+          CGO_ENABLED: "0"
+        run: |
+          set -o pipefail
+          go test ./... -v
+
+      - name: Integration tests (builds vt-helper offline from the module cache populated above)
+        run: |
+          set -o pipefail
+          python -m pytest tests/integration -v
