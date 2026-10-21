@@ -40,6 +40,15 @@ VulnTrace AI never outputs a claim about exploitability. Output text must say "r
 2. "The advisory does not list vulnerable functions. Which function in the fix commit is the root cause, and is it reachable from my app?"
 3. "Show me the exact call path, with file and line, so I can check it myself."
 4. "Tell me clearly when the tool cannot decide, and why."
+5. "There is no fix commit linked, only a fixed release. Search what changed and find the likely vulnerable function, with evidence I can check."
+
+## Two modes
+
+**Mode 1 - fix commit available.** The fix commit is known. Its diff is small (median 2 changed functions in the feasibility sample), fits in an LLM prompt, and needs no retrieval. An LLM chooses the root-cause function from a closed list; code does everything else.
+
+**Mode 2 - investigation mode.** No fix commit is given. The system must search the code that changed between the vulnerable release and the fixed release, using the advisory text. In the feasibility sample this candidate set had a median of 13 functions, but 12 of 45 releases changed 100 or more functions and the largest changed 2,558. Here advanced retrieval (hybrid search, fusion, reranking, query rewriting), a vector database and a tool-using agent have a real job, and each is measured against simpler baselines.
+
+Both modes end in the same deterministic reachability analysis and evidence verification.
 
 ## Scope (version 1)
 
@@ -47,9 +56,16 @@ In scope:
 
 - Go applications with one or more `package main` entry points.
 - Go advisories from the Go vulnerability database (golang/vulndb).
-- Fix commits hosted on GitHub.
-- Command-line usage and machine-readable JSON output.
-- An evaluation harness with synthetic and real cases.
+- Fix commits and releases hosted on GitHub.
+- Mode 1 and Mode 2.
+- Command-line usage, machine-readable JSON output, and a minimal local demo page.
+- An evaluation harness with synthetic, labelled and real cases.
+
+## Hard constraint: zero cost
+
+- No paid APIs of any kind. All LLM, embedding and reranker models are free open models run locally (owner's laptop) or on a free Google Colab GPU, through an OpenAI-compatible endpoint (Ollama by default).
+- The code is built with Claude Code under the owner's existing Claude Pro plan.
+- Tests use fake models and never download or call real ones.
 
 ## Non-goals (version 1)
 
@@ -58,16 +74,18 @@ In scope:
 - Languages other than Go.
 - Data-flow or taint analysis (whether attacker-controlled data reaches the function).
 - Automatic patching or upgrading of dependencies.
-- A web UI, hosted service, or multi-user API.
-- Vector databases, RAG, rerankers, agents or multi-agent orchestration in the main pipeline. Some of these appear only as measured experiments; see [architecture decisions](decisions/ARCHITECTURE_DECISIONS.md).
+- A hosted service or multi-user API. (A minimal local demo page is in scope.)
+- Retrieval, agents or multi-agent components in Mode 1, where measurements show they are not needed. They belong to Mode 2; see [architecture decisions](decisions/ARCHITECTURE_DECISIONS.md).
+- Paid models or paid infrastructure of any kind.
 - Competing with commercial tools (Endor Labs, Semgrep, Snyk). This is an engineering study and demonstration.
 
 ## Assumptions
 
 - Assumption: target applications build with the standard Go toolchain with `CGO_ENABLED=0`. Applications that need cgo will produce `CANT_DETERMINE` with an analysis-failure reason.
 - Assumption: the vulnerable module version named in the advisory (`vulnerable_at`) can be fetched and built.
-- Assumption: an LLM API will be available for milestone 4 onward. The provider and model are an open decision.
-- Assumption: development happens on a Windows 11 laptop with 16 GB RAM. Every tool chosen must work there or have a documented alternative.
+- Assumption: a 7B-class open model (for example Qwen2.5-Coder 7B Instruct via Ollama) is good enough for closed-set selection and tool calling. To be measured in CP5-CP6; a smaller or larger free model may replace it.
+- Assumption: Google Colab's free GPU is available often enough for evaluation runs. Runs must be resumable because Colab sessions end without warning.
+- Code is written and tested in Claude Code cloud sessions (Linux, 4 vCPU, 16 GB RAM, with Go, Python, PostgreSQL 16 and Docker preinstalled). The owner's Windows 11 laptop (16 GB RAM, no dedicated GPU) runs the demo. Windows behaviour must be checked, not assumed.
 
 ## Success criteria
 
@@ -75,9 +93,11 @@ The project is successful when all of the following are true and documented with
 
 1. On the synthetic suite (truth known by construction), the system produces zero false `NOT_REACHABLE` verdicts. Errors, if any, are `CANT_DETERMINE`.
 2. Every `REACHABLE` verdict carries a call path that the verifier has confirmed edge by edge.
-3. On the symbol-identification set, the LLM + lifting approach is measured against the "every changed function" baseline, separately for advisories created before and after the model's training cutoff.
-4. On adjudicated real applications, the verdict confusion matrix and abstention rate are reported, including failures.
-5. The final report states what each optional experiment (retrieval, agent) did or did not improve, with numbers.
-6. A reviewer can re-run the evaluation from a clean checkout by following documented commands.
+3. Mode 1: the LLM + lifting approach is measured against the "every changed function" baseline, separately for advisories created before and after the model's training cutoff.
+4. Mode 2: a retrieval ablation table (BM25, dense, hybrid, hybrid + reranker, + query rewriting, agent) reports Recall@k and MRR against labelled symbols, next to the simple ID-search baseline.
+5. On adjudicated real applications, the verdict confusion matrix and abstention rate are reported, including failures.
+6. The final report states what each advanced component did or did not improve, with numbers, including negative results.
+7. A reviewer can re-run the evaluation from a clean checkout using committed result files and cached model outputs.
+8. Total money spent: zero.
 
 Success does not require beating any existing tool. It requires honest, measured results.

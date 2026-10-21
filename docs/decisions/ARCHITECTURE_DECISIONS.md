@@ -1,6 +1,6 @@
 # Architecture decisions
 
-Each record states the decision, why, what else was considered, and how it will be validated. Status is `Accepted` (adopted for implementation), `Proposed` (adopted provisionally, must be validated), or `Rejected for v1`.
+Each record states the decision, why, what else was considered, and how it will be validated. Status is `Accepted`, `Proposed` (adopted provisionally; must be validated), or `Rejected`.
 
 Evidence references point to [feasibility findings](../research/FEASIBILITY_FINDINGS.md).
 
@@ -9,98 +9,102 @@ Evidence references point to [feasibility findings](../research/FEASIBILITY_FIND
 ## ADR-001 Go as the first ecosystem
 
 - Status: Accepted
-- Decision: Support Go applications and Go advisories only in version 1.
-- Why: 77.1% of REVIEWED Go advisories list curated symbols, with a separate `derived_symbols` field and a `vulnerable_at` version (trial 1). Go has mature analysis libraries.
-- Alternatives: Rust (21.6% of advisories list affected functions; less mature reachability tooling). Python (no function-level labels found in 7,862 advisories; dynamic language makes call graphs unreliable).
-- Consequences: The owner must run Go tooling. Python remains the main language for project code.
+- Decision: Go applications and Go advisories only.
+- Why: 77.1% of REVIEWED Go advisories list curated symbols, with separate `derived_symbols` and a `vulnerable_at` version (trial 1). Mature analysis libraries.
+- Alternatives: Rust (21.6% labelled), Python (no function-level labels found).
 
 ## ADR-002 Python orchestration with a Go analysis helper
 
 - Status: Accepted
-- Decision: Python for orchestration, LLM calls and evaluation. One small Go binary for program analysis, called as a subprocess with JSON in and out.
-- Why: VTA, SSA and the Go package loader exist only in Go. Python is the owner's strongest language.
-- Alternatives: All-Go (harder for the owner to maintain). Tree-sitter call graph in Python (name-based; trial 3 showed name-only graphs give false `NOT_REACHABLE`).
-- Consequences: A versioned contract between the two languages is required (see interfaces document).
+- Decision: Python for orchestration, retrieval, models, agent and evaluation; one small Go binary for program analysis, called as a subprocess with JSON in and out.
+- Why: VTA, SSA and the Go package loader exist only in Go. Python is the owner's strongest language and has the retrieval and agent ecosystem.
+- Alternatives: tree-sitter call graph in Python (name-based; trial 3 showed false `NOT_REACHABLE`).
 
-## ADR-003 Own VTA helper as the analysis engine; govulncheck as a reference only
-
-- Status: Proposed
-- Decision: Build reachability on `golang.org/x/tools` VTA in our helper. Run govulncheck separately where curated symbols exist, for comparison only.
-- Why: We need full call paths for the verifier and results for symbols we recovered ourselves. Using govulncheck as ground truth would be circular because it uses the same analysis family.
-- Alternatives: Wrap govulncheck's scanning API. Simpler, but intermediate data may not be exposed in the form we need.
-- Validation: In M2, confirm the helper can produce paths for fixture cases. If wrapping govulncheck turns out to provide everything needed, revisit this ADR.
-
-## ADR-004 Two independent reachability methods with abstention on disagreement
+## ADR-003 Own VTA helper; govulncheck as reference only
 
 - Status: Proposed
-- Decision: Combine VTA path search and linker symbol presence. Disagreement gives `CANT_DETERMINE`.
-- Why: Trial 3 showed one common method (name-only graph) can silently miss real paths. Two methods with different failure modes make silent misses less likely.
-- Risk: The linker is conservative, so disagreement may be frequent on real code, raising abstention.
-- Validation: Measure abstention and false `NOT_REACHABLE` on D2 (M2) and D3 (M5).
+- Decision: Reachability on `golang.org/x/tools` VTA in our helper; govulncheck run separately for comparison where curated symbols exist.
+- Why: Full paths are needed for the verifier, and recovered symbols must be checkable. Using govulncheck as truth would be circular.
+- Validation: CP2.
 
-## ADR-005 One LLM step: closed-set root-cause selection over the full diff
+## ADR-004 Two independent reachability methods with abstention
 
 - Status: Proposed
-- Decision: The LLM receives the advisory text and the complete non-test diff, and selects among candidate functions extracted by code. No retrieval in the main path.
-- Why: All 59 sampled fix diffs fit in context (max about 24k estimated tokens), with a median of 2 changed functions (trial 2). There is nothing meaningful to retrieve or rank.
-- Alternatives: RAG over diff chunks (no benefit at this size). Free-text symbol generation (hallucination risk).
-- Validation: E1 vs E0 on the post-cutoff split (M4).
+- Decision: VTA path search plus linker presence; disagreement gives `CANT_DETERMINE`.
+- Why: Trial 3 showed a common method silently missing real paths.
+- Risk: conservative linker may raise abstention. Measured in CP2 and CP7.
 
-## ADR-006 JSON files instead of a database in version 1
+## ADR-005 Mode 1 uses closed-set selection over the full diff, no retrieval
+
+- Status: Proposed
+- Decision: With a fix commit, the LLM receives the advisory and the complete non-test diff and selects candidate IDs.
+- Why: All 59 sampled fix diffs fit in context (max about 24k estimated tokens); median 2 changed functions (trial 2).
+- Validation: E1 vs E0 (CP5).
+
+## ADR-006 JSON files for cases and results
 
 - Status: Accepted
-- Decision: Store cases, results and reports as JSON / JSON Lines files.
-- Why: Hundreds of cases. Files are easy to diff, review and reproduce.
-- Alternatives: PostgreSQL (owner has experience). Kept as a later option if cross-run querying becomes painful.
+- Decision: Cases, verdicts, runs and traces as JSON / JSON Lines.
+- Why: Hundreds of records; easy to diff, review and reproduce.
 
-## ADR-007 No vector database, embeddings or reranker in the main pipeline
+## ADR-007 Mode 2 uses advanced retrieval with PostgreSQL + pgvector
 
-- Status: Accepted for the main pipeline; embeddings tested in M6 only
-- Decision: Main pipeline has no vector store, embeddings or reranker. M6 may test keyword search and hybrid (keyword + embeddings) retrieval on cases without a fix commit, using in-memory search.
-- Why: Candidate sets are tiny when a fix commit exists. Retrieval is only plausibly useful when there is no fix commit.
-- Alternatives: pgvector index (no scale need). Dedicated vector database (adds infrastructure without benefit).
-- Validation: X1 on D4. Enable only if it beats abstention with clear margins.
+- Status: Proposed
+- Decision: Function-level chunks with metadata; BM25 + dense search fused with RRF; optional cross-encoder reranking and HyDE; chunks and embeddings stored in PostgreSQL + pgvector with metadata filters; in-memory backend with the same interface for tests.
+- Why: Without the fix commit, candidate sets reach hundreds to thousands of functions (trial 5: 12/45 releases with 100+, max 2,558). Ranking is a real problem. pgvector keeps vectors next to relational metadata (module, version, package, hash, model) that every query filters on; PostgreSQL 16 is preinstalled in Claude Code cloud sessions and familiar to the owner.
+- Alternatives: dedicated vector databases (Qdrant, Milvus, Chroma) add a second datastore without a capability we need; pure in-memory search is fine for one case but does not show versioned indexing.
+- Validation: Q1-Q5 ablations vs B-ID baseline (CP4-CP5). Every component must earn its place; any that does not is reported as such.
 
-## ADR-008 No multi-agent architecture
+## ADR-008 Single LangGraph agent for Mode 2; multi-agent only as a measured stretch
 
-- Status: Rejected for v1
-- Decision: No separate cooperating agents.
-- Why: The stages are sequential and deterministic except one. Published analysis of multi-agent systems reports minimal gains over single agents and many coordination failure modes. A single tool-using agent is tested in M6 for hard cases only.
+- Status: Proposed (single agent), Stretch (multi-agent)
+- Decision: One tool-using agent built with LangGraph for Mode 2 investigation, with step and time budgets and closed-set answers. A two-agent investigator + sceptic variant is tested in CP8 only if time allows.
+- Why: Release ranges include commit messages, callers and diffs that a fixed pipeline cannot follow adaptively; an agent can. Published analysis of multi-agent systems reports minimal gains and many coordination failures, so multi-agent is tested, not assumed.
+- Alternatives: no agent (kept as the baseline S1); multi-agent by default (rejected).
 
 ## ADR-009 No knowledge graph
 
-- Status: Rejected for v1
-- Decision: Relationships between advisories, modules, versions, symbols and commits are stored as plain records.
-- Why: The relationships have a fixed shape. A knowledge graph would add technology without new capability. The call graph is a separate thing and is required.
+- Status: Rejected
+- Decision: Relationships between advisories, modules, versions, symbols and commits are plain records.
+- Why: Fixed-shape relationships; a knowledge graph would add technology without capability. The call graph is separate and required.
 
 ## ADR-010 Deterministic, downgrade-only evidence verifier
 
 - Status: Accepted
-- Decision: Every cited symbol, file, line and call edge is checked by code. Failures downgrade to `CANT_DETERMINE`. The verifier never upgrades.
-- Why: An LLM cannot be trusted to check its own claims, and path claims must be auditable.
+- Decision: Every cited symbol, file, line and call edge is checked by code; failures downgrade to `CANT_DETERMINE`.
 
 ## ADR-011 Deterministic lifting to public entry points
 
 - Status: Proposed
-- Decision: After the LLM selects root-cause functions, a call-graph walk inside the vulnerable module finds the nearest exported functions in importable (non-`internal`) packages.
-- Why: Trial 2 showed curated labels sometimes name the public caller instead of the changed private helper (Caddy, Helm).
-- Validation: E1+L vs E1 in M4. The exact stopping rule (nearest exported caller vs all exported callers) is an open question.
+- Decision: After root-cause selection, a call-graph walk finds the nearest exported functions in importable packages.
+- Why: Curated labels sometimes name the public caller (trial 2: Caddy, Helm).
+- Validation: E1+L vs E1 (CP5). Stopping rule is an open question.
 
 ## ADR-012 JSON Schema as the source of truth for data shapes
 
 - Status: Accepted
-- Decision: Data shapes are defined by JSON Schema files under `schemas/`, validated in tests with the `jsonschema` package. Both Python and Go code conform to them.
-- Alternatives: Python dataclasses or Pydantic only (does not cover the Go side).
 
 ## ADR-013 Inlining disabled for linker checks
 
 - Status: Proposed
-- Decision: Build with `-gcflags=all=-l` for linker presence.
-- Why: An inlined function may vanish from the symbol table even when called, which would cause a false `ABSENT`. Trial 3 used this flag.
-- Validation: M1 includes a case where the vulnerable function is small enough to be inlined; compare results with and without the flag and record them.
+- Decision: Build with `-gcflags=all=-l`.
+- Validation: CP1 inlining fixture, run with and without the flag.
 
 ## ADR-014 Analysis safety for untrusted code
 
 - Status: Accepted
-- Decision: Builds use `GOTOOLCHAIN=local` and `CGO_ENABLED=0`. Never run `go generate`, target tests or built binaries. Fixture builds use `GOPROXY=off`.
-- Why: Target repositories and fix commits are untrusted input.
+- Decision: `GOTOOLCHAIN=local`, `CGO_ENABLED=0`; never run `go generate`, target tests or binaries; fixture builds use `GOPROXY=off`; agent tools are read-only.
+
+## ADR-015 Zero cost: free open models behind interfaces
+
+- Status: Accepted
+- Decision: All models are free and open, served through an OpenAI-compatible endpoint (Ollama by default) or loaded locally (sentence-transformers). Every model sits behind an interface with a deterministic fake for tests. Paid API hosts are rejected by configuration.
+- Why: Owner constraint: no spending. Interfaces also make the system model-agnostic, which is good design regardless.
+- Default LLM: a 7B-class open coding model (Qwen2.5-Coder 7B Instruct proposed); confirmed or replaced by measurement in CP5.
+
+## ADR-016 Real model runs on Google Colab, code built in Claude Code cloud sessions
+
+- Status: Accepted
+- Decision: Claude Code writes and tests code in cloud sessions with fakes. Real model evaluations run in Colab notebooks (free GPU) that install this repository and write result files, which are then committed.
+- Why: Cloud sessions cannot download models by default (Hugging Face is not on the default network allowlist) and have no GPU; Colab has a free GPU. The owner's laptop has no dedicated GPU.
+- Risk: Colab GPU availability and session limits. Mitigation: resumable runs with caching; small model fallback.

@@ -55,11 +55,37 @@ advisory ID ──► C0 Case loader ──► VulnCase
 | C6 | draft `Verdict`; source; call graph | final `Verdict` | Any unverifiable item → downgrade to `CANT_DETERMINE` with `VERIFIER_REJECTED`. |
 | C7 | final `Verdict` | text | Failure only drops the explanation; verdict unchanged. |
 
-## Hard-case path (no fix commit)
+## Mode 2 path (no fix commit)
 
-If C1 returns `UNAVAILABLE`, version 1 returns `CANT_DETERMINE` with reason `NO_FIX_EVIDENCE`.
+Used when C1 returns `UNAVAILABLE`, or when the evaluation deliberately hides the fix commit.
 
-Milestone 6 may test experimental strategies for this path (keyword search over the module source, hybrid retrieval, a single tool-using agent). They write the same `RootCauseSelection` object, so the rest of the pipeline is unchanged. They are never enabled by default unless measurement justifies it.
+```
+VulnCase ──► C10 Release-range candidates ──► ReleaseRange (changed functions + commit messages)
+                    │
+                    ▼
+             C11 Indexer ──► CodeChunk records + embeddings ──► C12 Vector store
+                    │
+                    ▼
+advisory ──► C13 Retriever (BM25 + dense → RRF → reranker; optional HyDE) ──► RetrievalRun (ranked candidates)
+                    │
+           ┌────────┴─────────┐
+           ▼                  ▼
+   C2 LLM selects       C14 Agent investigates
+   from top-k            (tools, budget, trace)
+           └────────┬─────────┘
+                    ▼
+            RootCauseSelection (closed set, validated) ──► C3 Lifter ──► same path as Mode 1
+```
+
+| Stage | Reads | Writes | Fails how |
+|---|---|---|---|
+| C10 | report versions; git tags or pseudo-version commits | `ReleaseRange` | Tag or commit not found → `CANT_DETERMINE` / `NO_FIX_EVIDENCE`. |
+| C11 | `ReleaseRange`; module source at both versions | `CodeChunk` rows | Parse failure for a file → file skipped and counted. |
+| C12 | chunks + embeddings | indexed store | Database unavailable → in-memory backend only if explicitly configured; never silently. |
+| C13 | advisory text; store | `RetrievalRun` | Model endpoint down → stage reported as `ERROR`; no fallback that changes results silently. |
+| C2 / C14 | top-k or tools | `RootCauseSelection` | Invalid or out-of-set answer → rejected; budget exceeded → `none_selected` with reason `BUDGET_EXCEEDED`. |
+
+Index freshness: every chunk stores a content hash and the embedding model ID. Re-indexing a module version only re-embeds chunks whose hash or model changed. Chunks from different versions never mix in one query, because every search filters by `(module, version)`.
 
 ## Evaluation flow
 
@@ -71,5 +97,5 @@ The harness (C8) runs the same pipeline with extra controls:
 ## Caching and reproducibility
 
 - Git fetches are cached per repository directory.
-- LLM responses are cached by a hash of (model ID, prompt template version, input payload). Cached responses are reused in re-runs, so reported numbers are reproducible without new API spend.
+- LLM responses, agent traces and embeddings are cached by a hash of (model ID, template or tool version, input payload). Cached outputs are committed (small) or archived with a documented checksum (large), so reported numbers are reproducible without re-running models.
 - Every output records: Go version, GOOS/GOARCH, helper contract version, pipeline version, vulndb commit SHA.

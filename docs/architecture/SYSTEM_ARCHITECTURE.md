@@ -1,109 +1,117 @@
 # System architecture
 
-This document combines the originally proposed `SYSTEM_ARCHITECTURE.md` and `COMPONENT_DESIGN.md`. They describe the same boundaries, so one document is clearer.
+This document combines the originally proposed `SYSTEM_ARCHITECTURE.md` and `COMPONENT_DESIGN.md`.
 
 ## Design principles
 
-1. **The LLM proposes, code confirms.** The LLM may only choose among candidates that code has already extracted. Every claim in a verdict is checked by deterministic code.
-2. **Two independent reachability methods.** A source-level call graph and a linker-presence check. Disagreement leads to `CANT_DETERMINE`, never to a guess.
-3. **False `NOT_REACHABLE` is the worst error.** When in doubt, abstain.
-4. **Reachability only.** No component outputs an exploitability claim.
-5. **Reproducible by default.** Every run records tool versions, inputs, and (for LLM steps) the model ID, prompt hash and raw response.
-6. **Nothing optional in the main path.** Retrieval, embeddings and agents exist only as experiments behind flags (milestone 6), and only if measurement justifies them.
+1. **The LLM proposes, code confirms.** The LLM (or agent) may only choose among candidates that code has extracted. Every claim in a verdict is checked by deterministic code.
+2. **Use the simplest method that the data justifies.** Mode 1 needs no retrieval (median 2 candidates). Mode 2 has hundreds to thousands of candidates, so retrieval, a vector store and an agent are used there, each measured against a simpler baseline.
+3. **Two independent reachability methods.** A VTA call graph and a linker-presence check. Disagreement gives `CANT_DETERMINE`.
+4. **False `NOT_REACHABLE` is the worst error.** When in doubt, abstain.
+5. **Reachability only.** No component claims exploitability.
+6. **Zero cost.** Free open models only, run locally or on free Colab GPUs, behind interfaces with fake implementations for tests.
+7. **Reproducible.** Every run records tool and model versions; model outputs are cached and committed so numbers can be recomputed without re-running models.
+
+## Component map
+
+```
+                    ┌──────────────── Mode 1 (fix commit) ────────────────┐
+advisory ─► C0 Case │ C1 Fix evidence ─► C2 Root-cause selector (LLM,      │
+           loader ──┤                       closed set over full diff)     ├─► C3 Lifter ─► target symbols
+                    │                                                      │
+                    └──────────────── Mode 2 (no fix commit) ─────────────┤
+                      C10 Release-range candidates ─► C11 Indexer ─► C12 Vector store
+                      C13 Retriever (BM25 + dense + RRF + reranker + HyDE)
+                      C14 Investigation agent (LangGraph, tools) ─► closed-set answer
+                                                                            │
+target symbols ─► C4a VTA reachability ─┐                                   │
+                ─► C4b Linker presence ─┴─► C5 Verdict rule ─► C6 Verifier ─► C7 Explainer ─► verdict JSON / demo
+```
 
 ## Components
 
 | # | Component | Responsibility | Language | Deterministic? |
 |---|---|---|---|---|
-| C0 | Case loader | Read a vulndb report: module, packages, `vulnerable_at`, fix-commit URLs, core and derived symbols, `created` date. | Python | Yes |
-| C1 | Fix evidence extractor | Fetch fix commits with git. List changed non-test Go functions with old/new line ranges and diff hunks. | Python + Go helper (`funcs` mode) | Yes |
-| C2 | Root-cause selector | Read advisory text + the complete non-test diff. Choose which candidate functions contain the root cause. | Python + LLM | **No** (the only LLM decision) |
-| C3 | Symbol lifter | Walk callers inside the vulnerable module from root-cause functions to the nearest exported functions in importable packages. | Go helper (`lift` mode) | Yes |
-| C4a | Call-graph reachability | Build a VTA call graph of the target application. Search for paths from `main` entry points to target symbols. | Go helper (`reach` mode) | Yes |
-| C4b | Linker-presence check | Build the application with inlining disabled, list binary symbols, check if target symbols survive dead-code elimination. | Python calling `go build` and `go tool nm` | Yes |
-| C5 | Verdict engine | Combine C4a and C4b results with the agreement rule below. | Python | Yes |
-| C6 | Evidence verifier | Check every cited symbol, file, line, and call edge against source and the call graph. Reject unsupported evidence. | Python + Go helper | Yes |
-| C7 | Explainer | Turn the verified path into plain-English text. May not add facts. | Python + LLM (optional) | No, but cannot change the verdict |
-| C8 | Evaluation harness | Run datasets, compute metrics, write reports. | Python | Yes |
+| C0 | Case loader | Read a vulndb report: module, versions, `vulnerable_at`, fix-commit URLs, curated symbols, `created` date. | Python | Yes |
+| C1 | Fix evidence extractor | Fetch fix commits; list changed non-test functions with line ranges and hunks. | Python + Go helper `funcs` | Yes |
+| C2 | Root-cause selector | Advisory + full fix diff → choose candidate IDs. | Python + local LLM | No |
+| C3 | Lifter | Walk callers from root-cause functions to nearest exported functions in importable packages. | Go helper `lift` | Yes |
+| C4a | VTA reachability | Paths from `main` entry points to target symbols. | Go helper `reach` | Yes |
+| C4b | Linker presence | Build with inlining off; check symbol survival with `go tool nm`. | Python + Go toolchain | Yes |
+| C5 | Verdict rule | Combine C4a and C4b (rule table below). | Python | Yes |
+| C6 | Evidence verifier | Check every symbol, file, line and call edge; downgrade-only. | Python + helper `edges` | Yes |
+| C7 | Explainer | Plain-English text from the verified path only. | Python + local LLM (optional) | No, cannot change verdict |
+| C8 | Evaluation harness | Datasets, metrics, reports. | Python | Yes |
+| C10 | Release-range candidates | Functions changed between `vulnerable_at` and the first fixed release; commit messages in that range. | Python + git + helper `funcs` | Yes |
+| C11 | Indexer | Function-level chunks (package, signature, doc comment, body, linked commit messages), embeddings, content hashes. | Python | Yes (given a fixed model) |
+| C12 | Vector store | Stores chunks, embeddings and metadata; filtered similarity search. PostgreSQL + pgvector for real runs, in-memory for tests. | Python + PostgreSQL | Yes |
+| C13 | Retriever | BM25 and dense search, Reciprocal Rank Fusion, optional cross-encoder reranking, optional HyDE query rewriting. | Python | Yes except HyDE |
+| C14 | Investigation agent | LangGraph agent with tools over C12/C13, git and the helper; step and time budgets; must answer from the closed candidate set or abstain. | Python + LangGraph + local LLM | No |
 
-C2 runs only when the case has no curated symbols, or in evaluation when we deliberately hide them.
+C2 and C14 write the same `RootCauseSelection` object, so everything after them is shared.
 
-## Why Python plus a Go helper
+## Mode 2 in detail
 
-- VTA, SSA and the package loader exist only in Go (`golang.org/x/tools`). Python cannot compute an accurate Go call graph.
-- Python is the owner's main language and suits orchestration, LLM calls and evaluation.
-- The boundary is a command-line contract with JSON on stdout. See [interfaces and contracts](../design/INTERFACES_AND_CONTRACTS.md).
+Retrieval pipeline (C13), each stage switchable for ablations:
 
-Alternative considered: calling govulncheck as a library. It already does reachability with symbols. It is a useful reference, but it hides intermediate results we need (full call paths for our verifier, results for symbols we recovered ourselves). Decision recorded in [ADR-003](../decisions/ARCHITECTURE_DECISIONS.md).
+1. **Query building.** Advisory summary, details, CWE text, identifiers mentioned. Optional **HyDE**: the local LLM writes a short hypothetical vulnerable Go function; its embedding becomes an extra query.
+2. **Sparse search.** BM25 over chunk text, with Go-aware tokenisation (split camelCase and snake_case, keep package paths).
+3. **Dense search.** Cosine similarity over chunk embeddings in the vector store, filtered by `(module, from_version, to_version)` and `changed_in_range = true`.
+4. **Fusion.** Reciprocal Rank Fusion of sparse and dense lists.
+5. **Reranking.** Optional cross-encoder rescoring of the top 50.
+6. **Selection.** The local LLM selects candidate IDs from the top k (closed set), or the agent investigates further.
 
-## Deterministic vs LLM operations
+Agent (C14), built with LangGraph:
 
-| Operation | Method | Reason |
-|---|---|---|
-| Parse advisory fields, versions, URLs | Code | Exact data. |
-| Fetch fix commit, list changed functions | Code | Exact data. |
-| Choose root-cause functions among candidates | **LLM** | Needs reading natural language plus code intent. Closed choice set limits hallucination. |
-| Lift to public entry points | Code | Graph walk; trial 2 showed this is a labelling convention, not judgement. |
-| Reachability | Code (two methods) | Graph question; must be exact and repeatable. |
-| Verdict | Code (rule table) | Must be auditable. |
-| Verify evidence | Code | An LLM cannot check itself. |
-| Explanation text | LLM (optional) | Presentation only, constrained to verified facts. |
+- State: advisory, candidate pool, evidence notes, step count, budget.
+- Tools: `search_code`, `read_function`, `search_commits`, `show_commit`, `callers`, `callees`, `submit_answer`.
+- Rules: at most N steps and T seconds (set per run); `submit_answer` only accepts IDs from the candidate pool; any other output is rejected; the full trace is saved.
+- The agent never decides reachability. It only produces a `RootCauseSelection`.
 
-## Verdict rule (proposal, to be validated in milestones 2 and 5)
+Multi-agent variant (CP8, stretch): an investigator agent and a sceptic agent that tries to refute the investigator's choice using the same tools. It is kept only if it beats the single agent on the evaluation set.
 
-Per target symbol, the two methods produce:
+## Models (all free)
 
-- C4a (call graph): `PATH_FOUND`, `NO_PATH`, or `ERROR`.
-- C4b (linker): `PRESENT`, `ABSENT`, or `ERROR`.
+| Role | Default | Where it runs | Interface |
+|---|---|---|---|
+| LLM (selection, HyDE, agent, explainer) | Qwen2.5-Coder 7B Instruct via Ollama (to be confirmed by measurement) | Colab free GPU; laptop CPU for demos | `LLMClient` (OpenAI-compatible HTTP) |
+| Embeddings | A small open text/code embedding model via sentence-transformers (chosen in CP4) | Colab or laptop CPU | `Embedder` |
+| Reranker | A small open cross-encoder (chosen in CP4) | Colab or laptop CPU | `Reranker` |
 
-| C4a | C4b | Verifier | Per-symbol result | Reason code |
+Each interface has a deterministic fake for tests. Model names, versions and settings are recorded in every result.
+
+## Verdict rule (proposal, validated in CP2 and CP7)
+
+Per target symbol:
+
+| C4a (VTA) | C4b (linker) | Verifier | Result | Reason code |
 |---|---|---|---|---|
 | `PATH_FOUND` | `PRESENT` | passes | `REACHABLE` | - |
 | `PATH_FOUND` | `PRESENT` | fails | `CANT_DETERMINE` | `VERIFIER_REJECTED` |
 | `NO_PATH` | `ABSENT` | n/a | `NOT_REACHABLE` | - |
 | `NO_PATH` | `PRESENT` | n/a | `CANT_DETERMINE` | `METHOD_DISAGREEMENT` |
-| `PATH_FOUND` | `ABSENT` | n/a | `CANT_DETERMINE` | `METHOD_DISAGREEMENT` (flag as anomaly) |
+| `PATH_FOUND` | `ABSENT` | n/a | `CANT_DETERMINE` | `METHOD_DISAGREEMENT` (anomaly) |
 | `ERROR` | any | n/a | `CANT_DETERMINE` | `ANALYSIS_FAILED` |
 | any | `ERROR` | n/a | `CANT_DETERMINE` | `ANALYSIS_FAILED` |
 
-Case-level verdict across all target symbols:
+Case level: `REACHABLE` if any symbol is `REACHABLE`; `NOT_REACHABLE` only if all are; otherwise `CANT_DETERMINE`. No symbols → `CANT_DETERMINE` / `NO_TARGET_SYMBOLS`.
 
-- `REACHABLE` if at least one symbol is `REACHABLE`.
-- `NOT_REACHABLE` only if every symbol is `NOT_REACHABLE`.
-- Otherwise `CANT_DETERMINE`, with all reason codes listed.
-- `CANT_DETERMINE` with `NO_TARGET_SYMBOLS` if C0 and C2 produce no symbols.
-
-Open question: the linker is conservative, so `NO_PATH` + `PRESENT` may be common on real applications and push the abstention rate up. This must be measured on real cases (milestone 5) before the rule is considered final. See [risks and open questions](../decisions/RISKS_AND_OPEN_QUESTIONS.md).
+Open question: the linker is conservative, so `NO_PATH` + `PRESENT` may be common on real code. Measured in CP7.
 
 ## Confidence and uncertainty
 
-- No numeric confidence scores. LLM self-reported confidence is not used in verdicts.
-- Uncertainty is expressed only through `CANT_DETERMINE` and its reason codes.
-- Each verdict lists which methods agreed, so a reader can see why it was reached.
+- No numeric confidence. LLM self-reported confidence is never used.
+- Uncertainty is expressed by `CANT_DETERMINE` and reason codes, and by showing which methods agreed.
 
 ## Known limits of the analysis methods
 
-Call graph (VTA via golang.org/x/tools):
-
-- All algorithms in the package are documented as unsound in some respect.
-- Reflection and `unsafe` can hide edges.
-- Function pointers and interfaces are resolved conservatively, which can add infeasible paths.
-- Results depend on build configuration (GOOS, GOARCH, build tags). Version 1 analyses the default configuration of the analysis machine only and records it.
-
-Linker presence:
-
-- Binary-level and conservative: code kept for reflection or interface tables may be present but never called.
-- Inlining can remove a function's symbol even when it is called. Builds therefore use `-gcflags=all=-l` to disable inlining. This changes the binary compared with production; that is acceptable because we measure reachability, not the shipped artifact.
-- Only works for `main` packages.
-- Assumption to verify on Windows: `go tool nm` symbol names have the same format on Windows PE binaries as on Linux ELF binaries.
-
-Both methods:
-
-- Analyse one build configuration.
-- Say nothing about whether harmful input can reach the function (exploitability).
+- VTA: documented as unsound in some respects; reflection and `unsafe` can hide edges; interface and function-pointer calls are resolved conservatively; one build configuration only.
+- Linker presence: conservative, binary-level; inlining can remove symbols, so builds use `-gcflags=all=-l`; `main` packages only; Windows symbol format unverified.
+- Retrieval and agent: can miss the right function; the closed-set rule prevents invented names, not wrong choices. Wrong choices are measured, not hidden.
+- None of the methods assess exploitability.
 
 ## Security boundaries
 
-- Target repositories and fix commits are untrusted input. Analysis builds run with `GOTOOLCHAIN=local` and `CGO_ENABLED=0`, and never run `go generate` or the target's tests or binaries.
-- LLM inputs (advisory text, commit messages, code comments) may contain prompt-injection text. The LLM output is a closed-set selection that is validated by code, and the LLM has no tools in the main pipeline, so injected instructions cannot trigger actions.
-- API keys are read from environment variables and never written to files, logs or reports.
+- Target repositories, advisories and commit messages are untrusted. Builds use `GOTOOLCHAIN=local`, `CGO_ENABLED=0`; never run `go generate`, target tests or binaries.
+- Prompt injection: advisory and commit text may contain instructions. The LLM and agent outputs are closed-set selections validated by code; agent tools are read-only and limited to the case's repository and candidate data.
+- No API keys exist in this project; any local endpoint URL comes from configuration, never hard-coded secrets.

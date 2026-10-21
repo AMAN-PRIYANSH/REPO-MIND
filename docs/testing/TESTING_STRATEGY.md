@@ -1,47 +1,50 @@
 # Testing strategy
 
-Testing and evaluation are different. Tests check that code does what it is specified to do. Evaluation measures how well the approach works. Both are required.
+Testing checks that code does what it is specified to do. Evaluation measures how well the approach works. Both are required, and they are kept separate: tests never run real models, and evaluations never replace tests.
 
 ## Test layers
 
-| Layer | What it covers | Needs Go? | Needs network? | Needs LLM? |
+| Layer | What it covers | Needs Go? | Needs network? | Needs real models? |
 |---|---|---|---|---|
-| Unit | Pure Python logic: symbol-name mapping, `nm` output parsing, diff hunk parsing, verdict rule table, schema validation | No | No | No |
-| Contract | Recorded helper JSON responses validated against schemas; error-code handling | No | No | No |
-| Integration | Real `go build`, `go tool nm`, helper runs on the fixture module | Yes | No (`GOPROXY=off`) | No |
-| Pipeline | End-to-end on 2-3 fixed cases with cached LLM responses | Yes | Only for first git fetch | No (cached) |
-| Evaluation | Full datasets, metrics, reports | Yes | Yes | Yes (milestone 4+) |
+| Unit | Pure Python logic: symbol mapping, `nm` parsing, diff parsing, verdict table, schema validation, metrics maths, RRF, BM25 tokeniser | No | No | No |
+| Contract | Recorded Go-helper and model responses validated against schemas; error handling | No | No | No (fakes) |
+| Integration | Real `go build`, `go tool nm`, helper on fixtures; pgvector store against a local PostgreSQL if available; LangGraph agent loop with the fake LLM | Yes | No | No (fakes) |
+| Pipeline | End-to-end on 2-3 fixed cases with cached model outputs | Yes | Only for the first git fetch | No (cached) |
+| Evaluation | Full datasets with real models in Colab or on the laptop | Yes | Yes | Yes |
 
 ## Rules
 
-1. Unit and contract tests must pass on a machine with only Python installed.
-2. Integration tests that need Go are skipped, not failed, when `go` is missing. The skip message must say why. A test report with skipped integration tests is not evidence that a milestone passed.
-3. No test calls a live LLM API. LLM behaviour is tested with recorded responses, including deliberately invalid ones (wrong IDs, bad JSON).
-4. No test depends on internet access. Git-based tests use small local repositories created inside the test.
-5. Every bug found later gets a regression test before it is fixed.
-6. Tests must run on both Linux and Windows. Path handling is tested with Windows-style input paths.
-7. Determinism: running a method twice on the same input must produce identical results (excluding timing fields). This is an explicit test.
+1. Unit and contract tests pass on a machine with only Python installed.
+2. Integration tests skip, not fail, when a tool (Go, PostgreSQL, Docker) is missing, with a message naming the tool. A report with skipped integration tests is not evidence that a checkpoint passed.
+3. No test downloads a model or calls a model endpoint. Fakes are deterministic.
+4. LLM and agent behaviour is tested with scripted fake responses, including invalid ones: out-of-set IDs, malformed JSON, tool calls with bad arguments, endless tool loops (budget must stop them).
+5. No test depends on internet access. Git tests use small local repositories created inside the test.
+6. Every bug found later gets a regression test before it is fixed.
+7. Paths are tested with Windows-style input.
+8. Determinism: the same input twice gives identical results (excluding timing fields).
+9. A test asserts that the configured LLM endpoint is not a known paid API host.
 
-## What each milestone must test
+## What each checkpoint must test
 
-- **M1:** symbol-to-`nm`-pattern mapping (functions, value methods, pointer methods, unsupported generic forms), `nm` output parsing from recorded samples, manifest and method-result schema validation, linker method on every fixture case, determinism.
-- **M2:** helper contract (requests and responses), each helper error code, VTA results on fixtures, verdict rule table (every row), naive call-graph control.
-- **M3:** vulndb report parsing on recorded YAML samples (including multi-module and `/vN` paths), diff-to-function mapping on a local test repository, E0 scoring maths on hand-computed examples.
-- **M4:** LLM output validation (valid, invalid ID, invalid hunk, malformed JSON, empty selection), prompt construction is deterministic, cache keys, lifting on fixtures.
-- **M5:** verifier checks (each check can fail independently), downgrade-only behaviour, full pipeline on cached cases.
-- **M6:** experiments reuse the M4 validation path; strategies cannot bypass it.
+- **CP1:** symbol-to-`nm` mapping, `nm` parsing, schemas, linker method on fixtures, determinism, `doctor` with Go missing.
+- **CP2:** helper contract and every error code, VTA on fixtures, naive control, every row of the verdict table.
+- **CP3:** report parsing (`/vN` paths, multi-package, pseudo-versions, missing fields), diff-to-function mapping, release-range extraction on a local test repository, baseline metrics on hand-computed examples.
+- **CP4:** chunk construction, BM25 tokenisation, RRF on hand-computed lists, both vector-store backends behind one interface test suite, retrieval metrics on hand-computed rankings, index freshness (changed hash → re-embed; unchanged → skip).
+- **CP5:** LLM client request building, output validation (valid / invalid ID / malformed / empty), cache keys, HyDE switch, lifting on fixtures.
+- **CP6:** each agent tool in isolation, budget enforcement, rejection of out-of-set answers, trace completeness, recovery from tool errors.
+- **CP7:** each verifier check failing independently, downgrade-only behaviour, full pipeline on cached cases, demo page starts.
+- **CP8:** the multi-agent variant reuses the same validation and budgets; it cannot bypass them.
 
 ## Commands
 
-The exact commands are fixed in milestone 1 and recorded in the README. The expected form is:
+Fixed in CP1 and recorded in the README. Expected form:
 
 ```
-python -m pytest tests/unit                 # plus tests/contract from M2 onward
+python -m pytest tests/unit                  # plus tests/contract from CP2
 python -m pytest tests/integration
 python -m vulntrace doctor
-python -m vulntrace fixtures score --method linker
 ```
 
 ## Reporting
 
-Every milestone report lists the exact commands run, the pass / fail / skip counts as printed, and any test that was skipped with its reason. Claims like "all tests pass" without the printed output are not accepted.
+Every checkpoint report lists exact commands, the printed pass / fail / skip summary, and every skipped test with its reason.

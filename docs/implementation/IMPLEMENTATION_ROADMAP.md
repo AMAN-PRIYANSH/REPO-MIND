@@ -1,92 +1,92 @@
-# Implementation roadmap and milestone gates
+# Implementation roadmap and checkpoint gates
 
-This document combines the originally proposed `IMPLEMENTATION_ROADMAP.md` and `MILESTONE_ACCEPTANCE_CRITERIA.md`, so each milestone's criteria sit next to its scope. Milestone 1 has its own detailed specification: [MILESTONE_1.md](MILESTONE_1.md).
+Target: about 4 weeks of calendar time. The work is split into 8 checkpoints. Each checkpoint is built by Claude Code, reviewed by the supervising assistant and the owner, and only then is the next one released.
 
-## Gate rule (applies to every milestone)
+Only CP1 has a full specification now. Each later specification is written by the supervising assistant when the previous checkpoint is approved, using what was actually learned. The outlines below fix scope and acceptance themes so nothing important is forgotten.
 
-A milestone is complete only when:
+## How a checkpoint moves
 
-1. Every acceptance criterion below is met, with evidence (commands run and their printed output).
-2. The implementer's report lists files changed, deviations from the design, skipped tests with reasons, and open issues.
-3. The project owner has reviewed the report and explicitly approved moving on.
+1. The supervising assistant writes `docs/implementation/checkpoints/CPn.md` and sets STATUS.md to `READY`.
+2. The owner starts Claude Code with the model and effort named in the spec and pastes `prompts/SESSION_WRAPPER.md`.
+3. Claude Code works on the checkpoint branch, committing after each task. If it hits a usage limit, it leaves handoff notes in STATUS.md; the owner pastes the same wrapper in a new session to continue.
+4. Claude Code writes the report and sets `AWAITING_REVIEW`.
+5. The supervising assistant reviews the branch: runs or inspects tests, checks every acceptance criterion against evidence, reads samples of output. Result: `APPROVED` (branch merged into `main`) or `CHANGES_REQUESTED` (notes added to the spec).
 
-Claude Code must stop at the end of each milestone. Approval for one milestone is not approval for the next.
+## Model and effort per checkpoint
 
-Time estimates assume about 12 hours of work per week by the project owner, with AI assistance. They are rough.
+| CP | Model | Effort | Why |
+|---|---|---|---|
+| CP1 | Sonnet 5.5 | medium | Routine Python, small Go fixtures |
+| CP2 | Opus 5.5 | high | Go SSA/VTA analysis code is subtle |
+| CP3 | Sonnet 5.5 | medium | Data parsing and git plumbing |
+| CP4 | Opus 5.5 | high | Retrieval architecture, interfaces, evaluation harness |
+| CP5 | Sonnet 5.5 | high | LLM client, validation, caching, notebooks |
+| CP6 | Opus 5.5 | high | Agent design, tools, budgets, failure handling |
+| CP7 | Opus 5.5 | high | Verifier and end-to-end integration |
+| CP8 | Sonnet 5.5 | medium | Experiment variant, reports, README |
 
-## M0 - Design (this phase)
+Never use Fable or 1M-context models (they can use paid credits). Avoid `max` effort.
 
-- Deliverables: the documents in `docs/` and the Round 1 prompt.
-- Acceptance: owner has read the documents and resolved or accepted the open questions marked "before M1".
+## Checkpoint outlines
 
-## M1 - Ground truth and linker presence (Round 1)
+### CP1 - Ground truth and linker presence (week 1)
 
-- Prerequisites: M0 approved. Python 3.11+ available. Go available for integration tests (if not, unit tests still run, and the missing tool is reported as a blocker).
-- Deliverables: Python package skeleton, `doctor` command, two JSON Schemas, synthetic fixture suite (at least 12 cases), linker-presence method, `fixtures score --method linker`, tests, results document.
-- Dependencies: none.
-- Acceptance criteria and test gate: see [MILESTONE_1.md](MILESTONE_1.md).
-- Estimate: 1-2 weeks.
+Full spec: [checkpoints/CP1.md](checkpoints/CP1.md).
 
-## M2 - Go call-graph helper and verdict rule
+### CP2 - Go call-graph helper and verdict rule (week 1)
 
-- Prerequisites: M1 approved; Go available; decision on how `golang.org/x/tools` will be fetched (network access for the Go module proxy).
-- Deliverables: `helper/` Go module with `funcs`, `reach` and `edges` modes; Python wrapper; naive name-only call graph as negative control (R1); verdict rule (R4); fixture suite extended to about 25 cases; contract tests with recorded responses.
-- Acceptance:
-  - Every helper error code has a test.
-  - R1, R2, R3, R4 scored on D2 and reported with confusion matrices.
-  - R4 produces zero false `NOT_REACHABLE` on D2, or each exception is documented with its cause and a proposed design change (the rule may not be weakened silently to pass).
-  - Helper run on the largest fixture stays within documented memory and time.
-- Estimate: 2-3 weeks.
+- `helper/` Go module (pins `golang.org/x/tools`) with modes `funcs`, `reach` (VTA), `edges`, `lift`.
+- Python wrapper with timeouts and error codes; contract tests with recorded responses.
+- Naive name-only call graph as a negative control (R1).
+- Verdict rule (two-method agreement) and verdict schema; fixtures extended to about 20 cases.
+- Gate: R1-R4 scored on the fixture suite; zero false `NOT_REACHABLE` for the combined rule, or each exception explained.
 
-## M3 - Advisory dataset and fix evidence
+### CP3 - Advisory dataset, fix evidence, release-range candidates, baselines (week 2)
 
-- Prerequisites: M2 approved; network access to GitHub for git fetches; vulndb commit pinned.
-- Deliverables: vulndb report reader; `VulnCase` and `FixEvidence` builders; D1 sample of 150 cases; E0 baseline report; re-run of feasibility trial 2 at full size.
-- Acceptance:
-  - Parser tests cover `/vN` module paths, multi-package reports, missing fields.
-  - E0 results reported with counts and intervals, split by `created` date.
-  - Any differences from the feasibility numbers are explained.
-- Estimate: 2 weeks.
+- vulndb report reader at a pinned commit; `VulnCase` builder.
+- Fix-commit evidence (Mode 1) and release-range candidate extraction (Mode 2: functions changed between `vulnerable_at` and the first fixed tag), including pseudo-version handling.
+- Datasets D1 (fix commit) and D4 (release range, fix commit hidden).
+- Baselines: E0 (all changed functions) and B-ID (search commit messages in the release range for the advisory's CVE/GHSA IDs).
+- Gate: re-run of feasibility trials 2 and 5 at full size, reported with intervals.
 
-## M4 - LLM root-cause selection and lifting
+### CP4 - Retrieval stack (week 2)
 
-- Prerequisites: M3 approved; LLM provider, model and budget decided by the owner; API key available as an environment variable.
-- Deliverables: LLM client with caching; prompt template v1; output validation; `lift` helper mode; E1 and E1+L reports with contamination split.
-- Acceptance:
-  - Invalid LLM outputs are rejected in tests using recorded responses.
-  - No test calls a live API.
-  - Total API spend recorded and within the agreed budget.
-  - E1 and E1+L compared with E0 on the post-cutoff split, with intervals.
-- Estimate: 2 weeks.
+- Function-level chunking via the helper; chunk text = package, signature, doc comment, body, plus linked commit messages.
+- `VectorStore` interface with two backends: in-memory (tests) and PostgreSQL + pgvector (real runs, via Docker Compose).
+- BM25 (Python), dense embeddings (`Embedder` interface; fake for tests, sentence-transformers model for real runs), Reciprocal Rank Fusion, cross-encoder reranker interface.
+- Retrieval evaluation harness (Recall@k, MRR, nDCG) over D4.
+- Colab notebook that runs the real models and writes result files.
+- Gate: harness runs end-to-end on fakes in tests; at least one real run (BM25, dense, hybrid, hybrid+rerank) produced in Colab and committed as result files.
 
-## M5 - End-to-end pipeline, verifier, real applications
+### CP5 - Local LLM layer, root-cause selection, HyDE, lifting (week 3)
 
-- Prerequisites: M4 approved; D3 applications chosen and adjudication notes written by the owner.
-- Deliverables: verifier; `triage` command; D3 evaluation; failure gallery.
-- Acceptance:
-  - Every `REACHABLE` verdict has a verified path.
-  - Verifier tests show each check can fail and only downgrades.
-  - D3 confusion matrix, abstention rate, and per-case notes reported, including failures.
-  - Abstention rate of the verdict rule on real code is reported; if it is so high that the tool is not useful, that is documented and a design revision is proposed.
-- Estimate: 2-3 weeks.
+- `LLMClient` for any OpenAI-compatible endpoint (Ollama default), response cache, closed-set output validation.
+- E1 (LLM selects from fix-diff candidates) and Mode 2 selection from retrieved top-k.
+- HyDE query rewriting as a retrieval option, measured.
+- `lift` integration and E1+L.
+- Colab notebook running Ollama with an open model; all results cached and committed.
+- Gate: invalid LLM outputs rejected in tests; E0 vs E1 vs E1+L and retrieval with/without HyDE reported with contamination split.
 
-## M6 - Experiments on hard cases (optional)
+### CP6 - LangGraph investigation agent (week 3)
 
-- Prerequisites: M5 approved; owner decides it is worth the time and budget.
-- Deliverables: D4 set; X1 (keyword search, then hybrid keyword + embeddings) and X2 (single tool-using agent) strategies writing `RootCauseSelection`; comparison report.
-- Acceptance: results reported whether positive or negative; any strategy enabled by default only if it beats the abstaining baseline on D4 with non-overlapping intervals.
-- Estimate: 2 weeks.
+- Single agent built with LangGraph; tools: search_code, read_function, search_commits, show_commit, callers, callees, submit_answer.
+- Step and time budgets; closed-set validation of the final answer; full trace saved.
+- Evaluated on D4 against the best non-agent retrieval pipeline.
+- Gate: agent vs pipeline report, including cost in time and tokens, failures and traces.
 
-## M7 - Report and demo
+### CP7 - End-to-end triage, verifier, real applications, demo (week 4)
 
-- Deliverables: final results summary, README update with real numbers, short demo script, limitations section.
-- Acceptance: a reviewer can reproduce the headline tables from a clean checkout using documented commands and cached LLM responses.
-- Estimate: 1-2 weeks.
+- Evidence verifier (downgrade-only), `triage` command for both modes.
+- D3: 5 real applications, adjudicated by the owner with the supervising assistant's help.
+- A minimal local demo (CLI output plus a small Streamlit page) showing verdict, path and evidence.
+- Gate: every `REACHABLE` has a verified path; D3 results reported with failures.
 
-## Dependency chain
+### CP8 - Multi-agent experiment (stretch) and final report (week 4)
 
-```
-M0 → M1 → M2 → M3 → M4 → M5 → (M6 optional) → M7
-```
+- Optional: investigator + sceptic-reviewer pair in LangGraph vs the single agent, on D4.
+- Final results summary, README with real numbers, limitations, interview notes.
+- Gate: every headline number reproducible from committed result files.
 
-M3 could start in parallel with M2 because it does not depend on the helper, but sequential order is kept to make each review small.
+## If time runs short
+
+Drop in this order: CP8 multi-agent experiment, then the Streamlit page, then D3 down to 3 apps. Never drop baselines, the verifier, or honest reporting.

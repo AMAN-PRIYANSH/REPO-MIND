@@ -2,7 +2,7 @@
 
 This document records what was measured before the design was written, and what was not. Later documents cite it.
 
-All trials ran on 21 October 2026 in a Linux sandbox with Go 1.24.7 and Python 3.13. The trial scripts were delivered separately to the project owner (`vulntrace_trial.zip`) and are not part of this repository yet. Re-running them is part of milestone 3.
+All trials ran on 21 October 2026 in a Linux sandbox with Go 1.24.7 and Python 3.13. The trial scripts were delivered separately to the project owner (`vulntrace_trial.zip`) and are not part of this repository yet. Re-running them is part of CP3.
 
 ## What was run, and what was not
 
@@ -10,6 +10,7 @@ All trials ran on 21 October 2026 in a Linux sandbox with Go 1.24.7 and Python 3
 |---|---|
 | Label-coverage statistics over the whole Go vulnerability database | govulncheck itself (building third-party code was blocked in the sandbox) |
 | Comparison of curated symbols vs functions changed by the fix commit, 59 advisories | Any VTA / CHA / RTA call graph from golang.org/x/tools |
+| Count of functions changed between vulnerable and fixed releases, 45 advisories | Any model of any kind (LLM, embedding, reranker) |
 | Controlled 5-app reachability test with known truth | Any LLM call |
 | Label-coverage counts for Rust and Python advisory databases | Any embedding, vector search or retrieval experiment |
 
@@ -101,6 +102,32 @@ Implications:
 - A name-only call graph produces false `NOT_REACHABLE`, the most dangerous error. It must not be used.
 - Linker presence was correct on all five, but it is a conservative, binary-level check. govulncheck's documentation warns binary analysis can report code that is in the binary but unreachable. Five cases do not establish its accuracy.
 - Two independent methods (a VTA call graph and linker presence) with abstention on disagreement is the proposed design. It has not yet been tested.
+
+## Trial 5 - Candidate-set size without the fix commit (verified)
+
+Question: if the fix commit is not used, how many functions changed between the vulnerable release and the fixed release?
+
+Method:
+
+- Same 59-advisory sample as trial 2. For each, the `vulnerable_at` version and the smallest `fixed` version above it were mapped to git tags (sub-module prefixes and `+incompatible` suffixes handled).
+- Both tags were fetched; non-test, non-vendor Go functions overlapping changed lines were counted.
+- 50 advisories attempted, 45 succeeded. The 5 failures were Go pseudo-versions (`v0.0.0-2024...`), which have no git tag. Handling them (resolving the commit hash inside the pseudo-version) is required work for CP3.
+
+Results (n = 45):
+
+| Measure | Result |
+|---|---|
+| Changed functions between releases | 25th percentile 3, median 13, 75th percentile 102, 90th percentile 364, max 2,558 |
+| Releases with 100 or more changed functions | 12/45 |
+| Releases with 5 or fewer changed functions | 16/45 |
+| Cases where all core symbols are among the changed functions | 32/42 (any core symbol: 40/42) |
+| Same 45 cases, functions changed by the fix commit alone | median 2 |
+
+Implications (proposals):
+
+- Without the fix commit, about a quarter of cases become a real ranking problem over 100+ candidates. This is where hybrid retrieval, reranking and an agent can be measured meaningfully (Mode 2).
+- Some core symbols are outside the release diff (10/42 not all found). Possible reasons: labels naming public callers (trial 2), or matching limits. CP3 must investigate before the numbers are used as a ceiling.
+- A strong, cheap baseline must be included: searching commit messages in the release range for the advisory's CVE or GHSA identifier.
 
 ## Trial 4 - Other ecosystems (verified)
 

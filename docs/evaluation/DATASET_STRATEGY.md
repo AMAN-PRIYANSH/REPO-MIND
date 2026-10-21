@@ -1,85 +1,67 @@
 # Dataset strategy
 
-Four datasets, each answering a different question. Sizes are initial targets; they can grow later.
+Four datasets, each answering a different question. Sizes are initial targets for a 4-week build.
 
-## D2 - Synthetic reachability suite (milestones 1-2)
+## D2 - Synthetic reachability suite (CP1-CP2)
 
 Purpose: reachability methods tested against truth known by construction.
 
-- A Go module under `fixtures/reachability/` with a fake vulnerable package and one `package main` per case.
-- No external dependencies, so it builds offline.
-- Initial target: at least 12 cases in milestone 1, growing to about 25 by milestone 2.
+- A Go module under `fixtures/reachability/` with a fake vulnerable package and one `package main` per case. No external dependencies; builds offline.
+- At least 12 cases in CP1, about 20 by CP2.
 
-Required categories (milestone 1 must include the first five, which reproduce feasibility trial 3):
+Categories (CP1 must include the first five, which reproduce feasibility trial 3):
 
 | Category | Truth |
 |---|---|
 | Direct call | REACHABLE |
 | Package imported, only a safe function used | NOT_REACHABLE |
 | Vulnerable function stored as a function value in a map and called through it | REACHABLE |
-| Method that calls the vulnerable function, invoked via `reflect` `MethodByName` with a runtime name | REACHABLE |
-| Call exists only in a function nothing calls (dead code) | NOT_REACHABLE |
-| Interface method dispatch to an implementation that calls the vulnerable function | REACHABLE |
+| Method calling the vulnerable function, invoked via `reflect` `MethodByName` with a runtime name | REACHABLE |
+| Call only inside a function nothing calls (dead code) | NOT_REACHABLE |
+| Interface dispatch to an implementation that calls it | REACHABLE |
 | Type implements the interface but is never instantiated | NOT_REACHABLE |
 | Method value (`f := obj.Method; f()`) | REACHABLE |
 | Call inside a goroutine started from `main` | REACHABLE |
 | Call inside `init()` of an imported package | REACHABLE |
-| Call only in a file excluded by a build tag not set by default | NOT_REACHABLE |
+| Call only in a file excluded by a non-default build tag | NOT_REACHABLE |
 | Call only in a `_test.go` file | NOT_REACHABLE |
-| Generic function instantiation that calls the vulnerable function | REACHABLE |
-| Call through `unsafe`-based function pointer trick | REACHABLE (expected hard case) |
+| Generic function instantiation that calls it | REACHABLE |
+| Small vulnerable function that the compiler would inline | REACHABLE |
+| Call through an `unsafe` function-pointer trick | REACHABLE (expected hard case) |
 
-Rules:
+Rules: truth follows from the code and is justified in `rationale`; debatable cases are excluded or explained; method outcomes are observed, never pre-written as "expected".
 
-- Truth must follow from the code itself, written in the case's `rationale`.
-- If a case's truth is debatable (for example, reachability depends on a runtime input), it is excluded or labelled and explained, not forced.
-- Method outcomes are observed and reported. They are never written into the manifest as "expected" in advance.
-
-Limitation: synthetic cases are small and may not represent real code. They test correctness on known patterns, not real-world accuracy.
-
-## D1 - Symbol identification (milestones 3-4)
-
-Purpose: score recovery of vulnerable functions from advisory plus fix commit.
+## D1 - Mode 1 symbol identification (CP3, CP5)
 
 - Source: golang/vulndb `data/reports/*.yaml` at a pinned commit.
-- Inclusion: `review_status: REVIEWED`, at least one core `symbols` entry, at least one GitHub fix commit, not the standard library or toolchain.
-- Feasibility count: 507 eligible advisories (verified on 21 Oct 2026).
-- Initial sample: 150 advisories, stratified by `created` year, with all advisories created after the evaluated model's cutoff included.
-- Ground truth: core `symbols`; secondary: core ∪ `derived_symbols`.
+- Inclusion: `review_status: REVIEWED`, at least one core symbol, at least one GitHub fix commit, not standard library or toolchain. 507 eligible on 21 Oct 2026.
+- Sample: 150 advisories, stratified by `created` year, including all advisories created after the evaluated model's cutoff.
+- Gold: core `symbols`; secondary: core ∪ `derived_symbols`.
+- Owner manually reviews 20 random cases and records agreement with the labels.
 
-Known label issues:
+## D4 - Mode 2 investigation (CP3-CP6)
 
-- The Go team labels the nearest public function in some cases rather than the changed private helper (Caddy and Helm examples in the findings). This is a convention, not an error, and motivates lifting.
-- Curated labels can still be wrong. The owner manually reviews 20 randomly chosen D1 cases and records agreement.
-- Published dataset audits show commit-derived "vulnerable function" labels are often wrong in other datasets (VulValidate: 39/47/65 of 100). Go's curated labels are expected to be better but are not assumed perfect.
+- Same eligibility as D1, but the fix commit is hidden. Candidates are the functions changed between the `vulnerable_at` version and the smallest fixed version above it (feasibility trial 5).
+- Pseudo-versions must be resolved through the commit hash they contain (5 of 50 failed in the trial without this).
+- Sample: 120 advisories, deliberately including every eligible case with more than 100 candidates, because that is where retrieval matters.
+- Commit messages in the release range are part of the evidence, so the B-ID baseline and the `search_commits` agent tool are realistic.
+- Gold: core symbols present in the candidate set. Cases where no gold symbol is in the set are kept and reported separately as a ceiling limit.
 
-## D3 - Real applications, adjudicated (milestone 5)
+## D3 - Real applications, adjudicated (CP7)
 
-Purpose: end-to-end verdict quality on real code.
-
-- About 10 pairs of (advisory, real Go application at a commit that depends on the vulnerable module version).
-- Selection criteria: small-to-medium applications that build with `CGO_ENABLED=0`, load within the 16 GB memory limit, and have at least one `package main`.
-- Aim for a mix: some where reachability is expected, some where only an unrelated part of the dependency is used.
-- Truth: the owner adjudicates each case by reading the code and the call path, recording reasoning in a case note. Two-method agreement or govulncheck agreement is not accepted as truth on its own.
-
-Limitation: 10 cases cannot support strong statistical claims. Results are reported as case studies with counts.
-
-## D4 - Hard cases without fix evidence (milestone 6, experimental)
-
-Purpose: test whether retrieval or an agent helps when no fix commit is available.
-
-- REVIEWED advisories with core symbols but no fetchable GitHub fix commit, about 20 cases.
-- Only advisory text and the module source at `vulnerable_at` are given to the strategy.
-- Scored with the same symbol metrics as D1.
+- 5 pairs of (advisory, real Go application at a commit depending on the vulnerable version). Small-to-medium apps that build with `CGO_ENABLED=0` and fit in 16 GB RAM, with a `package main`.
+- Mix of expected reachable and expected not reachable.
+- Truth: owner adjudication with written reasoning. Two-method agreement or govulncheck agreement is not accepted as truth on its own.
+- 5 cases are case studies, not statistics. More can be added after the 4-week build.
 
 ## Contamination and splits
 
-- Split D1 and D4 by `source.created` against each model's cutoff.
-- Record the vulndb commit SHA used, so the case list is reproducible.
-- Feasibility check: 19 of 30 sampled GO-2026 advisories were created after 30 June 2026, so a post-cutoff split is feasible for models with cutoffs around mid-2026.
+- Split D1 and D4 by `source.created` against each model's training cutoff.
+- Record the vulndb commit SHA so case lists are reproducible.
+- Feasibility check: 19 of 30 sampled GO-2026 advisories were created after 30 June 2026.
 
-## Later additions (not version 1)
+## Later additions (after the 4-week build)
 
+- "Patch-absent" mode: search the whole module at `vulnerable_at` (thousands of functions), not just the release diff.
 - Rust (RustSec lists affected functions for about 22% of advisories).
-- UNREVIEWED Go advisories, evaluated qualitatively only, because they have no labels.
 - More D3 applications.

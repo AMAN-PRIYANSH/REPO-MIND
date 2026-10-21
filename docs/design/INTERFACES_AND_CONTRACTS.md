@@ -1,6 +1,6 @@
 # Interfaces and contracts
 
-This document replaces the originally proposed `API_DESIGN.md`. Version 1 has no network API or UI (see [project definition](../PROJECT_DEFINITION.md) non-goals). Its interfaces are a command-line interface, a Python-to-Go helper contract, and an LLM contract.
+This document replaces the originally proposed `API_DESIGN.md`. Version 1 has no hosted or multi-user API (see [project definition](../PROJECT_DEFINITION.md) non-goals); its only UI is a minimal local demo page. Its interfaces are a command-line interface, a Python-to-Go helper contract, model interfaces, LLM and agent-tool contracts, and a verifier contract.
 
 The examples below are interface specifications. They are not implementation code.
 
@@ -8,22 +8,26 @@ The examples below are interface specifications. They are not implementation cod
 
 Entry point: `python -m vulntrace <command>`.
 
-| Command | Milestone | Purpose |
+| Command | Checkpoint | Purpose |
 |---|---|---|
-| `doctor` | 1 | Report Python, Go and tool versions; list missing prerequisites. Never installs anything. |
-| `fixtures score --method linker` | 1 | Run a method over the synthetic suite and write a scored report. |
-| `fixtures score --method vta` | 2 | Same, call-graph method. |
-| `fixtures score --method combined` | 2 | Both methods plus the verdict rule. |
-| `dataset build` | 3 | Build `VulnCase` and `FixEvidence` files from a local vulndb checkout. |
-| `eval symbols --strategy e0` / `--strategy llm` / `--strategy llm+lift` | 3-4 | Score symbol identification. |
-| `triage --advisory <ID> --app <dir>` | 5 | Full pipeline on one case; prints a verdict JSON. |
-| `eval reachability --set d3` | 5 | End-to-end evaluation. |
+| `doctor` | CP1 | Report Python, Go, Docker and tool versions; list missing prerequisites. Never installs anything. |
+| `fixtures score --method linker` | CP1 | Run a method over the synthetic suite and write a scored report. |
+| `fixtures score --method vta` / `naive` / `combined` | CP2 | Call-graph method, negative control, and the verdict rule. |
+| `dataset build --mode fix` / `--mode release` | CP3 | Build `VulnCase` plus `FixEvidence` (Mode 1) or `ReleaseRange` (Mode 2). |
+| `eval symbols --strategy e0` / `id-search` | CP3 | Baselines. |
+| `index build --set d4` | CP4 | Chunk, embed and store candidates. |
+| `eval retrieval --config <name>` | CP4-CP5 | Retrieval ablations (BM25, dense, hybrid, rerank, HyDE). |
+| `eval symbols --strategy llm` / `llm+lift` / `llm-topk` | CP5 | LLM selection in both modes. |
+| `eval symbols --strategy agent` | CP6 | LangGraph agent. |
+| `triage --advisory <ID> --app <dir> [--mode auto/fix/release]` | CP7 | Full pipeline on one case; prints a verdict JSON. |
+| `eval reachability --set d3` | CP7 | End-to-end evaluation. |
+| `demo` | CP7 | Starts the local demo page. |
 
 Exit codes: `0` success (including `CANT_DETERMINE` verdicts), `2` invalid input, `3` missing prerequisite, `1` unexpected error.
 
 ## 2. Python-to-Go helper contract
 
-The Go helper is one binary, `vt-helper`, built from `helper/` in this repository (milestone 2). Python invokes it as a subprocess.
+The Go helper is one binary, `vt-helper`, built from `helper/` in this repository (CP2). Python invokes it as a subprocess.
 
 ### Invocation
 
@@ -87,7 +91,7 @@ Error codes: `BAD_REQUEST`, `CONTRACT_MISMATCH`, `LOAD_FAILED`, `TYPE_ERRORS`, `
 - The helper never accesses the network. Module downloads, if needed, happen in a separate, explicit Python step that the user has allowed.
 - `TARGET_NOT_FOUND` is not the same as `NO_PATH`. A symbol that does not exist in the loaded program must not become `NOT_REACHABLE`.
 
-## 3. Linker-presence contract (milestone 1, Python only)
+## 3. Linker-presence contract (CP1, Python only)
 
 Steps for one main package:
 
@@ -101,28 +105,54 @@ Steps for one main package:
 
 The matching rules for plain functions and value/pointer methods were observed in the feasibility trial on Linux. They must be re-checked on Windows (assumption).
 
-## 4. LLM contract (milestone 4)
+## 4. Model interfaces (CP4 onward)
 
-### Input to the model
+All models sit behind four small Python interfaces. Each has a deterministic **fake** used by every test, and a **real** implementation used only in evaluation runs (Colab or laptop). Tests never import real model libraries.
 
-- Advisory summary and description text.
-- The complete non-test Go diff, split into numbered hunks.
-- The candidate list from `FixEvidence`, with IDs.
-- Instructions: select zero or more candidate IDs that contain the root cause; cite hunk IDs; or answer `none_selected`.
+| Interface | Methods (informal) | Real implementation | Fake |
+|---|---|---|---|
+| `LLMClient` | `complete(messages, json_schema=None, tools=None) -> response` | HTTP client for an OpenAI-compatible endpoint (Ollama at `http://localhost:11434/v1` by default; URL from config) | Returns scripted responses keyed by input hash, including invalid ones for tests |
+| `Embedder` | `embed(texts) -> vectors`, `model_id` | sentence-transformers model chosen in CP4 | Hash-based deterministic vectors |
+| `Reranker` | `score(query, texts) -> scores`, `model_id` | sentence-transformers cross-encoder chosen in CP4 | Token-overlap score |
+| `VectorStore` | `upsert(chunks)`, `search(vector, filters, k)`, `delete(filters)` | PostgreSQL + pgvector | In-memory brute-force cosine |
 
-### Output from the model
+Rules:
 
-JSON only, matching the `RootCauseSelection.selected` shape. Code validates it as described in [data model](DATA_MODEL.md).
+- No paid endpoint may be configured. The endpoint configuration must reject known paid API hostnames.
+- Every real call records model name, digest or version, and settings in the output object.
+- Real implementations live in a separate optional dependency group so the base install and tests stay light.
 
-### Rules
+## 5. LLM contracts (CP5 onward)
 
-- The model chooses from a closed set. Free-text symbol names are ignored.
-- Temperature and sampling settings are recorded. Repeated runs are allowed for measuring variance.
-- Raw responses are stored so metrics can be recomputed without new API calls.
-- API keys come from environment variables. They are never logged or written to results.
-- The provider and model are an open decision (see [risks and open questions](../decisions/RISKS_AND_OPEN_QUESTIONS.md)).
+### Closed-set selection (Mode 1 `LLM_FULL_DIFF`, Mode 2 `LLM_TOPK`)
 
-## 5. Verifier contract (milestone 5)
+Input: advisory summary and details; Mode 1 the full non-test diff in numbered hunks; Mode 2 the top-k retrieved candidates with their code. Candidate list with IDs.
+
+Output: JSON only, matching `RootCauseSelection.selected`. Code validates it (see [data model](DATA_MODEL.md)).
+
+### HyDE query rewriting
+
+Input: advisory text. Output: one short hypothetical Go function (plain text) used only as a retrieval query. It is never shown as evidence.
+
+### Agent tools (CP6)
+
+| Tool | Input | Output | Notes |
+|---|---|---|---|
+| `search_code` | query text, k | ranked candidate IDs with snippets | Uses the C13 retriever |
+| `read_function` | candidate ID | code and location | Only candidates of this case |
+| `search_commits` | query text | commits in the release range with subjects | Read-only git |
+| `show_commit` | sha | diff limited to Go files, truncated to a budget | Only commits in the release range |
+| `callers` / `callees` | candidate ID | function names from the helper | Read-only |
+| `submit_answer` | candidate IDs, cited evidence | accepted / rejected | Ends the run; IDs must be in the pool |
+
+### Rules for all LLM use
+
+- Closed set only; free-text symbol names are ignored.
+- Temperature 0 and a fixed seed by default; repeated runs allowed to measure variance.
+- Raw responses and traces are cached and stored so metrics can be recomputed without re-running models.
+- Prompt templates are versioned files in the repository.
+
+## 6. Verifier contract (CP7)
 
 For each verdict, the verifier checks:
 

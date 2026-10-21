@@ -1,6 +1,6 @@
 # Data model
 
-All objects are JSON. Each object type will have a JSON Schema (draft 2020-12) file under `schemas/`; the schema file is the source of truth, and this document explains it. Milestone 1 creates the schemas it needs; later milestones add the rest.
+All objects are JSON. Each object type will have a JSON Schema (draft 2020-12) file under `schemas/`; the schema file is the source of truth, and this document explains it. CP1 creates the schemas it needs; later checkpoints add the rest.
 
 Every top-level object carries `"schema_version"`. Version 1 objects use `"1.0"`. Breaking changes bump the major number.
 
@@ -84,7 +84,7 @@ Produced by C1.
 
 ## RootCauseSelection
 
-Produced by C2 (or by an experimental strategy in milestone 6).
+Produced by C2 (Mode 1), or by C13/C14 (Mode 2).
 
 ```json
 {
@@ -96,13 +96,20 @@ Produced by C2 (or by an experimental strategy in milestone 6).
      "reason": "Image destination is written without escaping."}
   ],
   "none_selected": false,
-  "llm": {"provider": "<provider>", "model": "<model id>",
+  "llm": {"endpoint_kind": "OLLAMA", "model": "qwen2.5-coder:7b-instruct",
+          "model_digest": "<digest reported by the server>",
           "prompt_template": "root_cause_v1", "prompt_sha256": "...",
           "response_sha256": "...", "input_tokens": 3120, "output_tokens": 210,
-          "cached": false},
+          "temperature": 0, "seed": 7, "cached": false},
+  "retrieval_run_id": null,
+  "agent_trace_id": null,
   "validation": {"status": "VALID", "errors": []}
 }
 ```
+
+`strategy`: `LLM_FULL_DIFF` (Mode 1), `LLM_TOPK` (Mode 2, selection from retrieved top k), `AGENT` (Mode 2, LangGraph agent), `MULTI_AGENT` (CP8 experiment), `BASELINE_E0`, `BASELINE_ID_SEARCH`.
+
+In Mode 2, `candidate_id` refers to `ReleaseRange.candidates` instead of `FixEvidence.candidates`.
 
 Validation rules (enforced by code, not by the LLM):
 
@@ -110,6 +117,89 @@ Validation rules (enforced by code, not by the LLM):
 - Every `cited_hunk_id` must exist and belong to that candidate.
 - `reason` is stored for review but never used as evidence.
 - Invalid output → `validation.status = INVALID`; nothing is passed on.
+
+## ReleaseRange (Mode 2)
+
+Produced by C10.
+
+```json
+{
+  "schema_version": "1.0",
+  "case_id": "GO-2026-5504",
+  "module": "github.com/gohugoio/hugo",
+  "from": {"version": "0.159.1", "ref": "v0.159.1", "commit": "..."},
+  "to":   {"version": "0.159.2", "ref": "v0.159.2", "commit": "..."},
+  "candidates": [
+    {"candidate_id": "r17", "package_dir": "markup/goldmark",
+     "symbol": "hookedRenderer.renderImageDefault", "side": "BOTH",
+     "new_range": {"file": "markup/goldmark/render_hooks.go", "start": 210, "end": 251}}
+  ],
+  "commits": [{"sha": "...", "subject": "markup/goldmark: escape image destinations",
+               "touches_candidates": ["r17"]}],
+  "status": "AVAILABLE"
+}
+```
+
+`status`: `AVAILABLE`, `TAG_NOT_FOUND`, `PSEUDO_VERSION_UNRESOLVED`, `EMPTY`.
+
+## CodeChunk (Mode 2)
+
+One indexed function. Stored in the vector store (C12).
+
+```json
+{
+  "chunk_id": "github.com/gohugoio/hugo@0.159.2:markup/goldmark:hookedRenderer.renderImageDefault",
+  "module": "github.com/gohugoio/hugo",
+  "version": "0.159.2",
+  "package": "github.com/gohugoio/hugo/markup/goldmark",
+  "symbol": "hookedRenderer.renderImageDefault",
+  "file": "markup/goldmark/render_hooks.go", "start": 210, "end": 251,
+  "changed_in_range": true,
+  "candidate_id": "r17",
+  "text": "package goldmark\nfunc (r *hookedRenderer) renderImageDefault(...)\n// doc comment...\n<body>\nCommits: escape image destinations",
+  "content_sha256": "...",
+  "embedding_model": "<model id>",
+  "embedding": [0.012, -0.044, "..."]
+}
+```
+
+## RetrievalRun (Mode 2)
+
+```json
+{
+  "schema_version": "1.0",
+  "run_id": "...",
+  "case_id": "GO-2026-5504",
+  "config": {"sparse": "BM25", "dense": "<embedding model>", "fusion": "RRF", "rrf_k": 60,
+             "reranker": "<model or null>", "hyde": false, "top_k": 20},
+  "ranked": [{"candidate_id": "r17", "score": 0.91, "sources": ["BM25", "DENSE"]}],
+  "timing_ms": {"sparse": 12, "dense": 40, "rerank": 900},
+  "provenance": {"index_built_at": "...", "pipeline_version": "0.x"}
+}
+```
+
+## AgentTrace (Mode 2)
+
+```json
+{
+  "schema_version": "1.0",
+  "trace_id": "...",
+  "case_id": "GO-2026-5504",
+  "agent": "investigator_v1",
+  "budget": {"max_steps": 12, "max_seconds": 600},
+  "steps": [
+    {"n": 1, "tool": "search_commits", "args": {"query": "escape image"},
+     "result_summary": "2 commits", "duration_ms": 30},
+    {"n": 2, "tool": "read_function", "args": {"candidate_id": "r17"},
+     "result_summary": "42 lines", "duration_ms": 5}
+  ],
+  "final": {"tool": "submit_answer", "candidate_ids": ["r17"], "valid": true},
+  "stop_reason": "SUBMITTED",
+  "llm": {"model": "...", "input_tokens": 18400, "output_tokens": 920}
+}
+```
+
+`stop_reason`: `SUBMITTED`, `BUDGET_EXCEEDED`, `INVALID_ANSWER`, `ERROR`.
 
 ## TargetSymbol
 
@@ -207,7 +297,7 @@ One reachability method's answer for one target symbol.
 - `reason_codes`: `NO_TARGET_SYMBOLS`, `NO_FIX_EVIDENCE`, `METHOD_DISAGREEMENT`, `ANALYSIS_FAILED`, `VERIFIER_REJECTED`, `UNSUPPORTED_TARGET` (e.g. no `main` package).
 - `statement` is fixed text and always present.
 
-## FixtureManifest (synthetic suite, milestone 1)
+## FixtureManifest (synthetic suite, CP1)
 
 ```json
 {
@@ -228,4 +318,5 @@ One reachability method's answer for one target symbol.
 
 ## Storage
 
-Version 1 stores everything as JSON and JSON Lines files under `data/` and `results/`. A database is not needed at this scale (hundreds of cases). PostgreSQL remains an option if querying across runs becomes painful; see [ADR-006](../decisions/ARCHITECTURE_DECISIONS.md).
+- Cases, verdicts, retrieval runs, agent traces and reports: JSON / JSON Lines files under `data/` and `results/` (easy to diff and review). See [ADR-006](../decisions/ARCHITECTURE_DECISIONS.md).
+- Code chunks and embeddings: PostgreSQL + pgvector, one table with metadata columns (`module`, `version`, `package`, `symbol`, `changed_in_range`, `content_sha256`, `embedding_model`) and a vector column, plus an in-memory backend with the same interface for tests. See [ADR-007](../decisions/ARCHITECTURE_DECISIONS.md).

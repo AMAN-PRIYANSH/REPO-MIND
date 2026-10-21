@@ -1,38 +1,49 @@
 # VulnTrace AI
 
-VulnTrace AI is a Go-focused vulnerability reachability triage system.
+VulnTrace AI is a Go vulnerability reachability triage system.
 
-Given a vulnerability advisory and a Go application's source code, it answers one question:
+Given a vulnerability advisory and a Go application's source code, it answers:
 
 > Can this application's code actually reach the vulnerable function?
 
 It returns one of three verdicts, with evidence:
 
 - `REACHABLE` - a verified call path exists from the application's entry point to a vulnerable function.
-- `NOT_REACHABLE` - independent analysis methods agree that no path exists.
+- `NOT_REACHABLE` - two independent analysis methods agree that no path exists.
 - `CANT_DETERMINE` - evidence is missing, analysis failed, or the methods disagree.
 
-VulnTrace AI reports reachability, not exploitability. A reachable function is not proof that the vulnerability can be exploited.
+It reports reachability, not exploitability.
+
+## Two modes
+
+**Mode 1 - fix commit available.** The fix diff is small, so a local LLM reads the whole diff and picks the root-cause function from a closed list. No retrieval needed.
+
+**Mode 2 - investigation mode.** No fix commit. The system searches the functions that changed between the vulnerable and the fixed release, which can be hundreds or thousands. This mode uses advanced RAG (hybrid BM25 + dense search, Reciprocal Rank Fusion, cross-encoder reranking, HyDE query rewriting), a PostgreSQL + pgvector store with versioned indexing, and a LangGraph investigation agent. Every one of these is measured against simpler baselines.
+
+Both modes end in deterministic reachability analysis (a VTA call graph and a linker check) and an evidence verifier that can only downgrade a verdict.
+
+Everything runs on free, open models (local or Google Colab). Total cost: zero.
 
 ## Project status
 
-Design phase. No application code exists yet.
+Design complete. Implementation runs in 8 checkpoints; see [progress status](docs/progress/STATUS.md) and the [roadmap](docs/implementation/IMPLEMENTATION_ROADMAP.md).
 
-Implementation will happen in small milestones. Each milestone must pass its acceptance criteria and be approved before the next one starts. See [the implementation roadmap](docs/implementation/IMPLEMENTATION_ROADMAP.md).
+The repository is named `REPO-MIND` for historical reasons (the project started as a codebase-chat idea called RepoMind).
 
-The repository is named `REPO-MIND` for historical reasons (the project started as a codebase-chat idea called RepoMind). Renaming it is an open question; see [risks and open questions](docs/decisions/RISKS_AND_OPEN_QUESTIONS.md).
+## How the build works
 
-## Design in one paragraph
-
-Python orchestrates the pipeline. A small Go helper performs program analysis, because Go's own analysis libraries only exist in Go. Almost every step is deterministic code. One step uses an LLM: reading the advisory and the complete fix commit to choose the root-cause function. Code then lifts that function to public entry points, checks reachability with two independent methods, and verifies every piece of evidence before a verdict is produced. When the methods disagree, the system abstains.
+- Claude Code builds one checkpoint at a time, following [CLAUDE.md](CLAUDE.md).
+- Start every Claude Code session by pasting [the session wrapper](prompts/SESSION_WRAPPER.md).
+- Progress and handoff notes live in [docs/progress/STATUS.md](docs/progress/STATUS.md).
+- Each checkpoint ends with a report in `docs/progress/reports/` and waits for review.
 
 ## Documents
 
 Start here:
 
-1. [Project definition](docs/PROJECT_DEFINITION.md) - problem, users, scope, non-goals, success criteria.
-2. [Feasibility findings](docs/research/FEASIBILITY_FINDINGS.md) - what was actually measured before design, and what was not.
-3. [System architecture](docs/architecture/SYSTEM_ARCHITECTURE.md) - components, boundaries, deterministic vs LLM steps, verdict rule.
+1. [Project definition](docs/PROJECT_DEFINITION.md) - problem, two modes, scope, zero-cost constraint, success criteria.
+2. [Feasibility findings](docs/research/FEASIBILITY_FINDINGS.md) - what was measured before design, and what was not.
+3. [System architecture](docs/architecture/SYSTEM_ARCHITECTURE.md) - components, models, verdict rule.
 
 Design detail:
 
@@ -49,17 +60,16 @@ Evaluation and testing:
 
 Delivery:
 
-- [Implementation roadmap and milestone gates](docs/implementation/IMPLEMENTATION_ROADMAP.md)
-- [Milestone 1 specification](docs/implementation/MILESTONE_1.md)
-- [Claude Code Round 1 prompt](prompts/CLAUDE_CODE_ROUND_1.md)
+- [Implementation roadmap](docs/implementation/IMPLEMENTATION_ROADMAP.md)
+- [Checkpoint 1 specification](docs/implementation/checkpoints/CP1.md)
 
 Decisions:
 
 - [Architecture decisions](docs/decisions/ARCHITECTURE_DECISIONS.md)
 - [Risks and open questions](docs/decisions/RISKS_AND_OPEN_QUESTIONS.md)
 
-## How facts are labelled in these documents
+## How facts are labelled
 
 - **Verified** - observed in a recorded experiment or stated in a cited primary source.
-- **Assumption** - believed true but not yet checked in this project.
-- **Proposal** - a design choice that must be validated during implementation.
+- **Assumption** - believed true but not yet checked.
+- **Proposal** - a design choice to be validated during implementation.
