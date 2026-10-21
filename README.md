@@ -73,3 +73,13 @@ Decisions:
 - **Verified** - observed in a recorded experiment or stated in a cited primary source.
 - **Assumption** - believed true but not yet checked.
 - **Proposal** - a design choice to be validated during implementation.
+
+## Development (CP1)
+
+```
+python -m venv .venv && .venv/bin/pip install -e ".[dev]"
+python -m pytest tests/unit          # needs only Python
+python -m pytest tests/integration   # needs Go; skips with a message if missing
+python -m vulntrace doctor
+python -m vulntrace fixtures score --method linker [--out results/cp1] [--compare-inlining]
+```
