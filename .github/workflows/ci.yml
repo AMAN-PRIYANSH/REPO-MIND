@@ -28,7 +28,7 @@ jobs:
         run: |
           set -o pipefail
           python -m pip install --upgrade pip
-          pip install -e ".[dev]"
+          pip install -e ".[dev,db]"
 
       - name: Unit and contract tests (Python only, no Go needed)
         run: |
@@ -48,3 +48,45 @@ jobs:
         run: |
           set -o pipefail
           python -m pytest tests/integration -v
+
+  pgvector:
+    # CP4: the shared VectorStore suite against a real PostgreSQL 16 + pgvector service.
+    # VULNTRACE_REQUIRE_PG=1 makes a missing database a failure, not a skip.
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 30
+    env:
+      VULNTRACE_PG_DSN: postgresql://postgres:postgres@localhost:5432/postgres
+      VULNTRACE_REQUIRE_PG: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install vulntrace (dev + db extras)
+        run: |
+          set -o pipefail
+          python -m pip install --upgrade pip
+          pip install -e ".[dev,db]"
+
+      - name: VectorStore contract suite on both backends
+        run: |
+          set -o pipefail
+          python -m pytest tests/contract/test_vector_store.py -v -rs
