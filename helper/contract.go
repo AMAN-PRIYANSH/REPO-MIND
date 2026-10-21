@@ -122,13 +122,14 @@ type CallPath struct {
 
 // TargetResult is one target's answer in reach and naive mode.
 type TargetResult struct {
-	Target           Target     `json:"target"`
-	Result           string     `json:"result"`
-	Paths            []CallPath `json:"paths"`
-	ShortestLength   *int       `json:"shortest_length"`
-	PathsOmitted     *string    `json:"paths_omitted"`
-	MatchedFunctions []string   `json:"matched_functions"`
-	Error            *Error     `json:"error"`
+	Target              Target     `json:"target"`
+	Result              string     `json:"result"`
+	Paths               []CallPath `json:"paths"`
+	ShortestLength      *int       `json:"shortest_length"`
+	PathsOmitted        *string    `json:"paths_omitted"`
+	MatchedFunctions    []string   `json:"matched_functions"`
+	Error               *Error     `json:"error"`
+	PackageNotInProgram bool       `json:"package_not_in_program"`
 }
 
 type EdgeResult struct {

@@ -92,14 +92,24 @@ def test_init_root_is_used(vta):
 
 
 def test_target_not_found_is_never_no_path(helper):
-    targets = [PARSE, {"package": "vtfixtures/vulnlib", "symbol": "DoesNotExist"},
-               {"package": "vtfixtures/initdep", "symbol": "Result"}]
+    """A missing symbol in a loaded package is always an error (TARGET_NOT_FOUND)."""
+    targets = [PARSE, {"package": "vtfixtures/vulnlib", "symbol": "DoesNotExist"}]
     res = run_vta_method(FIXTURES_DIR, "vtfixtures/cmd/direct_call", targets, binary=helper)
     assert [(r["result"], (r["error"] or {}).get("code")) for r in res] == [
-        ("PATH_FOUND", None), ("ERROR", "TARGET_NOT_FOUND"), ("ERROR", "TARGET_NOT_FOUND")]
-    # vulnlib is imported only from a file excluded by a build tag: not in the program.
+        ("PATH_FOUND", None), ("ERROR", "TARGET_NOT_FOUND")]
+
+
+def test_package_not_in_program_is_no_path_with_detail(helper):
+    """Interfaces contract, section 2 exception: an unloaded package is NO_PATH, not an error."""
+    # vtfixtures/initdep is never imported by direct_call: not in the program.
+    res = run_vta_method(FIXTURES_DIR, "vtfixtures/cmd/direct_call",
+                         [{"package": "vtfixtures/initdep", "symbol": "Result"}], binary=helper)
+    assert res[0]["result"] == "NO_PATH" and res[0]["error"] is None
+    assert res[0]["details"]["package_not_in_program"] is True
+    # vulnlib is imported only from a file excluded by a build tag: not in the program either.
     res = run_vta_method(FIXTURES_DIR, "vtfixtures/cmd/build_tag_excluded", [PARSE], binary=helper)
-    assert (res[0]["result"], res[0]["error"]["code"]) == ("ERROR", "TARGET_NOT_FOUND")
+    assert res[0]["result"] == "NO_PATH" and res[0]["error"] is None
+    assert res[0]["details"]["package_not_in_program"] is True
 
 
 def test_timeout_is_reported_as_timeout(helper):

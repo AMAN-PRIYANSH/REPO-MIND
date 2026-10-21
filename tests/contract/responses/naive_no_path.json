@@ -8,6 +8,7 @@
       "matched_functions": [
         "vtfixtures/vulnlib.Parse"
       ],
+      "package_not_in_program": false,
       "paths": [],
       "paths_omitted": null,
       "result": "NO_PATH",
@@ -21,9 +22,9 @@
   "stats": {
     "callgraph_edges": 3,
     "callgraph_nodes": 7,
-    "duration_ms": 63,
+    "duration_ms": 34,
     "packages_loaded": 58,
-    "peak_rss_kb": 7068
+    "peak_rss_kb": 7140
   },
   "toolchain": {
     "go_version": "go1.24.7",

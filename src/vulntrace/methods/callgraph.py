@@ -31,7 +31,8 @@ def build_request(mode: str, module_dir: Path, main_package: str, targets: list[
 
 def _empty_details(toolchain=None, stats=None) -> dict[str, Any]:
     return {"path": None, "paths": [], "shortest_length": None, "paths_omitted": None,
-            "matched_functions": [], "toolchain": toolchain, "stats": stats}
+            "matched_functions": [], "toolchain": toolchain, "stats": stats,
+            "package_not_in_program": False}
 
 
 def to_method_results(method: str, main_package: str, targets: list[dict[str, str]],
@@ -61,7 +62,8 @@ def to_method_results(method: str, main_package: str, targets: list[dict[str, st
         details = _empty_details(response["toolchain"], response["stats"])
         details.update(paths=r["paths"], path=r["paths"][0] if r["paths"] else None,
                        shortest_length=r["shortest_length"], paths_omitted=r["paths_omitted"],
-                       matched_functions=r["matched_functions"])
+                       matched_functions=r["matched_functions"],
+                       package_not_in_program=r["package_not_in_program"])
         out.append(make(t, r["result"], details, r["error"]))
     return out
 

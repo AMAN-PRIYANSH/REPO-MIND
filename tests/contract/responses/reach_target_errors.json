@@ -8,6 +8,7 @@
       "matched_functions": [
         "vtfixtures/vulnlib.Parse"
       ],
+      "package_not_in_program": false,
       "paths": [
         {
           "edges": [
@@ -45,6 +46,7 @@
         "message": "symbol Missing not found in package vtfixtures/vulnlib"
       },
       "matched_functions": [],
+      "package_not_in_program": false,
       "paths": [],
       "paths_omitted": null,
       "result": "ERROR",
@@ -55,14 +57,12 @@
       }
     },
     {
-      "error": {
-        "code": "TARGET_NOT_FOUND",
-        "message": "package vtfixtures/initdep is not part of the loaded program"
-      },
+      "error": null,
       "matched_functions": [],
+      "package_not_in_program": true,
       "paths": [],
       "paths_omitted": null,
-      "result": "ERROR",
+      "result": "NO_PATH",
       "shortest_length": null,
       "target": {
         "package": "vtfixtures/initdep",
@@ -75,6 +75,7 @@
         "message": "unrecognised symbol form: \"a.b.c\""
       },
       "matched_functions": [],
+      "package_not_in_program": false,
       "paths": [],
       "paths_omitted": null,
       "result": "ERROR",
@@ -88,9 +89,9 @@
   "stats": {
     "callgraph_edges": 4074,
     "callgraph_nodes": 1307,
-    "duration_ms": 1496,
+    "duration_ms": 1075,
     "packages_loaded": 58,
-    "peak_rss_kb": 250008
+    "peak_rss_kb": 248816
   },
   "toolchain": {
     "go_version": "go1.24.7",

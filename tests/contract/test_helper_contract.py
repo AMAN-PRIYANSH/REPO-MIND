@@ -69,16 +69,30 @@ def test_response_level_errors_map_to_error_results(entry):
 
 
 def test_per_target_errors_never_become_no_path():
+    """A symbol missing from a loaded package is always an error, never NO_PATH."""
     targets = [PARSE, {"package": "vtfixtures/vulnlib", "symbol": "Missing"},
                {"package": "vtfixtures/initdep", "symbol": "X"}, {"package": "vtfixtures/vulnlib", "symbol": "a.b.c"}]
     results = run_vta_method(Path("."), "vtfixtures/cmd/direct_call", targets, binary=FAKE_BINARY,
                              runner=replay("reach_target_errors.json"))
     got = [(r["result"], (r["error"] or {}).get("code")) for r in results]
-    assert got == [("PATH_FOUND", None), ("ERROR", "TARGET_NOT_FOUND"), ("ERROR", "TARGET_NOT_FOUND"),
+    assert got == [("PATH_FOUND", None), ("ERROR", "TARGET_NOT_FOUND"), ("NO_PATH", None),
                    ("ERROR", "UNSUPPORTED_SYMBOL_FORM")]
-    assert "NO_PATH" not in [r["result"] for r in results]
     for r in results:
         validate("method_result", r)
+
+
+def test_package_not_in_program_becomes_no_path_not_target_not_found():
+    """Interfaces contract, section 2 exception: an unloaded package is NO_PATH, not an error."""
+    targets = [PARSE, {"package": "vtfixtures/vulnlib", "symbol": "Missing"},
+               {"package": "vtfixtures/initdep", "symbol": "X"}, {"package": "vtfixtures/vulnlib", "symbol": "a.b.c"}]
+    results = run_vta_method(Path("."), "vtfixtures/cmd/direct_call", targets, binary=FAKE_BINARY,
+                             runner=replay("reach_target_errors.json"))
+    not_in_program = results[2]
+    assert not_in_program["result"] == "NO_PATH"
+    assert not_in_program["error"] is None
+    assert not_in_program["details"]["package_not_in_program"] is True
+    assert results[0]["details"]["package_not_in_program"] is False
+    validate("method_result", not_in_program)
 
 
 def test_path_found_details_carry_the_shortest_path():

@@ -105,7 +105,7 @@
     "target_result": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["target", "result", "paths", "shortest_length", "paths_omitted", "matched_functions", "error"],
+      "required": ["target", "result", "paths", "shortest_length", "paths_omitted", "matched_functions", "error", "package_not_in_program"],
       "properties": {
         "target": {"$ref": "#/$defs/target"},
         "result": {"enum": ["PATH_FOUND", "NO_PATH", "ERROR"]},
@@ -113,6 +113,10 @@
         "shortest_length": {"type": ["integer", "null"], "minimum": 0},
         "paths_omitted": {"enum": [null, "MAX_PATH_LENGTH"]},
         "matched_functions": {"type": "array", "items": {"type": "string"}},
+        "package_not_in_program": {
+          "type": "boolean",
+          "description": "true only when result is NO_PATH because the target's package is not part of the loaded program at all (interfaces contract, section 2)."
+        },
         "error": {
           "oneOf": [
             {"type": "null"},
@@ -138,6 +142,10 @@
           "if": {"properties": {"result": {"const": "PATH_FOUND"}}},
           "then": {"properties": {"shortest_length": {"type": "integer"}}},
           "else": {"properties": {"paths": {"maxItems": 0}, "shortest_length": {"type": "null"}}}
+        },
+        {
+          "if": {"properties": {"package_not_in_program": {"const": true}}},
+          "then": {"properties": {"result": {"const": "NO_PATH"}}}
         }
       ]
     },

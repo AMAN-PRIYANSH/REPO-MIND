@@ -161,10 +161,15 @@ func runReach(req *Request, stderr io.Writer) (any, *Stats, *Error) {
 	}
 	results := make([]TargetResult, 0, len(req.Targets))
 	for _, t := range req.Targets {
-		obj, terr := lookupTarget(a.prog, t)
+		obj, notInProgram, terr := lookupTarget(a.prog, t)
 		if terr != nil {
 			results = append(results, TargetResult{Target: t, Result: ResultError, Paths: []CallPath{},
 				MatchedFunctions: []string{}, Error: terr})
+			continue
+		}
+		if notInProgram {
+			results = append(results, TargetResult{Target: t, Result: ResultNoPath, Paths: []CallPath{},
+				MatchedFunctions: []string{}, PackageNotInProgram: true})
 			continue
 		}
 		results = append(results, targetResult(a.g, t, a.roots, a.byObj[obj], req.Limits))

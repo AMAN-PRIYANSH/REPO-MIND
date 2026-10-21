@@ -83,17 +83,22 @@ func (r symbolRef) String() string {
 }
 
 // lookupTarget finds the declared function or method object for a target in the loaded program.
-// A missing package or symbol is TARGET_NOT_FOUND, never NO_PATH.
-func lookupTarget(prog *ssa.Program, t Target) (*types.Func, *Error) {
-	ref, err := parseSymbol(t.Symbol)
-	if err != nil {
-		return nil, err
+//
+// packageNotInProgram is true when no package in the build imports the target's package,
+// directly or indirectly: no code from that package can run, so the caller reports NO_PATH,
+// not an error (interfaces contract, section 2, exception added after the CP2 review). A
+// package that IS loaded but lacks the symbol stays TARGET_NOT_FOUND, never NO_PATH.
+func lookupTarget(prog *ssa.Program, t Target) (fn *types.Func, packageNotInProgram bool, err *Error) {
+	ref, perr := parseSymbol(t.Symbol)
+	if perr != nil {
+		return nil, false, perr
 	}
 	pkg := prog.ImportedPackage(t.Package)
 	if pkg == nil {
-		return nil, errf(CodeTargetNotFound, fmt.Sprintf("package %s is not part of the loaded program", t.Package))
+		return nil, true, nil
 	}
-	return lookupInScope(pkg.Pkg, ref, t)
+	fn, err = lookupInScope(pkg.Pkg, ref, t)
+	return fn, false, err
 }
 
 func lookupInScope(pkg *types.Package, ref symbolRef, t Target) (*types.Func, *Error) {

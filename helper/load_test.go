@@ -58,30 +58,45 @@ func TestLoadErrorsAreClassified(t *testing.T) {
 	}
 }
 
+// TestReachTargetNotFoundIsNotNoPath checks the two symbol-lookup rules from the interfaces
+// contract (section 2): a missing symbol in a loaded package is always TARGET_NOT_FOUND
+// (never NO_PATH), in both reach and naive mode. A target whose package is not part of the
+// loaded program at all is different: in reach mode (the exception added after the CP2
+// review) it is NO_PATH with details.package_not_in_program=true, because no code from an
+// unimported package can run; naive mode (the unsafe negative control) is unchanged and
+// still reports it as TARGET_NOT_FOUND.
 func TestReachTargetNotFoundIsNotNoPath(t *testing.T) {
 	dir := tempModule(t, map[string]string{
 		"lib/lib.go":      libSrc,
 		"other/other.go":  "package other\n\nfunc X() {}\n",
 		"cmd/app/main.go": "package main\n\nimport \"tm/lib\"\n\nfunc main() { _ = lib.T{} }\n",
 	})
-	for _, mode := range []string{"reach", "naive"} {
+	targets := []Target{
+		{"tm/lib", "Unused"},  // exists, never called
+		{"tm/lib", "Missing"}, // not declared
+		{"tm/other", "X"},     // package not imported
+		{"tm/lib", "T.M"},     // method exists, never called
+		{"tm/lib", "a.b.c"},   // bad form
+	}
+	type want struct{ result, code string }
+	cases := map[string][]want{
+		"reach": {
+			{ResultNoPath, ""}, {ResultError, CodeTargetNotFound}, {ResultNoPath, ""},
+			{ResultNoPath, ""}, {ResultError, CodeUnsupportedForm},
+		},
+		"naive": {
+			{ResultNoPath, ""}, {ResultError, CodeTargetNotFound}, {ResultError, CodeTargetNotFound},
+			{ResultNoPath, ""}, {ResultError, CodeUnsupportedForm},
+		},
+	}
+	for mode, want := range cases {
 		run := runReach
 		if mode == "naive" {
 			run = runNaive
 		}
-		res, _, err := run(reachReq(dir, mode,
-			Target{"tm/lib", "Unused"},  // exists, never called
-			Target{"tm/lib", "Missing"}, // not declared
-			Target{"tm/other", "X"},     // package not imported
-			Target{"tm/lib", "T.M"},     // method exists, never called
-			Target{"tm/lib", "a.b.c"},   // bad form
-		), io.Discard)
+		res, _, err := run(reachReq(dir, mode, targets...), io.Discard)
 		if err != nil {
 			t.Fatal(err)
-		}
-		want := []struct{ result, code string }{
-			{ResultNoPath, ""}, {ResultError, CodeTargetNotFound}, {ResultError, CodeTargetNotFound},
-			{ResultNoPath, ""}, {ResultError, CodeUnsupportedForm},
 		}
 		for i, r := range res.([]TargetResult) {
 			code := ""
@@ -90,6 +105,10 @@ func TestReachTargetNotFoundIsNotNoPath(t *testing.T) {
 			}
 			if r.Result != want[i].result || code != want[i].code {
 				t.Errorf("%s target %v: %s %s; want %s %s", mode, r.Target, r.Result, code, want[i].result, want[i].code)
+			}
+			wantPkgNotInProgram := mode == "reach" && i == 2
+			if r.PackageNotInProgram != wantPkgNotInProgram {
+				t.Errorf("%s target %v: package_not_in_program=%v; want %v", mode, r.Target, r.PackageNotInProgram, wantPkgNotInProgram)
 			}
 		}
 	}
