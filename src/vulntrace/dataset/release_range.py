@@ -194,7 +194,9 @@ def _touches_candidates(repo_dir: Path, sha: str, runner, file_candidate_ids: di
 def _walk_commits(host: str, owner: str, repo: str, repo_dir: Path, from_sha: str, to_sha: str, runner,
                   file_candidate_ids: dict[str, list[str]], commit_cap: int, cache_root: Path | None,
                   remote_url: str | None) -> tuple[list[dict], bool]:
-    """([{sha, subject, touches_candidates}], truncated).
+    """([{sha, subject, body, touches_candidates}], truncated). `body` is included because
+    the B-ID baseline (CP3 deliverable 6) searches commit subjects AND bodies for the
+    advisory's CVE/GHSA/GO identifier.
 
     `touches_candidates` is file-level (a commit "touches" every candidate in a file it
     changed at all) - a documented simplification that avoids re-running the helper per
@@ -213,20 +215,24 @@ def _walk_commits(host: str, owner: str, repo: str, repo_dir: Path, from_sha: st
                          remote_url=remote_url)
     except git_fetch.GitFetchError:
         pass  # best effort; connectivity is re-checked below regardless
+    # %x1e separates commits, %x1f separates fields within one commit (subject/body text
+    # essentially never contains either control character).
+    log_format = "--format=%H%x1f%s%x1f%b%x1e"
     if _is_ancestor(repo_dir, from_sha, to_sha, runner):
-        p = runner(["git", "log", "--format=%H%x1f%s", f"{from_sha}..{to_sha}"], cwd=repo_dir,
+        p = runner(["git", "log", log_format, f"{from_sha}..{to_sha}"], cwd=repo_dir,
                   capture_output=True, text=True, timeout=120)
-        lines = [ln for ln in p.stdout.splitlines() if ln.strip()] if p.returncode == 0 else []
-        truncated = p.returncode != 0 or len(lines) > commit_cap
+        records = [r for r in p.stdout.split("\x1e") if r.strip()] if p.returncode == 0 else []
+        truncated = p.returncode != 0 or len(records) > commit_cap
     else:
-        p = runner(["git", "log", f"--max-count={commit_cap}", "--format=%H%x1f%s", to_sha], cwd=repo_dir,
+        p = runner(["git", "log", f"--max-count={commit_cap}", log_format, to_sha], cwd=repo_dir,
                   capture_output=True, text=True, timeout=120)
-        lines = [ln for ln in p.stdout.splitlines() if ln.strip()] if p.returncode == 0 else []
+        records = [r for r in p.stdout.split("\x1e") if r.strip()] if p.returncode == 0 else []
         truncated = True
     out = []
-    for line in lines[:commit_cap]:
-        sha, _, subject = line.partition("\x1f")
-        out.append({"sha": sha, "subject": subject,
+    for record in records[:commit_cap]:
+        sha, _, rest = record.lstrip("\n").partition("\x1f")
+        subject, _, body = rest.partition("\x1f")
+        out.append({"sha": sha, "subject": subject, "body": body.strip("\n"),
                    "touches_candidates": _touches_candidates(repo_dir, sha, runner, file_candidate_ids)})
     return out, truncated
 
@@ -257,7 +263,8 @@ def build_release_range(case_id: str, module: str, vulnerable_at: str, fixed_in:
     status = STATUS_TRUNCATED if truncated else (STATUS_EMPTY if not diff["candidates"] else STATUS_AVAILABLE)
     return {
         **base, "status": status, "candidates": diff["candidates"],
-        "commits": [{"sha": c["sha"], "subject": c["subject"], "touches_candidates": c["touches_candidates"]}
+        "commits": [{"sha": c["sha"], "subject": c["subject"], "body": c["body"],
+                    "touches_candidates": c["touches_candidates"]}
                    for c in commits],
         "non_go_files_changed": sorted(set(diff["non_go_files"])), "test_files_changed": diff["test_files_changed"],
     }

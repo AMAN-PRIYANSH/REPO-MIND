@@ -55,10 +55,12 @@
       ]
     },
     "commit": {
-      "type": "object", "additionalProperties": false, "required": ["sha", "subject", "touches_candidates"],
+      "type": "object", "additionalProperties": false,
+      "required": ["sha", "subject", "body", "touches_candidates"],
       "properties": {
         "sha": {"type": "string", "minLength": 7},
         "subject": {"type": "string"},
+        "body": {"type": "string"},
         "touches_candidates": {"type": "array", "items": {"type": "string", "pattern": "^r[0-9]+$"}}
       }
     }

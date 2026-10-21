@@ -31,10 +31,30 @@ def build_parser() -> argparse.ArgumentParser:
     rs = sub.add_parser("results", help="committed results documents")
     rsub = rs.add_subparsers(dest="results_command", required=True)
     rr = rsub.add_parser("render", help="generate a docs/results/ document from a score report file")
-    rr.add_argument("--doc", required=True, choices=["cp1", "cp2"])
+    rr.add_argument("--doc", required=True, choices=["cp1", "cp2", "cp3"])
     rr.add_argument("--input", required=True,
-                    help="cp1: linker score JSON; cp2: directory with the naive, linker, vta and combined score JSON")
+                    help="cp1: linker score JSON; cp2/cp3: directory with the relevant score JSON files")
     rr.add_argument("--out", required=True, help="Markdown file to write")
+
+    ds = sub.add_parser("dataset", help="D1/D4 dataset construction (CP3)")
+    dsub = ds.add_subparsers(dest="dataset_command", required=True)
+    dfetch = dsub.add_parser("fetch", help="fetch the pinned golang/vulndb snapshot (uses the network)")
+    dfetch.add_argument("--cache", default=None, help="cache directory (default: ~/.cache/vulntrace/vulndb-src)")
+    dbuild = dsub.add_parser("build", help="build D1 (fix evidence) or D4 (release ranges); uses the network")
+    dbuild.add_argument("--mode", required=True, choices=["fix", "release"])
+    dbuild.add_argument("--seed", type=int, default=None, help="sampling seed (default: a fixed project constant)")
+    dbuild.add_argument("--target", type=int, default=None, help="sample size (default: 150 for fix, 120 for release)")
+    dbuild.add_argument("--out", default=None, help="docs/results/datasets/ output path (default: D1/D4_cases.json)")
+    dbuild.add_argument("--cache", default=None, help="vulndb cache directory")
+    dbuild.add_argument("--repo-cache", default=None, help="cache directory for fetched third-party repositories")
+
+    ev = sub.add_parser("eval", help="baselines and evaluation (CP3+)")
+    esub = ev.add_subparsers(dest="eval_command", required=True)
+    es = esub.add_parser("symbols", help="symbol-identification baselines")
+    es.add_argument("--strategy", required=True, choices=["e0", "id-search"])
+    es.add_argument("--cases", default=None, help="D1/D4 case-list JSON (default: docs/results/datasets/D1|D4_cases.json)")
+    es.add_argument("--cache", default=None, help="vulndb cache directory")
+    es.add_argument("--out", default=None, help="output directory (default: results/cp3)")
     return p
 
 
@@ -74,6 +94,85 @@ def _cmd_render(args) -> int:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(render(args.doc, Path(args.input)), encoding="utf-8")
     print(f"wrote {out}")
+    return EXIT_OK
+
+
+def _cmd_dataset(args) -> int:
+    from vulntrace.dataset import build as dataset_build
+    from vulntrace.dataset import datasets, vulndb
+    from vulntrace.methods.helper import HelperError, ensure_helper
+
+    cache = Path(args.cache) if args.cache else None
+    if args.dataset_command == "fetch":
+        try:
+            path = vulndb.ensure_vulndb_snapshot(cache)
+        except vulndb.VulndbError as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            return EXIT_MISSING_PREREQUISITE
+        print(f"vulndb snapshot ready at {path} (pinned commit {vulndb.pinned_commit()})")
+        return EXIT_OK
+
+    if shutil.which("go") is None or shutil.which("git") is None:
+        print("error: go toolchain and git are both required (run `python -m vulntrace doctor`)", file=sys.stderr)
+        return EXIT_MISSING_PREREQUISITE
+    try:
+        binary = ensure_helper()
+        vulndb.ensure_vulndb_snapshot(cache)
+    except (HelperError, vulndb.VulndbError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_MISSING_PREREQUISITE
+    cases, parse_errors = datasets.load_all_cases(cache)
+    if parse_errors:
+        print(f"warning: {parse_errors} report(s) failed to parse (counted, not dropped silently)", file=sys.stderr)
+    repo_cache = Path(args.repo_cache) if args.repo_cache else None
+    seed = args.seed if args.seed is not None else dataset_build.DEFAULT_SEED
+
+    def progress(i, n, result):
+        print(f"{i}/{n} {result['status']} candidates={len(result['candidates'])}", file=sys.stderr)
+
+    if args.mode == "fix":
+        target = args.target or datasets.D1_TARGET
+        summary = dataset_build.build_d1(cases, binary, cache_root=repo_cache, seed=seed, target=target,
+                                         progress=progress)
+        out = Path(args.out) if args.out else dataset_build.RESULTS_DATASETS_DIR / "D1_cases.json"
+    else:
+        target = args.target or datasets.D4_TARGET
+        summary = dataset_build.build_d4(cases, binary, cache_root=repo_cache, seed=seed, target=target,
+                                         progress=progress)
+        out = Path(args.out) if args.out else dataset_build.RESULTS_DATASETS_DIR / "D4_cases.json"
+    dataset_build.write_case_list(summary, out)
+    print(f"{summary['dataset']}: {summary['sample_count']} cases (eligible {summary['eligible_count']}), "
+         f"status counts {summary['status_counts']}")
+    print(f"wrote {out}")
+    return EXIT_OK
+
+
+def _cmd_eval_symbols(args) -> int:
+    from vulntrace.dataset import datasets
+    from vulntrace.dataset.build import RESULTS_DATASETS_DIR
+    from vulntrace.eval import symbols_score
+
+    cache = Path(args.cache) if args.cache else None
+    default_cases = RESULTS_DATASETS_DIR / ("D1_cases.json" if args.strategy == "e0" else "D4_cases.json")
+    case_list_path = Path(args.cases) if args.cases else default_cases
+    if not case_list_path.is_file():
+        print(f"error: no such case list: {case_list_path} (run `python -m vulntrace dataset build` first)",
+              file=sys.stderr)
+        return EXIT_INVALID_INPUT
+    cases, _ = datasets.load_all_cases(cache)
+    cases_by_id = {c["id"]: c for c in cases}
+    out_dir = Path(args.out) if args.out else Path("results/cp3")
+    if args.strategy == "e0":
+        report = symbols_score.score_e0(case_list_path, cases_by_id)
+    else:
+        report = symbols_score.score_id_search(case_list_path, cases_by_id)
+    jp, _ = symbols_score.write_score(report, out_dir)
+    s = report["summary_core"]
+    exact_match = sum(1 for r in report["rows"] if r["core"] and r["core"]["exact_match"])
+    print(f"{report['strategy']} on {report['dataset']}: {report['scored_count']}/{report['case_count']} scored")
+    print(f"precision={s['precision']['mean']:.3f} recall={s['recall']['mean']:.3f} f1={s['f1']['mean']:.3f} "
+         f"exact_match={exact_match}")
+    print(f"wrote {jp}")
     return EXIT_OK
 
 
@@ -137,6 +236,10 @@ def main(argv: list[str] | None = None) -> int:
             return _cmd_helper(args)
         if args.command == "results" and args.results_command == "render":
             return _cmd_render(args)
+        if args.command == "dataset":
+            return _cmd_dataset(args)
+        if args.command == "eval" and args.eval_command == "symbols":
+            return _cmd_eval_symbols(args)
     except Exception as exc:  # unexpected
         print(f"unexpected error: {exc!r}", file=sys.stderr)
         return EXIT_UNEXPECTED

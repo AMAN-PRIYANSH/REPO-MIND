@@ -86,6 +86,25 @@ def test_available_range_with_candidates_and_commit_attribution(tmp_path, helper
     assert by_subject["touch B"]["touches_candidates"] == [b_id]
 
 
+def test_commit_body_is_captured_for_bid_baseline(tmp_path, helper):
+    src = _init_repo(tmp_path)
+    (src / "a.go").write_text("package lib\n\nfunc A() int { return 1 }\n", encoding="utf-8")
+    _commit(src, "init")
+    _git(["tag", "v1.0.0"], src)
+    (src / "a.go").write_text("package lib\n\nfunc A() int { return 2 }\n", encoding="utf-8")
+    _git(["add", "-A"], src)
+    _git(["commit", "-q", "-m", "fix audience bypass\n\nFixes CVE-2020-26160\nGHSA-w73w-5m7g-f7qc"], src)
+    _git(["tag", "v1.0.1"], src)
+
+    rr = build_release_range("CASE-BODY", "github.com/o/r", "1.0.0", "1.0.1", "example.com", "o", "r",
+                             binary=helper, cache_root=tmp_path / "cache", remote_url=str(src))
+    validate("release_range", rr)
+    assert len(rr["commits"]) == 1
+    assert rr["commits"][0]["subject"] == "fix audience bypass"
+    assert "CVE-2020-26160" in rr["commits"][0]["body"]
+    assert "GHSA-w73w-5m7g-f7qc" in rr["commits"][0]["body"]
+
+
 def test_submodule_tag_prefix(tmp_path, helper):
     src = _init_repo(tmp_path)
     (src / "sub" / "lib.go").parent.mkdir(parents=True)
