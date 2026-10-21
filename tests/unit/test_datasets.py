@@ -1,5 +1,7 @@
+import vulntrace.dataset.datasets as datasets_mod
 from vulntrace.dataset.datasets import (
     CONTAMINATION_CUTOFF,
+    build_d4_case_list,
     eligible_for_d1,
     eligible_for_d4,
     has_core_symbols,
@@ -119,3 +121,19 @@ def test_stratified_sample_returns_everything_if_pool_smaller_than_target():
 
 def test_contamination_cutoff_is_the_documented_placeholder():
     assert CONTAMINATION_CUTOFF == "2026-06-30"
+
+
+def test_build_d4_case_list_counts_truncated_cases_as_large(monkeypatch):
+    """A TRUNCATED range still carries a real candidate list (it comes from a single
+    two-tree diff, not from the - possibly incomplete - commit walk it was truncated for),
+    so a truncated-but-large case must still count toward large_found."""
+    case = make_case(id_="GO-2026-0001", created="2020-01-01")
+
+    def fake_count(case, module, binary, cache_root, runner=None):
+        return {"status": "TRUNCATED", "candidates": [{"symbol": f"F{i}"} for i in range(150)],
+               "from": {"commit": "a"}, "to": {"commit": "b"}, "commits": []}
+
+    monkeypatch.setattr(datasets_mod, "d4_candidate_count", fake_count)
+    result = build_d4_case_list([case], seed=1, binary=None, target=1, large_target=1)
+    assert result["large_ids"] == ["GO-2026-0001"]
+    assert case in result["sample"]

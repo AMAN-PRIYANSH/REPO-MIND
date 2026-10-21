@@ -152,7 +152,12 @@ def build_d4_case_list(cases: list[dict[str, Any]], seed: int, binary, cache_roo
             module = pick_d4_module(case)
             rr = d4_candidate_count(case, module, binary, cache_root, runner)
             explored[case["id"]] = rr
-            if rr["status"] == "AVAILABLE" and len(rr["candidates"]) > large_threshold:
+            # A TRUNCATED range still carries a real candidate list (candidates come from a
+            # single two-tree diff, never from the - possibly incomplete - commit walk), so
+            # a truncated-but-large case must still count: excluding it here would under-
+            # count exactly the cases this exploration exists to find.
+            if (rr["status"] in (release_range.STATUS_AVAILABLE, release_range.STATUS_TRUNCATED)
+                   and len(rr["candidates"]) > large_threshold):
                 large_ids.append(case["id"])
             if progress is not None:
                 progress(len(explored), len(ordered), rr)
