@@ -49,11 +49,14 @@ def _compact(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
     ]
 
 
-def score_linker(fixtures_dir: Path, compare_inlining: bool = False, runner=None) -> dict[str, Any]:
+def score_linker(fixtures_dir: Path, compare_inlining: bool = False, runner=None,
+                 only: set[str] | None = None) -> dict[str, Any]:
     kwargs = {} if runner is None else {"runner": runner}
     manifest = load_manifest(fixtures_dir)
     cases, comparison = [], []
     for case in manifest["cases"]:
+        if only is not None and case["id"] not in only:
+            continue
         res = run_linker_method(fixtures_dir, case["main_package"], case["targets"], NO_INLINE_FLAGS, **kwargs)
         pred = predict(res)
         cases.append({

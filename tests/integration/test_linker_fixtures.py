@@ -77,7 +77,12 @@ def test_committed_cp1_results_doc_matches_a_fresh_run():
     from vulntrace.eval.results_doc import load_notes, render_cp1_doc
     from vulntrace.paths import REPO_ROOT
 
-    fresh = render_cp1_doc(score_linker(FIXTURES_DIR, compare_inlining=True), load_notes("cp1_linker"), "x")
     committed = (REPO_ROOT / "docs" / "results" / "CP1_LINKER_RESULTS.md").read_text(encoding="utf-8")
     table = lambda text: [ln for ln in text.splitlines() if ln.startswith("|") or ln.startswith("Cases:")]
+    # The CP1 document is CP1's record: regenerate it for exactly the cases it lists.
+    cp1_ids = {ln.split("|")[1].strip() for ln in table(committed)[2:] if ln.startswith("|") and "---" not in ln}
+    cp1_ids -= {"Case"}
+    assert len(cp1_ids) == 18
+    fresh = render_cp1_doc(score_linker(FIXTURES_DIR, compare_inlining=True, only=cp1_ids),
+                           load_notes("cp1_linker"), "x")
     assert table(committed) == table(fresh)

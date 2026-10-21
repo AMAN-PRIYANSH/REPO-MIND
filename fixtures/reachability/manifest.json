@@ -196,7 +196,7 @@
         }
       ],
       "truth": "REACHABLE",
-      "rationale": "main copies a function value of Parse through unsafe.Pointer and calls it. Expected hard case for static analysis."
+      "rationale": "main copies a function value of Parse through unsafe.Pointer and calls it. Not a test of unsafe for the linker method: taking the function value vulnlib.Parse keeps the symbol in the binary whatever happens to the value afterwards (CP1 review). For call-graph methods the call target flows through an unsafe.Pointer conversion."
     },
     {
       "id": "method_value_receiver",
@@ -236,6 +236,58 @@
       ],
       "truth": "REACHABLE",
       "rationale": "main calls the generic function vulnlib.ParseAny[string]; the target is the generic function itself. Included to document that the linker method does not support generic symbol forms."
+    },
+    {
+      "id": "present_but_unreachable",
+      "category": "PRESENT_BUT_UNREACHABLE",
+      "main_package": "vtfixtures/cmd/present_but_unreachable",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "NOT_REACHABLE",
+      "rationale": "loud.Run calls Parse. A loud value is stored in a package-level `any` and only printed with %T, which calls no method. The only interface call, r.Run, is made on r = newRunner(), which always returns quiet{} (same method name and signature). No loud.Run call executes, so Parse is never called. Designed so the symbol can stay in the binary while no path exists."
+    },
+    {
+      "id": "closure_never_called",
+      "category": "CLOSURE_NEVER_CALLED",
+      "main_package": "vtfixtures/cmd/closure_never_called",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "NOT_REACHABLE",
+      "rationale": "A closure that calls Parse is assigned to the package variable stored. stored is only compared with nil and never called; main otherwise calls only Safe."
+    },
+    {
+      "id": "method_expression",
+      "category": "METHOD_EXPRESSION",
+      "main_package": "vtfixtures/cmd/method_expression",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main takes the method expression vulnlib.Impl.Run, a func(vulnlib.Impl, string) string, and calls it; Impl.Run calls Parse."
+    },
+    {
+      "id": "interface_two_impls_one_used",
+      "category": "INTERFACE_TWO_IMPLS_ONE_USED",
+      "main_package": "vtfixtures/cmd/interface_two_impls_one_used",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "NOT_REACHABLE",
+      "rationale": "vulnlib.Impl and main's echo both implement vulnlib.Runner. Only echo{} is ever created (newRunner always returns it) and r.Run is called on it; echo.Run does not call Parse. The type assertion r.(vulnlib.Impl) names Impl but always fails because no Impl value exists, so Impl.Run (the only caller of Parse) never runs."
     }
   ]
 }
