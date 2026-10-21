@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "vuln_case.schema.json",
+  "title": "VulnCase",
+  "description": "One advisory as loaded by the CP3 report reader (docs/design/DATA_MODEL.md). Generalises the data model's single-module example to a `modules` list, because real golang/vulndb reports commonly cover several modules (historical import-path renames, major-version forks) each with their own vulnerable/fixed versions and packages.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "aliases", "summary", "review_status", "withdrawn", "created",
+               "fix_commits", "fix_references", "modules", "source"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"type": "string", "pattern": "^GO-\\d{4}-\\d+$"},
+    "aliases": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "summary": {"type": "string"},
+    "review_status": {"enum": ["REVIEWED", "UNREVIEWED", "NEEDS_REVIEW"]},
+    "withdrawn": {"type": "boolean"},
+    "created": {"oneOf": [{"type": "null"}, {"type": "string", "format": "date"}]},
+    "fix_commits": {"type": "array", "items": {"$ref": "#/$defs/fix_commit"}},
+    "fix_references": {"type": "array", "items": {"$ref": "#/$defs/fix_reference"}},
+    "modules": {"type": "array", "items": {"$ref": "#/$defs/module"}},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["vulndb_commit", "report_path"],
+      "properties": {
+        "vulndb_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "report_path": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "$defs": {
+    "fix_commit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host", "owner", "repo", "sha"],
+      "properties": {
+        "host": {"const": "github.com"},
+        "owner": {"type": "string", "minLength": 1},
+        "repo": {"type": "string", "minLength": 1},
+        "sha": {"type": "string", "pattern": "^[0-9a-f]{7,40}$"}
+      }
+    },
+    "fix_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "kind"],
+      "properties": {
+        "url": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["GITHUB_COMMIT", "GITHUB_PR", "OTHER"]}
+      }
+    },
+    "symbol_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "symbol"],
+      "properties": {
+        "package": {"type": "string", "minLength": 1},
+        "symbol": {"type": "string", "minLength": 1}
+      }
+    },
+    "package_symbols": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "core_symbols", "derived_symbols"],
+      "properties": {
+        "package": {"type": "string", "minLength": 1},
+        "core_symbols": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "derived_symbols": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "module": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["module", "vulnerable_at", "fixed_in", "packages"],
+      "properties": {
+        "module": {"type": "string", "minLength": 1},
+        "vulnerable_at": {"oneOf": [{"type": "null"}, {"type": "string", "minLength": 1}]},
+        "fixed_in": {"oneOf": [{"type": "null"}, {"type": "string", "minLength": 1}]},
+        "packages": {"type": "array", "items": {"$ref": "#/$defs/package_symbols"}}
+      }
+    }
+  }
+}

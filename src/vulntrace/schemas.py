@@ -13,6 +13,7 @@ _FILES = {
     "helper_request": "helper_request.schema.json",
     "helper_response": "helper_response.schema.json",
     "verdict": "verdict.schema.json",
+    "vuln_case": "vuln_case.schema.json",
 }
 
 
