@@ -1,0 +1,11 @@
+{
+  "repo_url": "https://github.com/golang/vulndb",
+  "commit": "e0bad56276e98711a598adbab976de7cd914013a",
+  "pinned_at": "2026-10-21",
+  "report_count_at_pin": 4710,
+  "licence": {
+    "code": "BSD-3-Clause-style (vulndb LICENSE, top section: \"Copyright 2009 The Go Authors... Redistribution and use in source and binary forms... are permitted\")",
+    "data": "CC-BY-4.0 (vulndb LICENSE, second section: \"The contents of the /data/ directory are licensed under the CC-BY-4.0 license\"; confirmed by vulndb README.md: \"Database entries are distributed under the terms of the CC-BY-4.0 license\")",
+    "note": "CC-BY-4.0 permits reproducing and adapting data/reports/*.yaml with attribution. This project still commits only advisory IDs, created dates, candidate counts and statuses (CP3 deliverable 5), never full report text - a narrower choice than the licence requires, made to keep docs/results/ small and to avoid redistributing advisory summaries the Go security team did not intend as a standalone dataset, not because the licence forbids more."
+  }
+}

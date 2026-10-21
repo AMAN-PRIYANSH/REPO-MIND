@@ -7,7 +7,7 @@ name = "vulntrace"
 version = "0.1.0"
 description = "VulnTrace AI: Go vulnerability reachability triage"
 requires-python = ">=3.11"
-dependencies = ["jsonschema"]  # helper responses are validated at run time (CP2)
+dependencies = ["jsonschema", "pyyaml"]  # jsonschema: CP2 helper responses; pyyaml: CP3 vulndb reports
 
 [project.optional-dependencies]
 dev = ["pytest", "jsonschema"]
