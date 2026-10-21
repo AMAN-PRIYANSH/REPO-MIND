@@ -147,6 +147,7 @@ def _cmd_eval_retrieval(args, argv) -> int:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_INVALID_INPUT
     out = Path(args.out) if args.out else Path("results/cp4")
+    env = er.environment(argv)  # before writing anything, so repo_dirty is about the code, not this run's output
     cases_doc = er.cases_document(ev_cases, ranges, notes)
     existing = out / "cases.json"
     if existing.is_file() and not args.replace_cases:
@@ -156,7 +157,6 @@ def _cmd_eval_retrieval(args, argv) -> int:
                   "Use a new --out directory, or --replace-cases (and re-run every config).", file=sys.stderr)
             return EXIT_INVALID_INPUT
     er.write_json(existing, cases_doc)
-    env = er.environment(argv)
     done = set()
     for cfg in configs:
         for variant in (["-"] if cfg.text_free else variants):
@@ -164,7 +164,7 @@ def _cmd_eval_retrieval(args, argv) -> int:
                 continue
             done.add((cfg.name, variant))
             run = harness.run(cfg, variant)
-            run["environment"] = er.environment(argv) if cfg.embedder else env
+            run["environment"] = er.environment(argv, base=env)
             p = er.write_json(out / "runs" / er.run_file_name(cfg.name, run["variant"]), run)
             from vulntrace.eval.retrieval_report import Summaries
 

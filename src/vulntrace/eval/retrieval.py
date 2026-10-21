@@ -345,10 +345,12 @@ def cases_document(cases: list[EvalCase], ranges: dict[str, list[chunking.Chunk]
             "notes": notes, "cases": [c.facts(cutoff) for c in cases]}
 
 
-def environment(argv: list[str]) -> dict[str, Any]:
+def environment(argv: list[str], base: dict[str, Any] | None = None) -> dict[str, Any]:
     """Run provenance. GPU details are read only if torch is already loaded (a real-model
-    run); the base install never imports it."""
-    env = {**run_info(argv), "platform": platform.platform(), "python_full": sys.version.split()[0]}
+    run); the base install never imports it. Pass `base` (an earlier call's result) to keep
+    the git state captured before this run wrote its own output files."""
+    env = dict(base) if base else {**run_info(argv), "platform": platform.platform(),
+                                   "python_full": sys.version.split()[0]}
     torch = sys.modules.get("torch")
     if torch is not None:
         try:
