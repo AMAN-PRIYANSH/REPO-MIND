@@ -74,7 +74,7 @@ Decisions:
 - **Assumption** - believed true but not yet checked.
 - **Proposal** - a design choice to be validated during implementation.
 
-## Development (CP1-CP3)
+## Development (CP1-CP4)
 
 ```
 python -m venv .venv && .venv/bin/pip install -e ".[dev]"
@@ -86,7 +86,7 @@ python -m vulntrace helper fetch             # once: downloads the helper's Go d
 python -m vulntrace helper build             # offline build into ~/.cache/vulntrace (never into the repo)
 python -m vulntrace fixtures score --method linker [--out results/cp1] [--compare-inlining]
 python -m vulntrace fixtures score --method naive|vta|combined [--out results/cp2] [--timeout 300]
-python -m vulntrace results render --doc cp1|cp2|cp3 --input <report or dir> --out docs/results/<file>.md
+python -m vulntrace results render --doc cp1|cp2|cp3|cp4 --input <report or dir> --out docs/results/<file>.md
 
 # CP3: datasets (network) and baselines
 python -m vulntrace dataset fetch                     # pin golang/vulndb's data/reports/ snapshot
@@ -94,6 +94,19 @@ python -m vulntrace dataset build --mode fix           # D1: FixEvidence for 150
 python -m vulntrace dataset build --mode release       # D4: ReleaseRange for 120 sampled advisories
 python -m vulntrace eval symbols --strategy e0          # baseline: every changed function
 python -m vulntrace eval symbols --strategy id-search   # baseline: commit-message identifier search
+
+# CP4: re-materialise evidence for the committed case lists (network; resumable; never re-selects)
+python -m vulntrace dataset materialize --set d4       # data/release_range + data/candidate_code
+python -m vulntrace dataset materialize --set d1       # data/fix_evidence (for E0 re-scoring)
+# CP4: retrieval (fakes and BM25 need no model; real models via .[ml], normally in Colab)
+pip install -e ".[dev,db]"                             # db: psycopg + pgvector for the pgvector store
+docker compose up -d pgvector                          # optional: PostgreSQL 16 + pgvector on localhost
+VULNTRACE_REQUIRE_PG=1 python -m pytest tests/contract/test_vector_store.py   # both backends, no skips
+python -m vulntrace eval retrieval --config random --config size --config bid --config bid-only --config bm25
+python -m vulntrace index build --set d4 --embedder bge-small --device cuda     # needs .[ml]
+python -m vulntrace eval retrieval --config dense:bge-small --config hybrid:bge-small \
+    --config hybrid+rerank:bge-small+minilm --device cuda                       # needs .[ml]
+# Real-model runs: notebooks/cp4_retrieval_colab.ipynb (free Colab GPU), which zips results/cp4 JSON.
 
 # Opt-in, not run in CI: fetches one real advisory's evidence from the real network
 VULNTRACE_NETWORK_TESTS=1 python -m pytest tests/integration/test_network_smoke.py
