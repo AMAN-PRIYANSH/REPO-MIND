@@ -7,7 +7,7 @@
   "required": ["schema_version", "method", "target", "main_package", "result", "details", "error", "duration_ms"],
   "properties": {
     "schema_version": {"const": "1.0"},
-    "method": {"enum": ["LINKER_PRESENCE", "CALLGRAPH_VTA"]},
+    "method": {"enum": ["LINKER_PRESENCE", "CALLGRAPH_VTA", "CALLGRAPH_NAIVE"]},
     "target": {
       "type": "object",
       "additionalProperties": false,
@@ -42,7 +42,7 @@
       "then": {"properties": {"result": {"enum": ["PRESENT", "ABSENT", "ERROR"]}}}
     },
     {
-      "if": {"properties": {"method": {"const": "CALLGRAPH_VTA"}}},
+      "if": {"properties": {"method": {"enum": ["CALLGRAPH_VTA", "CALLGRAPH_NAIVE"]}}},
       "then": {"properties": {"result": {"enum": ["PATH_FOUND", "NO_PATH", "ERROR"]}}}
     },
     {

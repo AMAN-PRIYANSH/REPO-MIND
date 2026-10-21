@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "verdict.schema.json",
+  "title": "Verdict",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "target_app", "verdict", "reason_codes", "per_symbol", "verification", "statement", "provenance"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "case_id": {"type": "string", "minLength": 1},
+    "target_app": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "module", "commit"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "module": {"type": ["string", "null"]},
+        "commit": {"type": ["string", "null"]},
+        "main_package": {"type": "string", "minLength": 1}
+      }
+    },
+    "verdict": {"enum": ["REACHABLE", "NOT_REACHABLE", "CANT_DETERMINE"]},
+    "reason_codes": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/reason_code"}},
+    "per_symbol": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["target", "result", "reason_code", "methods", "verified_path"],
+        "properties": {
+          "target": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["package", "symbol"],
+            "properties": {"package": {"type": "string", "minLength": 1}, "symbol": {"type": "string", "minLength": 1}}
+          },
+          "result": {"enum": ["REACHABLE", "NOT_REACHABLE", "CANT_DETERMINE"]},
+          "reason_code": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/reason_code"}]},
+          "methods": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["CALLGRAPH_VTA", "LINKER_PRESENCE"],
+            "properties": {
+              "CALLGRAPH_VTA": {"enum": ["PATH_FOUND", "NO_PATH", "ERROR"]},
+              "LINKER_PRESENCE": {"enum": ["PRESENT", "ABSENT", "ERROR"]}
+            }
+          },
+          "method_errors": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "CALLGRAPH_VTA": {"type": "string", "minLength": 1},
+              "LINKER_PRESENCE": {"type": "string", "minLength": 1}
+            }
+          },
+          "verified_path": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/call_path"}]}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"result": {"const": "CANT_DETERMINE"}}},
+            "then": {"properties": {"reason_code": {"$ref": "#/$defs/reason_code"}}},
+            "else": {"properties": {"reason_code": {"type": "null"}}}
+          }
+        ]
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "checks_run", "failures"],
+      "properties": {
+        "status": {"enum": ["PASSED", "FAILED", "NOT_RUN"]},
+        "checks_run": {"type": "integer", "minimum": 0},
+        "failures": {"type": "array"}
+      }
+    },
+    "statement": {"const": "Reachability only. This verdict does not assess exploitability."},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pipeline_version", "helper_contract", "vulndb_commit", "created_at"],
+      "properties": {
+        "pipeline_version": {"type": "string", "minLength": 1},
+        "helper_contract": {"type": "string", "minLength": 1},
+        "vulndb_commit": {"type": ["string", "null"]},
+        "created_at": {"type": "string", "format": "date-time"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"verdict": {"const": "CANT_DETERMINE"}}},
+      "then": {"properties": {"reason_codes": {"minItems": 1}}},
+      "else": {"properties": {"reason_codes": {"maxItems": 0}}}
+    }
+  ],
+  "$defs": {
+    "reason_code": {"enum": ["NO_TARGET_SYMBOLS", "NO_FIX_EVIDENCE", "METHOD_DISAGREEMENT", "ANALYSIS_FAILED", "VERIFIER_REJECTED", "UNSUPPORTED_TARGET"]},
+    "call_path": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entry", "target", "edges"],
+      "properties": {
+        "entry": {"type": "object", "required": ["package", "symbol"]},
+        "target": {"type": "object", "required": ["package", "symbol"]},
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["caller", "callee", "call_site", "kind"],
+            "properties": {
+              "caller": {"type": "string"},
+              "callee": {"type": "string"},
+              "call_site": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["file", "line"],
+                "properties": {"file": {"type": "string"}, "line": {"type": "integer", "minimum": 0}}
+              },
+              "kind": {"enum": ["STATIC", "DYNAMIC"]}
+            }
+          }
+        }
+      }
+    }
+  }
+}

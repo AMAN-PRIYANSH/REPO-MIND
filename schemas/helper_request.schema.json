@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "helper_request.schema.json",
+  "title": "HelperRequest",
+  "description": "Request file for vt-helper (contract 1.x). CP2 modes: funcs, reach, edges, naive.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "mode"],
+  "properties": {
+    "contract_version": {"type": "string", "pattern": "^1\\.[0-9]+$"},
+    "mode": {"enum": ["funcs", "reach", "edges", "naive"]},
+    "module_dir": {"type": "string", "minLength": 1},
+    "main_packages": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "targets": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/target"}},
+    "build": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tags": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "goos": {"type": ["string", "null"]},
+        "goarch": {"type": ["string", "null"]}
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_paths_per_target": {"type": "integer", "minimum": 1},
+        "max_path_length": {"type": "integer", "minimum": 1}
+      }
+    },
+    "files": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "edges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["caller", "callee"],
+        "properties": {
+          "caller": {"type": "string", "minLength": 1},
+          "callee": {"type": "string", "minLength": 1},
+          "call_site": {"$ref": "#/$defs/site"}
+        }
+      }
+    }
+  },
+  "allOf": [
+    {"if": {"properties": {"mode": {"const": "funcs"}}}, "then": {"required": ["files"]}},
+    {"if": {"properties": {"mode": {"enum": ["reach", "naive"]}}}, "then": {"required": ["module_dir", "main_packages", "targets"]}},
+    {"if": {"properties": {"mode": {"const": "edges"}}}, "then": {"required": ["module_dir", "main_packages", "edges"]}}
+  ],
+  "$defs": {
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "symbol"],
+      "properties": {"package": {"type": "string", "minLength": 1}, "symbol": {"type": "string", "minLength": 1}}
+    },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "line"],
+      "properties": {"file": {"type": "string"}, "line": {"type": "integer", "minimum": 0}}
+    }
+  }
+}

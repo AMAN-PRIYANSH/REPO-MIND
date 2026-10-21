@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "helper_response.schema.json",
+  "title": "HelperResponse",
+  "description": "The one JSON object vt-helper writes to stdout (contract 1.x).",
+  "type": "object",
+  "required": ["contract_version", "ok", "mode"],
+  "properties": {
+    "contract_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+$"},
+    "ok": {"type": "boolean"},
+    "mode": {"type": "string"}
+  },
+  "oneOf": [
+    {
+      "additionalProperties": false,
+      "required": ["toolchain", "results", "stats"],
+      "properties": {
+        "contract_version": true, "mode": {"enum": ["funcs", "reach", "edges", "naive"]},
+        "ok": {"const": true},
+        "toolchain": {"$ref": "#/$defs/toolchain"},
+        "results": {"type": "array"},
+        "stats": {"$ref": "#/$defs/stats"}
+      },
+      "allOf": [
+        {"if": {"properties": {"mode": {"enum": ["reach", "naive"]}}}, "then": {"properties": {"results": {"items": {"$ref": "#/$defs/target_result"}}}}},
+        {"if": {"properties": {"mode": {"const": "edges"}}}, "then": {"properties": {"results": {"items": {"$ref": "#/$defs/edge_result"}}}}},
+        {"if": {"properties": {"mode": {"const": "funcs"}}}, "then": {"properties": {"results": {"items": {"$ref": "#/$defs/file_funcs"}}}}}
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "required": ["error"],
+      "properties": {
+        "contract_version": true, "mode": true,
+        "ok": {"const": false},
+        "error": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "message"],
+          "properties": {
+            "code": {"enum": ["BAD_REQUEST", "CONTRACT_MISMATCH", "LOAD_FAILED", "TYPE_ERRORS", "TARGET_NOT_FOUND", "INTERNAL"]},
+            "message": {"type": "string"}
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "symbol"],
+      "properties": {"package": {"type": "string"}, "symbol": {"type": "string"}}
+    },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "line"],
+      "properties": {"file": {"type": "string"}, "line": {"type": "integer", "minimum": 0}}
+    },
+    "toolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["go_version", "goos", "goarch", "x_tools_version"],
+      "properties": {
+        "go_version": {"type": "string"}, "goos": {"type": "string"}, "goarch": {"type": "string"},
+        "x_tools_version": {"type": "string"}
+      }
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["packages_loaded", "callgraph_nodes", "callgraph_edges", "duration_ms", "peak_rss_kb"],
+      "properties": {
+        "packages_loaded": {"type": "integer", "minimum": 0},
+        "callgraph_nodes": {"type": "integer", "minimum": 0},
+        "callgraph_edges": {"type": "integer", "minimum": 0},
+        "duration_ms": {"type": "integer", "minimum": 0},
+        "peak_rss_kb": {"type": ["integer", "null"], "minimum": 0}
+      }
+    },
+    "call_path": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entry", "target", "edges"],
+      "properties": {
+        "entry": {"$ref": "#/$defs/target"},
+        "target": {"$ref": "#/$defs/target"},
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["caller", "callee", "call_site", "kind"],
+            "properties": {
+              "caller": {"type": "string", "minLength": 1},
+              "callee": {"type": "string", "minLength": 1},
+              "call_site": {"$ref": "#/$defs/site"},
+              "kind": {"enum": ["STATIC", "DYNAMIC"]}
+            }
+          }
+        }
+      }
+    },
+    "target_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "result", "paths", "shortest_length", "paths_omitted", "matched_functions", "error"],
+      "properties": {
+        "target": {"$ref": "#/$defs/target"},
+        "result": {"enum": ["PATH_FOUND", "NO_PATH", "ERROR"]},
+        "paths": {"type": "array", "items": {"$ref": "#/$defs/call_path"}},
+        "shortest_length": {"type": ["integer", "null"], "minimum": 0},
+        "paths_omitted": {"enum": [null, "MAX_PATH_LENGTH"]},
+        "matched_functions": {"type": "array", "items": {"type": "string"}},
+        "error": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "message"],
+              "properties": {
+                "code": {"enum": ["TARGET_NOT_FOUND", "UNSUPPORTED_SYMBOL_FORM"]},
+                "message": {"type": "string"}
+              }
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"result": {"const": "ERROR"}}},
+          "then": {"properties": {"error": {"type": "object"}, "paths": {"maxItems": 0}}},
+          "else": {"properties": {"error": {"type": "null"}}}
+        },
+        {
+          "if": {"properties": {"result": {"const": "PATH_FOUND"}}},
+          "then": {"properties": {"shortest_length": {"type": "integer"}}},
+          "else": {"properties": {"paths": {"maxItems": 0}, "shortest_length": {"type": "null"}}}
+        }
+      ]
+    },
+    "edge_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["caller", "callee", "call_site", "exists", "caller_found", "callee_found", "call_sites", "kinds"],
+      "properties": {
+        "caller": {"type": "string"},
+        "callee": {"type": "string"},
+        "call_site": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/site"}]},
+        "exists": {"type": "boolean"},
+        "caller_found": {"type": "boolean"},
+        "callee_found": {"type": "boolean"},
+        "call_sites": {"type": "array", "items": {"$ref": "#/$defs/site"}},
+        "kinds": {"type": "array", "items": {"enum": ["STATIC", "DYNAMIC"]}}
+      }
+    },
+    "file_funcs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "package", "functions"],
+      "properties": {
+        "file": {"type": "string"},
+        "package": {"type": "string"},
+        "functions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["symbol", "start", "end"],
+            "properties": {
+              "symbol": {"type": "string", "minLength": 1},
+              "start": {"type": "integer", "minimum": 1},
+              "end": {"type": "integer", "minimum": 1}
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,9 @@ SCHEMA_VERSION = "1.0"
 _FILES = {
     "fixture_manifest": "fixture_manifest.schema.json",
     "method_result": "method_result.schema.json",
+    "helper_request": "helper_request.schema.json",
+    "helper_response": "helper_response.schema.json",
+    "verdict": "verdict.schema.json",
 }
 
 
