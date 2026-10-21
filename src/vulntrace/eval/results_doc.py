@@ -493,6 +493,10 @@ def render(doc: str, input_path: Path) -> str:
         return render_cp2_doc(load_cp2_reports(Path(input_path)), load_notes("cp2_callgraph"), source.rstrip("/"))
     if doc == "cp3":
         return render_cp3_doc_from_dir(Path(input_path), source.rstrip("/"))
+    if doc == "cp4":
+        from vulntrace.eval.retrieval_report import render_cp4_doc
+
+        return render_cp4_doc(Path(input_path), source.rstrip("/"))
     raise ValueError(f"unknown results document: {doc}")
 
 

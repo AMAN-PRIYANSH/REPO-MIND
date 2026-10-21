@@ -31,7 +31,7 @@ def build_parser() -> argparse.ArgumentParser:
     rs = sub.add_parser("results", help="committed results documents")
     rsub = rs.add_subparsers(dest="results_command", required=True)
     rr = rsub.add_parser("render", help="generate a docs/results/ document from a score report file")
-    rr.add_argument("--doc", required=True, choices=["cp1", "cp2", "cp3"])
+    rr.add_argument("--doc", required=True, choices=["cp1", "cp2", "cp3", "cp4"])
     rr.add_argument("--input", required=True,
                     help="cp1: linker score JSON; cp2/cp3: directory with the relevant score JSON files")
     rr.add_argument("--out", required=True, help="Markdown file to write")
@@ -66,7 +66,132 @@ def build_parser() -> argparse.ArgumentParser:
     es.add_argument("--cases", default=None, help="D1/D4 case-list JSON (default: docs/results/datasets/D1|D4_cases.json)")
     es.add_argument("--cache", default=None, help="vulndb cache directory")
     es.add_argument("--out", default=None, help="output directory (default: results/cp3)")
+    er = esub.add_parser("retrieval", help="Mode 2 retrieval evaluation on D4 (CP4)")
+    er.add_argument("--config", action="append", required=True,
+                    help="random | size | bid | bid-only | bm25 | dense:<e> | hybrid:<e> | hybrid+rerank:<e>+<r> "
+                         "(repeatable; e.g. --config bm25 --config dense:bge-small)")
+    er.add_argument("--variant", action="append", default=None,
+                    help="chunk variant (repeatable; default: all of code_only, code+commits, code+commits_idmasked)")
+    _add_eval_data_args(er)
+    er.add_argument("--out", default=None, help="results directory (default: results/cp4)")
+    er.add_argument("--replace-cases", action="store_true",
+                    help="allow overwriting a cases.json in --out that differs from this run's evidence")
+
+    ix = sub.add_parser("index", help="chunk, embed and store D4 candidates (CP4)")
+    ixsub = ix.add_subparsers(dest="index_command", required=True)
+    ib = ixsub.add_parser("build", help="embed every chunk (cached by content hash) and optionally store it in pgvector")
+    ib.add_argument("--set", required=True, choices=["d4"], dest="dataset_set")
+    ib.add_argument("--embedder", action="append", required=True, help="embedder alias (repeatable)")
+    ib.add_argument("--variant", action="append", default=None, help="chunk variant (repeatable; default: all)")
+    _add_eval_data_args(ib)
     return p
+
+
+def _add_eval_data_args(sp) -> None:
+    sp.add_argument("--cases", default=None, help="D4 case list (default: docs/results/datasets/D4_cases.json)")
+    sp.add_argument("--data-dir", default=None, help="materialised evidence directory (default: data/)")
+    sp.add_argument("--cache", default=None, help="vulndb cache directory")
+    sp.add_argument("--embedding-cache", default=None, help="embedding cache directory (default: data/embeddings)")
+    sp.add_argument("--device", default=None, help="model device, e.g. cuda or cpu (default: library default)")
+    sp.add_argument("--store", choices=["memory", "pgvector"], default="memory", help="vector store backend")
+    sp.add_argument("--dsn", default=None, help="PostgreSQL DSN for --store pgvector (default: $VULNTRACE_PG_DSN)")
+    sp.add_argument("--allow-missing", action="store_true",
+                    help="score cases without materialised evidence as misses instead of stopping")
+
+
+def _load_eval_set(args):
+    import json
+    import os
+
+    from vulntrace.dataset import build as dataset_build
+    from vulntrace.dataset import datasets
+    from vulntrace.eval import retrieval as er
+
+    case_list_path = Path(args.cases) if args.cases else dataset_build.RESULTS_DATASETS_DIR / "D4_cases.json"
+    case_list = json.loads(case_list_path.read_text(encoding="utf-8"))
+    cases, _ = datasets.load_all_cases(Path(args.cache) if args.cache else None)
+    data_dir = Path(args.data_dir) if args.data_dir else dataset_build.DATA_DIR
+    ev_cases, ranges, notes = er.load_eval_set(case_list, {c["id"]: c for c in cases}, data_dir,
+                                               allow_missing=args.allow_missing)
+    store = None
+    if args.store == "pgvector":
+        from vulntrace.retrieval.pgvector_store import PgVectorStore
+
+        store = PgVectorStore(args.dsn or os.environ.get("VULNTRACE_PG_DSN",
+                                                         "postgresql://postgres:postgres@localhost:5432/postgres"))
+    emb_cache = Path(args.embedding_cache) if args.embedding_cache else dataset_build.DATA_DIR / "embeddings"
+    harness = er.Harness(ev_cases, ranges, embedding_cache_root=emb_cache, store=store, device=args.device,
+                         log=lambda m: print(m, file=sys.stderr, flush=True))
+    return ev_cases, ranges, notes, harness
+
+
+def _cmd_eval_retrieval(args, argv) -> int:
+    import json
+
+    from vulntrace.eval import retrieval as er
+    from vulntrace.retrieval.chunking import VARIANTS
+
+    try:
+        configs = [er.parse_config(c) for c in args.config]
+    except er.HarnessError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_INVALID_INPUT
+    variants = args.variant or list(VARIANTS)
+    bad = [v for v in variants if v not in VARIANTS]
+    if bad:
+        print(f"error: unknown variant(s) {bad}; expected {list(VARIANTS)}", file=sys.stderr)
+        return EXIT_INVALID_INPUT
+    try:
+        ev_cases, ranges, notes, harness = _load_eval_set(args)
+    except er.HarnessError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_INVALID_INPUT
+    out = Path(args.out) if args.out else Path("results/cp4")
+    cases_doc = er.cases_document(ev_cases, ranges, notes)
+    existing = out / "cases.json"
+    if existing.is_file() and not args.replace_cases:
+        old = json.loads(existing.read_text(encoding="utf-8"))
+        if old["cases"] != cases_doc["cases"]:
+            print(f"error: {existing} was written from different evidence; runs would not be comparable. "
+                  "Use a new --out directory, or --replace-cases (and re-run every config).", file=sys.stderr)
+            return EXIT_INVALID_INPUT
+    er.write_json(existing, cases_doc)
+    env = er.environment(argv)
+    done = set()
+    for cfg in configs:
+        for variant in (["-"] if cfg.text_free else variants):
+            if (cfg.name, variant) in done:
+                continue
+            done.add((cfg.name, variant))
+            run = harness.run(cfg, variant)
+            run["environment"] = er.environment(argv) if cfg.embedder else env
+            p = er.write_json(out / "runs" / er.run_file_name(cfg.name, run["variant"]), run)
+            from vulntrace.eval.retrieval_report import Summaries
+
+            sm = Summaries(cases_doc, [run]).summary(0)
+            print(f"{cfg.name} [{run['variant']}]: R@1={sm['recall@1']['mean']:.3f} R@10={sm['recall@10']['mean']:.3f} "
+                  f"MRR={sm['mrr']['mean']:.3f} (n={sm['mrr']['n']}, all scored cases) -> {p}", flush=True)
+        if cfg.embedder and not any(c.embedder == cfg.embedder for c in configs[configs.index(cfg) + 1:]):
+            harness.release_dense(cfg.embedder)
+    return EXIT_OK
+
+
+def _cmd_index_build(args) -> int:
+    from vulntrace.eval import retrieval as er
+    from vulntrace.retrieval.chunking import VARIANTS
+
+    variants = args.variant or list(VARIANTS)
+    try:
+        _ev, ranges, _notes, harness = _load_eval_set(args)
+    except er.HarnessError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_INVALID_INPUT
+    for alias in args.embedder:
+        for v in variants:
+            stats = harness.prepare_dense(alias, v, progress=lambda i, n: print(f"  {alias} {v}: {i}/{n}",
+                                                                                    file=sys.stderr, flush=True))
+            print(f"{alias} [{v}]: {stats} over {len(ranges)} ranges")
+    return EXIT_OK
 
 
 def _cmd_doctor() -> int:
@@ -285,6 +410,10 @@ def main(argv: list[str] | None = None) -> int:
             return _cmd_dataset(args)
         if args.command == "eval" and args.eval_command == "symbols":
             return _cmd_eval_symbols(args)
+        if args.command == "eval" and args.eval_command == "retrieval":
+            return _cmd_eval_retrieval(args, argv)
+        if args.command == "index" and args.index_command == "build":
+            return _cmd_index_build(args)
     except Exception as exc:  # unexpected
         print(f"unexpected error: {exc!r}", file=sys.stderr)
         return EXIT_UNEXPECTED
