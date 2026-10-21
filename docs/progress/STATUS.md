@@ -28,7 +28,7 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-- [ ] Task 0a: package-not-in-program contract change (reach -> NO_PATH, details.package_not_in_program)
+- [x] Task 0a: package-not-in-program contract change (reach -> NO_PATH, details.package_not_in_program)
 - [ ] Task 0b: GitHub Actions CI workflow
 - [ ] Task 0c: generic symbols in linker method (attempt)
 - [ ] D1. vulndb snapshot pinned (config file); licence recorded
