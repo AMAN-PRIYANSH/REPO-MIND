@@ -32,7 +32,7 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 - [x] D1 Go helper module `helper/` (`vt-helper`; modes `funcs`, `reach`, `edges`, `naive`; x/tools pinned; go.sum)
 - [x] D2 Python wrapper (`methods/callgraph.py`, `methods/naive.py`; cached build outside repo; timeout; error mapping)
 - [x] D3 Schemas (`helper_request`, `helper_response`, `verdict`; extend `method_result` by values only)
-- [ ] D4 Verdict rule (`verdict.py`; rule table, case aggregation, reason codes, fixed statement, verification NOT_RUN)
+- [x] D4 Verdict rule (`verdict.py`; rule table, case aggregation, reason codes, fixed statement, verification NOT_RUN)
 - [ ] D5 New fixture cases (>= 4) + `unsafe_func_pointer` rationale annotation
 - [ ] D6 Scoring: `fixtures score --method vta|naive|combined`
 - [ ] D7 Tests: unit, contract (no Go), integration (skip without Go), Go unit tests in `helper/`
