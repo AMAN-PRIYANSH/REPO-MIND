@@ -26,8 +26,19 @@ def test_pointer_method_spellings_equivalent(sym):
     assert symbol_patterns("p", sym) == ["p.Impl.Run", "p.(*Impl).Run"]
 
 
-@pytest.mark.parametrize("sym", ["Map[T]", "Box[T].Get", "(*Box[T]).Get", "Parse[go.shape.int]"])
-def test_generic_symbols_are_unsupported(sym):
+@pytest.mark.parametrize("sym,name", [("Map[T]", "Map"), ("List[K, V]", "List"), ("Parse[go.shape.int]", "Parse")])
+def test_bare_generic_function_gives_a_prefix_pattern(sym, name):
+    """CP3 task 0c: any instantiation's binary symbol is `pkg.Name[...]`, never the
+    concrete type vulndb would name (observed by building generic_target with several
+    instantiations), so the match is "any instantiation", encoded as a prefix pattern."""
+    assert symbol_patterns("p", sym) == [f"p.{name}["]
+
+
+@pytest.mark.parametrize("sym", ["Box[T].Get", "(*Box[T]).Get", "List[T].Push"])
+def test_generic_methods_are_still_unsupported(sym):
+    """A generic method, or a method on a generic type, embeds the type argument inside
+    the receiver's own brackets (e.g. `pkg.(*List[go.shape.string]).Push`), not after the
+    method name, so no reliable rule for this form was found."""
     with pytest.raises(UnsupportedSymbolForm):
         symbol_patterns("p", sym)
 
@@ -67,3 +78,15 @@ def test_match_only_text_symbols():
 
 def test_match_is_exact_not_prefix():
     assert match_symbols([("T", "p.ParseTiny")], ["p.Parse"]) == []
+
+
+def test_generic_prefix_pattern_matches_any_shape():
+    nm = [("T", "p.ParseAny[go.shape.string]"), ("T", "p.ParseAny[go.shape.int]"), ("R", "p.Other")]
+    assert match_symbols(nm, symbol_patterns("p", "ParseAny[T]")) == [
+        "p.ParseAny[go.shape.int]", "p.ParseAny[go.shape.string]"]
+
+
+def test_generic_prefix_does_not_match_a_different_function_name():
+    """`p.Parse[` must not match `p.ParseAny[...]`: the character after `Parse` is `A`, not `[`."""
+    nm = [("T", "p.ParseAny[go.shape.string]")]
+    assert match_symbols(nm, symbol_patterns("p", "Parse[T]")) == []

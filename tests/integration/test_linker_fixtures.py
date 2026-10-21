@@ -47,9 +47,14 @@ def test_reflection_case_keeps_method_symbols():
     assert set(r[0]["details"]["matched_binary_symbols"]) <= {"vtfixtures/vulnlib.Impl.Run", "vtfixtures/vulnlib.(*Impl).Run"}
 
 
-def test_generic_target_is_unsupported(report):
+def test_generic_target_is_present_via_prefix_match(report):
+    """CP3 task 0c: a bare generic function target (`ParseAny[T]`) matches any
+    instantiation's binary symbol by prefix, since the concrete type vulndb would name
+    is not recoverable from the binary (the compiler groups by "GC shape")."""
     case = next(c for c in report["cases"] if c["id"] == "generic_target")
-    assert case["method_results"][0]["error"]["code"] == "UNSUPPORTED_SYMBOL_FORM"
+    r = case["method_results"][0]
+    assert r["result"] == "PRESENT" and r["error"] is None
+    assert r["details"]["matched_binary_symbols"] == ["vtfixtures/vulnlib.ParseAny[go.shape.string]"]
 
 
 def test_all_method_results_validate_against_schema(report):

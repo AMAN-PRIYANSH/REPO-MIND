@@ -235,7 +235,7 @@
         }
       ],
       "truth": "REACHABLE",
-      "rationale": "main calls the generic function vulnlib.ParseAny[string]; the target is the generic function itself. Included to document that the linker method does not support generic symbol forms."
+      "rationale": "main calls the generic function vulnlib.ParseAny[string]; the target is the generic function itself. Originally included to document that the linker method did not support generic symbol forms; CP3 task 0c added a prefix-match rule for bare generic functions (any instantiation), so this case is now answered."
     },
     {
       "id": "present_but_unreachable",

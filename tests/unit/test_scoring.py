@@ -66,11 +66,13 @@ def test_build_failure_gives_error():
     assert r[0]["result"] == "ERROR" and r[0]["error"]["code"] == "BUILD_FAILED"
 
 
-def test_generic_symbol_is_error_without_building():
+def test_generic_method_symbol_is_error_without_building():
+    """A generic method (not a bare generic function, CP3 task 0c) is still unsupported."""
+
     def runner(*a, **k):
         raise AssertionError("must not build for unsupported symbols")
 
-    r = run_linker_method(Path("."), "p/cmd/a", [{"package": "p", "symbol": "Map[T]"}], runner=runner)
+    r = run_linker_method(Path("."), "p/cmd/a", [{"package": "p", "symbol": "Box[T].Get"}], runner=runner)
     assert r[0]["result"] == "ERROR" and r[0]["error"]["code"] == "UNSUPPORTED_SYMBOL_FORM"
 
 

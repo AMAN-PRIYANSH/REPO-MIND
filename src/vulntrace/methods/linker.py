@@ -46,16 +46,41 @@ def escape_pkg_path(pkgpath: str) -> str:
     return head + sep + last.replace(".", "%2e")
 
 
+_GENERIC_FUNC = re.compile(r"(\w+)\[.*\]")
+
+
 def symbol_patterns(package: str, symbol: str) -> list[str]:
     """Binary symbol names that mean `symbol` of `package` is in the binary.
 
     `Func` -> pkg.Func;  `T.M` / `*T.M` / `(*T).M` -> pkg.T.M and pkg.(*T).M.
-    Anything generic (type parameters, `[`...`]`) raises UnsupportedSymbolForm.
+
+    A bare generic function, e.g. `ParseAny[T]` -> a *prefix* pattern `pkg.ParseAny[`
+    (CP3 task 0c). The compiler groups instantiations by "GC shape" (observed by
+    building fixtures/reachability/cmd/generic_target with several instantiations:
+    `string`, `int` and `[]byte` all produced a *different* binary symbol,
+    `pkg.ParseAny[go.shape.<kind>]`, never the concrete type vulndb would name), so
+    there is no reliable way to match one *specific* instantiation. There IS a
+    reliable way to ask "is any instantiation of this generic function present":
+    the bracket only ever starts right after the function's own name in this form
+    (never after a dot), so the prefix is exact-namespaced to this package and name
+    and cannot match a different, differently-named function (e.g. `pkg.Parse[`
+    cannot match `pkg.ParseAny[...]`, since the character after `Parse` is `A`, not
+    `[`). A generic *method*, or a method on a generic type, is different: the type
+    argument is embedded inside the receiver's own brackets, e.g.
+    `pkg.(*List[go.shape.string]).Push`, not after the method name, so no prefix or
+    suffix rule covering that form was found here; it still raises
+    UnsupportedSymbolForm.
     """
-    if "[" in symbol or "]" in symbol:
-        raise UnsupportedSymbolForm(f"generic symbol form is not supported: {symbol!r}")
     pkg = escape_pkg_path(package)
     sym = symbol.strip()
+    m = _GENERIC_FUNC.fullmatch(sym)
+    if m:
+        name = m.group(1)
+        if not _IDENT.match(name):
+            raise UnsupportedSymbolForm(f"unrecognised symbol form: {symbol!r}")
+        return [f"{pkg}.{name}["]
+    if "[" in symbol or "]" in symbol:
+        raise UnsupportedSymbolForm(f"generic symbol form is not supported: {symbol!r}")
     m = re.fullmatch(r"\(\*(\w+)\)\.(\w+)", sym)
     if m:
         recv, meth = m.groups()
@@ -82,8 +107,12 @@ def parse_nm(text: str) -> list[tuple[str, str]]:
 
 
 def match_symbols(nm_symbols: list[tuple[str, str]], patterns: list[str]) -> list[str]:
-    wanted = set(patterns)
-    return sorted({name for typ, name in nm_symbols if typ in TEXT_SYMBOL_TYPES and name in wanted})
+    """A pattern ending in `[` (from a bare generic function target) matches by prefix,
+    i.e. any instantiation; every other pattern matches only exactly."""
+    exact = {p for p in patterns if not p.endswith("[")}
+    prefixes = tuple(p for p in patterns if p.endswith("["))
+    return sorted({name for typ, name in nm_symbols
+                  if typ in TEXT_SYMBOL_TYPES and (name in exact or name.startswith(prefixes))})
 
 
 def binary_name(goos: str) -> str:
