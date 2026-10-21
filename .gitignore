@@ -27,3 +27,5 @@ data/*
 *.exe
 *.test
 *.out
+/helper/helper
+/helper/vt-helper

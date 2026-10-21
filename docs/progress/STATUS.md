@@ -29,7 +29,7 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
 - [x] T0 CP1 carry-over: `.gitignore` -> `/results/`; generated `docs/results/CP1_LINKER_RESULTS.md`; correction section in CP1 report
-- [ ] D1 Go helper module `helper/` (`vt-helper`; modes `funcs`, `reach`, `edges`, `naive`; x/tools pinned; go.sum)
+- [x] D1 Go helper module `helper/` (`vt-helper`; modes `funcs`, `reach`, `edges`, `naive`; x/tools pinned; go.sum)
 - [ ] D2 Python wrapper (`methods/callgraph.py`, `methods/naive.py`; cached build outside repo; timeout; error mapping)
 - [ ] D3 Schemas (`helper_request`, `helper_response`, `verdict`; extend `method_result` by values only)
 - [ ] D4 Verdict rule (`verdict.py`; rule table, case aggregation, reason codes, fixed statement, verification NOT_RUN)
