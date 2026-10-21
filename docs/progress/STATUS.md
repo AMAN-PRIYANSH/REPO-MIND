@@ -29,7 +29,7 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
 - [x] D1 Python package skeleton (pyproject, src/vulntrace, tests, .gitignore)
-- [ ] D2 `doctor` command
+- [x] D2 `doctor` command
 - [ ] D3 Schemas (fixture_manifest, method_result)
 - [ ] D4 Fixture suite (>=12 cases, inlining case, manifest.json)
 - [ ] D5 Linker-presence method
