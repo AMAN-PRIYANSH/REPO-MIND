@@ -123,6 +123,29 @@ def test_contamination_cutoff_is_the_documented_placeholder():
     assert CONTAMINATION_CUTOFF == "2026-06-30"
 
 
+def test_build_d4_case_list_explores_every_forced_case_even_with_early_stopping(monkeypatch):
+    """Regression: with target small enough that exploration could stop after the first
+    batch, every post-cutoff (forced) case must still have been explored, so it can always
+    be included in the final sample - never silently missing just because the pool is
+    larger than one batch and the forced cases do not happen to sort first by id."""
+    # created="2026-12-01" (forced) cases given ids that sort AFTER the non-forced ones:
+    # under the old "stratified_sample(eligible, len(eligible), ...)" behaviour this
+    # degenerated to a plain id-sort, so these would never be reached if exploration
+    # stopped early.
+    forced = [make_case(id_=f"GO-2026-{9000+i}", created="2026-12-01") for i in range(3)]
+    non_forced = [make_case(id_=f"GO-2020-{i:04d}", created="2020-01-01") for i in range(10)]
+
+    def fake_count(case, module, binary, cache_root, runner=None):
+        return {"status": "AVAILABLE", "candidates": [], "from": {"commit": "a"}, "to": {"commit": "b"},
+               "commits": []}
+
+    monkeypatch.setattr(datasets_mod, "d4_candidate_count", fake_count)
+    result = build_d4_case_list(forced + non_forced, seed=1, binary=None, target=2, large_target=0, batch_size=2)
+    forced_ids = {c["id"] for c in forced}
+    assert forced_ids <= set(result["explored"])
+    assert forced_ids <= {c["id"] for c in result["sample"]}
+
+
 def test_build_d4_case_list_counts_truncated_cases_as_large(monkeypatch):
     """A TRUNCATED range still carries a real candidate list (it comes from a single
     two-tree diff, not from the - possibly incomplete - commit walk it was truncated for),

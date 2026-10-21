@@ -141,7 +141,18 @@ def build_d4_case_list(cases: list[dict[str, Any]], seed: int, binary, cache_roo
     remaining explored AVAILABLE cases to reach `target`)."""
     eligible = [c for c in cases if eligible_for_d4(c)]
     by_id = {c["id"]: c for c in eligible}
-    ordered = stratified_sample(eligible, len(eligible), seed, cutoff)  # a full, seeded, stratified order
+    # Forced (post-cutoff) cases are explored first, so they are guaranteed to be available
+    # for the final sample even if exploration stops early; the remainder is seeded-shuffled
+    # (not left in id/chronological order) so which cases get explored - and so which ones
+    # can be found "large" - is not systematically biased toward older or newer advisories.
+    # stratified_sample(eligible, target=len(eligible), ...) would look like it does this,
+    # but its own "pool fits within target" short-circuit returns the pool sorted by id,
+    # unshuffled - found while reviewing this code, not from a test failure.
+    forced = [c for c in eligible if (c["created"] or "") > cutoff]
+    forced_ids = {c["id"] for c in forced}
+    remainder = sorted((c for c in eligible if c["id"] not in forced_ids), key=lambda c: c["id"])
+    random.Random(seed).shuffle(remainder)
+    ordered = sorted(forced, key=lambda c: c["id"]) + remainder
 
     explored: dict[str, dict] = {}
     large_ids: list[str] = []
@@ -162,12 +173,17 @@ def build_d4_case_list(cases: list[dict[str, Any]], seed: int, binary, cache_roo
             if progress is not None:
                 progress(len(explored), len(ordered), rr)
         i += batch_size
-        if len(large_ids) >= large_target and len(explored) >= target:
+        # Batches are processed in order starting at `ordered[0]`, and `forced` occupies
+        # ordered[:len(forced)], so len(explored) >= len(forced) is enough to guarantee
+        # every forced case has actually been explored by this point (not just that enough
+        # cases *in total* have been, which batch boundaries alone would not promise).
+        if len(explored) >= len(forced) and len(large_ids) >= large_target and len(explored) >= target:
             break
 
-    forced_ids = {c["id"] for c in eligible if (c["created"] or "") > cutoff}
+    # `forced` is explored first (above), so every forced case is guaranteed to be in
+    # `explored` by now, however the loop ended.
     final_ids = set(forced_ids) | set(large_ids)
-    for case in ordered:  # fill the rest from the explored, seeded, stratified order
+    for case in ordered:  # fill the rest from the explored order (forced, then seeded-shuffled)
         if len(final_ids) >= target:
             break
         if case["id"] in explored:
