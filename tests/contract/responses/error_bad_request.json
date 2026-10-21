@@ -1,0 +1,9 @@
+{
+  "contract_version": "1.0",
+  "error": {
+    "code": "BAD_REQUEST",
+    "message": "invalid request: json: unknown field \"unknown_field\""
+  },
+  "mode": "reach",
+  "ok": false
+}

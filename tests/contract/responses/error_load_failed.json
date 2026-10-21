@@ -1,0 +1,9 @@
+{
+  "contract_version": "1.0",
+  "error": {
+    "code": "LOAD_FAILED",
+    "message": "package vtfixtures/vulnlib is not a main package (name \"vulnlib\")"
+  },
+  "mode": "reach",
+  "ok": false
+}

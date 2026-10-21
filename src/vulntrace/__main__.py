@@ -22,6 +22,10 @@ def build_parser() -> argparse.ArgumentParser:
     sc.add_argument("--fixtures-dir", default=str(FIXTURES_DIR))
     sc.add_argument("--compare-inlining", action="store_true",
                     help="also build without -gcflags=all=-l and report both (not used for scoring)")
+    hp = sub.add_parser("helper", help="the Go analysis helper vt-helper")
+    hsub = hp.add_subparsers(dest="helper_command", required=True)
+    hsub.add_parser("build", help="build vt-helper into the cache (offline) and print its path")
+    hsub.add_parser("fetch", help="download the helper's Go dependencies (uses the network; run once)")
     rs = sub.add_parser("results", help="committed results documents")
     rsub = rs.add_subparsers(dest="results_command", required=True)
     rr = rsub.add_parser("render", help="generate a docs/results/ document from a score report file")
@@ -37,6 +41,24 @@ def _cmd_doctor() -> int:
     rep = run_doctor()
     print("\n".join(rep.lines))
     return rep.exit_code
+
+
+def _cmd_helper(args) -> int:
+    from vulntrace.methods.helper import HelperError, ensure_helper, fetch_helper_modules
+
+    if shutil.which("go") is None:
+        print("error: go toolchain not found (run `python -m vulntrace doctor`)", file=sys.stderr)
+        return EXIT_MISSING_PREREQUISITE
+    if args.helper_command == "fetch":
+        p = fetch_helper_modules()
+        print((p.stdout + p.stderr).strip() or "helper modules downloaded")
+        return EXIT_OK if p.returncode == 0 else EXIT_MISSING_PREREQUISITE
+    try:
+        print(ensure_helper())
+    except HelperError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_MISSING_PREREQUISITE
+    return EXIT_OK
 
 
 def _cmd_render(args) -> int:
@@ -85,6 +107,8 @@ def main(argv: list[str] | None = None) -> int:
             return _cmd_doctor()
         if args.command == "fixtures" and args.fixtures_command == "score":
             return _cmd_score(args, argv)
+        if args.command == "helper":
+            return _cmd_helper(args)
         if args.command == "results" and args.results_command == "render":
             return _cmd_render(args)
     except Exception as exc:  # unexpected

@@ -1,0 +1,9 @@
+{
+  "contract_version": "1.0",
+  "error": {
+    "code": "TYPE_ERRORS",
+    "message": "/tmp/vt_contract_feklr2eq/typeerr/cmd/app/main.go:3:27: cannot use \"s\" (untyped string constant) as int value in variable declaration"
+  },
+  "mode": "reach",
+  "ok": false
+}

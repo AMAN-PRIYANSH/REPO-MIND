@@ -1,0 +1,101 @@
+{
+  "contract_version": "1.0",
+  "mode": "reach",
+  "ok": true,
+  "results": [
+    {
+      "error": null,
+      "matched_functions": [
+        "vtfixtures/vulnlib.Parse"
+      ],
+      "paths": [
+        {
+          "edges": [
+            {
+              "call_site": {
+                "file": "cmd/direct_call/main.go",
+                "line": 10
+              },
+              "callee": "vtfixtures/vulnlib.Parse",
+              "caller": "vtfixtures/cmd/direct_call.main",
+              "kind": "STATIC"
+            }
+          ],
+          "entry": {
+            "package": "vtfixtures/cmd/direct_call",
+            "symbol": "main"
+          },
+          "target": {
+            "package": "vtfixtures/vulnlib",
+            "symbol": "Parse"
+          }
+        }
+      ],
+      "paths_omitted": null,
+      "result": "PATH_FOUND",
+      "shortest_length": 1,
+      "target": {
+        "package": "vtfixtures/vulnlib",
+        "symbol": "Parse"
+      }
+    },
+    {
+      "error": {
+        "code": "TARGET_NOT_FOUND",
+        "message": "symbol Missing not found in package vtfixtures/vulnlib"
+      },
+      "matched_functions": [],
+      "paths": [],
+      "paths_omitted": null,
+      "result": "ERROR",
+      "shortest_length": null,
+      "target": {
+        "package": "vtfixtures/vulnlib",
+        "symbol": "Missing"
+      }
+    },
+    {
+      "error": {
+        "code": "TARGET_NOT_FOUND",
+        "message": "package vtfixtures/initdep is not part of the loaded program"
+      },
+      "matched_functions": [],
+      "paths": [],
+      "paths_omitted": null,
+      "result": "ERROR",
+      "shortest_length": null,
+      "target": {
+        "package": "vtfixtures/initdep",
+        "symbol": "X"
+      }
+    },
+    {
+      "error": {
+        "code": "UNSUPPORTED_SYMBOL_FORM",
+        "message": "unrecognised symbol form: \"a.b.c\""
+      },
+      "matched_functions": [],
+      "paths": [],
+      "paths_omitted": null,
+      "result": "ERROR",
+      "shortest_length": null,
+      "target": {
+        "package": "vtfixtures/vulnlib",
+        "symbol": "a.b.c"
+      }
+    }
+  ],
+  "stats": {
+    "callgraph_edges": 4074,
+    "callgraph_nodes": 1307,
+    "duration_ms": 1496,
+    "packages_loaded": 58,
+    "peak_rss_kb": 250008
+  },
+  "toolchain": {
+    "go_version": "go1.24.7",
+    "goarch": "amd64",
+    "goos": "linux",
+    "x_tools_version": "v0.42.0"
+  }
+}

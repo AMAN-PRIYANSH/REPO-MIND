@@ -1,0 +1,56 @@
+{
+  "contract_version": "1.0",
+  "mode": "funcs",
+  "ok": true,
+  "results": [
+    {
+      "file": "vulnlib/vulnlib.go",
+      "functions": [
+        {
+          "end": 21,
+          "start": 11,
+          "symbol": "Parse"
+        },
+        {
+          "end": 25,
+          "start": 25,
+          "symbol": "ParseTiny"
+        },
+        {
+          "end": 28,
+          "start": 28,
+          "symbol": "ParseAny"
+        },
+        {
+          "end": 31,
+          "start": 31,
+          "symbol": "Safe"
+        },
+        {
+          "end": 42,
+          "start": 42,
+          "symbol": "Impl.Run"
+        },
+        {
+          "end": 48,
+          "start": 48,
+          "symbol": "PImpl.Run"
+        }
+      ],
+      "package": "vulnlib"
+    }
+  ],
+  "stats": {
+    "callgraph_edges": 0,
+    "callgraph_nodes": 0,
+    "duration_ms": 0,
+    "packages_loaded": 0,
+    "peak_rss_kb": 5372
+  },
+  "toolchain": {
+    "go_version": "go1.24.7",
+    "goarch": "amd64",
+    "goos": "linux",
+    "x_tools_version": "v0.42.0"
+  }
+}

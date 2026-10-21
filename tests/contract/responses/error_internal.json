@@ -1,0 +1,9 @@
+{
+  "contract_version": "1.0",
+  "error": {
+    "code": "INTERNAL",
+    "message": "panic: runtime error (synthesised; a real one needs a helper bug)"
+  },
+  "mode": "reach",
+  "ok": false
+}

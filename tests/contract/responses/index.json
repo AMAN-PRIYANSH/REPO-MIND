@@ -1,0 +1,74 @@
+[
+  {
+    "file": "reach_path_found.json",
+    "mode": "reach",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "reach_no_path.json",
+    "mode": "reach",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "reach_target_errors.json",
+    "mode": "reach",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "naive_no_path.json",
+    "mode": "naive",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "edges.json",
+    "mode": "edges",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "funcs.json",
+    "mode": "funcs",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "error_bad_request.json",
+    "mode": "reach",
+    "provenance": "RECORDED",
+    "exit_code": 1
+  },
+  {
+    "file": "error_contract_mismatch.json",
+    "mode": "reach",
+    "provenance": "RECORDED",
+    "exit_code": 1
+  },
+  {
+    "file": "error_load_failed.json",
+    "mode": "reach",
+    "provenance": "RECORDED",
+    "exit_code": 1
+  },
+  {
+    "file": "error_type_errors.json",
+    "mode": "reach",
+    "provenance": "RECORDED",
+    "exit_code": 1
+  },
+  {
+    "file": "error_internal.json",
+    "mode": "reach",
+    "provenance": "SYNTHESISED",
+    "exit_code": 1
+  },
+  {
+    "file": "error_target_not_found.json",
+    "mode": "reach",
+    "provenance": "SYNTHESISED",
+    "exit_code": 1
+  }
+]

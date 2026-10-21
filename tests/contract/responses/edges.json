@@ -1,0 +1,47 @@
+{
+  "contract_version": "1.0",
+  "mode": "edges",
+  "ok": true,
+  "results": [
+    {
+      "call_site": null,
+      "call_sites": [
+        {
+          "file": "cmd/direct_call/main.go",
+          "line": 10
+        }
+      ],
+      "callee": "vtfixtures/vulnlib.Parse",
+      "callee_found": true,
+      "caller": "vtfixtures/cmd/direct_call.main",
+      "caller_found": true,
+      "exists": true,
+      "kinds": [
+        "STATIC"
+      ]
+    },
+    {
+      "call_site": null,
+      "call_sites": [],
+      "callee": "vtfixtures/vulnlib.Safe",
+      "callee_found": false,
+      "caller": "vtfixtures/cmd/direct_call.main",
+      "caller_found": true,
+      "exists": false,
+      "kinds": []
+    }
+  ],
+  "stats": {
+    "callgraph_edges": 4074,
+    "callgraph_nodes": 1307,
+    "duration_ms": 1505,
+    "packages_loaded": 58,
+    "peak_rss_kb": 239440
+  },
+  "toolchain": {
+    "go_version": "go1.24.7",
+    "goarch": "amd64",
+    "goos": "linux",
+    "x_tools_version": "v0.42.0"
+  }
+}

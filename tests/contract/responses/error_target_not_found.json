@@ -1,0 +1,9 @@
+{
+  "contract_version": "1.0",
+  "error": {
+    "code": "TARGET_NOT_FOUND",
+    "message": "response-level form listed in the contract; the helper reports it per target"
+  },
+  "mode": "reach",
+  "ok": false
+}

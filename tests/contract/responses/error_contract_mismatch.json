@@ -1,0 +1,9 @@
+{
+  "contract_version": "1.0",
+  "error": {
+    "code": "CONTRACT_MISMATCH",
+    "message": "request contract_version \"2.0\", helper supports \"1.0\""
+  },
+  "mode": "reach",
+  "ok": false
+}
