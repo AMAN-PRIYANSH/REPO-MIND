@@ -4,10 +4,10 @@ This file is the single source of truth for where the build stands. Claude Code 
 
 ## Current
 
-- Current checkpoint: **CP1 - Ground truth and linker presence**
-- State: `AWAITING_REVIEW`
-- Branch in use: `claude/vulntrace-checkpoint-continue-ia7tx5`
-- Specification: [checkpoints/CP1.md](../implementation/checkpoints/CP1.md)
+- Current checkpoint: **CP2 - Go call-graph helper and verdict rule**
+- State: `READY` (released, not started)
+- Branch in use: (none yet - the first session writes its own `claude/...` session branch here; see `CLAUDE.md` section 5)
+- Specification: [checkpoints/CP2.md](../implementation/checkpoints/CP2.md)
 
 State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
 
@@ -15,8 +15,8 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 | CP | Title | State | Branch | Report |
 |---|---|---|---|---|
-| CP1 | Ground truth and linker presence | AWAITING_REVIEW | claude/vulntrace-checkpoint-continue-ia7tx5 | [CP1_REPORT](reports/CP1_REPORT.md) |
-| CP2 | Go call-graph helper and verdict rule | NOT_RELEASED | - | - |
+| CP1 | Ground truth and linker presence | APPROVED (1 fix carried to CP2 task 0) | claude/vulntrace-checkpoint-continue-ia7tx5 | [CP1_REPORT](reports/CP1_REPORT.md) |
+| CP2 | Go call-graph helper and verdict rule | READY | - | - |
 | CP3 | Advisory dataset, fix evidence, release-range candidates, baselines | NOT_RELEASED | - | - |
 | CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | NOT_RELEASED | - | - |
 | CP5 | Local LLM layer, root-cause selection, HyDE, lifting, Colab runs | NOT_RELEASED | - | - |
@@ -28,18 +28,10 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-- [x] D1 Python package skeleton (pyproject, src/vulntrace, tests, .gitignore)
-- [x] D2 `doctor` command
-- [x] D3 Schemas (fixture_manifest, method_result)
-- [x] D4 Fixture suite (>=12 cases, inlining case, manifest.json)
-- [x] D5 Linker-presence method
-- [x] D6 Scoring command (`fixtures score --method linker`)
-- [x] D7 Tests (unit + integration)
-- [x] D8 Results document `docs/results/CP1_LINKER_RESULTS.md`
-- [x] Report `docs/progress/reports/CP1_REPORT.md`, state -> AWAITING_REVIEW
+- [ ] (CP2 not started)
 
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-CP1 complete and awaiting review. Nothing half-done. See reports/CP1_REPORT.md.
+(CP2: none yet. CP1 was approved on 21 Oct 2026; see the review notes in checkpoints/CP1.md.)

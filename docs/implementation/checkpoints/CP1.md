@@ -79,4 +79,21 @@ The Go helper and `golang.org/x/tools`; verdicts; vulndb, advisories and git fet
 
 ## Review notes
 
-(The supervising assistant adds notes here if the state becomes `CHANGES_REQUESTED`.)
+**Supervisor review, 21 Oct 2026 - APPROVED with one carried-over fix.**
+
+Independently re-run by the supervisor on a clean checkout of `claude/vulntrace-checkpoint-continue-ia7tx5` at `78a8c80` (Linux, Go 1.24.7, Python 3.13):
+
+- `pytest tests/unit`: 49 passed. `pytest tests/integration`: 7 passed.
+- With Go removed from PATH: 49 passed, 7 skipped; `doctor` exit code 3.
+- `fixtures score --method linker` run twice: identical apart from timing; 18 cases, 17 agree, 0 false NOT_REACHABLE, 0 false REACHABLE, 1 error (`generic_target`, by design).
+- Truth labels of `interface_not_instantiated`, `func_value_map`, `dead_code`, `reflect_method`, `goroutine`, `unsafe_func_pointer` checked by reading the code: correct.
+
+Problem found:
+
+- `docs/results/CP1_LINKER_RESULTS.md` is **not in the repository**. The `.gitignore` pattern `results/` also matches `docs/results/`, so git silently skipped the file. The report marks criterion 9 as Met, which is not true for the repository. Carried over to CP2 as task 0.
+
+Accepted observations from the implementer (good, honest catches):
+
+- The suite has no case where the symbol is in the binary but unreachable. CP2 adds such cases.
+- `unsafe_func_pointer` does not exercise anything special, because taking the function value keeps the symbol. It stays in the suite but must not be presented as an `unsafe` test.
+- Without `-gcflags=all=-l`, three cases flip to false NOT_REACHABLE. ADR-013 is confirmed by observation.

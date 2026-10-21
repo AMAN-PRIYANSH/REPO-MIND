@@ -35,7 +35,7 @@ Full spec: [checkpoints/CP1.md](checkpoints/CP1.md).
 
 ### CP2 - Go call-graph helper and verdict rule (week 1)
 
-- `helper/` Go module (pins `golang.org/x/tools`) with modes `funcs`, `reach` (VTA), `edges`, `lift`.
+- `helper/` Go module (pins `golang.org/x/tools`) with modes `funcs`, `reach` (VTA), `edges`, `naive`. (`lift` is added in CP5.)
 - Python wrapper with timeouts and error codes; contract tests with recorded responses.
 - Naive name-only call graph as a negative control (R1).
 - Verdict rule (two-method agreement) and verdict schema; fixtures extended to about 20 cases.
