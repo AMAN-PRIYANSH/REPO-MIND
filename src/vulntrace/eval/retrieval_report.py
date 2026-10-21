@@ -51,6 +51,8 @@ class Summaries:
             return np.ones(len(c), dtype=bool)
         if group == "no_rclone":
             return np.array([x["cluster_key"] != self.rclone for x in c])
+        if group == "no_named_gold":
+            return np.array([not x.get("query_names_gold", False) for x in c])
         kind, _, val = group.partition(":")
         field = {"size": "size_bucket", "date": "date_bucket"}[kind]
         return np.array([x[field] == val for x in c])
@@ -318,11 +320,27 @@ def render_cp4_doc(results_dir: Path, source: str) -> str:
                          f"{_ci(s.paired_diff(i, ref, 'recall@10'))} | "
                          f"{_ci(s.paired_diff(i, ref, 'mrr', 'size:>100'))} | {vs_rand} |")
 
+    n_named = sum(1 for c in cases if c.get("query_names_gold"))
+    n_qid = sum(1 for c in cases if c["query_has_advisory_id"])
     lines += ["", "## Leakage control: do advisory identifiers in commit messages explain the gains?", "",
               f"Chunks whose commit subjects contain an advisory identifier: {st.get('id_in_commit_subjects', 0)}; "
-              f"chunks whose code or doc comment contains one: {st.get('id_in_code', 0)}. The query contains an "
-              f"identifier in {sum(1 for c in cases if c['query_has_advisory_id'])} cases, so masking can only change "
-              "a lexical match in those; it can still change dense scores slightly everywhere it alters text.", ""]
+              f"chunks whose code or doc comment contains one: {st.get('id_in_code', 0)}. The query (summary + "
+              f"details only) contains an identifier in {n_qid} of {n} cases."
+              + (" **So no lexical match on an advisory identifier is possible in this setup, and the masked "
+                 "variant cannot test that channel**: any difference between `code+commits` and "
+                 "`code+commits_idmasked` comes only from the changed tokens (document length, IDF) or, for dense "
+                 "models, from the slightly different text." if n_qid == 0 else
+                 " Masking can only remove a lexical identifier match in those cases."), ""]
+    if retrieval:
+        lines += [f"A different, legitimate shortcut: in {n_named} of {n} cases the advisory text names a gold "
+                  "function (its bare name as a case-sensitive whole word). This is real advisory text, not a leak, "
+                  "but it hands lexical retrieval a direct hit, so MRR is also shown without those cases "
+                  "(denominator (b)):", "",
+                  "| Config | MRR all | MRR without named-gold cases |", "|---|---|---|"]
+        for i in [j for j in _order(runs) if runs[j]["kind"] in ("bid", "random")] + retrieval:
+            lines.append(f"| {_label(runs[i])} | {_ci(s.summary(i)['mrr'])} | "
+                         f"{_ci(s.summary(i, 'no_named_gold')['mrr'])} |")
+        lines.append("")
     pairs = []
     for i in retrieval:
         r = runs[i]
@@ -332,7 +350,8 @@ def render_cp4_doc(results_dir: Path, source: str) -> str:
         only = _find(runs, r["kind"], "code_only", r["config"])
         pairs.append((i, masked, only))
     if pairs:
-        lines += ["| Config | MRR code_only | MRR code+commits | MRR idmasked | Δ commits − idmasked | Δ commits − code_only |",
+        lines += ["Variant comparison (MRR, denominator (b); differences are paired):", "",
+                  "| Config | MRR code_only | MRR code+commits | MRR idmasked | Δ commits − idmasked | Δ commits − code_only |",
                   "|---|---|---|---|---|---|"]
         for i, masked, only in pairs:
             m = lambda j: _ci(s.summary(j)["mrr"]) if j is not None else "-"

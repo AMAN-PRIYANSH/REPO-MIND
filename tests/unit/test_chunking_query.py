@@ -166,3 +166,13 @@ def test_query_builder_rejects_a_raw_case_and_input_has_only_two_fields():
         build_query(_case_with_gold_sentinels())
     assert set(QueryInput.__dataclass_fields__) == {"summary", "details"}
     assert build_query(QueryInput("only a summary", "")) == "only a summary"
+
+
+def test_query_names_symbol_is_whole_word_case_sensitive_bare_name():
+    from vulntrace.eval.retrieval import query_names_symbol
+
+    assert query_names_symbol("Fs.Move does not check paths", {"Fs.Move"})
+    assert query_names_symbol("calling Move with ..", {"Fs.Move"})
+    assert not query_names_symbol("files are moved", {"Fs.Move"})       # case-sensitive
+    assert not query_names_symbol("Remover breaks", {"Fs.Move"})        # whole word only
+    assert not query_names_symbol("anything", set())

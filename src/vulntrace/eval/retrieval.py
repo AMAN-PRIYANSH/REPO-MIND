@@ -21,6 +21,7 @@ counts) once; the results document is rendered from these files by code.
 
 import json
 import platform
+import re
 import sys
 import time
 from dataclasses import dataclass, field
@@ -93,6 +94,7 @@ class EvalCase:
     bid_matched: bool
     body_len: dict[str, int] = field(default_factory=dict)
     query_has_details: bool = False
+    query_names_gold: bool = False
 
     def facts(self, cutoff: str) -> dict[str, Any]:
         n = len(self.candidate_ids)
@@ -102,8 +104,18 @@ class EvalCase:
                 "n_gold_core_derived": len(self.gold_core_derived),
                 "query_has_advisory_id": chunking.has_advisory_id(self.query),
                 "query_chars": len(self.query), "query_has_details": self.query_has_details,
+                "query_names_gold": self.query_names_gold,
                 "bid_matched": self.bid_matched,
                 "bid_predicted_count": len(self.bid_ids)}
+
+
+def query_names_symbol(query: str, symbols: set[str]) -> bool:
+    """Whether the advisory text names one of the gold functions (its bare name, after any
+    `Type.`, as a case-sensitive whole word). Legitimate advisory text, not a leak, but it
+    hands lexical retrieval a direct hit, so results are also reported without such cases.
+    Evaluation-side only: the query builder never sees the symbols."""
+    names = {s.rsplit(".", 1)[-1] for s in symbols}
+    return any(re.search(r"\b" + re.escape(n) + r"\b", query) for n in names if n)
 
 
 def bid_candidate_ids(case: dict[str, Any], rr: dict[str, Any]) -> tuple[set[str], bool]:
@@ -165,6 +177,7 @@ def load_eval_set(case_list: dict[str, Any], cases_by_id: dict[str, dict], data_
             query=build_query(query_input_from_case(vc)) if vc else "", bid_ids=bid_ids, bid_matched=matched,
             body_len={c.candidate_id: len(c.body) for c in chunks},
             query_has_details=bool(vc and query_input_from_case(vc).details.strip()),
+            query_names_gold=bool(vc and query_names_symbol(build_query(query_input_from_case(vc)), core)),
         ))
     return cases, ranges, notes
 
