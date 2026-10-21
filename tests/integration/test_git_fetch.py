@@ -8,12 +8,14 @@ import pytest
 from vulntrace.dataset.git_fetch import (
     GitFetchError,
     changed_files,
+    deepen,
     fetch_commit,
     fetch_ref,
     file_content_at,
     object_exists,
     parent_sha,
     resolve_tag,
+    run_git,
     unified_diff,
 )
 
@@ -145,3 +147,33 @@ def test_fetch_ref_result_is_usable_without_a_persistent_local_tag(tmp_path):
     assert sha == parent
     assert object_exists(repo_dir, sha, subprocess.run)
     assert resolve_tag(repo_dir, sha, subprocess.run) == parent
+
+
+def test_run_git_timeout_is_a_failed_result_not_an_exception(tmp_path):
+    """Regression: a real D4 build crashed with an unhandled TimeoutExpired from a slow
+    `git fetch --depth=501` on a large, active repository. run_git must turn a timeout into
+    an ordinary failed CompletedProcess (returncode 124), exactly like every other git
+    failure every caller here already handles - never propagate the exception and take
+    down a whole dataset build over one slow case."""
+
+    def slow_runner(args, **kwargs):
+        raise subprocess.TimeoutExpired(args, kwargs.get("timeout", 1))
+
+    p = run_git(slow_runner, ["git", "fetch"], tmp_path, timeout=1)
+    assert p.returncode == 124
+    assert "timed out" in p.stderr
+
+
+def test_deepen_does_not_raise_on_timeout_but_fails_gracefully(tmp_path):
+    src, parent, fix = make_source_repo(tmp_path)
+    cache_root = tmp_path / "cache"
+    fetch_commit("h", "o", "r", fix, cache_root=cache_root, remote_url=str(src))
+
+    def slow_runner(args, **kwargs):
+        if args[:2] == ["git", "fetch"]:
+            raise subprocess.TimeoutExpired(args, kwargs.get("timeout", 1))
+        return subprocess.run(args, **kwargs)
+
+    with pytest.raises(GitFetchError) as exc:
+        deepen("h", "o", "r", fix, 10, cache_root=cache_root, runner=slow_runner, remote_url=str(src))
+    assert exc.value.code == "FETCH_FAILED"

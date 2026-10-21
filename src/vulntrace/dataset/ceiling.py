@@ -13,6 +13,8 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from vulntrace.dataset import git_fetch
+
 REASON_EXISTS_UNCHANGED = "EXISTS_UNCHANGED"
 REASON_NOT_FOUND_EITHER_VERSION = "NOT_FOUND_EITHER_VERSION"
 REASON_MATCHING_PROBLEM = "MATCHING_PROBLEM"
@@ -21,9 +23,10 @@ REASON_OTHER = "OTHER"
 
 def _grep_symbol_name(repo_dir: Path, ref: str, name: str, runner=subprocess.run) -> bool | None:
     """Whether `name` (the bare func/method name, no receiver) appears in any .go file at
-    `ref`. None if `git grep` itself failed (ambiguous, not "not found")."""
-    p = runner(["git", "grep", "-q", "-w", "-I", "--", name, ref, "--", "*.go"], cwd=repo_dir,
-              capture_output=True, text=True, timeout=60)
+    `ref`. None if `git grep` itself failed, including timing out (ambiguous, not "not
+    found")."""
+    p = git_fetch.run_git(runner, ["git", "grep", "-q", "-w", "-I", "--", name, ref, "--", "*.go"], repo_dir,
+                         timeout=60)
     if p.returncode == 0:
         return True
     if p.returncode == 1:
@@ -71,8 +74,6 @@ def run_investigation(cases_by_id: dict[str, dict[str, Any]], release_ranges_by_
     """Across every D4 case with a resolved release range, classify why each missing core
     symbol is missing (open question Q8). Returns counts per reason plus up to
     `max_examples` worked examples (case id, symbol, reason)."""
-    from vulntrace.dataset import git_fetch
-
     counts = {REASON_EXISTS_UNCHANGED: 0, REASON_NOT_FOUND_EITHER_VERSION: 0, REASON_MATCHING_PROBLEM: 0,
              REASON_OTHER: 0}
     examples: list[dict[str, str]] = []

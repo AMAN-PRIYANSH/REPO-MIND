@@ -178,14 +178,13 @@ def _diff_candidates(repo_dir: Path, from_sha: str, to_sha: str, runner,
 
 
 def _is_ancestor(repo_dir: Path, ancestor: str, descendant: str, runner) -> bool:
-    p = runner(["git", "merge-base", "--is-ancestor", ancestor, descendant], cwd=repo_dir,
-              capture_output=True, text=True, timeout=30)
+    p = git_fetch.run_git(runner, ["git", "merge-base", "--is-ancestor", ancestor, descendant], repo_dir, timeout=30)
     return p.returncode == 0
 
 
 def _touches_candidates(repo_dir: Path, sha: str, runner, file_candidate_ids: dict[str, list[str]]) -> list[str]:
-    nf = runner(["git", "diff", "--no-renames", "--name-only", f"{sha}^", sha], cwd=repo_dir,
-               capture_output=True, text=True, timeout=60)
+    nf = git_fetch.run_git(runner, ["git", "diff", "--no-renames", "--name-only", f"{sha}^", sha], repo_dir,
+                          timeout=60)
     touched_files = set(nf.stdout.split()) if nf.returncode == 0 else set()
     return sorted({cid for f, ids in file_candidate_ids.items() if f in touched_files for cid in ids},
                  key=lambda c: int(c[1:]))
@@ -219,13 +218,12 @@ def _walk_commits(host: str, owner: str, repo: str, repo_dir: Path, from_sha: st
     # essentially never contains either control character).
     log_format = "--format=%H%x1f%s%x1f%b%x1e"
     if _is_ancestor(repo_dir, from_sha, to_sha, runner):
-        p = runner(["git", "log", log_format, f"{from_sha}..{to_sha}"], cwd=repo_dir,
-                  capture_output=True, text=True, timeout=120)
+        p = git_fetch.run_git(runner, ["git", "log", log_format, f"{from_sha}..{to_sha}"], repo_dir, timeout=120)
         records = [r for r in p.stdout.split("\x1e") if r.strip()] if p.returncode == 0 else []
         truncated = p.returncode != 0 or len(records) > commit_cap
     else:
-        p = runner(["git", "log", f"--max-count={commit_cap}", log_format, to_sha], cwd=repo_dir,
-                  capture_output=True, text=True, timeout=120)
+        p = git_fetch.run_git(runner, ["git", "log", f"--max-count={commit_cap}", log_format, to_sha], repo_dir,
+                             timeout=120)
         records = [r for r in p.stdout.split("\x1e") if r.strip()] if p.returncode == 0 else []
         truncated = True
     out = []

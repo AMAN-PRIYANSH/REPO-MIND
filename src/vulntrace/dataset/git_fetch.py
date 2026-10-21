@@ -40,8 +40,21 @@ def repo_url(host: str, owner: str, repo: str) -> str:
     return f"https://{host}/{owner}/{repo}"
 
 
-def _run(runner, args: list[str], cwd: Path, timeout: float = DEFAULT_TIMEOUT_S) -> subprocess.CompletedProcess:
-    return runner(args, cwd=cwd, capture_output=True, text=True, timeout=timeout)
+def run_git(runner, args: list[str], cwd: Path, timeout: float = DEFAULT_TIMEOUT_S) -> subprocess.CompletedProcess:
+    """Run one git subprocess. A timeout is a failed git invocation, like a non-zero exit -
+    every caller in this package already handles that (GitFetchError, or None/False for
+    "not found"), so this never raises: letting subprocess.TimeoutExpired propagate would
+    crash a whole dataset build over one slow fetch (observed: `git fetch --depth=501` on a
+    large, active repository), rather than being counted as one unfetchable/unresolved case.
+    Every git subprocess call in the dataset package goes through this, not `runner`
+    directly, so the same safety applies everywhere (release_range.py, ceiling.py)."""
+    try:
+        return runner(args, cwd=cwd, capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        return subprocess.CompletedProcess(args, 124, stdout="", stderr=f"git command timed out after {timeout:g}s")
+
+
+_run = run_git  # internal alias used throughout this module
 
 
 def _ensure_repo_initialised(repo_dir: Path, host: str, owner: str, repo: str, runner,
