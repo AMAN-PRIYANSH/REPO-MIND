@@ -141,7 +141,9 @@ def test_harness_end_to_end_on_fakes(tiny_d4, tmp_path):
                     "### By advisory date", "### Without the nine-case rclone cluster",
                     "## Paired differences against B-ID and random", "## Leakage control", "## Running time"):
         assert section in doc, section
-    first_para = doc.split("\n\n")[2]
+    # dense, hybrid and hybrid+rerank use (fake) models, each on 3 variants: 9 runs
+    assert "**WARNING: 9 run(s) use FAKE models**" in doc
+    first_para = doc.split("\n\n")[3]
     assert "B-ID" in first_para
 
 
