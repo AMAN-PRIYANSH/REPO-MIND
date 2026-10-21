@@ -50,14 +50,14 @@ def build_parser() -> argparse.ArgumentParser:
 
     dmat = dsub.add_parser("materialize", help="rebuild bulky D4 evidence into data/ from the committed case list "
                                                "(never re-selects cases; uses the network; resumable)")
-    dmat.add_argument("--set", required=True, choices=["d4"], dest="dataset_set")
-    dmat.add_argument("--cases", default=None, help="case list (default: docs/results/datasets/D4_cases.json)")
+    dmat.add_argument("--set", required=True, choices=["d4", "d1"], dest="dataset_set")
+    dmat.add_argument("--cases", default=None, help="case list (default: docs/results/datasets/D4|D1_cases.json)")
     dmat.add_argument("--data-dir", default=None, help="output data directory (default: data/)")
     dmat.add_argument("--cache", default=None, help="vulndb cache directory")
     dmat.add_argument("--repo-cache", default=None, help="cache directory for fetched third-party repositories")
     dmat.add_argument("--delay", type=float, default=1.0, help="seconds to wait between cases that fetch (default 1)")
     dmat.add_argument("--summary-out", default=None,
-                      help="where to write the run summary (default: docs/results/datasets/D4_materialize.json)")
+                      help="where to write the run summary (default: docs/results/datasets/D4|D1_materialize.json)")
 
     ev = sub.add_parser("eval", help="baselines and evaluation (CP3+)")
     esub = ev.add_subparsers(dest="eval_command", required=True)
@@ -166,7 +166,8 @@ def _cmd_materialize(args, cases, binary, repo_cache) -> int:
     from vulntrace.dataset import build as dataset_build
     from vulntrace.dataset import materialize
 
-    case_list_path = Path(args.cases) if args.cases else dataset_build.RESULTS_DATASETS_DIR / "D4_cases.json"
+    name = args.dataset_set.upper()
+    case_list_path = Path(args.cases) if args.cases else dataset_build.RESULTS_DATASETS_DIR / f"{name}_cases.json"
     if not case_list_path.is_file():
         print(f"error: no such case list: {case_list_path}", file=sys.stderr)
         return EXIT_INVALID_INPUT
@@ -176,11 +177,13 @@ def _cmd_materialize(args, cases, binary, repo_cache) -> int:
     def progress(i, n, case_id, what):
         print(f"{i}/{n} {case_id} {what}", file=sys.stderr, flush=True)
 
-    summary = materialize.materialize_d4(case_list, {c["id"]: c for c in cases}, binary, data_dir=data_dir,
-                                         cache_root=repo_cache, delay_s=args.delay, progress=progress)
-    out = Path(args.summary_out) if args.summary_out else dataset_build.RESULTS_DATASETS_DIR / "D4_materialize.json"
+    fn = materialize.materialize_d4 if args.dataset_set == "d4" else materialize.materialize_d1
+    summary = fn(case_list, {c["id"]: c for c in cases}, binary, data_dir=data_dir, cache_root=repo_cache,
+                 delay_s=args.delay, progress=progress)
+    out = (Path(args.summary_out) if args.summary_out
+           else dataset_build.RESULTS_DATASETS_DIR / f"{name}_materialize.json")
     dataset_build.write_case_list(summary, out)
-    print(f"D4 materialize: {summary['case_count']} cases in {summary['wall_seconds']}s; "
+    print(f"{name} materialize: {summary['case_count']} cases in {summary['wall_seconds']}s; "
           f"actions {summary['action_counts']}; status counts {summary['status_counts']} "
           f"(case list: {summary['expected_status_counts']}); {len(summary['differences'])} case(s) differ")
     for d in summary["differences"]:

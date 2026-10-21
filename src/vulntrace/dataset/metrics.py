@@ -68,3 +68,47 @@ def summarize(per_case: list[dict[str, Any]], seed: int) -> dict[str, Any]:
         "any_hit": {"count": any_hit, "rate": any_hit / n if n else 0.0},
         "abstained": {"count": abstained, "rate": abstained / n if n else 0.0},
     }
+
+
+def cluster_bootstrap_ci(values: list[float], clusters: list[str], seed: int, n_resamples: int = DEFAULT_RESAMPLES,
+                         ci: float = DEFAULT_CI) -> dict[str, Any]:
+    """{mean, ci_low, ci_high, n, n_clusters}: percentile bootstrap that resamples whole
+    clusters with replacement (CP3 review finding 1: cases sharing one release range are not
+    independent). Each resample's statistic is the case-weighted mean over every case in the
+    drawn clusters, so the point estimate equals the plain case mean. With one cluster per
+    case this is the ordinary case bootstrap. Deterministic for a given seed."""
+    if len(values) != len(clusters):
+        raise ValueError("values and clusters must have the same length")
+    n = len(values)
+    if n == 0:
+        return {"mean": 0.0, "ci_low": 0.0, "ci_high": 0.0, "n": 0, "n_clusters": 0}
+    point = sum(values) / n
+    groups: dict[str, list[float]] = {}
+    for v, c in zip(values, clusters):
+        groups.setdefault(c, []).append(v)
+    keys = sorted(groups)  # fixed order: the result must not depend on input order
+    sums = [sum(groups[k]) for k in keys]
+    sizes = [len(groups[k]) for k in keys]
+    g = len(keys)
+    if g < 2:
+        return {"mean": point, "ci_low": point, "ci_high": point, "n": n, "n_clusters": g}
+    rng = random.Random(seed)
+    means = []
+    for _ in range(n_resamples):
+        idx = [rng.randrange(g) for _ in range(g)]
+        means.append(sum(sums[i] for i in idx) / sum(sizes[i] for i in idx))
+    means.sort()
+    lo = means[int((1 - ci) / 2 * n_resamples)]
+    hi = means[min(int((1 + ci) / 2 * n_resamples), n_resamples - 1)]
+    return {"mean": point, "ci_low": lo, "ci_high": hi, "n": n, "n_clusters": g}
+
+
+def summarize_clustered(per_case: list[dict[str, Any]], clusters: list[str], seed: int) -> dict[str, Any]:
+    """`summarize`, plus cluster-bootstrap intervals for precision, recall and F1 under
+    `cluster_*` keys (the case-bootstrap ones are kept so the widening can be reported)."""
+    out = summarize(per_case, seed)
+    p_vals = [(c["precision"], k) for c, k in zip(per_case, clusters) if c["precision"] is not None]
+    out["cluster_precision"] = cluster_bootstrap_ci([v for v, _ in p_vals], [k for _, k in p_vals], seed)
+    out["cluster_recall"] = cluster_bootstrap_ci([c["recall"] for c in per_case], clusters, seed + 1)
+    out["cluster_f1"] = cluster_bootstrap_ci([c["f1"] for c in per_case], clusters, seed + 2)
+    return out

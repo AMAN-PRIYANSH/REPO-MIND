@@ -129,9 +129,16 @@ def test_committed_cp2_doc_is_generated_and_fully_explained():
 
 
 def _metric_summary(values, seed=1):
+    from vulntrace.dataset.metrics import cluster_bootstrap_ci
+
+    clusters = [str(i) for i in range(len(values))]
     return {
+        "n_cases": len(values),
         "precision": bootstrap_ci(values, seed), "recall": bootstrap_ci(values, seed + 1),
         "f1": bootstrap_ci(values, seed + 2),
+        "cluster_precision": cluster_bootstrap_ci(values, clusters, seed),
+        "cluster_recall": cluster_bootstrap_ci(values, clusters, seed + 1),
+        "cluster_f1": cluster_bootstrap_ci(values, clusters, seed + 2),
         "exact_match": {"count": 1, "rate": 0.5}, "any_hit": {"count": 2, "rate": 1.0},
         "abstained": {"count": 0, "rate": 0.0},
     }
@@ -145,17 +152,27 @@ def test_render_cp3_doc_includes_every_section():
         "scored_count": 2, "case_count": 2, "cutoff": "2026-06-30",
         "summary_core": _metric_summary([0.5, 1.0]), "summary_core_derived": _metric_summary([0.3, 0.6]),
         "summary_core_pre_cutoff": _metric_summary([0.5]), "summary_core_post_cutoff": _metric_summary([1.0]),
+        "summary_core_undated": _metric_summary([0.25]), "cluster_count": 2,
     }
     id_search = {
         **e0, "candidate_set_size": {"n": 2, "small_le_10": 1, "medium_11_100": 0, "large": 1,
                                      "large_threshold": 100},
         "gold_not_in_candidates_count": 1,
+        "summary_core_no_truncated": _metric_summary([0.5]), "summary_core_no_rclone": _metric_summary([1.0]),
     }
     ceiling = {"cases_checked": 2, "cases_with_missing_core_symbol": 1,
               "missing_symbol_counts_by_reason": {"EXISTS_UNCHANGED": 1, "NOT_FOUND_EITHER_VERSION": 0,
                                                   "MATCHING_PROBLEM": 0, "OTHER": 0},
               "examples": [{"case_id": "GO-X", "symbol": "F", "reason": "EXISTS_UNCHANGED"}]}
-    doc = render_cp3_doc(d1, d4, e0, id_search, ceiling, "test")
+    materialized = {"D4": {"dataset": "D4", "case_count": 2, "action_counts": {"built": 2},
+                           "status_counts": {"AVAILABLE": 2}, "expected_status_counts": {"AVAILABLE": 2},
+                           "differences": [{"id": "GO-Y", "differences": ["status A -> B"]}]}}
+    doc = render_cp3_doc(d1, d4, e0, id_search, ceiling, "test", materialized)
+    assert "## Evidence re-materialisation (CP4 task 0a)" in doc and "`GO-Y`: status A -> B" in doc
+    assert "| no `created` date (undated) | 1 |" in doc
+    assert "| Without TRUNCATED | 1 |" in doc and "| Without the nine-case rclone cluster | 1 |" in doc
+    assert "### How much the intervals widen under cluster resampling" in doc
+    assert "(2 clusters)" in doc
     assert "# CP3 results: datasets and baselines" in doc
     assert "## D1 (Mode 1 symbol identification)" in doc
     assert "## D4 (Mode 2 investigation)" in doc
@@ -173,7 +190,7 @@ def test_render_cp3_doc_handles_zero_explored_without_crashing():
     empty_summary = _metric_summary([])
     e0 = {"scored_count": 0, "case_count": 0, "cutoff": "2026-06-30", "summary_core": empty_summary,
          "summary_core_derived": empty_summary, "summary_core_pre_cutoff": empty_summary,
-         "summary_core_post_cutoff": empty_summary}
+         "summary_core_post_cutoff": empty_summary, "summary_core_undated": empty_summary}
     id_search = {**e0, "candidate_set_size": {"n": 0, "small_le_10": 0, "medium_11_100": 0, "large": 0,
                                               "large_threshold": 100}, "gold_not_in_candidates_count": 0}
     ceiling = {"cases_checked": 0, "cases_with_missing_core_symbol": 0,

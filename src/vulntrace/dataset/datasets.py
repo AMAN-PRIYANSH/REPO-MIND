@@ -20,6 +20,11 @@ from vulntrace.dataset.report import ReportError, parse_report_file
 STDLIB_MODULES = {"std", "cmd"}
 CONTAMINATION_CUTOFF = "2026-06-30"  # placeholder until a model is chosen (CP5; CP3.md task spec)
 
+DATE_PRE, DATE_POST, DATE_UNDATED = "pre", "post", "undated"
+# CP3 review finding 1: nine post-cutoff rclone advisories (GO-2026-6181..6199) share this one
+# 445-candidate range. Results are also reported without them.
+RCLONE_CLUSTER = "github.com/rclone/rclone@1.74.4..1.75.0"
+
 D1_TARGET = 150
 D4_TARGET = 120
 D4_LARGE_TARGET = 25
@@ -79,6 +84,14 @@ def d4_cluster_key(case: dict[str, Any]) -> str | None:
 
 def eligible_for_d4(case: dict[str, Any]) -> bool:
     return eligible_for_d1(case) and pick_d4_module(case) is not None
+
+
+def date_bucket(created: str | None, cutoff: str = CONTAMINATION_CUTOFF) -> str:
+    """`pre` / `post` the contamination cutoff, or `undated` when the report has no created
+    date (CP3 review finding 2: 14 D4 cases had been counted as pre-cutoff)."""
+    if not created:
+        return DATE_UNDATED
+    return DATE_POST if created > cutoff else DATE_PRE
 
 
 def _created_year(case: dict[str, Any]) -> str:

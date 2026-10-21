@@ -277,6 +277,58 @@ def _ci_cell(m: dict[str, Any]) -> str:
     return f"{m['mean']:.3f} [{m['ci_low']:.3f}, {m['ci_high']:.3f}] (n={m['n']})"
 
 
+def _cluster_cell(summary: dict[str, Any], metric: str) -> str:
+    m = summary.get(f"cluster_{metric}")
+    if m is None:
+        return "-"
+    return f"[{m['ci_low']:.3f}, {m['ci_high']:.3f}] ({m['n_clusters']} clusters)"
+
+
+def _metric_rows(summary: dict[str, Any]) -> list[str]:
+    return [f"| {label} | {_ci_cell(summary[metric])} | {_cluster_cell(summary, metric)} |"
+            for label, metric in (("Precision", "precision"), ("Recall", "recall"), ("F1", "f1"))]
+
+
+def _split_rows(report: dict[str, Any]) -> list[str]:
+    cutoff = report["cutoff"]
+    out = []
+    for key, label in (("summary_core_pre_cutoff", f"created ≤ {cutoff}"),
+                       ("summary_core_post_cutoff", f"created > {cutoff}"),
+                       ("summary_core_undated", "no `created` date (undated)")):
+        if key not in report:
+            continue
+        sm = report[key]
+        out.append(f"| {label} | {sm['n_cases']} | {_ci_cell(sm['precision'])} | {_ci_cell(sm['recall'])} | "
+                   f"{_ci_cell(sm['f1'])} | {_cluster_cell(sm, 'f1')} |")
+    return out
+
+
+def _width(m: dict[str, Any] | None) -> float | None:
+    return None if m is None else m["ci_high"] - m["ci_low"]
+
+
+def _widening_rows(name: str, summary: dict[str, Any]) -> list[str]:
+    out = []
+    for metric in ("precision", "recall", "f1"):
+        w_case, w_cl = _width(summary.get(metric)), _width(summary.get(f"cluster_{metric}"))
+        if w_case is None or w_cl is None:
+            continue
+        ratio = f"{w_cl / w_case:.2f}×" if w_case > 0 else "-"
+        out.append(f"| {name} | {metric} | {w_case:.3f} | {w_cl:.3f} | {ratio} |")
+    return out
+
+
+def _materialize_lines(m: dict[str, Any] | None) -> list[str]:
+    if m is None:
+        return ["(no re-materialisation summary found)"]
+    lines = [f"- {m['dataset']}: {m['case_count']} cases; actions {m['action_counts']}; status counts "
+             f"{m['status_counts']} (committed case list: {m['expected_status_counts']}).",
+             f"- Cases whose status or counts differ from the committed case list: {len(m['differences'])}."]
+    for d in m["differences"]:
+        lines.append(f"  - `{d['id']}`: {'; '.join(d['differences'])}")
+    return lines
+
+
 def _dataset_status_lines(summary: dict[str, Any]) -> list[str]:
     counts = ", ".join(f"`{k}` {v}" for k, v in sorted(summary["status_counts"].items()))
     return [f"- Sample: {summary['sample_count']} cases (eligible pool: {summary['eligible_count']}, "
@@ -284,7 +336,8 @@ def _dataset_status_lines(summary: dict[str, Any]) -> list[str]:
 
 
 def render_cp3_doc(d1: dict[str, Any], d4: dict[str, Any], e0: dict[str, Any], id_search: dict[str, Any],
-                   ceiling: dict[str, Any], source: str) -> str:
+                   ceiling: dict[str, Any], source: str, materialized: dict[str, dict] | None = None) -> str:
+    materialized = materialized or {}
     lines = [
         "# CP3 results: datasets and baselines",
         "",
@@ -300,7 +353,20 @@ def render_cp3_doc(d1: dict[str, Any], d4: dict[str, Any], e0: dict[str, Any], i
         f"- Explored {d4['explored_count']} of {d4['eligible_count']} eligible cases while searching for cases "
         f"with more than 100 candidates; pool exhausted: {d4['pool_exhausted']}.",
         f"- Cases found with more than 100 candidates: {d4['large_found']} (target {d4['large_target']}).",
+        *([f"- Distinct release ranges (clusters): {id_search['cluster_count']} of {id_search['scored_count']} "
+           "scored cases (CP3 review finding 1)."] if "cluster_count" in id_search else []),
         "",
+        *([
+            "## Evidence re-materialisation (CP4 task 0a)",
+            "",
+            "CP3's bulky evidence was not kept, so every number below is computed from evidence rebuilt in CP4 "
+            "by `python -m vulntrace dataset materialize` for exactly the committed case IDs (no re-selection). "
+            "The case lists above are CP3's, unchanged.",
+            "",
+            *_materialize_lines(materialized.get("D1")),
+            *_materialize_lines(materialized.get("D4")),
+            "",
+        ] if materialized else []),
         "## Candidate-set size distribution (D4)",
         "",
         f"n={id_search['candidate_set_size']['n']}.",
@@ -311,63 +377,76 @@ def render_cp3_doc(d1: dict[str, Any], d4: dict[str, Any], e0: dict[str, Any], i
         f"{id_search['candidate_set_size']['large']} |",
         "",
         f"Gold-not-in-candidates (ceiling limit, reported separately, not counted as a retrieval failure): "
-        f"{id_search['gold_not_in_candidates_count']} of {id_search['scored_count']} scored cases.",
+        f"{id_search['gold_not_in_candidates_count']} of {id_search['scored_count']} scored cases have **no** core "
+        "symbol among the candidates (this includes cases with no candidates at all). The ceiling investigation "
+        "below counts the wider set of cases with **at least one** core symbol missing.",
         "",
         "## E0 baseline (D1): every changed function predicted vulnerable",
         "",
-        f"Scored {e0['scored_count']}/{e0['case_count']} cases. Metrics against core symbols (95% bootstrap CI, "
-        f"raw n):",
+        f"Scored {e0['scored_count']}/{e0['case_count']} cases in {e0.get('cluster_count', '?')} clusters "
+        "(cluster = the set of fix commits; advisories fixed by the same commit share evidence). Metrics against "
+        "core symbols, 95% case-bootstrap CI with raw n, and the 95% cluster-bootstrap CI (CP4 task 0b):",
         "",
-        "| Metric | Value |",
-        "|---|---|",
-        f"| Precision | {_ci_cell(e0['summary_core']['precision'])} |",
-        f"| Recall | {_ci_cell(e0['summary_core']['recall'])} |",
-        f"| F1 | {_ci_cell(e0['summary_core']['f1'])} |",
-        f"| Exact match | {_pct(e0['summary_core']['exact_match'])} |",
-        f"| Any-hit | {_pct(e0['summary_core']['any_hit'])} |",
-        f"| Abstained | {_pct(e0['summary_core']['abstained'])} |",
+        "| Metric | Value, case CI (n) | Cluster CI |",
+        "|---|---|---|",
+        *_metric_rows(e0["summary_core"]),
+        f"| Exact match | {_pct(e0['summary_core']['exact_match'])} | |",
+        f"| Any-hit | {_pct(e0['summary_core']['any_hit'])} | |",
+        f"| Abstained | {_pct(e0['summary_core']['abstained'])} | |",
         "",
         "Against core ∪ derived symbols:",
         "",
-        "| Metric | Value |",
-        "|---|---|",
-        f"| Precision | {_ci_cell(e0['summary_core_derived']['precision'])} |",
-        f"| Recall | {_ci_cell(e0['summary_core_derived']['recall'])} |",
-        f"| F1 | {_ci_cell(e0['summary_core_derived']['f1'])} |",
+        "| Metric | Value, case CI (n) | Cluster CI |",
+        "|---|---|---|",
+        *_metric_rows(e0["summary_core_derived"]),
         "",
         f"Split by `created` date against the placeholder cutoff `{e0['cutoff']}` (CP5 will use the evaluated "
-        "model's real training cutoff instead):",
+        "model's real training cutoff instead). Cases with no `created` date have their own bucket (CP4 task 0c; "
+        "CP3 had counted them as pre-cutoff):",
         "",
-        "| Split | Precision | Recall | F1 |",
-        "|---|---|---|---|",
-        f"| created ≤ {e0['cutoff']} | {_ci_cell(e0['summary_core_pre_cutoff']['precision'])} | "
-        f"{_ci_cell(e0['summary_core_pre_cutoff']['recall'])} | {_ci_cell(e0['summary_core_pre_cutoff']['f1'])} |",
-        f"| created > {e0['cutoff']} | {_ci_cell(e0['summary_core_post_cutoff']['precision'])} | "
-        f"{_ci_cell(e0['summary_core_post_cutoff']['recall'])} | {_ci_cell(e0['summary_core_post_cutoff']['f1'])} |",
+        "| Split | Cases | Precision | Recall | F1 | F1 cluster CI |",
+        "|---|---|---|---|---|---|",
+        *_split_rows(e0),
         "",
         "## B-ID baseline (D4): commit-message identifier search",
         "",
-        f"Scored {id_search['scored_count']}/{id_search['case_count']} cases. Metrics against core symbols:",
+        f"Scored {id_search['scored_count']}/{id_search['case_count']} cases in "
+        f"{id_search.get('cluster_count', '?')} clusters (cluster = module + vulnerable_at + fixed version: cases "
+        "with an identical release range). Metrics against core symbols:",
         "",
-        "| Metric | Value |",
-        "|---|---|",
-        f"| Precision | {_ci_cell(id_search['summary_core']['precision'])} |",
-        f"| Recall | {_ci_cell(id_search['summary_core']['recall'])} |",
-        f"| F1 | {_ci_cell(id_search['summary_core']['f1'])} |",
-        f"| Exact match | {_pct(id_search['summary_core']['exact_match'])} |",
-        f"| Any-hit | {_pct(id_search['summary_core']['any_hit'])} |",
-        f"| Abstained (no commit named the advisory) | {_pct(id_search['summary_core']['abstained'])} |",
+        "| Metric | Value, case CI (n) | Cluster CI |",
+        "|---|---|---|",
+        *_metric_rows(id_search["summary_core"]),
+        f"| Exact match | {_pct(id_search['summary_core']['exact_match'])} | |",
+        f"| Any-hit | {_pct(id_search['summary_core']['any_hit'])} | |",
+        f"| Abstained (no commit named the advisory) | {_pct(id_search['summary_core']['abstained'])} | |",
         "",
         f"Split by `created` date against `{id_search['cutoff']}`:",
         "",
-        "| Split | Precision | Recall | F1 |",
-        "|---|---|---|---|",
-        f"| created ≤ {id_search['cutoff']} | {_ci_cell(id_search['summary_core_pre_cutoff']['precision'])} | "
-        f"{_ci_cell(id_search['summary_core_pre_cutoff']['recall'])} | "
-        f"{_ci_cell(id_search['summary_core_pre_cutoff']['f1'])} |",
-        f"| created > {id_search['cutoff']} | {_ci_cell(id_search['summary_core_post_cutoff']['precision'])} | "
-        f"{_ci_cell(id_search['summary_core_post_cutoff']['recall'])} | "
-        f"{_ci_cell(id_search['summary_core_post_cutoff']['f1'])} |",
+        "| Split | Cases | Precision | Recall | F1 | F1 cluster CI |",
+        "|---|---|---|---|---|---|",
+        *_split_rows(id_search),
+        "",
+        *([
+            "Subsets (CP3 review findings 1 and 3). `TRUNCATED` ranges were walked over only their newest 500 "
+            "commits, so B-ID on them is a lower bound; the nine rclone advisories share one range:",
+            "",
+            "| Subset | Cases | Precision | Recall | F1 | F1 cluster CI |",
+            "|---|---|---|---|---|---|",
+            *[f"| {label} | {id_search[k]['n_cases']} | {_ci_cell(id_search[k]['precision'])} | "
+              f"{_ci_cell(id_search[k]['recall'])} | {_ci_cell(id_search[k]['f1'])} | "
+              f"{_cluster_cell(id_search[k], 'f1')} |"
+              for k, label in (("summary_core", "All"), ("summary_core_no_truncated", "Without TRUNCATED"),
+                               ("summary_core_no_rclone", "Without the nine-case rclone cluster"))
+              if k in id_search],
+            "",
+        ] if "summary_core_no_truncated" in id_search else []),
+        "### How much the intervals widen under cluster resampling",
+        "",
+        "| Baseline | Metric | Case-CI width | Cluster-CI width | Ratio |",
+        "|---|---|---|---|---|",
+        *_widening_rows("E0 (D1)", e0["summary_core"]),
+        *_widening_rows("B-ID (D4)", id_search["summary_core"]),
         "",
         "## Ceiling investigation (open question Q8)",
         "",
@@ -436,4 +515,9 @@ def render_cp3_doc_from_dir(score_dir: Path, source: str) -> str:
         if p.is_file():
             release_ranges_by_id[c["id"]] = json.loads(p.read_text(encoding="utf-8"))
     ceiling_result = ceiling_mod.run_investigation(cases_by_id, release_ranges_by_id)
-    return render_cp3_doc(d1, d4, e0, id_search, ceiling_result, source)
+    materialized = {}
+    for name in ("D1", "D4"):
+        mp = dataset_build.RESULTS_DATASETS_DIR / f"{name}_materialize.json"
+        if mp.is_file():
+            materialized[name] = json.loads(mp.read_text(encoding="utf-8"))
+    return render_cp3_doc(d1, d4, e0, id_search, ceiling_result, source, materialized)

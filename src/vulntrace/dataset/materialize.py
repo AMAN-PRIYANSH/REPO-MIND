@@ -1,4 +1,4 @@
-"""Re-materialise D4 release-range evidence from the committed case list (CP4 task 0a).
+"""Re-materialise D4 (and D1) evidence from the committed case lists (CP4 task 0a).
 
 CP3 committed only the D4 case list (`docs/results/datasets/D4_cases.json`); the bulky
 per-case evidence lived in a gitignored `data/` directory on an earlier session's machine.
@@ -24,7 +24,7 @@ import time
 from pathlib import Path
 from typing import Any, Callable
 
-from vulntrace.dataset import datasets, git_fetch, release_range
+from vulntrace.dataset import datasets, fix_evidence, git_fetch, release_range
 from vulntrace.dataset.build import DATA_DIR
 
 CODE_SCHEMA_VERSION = "1.0"
@@ -217,6 +217,65 @@ def materialize_d4(case_list: dict[str, Any], cases_by_id: dict[str, dict], bina
         action_counts[r["action"]] = action_counts.get(r["action"], 0) + 1
     return {
         "dataset": "D4", "case_count": len(entries), "status_counts": status_counts,
+        "expected_status_counts": case_list.get("status_counts"), "action_counts": action_counts,
+        "differences": [{"id": r["id"], "differences": r["differences"]} for r in rows if r["differences"]],
+        "wall_seconds": round(time.monotonic() - started, 1), "cases": rows,
+    }
+
+
+def d1_cluster_key(case: dict[str, Any]) -> str:
+    """D1 cluster key: the set of fix commits. Two advisories fixed by the same commit(s)
+    share identical FixEvidence, so they are one statistical unit for E0."""
+    return ",".join(sorted(f"{c['owner']}/{c['repo']}@{c['sha']}" for c in case["fix_commits"])) or case["id"]
+
+
+def materialize_d1(case_list: dict[str, Any], cases_by_id: dict[str, dict], binary, data_dir: Path = DATA_DIR,
+                   cache_root: Path | None = None, runner=subprocess.run, delay_s: float = DEFAULT_DELAY_S,
+                   build_evidence: Callable[..., dict] | None = None,
+                   progress: Callable[[int, int, str, str], None] | None = None,
+                   sleep: Callable[[float], None] = time.sleep) -> dict[str, Any]:
+    """D1 counterpart of `materialize_d4`, needed so CP4 task 0b can re-score E0 with cluster
+    intervals: rebuilds `data/fix_evidence/<id>.json` for exactly the committed D1 IDs."""
+    build_evidence = build_evidence or (lambda case: fix_evidence.build_fix_evidence(
+        case["id"], case["fix_commits"], binary=binary, cache_root=cache_root, runner=runner))
+    out_dir = data_dir / "fix_evidence"
+    started = time.monotonic()
+    rows = []
+    entries = sorted(case_list["cases"], key=lambda c: c["id"])
+    for i, expected in enumerate(entries, start=1):
+        case_id = expected["id"]
+        t0 = time.monotonic()
+        case = cases_by_id.get(case_id)
+        if case is None:
+            rows.append({"id": case_id, "action": "missing_from_vulndb", "status": None,
+                         "differences": ["case id not found in the pinned vulndb snapshot"], "seconds": 0.0})
+            continue
+        ev = _load(out_dir / f"{case_id}.json")
+        if ev is not None and ev.get("case_id") == case_id:
+            action = "skipped"
+        else:
+            action = "built"
+            ev = build_evidence(case)
+            _write_atomic(out_dir / f"{case_id}.json", ev)
+        diffs = []
+        if expected["status"] != ev["status"]:
+            diffs.append(f"status {expected['status']} -> {ev['status']}")
+        if expected.get("candidate_count") != len(ev["candidates"]):
+            diffs.append(f"candidate_count {expected.get('candidate_count')} -> {len(ev['candidates'])}")
+        rows.append({"id": case_id, "action": action, "status": ev["status"], "candidate_count": len(ev["candidates"]),
+                     "cluster_key": d1_cluster_key(case), "differences": diffs,
+                     "seconds": round(time.monotonic() - t0, 2)})
+        if progress is not None:
+            progress(i, len(entries), case_id, f"{action} {ev['status']}")
+        if action == "built" and delay_s > 0 and i < len(entries):
+            sleep(delay_s)
+    status_counts: dict[str, int] = {}
+    action_counts: dict[str, int] = {}
+    for r in rows:
+        status_counts[str(r["status"])] = status_counts.get(str(r["status"]), 0) + 1
+        action_counts[r["action"]] = action_counts.get(r["action"], 0) + 1
+    return {
+        "dataset": "D1", "case_count": len(entries), "status_counts": status_counts,
         "expected_status_counts": case_list.get("status_counts"), "action_counts": action_counts,
         "differences": [{"id": r["id"], "differences": r["differences"]} for r in rows if r["differences"]],
         "wall_seconds": round(time.monotonic() - started, 1), "cases": rows,
