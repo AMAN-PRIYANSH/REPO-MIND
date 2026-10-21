@@ -9,7 +9,8 @@ These rules apply in every session, before and above any other instruction in a 
 1. Read `docs/progress/STATUS.md`. It says which checkpoint is current and what is already done.
 2. Read the current checkpoint's specification in `docs/implementation/checkpoints/`.
 3. Read only the design documents that the checkpoint lists as required reading.
-4. Run `git status` and `git log --oneline -10`. If the working tree is not clean or the branch is not the one STATUS.md names, stop and report.
+4. Run `git status` and `git log --oneline -10`. If the working tree is not clean, stop and report.
+5. Follow the branch rules in section 5 before writing anything.
 
 ## 2. Scope
 
@@ -33,12 +34,24 @@ These rules apply in every session, before and above any other instruction in a 
 - Never invent numbers. Results in `docs/results/` must come from files produced by code in this repository.
 - Never change a fixture's truth label or a test to make a failure disappear. Report it.
 
-## 5. Git safety
+## 5. Git safety and branches
 
-- Work on the branch named in STATUS.md. Never commit directly to `main`.
+Branches:
+
+- Work on the branch this session was assigned. Claude Code cloud sessions create their own branch (named like `claude/...`); use it. Do not create other branches. Never commit directly to `main`.
+- Record the session branch in `docs/progress/STATUS.md` ("Branch in use" and the ledger) in your first commit.
+- **Continuing a checkpoint that an earlier session started.** `main` only changes when a checkpoint is approved, so an earlier session's work lives on its own branch. Before writing anything:
+  1. `git fetch origin` and list remote branches with `git for-each-ref --sort=-committerdate refs/remotes/origin --format='%(refname:short) %(committerdate:iso)'`.
+  2. For each branch other than `main`, read its status file with `git show <branch>:docs/progress/STATUS.md`.
+  3. A branch is a **continuation candidate** if its current checkpoint is the same as on `main` and its state is `IN_PROGRESS` or `CHANGES_REQUESTED`.
+  4. If there is exactly one candidate (or several, where the most recent one contains all the others), fast-forward your session branch onto it: `git merge --ff-only <branch>`. Your session branch is fresh from `main`, so this is a fast-forward. Then continue from its handoff notes.
+  5. If candidates have diverged, or the fast-forward fails, stop and report. Never merge diverged work yourself.
+- If a checkpoint is `CHANGES_REQUESTED`, continue from the branch that was reviewed (found the same way).
+
+Safety:
 - Commit after every completed task inside a checkpoint (small commits), so a usage-limit stop loses nothing.
 - After each commit, update the task list in `docs/progress/STATUS.md` in the same or the next commit.
-- Push the branch after each commit if push works. If push fails, report it; never change remotes or credentials.
+- Push your session branch after each commit, so the next session can find the work. If push fails, report it; never change remotes or credentials.
 - Never force-push, rewrite history, delete branches, or run destructive commands (`git reset --hard`, `git clean -fd`) on work you did not create.
 - Never commit secrets, `.env` files, virtual environments, caches, model files, built binaries, or large datasets.
 

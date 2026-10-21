@@ -1,7 +1,7 @@
 # CP1 - Ground truth and linker presence
 
 - Recommended model: **Sonnet 5.5**, effort **medium**
-- Branch: `cp1-ground-truth-linker`
+- Branch: this session's own `claude/...` branch (see `CLAUDE.md` section 5)
 - Target duration: 2-3 days
 - Required reading: `CLAUDE.md`, `docs/PROJECT_DEFINITION.md`, `docs/research/FEASIBILITY_FINDINGS.md` (trial 3), `docs/architecture/SYSTEM_ARCHITECTURE.md`, `docs/design/DATA_MODEL.md` (MethodResult, FixtureManifest), `docs/design/INTERFACES_AND_CONTRACTS.md` (sections 1 and 3), `docs/design/PROJECT_STRUCTURE.md`, `docs/testing/TESTING_STRATEGY.md`
 

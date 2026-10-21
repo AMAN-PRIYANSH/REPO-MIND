@@ -8,7 +8,7 @@ Only CP1 has a full specification now. Each later specification is written by th
 
 1. The supervising assistant writes `docs/implementation/checkpoints/CPn.md` and sets STATUS.md to `READY`.
 2. The owner starts Claude Code with the model and effort named in the spec and pastes `prompts/SESSION_WRAPPER.md`.
-3. Claude Code works on the checkpoint branch, committing after each task. If it hits a usage limit, it leaves handoff notes in STATUS.md; the owner pastes the same wrapper in a new session to continue.
+3. Claude Code works on its own session branch (`claude/...`), committing and pushing after each task. If it hits a usage limit, it leaves handoff notes in STATUS.md on that branch; the owner pastes the same wrapper in a new session, which finds that branch and fast-forwards onto it (`CLAUDE.md` section 5).
 4. Claude Code writes the report and sets `AWAITING_REVIEW`.
 5. The supervising assistant reviews the branch: runs or inspects tests, checks every acceptance criterion against evidence, reads samples of output. Result: `APPROVED` (branch merged into `main`) or `CHANGES_REQUESTED` (notes added to the spec).
 

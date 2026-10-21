@@ -10,14 +10,15 @@ You are continuing the VulnTrace AI build in this repository.
 
 Follow `CLAUDE.md` exactly. Then:
 
-1. Read `docs/progress/STATUS.md`. Identify the current checkpoint, its state, and its branch.
-2. If the state is `AWAITING_REVIEW`, `APPROVED` or `NOT_RELEASED`, do nothing except report the state and stop. Work is only allowed when the state is `READY`, `IN_PROGRESS` or `CHANGES_REQUESTED`.
-3. Read the checkpoint specification in `docs/implementation/checkpoints/`, and the documents it lists as required reading. If the state is `CHANGES_REQUESTED`, read the review notes at the end of that specification first.
-4. Check out the checkpoint branch (create it from `main` if it does not exist). Set the state to `IN_PROGRESS` in STATUS.md, copy the deliverables into the task list there, commit, and push.
-5. Check the environment before writing code: OS, Python, Go, git, Docker, and whether the network can reach what the checkpoint needs. Record the output in your report. Do not install anything system-wide. Project-local Python packages in a virtual environment are fine if the checkpoint allows them.
-6. Do the work in small steps. After each completed deliverable: run its tests, commit, push, tick it in STATUS.md.
-7. If you approach your usage limit, follow section 6 of `CLAUDE.md` and stop cleanly.
-8. When all acceptance criteria are met or blocked, write `docs/progress/reports/CPn_REPORT.md` in the format below, set the state to `AWAITING_REVIEW`, commit, push, and stop.
+1. Read `docs/progress/STATUS.md`. Identify the current checkpoint and its state.
+2. Follow the branch rules in section 5 of `CLAUDE.md`: stay on this session's own branch, and if an earlier session already started this checkpoint, find its branch and fast-forward onto it. Read STATUS.md again afterwards, because it may now contain progress and handoff notes.
+3. If the state is `AWAITING_REVIEW`, `APPROVED` or `NOT_RELEASED`, do nothing except report the state and stop. Work is only allowed when the state is `READY`, `IN_PROGRESS` or `CHANGES_REQUESTED`.
+4. Read the checkpoint specification in `docs/implementation/checkpoints/`, and the documents it lists as required reading. If the state is `CHANGES_REQUESTED`, read the review notes at the end of that specification first.
+5. Set the state to `IN_PROGRESS` and write this session's branch name into STATUS.md ("Branch in use" and the ledger). If starting fresh, copy the deliverables into the task list. Commit and push.
+6. Check the environment before writing code: OS, Python, Go, git, Docker, and whether the network can reach what the checkpoint needs. Record the output in your report. Do not install anything system-wide. Project-local Python packages in a virtual environment are fine if the checkpoint allows them.
+7. Do the work in small steps. After each completed deliverable: run its tests, commit, push, tick it in STATUS.md.
+8. If you approach your usage limit, follow section 6 of `CLAUDE.md` and stop cleanly.
+9. When all acceptance criteria are met or blocked, write `docs/progress/reports/CPn_REPORT.md` in the format below, set the state to `AWAITING_REVIEW`, commit, push, and stop. Do not open or merge a pull request; the supervising assistant handles merging into `main` after review.
 
 Never start the next checkpoint. Never claim a result you did not observe.
 

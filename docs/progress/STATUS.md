@@ -6,7 +6,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 
 - Current checkpoint: **CP1 - Ground truth and linker presence**
 - State: `READY` (released, not started)
-- Branch to work on: `cp1-ground-truth-linker` (create it from `main` if it does not exist)
+- Branch in use: (none yet - the first session writes its own `claude/...` session branch here; see `CLAUDE.md` section 5)
 - Specification: [checkpoints/CP1.md](../implementation/checkpoints/CP1.md)
 
 State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
@@ -15,7 +15,7 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 | CP | Title | State | Branch | Report |
 |---|---|---|---|---|
-| CP1 | Ground truth and linker presence | READY | cp1-ground-truth-linker | - |
+| CP1 | Ground truth and linker presence | READY | - | - |
 | CP2 | Go call-graph helper and verdict rule | NOT_RELEASED | - | - |
 | CP3 | Advisory dataset, fix evidence, release-range candidates, baselines | NOT_RELEASED | - | - |
 | CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | NOT_RELEASED | - | - |
