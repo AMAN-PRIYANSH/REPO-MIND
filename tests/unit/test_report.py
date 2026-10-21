@@ -220,3 +220,14 @@ def test_empty_report_body_is_a_report_error():
 def test_determinism():
     text = "id: GO-2020-0001\nmodules: []\nsummary: s\nreview_status: REVIEWED\n"
     assert parse_report(text, PATH, VULNDB_COMMIT) == parse_report(text, PATH, VULNDB_COMMIT)
+
+
+def test_details_comes_from_description_and_defaults_to_empty():
+    """CP4: `details` (vulndb `description`) is the second half of the Mode 2 query."""
+    base = "id: GO-2026-0001\nsummary: s\n"
+    with_desc = parse_report(base + "description: |-\n    Long text.\n", PATH, VULNDB_COMMIT)
+    without = parse_report(base, PATH, VULNDB_COMMIT)
+    validate("vuln_case", with_desc)
+    validate("vuln_case", without)
+    assert with_desc["details"] == "Long text."
+    assert without["details"] == ""

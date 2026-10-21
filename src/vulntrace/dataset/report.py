@@ -117,6 +117,9 @@ def parse_report(text: str, report_path: str, vulndb_commit: str) -> dict[str, A
         "id": report["id"],
         "aliases": _aliases(report),
         "summary": str(report.get("summary") or ""),
+        # vulndb's `description` (often absent: many GHSA-derived reports carry only a
+        # summary). Added in CP4 as the second half of the Mode 2 retrieval query.
+        "details": str(report.get("description") or ""),
         "review_status": report.get("review_status") or "UNREVIEWED",
         "withdrawn": "withdrawn" in report,
         "created": created,

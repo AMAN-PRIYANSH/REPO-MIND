@@ -65,6 +65,18 @@ def pick_d4_module(case: dict[str, Any]) -> dict[str, Any] | None:
     return pool[0] if pool else None
 
 
+def cluster_key(module: str, vulnerable_at: str, fixed_in: str) -> str:
+    """D4 cluster key (CP3 review finding 1): cases whose release range is identical - same
+    module, vulnerable_at and fixed version - are one statistical unit, not independent
+    cases. Also used as the retrieval `range_key` (one shared index per range)."""
+    return f"{module}@{vulnerable_at}..{fixed_in}"
+
+
+def d4_cluster_key(case: dict[str, Any]) -> str | None:
+    module = pick_d4_module(case)
+    return cluster_key(module["module"], module["vulnerable_at"], module["fixed_in"]) if module else None
+
+
 def eligible_for_d4(case: dict[str, Any]) -> bool:
     return eligible_for_d1(case) and pick_d4_module(case) is not None
 

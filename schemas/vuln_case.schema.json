@@ -12,6 +12,7 @@
     "id": {"type": "string", "pattern": "^GO-\\d{4}-\\d+$"},
     "aliases": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "summary": {"type": "string"},
+    "details": {"type": "string", "description": "vulndb report `description`; empty if absent (added in CP4, optional for older objects)"},
     "review_status": {"enum": ["REVIEWED", "UNREVIEWED", "NEEDS_REVIEW"]},
     "withdrawn": {"type": "boolean"},
     "created": {"oneOf": [{"type": "null"}, {"type": "string", "format": "date"}]},

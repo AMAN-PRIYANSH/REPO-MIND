@@ -61,13 +61,15 @@ def build_d4(cases: list[dict[str, Any]], binary, cache_root: Path | None = None
         summaries.append(_case_summary(by_id[case_id], rr["status"], {
             "candidate_count": len(rr["candidates"]), "commit_count": len(rr["commits"]),
             "large": len(rr["candidates"]) > datasets.D4_LARGE_THRESHOLD,
+            "cluster_key": datasets.d4_cluster_key(by_id[case_id]),
         }))
     summaries.sort(key=lambda s: s["id"])
     return {
         "dataset": "D4", "seed": seed, "target": target, "eligible_count": picked["eligible_count"],
         "explored_count": len(picked["explored"]), "pool_exhausted": picked["pool_exhausted"],
         "large_found": len(picked["large_ids"]), "large_target": datasets.D4_LARGE_TARGET,
-        "sample_count": len(picked["sample"]), "status_counts": status_counts, "cases": summaries,
+        "sample_count": len(picked["sample"]), "status_counts": status_counts,
+        "cluster_count": len({s["cluster_key"] for s in summaries}), "cases": summaries,
     }
 
 
