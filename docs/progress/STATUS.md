@@ -46,12 +46,12 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 
 Session branch note: this fix session runs in a container whose assigned branch is `claude/vulntrace-ai-build-v2kb3a`; it was fast-forwarded to `claude/vulntrace-ai-build-9qhbjg` (6a75cb7) and pushes to `claude/vulntrace-ai-build-9qhbjg` as the review notes and owner instruct.
 
-- [ ] FIX-1 Diagnose one case with local-disk cache, print git stderr
-- [ ] FIX-2 Resume rule (rebuild mismatching/failed results; never reuse a failed result)
-- [ ] FIX-3 Record first git error line in evidence; print top-3 errors in summary
-- [ ] FIX-4 Notebook: cache on /content/cache, gate cell
-- [ ] FIX-5 `eval retrieval` / `index build` refuse empty runs (one tested function, shared with the gate)
-- [ ] FIX-6 Tests for FIX-2, FIX-5, gate
+- [x] FIX-1 `dataset diagnose --case ID` added; run on GO-2020-0038 with a local-disk cache: AVAILABLE, 81 candidates, 0 differences. Drive hypothesis NOT testable here (no Drive)
+- [x] FIX-2 Resume rule (D4 and D1)
+- [x] FIX-3 `git_error` in evidence (+schema), top-3 errors in summary
+- [x] FIX-4 Notebook: local cache/evidence, gate cell
+- [x] FIX-5 `eval/evidence_gate.py`, used by both commands and the notebook
+- [~] FIX-6 Tests (unit: test_materialize_resume, test_evidence_gate; full-suite run pending)
 
 ## Handoff notes
 

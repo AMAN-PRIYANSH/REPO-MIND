@@ -77,8 +77,9 @@ def candidate_tags(module_path: str, version: str, fix_owner: str, fix_repo: str
 
 
 class ResolveResult:
-    def __init__(self, status: str, ref: str | None, commit: str | None):
+    def __init__(self, status: str, ref: str | None, commit: str | None, error: str | None = None):
         self.status, self.ref, self.commit = status, ref, commit
+        self.error = error  # first line of the git error behind a non-AVAILABLE status, if any
 
 
 def _shallow_since_date(timestamp: str) -> str:
@@ -103,11 +104,14 @@ def _resolve_pseudo_version(host: str, owner: str, repo: str, version: str, cach
     try:
         repo_dir = git_fetch.fetch_since(host, owner, repo, _shallow_since_date(timestamp),
                                          cache_root=cache_root, runner=runner, remote_url=remote_url)
-    except (git_fetch.GitFetchError, ValueError):
-        return ResolveResult(STATUS_PSEUDO_VERSION_UNRESOLVED, None, None)
+    except (git_fetch.GitFetchError, ValueError) as exc:
+        message = exc.message if isinstance(exc, git_fetch.GitFetchError) else str(exc)
+        return ResolveResult(STATUS_PSEUDO_VERSION_UNRESOLVED, None, None,
+                             git_fetch.first_error_line(message) or repr(exc))
     full_sha = git_fetch.resolve_abbreviated(repo_dir, short_sha, runner)
     if full_sha is None:
-        return ResolveResult(STATUS_PSEUDO_VERSION_UNRESOLVED, None, None)
+        return ResolveResult(STATUS_PSEUDO_VERSION_UNRESOLVED, None, None,
+                             f"abbreviated commit {short_sha} not found (or ambiguous) after fetching history")
     return ResolveResult(STATUS_AVAILABLE, full_sha, full_sha)
 
 
@@ -118,12 +122,13 @@ def resolve_version(host: str, owner: str, repo: str, module_path: str, version:
     forms `candidate_tags` gives, in order)."""
     if pseudo_version_parts(version) is not None:
         return _resolve_pseudo_version(host, owner, repo, version, cache_root, runner, remote_url)
+    errors: list[str] = []
     for tag in candidate_tags(module_path, version, owner, repo):
         _repo_dir, sha = git_fetch.fetch_ref(host, owner, repo, tag, depth=1, cache_root=cache_root, runner=runner,
-                                            remote_url=remote_url)
+                                            remote_url=remote_url, errors=errors)
         if sha is not None:
             return ResolveResult(STATUS_AVAILABLE, tag, sha)
-    return ResolveResult(STATUS_TAG_NOT_FOUND, None, None)
+    return ResolveResult(STATUS_TAG_NOT_FOUND, None, None, errors[0] if errors else None)
 
 
 def _diff_candidates(repo_dir: Path, from_sha: str, to_sha: str, runner,
@@ -250,9 +255,9 @@ def build_release_range(case_id: str, module: str, vulnerable_at: str, fixed_in:
         "candidates": [], "commits": [], "non_go_files_changed": [], "test_files_changed": 0,
     }
     if from_res.status != STATUS_AVAILABLE:
-        return {**base, "status": from_res.status}
+        return {**base, "status": from_res.status, "git_error": from_res.error}
     if to_res.status != STATUS_AVAILABLE:
-        return {**base, "status": to_res.status}
+        return {**base, "status": to_res.status, "git_error": to_res.error}
 
     repo_dir = git_fetch.repo_cache_dir(host, owner, repo, cache_root)
     diff = _diff_candidates(repo_dir, from_res.commit, to_res.commit, runner, binary, helper_timeout)

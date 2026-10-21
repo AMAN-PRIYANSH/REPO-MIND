@@ -27,4 +27,6 @@ def test_materialize_d1_builds_once_skips_on_resume_and_lists_differences(tmp_pa
     assert {r["cluster_key"] for r in s["cases"]} == {"o/r@" + "1" * 40}
     s2 = materialize.materialize_d1(case_list, cases, None, data_dir=tmp_path, build_evidence=build,
                                     sleep=lambda _: None)
-    assert calls == ["A", "B"] and s2["action_counts"] == {"skipped": 2}
+    # FIX-2: B's stored result differs from the case list (EMPTY expected), so it is rebuilt on a
+    # resume, not skipped; A matches and is skipped.
+    assert calls == ["A", "B", "B"] and s2["action_counts"] == {"skipped": 1, "built": 1}

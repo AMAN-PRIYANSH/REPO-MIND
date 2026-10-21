@@ -73,8 +73,10 @@ def test_materialize_builds_reuses_identical_ranges_resumes_and_reports_differen
     calls.clear()
     again = materialize.materialize_d4(case_list, cases, helper, data_dir=data, cache_root=cache,
                                        build_range=build_range, sleep=slept.append)
-    assert calls == []
-    assert [r["action"] for r in again["cases"]] == ["skipped", "skipped", "skipped"]
+    # FIX-2: C-3's stored result (TAG_NOT_FOUND) differs from the case list, so it is rebuilt.
+    assert calls == ["C-3"]
+    assert [r["action"] for r in again["cases"]] == ["skipped", "skipped", "built"]
+    assert "couldn't find remote ref" in again["cases"][2]["git_error"]  # FIX-3: git's own message is kept
 
 
 def test_doc_comment_and_signature_helpers():

@@ -24,6 +24,15 @@ class GitFetchError(Exception):
         self.message = message
 
 
+def first_error_line(text: str | None) -> str:
+    """First non-empty line of a git error message, shortened: what the evidence files and
+    the materialise summary record so a git failure is never reported as a bare "not found"."""
+    for line in (text or "").splitlines():
+        if line.strip():
+            return line.strip()[:300]
+    return ""
+
+
 def default_cache_root() -> Path:
     if os.environ.get("VULNTRACE_CACHE"):
         return Path(os.environ["VULNTRACE_CACHE"]) / "repos"
@@ -191,11 +200,14 @@ def resolve_abbreviated(repo_dir: Path, short_sha: str, runner=subprocess.run) -
 
 def fetch_ref(host: str, owner: str, repo: str, ref: str, depth: int | None = None,
               cache_root: Path | None = None, runner=subprocess.run,
-              timeout: float = DEFAULT_TIMEOUT_S, remote_url: str | None = None) -> tuple[Path, str | None]:
+              timeout: float = DEFAULT_TIMEOUT_S, remote_url: str | None = None,
+              errors: list[str] | None = None) -> tuple[Path, str | None]:
     """Fetch a tag, branch or commit `ref` (not necessarily a full SHA) into the cache clone.
     Returns (repo_dir, resolved_sha_or_None). Does not raise on a ref that does not exist
     (the caller decides what that means, e.g. TAG_NOT_FOUND); does raise GitFetchError on a
-    transport failure. `remote_url` is as in `fetch_commit`."""
+    transport failure. `remote_url` is as in `fetch_commit`. If `errors` is given, the first
+    line of git's stderr for a failed fetch is appended to it (the status stays "not found",
+    but the real message is no longer lost)."""
     repo_dir = repo_cache_dir(host, owner, repo, cache_root)
     _ensure_repo_initialised(repo_dir, host, owner, repo, runner, remote_url)
     args = ["git", "fetch", "origin", ref]
@@ -203,5 +215,10 @@ def fetch_ref(host: str, owner: str, repo: str, ref: str, depth: int | None = No
         args.insert(2, f"--depth={depth}")
     fetch = _run(runner, args, repo_dir, timeout=timeout)
     if fetch.returncode != 0:
+        if errors is not None:
+            errors.append(first_error_line(fetch.stderr or fetch.stdout) or f"git fetch exited {fetch.returncode}")
         return repo_dir, None
-    return repo_dir, resolve_tag(repo_dir, "FETCH_HEAD", runner)
+    sha = resolve_tag(repo_dir, "FETCH_HEAD", runner)
+    if sha is None and errors is not None:
+        errors.append(f"git fetch {ref} succeeded but FETCH_HEAD does not resolve to a commit")
+    return repo_dir, sha

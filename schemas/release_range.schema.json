@@ -17,7 +17,9 @@
     "commits": {"type": "array", "items": {"$ref": "#/$defs/commit"}},
     "non_go_files_changed": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "test_files_changed": {"type": "integer", "minimum": 0},
-    "status": {"enum": ["AVAILABLE", "TAG_NOT_FOUND", "PSEUDO_VERSION_UNRESOLVED", "EMPTY", "TRUNCATED"]}
+    "status": {"enum": ["AVAILABLE", "TAG_NOT_FOUND", "PSEUDO_VERSION_UNRESOLVED", "EMPTY", "TRUNCATED"]},
+    "git_error": {"type": ["string", "null"],
+                  "description": "First line of the git error behind a non-AVAILABLE status (CP4 FIX-3); absent or null when git gave none."}
   },
   "$defs": {
     "endpoint": {

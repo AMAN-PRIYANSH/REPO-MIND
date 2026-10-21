@@ -31,11 +31,16 @@ def test_notebook_has_no_outputs_and_no_paid_api():
 
 def test_notebook_steps_are_present_in_order():
     src = "\n".join("".join(c["source"]) for c in _cells() if c["cell_type"] == "code")
-    steps = ["git", "clone", "pip install -q -e \".[ml]\"", "dataset materialize --set d4", "check_embedder",
+    steps = ["git", "clone", "pip install -q -e \".[ml]\"", "dataset materialize --set d4", "evidence_gate",
+             "check_embedder",
              "index build --set d4", "eval retrieval", "results render --doc cp4", "zipfile"]
     positions = [src.index(s) for s in steps]
     assert positions == sorted(positions)
-    assert re.search(r"--data-dir \"\{WORK\}/data\"", src)  # cached on Drive (resumable)
+    # FIX-4: git cache and rebuilt evidence on the local disk; only embeddings/results on Drive
+    assert re.search(r"--data-dir \"\{DATA\}\"", src) and "{WORK}/data" not in src
+    assert 'DATA = "/content/data"' in src and 'CACHE = "/content/cache"' in src
+    assert 'os.environ["VULNTRACE_CACHE"] = CACHE' in src and "WORK}/cache" not in src
+    assert "raise SystemExit" in src  # the gate stops the notebook
 
 
 def test_plan_configs_parse_and_respect_q6():

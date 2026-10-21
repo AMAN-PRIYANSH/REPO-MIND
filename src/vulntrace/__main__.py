@@ -59,6 +59,13 @@ def build_parser() -> argparse.ArgumentParser:
     dmat.add_argument("--summary-out", default=None,
                       help="where to write the run summary (default: docs/results/datasets/D4|D1_materialize.json)")
 
+    ddiag = dsub.add_parser("diagnose", help="build ONE D4 case with the git cache where you point it and print "
+                                             "every git command's exit code and stderr (writes nothing to data/)")
+    ddiag.add_argument("--case", required=True, help="advisory id, e.g. GO-2020-0038")
+    ddiag.add_argument("--cases", default=None, help="case list (default: docs/results/datasets/D4_cases.json)")
+    ddiag.add_argument("--cache", default=None, help="vulndb cache directory")
+    ddiag.add_argument("--repo-cache", default=None, help="cache directory for fetched third-party repositories")
+
     ev = sub.add_parser("eval", help="baselines and evaluation (CP3+)")
     esub = ev.add_subparsers(dest="eval_command", required=True)
     es = esub.add_parser("symbols", help="symbol-identification baselines")
@@ -105,6 +112,7 @@ def _load_eval_set(args):
 
     from vulntrace.dataset import build as dataset_build
     from vulntrace.dataset import datasets
+    from vulntrace.eval import evidence_gate
     from vulntrace.eval import retrieval as er
 
     case_list_path = Path(args.cases) if args.cases else dataset_build.RESULTS_DATASETS_DIR / "D4_cases.json"
@@ -113,6 +121,11 @@ def _load_eval_set(args):
     data_dir = Path(args.data_dir) if args.data_dir else dataset_build.DATA_DIR
     ev_cases, ranges, notes = er.load_eval_set(case_list, {c["id"]: c for c in cases}, data_dir,
                                                allow_missing=args.allow_missing)
+    try:  # FIX-5: refuse empty or wrong evidence before anything is written
+        evidence_gate.require_valid_evidence(case_list, {c.case_id: c.status for c in ev_cases},
+                                             sum(len(chunks) for chunks in ranges.values()))
+    except evidence_gate.EvidenceGateError as exc:
+        raise er.HarnessError(str(exc)) from exc
     store = None
     if args.store == "pgvector":
         from vulntrace.retrieval.pgvector_store import PgVectorStore
@@ -263,6 +276,8 @@ def _cmd_dataset(args) -> int:
     repo_cache = Path(args.repo_cache) if args.repo_cache else None
     if args.dataset_command == "materialize":
         return _cmd_materialize(args, cases, binary, repo_cache)
+    if args.dataset_command == "diagnose":
+        return _cmd_diagnose(args, cases, binary, repo_cache)
     seed = args.seed if args.seed is not None else dataset_build.DEFAULT_SEED
 
     def progress(i, n, result):
@@ -282,6 +297,30 @@ def _cmd_dataset(args) -> int:
     print(f"{summary['dataset']}: {summary['sample_count']} cases (eligible {summary['eligible_count']}), "
          f"status counts {summary['status_counts']}")
     print(f"wrote {out}")
+    return EXIT_OK
+
+
+def _cmd_diagnose(args, cases, binary, repo_cache) -> int:
+    import json
+    import subprocess
+
+    from vulntrace.dataset import build as dataset_build
+    from vulntrace.dataset import git_fetch, materialize
+
+    case_list_path = Path(args.cases) if args.cases else dataset_build.RESULTS_DATASETS_DIR / "D4_cases.json"
+    case_list = json.loads(case_list_path.read_text(encoding="utf-8"))
+    expected = next((e for e in case_list["cases"] if e["id"] == args.case), None)
+    case = next((c for c in cases if c["id"] == args.case), None)
+    if case is None or expected is None:
+        print(f"error: {args.case} is not in both the vulndb snapshot and {case_list_path}", file=sys.stderr)
+        return EXIT_INVALID_INPUT
+    root = repo_cache or git_fetch.default_cache_root()
+    print(f"git cache root: {root}")
+    print(subprocess.run(["git", "--version"], capture_output=True, text=True).stdout.strip())
+    fs = subprocess.run(["stat", "-f", "-c", "filesystem type: %T", str(root.parent if root.exists() else Path("."))],
+                        capture_output=True, text=True)
+    print((fs.stdout or fs.stderr).strip())
+    materialize.diagnose_case(case, binary, cache_root=repo_cache, expected=expected)
     return EXIT_OK
 
 
@@ -313,6 +352,8 @@ def _cmd_materialize(args, cases, binary, repo_cache) -> int:
           f"(case list: {summary['expected_status_counts']}); {len(summary['differences'])} case(s) differ")
     for d in summary["differences"]:
         print(f"  DIFFERS {d['id']}: {'; '.join(d['differences'])}")
+    for e in summary.get("top_git_errors", []):
+        print(f"  git error x{e['count']} (e.g. {e['example_case']}): {e['message']}")
     print(f"wrote {out}")
     return EXIT_OK
 

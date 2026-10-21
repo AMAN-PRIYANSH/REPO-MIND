@@ -11,7 +11,9 @@ pinned vulndb commit:
   and body text the CP4 chunker needs (vulnerable-side body; fixed-side only for functions
   that exist only in the fixed version).
 
-Resumable (a case whose two files are both complete is skipped), sequential, with a small
+Resumable (a case is skipped only if both files are complete AND the stored result matches the
+committed case list's status and counts; a failed or mismatching result is rebuilt, never reused),
+sequential, with a small
 delay between cases that touch the network. Cases that share an identical range (same module,
 versions and repository: e.g. nine rclone advisories) are computed once and copied. Every case
 whose status or counts differ from the committed case list is reported, never hidden.
@@ -131,10 +133,41 @@ def _load(path: Path) -> dict[str, Any] | None:
         return None  # a half-written file from an interrupted run: recompute
 
 
-def is_complete(case_id: str, data_dir: Path = DATA_DIR) -> bool:
+def is_complete(case_id: str, data_dir: Path = DATA_DIR, expected: dict[str, Any] | None = None) -> bool:
+    """Both evidence files exist and are whole. With `expected` (the case's entry in the
+    committed case list) the stored result must also match its status and counts (FIX-2):
+    a failed result such as TAG_NOT_FOUND where AVAILABLE is expected is not "done"."""
     rr = _load(data_dir / "release_range" / f"{case_id}.json")
     code = _load(data_dir / "candidate_code" / f"{case_id}.json")
-    return rr is not None and code is not None and code.get("complete") is True and code["case_id"] == case_id
+    if rr is None or code is None or code.get("complete") is not True or code.get("case_id") != case_id:
+        return False
+    return expected is None or not _compare(expected, rr)
+
+
+_SHA_RE = re.compile(r"\b[0-9a-f]{40}\b")
+_REMOTE_REF_RE = re.compile(r"(couldn't find remote ref) \S+")
+_QUOTED_RE = re.compile(r"'[^']*'")
+
+
+def normalise_git_error(message: str) -> str:
+    """Group key for a git error line: the same failure for different tags/commits/paths
+    counts once."""
+    message = _SHA_RE.sub("<sha>", message)
+    message = _REMOTE_REF_RE.sub(r"\1 <ref>", message)
+    return _QUOTED_RE.sub("'<x>'", message)
+
+
+def top_git_errors(rows: list[dict[str, Any]], n: int = 3) -> list[dict[str, Any]]:
+    """The `n` most common git error messages among the rows (FIX-3), as
+    [{"message", "count", "example_case"}], most common first."""
+    counts: dict[str, list] = {}
+    for r in rows:
+        msg = r.get("git_error")
+        if msg:
+            entry = counts.setdefault(normalise_git_error(msg), [0, r["id"]])
+            entry[0] += 1
+    ranked = sorted(counts.items(), key=lambda kv: (-kv[1][0], kv[0]))[:n]
+    return [{"message": m, "count": c, "example_case": ex} for m, (c, ex) in ranked]
 
 
 def _compare(expected: dict[str, Any], rr: dict[str, Any]) -> list[str]:
@@ -174,13 +207,15 @@ def materialize_d4(case_list: dict[str, Any], cases_by_id: dict[str, dict], bina
                          "differences": ["case id not found in the pinned vulndb snapshot"], "seconds": 0.0})
             continue
         rkey = _reuse_key(case)
-        if is_complete(case_id, data_dir):
+        src = done_by_reuse_key.get(rkey) if rkey is not None else None
+        src_rr = _load(rr_dir / f"{src}.json") if src else None
+        if is_complete(case_id, data_dir, expected):
             action = "skipped"
             rr = _load(rr_dir / f"{case_id}.json")
-        elif rkey is not None and rkey in done_by_reuse_key:
+        elif src_rr is not None and not _compare(expected, src_rr):
+            # Only a result that matches the committed case list is ever copied (FIX-2).
             action = "reused"
-            src = done_by_reuse_key[rkey]
-            rr = {**_load(rr_dir / f"{src}.json"), "case_id": case_id}
+            rr = {**src_rr, "case_id": case_id}
             code = {**_load(code_dir / f"{src}.json"), "case_id": case_id, "copied_from": src}
             _write_atomic(rr_dir / f"{case_id}.json", rr)
             _write_atomic(code_dir / f"{case_id}.json", code)
@@ -198,13 +233,15 @@ def materialize_d4(case_list: dict[str, Any], cases_by_id: dict[str, dict], bina
                         "from_commit": rr["from"]["commit"], "to_commit": rr["to"]["commit"],
                         "candidates": {}, "missing_bodies": 0, "complete": True}
             _write_atomic(code_dir / f"{case_id}.json", code)
-        if rkey is not None and rkey not in done_by_reuse_key:
+        differences = _compare(expected, rr)
+        if rkey is not None and rkey not in done_by_reuse_key and not differences:
             done_by_reuse_key[rkey] = case_id
         code = _load(code_dir / f"{case_id}.json") or {}
         rows.append({"id": case_id, "action": action, "status": rr["status"],
                      "candidate_count": len(rr["candidates"]), "commit_count": len(rr["commits"]),
                      "missing_bodies": code.get("missing_bodies", 0), "cluster_key": range_key_for(case),
-                     "differences": _compare(expected, rr), "seconds": round(time.monotonic() - t0, 2)})
+                     "git_error": rr.get("git_error"),
+                     "differences": differences, "seconds": round(time.monotonic() - t0, 2)})
         if progress is not None:
             progress(i, len(entries), case_id, f"{action} {rr['status']}")
         if action == "built" and delay_s > 0 and i < len(entries):
@@ -219,8 +256,48 @@ def materialize_d4(case_list: dict[str, Any], cases_by_id: dict[str, dict], bina
         "dataset": "D4", "case_count": len(entries), "status_counts": status_counts,
         "expected_status_counts": case_list.get("status_counts"), "action_counts": action_counts,
         "differences": [{"id": r["id"], "differences": r["differences"]} for r in rows if r["differences"]],
+        "top_git_errors": top_git_errors(rows),
         "wall_seconds": round(time.monotonic() - started, 1), "cases": rows,
     }
+
+
+def diagnose_case(case: dict[str, Any], binary, cache_root: Path | None = None, runner=subprocess.run,
+                  print_line: Callable[[str], None] = print, build_range: Callable[..., dict] | None = None,
+                  expected: dict[str, Any] | None = None, max_ok_printed: int = 12) -> dict[str, Any]:
+    """FIX-1: build the ReleaseRange for ONE case and print every git command with its exit
+    code and stderr, so a git problem is seen as git reported it. Writes nothing to `data/`.
+    Returns {"status", "candidate_count", "git_error", "git_calls": [...]}."""
+    calls: list[dict[str, Any]] = []
+
+    def logging_runner(args, **kwargs):
+        t0 = time.monotonic()
+        p = runner(args, **kwargs)
+        if args and args[0] == "git":
+            rec = {"args": " ".join(map(str, args[1:])), "cwd": str(kwargs.get("cwd")), "returncode": p.returncode,
+                   "stderr": (p.stderr or "").strip()[:2000], "seconds": round(time.monotonic() - t0, 2)}
+            calls.append(rec)
+            # Every failure is printed; successes only until `max_ok_printed` (a range can have
+            # hundreds of per-commit `git diff` calls), the rest are counted.
+            shown = sum(1 for c in calls if c["returncode"] == 0)
+            if rec["returncode"] != 0 or shown <= max_ok_printed:
+                print_line(f"git {rec['args']}  [cwd {rec['cwd']}]  -> exit {rec['returncode']} in {rec['seconds']}s")
+                for line in rec["stderr"].splitlines()[:6]:
+                    print_line(f"    stderr: {line}")
+        return p
+
+    build_range = build_range or (lambda c, m: datasets.d4_candidate_count(c, m, binary, cache_root, logging_runner))
+    module = datasets.pick_d4_module(case)
+    rr = build_range(case, module)
+    result = {"id": case["id"], "module": module["module"], "status": rr["status"],
+              "candidate_count": len(rr["candidates"]), "git_error": rr.get("git_error"), "git_calls": calls}
+    if expected is not None:
+        result["differences"] = _compare(expected, rr)
+    ok = sum(1 for c in calls if c["returncode"] == 0)
+    print_line(f"{len(calls)} git calls: {ok} exit 0 ({max(0, ok - max_ok_printed)} not printed), {len(calls) - ok} failed")
+    print_line(f"{case['id']}: status {rr['status']}, {len(rr['candidates'])} candidates, "
+               f"git_error={rr.get('git_error')!r}"
+               + (f", differences from the case list: {result['differences'] or 'none'}" if expected else ""))
+    return result
 
 
 def d1_cluster_key(case: dict[str, Any]) -> str:
@@ -251,8 +328,9 @@ def materialize_d1(case_list: dict[str, Any], cases_by_id: dict[str, dict], bina
                          "differences": ["case id not found in the pinned vulndb snapshot"], "seconds": 0.0})
             continue
         ev = _load(out_dir / f"{case_id}.json")
-        if ev is not None and ev.get("case_id") == case_id:
-            action = "skipped"
+        if (ev is not None and ev.get("case_id") == case_id and expected["status"] == ev["status"]
+                and expected.get("candidate_count") == len(ev["candidates"])):
+            action = "skipped"  # only a stored result that matches the case list counts as done (FIX-2)
         else:
             action = "built"
             ev = build_evidence(case)
