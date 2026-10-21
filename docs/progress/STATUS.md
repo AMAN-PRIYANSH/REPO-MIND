@@ -31,7 +31,7 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 - [x] D1 Python package skeleton (pyproject, src/vulntrace, tests, .gitignore)
 - [x] D2 `doctor` command
 - [x] D3 Schemas (fixture_manifest, method_result)
-- [ ] D4 Fixture suite (>=12 cases, inlining case, manifest.json)
+- [x] D4 Fixture suite (>=12 cases, inlining case, manifest.json)
 - [ ] D5 Linker-presence method
 - [ ] D6 Scoring command (`fixtures score --method linker`)
 - [ ] D7 Tests (unit + integration)

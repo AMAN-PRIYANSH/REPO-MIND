@@ -1,0 +1,241 @@
+{
+  "schema_version": "1.0",
+  "module_dir": "fixtures/reachability",
+  "vulnerable_package": "vtfixtures/vulnlib",
+  "cases": [
+    {
+      "id": "direct_call",
+      "category": "DIRECT",
+      "main_package": "vtfixtures/cmd/direct_call",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main calls vulnlib.Parse directly."
+    },
+    {
+      "id": "safe_only",
+      "category": "SAFE_ONLY",
+      "main_package": "vtfixtures/cmd/safe_only",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "NOT_REACHABLE",
+      "rationale": "main imports vulnlib but calls only vulnlib.Safe; nothing calls Parse."
+    },
+    {
+      "id": "func_value_map",
+      "category": "FUNC_VALUE",
+      "main_package": "vtfixtures/cmd/func_value_map",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "vulnlib.Parse is stored in a map of function values and main calls the map entry (key defaults to \"parse\")."
+    },
+    {
+      "id": "reflect_method",
+      "category": "REFLECTION",
+      "main_package": "vtfixtures/cmd/reflect_method",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main calls Impl.Run through reflect MethodByName with a name assembled at run time (\"Run\"); Impl.Run calls Parse."
+    },
+    {
+      "id": "dead_code",
+      "category": "DEAD_CODE",
+      "main_package": "vtfixtures/cmd/dead_code",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "NOT_REACHABLE",
+      "rationale": "Parse is called only inside neverCalled(), which nothing calls."
+    },
+    {
+      "id": "interface_dispatch",
+      "category": "INTERFACE_DISPATCH",
+      "main_package": "vtfixtures/cmd/interface_dispatch",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main creates worker{}, stores it in a runner interface and calls Run; worker.Run calls Parse. The quiet{} branch never executes in practice (it needs more than 5 arguments), but worker is the value assigned by default."
+    },
+    {
+      "id": "interface_not_instantiated",
+      "category": "INTERFACE_NOT_INSTANTIATED",
+      "main_package": "vtfixtures/cmd/interface_not_instantiated",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "NOT_REACHABLE",
+      "rationale": "worker implements runner and its Run calls Parse, but no worker value is ever created; main uses only quiet{}."
+    },
+    {
+      "id": "method_value",
+      "category": "METHOD_VALUE",
+      "main_package": "vtfixtures/cmd/method_value",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main binds f := vulnlib.Impl{}.Run and calls f; Impl.Run calls Parse."
+    },
+    {
+      "id": "goroutine",
+      "category": "GOROUTINE",
+      "main_package": "vtfixtures/cmd/goroutine",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main starts a goroutine that calls Parse and waits for it."
+    },
+    {
+      "id": "init_imported",
+      "category": "INIT_IMPORTED",
+      "main_package": "vtfixtures/cmd/init_imported",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main imports vtfixtures/initdep, whose init() calls Parse; init runs before main."
+    },
+    {
+      "id": "build_tag_excluded",
+      "category": "BUILD_TAG_EXCLUDED",
+      "main_package": "vtfixtures/cmd/build_tag_excluded",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "NOT_REACHABLE",
+      "rationale": "The only call to Parse is in a file with //go:build vtexcluded; the default build excludes that file."
+    },
+    {
+      "id": "test_file_only",
+      "category": "TEST_FILE_ONLY",
+      "main_package": "vtfixtures/cmd/test_file_only",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "NOT_REACHABLE",
+      "rationale": "The only call to Parse is in main_test.go, which is not part of the built program."
+    },
+    {
+      "id": "generic_call",
+      "category": "GENERIC_CALL",
+      "main_package": "vtfixtures/cmd/generic_call",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main instantiates the generic function viaGeneric[string], which calls Parse."
+    },
+    {
+      "id": "inlined_small",
+      "category": "INLINED_SMALL",
+      "main_package": "vtfixtures/cmd/inlined_small",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "ParseTiny"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main calls vulnlib.ParseTiny, a one-line function the compiler can inline."
+    },
+    {
+      "id": "unsafe_func_pointer",
+      "category": "UNSAFE_FUNC_POINTER",
+      "main_package": "vtfixtures/cmd/unsafe_func_pointer",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Parse"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main copies a function value of Parse through unsafe.Pointer and calls it. Expected hard case for static analysis."
+    },
+    {
+      "id": "method_value_receiver",
+      "category": "METHOD_TARGET_VALUE",
+      "main_package": "vtfixtures/cmd/method_value_receiver",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "Impl.Run"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main calls Impl.Run on a value; the target is the method itself."
+    },
+    {
+      "id": "method_pointer_receiver",
+      "category": "METHOD_TARGET_POINTER",
+      "main_package": "vtfixtures/cmd/method_pointer_receiver",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "PImpl.Run"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main calls (*PImpl).Run through a pointer; the target is the method itself."
+    },
+    {
+      "id": "generic_target",
+      "category": "GENERIC_TARGET",
+      "main_package": "vtfixtures/cmd/generic_target",
+      "targets": [
+        {
+          "package": "vtfixtures/vulnlib",
+          "symbol": "ParseAny[T]"
+        }
+      ],
+      "truth": "REACHABLE",
+      "rationale": "main calls the generic function vulnlib.ParseAny[string]; the target is the generic function itself. Included to document that the linker method does not support generic symbol forms."
+    }
+  ]
+}
