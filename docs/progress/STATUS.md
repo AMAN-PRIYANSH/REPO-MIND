@@ -4,10 +4,10 @@ This file is the single source of truth for where the build stands. Claude Code 
 
 ## Current
 
-- Current checkpoint: **CP4 - Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker**
-- State: `APPROVED` (merged into main)
-- Branch in use: `claude/vulntrace-ai-build-9qhbjg`
-- Specification: [checkpoints/CP4.md](../implementation/checkpoints/CP4.md)
+- Current checkpoint: **CP5 - Local LLM layer, root-cause selection, HyDE**
+- State: `READY` (released, not started)
+- Branch in use: (none yet - the first session writes its own `claude/...` session branch here; see `CLAUDE.md` section 5)
+- Specification: [checkpoints/CP5.md](../implementation/checkpoints/CP5.md)
 
 State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
 
@@ -19,7 +19,8 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 | CP2 | Go call-graph helper and verdict rule | APPROVED | claude/optimistic-shannon-397w1q | [CP2_REPORT](reports/CP2_REPORT.md) |
 | CP3 | Advisory dataset, fix evidence, release ranges, baselines (+ CI) | APPROVED | claude/lucid-fermi-9esjyw | [CP3_REPORT](reports/CP3_REPORT.md) |
 | CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | APPROVED | claude/vulntrace-ai-build-9qhbjg | [CP4_REPORT](reports/CP4_REPORT.md) |
-| CP5 | Local LLM layer, root-cause selection, HyDE, lifting, Colab runs | NOT_RELEASED | - | - |
+| CP5 | Local LLM layer, root-cause selection, HyDE | READY | - | - |
+| CP5b | Lifting and caller/callee queries (Go helper) | NOT_RELEASED | - | - |
 | CP6 | LangGraph investigation agent | NOT_RELEASED | - | - |
 | CP7 | End-to-end triage, verifier, real apps, demo | NOT_RELEASED | - | - |
 | CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
@@ -28,41 +29,10 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-- [x] Task 0a: `dataset materialize --set d4` (120 cases, 1366.9 s, 1 difference listed) and `--set d1` (150 cases, 1 difference listed)
-- [x] Task 0b: `cluster_key` on D4 cases (94 clusters); cluster bootstrap; CP3 doc regenerated (`dcdac10`)
-- [x] Task 0c: `undated` bucket in every date split; CP3 doc regenerated (`dcdac10`)
-- [x] D1: chunking, three variants, caps, masking, query-leakage tests (`39ff46d`)
-- [x] D2: VectorStore + in-memory + pgvector, docker-compose, shared suite, CI pgvector job green; Q10 answered (`1d8d2cf`, `b357700`)
-- [x] D3: BM25 + code-aware tokeniser (`78c9c24`)
-- [~] D4: dense retrieval code, fake, sentence-transformers wrapper, embedding cache done (`b74cca2`); **real model run not done** (Hugging Face blocked here; needs Colab)
-- [~] D5: RRF + Reranker interface, fake, cross-encoder wrapper done (`78c9c24`, `b74cca2`); **real reranker run not done**
-- [x] D6: harness, CLI, metrics, both denominators, buckets, cluster CIs, rclone-removed, B-ID + random (`1f6dd9d`); real runs only for no-model configs (`7cea026`)
-- [~] D7: notebook done (`1f1c607`) and its grid dry-run on real D4 with fakes (91 s); **not executed in Colab**
-- [x] D8: tests (329 unit+contract incl. both backends; 66 integration + 2 opt-in skips; CI green)
-- [x] D9: `docs/results/CP4_RETRIEVAL_RESULTS.md` generated (baselines + BM25 only)
-- [x] Report `docs/progress/reports/CP4_REPORT.md`; STATUS `AWAITING_REVIEW`
-
-## Fix-round task list (CHANGES_REQUESTED, FIX-1..FIX-6)
-
-Session branch note: this fix session runs in a container whose assigned branch is `claude/vulntrace-ai-build-v2kb3a`; it was fast-forwarded to `claude/vulntrace-ai-build-9qhbjg` (6a75cb7) and pushes to `claude/vulntrace-ai-build-9qhbjg` as the review notes and owner instruct.
-
-- [x] FIX-1 `dataset diagnose --case ID` added; run on GO-2020-0038 with a local-disk cache: AVAILABLE, 81 candidates, 0 differences. Drive hypothesis NOT testable here (no Drive)
-- [x] FIX-2 Resume rule (D4 and D1)
-- [x] FIX-3 `git_error` in evidence (+schema), top-3 errors in summary
-- [x] FIX-4 Notebook: local cache/evidence, gate cell
-- [x] FIX-5 `eval/evidence_gate.py`, used by both commands and the notebook
-- [x] FIX-6 Tests; full suite: 399 passed, 11 skipped
+- [ ] (CP5 not started)
 
 ## Handoff notes
 
-Fix round done on `claude/vulntrace-ai-build-9qhbjg`. Next: owner re-runs `notebooks/cp4_retrieval_colab.ipynb` (gate cell will stop it if evidence is wrong; if so run `!python -m vulntrace dataset diagnose --case GO-2020-0038` and send the output). Then a session replaces `docs/results/cp4/` as described below. Root cause of the first failure is unproven.
-
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-CP4 is AWAITING_REVIEW on `claude/vulntrace-ai-build-9qhbjg`. What is missing for criterion 6 is a run the owner does:
-
-1. Open `notebooks/cp4_retrieval_colab.ipynb` in Colab (T4 GPU), keep `BRANCH = "claude/vulntrace-ai-build-9qhbjg"` (or `main` after merge), run all cells. Materialisation took ~23 min here; GPU times are unknown.
-2. Hand the downloaded `cp4_results.zip` to the next session. It holds `cp4/cases.json`, `cp4/runs/*.json`, `cp4/D4_materialize_colab.json`, `cp4/model_problems.json` (JSON only).
-3. Next session: compare the zip's `cases.json` with `docs/results/cp4/cases.json` and report every difference. If the bundle contains every config, replace `docs/results/cp4/` with it, then run `python -m vulntrace results render --doc cp4 --input docs/results/cp4 --out docs/results/CP4_RETRIEVAL_RESULTS.md`, and update CP4_REPORT sections 5 and 6 (criterion 6).
-
-The notebook's Colab mechanics are untested (only its config grid was dry-run), so small fixes may be needed on first use.
+(CP5: none yet. CP4 was approved on 22 Oct 2026; read the review notes in checkpoints/CP3.md and CP4.md - they bind CP5. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists.)

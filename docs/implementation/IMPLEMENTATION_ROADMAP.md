@@ -21,6 +21,7 @@ Only CP1 has a full specification now. Each later specification is written by th
 | CP3 | Sonnet 5.5 | high | Data parsing, git edge cases, CI setup |
 | CP4 | Opus 5.5 | high | Retrieval architecture, interfaces, evaluation harness |
 | CP5 | Sonnet 5.5 | high | LLM client, validation, caching, notebooks |
+| CP5b | Opus 5.5 | high | Go call-graph lifting and caller/callee queries (subtle analysis code) |
 | CP6 | Opus 5.5 | high | Agent design, tools, budgets, failure handling |
 | CP7 | Opus 5.5 | high | Verifier and end-to-end integration |
 | CP8 | Sonnet 5.5 | medium | Experiment variant, reports, README |
@@ -35,7 +36,7 @@ Full spec: [checkpoints/CP1.md](checkpoints/CP1.md).
 
 ### CP2 - Go call-graph helper and verdict rule (week 1)
 
-- `helper/` Go module (pins `golang.org/x/tools`) with modes `funcs`, `reach` (VTA), `edges`, `naive`. (`lift` is added in CP5.)
+- `helper/` Go module (pins `golang.org/x/tools`) with modes `funcs`, `reach` (VTA), `edges`, `naive`. (`lift` is added in CP5b.)
 - Python wrapper with timeouts and error codes; contract tests with recorded responses.
 - Naive name-only call graph as a negative control (R1).
 - Verdict rule (two-method agreement) and verdict schema; fixtures extended to about 20 cases.
@@ -58,14 +59,16 @@ Full spec: [checkpoints/CP1.md](checkpoints/CP1.md).
 - Colab notebook that runs the real models and writes result files.
 - Gate: harness runs end-to-end on fakes in tests; at least one real run (BM25, dense, hybrid, hybrid+rerank) produced in Colab and committed as result files.
 
-### CP5 - Local LLM layer, root-cause selection, HyDE, lifting (week 3)
+### CP5 - Local LLM layer, root-cause selection, HyDE (week 2-3)
 
-- `LLMClient` for any OpenAI-compatible endpoint (Ollama default), response cache, closed-set output validation.
-- E1 (LLM selects from fix-diff candidates) and Mode 2 selection from retrieved top-k.
-- HyDE query rewriting as a retrieval option, measured.
-- `lift` integration and E1+L.
-- Colab notebook running Ollama with an open model; all results cached and committed.
-- Gate: invalid LLM outputs rejected in tests; E0 vs E1 vs E1+L and retrieval with/without HyDE reported with contamination split.
+Full spec: [checkpoints/CP5.md](checkpoints/CP5.md). `LLMClient` (any OpenAI-compatible local endpoint, paid hosts rejected), response cache, closed-set validation; E1 (Mode 1) vs E0; S1 (Mode 2 top-k) vs retrieval top-1; HyDE; contamination split with the real model cutoff; Colab notebook running Ollama. Lifting was moved to CP5b because it is Go analysis work and the CP6 agent tools (`callers`, `callees`) need the same helper mode.
+
+### CP5b - Lifting and caller/callee queries (week 3)
+
+- Go helper `lift` mode (and `callers`/`callees` queries): from a root-cause function, find exported callers; stopping rule per open question Q4 (nearest exported caller vs all), measured on both.
+- Scored against vulndb `derived_symbols` (they are exactly the lifted symbols) and used for E1+L; addresses CP3 finding 4 (labelled function unchanged in the range) and risk R5.
+- Report dependency-loading success rate honestly (real modules need their dependencies; builds use `GOTOOLCHAIN=local`, `CGO_ENABLED=0`, never run target code).
+- Gate: lift recall and precision against `derived_symbols` with intervals; E1+L reported next to E1.
 
 ### CP6 - LangGraph investigation agent (week 3)
 
