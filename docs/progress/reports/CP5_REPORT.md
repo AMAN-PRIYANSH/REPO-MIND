@@ -181,3 +181,8 @@ a7c60d9 CP5: results document renderer (results render --doc cp5) and tests
 9f2a60a CP5: set IN_PROGRESS, record branch, copy task list
 (+ the final report/STATUS commit)
 ```
+
+
+## Supervisor addendum (22 Oct 2026)
+
+Acceptance criterion 6 is met: the owner ran `notebooks/cp5_llm_colab.ipynb` in Colab (T4); the valid bundle was committed to `docs/results/cp5/` and `docs/results/CP5_LLM_RESULTS.md` was regenerated from it. See the supervisor review notes in `checkpoints/CP5.md`.

@@ -1,0 +1,107 @@
+{
+ "models": {
+  "llama3.1:8b": {
+   "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+   "size": 4920753328,
+   "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "llama",
+    "families": [
+     "llama"
+    ],
+    "parameter_size": "8.0B",
+    "quantization_level": "Q4_K_M",
+    "context_length": 131072,
+    "embedding_length": 4096,
+    "runner": "ggml"
+   }
+  },
+  "qwen2.5-coder:7b-instruct": {
+   "digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+   "size": 4683087561,
+   "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen2",
+    "families": [
+     "qwen2"
+    ],
+    "parameter_size": "7.6B",
+    "quantization_level": "Q4_K_M",
+    "context_length": 32768,
+    "embedding_length": 3584,
+    "runner": "ggml"
+   }
+  }
+ },
+ "timings": [
+  {
+   "step": "fetch vulndb + build helper",
+   "seconds": 27.5
+  },
+  {
+   "step": "materialize D1",
+   "seconds": 491.8
+  },
+  {
+   "step": "materialize D4",
+   "seconds": 1659.4
+  },
+  {
+   "step": "materialize D1",
+   "seconds": 22.4
+  },
+  {
+   "step": "embed D4 chunks (bge-small)",
+   "seconds": 85.4
+  },
+  {
+   "step": "install + start Ollama",
+   "seconds": 31.2
+  },
+  {
+   "step": "pull qwen2.5-coder:7b-instruct",
+   "seconds": 87.5
+  },
+  {
+   "step": "pull llama3.1:8b",
+   "seconds": 73.1
+  },
+  {
+   "step": "E1 qwen2.5-coder-7b",
+   "seconds": 115.4
+  },
+  {
+   "step": "E1 llama3.1-8b",
+   "seconds": 104.0
+  },
+  {
+   "step": "S1 qwen2.5-coder-7b k=10",
+   "seconds": 129.7
+  },
+  {
+   "step": "S1 qwen2.5-coder-7b k=5",
+   "seconds": 256.2
+  },
+  {
+   "step": "S1 llama3.1-8b k=10",
+   "seconds": 643.2
+  },
+  {
+   "step": "S1 llama3.1-8b k=5",
+   "seconds": 344.5
+  },
+  {
+   "step": "HyDE qwen2.5-coder-7b",
+   "seconds": 510.3
+  },
+  {
+   "step": "HyDE llama3.1-8b",
+   "seconds": 563.6
+  }
+ ],
+ "dry_run": false,
+ "gpu": true,
+ "context_tokens": 32768
+}
