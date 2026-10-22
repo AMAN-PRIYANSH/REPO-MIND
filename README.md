@@ -74,7 +74,7 @@ Decisions:
 - **Assumption** - believed true but not yet checked.
 - **Proposal** - a design choice to be validated during implementation.
 
-## Development (CP1-CP4)
+## Development (CP1-CP5)
 
 ```
 python -m venv .venv && .venv/bin/pip install -e ".[dev]"
@@ -86,7 +86,7 @@ python -m vulntrace helper fetch             # once: downloads the helper's Go d
 python -m vulntrace helper build             # offline build into ~/.cache/vulntrace (never into the repo)
 python -m vulntrace fixtures score --method linker [--out results/cp1] [--compare-inlining]
 python -m vulntrace fixtures score --method naive|vta|combined [--out results/cp2] [--timeout 300]
-python -m vulntrace results render --doc cp1|cp2|cp3|cp4 --input <report or dir> --out docs/results/<file>.md
+python -m vulntrace results render --doc cp1|cp2|cp3|cp4|cp5 --input <report or dir> --out docs/results/<file>.md
 
 # CP3: datasets (network) and baselines
 python -m vulntrace dataset fetch                     # pin golang/vulndb's data/reports/ snapshot
@@ -107,6 +107,13 @@ python -m vulntrace index build --set d4 --embedder bge-small --device cuda     
 python -m vulntrace eval retrieval --config dense:bge-small --config hybrid:bge-small \
     --config hybrid+rerank:bge-small+minilm --device cuda                       # needs .[ml]
 # Real-model runs: notebooks/cp4_retrieval_colab.ipynb (free Colab GPU), which zips results/cp4 JSON.
+
+# CP5: local LLM layer (Ollama on localhost only; paid API hosts are refused). Tests and --dry-run use fakes.
+python -m vulntrace eval select --mode fix --model qwen2.5-coder-7b                # E1 on D1, E0 in the same file
+python -m vulntrace eval select --mode release --model qwen2.5-coder-7b --k 10     # S1 on D4, retriever top-1 in the same file
+python -m vulntrace eval retrieval --hyde query+hyde --hyde hyde-only --model qwen2.5-coder-7b   # HyDE on D4
+python -m vulntrace eval select --mode release --dry-run                           # pipeline check with fake LLM + fake embedder
+# Real runs: notebooks/cp5_llm_colab.ipynb (free Colab GPU + Ollama), which zips results/cp5 JSON.
 
 # Opt-in, not run in CI: fetches one real advisory's evidence from the real network
 VULNTRACE_NETWORK_TESTS=1 python -m pytest tests/integration/test_network_smoke.py
