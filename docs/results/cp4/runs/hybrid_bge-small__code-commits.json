@@ -1,0 +1,2182 @@
+{
+ "config": "hybrid:bge-small",
+ "environment": {
+  "command": "python -m vulntrace eval retrieval --config dense:bge-small --config hybrid:bge-small --config hybrid+rerank:bge-small+minilm --config hybrid+rerank:bge-small+bge-reranker --data-dir /content/data --embedding-cache /content/drive/MyDrive/vulntrace_cp4/embeddings --device cuda --out /content/drive/MyDrive/vulntrace_cp4/results/cp4",
+  "cuda_available": true,
+  "go": "go version go1.24.7 linux/amd64",
+  "gpu": "Tesla T4",
+  "os": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "python": "3.13.15",
+  "python_full": "3.13.15",
+  "repo_commit": "73c48b8",
+  "repo_dirty": false,
+  "torch": "2.11.0+cu130"
+ },
+ "kind": "hybrid",
+ "models": {
+  "embedder": {
+   "batch_size": 64,
+   "device": "cuda:0",
+   "dim": 384,
+   "kind": "SENTENCE_TRANSFORMERS",
+   "max_seq_length": 512,
+   "model_id": "BAAI/bge-small-en-v1.5",
+   "query_prefix": "Represent this sentence for searching relevant passages: ",
+   "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+   "versions": {
+    "sentence_transformers": "5.7.0",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.20.1"
+   }
+  },
+  "embedding_cache": {
+   "cached": 36534,
+   "embedded": 0,
+   "requested": 36534,
+   "seconds": 0.0
+  }
+ },
+ "params": {
+  "bm25_b": 0.75,
+  "bm25_k1": 1.2,
+  "chunk_char_cap": 2000,
+  "commit_char_cap": 500,
+  "rerank_top_n": null,
+  "rrf_k": 60
+ },
+ "rows": [
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2020-0006"
+  },
+  {
+   "core": {
+    "first_rank": 20,
+    "top_ranks": [
+     20
+    ]
+   },
+   "core_derived": {
+    "first_rank": 20,
+    "top_ranks": [
+     20
+    ]
+   },
+   "id": "GO-2020-0038"
+  },
+  {
+   "core": {
+    "first_rank": 5,
+    "top_ranks": [
+     5,
+     9
+    ]
+   },
+   "core_derived": {
+    "first_rank": 5,
+    "top_ranks": [
+     5,
+     6,
+     7,
+     9,
+     11,
+     13,
+     16
+    ]
+   },
+   "id": "GO-2021-0052"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "id": "GO-2022-0326"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     4,
+     8,
+     20
+    ]
+   },
+   "id": "GO-2022-0391"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     4
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     4
+    ]
+   },
+   "id": "GO-2022-0400"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2022-0462"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2022-0519"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2022-0588"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     7
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     7
+    ]
+   },
+   "id": "GO-2022-1118"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "id": "GO-2023-1547"
+  },
+  {
+   "core": {
+    "first_rank": 8,
+    "top_ranks": [
+     8
+    ]
+   },
+   "core_derived": {
+    "first_rank": 6,
+    "top_ranks": [
+     6,
+     8,
+     14,
+     15
+    ]
+   },
+   "id": "GO-2023-1578"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     4,
+     6,
+     7,
+     8
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     4,
+     6,
+     7,
+     8
+    ]
+   },
+   "id": "GO-2023-1602"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2
+    ]
+   },
+   "id": "GO-2023-1664"
+  },
+  {
+   "core": {
+    "first_rank": 7,
+    "top_ranks": [
+     7,
+     8,
+     19,
+     20
+    ]
+   },
+   "core_derived": {
+    "first_rank": 7,
+    "top_ranks": [
+     7,
+     8,
+     19,
+     20
+    ]
+   },
+   "id": "GO-2023-1872"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     4,
+     9,
+     10,
+     13,
+     14,
+     15,
+     16,
+     17
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     4,
+     9,
+     10,
+     13,
+     14,
+     15,
+     16,
+     17
+    ]
+   },
+   "id": "GO-2023-2098"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     4,
+     6,
+     7,
+     8,
+     11,
+     14,
+     20
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     4,
+     6,
+     7,
+     8,
+     11,
+     14,
+     20
+    ]
+   },
+   "id": "GO-2023-2116"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2023-2328"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2023-2386"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     5,
+     6,
+     9,
+     13,
+     15
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     4,
+     5,
+     6,
+     7,
+     9,
+     13,
+     15
+    ]
+   },
+   "id": "GO-2023-2402"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     6
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     6
+    ]
+   },
+   "id": "GO-2024-2538"
+  },
+  {
+   "core": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     5,
+     6
+    ]
+   },
+   "core_derived": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     5,
+     6
+    ]
+   },
+   "id": "GO-2024-2671"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     19,
+     20
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     19,
+     20
+    ]
+   },
+   "id": "GO-2024-2842"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     5,
+     6,
+     10,
+     13
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     5,
+     6,
+     10,
+     11,
+     13
+    ]
+   },
+   "id": "GO-2024-3112"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     7
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     7
+    ]
+   },
+   "id": "GO-2024-3124"
+  },
+  {
+   "core": {
+    "first_rank": 3,
+    "top_ranks": [
+     3
+    ]
+   },
+   "core_derived": {
+    "first_rank": 3,
+    "top_ranks": [
+     3
+    ]
+   },
+   "id": "GO-2025-3476"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     4,
+     5,
+     8,
+     10,
+     12,
+     13
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     4,
+     5,
+     8,
+     10,
+     12,
+     13
+    ]
+   },
+   "id": "GO-2025-3533"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "id": "GO-2025-3600"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2025-3748"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     5
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     5
+    ]
+   },
+   "id": "GO-2025-3764"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2025-4017"
+  },
+  {
+   "core": {
+    "first_rank": 15,
+    "top_ranks": [
+     15
+    ]
+   },
+   "core_derived": {
+    "first_rank": 15,
+    "top_ranks": [
+     15
+    ]
+   },
+   "id": "GO-2026-4789"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-4942"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5051"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5052"
+  },
+  {
+   "core": {
+    "first_rank": 6,
+    "top_ranks": [
+     6,
+     7
+    ]
+   },
+   "core_derived": {
+    "first_rank": 6,
+    "top_ranks": [
+     6,
+     7
+    ]
+   },
+   "id": "GO-2026-5069"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     5
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     5
+    ]
+   },
+   "id": "GO-2026-5073"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5208"
+  },
+  {
+   "core": {
+    "first_rank": 9,
+    "top_ranks": [
+     9
+    ]
+   },
+   "core_derived": {
+    "first_rank": 4,
+    "top_ranks": [
+     4,
+     9,
+     19
+    ]
+   },
+   "id": "GO-2026-5313"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3
+    ]
+   },
+   "id": "GO-2026-5320"
+  },
+  {
+   "core": {
+    "first_rank": 3,
+    "top_ranks": [
+     3
+    ]
+   },
+   "core_derived": {
+    "first_rank": 3,
+    "top_ranks": [
+     3
+    ]
+   },
+   "id": "GO-2026-5380"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-5410"
+  },
+  {
+   "core": {
+    "first_rank": 16,
+    "top_ranks": [
+     16
+    ]
+   },
+   "core_derived": {
+    "first_rank": 16,
+    "top_ranks": [
+     16
+    ]
+   },
+   "id": "GO-2026-5427"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-5435"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     9,
+     12,
+     13
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     9,
+     12,
+     13
+    ]
+   },
+   "id": "GO-2026-5452"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-5463"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5466"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3
+    ]
+   },
+   "id": "GO-2026-5504"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     13,
+     17,
+     20
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     13,
+     17,
+     20
+    ]
+   },
+   "id": "GO-2026-5506"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": 27,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5525"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5529"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5543"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5548"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5566"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "id": "GO-2026-5569"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "id": "GO-2026-5596"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     11,
+     12
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     11,
+     12
+    ]
+   },
+   "id": "GO-2026-5606"
+  },
+  {
+   "core": {
+    "first_rank": 39,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": 17,
+    "top_ranks": [
+     17
+    ]
+   },
+   "id": "GO-2026-5665"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     5,
+     6,
+     13,
+     15
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     5,
+     6,
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   "id": "GO-2026-5666"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3
+    ]
+   },
+   "id": "GO-2026-5676"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     5
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     5
+    ]
+   },
+   "id": "GO-2026-5681"
+  },
+  {
+   "core": {
+    "first_rank": 35,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": 35,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5699"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-5713"
+  },
+  {
+   "core": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     13,
+     18
+    ]
+   },
+   "core_derived": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     13,
+     16,
+     18
+    ]
+   },
+   "id": "GO-2026-5740"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5748"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-5841"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5879"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5880"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-5882"
+  },
+  {
+   "core": {
+    "first_rank": 4,
+    "top_ranks": [
+     4
+    ]
+   },
+   "core_derived": {
+    "first_rank": 4,
+    "top_ranks": [
+     4
+    ]
+   },
+   "id": "GO-2026-5884"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "id": "GO-2026-5885"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-5954"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "id": "GO-2026-5955"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     13
+    ]
+   },
+   "id": "GO-2026-5960"
+  },
+  {
+   "core": {
+    "first_rank": 7,
+    "top_ranks": [
+     7
+    ]
+   },
+   "core_derived": {
+    "first_rank": 7,
+    "top_ranks": [
+     7
+    ]
+   },
+   "id": "GO-2026-5971"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     12,
+     15
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     12,
+     15
+    ]
+   },
+   "id": "GO-2026-5983"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     9,
+     10
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     9,
+     10
+    ]
+   },
+   "id": "GO-2026-5987"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     4
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     4
+    ]
+   },
+   "id": "GO-2026-5989"
+  },
+  {
+   "core": {
+    "first_rank": 4,
+    "top_ranks": [
+     4,
+     8,
+     20
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     4,
+     8,
+     20
+    ]
+   },
+   "id": "GO-2026-6061"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6095"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6112"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6114"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6138"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     9,
+     18
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     9,
+     18
+    ]
+   },
+   "id": "GO-2026-6139"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-6163"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-6165"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     6
+    ]
+   },
+   "id": "GO-2026-6181"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6182"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3,
+     4,
+     15,
+     20
+    ]
+   },
+   "id": "GO-2026-6183"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6184"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "id": "GO-2026-6185"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     4,
+     8,
+     9,
+     10,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     4,
+     8,
+     9,
+     10,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "id": "GO-2026-6186"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     20
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     20
+    ]
+   },
+   "id": "GO-2026-6187"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2
+    ]
+   },
+   "id": "GO-2026-6188"
+  },
+  {
+   "core": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     5,
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   "core_derived": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     5,
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   "id": "GO-2026-6189"
+  },
+  {
+   "core": {
+    "first_rank": 3,
+    "top_ranks": [
+     3
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     3
+    ]
+   },
+   "id": "GO-2026-6190"
+  },
+  {
+   "core": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     7,
+     8,
+     9
+    ]
+   },
+   "core_derived": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     7,
+     8,
+     9
+    ]
+   },
+   "id": "GO-2026-6191"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6195"
+  },
+  {
+   "core": {
+    "first_rank": 6,
+    "top_ranks": [
+     6,
+     7
+    ]
+   },
+   "core_derived": {
+    "first_rank": 6,
+    "top_ranks": [
+     6,
+     7,
+     9,
+     14,
+     18
+    ]
+   },
+   "id": "GO-2026-6197"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "id": "GO-2026-6199"
+  },
+  {
+   "core": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     4,
+     5,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     14
+    ]
+   },
+   "core_derived": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     4,
+     5,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     14
+    ]
+   },
+   "id": "GO-2026-6213"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2
+    ]
+   },
+   "id": "GO-2026-6234"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6237"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6238"
+  },
+  {
+   "core": {
+    "first_rank": 8,
+    "top_ranks": [
+     8
+    ]
+   },
+   "core_derived": {
+    "first_rank": 8,
+    "top_ranks": [
+     8
+    ]
+   },
+   "id": "GO-2026-6302"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     11
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     11
+    ]
+   },
+   "id": "GO-2026-6348"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-6366"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6452"
+  },
+  {
+   "core": {
+    "first_rank": 13,
+    "top_ranks": [
+     13,
+     20
+    ]
+   },
+   "core_derived": {
+    "first_rank": 13,
+    "top_ranks": [
+     13,
+     20
+    ]
+   },
+   "id": "GO-2026-6453"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     15,
+     20
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     15,
+     18,
+     19,
+     20
+    ]
+   },
+   "id": "GO-2026-6489"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 2,
+    "top_ranks": [
+     2
+    ]
+   },
+   "id": "GO-2026-6512"
+  },
+  {
+   "core": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "core_derived": {
+    "first_rank": null,
+    "top_ranks": []
+   },
+   "id": "GO-2026-6535"
+  },
+  {
+   "core": {
+    "first_rank": 14,
+    "top_ranks": [
+     14
+    ]
+   },
+   "core_derived": {
+    "first_rank": 3,
+    "top_ranks": [
+     3,
+     14
+    ]
+   },
+   "id": "GO-2026-6665"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     3,
+     4,
+     5,
+     8,
+     9,
+     11
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     8,
+     9,
+     11
+    ]
+   },
+   "id": "GO-2026-6684"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2
+    ]
+   },
+   "id": "GO-2026-6685"
+  },
+  {
+   "core": {
+    "first_rank": 2,
+    "top_ranks": [
+     2,
+     3,
+     11
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2,
+     3,
+     4,
+     8,
+     11
+    ]
+   },
+   "id": "GO-2026-6686"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6687"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1,
+     2
+    ]
+   },
+   "id": "GO-2026-6689"
+  },
+  {
+   "core": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "core_derived": {
+    "first_rank": 1,
+    "top_ranks": [
+     1
+    ]
+   },
+   "id": "GO-2026-6695"
+  },
+  {
+   "core": {
+    "first_rank": 7,
+    "top_ranks": [
+     7
+    ]
+   },
+   "core_derived": {
+    "first_rank": 7,
+    "top_ranks": [
+     7
+    ]
+   },
+   "id": "GO-2026-6700"
+  }
+ ],
+ "schema_version": "1.0",
+ "seed": 20261021,
+ "timing_seconds": {
+  "prepare": 0.0,
+  "rank_all_cases": 7.82
+ },
+ "variant": "code+commits"
+}

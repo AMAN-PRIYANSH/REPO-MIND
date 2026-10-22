@@ -129,3 +129,17 @@ After the fix: the owner re-runs the notebook in Colab and hands the new zip to 
 
 Branch rule for this fix session: work directly on branch `claude/vulntrace-ai-build-9qhbjg` (check it out; it already exists; do not create another branch). If the session runs on the owner's laptop and cannot run Go or Docker, say which tests were not run and why.
 
+
+**Supervisor review, 22 Oct 2026 - APPROVED** (fix round `73c48b8` plus the real Colab results committed by the supervisor).
+
+Checked by the supervisor: `pytest tests/unit tests/contract` -> 333 passed, 9 skipped (pgvector, no database in the supervisor sandbox; CI ran the pgvector job green); CI green on the fix commits. The second Colab bundle is valid: 36,801 chunks, 118 of 120 cases with candidates, statuses 104 AVAILABLE / 14 TRUNCATED / 2 EMPTY, 31 runs, repo commit `73c48b8`, clean tree, Tesla T4. Its `cases.json` is **identical** to the one built in the Claude Code session, and the 7 CPU runs (random, size, B-ID, BM25 x3) give identical rankings in both places: the evidence rebuild is reproducible across machines. The first failure's root cause is still unproven (suspected: git cache on the Drive mount); the notebook now keeps git on local disk and has a gate.
+
+What the results say (honest reading; numbers are in `docs/results/CP4_RETRIEVAL_RESULTS.md`):
+
+1. Retrieval beats B-ID clearly, but only when commit subjects are in the chunk text. Best MRR about 0.60 (dense bge-small, code+commits) vs B-ID 0.397; on the `>100` bucket 0.56 vs 0.21. Recall@1 is only about 0.5: ranking is useful, not solved.
+2. **Neural methods do not clearly beat BM25.** The results document names `dense:bge-small` "best by MRR", which overstates it. Supervisor spot check (ad hoc paired cluster bootstrap on the committed run files, not a committed script): dense-bge vs BM25 delta MRR +0.032 [-0.025, +0.086]; hybrid vs BM25 +0.028 [-0.012, +0.067]; hybrid vs dense -0.003 [-0.044, +0.037]. All include 0. The honest claim: BM25, dense and hybrid are statistically indistinguishable on this data.
+3. **Rerankers do not help.** MiniLM reranking vs hybrid: -0.018 [-0.070, +0.032]; bge-reranker: -0.034 [-0.107, +0.038]; with code-only chunks bge-reranker is worse: -0.073 [-0.142, -0.003]. The code-oriented embedder (st-codesearch-distilroberta, max_seq_length 128) is worse than bge-small: -0.137 [-0.207, -0.061].
+4. Commit subjects are the main gain (+0.06 to +0.11 MRR for the bge-based configs), and the ID-masked control changes nothing. The control is weak (no query contains an advisory ID), so this shows the gain is not from identifier matching, not that it is free of other commit-text shortcuts. 77 of 120 queries are summary-only; 17 of 120 name a gold function.
+5. Ceiling: 19 of 120 cases have no gold symbol among the candidates; CP3 found 31 with some core symbol unchanged in the range. Caller/callee expansion or lifting (CP5) is the lever for these, not better ranking.
+
+Requests carried into CP5 (small, each its own commit): (a) add paired method-vs-method comparisons (BM25 vs dense vs hybrid vs rerank) and a neutral "best" statement to the results renderer, so the headline cannot overstate; (b) keep a committed `sys.path` line in the Colab notebook before the first `import vulntrace` cell (the owner hit `ModuleNotFoundError` in the notebook kernel after `pip install -e`).

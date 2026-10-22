@@ -441,3 +441,8 @@ Docker 29.9.1 installed but **no PostgreSQL/pgvector reachable**, so the 9 pgvec
 
 Commits on `claude/vulntrace-ai-build-9qhbjg` after `6a75cb7`: `5dfde4e` (set IN_PROGRESS), `5ed5fb3` (FIX-1..6), plus this
 report's commit; pushes succeeded.
+
+
+## Supervisor addendum (22 Oct 2026)
+
+Acceptance criterion 6 is met: the owner ran the fixed notebook in Colab (T4); the valid bundle was committed to `docs/results/cp4/` and `docs/results/CP4_RETRIEVAL_RESULTS.md` was regenerated from it. See the supervisor review notes in `checkpoints/CP4.md`.
