@@ -191,3 +191,50 @@ def test_e1_llm_vs_e0_on_synthetic_fix_evidence():
     assert rows["GO-2"]["m"]["llm"]["core_derived"]["recall"] == 0.5     # chose B only; core ∪ derived = {B, C}
     assert rows["GO-3"]["llm"]["status"] == "NOT_ASKED" and rows["GO-3"]["m"]["e0"]["core"]["abstain"]
     assert doc["counts"]["asked"] == 2 and doc["max_selected"] == 5
+
+
+# --- results document --------------------------------------------------------------------------------
+def test_cp5_doc_renders_from_dry_run_files_with_the_fake_warning(cli_env):
+    base, out = cli_env
+    assert main(["eval", "select", "--mode", "release", "--k", "5", "--dry-run", *base]) == 0
+    assert main(["eval", "retrieval", "--hyde", "query+hyde", "--hyde", "hyde-only", "--dry-run", *base]) == 0
+    md = out.parent / "doc.md"
+    assert main(["results", "render", "--doc", "cp5", "--input", str(out), "--out", str(md)]) == 0
+    text = md.read_text()
+    assert text.startswith("# CP5 results") and "WARNING: some results come from the FAKE LLM" in text
+    for part in ("**Main finding.**", "## S1 (Mode 2, D4)", "## HyDE (Mode 2, D4)", "(a) gold inside the top-k",
+                 "(b) all scored cases", "cutoff undocumented", "## Models, prompts, settings", "## Cost per case",
+                 "Not run / not in this directory:** E1"):
+        assert part in text, part
+    assert "func handle" not in text  # no hypothetical text in the document
+
+
+def test_cp5_doc_with_no_files_claims_nothing(tmp_path):
+    from vulntrace.eval.llm_report import render_cp5_doc
+
+    assert "nothing is claimed" in render_cp5_doc(tmp_path, "x")
+
+
+def test_cp5_doc_for_e1_with_a_documented_cutoff_splits_pre_post_undated(tmp_path):
+    import copy
+
+    from vulntrace.eval.llm_report import render_cp5_doc
+
+    ids = [f"GO-{i}" for i in range(6)]
+    created = ["2020-01-01", "2024-02-01", "2024-03-01", None, "2025-01-01", "2019-01-01"]
+    cases = {i: _d1_case(i, ["A"], created=c) for i, c in zip(ids, created)}
+    ev = {i: _fix_ev(i, ["A", "x"]) for i in ids}
+    case_list = {"cases": [{"id": i, "created": c, "status": "AVAILABLE"} for i, c in zip(ids, created)]}
+    doc = select_eval.run_e1(case_list, cases, ev, fakes.FakeLLMClient(fallback=lambda m: fakes.resp_select(["c1"])))
+    doc.update({"prompt": {"version": "root_cause_fix_v1", "sha256": "0" * 64}, "settings": {}, "environment": {},
+                "model": {"alias": "m", "ollama_tag": "m:1", "params": "1B", "quantization": "q", "cutoff": "2023-12-31",
+                           "cutoff_source": "test source", "model_digest": "abc", "dry_run": False, "kind": "REAL"}})
+    d = tmp_path / "r"
+    d.mkdir()
+    (d / "select_fix__m.json").write_text(json.dumps(doc))
+    text = render_cp5_doc(d, "x")
+    assert "post-cutoff (created after 2023-12-31) - HEADLINE" in text and "n = 3 " in text      # 2024-02, 2024-03, 2025-01
+    assert "pre-cutoff" in text and "undated (no created date)" in text
+    assert "post-cutoff: 3; pre-cutoff: 2; undated: 1; total 6" in text
+    assert "E0 (all changed functions)" in text and "WARNING" not in text
+    assert "LLM is better (interval excludes 0) on F1" in text or "LLM is no detectable difference" in text

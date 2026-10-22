@@ -36,12 +36,12 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 - [x] 2 Response cache (no prompts/responses committed)
 - [x] 3 Prompts + closed-set validation + injection tests
 - [x] 4 HyDE
-- [ ] 5 Eval commands (select fix/release, retrieval --hyde) + JSON results + renderer
-- [ ] 6 Contamination split
-- [ ] 7 Models config (max two, tags/digests recorded in Colab)
+- [x] 5 Eval commands (select fix/release, retrieval --hyde) + JSON results + renderer
+- [x] 6 Contamination split
+- [x] 7 Models config (max two, tags/digests recorded in Colab)
 - [ ] 8 Colab notebook + fake-LLM dry run on real evidence
-- [ ] 9 Tests (unit + integration)
-- [ ] 10 Results doc generator (CP5_LLM_RESULTS.md)
+- [x] 9 Tests (unit + integration)
+- [x] 10a Results doc generator code (docs/results/CP5_LLM_RESULTS.md still to be generated from the real run)
 - [ ] 11 Report CP5_REPORT.md, AWAITING_REVIEW
 
 ## Handoff notes

@@ -497,6 +497,10 @@ def render(doc: str, input_path: Path) -> str:
         from vulntrace.eval.retrieval_report import render_cp4_doc
 
         return render_cp4_doc(Path(input_path), source.rstrip("/"))
+    if doc == "cp5":
+        from vulntrace.eval.llm_report import render_cp5_doc
+
+        return render_cp5_doc(Path(input_path), source.rstrip("/"))
     raise ValueError(f"unknown results document: {doc}")
 
 
