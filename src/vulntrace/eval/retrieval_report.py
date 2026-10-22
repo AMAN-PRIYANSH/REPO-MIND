@@ -20,6 +20,7 @@ RETRIEVAL_KINDS = ("bm25", "dense", "hybrid", "hybrid+rerank")
 BASELINE_ORDER = ("random", "size", "bid", "bid-only")
 SIZE_BUCKETS = ("<=10", "11-100", ">100")
 DATE_BUCKETS = ("pre", "post", "undated")
+PRIMARY_VARIANT = "code+commits"
 EXPECTED_RETRIEVAL = ("bm25", "dense", "hybrid", "hybrid+rerank")
 
 
@@ -178,6 +179,23 @@ def _beats(s: Summaries, i: int, ref: int, metric: str, group: str = "all") -> t
     return a["ci_low"] > b["ci_high"], a, b, s.paired_diff(i, ref, metric, group)
 
 
+def best_vs_runner_up(s: Summaries, retrieval: list[int]) -> tuple[int, int | None, dict[str, float] | None, bool]:
+    """(best run, runner-up, paired MRR difference best - runner-up, whether the best is clearly
+    ahead). Ranking is by point-estimate MRR over all scored cases. The best is "clearly ahead"
+    only when the paired 95% interval of the difference excludes 0; otherwise the honest
+    statement is "no clear winner" (CP4 review: BM25, dense and hybrid were indistinguishable)."""
+    # The ID-masked and code-only variants are controls of the same method, not competitors:
+    # compare methods on the primary variant when it exists.
+    primary = [i for i in retrieval if s.runs[i]["variant"] == PRIMARY_VARIANT]
+    ranked = sorted(primary or retrieval, key=lambda i: -s.summary(i)["mrr"]["mean"])
+    best = ranked[0]
+    if len(ranked) < 2:
+        return best, None, None, False
+    runner = ranked[1]
+    d = s.paired_diff(best, runner, "mrr")
+    return best, runner, d, d["ci_low"] > 0
+
+
 def headline(s: Summaries) -> list[str]:
     runs = s.runs
     ref = _find(runs, "bid")
@@ -193,21 +211,31 @@ def headline(s: Summaries) -> list[str]:
             ok, a, b, d = _beats(s, i, ref, metric)
             if ok:
                 clear.append((i, metric, a, b, d))
-    best = max(retrieval, key=lambda i: s.summary(i)["mrr"]["mean"])
+    best, runner, dbr, ahead = best_vs_runner_up(s, retrieval)
     bm, bb = s.summary(best)["mrr"], s.summary(ref)["mrr"]
     d = s.paired_diff(best, ref, "mrr")
     if not clear:
         lines.append(f"**No retrieval configuration evaluated here clearly beats B-ID** (commit-message search "
                      f"for the advisory's identifiers, remaining candidates in seeded random order) on MRR or "
                      f"Recall@10 over all {bm['n']} scored D4 cases: by the evaluation plan's rule (non-overlapping "
-                     f"95% cluster-bootstrap intervals) no difference is a clear improvement. The best by MRR is "
+                     f"95% cluster-bootstrap intervals) no difference is a clear improvement. The highest MRR is "
                      f"`{_label(runs[best])}`: MRR {_ci(bm)} vs B-ID {_ci(bb)}; paired difference "
                      f"{_ci(d)}.")
     else:
         names = sorted({f"`{_label(runs[i])}` ({m})" for i, m, *_ in clear})
         lines.append(f"**Retrieval configurations that clearly beat B-ID** over all {bm['n']} scored D4 cases "
-                     f"(non-overlapping 95% cluster-bootstrap intervals): {', '.join(names)}. The best by MRR is "
+                     f"(non-overlapping 95% cluster-bootstrap intervals): {', '.join(names)}. The highest MRR is "
                      f"`{_label(runs[best])}`: MRR {_ci(bm)} vs B-ID {_ci(bb)}; paired difference {_ci(d)}.")
+    if runner is not None:
+        if ahead:
+            lines += ["", f"Among retrieval configurations `{_label(runs[best])}` is ahead of the runner-up "
+                          f"`{_label(runs[runner])}`: paired ΔMRR {_ci(dbr)} (interval excludes 0)."]
+        else:
+            lines += ["", f"**No clear winner among the retrieval configurations.** The highest point-estimate MRR "
+                          f"is `{_label(runs[best])}`, but its paired difference to the runner-up "
+                          f"`{_label(runs[runner])}` is ΔMRR {_ci(dbr)}, an interval that includes 0. Treat the "
+                          f"configurations at the top as statistically indistinguishable on this data; the "
+                          f"method-vs-method table below gives the pairs."]
     large = s.summary(best, "size:>100")["mrr"]
     large_ref = s.summary(ref, "size:>100")["mrr"]
     lines.append("")
@@ -219,6 +247,33 @@ def headline(s: Summaries) -> list[str]:
                      "and are produced by `notebooks/cp4_retrieval_colab.ipynb`. Until then this document compares "
                      "only what is listed below; it is not the checkpoint's full answer.")
     return lines
+
+
+def method_comparison_pairs(runs: list[dict[str, Any]], variant: str = "code+commits") -> list[tuple[str, int, int]]:
+    """(label, run a, run b) for the method-vs-method rows, on one chunk variant: BM25 vs each
+    dense, BM25 vs each hybrid, each dense vs the hybrid of the same embedder, and each hybrid
+    vs each rerank of it. Only pairs where both runs exist."""
+    def find(kind, config=None):
+        return _find(runs, kind, variant, config)
+
+    bm = find("bm25")
+    out: list[tuple[str, int, int]] = []
+    embedders = sorted({r["config"].split(":", 1)[1].split("+", 1)[0] for r in runs
+                        if r["kind"] in ("dense", "hybrid", "hybrid+rerank") and r["variant"] == variant})
+    for e in embedders:
+        dn, hy = find("dense", f"dense:{e}"), find("hybrid", f"hybrid:{e}")
+        if bm is not None and dn is not None:
+            out.append((f"dense:{e} vs bm25", dn, bm))
+        if bm is not None and hy is not None:
+            out.append((f"hybrid:{e} vs bm25", hy, bm))
+        if dn is not None and hy is not None:
+            out.append((f"hybrid:{e} vs dense:{e}", hy, dn))
+        for r in runs:
+            if r["kind"] == "hybrid+rerank" and r["variant"] == variant and r["config"].startswith(f"hybrid+rerank:{e}+"):
+                rr = _find(runs, "hybrid+rerank", variant, r["config"])
+                if hy is not None and rr is not None:
+                    out.append((f"{r['config']} vs hybrid:{e}", rr, hy))
+    return out
 
 
 def render_cp4_doc(results_dir: Path, source: str) -> str:
@@ -323,6 +378,17 @@ def render_cp4_doc(results_dir: Path, source: str) -> str:
             lines.append(f"| {_label(runs[i])} | {_ci(s.paired_diff(i, ref, 'mrr'))} | "
                          f"{_ci(s.paired_diff(i, ref, 'recall@10'))} | "
                          f"{_ci(s.paired_diff(i, ref, 'mrr', 'size:>100'))} | {vs_rand} |")
+
+    pairs_mm = method_comparison_pairs(runs)
+    if pairs_mm:
+        lines += ["", "## Method vs method (paired, chunk variant `code+commits`)", "",
+                  "First minus second, paired cluster bootstrap with the same draws for every pair, denominator (b). "
+                  "An interval that includes 0 means the two are not distinguishable here; a headline of \"best "
+                  "method\" is only justified by an interval that excludes 0.", "",
+                  "| Comparison | ΔMRR (all) | ΔR@10 (all) | ΔMRR (>100) | ΔR@1 (all) |", "|---|---|---|---|---|"]
+        for lab, a, b in pairs_mm:
+            lines.append(f"| {lab} | {_ci(s.paired_diff(a, b, 'mrr'))} | {_ci(s.paired_diff(a, b, 'recall@10'))} | "
+                         f"{_ci(s.paired_diff(a, b, 'mrr', 'size:>100'))} | {_ci(s.paired_diff(a, b, 'recall@1'))} |")
 
     n_named = sum(1 for c in cases if c.get("query_names_gold"))
     n_qid = sum(1 for c in cases if c["query_has_advisory_id"])

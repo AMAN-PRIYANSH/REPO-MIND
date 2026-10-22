@@ -29,7 +29,7 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-- [ ] 0a Neutral headline + paired method-vs-method rows in CP4 renderer; regenerate CP4 results doc
+- [x] 0a Neutral headline + paired method-vs-method rows in CP4 renderer; regenerate CP4 results doc
 - [ ] 0b Notebook import path line (CP4 notebook + new CP5 notebook)
 - [ ] 0c Retrieval config file (fixed retriever) read by harness
 - [ ] 1 LLMClient (real, endpoint rule, fake, call records)
