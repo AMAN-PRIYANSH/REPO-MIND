@@ -22,12 +22,14 @@ class EvidenceGateError(Exception):
     pass
 
 
-def evidence_statuses(case_list: dict[str, Any], data_dir: Path) -> tuple[dict[str, str], int]:
-    """({case_id: stored status or "MISSING"}, total candidate count) for every case in the list."""
+def evidence_statuses(case_list: dict[str, Any], data_dir: Path,
+                      subdir: str = "release_range") -> tuple[dict[str, str], int]:
+    """({case_id: stored status or "MISSING"}, total candidate count) for every case in the list.
+    `subdir` is `release_range` for D4 and `fix_evidence` for D1."""
     statuses: dict[str, str] = {}
     candidates = 0
     for entry in case_list["cases"]:
-        path = Path(data_dir) / "release_range" / f"{entry['id']}.json"
+        path = Path(data_dir) / subdir / f"{entry['id']}.json"
         try:
             rr = json.loads(path.read_text(encoding="utf-8"))
             statuses[entry["id"]] = rr["status"]

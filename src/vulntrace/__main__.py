@@ -74,15 +74,25 @@ def build_parser() -> argparse.ArgumentParser:
     es.add_argument("--cache", default=None, help="vulndb cache directory")
     es.add_argument("--out", default=None, help="output directory (default: results/cp3)")
     er = esub.add_parser("retrieval", help="Mode 2 retrieval evaluation on D4 (CP4)")
-    er.add_argument("--config", action="append", required=True,
+    er.add_argument("--config", action="append", default=None,
                     help="random | size | bid | bid-only | bm25 | dense:<e> | hybrid:<e> | hybrid+rerank:<e>+<r> "
                          "(repeatable; e.g. --config bm25 --config dense:bge-small)")
     er.add_argument("--variant", action="append", default=None,
                     help="chunk variant (repeatable; default: all of code_only, code+commits, code+commits_idmasked)")
     _add_eval_data_args(er)
-    er.add_argument("--out", default=None, help="results directory (default: results/cp4)")
+    er.add_argument("--hyde", action="append", default=None,
+                    help="CP5 HyDE: query | query+hyde | hyde-only (repeatable); uses the fixed retriever, not --config")
+    _add_llm_args(er)
+    er.add_argument("--out", default=None, help="results directory (default: results/cp4; with --hyde results/cp5)")
     er.add_argument("--replace-cases", action="store_true",
                     help="allow overwriting a cases.json in --out that differs from this run's evidence")
+
+    sl = esub.add_parser("select", help="CP5: LLM closed-set selection - E1 (--mode fix, D1) or S1 (--mode release, D4)")
+    sl.add_argument("--mode", required=True, choices=["fix", "release"])
+    sl.add_argument("--k", type=int, default=None, help="S1 candidates shown to the model (default from the fixed retriever file: 10)")
+    _add_eval_data_args(sl)
+    _add_llm_args(sl)
+    sl.add_argument("--out", default=None, help="results directory (default: results/cp5)")
 
     ix = sub.add_parser("index", help="chunk, embed and store D4 candidates (CP4)")
     ixsub = ix.add_subparsers(dest="index_command", required=True)
@@ -104,6 +114,15 @@ def _add_eval_data_args(sp) -> None:
     sp.add_argument("--dsn", default=None, help="PostgreSQL DSN for --store pgvector (default: $VULNTRACE_PG_DSN)")
     sp.add_argument("--allow-missing", action="store_true",
                     help="score cases without materialised evidence as misses instead of stopping")
+
+
+def _add_llm_args(sp) -> None:
+    sp.add_argument("--model", default="fake", help="model alias or Ollama tag (qwen2.5-coder-7b, llama3.1-8b) or 'fake'")
+    sp.add_argument("--llm-url", default=None, help="OpenAI-compatible endpoint (default http://localhost:11434/v1; "
+                                                     "only loopback hosts are accepted)")
+    sp.add_argument("--llm-cache", default=None, help="LLM response cache directory (default: data/llm_cache)")
+    sp.add_argument("--dry-run", action="store_true",
+                    help="use the fake LLM and the fake embedder instead of real models (pipeline check; marked FAKE)")
 
 
 def _load_eval_set(args):
@@ -144,6 +163,13 @@ def _cmd_eval_retrieval(args, argv) -> int:
     from vulntrace.eval import retrieval as er
     from vulntrace.retrieval.chunking import VARIANTS
 
+    if args.hyde:
+        from vulntrace.eval import cp5_cli
+
+        return cp5_cli.cmd_hyde(args, argv, _load_eval_set)
+    if not args.config:
+        print("error: give --config (CP4 retrieval) or --hyde (CP5)", file=sys.stderr)
+        return EXIT_INVALID_INPUT
     try:
         configs = [er.parse_config(c) for c in args.config]
     except er.HarnessError as exc:
@@ -453,6 +479,10 @@ def main(argv: list[str] | None = None) -> int:
             return _cmd_eval_symbols(args)
         if args.command == "eval" and args.eval_command == "retrieval":
             return _cmd_eval_retrieval(args, argv)
+        if args.command == "eval" and args.eval_command == "select":
+            from vulntrace.eval import cp5_cli
+
+            return cp5_cli.cmd_select(args, argv, _load_eval_set)
         if args.command == "index" and args.index_command == "build":
             return _cmd_index_build(args)
     except Exception as exc:  # unexpected

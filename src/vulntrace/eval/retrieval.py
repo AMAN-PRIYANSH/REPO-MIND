@@ -19,6 +19,7 @@ file of compact per-case rows; `cases.json` holds the per-case facts (cluster, b
 counts) once; the results document is rendered from these files by code.
 """
 
+import dataclasses
 import json
 import platform
 import re
@@ -95,6 +96,8 @@ class EvalCase:
     body_len: dict[str, int] = field(default_factory=dict)
     query_has_details: bool = False
     query_names_gold: bool = False
+    summary: str = ""   # the two advisory fields the query is built from (CP5 prompts take the same two)
+    details: str = ""
 
     def facts(self, cutoff: str) -> dict[str, Any]:
         n = len(self.candidate_ids)
@@ -174,7 +177,9 @@ def load_eval_set(case_list: dict[str, Any], cases_by_id: dict[str, dict], data_
             status=rr["status"] if rr else "MISSING", candidate_ids=[c["candidate_id"] for c in cands],
             gold_core={c["candidate_id"] for c in cands if c["symbol"] in core},
             gold_core_derived={c["candidate_id"] for c in cands if c["symbol"] in core_derived},
-            query=build_query(query_input_from_case(vc)) if vc else "", bid_ids=bid_ids, bid_matched=matched,
+            query=build_query(query_input_from_case(vc)) if vc else "",
+            summary=query_input_from_case(vc).summary if vc else "", details=query_input_from_case(vc).details if vc else "",
+            bid_ids=bid_ids, bid_matched=matched,
             body_len={c.candidate_id: len(c.body) for c in chunks},
             query_has_details=bool(vc and query_input_from_case(vc).details.strip()),
             query_names_gold=bool(vc and query_names_symbol(build_query(query_input_from_case(vc)), core)),
@@ -187,6 +192,7 @@ class Harness:
                  embedding_cache_root: Path | None = None, store: VectorStore | None = None, device: str | None = None,
                  rerank_top_n: int = rerank.DEFAULT_TOP_N, log: Callable[[str], None] | None = None):
         self.cases, self.ranges, self.seed = cases, ranges, seed
+        self._base_cases = list(cases)
         self.cache_root, self.device, self.rerank_top_n = embedding_cache_root, device, rerank_top_n
         self.store = store or InMemoryVectorStore()
         self.log = log or (lambda msg: None)
@@ -198,6 +204,13 @@ class Harness:
         self._qvec: dict[tuple[str, str], Any] = {}
         self._dense_rankings: dict[tuple[str, str, str], list[str]] = {}
         self.embed_stats: dict[str, dict] = {}
+
+    def set_queries(self, queries: dict[str, str] | None) -> None:
+        """Replace the query text of the given cases (HyDE); `None` restores the originals. The
+        cached dense rankings depend on the query, so they are dropped."""
+        self.cases = [dataclasses.replace(c, query=queries[c.case_id]) if queries and c.case_id in queries else c
+                      for c in self._base_cases]
+        self._dense_rankings.clear()
 
     # --- components -----------------------------------------------------------------------
     def _bm25_for(self, range_key: str, variant: str):
