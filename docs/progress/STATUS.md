@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP5 - Local LLM layer, root-cause selection, HyDE**
-- State: `IN_PROGRESS`
+- State: `AWAITING_REVIEW` (criterion 6 NOT MET: no real LLM run; needs the owner's Colab run)
 - Branch in use: `claude/vulntrace-ai-build-o31zls`
 - Specification: [checkpoints/CP5.md](../implementation/checkpoints/CP5.md)
 
@@ -19,7 +19,7 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 | CP2 | Go call-graph helper and verdict rule | APPROVED | claude/optimistic-shannon-397w1q | [CP2_REPORT](reports/CP2_REPORT.md) |
 | CP3 | Advisory dataset, fix evidence, release ranges, baselines (+ CI) | APPROVED | claude/lucid-fermi-9esjyw | [CP3_REPORT](reports/CP3_REPORT.md) |
 | CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | APPROVED | claude/vulntrace-ai-build-9qhbjg | [CP4_REPORT](reports/CP4_REPORT.md) |
-| CP5 | Local LLM layer, root-cause selection, HyDE | IN_PROGRESS | claude/vulntrace-ai-build-o31zls | - |
+| CP5 | Local LLM layer, root-cause selection, HyDE | AWAITING_REVIEW (no real run yet) | claude/vulntrace-ai-build-o31zls | [CP5_REPORT](reports/CP5_REPORT.md) |
 | CP5b | Lifting and caller/callee queries (Go helper) | NOT_RELEASED | - | - |
 | CP6 | LangGraph investigation agent | NOT_RELEASED | - | - |
 | CP7 | End-to-end triage, verifier, real apps, demo | NOT_RELEASED | - | - |
@@ -39,13 +39,14 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 - [x] 5 Eval commands (select fix/release, retrieval --hyde) + JSON results + renderer
 - [x] 6 Contamination split
 - [x] 7 Models config (max two, tags/digests recorded in Colab)
-- [~] 8 Colab notebook written + tested (notebooks/cp5_llm_colab.ipynb); fake-LLM dry run on real evidence: pending (D4 evidence rebuilding in session)
+- [x] 8 Colab notebook written + tested; fake-LLM dry run on real D1/D4 evidence done (CP5_DRYRUN.log). NOT executed in Colab
 - [x] 9 Tests (unit + integration)
 - [x] 10a Results doc generator code (docs/results/CP5_LLM_RESULTS.md still to be generated from the real run)
-- [ ] 11 Report CP5_REPORT.md, AWAITING_REVIEW
+- [x] 11 Report CP5_REPORT.md, AWAITING_REVIEW
+- [ ] (open) real Colab run of E1/S1/HyDE -> commit docs/results/cp5/ and render CP5_LLM_RESULTS.md
 
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-(CP5: none yet. CP4 was approved on 22 Oct 2026; read the review notes in checkpoints/CP3.md and CP4.md - they bind CP5. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists.)
+(CP5: all code, tests, notebook and dry run done; the only missing piece is the real Colab run (owner runs notebooks/cp5_llm_colab.ipynb, hands over cp5_results.zip). Next session: unzip into docs/results/cp5/, render CP5_LLM_RESULTS.md, check invalid rates, add results section to the report. Earlier note: CP4 was approved on 22 Oct 2026; read the review notes in checkpoints/CP3.md and CP4.md - they bind CP5. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists.)
