@@ -5,8 +5,8 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP5 - Local LLM layer, root-cause selection, HyDE**
-- State: `READY` (released, not started)
-- Branch in use: (none yet - the first session writes its own `claude/...` session branch here; see `CLAUDE.md` section 5)
+- State: `IN_PROGRESS`
+- Branch in use: `claude/vulntrace-ai-build-o31zls`
 - Specification: [checkpoints/CP5.md](../implementation/checkpoints/CP5.md)
 
 State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
@@ -19,7 +19,7 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 | CP2 | Go call-graph helper and verdict rule | APPROVED | claude/optimistic-shannon-397w1q | [CP2_REPORT](reports/CP2_REPORT.md) |
 | CP3 | Advisory dataset, fix evidence, release ranges, baselines (+ CI) | APPROVED | claude/lucid-fermi-9esjyw | [CP3_REPORT](reports/CP3_REPORT.md) |
 | CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | APPROVED | claude/vulntrace-ai-build-9qhbjg | [CP4_REPORT](reports/CP4_REPORT.md) |
-| CP5 | Local LLM layer, root-cause selection, HyDE | READY | - | - |
+| CP5 | Local LLM layer, root-cause selection, HyDE | IN_PROGRESS | claude/vulntrace-ai-build-o31zls | - |
 | CP5b | Lifting and caller/callee queries (Go helper) | NOT_RELEASED | - | - |
 | CP6 | LangGraph investigation agent | NOT_RELEASED | - | - |
 | CP7 | End-to-end triage, verifier, real apps, demo | NOT_RELEASED | - | - |
@@ -29,7 +29,20 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-- [ ] (CP5 not started)
+- [ ] 0a Neutral headline + paired method-vs-method rows in CP4 renderer; regenerate CP4 results doc
+- [ ] 0b Notebook import path line (CP4 notebook + new CP5 notebook)
+- [ ] 0c Retrieval config file (fixed retriever) read by harness
+- [ ] 1 LLMClient (real, endpoint rule, fake, call records)
+- [ ] 2 Response cache (no prompts/responses committed)
+- [ ] 3 Prompts + closed-set validation + injection tests
+- [ ] 4 HyDE
+- [ ] 5 Eval commands (select fix/release, retrieval --hyde) + JSON results + renderer
+- [ ] 6 Contamination split
+- [ ] 7 Models config (max two, tags/digests recorded in Colab)
+- [ ] 8 Colab notebook + fake-LLM dry run on real evidence
+- [ ] 9 Tests (unit + integration)
+- [ ] 10 Results doc generator (CP5_LLM_RESULTS.md)
+- [ ] 11 Report CP5_REPORT.md, AWAITING_REVIEW
 
 ## Handoff notes
 
