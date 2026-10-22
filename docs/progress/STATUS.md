@@ -39,7 +39,7 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 - [x] 5 Eval commands (select fix/release, retrieval --hyde) + JSON results + renderer
 - [x] 6 Contamination split
 - [x] 7 Models config (max two, tags/digests recorded in Colab)
-- [ ] 8 Colab notebook + fake-LLM dry run on real evidence
+- [~] 8 Colab notebook written + tested (notebooks/cp5_llm_colab.ipynb); fake-LLM dry run on real evidence: pending (D4 evidence rebuilding in session)
 - [x] 9 Tests (unit + integration)
 - [x] 10a Results doc generator code (docs/results/CP5_LLM_RESULTS.md still to be generated from the real run)
 - [ ] 11 Report CP5_REPORT.md, AWAITING_REVIEW
