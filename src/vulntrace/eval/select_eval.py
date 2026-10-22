@@ -57,6 +57,7 @@ def counts(llm_rows: list[dict[str, Any]]) -> dict[str, Any]:
             "retried": sum(1 for r in llm_rows if r["retried"]),
             "input_tokens": sum(r["input_tokens"] for r in llm_rows), "output_tokens": sum(r["output_tokens"] for r in llm_rows),
             "llm_seconds": round(sum(r["latency_s"] for r in llm_rows), 1),
+            "max_input_tokens": max((a["input_tokens"] or 0 for r in llm_rows for a in r["attempts"]), default=0),
             "cached_calls": sum(1 for r in llm_rows for a in r["attempts"] if a["cached"]),
             "calls": sum(len(r["attempts"]) for r in llm_rows)}
 

@@ -136,7 +136,8 @@ def e1_section(alias: str, doc: dict[str, Any]) -> list[str]:
     out += [f"Run: {c['asked']} cases asked ({c['not_asked']} had no candidates), {c['valid']} valid, {c['invalid']} INVALID, "
             f"{c['error']} server errors, {c['abstain']} abstained, {c['retried']} needed the retry; "
             f"{c['input_tokens']} prompt / {c['output_tokens']} completion tokens, {c['llm_seconds']} s of LLM time over "
-            f"{c['calls']} calls ({c['cached_calls']} served from cache).", ""]
+            f"{c['calls']} calls ({c['cached_calls']} served from cache). Largest prompt: {c.get('max_input_tokens', 0)} tokens "
+            "(the Colab run configures a 16384-token context; a value near it means the server may have cut the prompt).", ""]
     trunc = [r["id"] for r in rows if r["prompt_meta"].get("diff_truncated")]
     out += [f"Diff truncation rule: each hunk cut at 2500 characters, hunks added in order until 20000 characters are used, "
             f"the rest omitted (candidates are never cut). Cases with a truncated diff: {len(trunc)}"
