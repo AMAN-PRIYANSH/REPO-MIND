@@ -1,0 +1,20 @@
+Task: the advisory below was fixed by a commit. The candidates are the Go functions that the fixing change modified. Decide which of them contained the vulnerability before the fix. Some candidates may only have changed for unrelated reasons (renames, refactoring, logging, callers adapted to a new signature).
+
+<<<BEGIN ADVISORY>>>
+Summary: $summary
+
+Details:
+$details
+<<<END ADVISORY>>>
+
+Candidates (the closed set; each starts with its ID):
+
+$candidates
+
+The fixing change, as numbered hunks (test files are not shown). $diff_note
+
+<<<BEGIN DIFF>>>
+$diff
+<<<END DIFF>>>
+
+Select at most $max_selected candidate IDs, or abstain. Answer with the JSON object only.

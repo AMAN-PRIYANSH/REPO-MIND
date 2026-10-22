@@ -1,0 +1,14 @@
+Task: find the function that contains the vulnerability described in the advisory. The candidates below are the best matches that a search over a software release returned for the advisory text, listed in the search's order (first = best match). The vulnerable function may be missing from the list; in that case abstain. The search is imperfect: the first candidate is not necessarily the right one.
+
+<<<BEGIN ADVISORY>>>
+Summary: $summary
+
+Details:
+$details
+<<<END ADVISORY>>>
+
+Candidates (the closed set; each starts with its ID):
+
+$candidates
+
+Select at most $max_selected candidate IDs, or abstain. Answer with the JSON object only.

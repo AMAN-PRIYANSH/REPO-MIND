@@ -1,0 +1,8 @@
+<<<BEGIN ADVISORY>>>
+Summary: $summary
+
+Details:
+$details
+<<<END ADVISORY>>>
+
+Write the hypothetical vulnerable Go function now.

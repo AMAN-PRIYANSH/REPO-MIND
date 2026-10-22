@@ -1,0 +1,3 @@
+Your previous answer was rejected by the checker: $problems
+
+Answer again. Output ONLY a JSON object of the form {"selected": ["<id>", ...], "abstain": false} or {"selected": [], "abstain": true}. Use only IDs from this list: $ids. Select at most $max_selected.

@@ -34,8 +34,8 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 - [x] 0c Retrieval config file (fixed retriever) read by harness
 - [x] 1 LLMClient (real, endpoint rule, fake, call records)
 - [x] 2 Response cache (no prompts/responses committed)
-- [ ] 3 Prompts + closed-set validation + injection tests
-- [ ] 4 HyDE
+- [x] 3 Prompts + closed-set validation + injection tests
+- [x] 4 HyDE
 - [ ] 5 Eval commands (select fix/release, retrieval --hyde) + JSON results + renderer
 - [ ] 6 Contamination split
 - [ ] 7 Models config (max two, tags/digests recorded in Colab)
