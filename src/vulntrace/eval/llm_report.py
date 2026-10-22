@@ -137,7 +137,7 @@ def e1_section(alias: str, doc: dict[str, Any]) -> list[str]:
             f"{c['error']} server errors, {c['abstain']} abstained, {c['retried']} needed the retry; "
             f"{c['input_tokens']} prompt / {c['output_tokens']} completion tokens, {c['llm_seconds']} s of LLM time over "
             f"{c['calls']} calls ({c['cached_calls']} served from cache). Largest prompt: {c.get('max_input_tokens', 0)} tokens "
-            "(the Colab run configures a 16384-token context; a value near it means the server may have cut the prompt).", ""]
+            "(the Colab notebook configures a 32768-token context; a value near it would mean the server may have cut the prompt).", ""]
     trunc = [r["id"] for r in rows if r["prompt_meta"].get("diff_truncated")]
     out += [f"Diff truncation rule: each hunk cut at 2500 characters, hunks added in order until 20000 characters are used, "
             f"the rest omitted (candidates are never cut). Cases with a truncated diff: {len(trunc)}"
@@ -289,8 +289,8 @@ def main_finding(res: dict[str, Any]) -> list[str]:
         if cell:
             n, nc, d, s, sb = cell
             lines.append(f"- **E1, `{alias}`** ({n} headline cases, {nc} clusters): F1 {_ci(s['f1'])} vs E0 {_ci(sb['f1'])}; "
-                         f"paired ΔF1 {_ci(d['f1'])}, Δ any-hit {_ci(d['any_hit'])}, Δ exact match {_ci(d['exact'])}: LLM is "
-                         f"{verdict(d['f1'])} on F1 and {verdict(d['any_hit'])} on any-hit. INVALID rate "
+                         f"paired ΔF1 {_ci(d['f1'])}, Δ any-hit {_ci(d['any_hit'])}, Δ exact match {_ci(d['exact'])}: LLM vs E0 - F1: "
+                         f"{verdict(d['f1'])}; any-hit: {verdict(d['any_hit'])}. INVALID rate "
                          f"{_status_rates(_sub(doc['rows'], group_defs(doc['rows'], doc['model']['cutoff'])[0][2]))[0]}.")
         else:
             lines.append(f"- **E1, `{alias}`**: the headline group is empty.")
@@ -300,7 +300,7 @@ def main_finding(res: dict[str, Any]) -> list[str]:
         if cell:
             n, nc, d, s, sb = cell
             lines.append(f"- **S1, `{alias}`, k={k}** (headline cases whose gold is in the top-{k}: {n}, {nc} clusters): any-hit "
-                         f"{_ci(s['any_hit'])} vs retriever top-1 {_ci(sb['any_hit'])}; paired Δ {_ci(d['any_hit'])}: LLM is "
+                         f"{_ci(s['any_hit'])} vs retriever top-1 {_ci(sb['any_hit'])}; paired Δ {_ci(d['any_hit'])}: LLM vs top-1: "
                          f"{verdict(d['any_hit'])}.")
         else:
             lines.append(f"- **S1, `{alias}`, k={k}**: the headline group (denominator (a)) is empty.")

@@ -1,0 +1,21 @@
+E1 on 150 D1 cases with model fake-llm-v1
+E1 [fake]: 144 asked, 144 valid, 0 INVALID, 0 errors, 8 abstained, 14 retried; 264852 in / 1514 out tokens; cache hits 0/158 -> /tmp/claude-0/-home-user-REPO-MIND/3b7c71a9-9231-555e-abb1-2433f4e36e41/scratchpad/cp5dry/select_fix__fake.json
+S1 on 120 D4 cases, retriever hybrid:fake [code+commits], k=10, model fake-llm-v1
+dense fake code+commits: {'requested': 36534, 'embedded': 36534, 'cached': 0, 'seconds': 8.22}
+S1 [fake]: 118 asked, 118 valid, 0 INVALID, 0 errors, 5 abstained, 22 retried; 443713 in / 1381 out tokens; cache hits 0/140 -> /tmp/claude-0/-home-user-REPO-MIND/3b7c71a9-9231-555e-abb1-2433f4e36e41/scratchpad/cp5dry/select_release__fake__k10.json
+S1 on 120 D4 cases, retriever hybrid:fake [code+commits], k=5, model fake-llm-v1
+dense fake code+commits: {'requested': 36534, 'embedded': 0, 'cached': 36534, 'seconds': 0.0}
+S1 [fake]: 118 asked, 118 valid, 0 INVALID, 0 errors, 9 abstained, 11 retried; 247198 in / 1272 out tokens; cache hits 0/129 -> /tmp/claude-0/-home-user-REPO-MIND/3b7c71a9-9231-555e-abb1-2433f4e36e41/scratchpad/cp5dry/select_release__fake__k5.json
+HyDE generation for 120 D4 cases with fake-llm-v1
+dense fake code+commits: {'requested': 36534, 'embedded': 0, 'cached': 36534, 'seconds': 0.0}
+hybrid:fake + query: R@1=0.367 R@10=0.683 MRR=0.475 (n=120) -> /tmp/claude-0/-home-user-REPO-MIND/3b7c71a9-9231-555e-abb1-2433f4e36e41/scratchpad/cp5dry/hyde__fake/runs/hybrid_fake__hyde-query.json
+hybrid:fake + query+hyde: R@1=0.383 R@10=0.675 MRR=0.478 (n=120) -> /tmp/claude-0/-home-user-REPO-MIND/3b7c71a9-9231-555e-abb1-2433f4e36e41/scratchpad/cp5dry/hyde__fake/runs/hybrid_fake__hyde-query-hyde.json
+hybrid:fake + hyde-only: R@1=0.208 R@10=0.492 MRR=0.295 (n=120) -> /tmp/claude-0/-home-user-REPO-MIND/3b7c71a9-9231-555e-abb1-2433f4e36e41/scratchpad/cp5dry/hyde__fake/runs/hybrid_fake__hyde-hyde-only.json
+bm25 + query: R@1=0.450 R@10=0.775 MRR=0.571 (n=120) -> /tmp/claude-0/-home-user-REPO-MIND/3b7c71a9-9231-555e-abb1-2433f4e36e41/scratchpad/cp5dry/hyde__fake/runs/bm25__hyde-query.json
+bm25 + query+hyde: R@1=0.492 R@10=0.775 MRR=0.596 (n=120) -> /tmp/claude-0/-home-user-REPO-MIND/3b7c71a9-9231-555e-abb1-2433f4e36e41/scratchpad/cp5dry/hyde__fake/runs/bm25__hyde-query-hyde.json
+bm25 + hyde-only: R@1=0.233 R@10=0.475 MRR=0.315 (n=120) -> /tmp/claude-0/-home-user-REPO-MIND/3b7c71a9-9231-555e-abb1-2433f4e36e41/scratchpad/cp5dry/hyde__fake/runs/bm25__hyde-hyde-only.json
+HyDE generation: 120 cases, 0 empty, 0 truncated, 0 errors
+
+real	1m15.911s
+user	1m15.738s
+sys	0m4.472s

@@ -1,0 +1,11 @@
+{
+ "comment": "Prompt templates are frozen before the first real run. A change after seeing real results is a NEW file with a new _vN suffix (the old file stays) and a line in the CP5 report naming the reason. tests/unit/test_prompts_frozen.py enforces this.",
+ "sha256": {
+  "hyde_system_v1.txt": "64479499dbc71d5c6425233ef5acda34c1065223e127277dfb0d27f47607444a",
+  "hyde_v1.txt": "fe0a1a87e69066baea9ecaba1579061f02e83a62b7c4eb74e80d914be3065eff",
+  "root_cause_fix_v1.txt": "7bfe14ae429b88497722bca3cb6b2e3a26b143c70f5221474cad6e185998538e",
+  "root_cause_retry_v1.txt": "826a48fd5f793abf20e2f30b8f95847dfe3698d77c9d4264c0f9d5e87962820f",
+  "root_cause_system_v1.txt": "33233b5468c54a71fe85e03d488a4711e61d15a322ccefb0a58b717eb3d7c381",
+  "root_cause_topk_v1.txt": "328041692f72c51ef363c6a8cf202481d0c1a91327e2071bc8be18d9d5ee5757"
+ }
+}

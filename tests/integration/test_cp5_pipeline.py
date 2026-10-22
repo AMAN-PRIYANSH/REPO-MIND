@@ -237,4 +237,4 @@ def test_cp5_doc_for_e1_with_a_documented_cutoff_splits_pre_post_undated(tmp_pat
     assert "pre-cutoff" in text and "undated (no created date)" in text
     assert "post-cutoff: 3; pre-cutoff: 2; undated: 1; total 6" in text
     assert "E0 (all changed functions)" in text and "WARNING" not in text
-    assert "LLM is better (interval excludes 0) on F1" in text or "LLM is no detectable difference" in text
+    assert "LLM vs E0 - F1:" in text
