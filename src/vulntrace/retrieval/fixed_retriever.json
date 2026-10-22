@@ -1,0 +1,9 @@
+{
+  "comment": "The retriever CP5 uses for S1 (top-k selection) and HyDE, fixed from the CP4 results (BM25, dense and hybrid were statistically indistinguishable; rerankers did not help; hybrid is the simplest strong choice). Read by vulntrace.retrieval.fixed; S1 and HyDE take no other retriever.",
+  "config": "hybrid:bge-small",
+  "variant": "code+commits",
+  "secondary_config": "bm25",
+  "reranker": null,
+  "default_k": 10,
+  "ablation_k": [5]
+}
