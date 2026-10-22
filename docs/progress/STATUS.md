@@ -32,8 +32,8 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 - [x] 0a Neutral headline + paired method-vs-method rows in CP4 renderer; regenerate CP4 results doc
 - [x] 0b Notebook import path line in CP4 notebook (CP5 notebook gets it when written; test globs all notebooks)
 - [x] 0c Retrieval config file (fixed retriever) read by harness
-- [ ] 1 LLMClient (real, endpoint rule, fake, call records)
-- [ ] 2 Response cache (no prompts/responses committed)
+- [x] 1 LLMClient (real, endpoint rule, fake, call records)
+- [x] 2 Response cache (no prompts/responses committed)
 - [ ] 3 Prompts + closed-set validation + injection tests
 - [ ] 4 HyDE
 - [ ] 5 Eval commands (select fix/release, retrieval --hyde) + JSON results + renderer
