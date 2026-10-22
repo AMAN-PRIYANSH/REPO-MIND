@@ -21,7 +21,7 @@ ml = ["sentence-transformers"]
 where = ["src"]
 
 [tool.setuptools.package-data]
-vulntrace = ["retrieval/migrations/*.sql", "retrieval/fixed_retriever.json", "llm/prompts/*.txt"]
+vulntrace = ["retrieval/migrations/*.sql", "retrieval/fixed_retriever.json", "llm/prompts/*.txt", "llm/prompts/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
