@@ -407,3 +407,42 @@ func Gen[T any](x T) T { return x }
 		t.Errorf("objSymbol = %q", got)
 	}
 }
+
+// App mode: with main_packages the roots are main and init (as in reach), and the module under study
+// is the main packages' own module, so a caller in package main is found.
+func TestQueryModesInAppMode(t *testing.T) {
+	dir, err := filepath.Abs("../fixtures/reachability")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := os.Stat(filepath.Join(dir, "go.mod")); err != nil {
+		t.Skip("fixtures/reachability not found")
+	}
+	body := fmt.Sprintf(`{"contract_version":"1.0","mode":"callers","module_dir":%q,"main_packages":["./cmd/direct_call"],"targets":[{"package":"vtfixtures/vulnlib","symbol":"Parse"}]}`, filepath.ToSlash(dir))
+	resp, _ := runHelper(t, "callers", "--request", writeReq(t, body))
+	if !resp.OK || resp.Load == nil || resp.Load.Mode != "APP" {
+		t.Fatalf("app mode: %+v %+v", resp.Error, resp.Load)
+	}
+	raw, _ := json.Marshal(resp.Results)
+	var res []NeighborResult
+	json.Unmarshal(raw, &res)
+	if res[0].Result != NeighborFound || len(res[0].Edges) != 1 || res[0].Edges[0].Other.Symbol != "main" ||
+		res[0].Edges[0].CallSite.File != "cmd/direct_call/main.go" || res[0].Edges[0].CallSite.Line != 10 {
+		t.Errorf("callers of Parse in app mode: %+v", res[0])
+	}
+	// lift: Parse is exported, so it lifts to itself even though its only caller is main (never an entry point).
+	body = strings.Replace(strings.Replace(body, `"callers"`, `"lift"`, 1), `"mode":"callers"`, `"mode":"lift"`, 1)
+	lr, _ := runHelper(t, "lift", "--request", writeReq(t, body))
+	raw, _ = json.Marshal(lr.Results)
+	var lifts []LiftResult
+	json.Unmarshal(raw, &lifts)
+	if !lr.OK || lifts[0].Status != LiftAlreadyExported {
+		t.Errorf("lift in app mode: %+v %+v", lr.Error, lifts)
+	}
+	// A main package that does not exist stays a LOAD_FAILED.
+	bad := fmt.Sprintf(`{"contract_version":"1.0","mode":"callees","module_dir":%q,"main_packages":["./cmd/nope"],"targets":[{"package":"vtfixtures/vulnlib","symbol":"Parse"}]}`, filepath.ToSlash(dir))
+	br, code := runHelper(t, "callees", "--request", writeReq(t, bad))
+	if br.OK || code != 1 || br.Error.Code != CodeLoadFailed {
+		t.Errorf("missing main package: %+v", br.Error)
+	}
+}

@@ -49,7 +49,7 @@ func loadQuery(req *Request, stderr io.Writer) (*qAnalysis, *Error) {
 	if appMode {
 		info.Mode = "APP"
 		var err *Error
-		pkgs, dir, err = loadPackages(req, packages.LoadAllSyntax)
+		pkgs, dir, err = loadPackages(req, packages.LoadAllSyntax|packages.NeedModule)
 		if err != nil {
 			return nil, err
 		}
@@ -66,6 +66,20 @@ func loadQuery(req *Request, stderr io.Writer) (*qAnalysis, *Error) {
 	modulePkgs := map[string]bool{}
 	for _, p := range pkgs {
 		modulePkgs[p.PkgPath] = true
+	}
+	if appMode {
+		// The module under study is the main packages' own module, not only the main packages.
+		mainModules := map[string]bool{}
+		for _, p := range pkgs {
+			if p.Module != nil {
+				mainModules[p.Module.Path] = true
+			}
+		}
+		packages.Visit(pkgs, nil, func(p *packages.Package) {
+			if p.Module != nil && mainModules[p.Module.Path] {
+				modulePkgs[p.PkgPath] = true
+			}
+		})
 	}
 	var set map[*ssa.Function]bool
 	var cg *callgraph.Graph
