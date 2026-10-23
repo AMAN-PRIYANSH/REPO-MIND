@@ -1,9 +1,9 @@
 {
   "cases": [
     {
-      "candidate_count": 0,
+      "candidate_count": 1,
       "cluster_key": "github.com/miekg/dns@1.0.3..1.0.4-0.20180125103619-43913f2f4fbd",
-      "commit_count": 0,
+      "commit_count": 4,
       "created": "2021-04-14",
       "fix_commit": {
         "host": "github.com",
@@ -14,7 +14,7 @@
       "id": "GO-2020-0006",
       "large": false,
       "review_status": "REVIEWED",
-      "status": "PSEUDO_VERSION_UNRESOLVED"
+      "status": "AVAILABLE"
     },
     {
       "candidate_count": 81,
@@ -1931,9 +1931,8 @@
   "sample_count": 120,
   "seed": 20261021,
   "status_counts": {
-    "AVAILABLE": 103,
+    "AVAILABLE": 104,
     "EMPTY": 2,
-    "PSEUDO_VERSION_UNRESOLVED": 1,
     "TRUNCATED": 14
   },
   "target": 120

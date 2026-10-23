@@ -11,8 +11,9 @@ import json
 from pathlib import Path
 from typing import Any
 
-# A handful of cases may legitimately differ from the committed list (the Claude Code session
-# saw 1 of 120); the broken Colab run differed in 119.
+# A handful of cases may legitimately differ from the committed list (before CP5b task 0c one
+# stale record, GO-2020-0006, always did; the corrected D4 list now matches a rebuild in every
+# environment tried); the broken Colab run differed in 119.
 MAX_STATUS_DIFFERENCES = 3
 
 MISSING = "MISSING"
