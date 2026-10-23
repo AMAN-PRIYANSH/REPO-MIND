@@ -4,10 +4,10 @@ This file is the single source of truth for where the build stands. Claude Code 
 
 ## Current
 
-- Current checkpoint: **CP5b - Lifting and caller/callee queries (Go helper)**
-- State: `AWAITING_REVIEW`
-- Branch in use: `claude/eloquent-shannon-baphva`
-- Specification: [checkpoints/CP5b.md](../implementation/checkpoints/CP5b.md)
+- Current checkpoint: **CP6 - LangGraph investigation agent (Mode 2)**
+- State: `READY`
+- Branch in use: (none yet; the CP6 session records its own `claude/...` branch)
+- Specification: [checkpoints/CP6.md](../implementation/checkpoints/CP6.md)
 
 State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
 
@@ -20,8 +20,8 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 | CP3 | Advisory dataset, fix evidence, release ranges, baselines (+ CI) | APPROVED | claude/lucid-fermi-9esjyw | [CP3_REPORT](reports/CP3_REPORT.md) |
 | CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | APPROVED | claude/vulntrace-ai-build-9qhbjg | [CP4_REPORT](reports/CP4_REPORT.md) |
 | CP5 | Local LLM layer, root-cause selection, HyDE | APPROVED | claude/vulntrace-ai-build-o31zls | [CP5_REPORT](reports/CP5_REPORT.md) |
-| CP5b | Lifting and caller/callee queries (Go helper) | AWAITING_REVIEW | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
-| CP6 | LangGraph investigation agent | NOT_RELEASED | - | - |
+| CP5b | Lifting and caller/callee queries (Go helper) | APPROVED | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
+| CP6 | LangGraph investigation agent | READY | - | - |
 | CP7 | End-to-end triage, verifier, real apps, demo | NOT_RELEASED | - | - |
 | CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
 
@@ -29,19 +29,10 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-- [x] Task 0a: D1 first-pass materialize mismatch (cause, one-pass fix, test, remove notebook workaround)
-- [x] Task 0b: Ollama install check in CP5 notebook
-- [x] Task 0c: correct GO-2020-0006 in D4_cases.json (+ counts, gate expectations)
-- [x] Task 0d: HyDE table comparison count note; regenerate CP5_LLM_RESULTS.md
-- [x] D1: helper `lift` mode (NEAREST + ALL, depth limit, ROOT_ONLY, LOAD_FAILED)
-- [x] D2: helper `callers` / `callees` modes + Python wrappers + schema entries
-- [x] D3: lifting fixtures (observed truths)
-- [x] D4: `eval lift` on D1, E1+L, D4 ceiling; results/cp5b/ + docs/results/CP5B_LIFTING_RESULTS.md
-- [x] D5: tests (Go, Python contract, integration)
-- [x] Report CP5b_REPORT.md, STATE AWAITING_REVIEW
+(CP6: not started.)
 
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-(CP5b: finished, report written; the next step is the supervisor's review. Earlier note: CP5 was approved on 22 Oct 2026; read the review notes in checkpoints/CP3.md, CP4.md and CP5.md - they bind CP5b. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists.)
+(CP5b was approved on 23 Oct 2026; read the review notes at the end of checkpoints/CP3.md to CP5b.md - they bind CP6. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists.)

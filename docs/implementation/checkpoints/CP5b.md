@@ -78,3 +78,16 @@ LLM calls, retrieval changes, the agent (CP6), the verifier, real target applica
 ## Review notes
 
 (The supervising assistant adds notes here if the state becomes `CHANGES_REQUESTED`.)
+
+**Supervisor review, 23 Oct 2026 - APPROVED** (branch `claude/eloquent-shannon-baphva` at `c939c52`). The session ran on Sonnet at medium effort instead of the recommended Opus high; the review therefore read the Go lifting code line by line rather than trusting the report.
+
+Checked by the supervisor: `pytest tests/unit tests/contract` -> 554 passed, 9 skipped (pgvector); CI green on every commit including the last one (the builder reported the last CI run as unchecked; it passed). Go tests were not re-run by the supervisor (no Go module proxy in the review sandbox); CI runs `go test ./... -v` and passed. `walkUp` (BFS over callers, module-only, NEAREST stops at the first entry point, ALL continues, depth limit flagged, shallowest example path, dedupe by declaration) matches the specification.
+
+Findings that bind later checkpoints:
+
+1. **Task 0a was a real bug, correctly found.** `fetch_commit` trusted a commit that was only the shallow boundary of an earlier fetch, so its parent was missing and the case was wrongly `NO_PARENT`. Four `D1_cases.json` records changed status/counts; no truth labels changed. The committed CP5 result files still reflect the old lists; four cases are excluded from E1+L for that reason. Accepted.
+2. **Lifting coverage: 86 of 99 cases lift (0.869).** Against the curators' `derived_symbols` (new symbols only): NEAREST precision 0.727, recall 0.253; ALL precision 0.473, recall 0.466. Low recall is partly the curators' convention (worked examples are in the results document). Neither rule is good enough to sit inside the verdict path. Use lifting as a candidate-widening aid only, and keep both rules reported.
+3. **E1+L "add" beats E1 but nothing beats E0.** Adding lifted symbols to E1 raises recall mechanically; this does not rescue the LLM pick. Do not present E1+L as an improvement over the baseline.
+4. **D4 ceiling is weak support for graph expansion:** of 17 cases whose core symbol is not a candidate, a candidate is within 1 hop in 1 and within 2 hops in 4. n is tiny; treat the `callers`/`callees` agent tools as an ablation, not a promised gain.
+5. **Reproducibility caveat:** the D1 and D4 runs used go1.26.10 (fetched into a scratch directory) because 31 of 99 go.mod files need a newer Go; CI stays on 1.24.7, so the lifting evaluation is not reproducible inside CI. The results document records the toolchain. The command line in it contains a scratch path from the builder's machine (cosmetic).
+6. The Ollama install check (0b) is only tested with fakes, not against a real Ollama. It will be exercised for real in the CP6 Colab run.
