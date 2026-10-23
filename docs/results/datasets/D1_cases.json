@@ -706,9 +706,9 @@
       "unfetchable_commits": 0
     },
     {
-      "candidate_count": 50,
+      "candidate_count": 56,
       "created": "2024-07-29",
-      "fetched_commits": 9,
+      "fetched_commits": 10,
       "fix_commit": {
         "host": "github.com",
         "owner": "moby",
@@ -718,7 +718,7 @@
       "id": "GO-2024-3005",
       "review_status": "REVIEWED",
       "status": "AVAILABLE",
-      "unfetchable_commits": 1
+      "unfetchable_commits": 0
     },
     {
       "candidate_count": 1,
@@ -871,9 +871,9 @@
       "unfetchable_commits": 0
     },
     {
-      "candidate_count": 4,
+      "candidate_count": 5,
       "created": "2026-03-06",
-      "fetched_commits": 2,
+      "fetched_commits": 3,
       "fix_commit": {
         "host": "github.com",
         "owner": "elastic",
@@ -883,7 +883,7 @@
       "id": "GO-2026-4360",
       "review_status": "REVIEWED",
       "status": "AVAILABLE",
-      "unfetchable_commits": 1
+      "unfetchable_commits": 0
     },
     {
       "candidate_count": 2,
@@ -1696,9 +1696,9 @@
       "unfetchable_commits": 0
     },
     {
-      "candidate_count": 0,
+      "candidate_count": 1,
       "created": "2026-08-17",
-      "fetched_commits": 0,
+      "fetched_commits": 1,
       "fix_commit": {
         "host": "github.com",
         "owner": "pion",
@@ -1707,8 +1707,8 @@
       },
       "id": "GO-2026-6165",
       "review_status": "REVIEWED",
-      "status": "UNAVAILABLE",
-      "unfetchable_commits": 1
+      "status": "AVAILABLE",
+      "unfetchable_commits": 0
     },
     {
       "candidate_count": 1,
@@ -1951,9 +1951,9 @@
       "unfetchable_commits": 0
     },
     {
-      "candidate_count": 0,
+      "candidate_count": 1,
       "created": "2026-08-17",
-      "fetched_commits": 0,
+      "fetched_commits": 1,
       "fix_commit": {
         "host": "github.com",
         "owner": "insomniacslk",
@@ -1962,8 +1962,8 @@
       },
       "id": "GO-2026-6237",
       "review_status": "REVIEWED",
-      "status": "UNAVAILABLE",
-      "unfetchable_commits": 1
+      "status": "AVAILABLE",
+      "unfetchable_commits": 0
     },
     {
       "candidate_count": 1,
@@ -2256,9 +2256,8 @@
   "sample_count": 150,
   "seed": 20261021,
   "status_counts": {
-    "AVAILABLE": 144,
-    "EMPTY": 4,
-    "UNAVAILABLE": 2
+    "AVAILABLE": 146,
+    "EMPTY": 4
   },
   "target": 150
 }

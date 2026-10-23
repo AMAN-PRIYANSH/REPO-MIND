@@ -39,3 +39,13 @@ def test_the_gate_passes_with_zero_differences_for_the_committed_list():
     d4 = _load("D4_cases.json")
     actual = {c["id"]: c["status"] for c in d4["cases"]}
     assert check_evidence(d4, actual, total_chunks=1, max_differences=0) == []
+
+
+def test_d1_list_has_no_record_that_the_shallow_boundary_bug_produced():
+    """CP5b task 0a: four D1 records had been written while fetch_commit trusted a shallow-boundary commit
+    (an unfetchable commit that is in fact fetchable). A corrected list has none of them."""
+    cases = {c["id"]: c for c in _load("D1_cases.json")["cases"]}
+    for cid, (n_cand, fetched) in {"GO-2024-3005": (56, 10), "GO-2026-4360": (5, 3),
+                                   "GO-2026-6165": (1, 1), "GO-2026-6237": (1, 1)}.items():
+        c = cases[cid]
+        assert (c["status"], c["candidate_count"], c["fetched_commits"], c["unfetchable_commits"]) == ("AVAILABLE", n_cand, fetched, 0), cid
