@@ -18,6 +18,7 @@ Entry point: `python -m vulntrace <command>`.
 | `index build --set d4` | CP4 | Chunk, embed and store candidates. |
 | `eval retrieval --config <name>` | CP4-CP5 | Retrieval ablations (BM25, dense, hybrid, rerank, HyDE). |
 | `eval symbols --strategy llm` / `llm+lift` / `llm-topk` | CP5 | LLM selection in both modes. |
+| `eval lift --set d1` / `--set d4-ceiling` | CP5b | Lifting vs `derived_symbols` and E1+L on the committed CP5 selections; caller/callee ceiling on D4. |
 | `eval symbols --strategy agent` | CP6 | LangGraph agent. |
 | `triage --advisory <ID> --app <dir> [--mode auto/fix/release]` | CP7 | Full pipeline on one case; prints a verdict JSON. |
 | `eval reachability --set d3` | CP7 | End-to-end evaluation. |
@@ -35,7 +36,7 @@ The Go helper is one binary, `vt-helper`, built from `helper/` in this repositor
 vt-helper <mode> --request <path-to-request.json>
 ```
 
-- Modes: `funcs` (list functions and line ranges in Go files), `reach` (VTA reachability), `lift` (caller walk to public functions), `edges` (confirm specific call edges for the verifier).
+- Modes: `funcs` (list functions and line ranges in Go files), `reach` (VTA reachability), `lift` (caller walk to public functions, CP5b), `callers` / `callees` (read-only call-graph queries, CP5b), `edges` (confirm specific call edges for the verifier), `naive` (negative control).
 - The request is a JSON file, not command-line flags, so long symbol lists and Windows paths are safe.
 - The helper writes exactly one JSON object to stdout. Logs go to stderr only.
 - Python enforces a timeout (default 300 s, configurable) and kills the process on expiry; result `ERROR` with code `TIMEOUT`.
@@ -84,6 +85,15 @@ vt-helper <mode> --request <path-to-request.json>
 ```
 
 Error codes: `BAD_REQUEST`, `CONTRACT_MISMATCH`, `LOAD_FAILED`, `TYPE_ERRORS`, `TARGET_NOT_FOUND`, `INTERNAL`, plus Python-side `TIMEOUT` and `HELPER_MISSING`.
+
+### CP5b modes: `lift`, `callers`, `callees`
+
+`contract_version` stays `1.0`: these modes, their fields and their statuses are added; no existing recording changes.
+
+- Loading: with `main_packages` the program is loaded as for `reach` (roots are `main` and `init`). Without it the module is loaded as a **library**: `packages` (default `["./..."]`) are loaded, every function is a node, and a package with its own errors, or importing one that has, is left out and counted in the response's `load` object (`packages_matched`, `packages_skipped`, `first_errors`). If nothing loads the response is `LOAD_FAILED` with the first error line.
+- Graph: the same CHA-seeded VTA call graph as `reach`. A closure is folded into its outermost enclosing function. Every edge is `STATIC` or `DYNAMIC`.
+- `lift` request: `targets` (the seeds, vulndb symbol form), `lift_rules` (`NEAREST`, `ALL`; default both), `limits.max_lift_depth` (default 10). An **exported entry point** is an exported function, or an exported method of an exported type, in a package that is neither `internal` nor `main`. `NEAREST` stops at the first entry point on each caller path; `ALL` keeps walking up. The walk stays inside the packages the request matched. Per seed: `status` (`LIFTED`, `ALREADY_EXPORTED` - the seed lifts to itself, `ROOT_ONLY` - no exported caller, nothing is invented, `PACKAGE_NOT_IN_PROGRAM`, `ERROR`), and per rule the entries with `depth`, `dynamic` and one shortest example path (entry first, seed last), plus `depth_limit_reached`. Generic seeds are `ERROR` / `UNSUPPORTED_SYMBOL_FORM`; a symbol missing from a loaded package is `TARGET_NOT_FOUND`; a package that was skipped at load time is `PACKAGE_NOT_LOADED`.
+- `callers` / `callees` request: `targets`, `limits.max_hops` (default 1), `limits.max_results` (default 200), `external` (also report functions outside the matched packages; default false). Per target: `result` (`FOUND`, `NONE`, `PACKAGE_NOT_IN_PROGRAM`, `ERROR`) and `edges` with `hop`, the call site (file and line) and `kind`; `truncated` says whether `max_results` cut the list.
 
 ### Rules
 
