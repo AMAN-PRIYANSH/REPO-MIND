@@ -84,6 +84,16 @@ def object_exists(repo_dir: Path, sha: str, runner) -> bool:
     return p.returncode == 0
 
 
+def is_shallow_boundary(repo_dir: Path, sha: str) -> bool:
+    """True if `sha` is listed in the clone's `.git/shallow`: the commit object is present but
+    its parents were cut off. An earlier fetch of a child commit leaves its parent in exactly
+    this state, so "the object exists" does not mean "the parent exists" (CP5b task 0a)."""
+    try:
+        return sha in (repo_dir / ".git" / "shallow").read_text(encoding="utf-8").split()
+    except OSError:
+        return False
+
+
 def fetch_commit(host: str, owner: str, repo: str, sha: str, depth: int = DEFAULT_FETCH_DEPTH,
                  cache_root: Path | None = None, runner=subprocess.run,
                  timeout: float = DEFAULT_TIMEOUT_S, remote_url: str | None = None) -> Path:
@@ -98,7 +108,10 @@ def fetch_commit(host: str, owner: str, repo: str, sha: str, depth: int = DEFAUL
     """
     repo_dir = repo_cache_dir(host, owner, repo, cache_root)
     _ensure_repo_initialised(repo_dir, host, owner, repo, runner, remote_url)
-    if object_exists(repo_dir, sha, runner):
+    # A commit that is only the shallow boundary of an earlier fetch has no parent here. Returning
+    # early for it made the result depend on which cases were fetched before (NO_PARENT for a
+    # commit that has one), so it is fetched again to the requested depth.
+    if object_exists(repo_dir, sha, runner) and not (depth > 1 and is_shallow_boundary(repo_dir, sha)):
         return repo_dir
     fetch = _run(runner, ["git", "fetch", f"--depth={depth}", "origin", sha], repo_dir, timeout=timeout)
     if fetch.returncode != 0:

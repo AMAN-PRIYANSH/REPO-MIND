@@ -11,6 +11,7 @@ from vulntrace.dataset.git_fetch import (
     deepen,
     fetch_commit,
     fetch_ref,
+    is_shallow_boundary,
     file_content_at,
     object_exists,
     parent_sha,
@@ -177,3 +178,61 @@ def test_deepen_does_not_raise_on_timeout_but_fails_gracefully(tmp_path):
     with pytest.raises(GitFetchError) as exc:
         deepen("h", "o", "r", fix, 10, cache_root=cache_root, runner=slow_runner, remote_url=str(src))
     assert exc.value.code == "FETCH_FAILED"
+
+
+def make_chain_repo(tmp_path, n=3):
+    """A linear history of `n` commits; returns (source dir, [sha oldest .. newest])."""
+    src = tmp_path / "chain"
+    src.mkdir()
+    _git(["init", "-q", "-b", "main"], src)
+    _git(["config", "user.email", "t@example.com"], src)
+    _git(["config", "user.name", "t"], src)
+    shas = []
+    for i in range(n):
+        (src / "f.go").write_text(f"package f\n\nfunc F() int {{ return {i} }}\n", encoding="utf-8")
+        _git(["add", "-A"], src)
+        _git(["commit", "-q", "-m", f"c{i}"], src)
+        shas.append(_git(["rev-parse", "HEAD"], src).strip())
+    return src, shas
+
+
+def test_fetch_commit_deepens_a_commit_that_is_only_a_shallow_boundary(tmp_path):
+    """CP5b task 0a. Fetching a child at depth 2 leaves its parent present but parentless (it is the
+    shallow boundary). Asking for that parent next used to return early, and parent_sha() was None
+    ("NO_PARENT" for a commit that has one), so a case's result depended on which cases ran before it."""
+    src, (root, mid, tip) = make_chain_repo(tmp_path)
+    cache = tmp_path / "cache"
+    repo_dir = fetch_commit("h", "o", "r", tip, cache_root=cache, remote_url=str(src))
+    assert object_exists(repo_dir, mid, subprocess.run)
+    assert parent_sha(repo_dir, mid, subprocess.run) is None  # the premise: mid is the boundary
+    assert is_shallow_boundary(repo_dir, mid)
+    repo_dir = fetch_commit("h", "o", "r", mid, cache_root=cache, remote_url=str(src))
+    assert parent_sha(repo_dir, mid, subprocess.run) == root
+    assert not is_shallow_boundary(repo_dir, mid)
+
+
+def test_fetch_commit_result_does_not_depend_on_order(tmp_path):
+    src, (root, mid, tip) = make_chain_repo(tmp_path)
+    parents = []
+    for order in ((tip, mid), (mid, tip)):
+        cache = tmp_path / f"cache-{order[0][:6]}"
+        got = {}
+        for sha in order:
+            repo_dir = fetch_commit("h", "o", "r", sha, cache_root=cache, remote_url=str(src))
+            got[sha] = parent_sha(repo_dir, sha, subprocess.run)
+        parents.append(got)
+    assert parents[0] == parents[1] == {tip: mid, mid: root}
+
+
+def test_fetch_commit_does_not_refetch_a_complete_commit(tmp_path):
+    src, (root, mid, tip) = make_chain_repo(tmp_path)
+    calls = []
+
+    def counting(args, **kw):
+        calls.append(args)
+        return subprocess.run(args, **kw)
+
+    cache = tmp_path / "cache"
+    fetch_commit("h", "o", "r", tip, cache_root=cache, remote_url=str(src), runner=counting)
+    fetch_commit("h", "o", "r", tip, cache_root=cache, remote_url=str(src), runner=counting)
+    assert sum(1 for c in calls if c[:2] == ["git", "fetch"]) == 1
