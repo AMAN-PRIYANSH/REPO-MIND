@@ -99,8 +99,8 @@ def _e1l_section(d: dict[str, Any]) -> list[str]:
                 out += [f"**{(g or {}).get('label', key)}**: no cases.", ""]
                 continue
             out += [f"**{g['label']}**: {g['n']} cases ({g['n_clusters']} clusters); lifting applied to {g['lifting_applied']} "
-                    f"(a loaded module and at least one lifted selection), and it changed the selection in {g['selection_changed']}. "
-                    f"Where lifting did not apply, E1+L equals E1.", ""]
+                    f"(a selected function lifted or was already exported), and it changed the selection in {g['selection_changed']}. "
+                    f"Where lifting did not apply, E1+L equals E1. Cases by reason: " + ", ".join(f"{k} {v}" for k, v in g["reasons"].items()) + ".", ""]
             for gold, glabel in (("core_derived", "core ∪ derived (primary)"), ("core", "core only")):
                 gg = g[gold]
                 out += [f"*Gold: {glabel}*", "", "| Method | precision | recall | F1 | any-hit | Δ F1 vs E1 | Δ recall vs E1 | Δ F1 vs E0 | Δ recall vs E0 |",
@@ -219,10 +219,11 @@ def render_cp5b_doc(results_dir: Path, source: str) -> str:
     out.append("")
     if d1:
         e = d1["environment"]
-        out += ["## Run", "", f"- Command: `{e['command']}`", f"- Machine: {e['machine']}, {e['os']}; {e.get('go')}; Python {e['python']}; "
-                f"repository commit {e['repo_commit']}{' (dirty)' if e.get('repo_dirty') else ''}; {e['jobs']} case(s) in parallel.",
-                f"- Time: {e['wall_seconds_this_invocation']} s wall clock for this invocation; {e['per_case_seconds_total']} s summed over cases "
-                f"(first-time module downloads dominate). {e.get('gomodcache_note', '')}",
+        out += ["## Run", "", f"- Command of the last (aggregating) invocation: `{e['command']}`",
+                f"- Machine: {e['machine']}, {e['os']}; {e.get('go')}; Python {e['python']}; "
+                f"repository commit {e['repo_commit']}{' (dirty)' if e.get('repo_dirty') else ''}.",
+                f"- Time: {e['per_case_seconds_total']} s summed over the per-case runs (first-time module downloads dominate; cases ran "
+                f"1 to 3 at a time, in several invocations that reused each case's saved result, so this is compute time, not wall-clock time).",
                 f"- Settings: rules {d1['settings']['rules']}, depth limit {d1['settings']['max_lift_depth']}; {d1['settings']['walk']}.", ""]
         out += _lifting_section(d1)
         out += _e1l_section(d1)

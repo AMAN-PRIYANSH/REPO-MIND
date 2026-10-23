@@ -130,7 +130,7 @@ def cmd_lift(args, argv) -> int:
                              "VTA call graph as reach",
                      "source": "vulnerable side = parent of the first fix commit; E1 selections = committed CP5 files in " + str(e1_dir)},
         "case_list": {"cases": len(case_list["cases"]), "attempted_for_lift": len(entries), "status_counts": case_list["status_counts"]},
-        "lifting": summary, "examples": le.worked_examples(rows), "rows": rows,
+        "lifting": summary, "examples": le.worked_examples(rows), "rows": le.slim_rows(rows),
         "e1_plus_l": e1_blocks,
     }
     out = Path(args.out) if args.out else Path(DEFAULT_OUT)

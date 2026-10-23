@@ -273,13 +273,24 @@ def score_cases(cases_by_id: dict[str, dict], d1_entries: list[dict[str, Any]], 
             row["synthesized_go_mod"] = any(m["prep"].get("synthesized_go_mod") for m in art["modules"])
             row["lifted"] = {r: sorted(lifted_set(art, r)) for r in RULES} if out["success"] else {r: [] for r in RULES}
             row["seconds"] = art.get("seconds")
-        row["metrics"] = {}
-        for r in RULES:
-            lit = set(row["lifted"][r])
-            new = lit - set(core)
-            row["metrics"][r] = {"literal": st.set_metrics(lit, derived), "new_only": st.set_metrics(new, derived)}
+        attach_metrics(row)
         rows.append(row)
     return rows
+
+
+def attach_metrics(row: dict[str, Any]) -> dict[str, Any]:
+    """Recompute a row's per-rule metrics from its stored lists (so committed rows need not store them)."""
+    derived, core = set(row["derived"]), set(row["core"])
+    row["metrics"] = {}
+    for r in RULES:
+        lit = set(row["lifted"][r])
+        row["metrics"][r] = {"literal": st.set_metrics(lit, derived), "new_only": st.set_metrics(lit - core, derived)}
+    return row
+
+
+def slim_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Rows as committed: everything except the recomputable metrics."""
+    return [{k: v for k, v in r.items() if k != "metrics"} for r in rows]
 
 
 def _group(rows: list[dict[str, Any]]) -> st.Group:
@@ -372,6 +383,23 @@ def e1_plus_l_sets(art: dict[str, Any] | None, alias: str, selected_syms: list[t
     return out
 
 
+def _applied_reason(art: dict[str, Any] | None, names: list[str], pk: list[tuple[str, str]], applied: bool) -> str:
+    """Why lifting did or did not touch a case's selection (every case lands in exactly one bucket)."""
+    if applied:
+        return "APPLIED"
+    if not names:
+        return "NO_SELECTION"
+    if art is None or not any(m["prep"]["status"] == lift_prep.READY for m in art["modules"]):
+        return "NO_MODULE"
+    ready = [m for m in art["modules"] if m["prep"]["status"] == lift_prep.READY]
+    if not any(rec["error"] is None or rec["error"]["code"] not in ("LOAD_FAILED", "TIMEOUT", "HELPER_MISSING", "BAD_RESPONSE", "CONTRACT_MISMATCH")
+               for m in ready for rec in m["records"]):
+        return "LOAD_FAILED"
+    if not pk:
+        return "SELECTED_OUTSIDE_MODULE"
+    return "NOTHING_LIFTED"
+
+
 def e1_plus_l_rows(case_list_ids: list[str], cases_by_id: dict[str, dict], evidence_by_id: dict[str, dict],
                    e1_doc: dict[str, Any], arts: dict[str, dict]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Per-case E1+L rows for one model, plus counts of what was and was not mappable."""
@@ -405,11 +433,12 @@ def e1_plus_l_rows(case_list_ids: list[str], cases_by_id: dict[str, dict], evide
         # symbols selected outside the analysed module stay as they are
         extra = set(names) - {s for _p, s in pk}
         sets = {k: v | extra for k, v in sets.items()}
-        applied = bool(art) and any(m["prep"]["status"] == lift_prep.READY and any(
-            rec["status"] in OK_STATUSES for rec in m["records"]) for m in art["modules"]) and bool(pk)
+        recs = seed_lifts(art) if art else {}
+        applied = any(recs.get(k, {}).get("status") in OK_STATUSES for k in pk)
+        reason = _applied_reason(art, names, pk, applied)
         changed = any(sets[k] != set(names) for k in sets)
         e0_names = baselines.e0_predict(ev)
-        row = {"id": cid, "cluster_key": r["cluster_key"], "created": r["created"], "lifting_applied": applied, "changed": changed,
+        row = {"id": cid, "cluster_key": r["cluster_key"], "created": r["created"], "lifting_applied": applied, "reason": reason, "changed": changed,
                "n_selected": len(names), "gold": {"core": sorted(core), "core_derived": sorted(derived)},
                "sets": {"e0": sorted(e0_names), "e1": sorted(names), **{k: sorted(v) for k, v in sets.items()}}}
         mm = row_metrics(row)
@@ -442,7 +471,8 @@ def summarize_e1_plus_l(rows: list[dict[str, Any]], cutoff: str | None, group_de
         metrics = {r["id"]: row_metrics(r) for r in rows}
         g_applied = [r for r in sub if r["lifting_applied"]]
         entry: dict[str, Any] = {"label": label, "n": len(sub), "n_clusters": g.n_clusters,
-                                 "lifting_applied": len(g_applied), "selection_changed": sum(1 for r in sub if r["changed"])}
+                                 "lifting_applied": len(g_applied), "selection_changed": sum(1 for r in sub if r["changed"]),
+                                 "reasons": dict(sorted(Counter(r["reason"] for r in sub).items()))}
         for gold in ("core", "core_derived"):
             mats = {m: st.matrix([metrics[r["id"]][gold][m] for r in sub]) for m in methods}
             entry[gold] = {"summary": {m: dict(zip(st.COLUMNS, g.summary(mats[m]))) for m in methods}, "paired_vs_e1": {}, "paired_vs_e0": {}}
@@ -461,5 +491,8 @@ def summarize_e1_plus_l(rows: list[dict[str, Any]], cutoff: str | None, group_de
 
 # --- the results document --------------------------------------------------------------------------------
 def write_json(path: Path, obj: Any) -> None:
+    """One line per top-level key, each value compact: small enough to commit, still easy to diff by key."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(obj, indent=1, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8")
+    dump = lambda v: json.dumps(v, sort_keys=True, ensure_ascii=False, separators=(",", ":"))  # noqa: E731
+    body = ",\n".join(f"{dump(k)}:{dump(v)}" for k, v in sorted(obj.items()))
+    path.write_text("{\n" + body + "\n}\n", encoding="utf-8")

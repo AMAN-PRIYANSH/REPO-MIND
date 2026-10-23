@@ -176,6 +176,7 @@ def test_e1_plus_l_rows_reproduce_the_committed_e1_and_skip_what_cannot_be_mappe
     assert set(by) == {"A", "C"} and by["A"]["lifting_applied"] is True and by["A"]["changed"] is True
     assert by["A"]["sets"]["e1"] == ["p"] and by["A"]["sets"]["replace/NEAREST"] == ["P"]
     assert by["C"]["lifting_applied"] is False and by["C"]["sets"]["replace/ALL"] == by["C"]["sets"]["e1"] == []
+    assert (by["A"]["reason"], by["C"]["reason"]) == ("APPLIED", "NO_SELECTION")
     m = le.row_metrics(by["A"])["core_derived"]
     assert m["replace/NEAREST"]["recall"] == 0.5 and m["e1"]["recall"] == 0.5 and m["add/NEAREST"]["recall"] == 1.0
 
@@ -199,6 +200,7 @@ def test_summarize_e1_plus_l_pairs_every_variant_with_e1_and_e0():
     s = le.summarize_e1_plus_l(rows, None, group_defs)
     allg = s["all"]
     assert allg["n"] == 3 and allg["lifting_applied"] == 3 and allg["selection_changed"] == 3
+    assert allg["reasons"] == {"APPLIED": 3}
     d = allg["core_derived"]["paired_vs_e1"]["add/NEAREST"]["recall"]
     assert d["mean"] == pytest.approx(0.5) and d["n"] == 3
     assert set(allg["core_derived"]["paired_vs_e0"]) == {"replace/NEAREST", "replace/ALL", "add/NEAREST", "add/ALL"}
@@ -258,3 +260,27 @@ def test_a_failed_case_is_reported_by_its_furthest_progress():
     assert o["failure"] == le.F_LOAD and "exit -9" in o["detail"]
     ok = le.case_outcome({"modules": [nomod, {**loaded, "records": [rec("m", "p", "LIFTED", ["P"])]}]})
     assert ok["success"] and ok["failure"] is None
+
+
+def test_attach_metrics_reproduces_score_cases_and_slim_rows_drop_only_the_metrics():
+    cases = {"A": case("A", ["a"], ["Ax", "Ay"])}
+    arts = {"A": art("A", [seed("a")], [rec("m", "a", "LIFTED", ["Ax"], ["Ax", "Top"])])}
+    rows = le.score_cases(cases, [{"id": "A", "status": "AVAILABLE"}], arts)
+    slim = le.slim_rows(rows)
+    assert "metrics" not in slim[0] and set(rows[0]) - set(slim[0]) == {"metrics"}
+    assert le.attach_metrics(dict(slim[0]))["metrics"] == rows[0]["metrics"]
+
+
+def test_applied_reason_buckets():
+    f = le._applied_reason
+    ready = {"status": lp.READY, "reason": None, "module_rel": ""}
+    ok = rec("m", "p", "LIFTED", ["P"])
+    boom = rec("m", "p", "ERROR", error={"code": "LOAD_FAILED", "message": "x"})
+    root = rec("m", "p", "ROOT_ONLY")
+    assert f(None, [], [], False) == "NO_SELECTION"
+    assert f(None, ["p"], [], False) == "NO_MODULE"
+    assert f(art("c", [], [], prep={"status": lp.PREP_FAILED, "reason": "x", "module_rel": ""}), ["p"], [], False) == "NO_MODULE"
+    assert f(art("c", [seed("p", "E1:x")], [boom], prep=ready), ["p"], [("m", "p")], False) == "LOAD_FAILED"
+    assert f(art("c", [seed("q")], [root], prep=ready), ["p"], [], False) == "SELECTED_OUTSIDE_MODULE"
+    assert f(art("c", [seed("p", "E1:x")], [root], prep=ready), ["p"], [("m", "p")], False) == "NOTHING_LIFTED"
+    assert f(art("c", [seed("p", "E1:x")], [ok], prep=ready), ["p"], [("m", "p")], True) == "APPLIED"
