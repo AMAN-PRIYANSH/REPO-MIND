@@ -169,7 +169,8 @@ def test_e1_plus_l_rows_reproduce_the_committed_e1_and_skip_what_cannot_be_mappe
     evidence = {"A": ev("A", ["p", "o"]), "B": ev("B", ["z"]), "C": ev("C", ["k", "k2"])}
     doc = _e1_doc([_e1_row("A", ["c1"], 2, c1, evidence["A"]), _e1_row("B", ["c1"], 5, c2, evidence["B"]),   # 5 != 1 candidates
                    _e1_row("C", [], 2, c3, evidence["C"], status="VALID")])
-    arts = {"A": art("A", [seed("p", "E1:x", pkg="m")], [rec("m", "p", "LIFTED", ["P"])])}
+    # the selected function is also a core symbol, so it was run once under the CORE origin (seeds are de-duplicated)
+    arts = {"A": art("A", [seed("p", "CORE", pkg="m")], [rec("m", "p", "LIFTED", ["P"])])}
     rows, skipped = le.e1_plus_l_rows(["A", "B", "C"], {"A": c1, "B": c2, "C": c3}, evidence, doc, arts)
     assert skipped == {"evidence_changed_since_cp5": 1}
     by = {r["id"]: r for r in rows}
@@ -194,7 +195,7 @@ def test_summarize_e1_plus_l_pairs_every_variant_with_e1_and_e0():
         e = {**ev, "case_id": cid}
         r = _e1_row(cid, ["c1"], 2, cc, e)
         r["cluster_key"] = cid
-        a = art(cid, [seed("p", "E1:x")], [rec("m", "p", "LIFTED", ["P"])])
+        a = art(cid, [seed("p", "CORE")], [rec("m", "p", "LIFTED", ["P"])])
         out, _ = le.e1_plus_l_rows([cid], {cid: cc}, {cid: e}, _e1_doc([r]), {cid: a})
         rows += out
     s = le.summarize_e1_plus_l(rows, None, group_defs)

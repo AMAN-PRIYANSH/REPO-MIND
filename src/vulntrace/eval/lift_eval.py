@@ -421,13 +421,14 @@ def e1_plus_l_rows(case_list_ids: list[str], cases_by_id: dict[str, dict], evide
         names = [by_id[i]["symbol"] for i in selected if i in by_id]
         art = arts.get(cid)
         # (package, symbol) per selected candidate in the module that was analysed
+        # (package, symbol) of the selected functions in each module that was analysed. Taken from the evidence, not from the
+        # seed origins: a selected function that is also a core symbol was run once, under the CORE origin.
         pk: list[tuple[str, str]] = []
         if art:
             for m in art["modules"]:
                 if m["prep"]["status"] == lift_prep.READY:
-                    for s in m["seeds"]:
-                        if s["origin"] == f"E1:{alias}":
-                            pk.append((s["package"], s["symbol"]))
+                    for sd in selected_seeds(ev, selected, m["module"], m["prep"].get("module_rel") or "", f"E1:{alias}"):
+                        pk.append((sd["package"], sd["symbol"]))
         pk = sorted(set(pk))
         sets = e1_plus_l_sets(art, alias, pk) if pk else {f"{v}/{rule}": set(names) for v, rule in VARIANTS}
         # symbols selected outside the analysed module stay as they are
