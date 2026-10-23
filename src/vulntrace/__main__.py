@@ -31,7 +31,7 @@ def build_parser() -> argparse.ArgumentParser:
     rs = sub.add_parser("results", help="committed results documents")
     rsub = rs.add_subparsers(dest="results_command", required=True)
     rr = rsub.add_parser("render", help="generate a docs/results/ document from a score report file")
-    rr.add_argument("--doc", required=True, choices=["cp1", "cp2", "cp3", "cp4", "cp5"])
+    rr.add_argument("--doc", required=True, choices=["cp1", "cp2", "cp3", "cp4", "cp5", "cp5b"])
     rr.add_argument("--input", required=True,
                     help="cp1: linker score JSON; cp2/cp3: directory with the relevant score JSON files")
     rr.add_argument("--out", required=True, help="Markdown file to write")
@@ -93,6 +93,22 @@ def build_parser() -> argparse.ArgumentParser:
     _add_eval_data_args(sl)
     _add_llm_args(sl)
     sl.add_argument("--out", default=None, help="results directory (default: results/cp5)")
+
+    lf = esub.add_parser("lift", help="CP5b: lifting to exported entry points vs derived_symbols and E1+L (--set d1), "
+                                      "or the caller/callee ceiling on D4 (--set d4-ceiling); needs network for sources and modules")
+    lf.add_argument("--set", required=True, choices=["d1", "d4-ceiling"], dest="dataset_set")
+    lf.add_argument("--cases", default=None, help="case list (default: docs/results/datasets/D1_cases.json or D4_cases.json)")
+    lf.add_argument("--cache", default=None, help="vulndb cache directory")
+    lf.add_argument("--data-dir", default=None, help="materialised evidence directory (default: data/); per-case results go to <data-dir>/lift")
+    lf.add_argument("--repo-cache", default=None, help="cache directory of fetched third-party repositories (as `dataset materialize` used)")
+    lf.add_argument("--gomodcache", default=None, help="Go module cache for the analysed modules' dependencies (default: <cache>/gomod)")
+    lf.add_argument("--e1-dir", default=None, help="committed CP5 results directory holding select_fix__*.json (default: docs/results/cp5)")
+    lf.add_argument("--jobs", type=int, default=3, help="cases processed in parallel (default 3)")
+    lf.add_argument("--limit", type=int, default=None, help="only the first N cases (a trial run)")
+    lf.add_argument("--rerun", action="store_true", help="ignore per-case results from an earlier run")
+    lf.add_argument("--keep-trees", action="store_true", help="keep each unpacked source tree (default: delete after the case)")
+    lf.add_argument("--timeout", type=float, default=900.0, help="seconds allowed per helper call (default 900)")
+    lf.add_argument("--out", default=None, help="results directory (default: results/cp5b)")
 
     ix = sub.add_parser("index", help="chunk, embed and store D4 candidates (CP4)")
     ixsub = ix.add_subparsers(dest="index_command", required=True)
@@ -483,6 +499,10 @@ def main(argv: list[str] | None = None) -> int:
             from vulntrace.eval import cp5_cli
 
             return cp5_cli.cmd_select(args, argv, _load_eval_set)
+        if args.command == "eval" and args.eval_command == "lift":
+            from vulntrace.eval import lift_cli
+
+            return lift_cli.cmd_lift(args, argv)
         if args.command == "index" and args.index_command == "build":
             return _cmd_index_build(args)
     except Exception as exc:  # unexpected
