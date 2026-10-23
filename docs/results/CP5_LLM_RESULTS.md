@@ -928,6 +928,8 @@ For each advisory the model wrote one hypothetical Go function (prompt `hyde_v1`
 
 Cases per group - post-cutoff: 98; pre-cutoff: 8; undated: 14; all cases: 120.
 
+**How many comparisons this table holds.** `llama3.1-8b` has 32 comparisons against `query` in the tables below (retriever x query+hyde / hyde-only x group x denominator), so 32 intervals on MRR and 32 on R@10, none corrected for multiple comparisons. 0 of the 32 MRR intervals exclude 0. With that many 95% intervals, about 1.6 would exclude 0 by chance alone if there were no effect and the comparisons were independent (they overlap: same cases and retrievers, so this is a rough guide only). A single borderline interval is not a finding; read it only if it is consistent across retrievers, groups and models.
+
 **post-cutoff - HEADLINE, (b) all scored cases**
 
 | Retriever | Query | n (clusters) | R@1 | R@10 | MRR | ΔMRR vs query | ΔR@10 vs query | Verdict on MRR |
@@ -1021,6 +1023,8 @@ Cases per group - post-cutoff: 98; pre-cutoff: 8; undated: 14; all cases: 120.
 For each advisory the model wrote one hypothetical Go function (prompt `hyde_v1`, at most 1200 characters); it is used only as a retrieval query. 120 generations: 0 empty, 1 cut at the cap, 0 server errors; 22553 / 11322 tokens, 439.8 s. Retriever: `hybrid:bge-small` on `code+commits` chunks, secondary row `bm25`. `query` is the CP4 query unchanged.
 
 Cases per group - all dated cases (cutoff undocumented): 106; undated: 14; all cases: 120.
+
+**How many comparisons this table holds.** `qwen2.5-coder-7b` has 24 comparisons against `query` in the tables below (retriever x query+hyde / hyde-only x group x denominator), so 24 intervals on MRR and 24 on R@10, none corrected for multiple comparisons. 2 of the 24 MRR intervals exclude 0. With that many 95% intervals, about 1.2 would exclude 0 by chance alone if there were no effect and the comparisons were independent (they overlap: same cases and retrievers, so this is a rough guide only). A single borderline interval is not a finding; read it only if it is consistent across retrievers, groups and models.
 
 **all dated cases (cutoff undocumented) - HEADLINE, (b) all scored cases**
 

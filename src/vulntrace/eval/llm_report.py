@@ -244,11 +244,13 @@ def hyde_section(alias: str, h: dict[str, Any]) -> list[str]:
     by = {}
     for i, r in enumerate(runs):
         by.setdefault(r["config"], {})[r["hyde"]] = i
+    body: list[str] = []
+    n_cmp = n_excl = 0
     for group, glabel in groups:
         for dn, dlabel in (("b", "(b) all scored cases"), ("a", "(a) gold inside the candidate set")):
             if not int((s.group_mask(group) & s.denom_mask(dn)).sum()):
                 continue
-            out += [f"**{glabel}, {dlabel}**", "", "| Retriever | Query | n (clusters) | R@1 | R@10 | MRR | ΔMRR vs query | ΔR@10 vs query | Verdict on MRR |",
+            body += [f"**{glabel}, {dlabel}**", "", "| Retriever | Query | n (clusters) | R@1 | R@10 | MRR | ΔMRR vs query | ΔR@10 vs query | Verdict on MRR |",
                     "|---|---|---|---|---|---|---|---|---|"]
             for cfg, vs in by.items():
                 base = vs.get("query")
@@ -262,9 +264,18 @@ def hyde_section(alias: str, h: dict[str, Any]) -> list[str]:
                     else:
                         d1, d2 = s.paired_diff(vs[v], base, "mrr", group, dn), s.paired_diff(vs[v], base, "recall@10", group, dn)
                         dm, dr, ver = _ci(d1), _ci(d2), verdict(d1)
-                    out.append(f"| {cfg} | {v} | {sm['mrr']['n']} ({sm['mrr']['n_clusters']}) | {_f(sm['recall@1']['mean'])} | "
+                        n_cmp += 1
+                        n_excl += int(bool(d1.get("n")) and (d1["ci_low"] > 0 or d1["ci_high"] < 0))
+                    body.append(f"| {cfg} | {v} | {sm['mrr']['n']} ({sm['mrr']['n_clusters']}) | {_f(sm['recall@1']['mean'])} | "
                                f"{_ci(sm['recall@10'])} | {_ci(sm['mrr'])} | {dm} | {dr} | {ver} |")
-            out.append("")
+            body.append("")
+    out += [f"**How many comparisons this table holds.** `{alias}` has {n_cmp} comparisons against `query` in the tables below "
+            f"(retriever x query+hyde / hyde-only x group x denominator), so {n_cmp} intervals on MRR and {n_cmp} on R@10, none "
+            f"corrected for multiple comparisons. {n_excl} of the {n_cmp} MRR intervals exclude 0. With that many 95% intervals, "
+            f"about {n_cmp * 0.05:.1f} would exclude 0 by chance alone if there were no effect and the comparisons were independent "
+            f"(they overlap: same cases and retrievers, so this is a rough guide only). A single borderline interval is not a "
+            f"finding; read it only if it is consistent across retrievers, groups and models.", ""]
+    out += body
     return out
 
 
