@@ -75,3 +75,10 @@ def test_install_is_checked_with_a_generate_call_and_can_be_repaired():
     assert "def reinstall_ollama" in src and "ollama_setup.ensure_working" in src and "probe_generate" in src
     assert src.index("def reinstall_ollama") < src.index("ollama_setup.ensure_working") < src.index("eval select --mode fix")
     assert src.index('"pull"') < src.index("ollama_setup.ensure_working")   # the probe needs a pulled model
+
+
+def test_d1_is_materialised_in_one_pass():
+    """CP5b task 0a removed the double-run workaround: the cause (a shallow-boundary commit reused from the cache) is fixed."""
+    src = _code()
+    assert src.count("materialize --set d1") == 1
+    assert "runs twice" not in src and "SECOND pass" not in src
