@@ -133,6 +133,9 @@ def cmd_lift(args, argv) -> int:
         "e1_plus_l": e1_blocks,
     }
     out = Path(args.out) if args.out else Path(DEFAULT_OUT)
+    # The per-case E1+L rows (predicted sets) go to one file per model so every committed file stays small.
+    for alias, block in doc["e1_plus_l"].items():
+        le.write_json(out / f"e1_plus_l__{alias}.json", {"schema_version": le.SCHEMA_VERSION, "model": block["model"], "rows": block.pop("rows")})
     le.write_json(out / "lift_d1.json", doc)
     c = summary["coverage"]
     print(f"lift D1: {summary['cases_with_derived']} cases with derived_symbols; module loaded {summary['module_loaded']}; "
