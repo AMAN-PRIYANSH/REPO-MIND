@@ -29,13 +29,13 @@ State values: `READY` → `IN_PROGRESS` → `AWAITING_REVIEW` → `APPROVED` (or
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-- [ ] Task 0a: D1 first-pass materialize mismatch (cause, one-pass fix, test, remove notebook workaround)
-- [ ] Task 0b: Ollama install check in CP5 notebook
-- [ ] Task 0c: correct GO-2020-0006 in D4_cases.json (+ counts, gate expectations)
-- [ ] Task 0d: HyDE table comparison count note; regenerate CP5_LLM_RESULTS.md
-- [ ] D1: helper `lift` mode (NEAREST + ALL, depth limit, ROOT_ONLY, LOAD_FAILED)
-- [ ] D2: helper `callers` / `callees` modes + Python wrappers + schema entries
-- [ ] D3: lifting fixtures (observed truths)
+- [x] Task 0a: D1 first-pass materialize mismatch (cause, one-pass fix, test, remove notebook workaround)
+- [x] Task 0b: Ollama install check in CP5 notebook
+- [x] Task 0c: correct GO-2020-0006 in D4_cases.json (+ counts, gate expectations)
+- [x] Task 0d: HyDE table comparison count note; regenerate CP5_LLM_RESULTS.md
+- [x] D1: helper `lift` mode (NEAREST + ALL, depth limit, ROOT_ONLY, LOAD_FAILED)
+- [x] D2: helper `callers` / `callees` modes + Python wrappers + schema entries
+- [x] D3: lifting fixtures (observed truths)
 - [ ] D4: `eval lift` on D1, E1+L, D4 ceiling; results/cp5b/ + docs/results/CP5B_LIFTING_RESULTS.md
 - [ ] D5: tests (Go, Python contract, integration)
 - [ ] Report CP5b_REPORT.md, STATE AWAITING_REVIEW
