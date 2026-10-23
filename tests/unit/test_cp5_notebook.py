@@ -67,3 +67,11 @@ def test_every_vulntrace_command_in_the_notebook_parses():
         parser.parse_args(argv)
         seen += 1
     assert seen >= 10
+
+
+def test_install_is_checked_with_a_generate_call_and_can_be_repaired():
+    """CP5b task 0b: `which ollama` alone let a partial install through (HTTP 500 on every call)."""
+    src = _code()
+    assert "def reinstall_ollama" in src and "ollama_setup.ensure_working" in src and "probe_generate" in src
+    assert src.index("def reinstall_ollama") < src.index("ollama_setup.ensure_working") < src.index("eval select --mode fix")
+    assert src.index('"pull"') < src.index("ollama_setup.ensure_working")   # the probe needs a pulled model
