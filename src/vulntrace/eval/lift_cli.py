@@ -77,6 +77,7 @@ def cmd_lift(args, argv) -> int:
     gomodcache.mkdir(parents=True, exist_ok=True)
     os.environ["GOMODCACHE"] = str(gomodcache)       # the helper and `go mod tidy` share one module cache
     os.environ["GOWORK"] = "off"
+    os.environ.setdefault("GOMEMLIMIT", "9GiB")      # soft limit: the helper's GC works harder instead of being OOM-killed
     case_list, cases_by_id, evidence, data_dir = _load_d1_inputs(args)
     e1_dir = Path(args.e1_dir) if args.e1_dir else Path("docs/results/cp5")
     e1_docs = _e1_docs(e1_dir)

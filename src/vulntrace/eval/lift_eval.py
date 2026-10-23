@@ -94,6 +94,11 @@ def dedupe(seeds: list[dict[str, str]]) -> list[dict[str, str]]:
 
 
 # --- running ---------------------------------------------------------------------------------------
+def _all_load_failed(records: list[dict[str, Any]]) -> bool:
+    """Every seed's answer is a LOAD_FAILED: nothing in the tree loaded."""
+    return bool(records) and all(r["error"] and r["error"]["code"] == "LOAD_FAILED" for r in records)
+
+
 _REPO_LOCKS: dict[str, threading.Lock] = {}
 _REPO_LOCKS_GUARD = threading.Lock()
 
@@ -141,7 +146,7 @@ def run_case(case: dict[str, Any], evidence: dict[str, Any] | None, selections: 
         entry: dict[str, Any] = {"module": m["module"], "seeds": [], "records": []}
         prep = prepare(repo_dir, parent, m["module"], work_dir, gomodcache,
                        repo_prefix=f"{fc['host']}/{fc['owner']}/{fc['repo']}")
-        entry["prep"] = {k: prep.get(k) for k in ("status", "reason", "module_rel", "synthesized_go_mod", "vendored")}
+        entry["prep"] = {k: prep.get(k) for k in ("status", "reason", "module_rel", "synthesized_go_mod", "vendored", "vendor_dropped")}
         if prep["status"] == lift_prep.READY:
             seeds = core_seeds(m)
             for alias, ids in sorted(selections.items()):
@@ -152,6 +157,15 @@ def run_case(case: dict[str, Any], evidence: dict[str, Any] | None, selections: 
             entry["records"] = lift_method.run_lift(Path(prep["module_dir"]), [{"package": s["package"], "symbol": s["symbol"]} for s in seeds],
                                                     limits={"max_lift_depth": MAX_LIFT_DEPTH}, timeout=timeout, binary=binary,
                                                     runner=runner)
+            if prep.get("vendored") and _all_load_failed(entry["records"]) and lift_prep.drop_vendor(Path(prep["module_dir"])):
+                # the tree's own vendor directory did not load (for example 'inconsistent vendoring'): use the module cache instead (flagged)
+                err = lift_prep.tidy(Path(prep["module_dir"]), gomodcache, timeout=timeout)
+                entry["prep"]["vendor_dropped"] = True
+                entry["records"] = lift_method.run_lift(Path(prep["module_dir"]), [{"package": s["package"], "symbol": s["symbol"]} for s in seeds],
+                                                        limits={"max_lift_depth": MAX_LIFT_DEPTH}, timeout=timeout, binary=binary,
+                                                        runner=runner)
+                if err:
+                    entry["prep"]["reason"] = err
             entry["lift_seconds"] = round(time.monotonic() - t0, 1)
         art["modules"].append(entry)
     if not keep_tree:
@@ -174,36 +188,51 @@ def seed_lifts(art: dict[str, Any]) -> dict[tuple[str, str], dict[str, Any]]:
     return out
 
 
+# How far a failed case got, best first. A case with several modules is reported by its furthest progress, so a
+# sibling module with no go.mod does not hide that the main module loaded and simply had no exported caller.
+FAILURE_PROGRESS = (F_ROOT_ONLY, F_SEED_ERROR, F_TIMEOUT, F_LOAD, F_PREP, F_NO_MODULE, F_NO_SOURCE)
+
+
 def case_outcome(art: dict[str, Any]) -> dict[str, Any]:
     """Did lifting work on this case, from the core seeds? Returns {success, failure, detail,
     module_loaded, seed_status}."""
     status: dict[str, str] = {}
-    failure, detail, loaded = None, None, False
+    failures: list[tuple[str, str]] = []
+    loaded = False
     for m in art["modules"]:
         prep = m["prep"]
         if prep["status"] != lift_prep.READY:
-            failure = failure or {lift_prep.NO_SOURCE: F_NO_SOURCE, lift_prep.NO_MODULE: F_NO_MODULE,
-                                  lift_prep.PREP_FAILED: F_PREP}[prep["status"]]
-            detail = detail or prep["reason"]
+            failures.append(({lift_prep.NO_SOURCE: F_NO_SOURCE, lift_prep.NO_MODULE: F_NO_MODULE,
+                              lift_prep.PREP_FAILED: F_PREP}[prep["status"]], prep["reason"]))
             continue
+        core_keys = {(s["package"], s["symbol"]) for s in m["seeds"] if s["origin"] == "CORE"}
+        module_status: dict[str, str] = {}
         for rec in m["records"]:
+            key = (rec["target"]["package"], rec["target"]["symbol"])
             if rec["error"] and rec["error"]["code"] in ("LOAD_FAILED", "TIMEOUT", "HELPER_MISSING", "BAD_RESPONSE", "CONTRACT_MISMATCH"):
-                failure = failure or (F_TIMEOUT if rec["error"]["code"] == "TIMEOUT" else F_LOAD)
-                detail = detail or f"{rec['error']['code']}: {rec['error']['message']}"
+                failures.append((F_TIMEOUT if rec["error"]["code"] == "TIMEOUT" else F_LOAD,
+                                 f"{rec['error']['code']}: {rec['error']['message']}"))
             else:
                 loaded = True
-            if rec["target"]["symbol"] and any(s["origin"] == "CORE" and (s["package"], s["symbol"]) == (rec["target"]["package"], rec["target"]["symbol"])
-                                               for s in m["seeds"]):
-                status[f"{rec['target']['package']}::{rec['target']['symbol']}"] = rec["status"] if not rec["error"] else rec["error"]["code"]
+            if key in core_keys:
+                module_status[f"{key[0]}::{key[1]}"] = rec["status"] if not rec["error"] else rec["error"]["code"]
+        status.update(module_status)
+        if module_status and not any(v in OK_STATUSES for v in module_status.values()):
+            codes = set(module_status.values())
+            if codes <= {lift_method.STATUS_ROOT_ONLY, lift_method.STATUS_NOT_IN_PROGRAM}:
+                failures.append((F_ROOT_ONLY, ", ".join(f"{k.split('::')[1]}={v}" for k, v in sorted(module_status.items()))[:300]))
+            elif not any(f in (F_LOAD, F_TIMEOUT) for f, _ in failures):
+                failures.append((F_SEED_ERROR, ", ".join(f"{k.split('::')[1]}={v}" for k, v in sorted(module_status.items()))[:300]))
     success = any(v in OK_STATUSES for v in status.values())
-    if not success and failure is None:
-        codes = set(status.values())
-        failure = F_ROOT_ONLY if codes <= {lift_method.STATUS_ROOT_ONLY, lift_method.STATUS_NOT_IN_PROGRAM} and codes else F_SEED_ERROR
-        detail = detail or ", ".join(f"{k.split('::')[1]}={v}" for k, v in sorted(status.items()))[:300]
-    if not art["modules"]:
-        failure, detail = F_NO_MODULE, "no module with core symbols"
-    return {"success": success, "failure": None if success else failure, "detail": None if success else detail,
-            "module_loaded": loaded, "seed_status": status}
+    failure, detail = None, None
+    if not success:
+        if not art["modules"]:
+            failure, detail = F_NO_MODULE, "no module with core symbols"
+        elif failures:
+            failure, detail = min(failures, key=lambda fd: FAILURE_PROGRESS.index(fd[0]))
+        else:
+            failure, detail = F_SEED_ERROR, "no seed answered"
+    return {"success": success, "failure": failure, "detail": detail, "module_loaded": loaded, "seed_status": status}
 
 
 def lifted_set(art: dict[str, Any], rule: str, origin_prefix: str = "CORE", exclude: set[str] | None = None) -> set[str]:

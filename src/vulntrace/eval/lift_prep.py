@@ -121,6 +121,17 @@ def synthesize_go_mod(tree: Path, module_path: str, repo_prefix: str) -> Path | 
     return directory
 
 
+def drop_vendor(module_dir: Path) -> bool:
+    """Set a vendored tree aside (rename `vendor` to `vendor.unused`) so modules come from the module cache.
+    Used when the tree's own vendor directory cannot match its go.mod: a go.mod we synthesised, or an
+    'inconsistent vendoring' load error. The analysed dependencies are then the versions go.mod names."""
+    v = module_dir / "vendor"
+    if v.is_dir():
+        v.rename(module_dir / "vendor.unused")
+        return True
+    return False
+
+
 def tidy(module_dir: Path, gomodcache: Path, runner=subprocess.run, timeout: float = TIDY_TIMEOUT_S) -> str | None:
     """`go mod tidy -e` in the module directory (downloads dependencies; executes no analysed code).
     Returns None on success, otherwise the first error line (a partial tidy under -e is still success:
@@ -161,11 +172,13 @@ def prepare_case(repo_dir: Path, parent_sha: str, module_path: str, work_dir: Pa
         return {"status": NO_MODULE, "module_dir": None, "module_rel": None, "synthesized_go_mod": False,
                 "reason": f"no go.mod declaring module {module_path} in the vulnerable-side tree"}
     # A vendored tree is used as it is: `go mod tidy` would change go.mod and make vendor/modules.txt inconsistent.
+    # A go.mod we invented cannot match any vendor directory, so there the vendor directory is set aside.
+    vendor_dropped = drop_vendor(root) if synthesized else False
     vendored = (root / "vendor" / "modules.txt").is_file()
     err = None if vendored else tidy(root, gomodcache, runner)
     rel = root.relative_to(tree).as_posix()
     base = {"module_dir": str(root), "module_rel": "" if rel == "." else rel, "synthesized_go_mod": synthesized,
-            "vendored": vendored}
+            "vendored": vendored, "vendor_dropped": vendor_dropped}
     if err:
         return {"status": PREP_FAILED, "reason": err, **base}
     return {"status": READY, "reason": None, **base}

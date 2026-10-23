@@ -232,3 +232,29 @@ def test_ensure_parent_refetches_and_reports_a_fetch_error_as_one_line(tmp_path,
     monkeypatch.setattr(git_fetch, "parent_sha", lambda repo_dir, sha, runner=None: None)
     _, parent, err = le.ensure_parent(fc, tmp_path, fetch=lambda *a, **k: None)
     assert parent is None and "no parent" in err
+
+
+def test_all_load_failed_needs_every_record_to_fail_to_load():
+    bad = rec("m", "p", "ERROR", error={"code": "LOAD_FAILED", "message": "err: go: inconsistent vendoring in /x"})
+    nf = rec("m", "q", "ERROR", error={"code": "TARGET_NOT_FOUND", "message": "x"})
+    assert le._all_load_failed([bad, bad]) is True
+    assert le._all_load_failed([bad, nf]) is False
+    assert le._all_load_failed([]) is False
+    assert le._all_load_failed([rec("m", "p", "LIFTED", ["P"])]) is False
+
+
+def test_a_failed_case_is_reported_by_its_furthest_progress():
+    """GO-2024-3005 had a module that loaded (seeds not found) and a sibling with no go.mod; the sibling must not win."""
+    loaded = {"module": "m", "prep": {"status": lp.READY, "reason": None, "module_rel": ""}, "seeds": [seed("p")],
+              "records": [rec("m", "p", "ERROR", error={"code": "PACKAGE_NOT_LOADED", "message": "x"})]}
+    nomod = {"module": "n", "prep": {"status": lp.NO_MODULE, "reason": "no go.mod", "module_rel": None}, "seeds": [], "records": []}
+    o = le.case_outcome({"modules": [nomod, loaded]})
+    assert (o["success"], o["failure"], o["module_loaded"]) == (False, le.F_SEED_ERROR, True)
+    root = {**loaded, "records": [rec("m", "p", "ROOT_ONLY")]}
+    assert le.case_outcome({"modules": [nomod, root]})["failure"] == le.F_ROOT_ONLY
+    broken = {"module": "b", "prep": {"status": lp.READY, "reason": None, "module_rel": ""}, "seeds": [seed("p")],
+              "records": [rec("m", "p", "ERROR", error={"code": "BAD_RESPONSE", "message": "exit -9"})]}
+    o = le.case_outcome({"modules": [nomod, broken]})
+    assert o["failure"] == le.F_LOAD and "exit -9" in o["detail"]
+    ok = le.case_outcome({"modules": [nomod, {**loaded, "records": [rec("m", "p", "LIFTED", ["P"])]}]})
+    assert ok["success"] and ok["failure"] is None

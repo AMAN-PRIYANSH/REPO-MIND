@@ -172,3 +172,23 @@ def test_tidy_timeout_is_a_failure_line_not_a_crash(tmp_path):
         raise subprocess.TimeoutExpired(args, 1)
 
     assert "timed out" in lp.tidy(tmp_path, tmp_path / "m", runner, timeout=1)
+
+
+def test_drop_vendor_sets_the_directory_aside(tmp_path):
+    (tmp_path / "vendor").mkdir()
+    (tmp_path / "vendor" / "x.go").write_text("package x\n")
+    assert lp.drop_vendor(tmp_path) is True and not (tmp_path / "vendor").exists() and (tmp_path / "vendor.unused" / "x.go").is_file()
+    assert lp.drop_vendor(tmp_path) is False
+
+
+def test_a_synthesised_go_mod_drops_the_trees_vendor_directory(tmp_path):
+    tar = make_tar({"a.go": b"package a\n", "vendor/modules.txt": b"# x\n", "vendor/y/y.go": b"package y\n"})
+
+    def runner(args, **kw):
+        if args[0] == "git":
+            return subprocess.CompletedProcess(args, 0, stdout=tar, stderr=b"")
+        return subprocess.CompletedProcess(args, 0, stdout="", stderr="")
+
+    r = lp.prepare_case(tmp_path, "abc", "github.com/o/r", tmp_path / "w", tmp_path / "m", runner, "github.com/o/r")
+    assert r["synthesized_go_mod"] and r["vendor_dropped"] and not r["vendored"]
+    assert not (tmp_path / "w" / "tree" / "vendor").exists()
