@@ -15,16 +15,19 @@
       "additionalProperties": false,
       "required": ["toolchain", "results", "stats"],
       "properties": {
-        "contract_version": true, "mode": {"enum": ["funcs", "reach", "edges", "naive"]},
+        "contract_version": true, "mode": {"enum": ["funcs", "reach", "edges", "naive", "lift", "callers", "callees"]},
         "ok": {"const": true},
         "toolchain": {"$ref": "#/$defs/toolchain"},
         "results": {"type": "array"},
-        "stats": {"$ref": "#/$defs/stats"}
+        "stats": {"$ref": "#/$defs/stats"},
+        "load": {"$ref": "#/$defs/load"}
       },
       "allOf": [
         {"if": {"properties": {"mode": {"enum": ["reach", "naive"]}}}, "then": {"properties": {"results": {"items": {"$ref": "#/$defs/target_result"}}}}},
         {"if": {"properties": {"mode": {"const": "edges"}}}, "then": {"properties": {"results": {"items": {"$ref": "#/$defs/edge_result"}}}}},
-        {"if": {"properties": {"mode": {"const": "funcs"}}}, "then": {"properties": {"results": {"items": {"$ref": "#/$defs/file_funcs"}}}}}
+        {"if": {"properties": {"mode": {"const": "funcs"}}}, "then": {"properties": {"results": {"items": {"$ref": "#/$defs/file_funcs"}}}}},
+        {"if": {"properties": {"mode": {"const": "lift"}}}, "then": {"properties": {"results": {"items": {"$ref": "#/$defs/lift_result"}}}}},
+        {"if": {"properties": {"mode": {"enum": ["callers", "callees"]}}}, "then": {"properties": {"results": {"items": {"$ref": "#/$defs/neighbor_result"}}}}}
       ]
     },
     {
@@ -184,6 +187,99 @@
             }
           }
         }
+      }
+    },
+    "load": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "packages_matched", "packages_skipped", "first_errors"],
+      "properties": {
+        "mode": {"enum": ["LIBRARY", "APP"]},
+        "packages_matched": {"type": "integer", "minimum": 0},
+        "packages_skipped": {"type": "integer", "minimum": 0},
+        "first_errors": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "per_target_error": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "message"],
+          "properties": {
+            "code": {"enum": ["TARGET_NOT_FOUND", "UNSUPPORTED_SYMBOL_FORM", "PACKAGE_NOT_LOADED"]},
+            "message": {"type": "string"}
+          }
+        }
+      ]
+    },
+    "lift_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "symbol", "depth", "dynamic", "path"],
+      "properties": {
+        "package": {"type": "string", "minLength": 1},
+        "symbol": {"type": "string", "minLength": 1},
+        "depth": {"type": "integer", "minimum": 0},
+        "dynamic": {"type": "boolean"},
+        "path": {"$ref": "#/$defs/call_path"}
+      }
+    },
+    "lift_rule_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entries", "depth_limit_reached"],
+      "properties": {
+        "entries": {"type": "array", "items": {"$ref": "#/$defs/lift_entry"}},
+        "depth_limit_reached": {"type": "boolean"}
+      }
+    },
+    "lift_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "status", "rules", "matched_functions", "error", "package_not_in_program"],
+      "properties": {
+        "target": {"$ref": "#/$defs/target"},
+        "status": {"enum": ["LIFTED", "ALREADY_EXPORTED", "ROOT_ONLY", "PACKAGE_NOT_IN_PROGRAM", "ERROR"]},
+        "rules": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "NEAREST": {"$ref": "#/$defs/lift_rule_result"},
+            "ALL": {"$ref": "#/$defs/lift_rule_result"}
+          }
+        },
+        "matched_functions": {"type": "array", "items": {"type": "string"}},
+        "error": {"$ref": "#/$defs/per_target_error"},
+        "package_not_in_program": {"type": "boolean"}
+      }
+    },
+    "hop_edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hop", "caller", "callee", "call_site", "kind", "other"],
+      "properties": {
+        "hop": {"type": "integer", "minimum": 1},
+        "caller": {"type": "string", "minLength": 1},
+        "callee": {"type": "string", "minLength": 1},
+        "call_site": {"$ref": "#/$defs/site"},
+        "kind": {"enum": ["STATIC", "DYNAMIC"]},
+        "other": {"$ref": "#/$defs/target"}
+      }
+    },
+    "neighbor_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "result", "edges", "truncated", "matched_functions", "error", "package_not_in_program"],
+      "properties": {
+        "target": {"$ref": "#/$defs/target"},
+        "result": {"enum": ["FOUND", "NONE", "PACKAGE_NOT_IN_PROGRAM", "ERROR"]},
+        "edges": {"type": "array", "items": {"$ref": "#/$defs/hop_edge"}},
+        "truncated": {"type": "boolean"},
+        "matched_functions": {"type": "array", "items": {"type": "string"}},
+        "error": {"$ref": "#/$defs/per_target_error"},
+        "package_not_in_program": {"type": "boolean"}
       }
     }
   }

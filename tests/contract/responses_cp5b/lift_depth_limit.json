@@ -1,0 +1,48 @@
+{
+  "contract_version": "1.0",
+  "load": {
+    "first_errors": [],
+    "mode": "LIBRARY",
+    "packages_matched": 15,
+    "packages_skipped": 0
+  },
+  "mode": "lift",
+  "ok": true,
+  "results": [
+    {
+      "error": null,
+      "matched_functions": [
+        "vtlift/chain.a"
+      ],
+      "package_not_in_program": false,
+      "rules": {
+        "ALL": {
+          "depth_limit_reached": true,
+          "entries": []
+        },
+        "NEAREST": {
+          "depth_limit_reached": true,
+          "entries": []
+        }
+      },
+      "status": "ROOT_ONLY",
+      "target": {
+        "package": "vtlift/chain",
+        "symbol": "a"
+      }
+    }
+  ],
+  "stats": {
+    "callgraph_edges": 27,
+    "callgraph_nodes": 56,
+    "duration_ms": 0,
+    "packages_loaded": 15,
+    "peak_rss_kb": null
+  },
+  "toolchain": {
+    "go_version": "go1.24.7",
+    "goarch": "amd64",
+    "goos": "linux",
+    "x_tools_version": "v0.42.0"
+  }
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "file": "lift_ok.json",
+    "mode": "lift",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "lift_nearest_only.json",
+    "mode": "lift",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "lift_depth_limit.json",
+    "mode": "lift",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "lift_package_not_loaded.json",
+    "mode": "lift",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "callers_two_hops.json",
+    "mode": "callers",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "callees_one_hop.json",
+    "mode": "callees",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "callees_truncated.json",
+    "mode": "callees",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "callers_not_in_program.json",
+    "mode": "callers",
+    "provenance": "RECORDED",
+    "exit_code": 0
+  },
+  {
+    "file": "error_lift_load_failed_dir.json",
+    "mode": "lift",
+    "provenance": "RECORDED",
+    "exit_code": 1
+  },
+  {
+    "file": "error_lift_load_failed_nothing_loads.json",
+    "mode": "lift",
+    "provenance": "RECORDED",
+    "exit_code": 1
+  },
+  {
+    "file": "error_callers_load_failed_dir.json",
+    "mode": "callers",
+    "provenance": "RECORDED",
+    "exit_code": 1
+  },
+  {
+    "file": "error_lift_bad_request.json",
+    "mode": "lift",
+    "provenance": "RECORDED",
+    "exit_code": 1
+  },
+  {
+    "file": "error_lift_contract_mismatch.json",
+    "mode": "lift",
+    "provenance": "RECORDED",
+    "exit_code": 1
+  }
+]

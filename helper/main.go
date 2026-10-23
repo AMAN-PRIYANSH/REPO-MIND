@@ -21,12 +21,16 @@ import (
 
 type modeFunc func(req *Request, stderr io.Writer) (any, *Stats, *Error)
 
-// handlers maps each CP2 mode to its implementation (lift arrives in CP5).
+// handlers maps each mode to its implementation (lift, callers and callees arrived in CP5b).
 var handlers = map[string]modeFunc{
 	"funcs": func(req *Request, _ io.Writer) (any, *Stats, *Error) { r, err := runFuncs(req); return r, nil, err },
 	"reach": runReach,
 	"edges": runEdges,
 	"naive": runNaive,
+	// CP5b
+	"lift":    runLift,
+	"callers": runCallers,
+	"callees": runCallees,
 }
 
 func main() { os.Exit(run(os.Args[1:], os.Stdout, os.Stderr)) }
@@ -73,16 +77,20 @@ func handle(args []string, stderr io.Writer) (resp *Response) {
 	}
 	stats.DurationMS = time.Since(start).Milliseconds()
 	stats.PeakRSSKB = peakRSSKB()
-	return &Response{OK: true, Toolchain: toolchain(req), Results: results, Stats: stats}
+	resp = &Response{OK: true, Toolchain: toolchain(req), Results: results, Stats: stats}
+	if w, ok := results.(withLoad); ok {
+		resp.Results, resp.Load = w.results, w.load
+	}
+	return resp
 }
 
 func parseArgs(args []string) (*Request, *Error) {
 	if len(args) == 0 {
-		return nil, errf(CodeBadRequest, "usage: vt-helper <funcs|reach|edges|naive> --request <file>")
+		return nil, errf(CodeBadRequest, "usage: vt-helper <funcs|reach|edges|naive|lift|callers|callees> --request <file>")
 	}
 	mode := args[0]
 	if handlers[mode] == nil {
-		return nil, errf(CodeBadRequest, fmt.Sprintf("unknown or unsupported mode %q (CP2 modes: funcs, reach, edges, naive)", mode))
+		return nil, errf(CodeBadRequest, fmt.Sprintf("unknown or unsupported mode %q (modes: funcs, reach, edges, naive, lift, callers, callees)", mode))
 	}
 	fs := flag.NewFlagSet("vt-helper", flag.ContinueOnError)
 	fs.SetOutput(io.Discard)
@@ -137,6 +145,22 @@ func validate(req *Request) *Error {
 	switch req.Mode {
 	case "funcs":
 		return need(len(req.Files) > 0, "a non-empty files list")
+	case "lift", "callers", "callees":
+		if e := need(req.ModuleDir != "", "module_dir"); e != nil {
+			return e
+		}
+		if e := need(len(req.Targets) > 0, "a non-empty targets list"); e != nil {
+			return e
+		}
+		l := req.Limits
+		if l.MaxLiftDepth < 0 || l.MaxHops < 0 || l.MaxResults < 0 {
+			return errf(CodeBadRequest, "limits must not be negative")
+		}
+		for _, r := range req.LiftRules {
+			if r != RuleNearest && r != RuleAll {
+				return errf(CodeBadRequest, "lift_rules must be NEAREST and/or ALL, got "+r)
+			}
+		}
 	case "reach", "naive", "edges":
 		if e := need(req.ModuleDir != "", "module_dir"); e != nil {
 			return e

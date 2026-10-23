@@ -1,0 +1,301 @@
+{
+  "schema_version": "1.0",
+  "module_dir": ".",
+  "module": "vtlift",
+  "default_max_lift_depth": 10,
+  "note": "Truth is by construction (rationale per case) and is checked against the real helper by tests/integration/test_lift_fixtures.py and helper/query_test.go; outcomes are observed, not assumed.",
+  "cases": [
+    {
+      "id": "private_helper",
+      "category": "PRIVATE_HELPER",
+      "target": {
+        "package": "vtlift/private_helper",
+        "symbol": "parse"
+      },
+      "expected": {
+        "status": "LIFTED",
+        "NEAREST": [
+          "Parse"
+        ],
+        "ALL": [
+          "Parse"
+        ]
+      },
+      "rationale": "Exported Parse calls the unexported parse directly."
+    },
+    {
+      "id": "interface_call",
+      "category": "INTERFACE",
+      "target": {
+        "package": "vtlift/interface_call",
+        "symbol": "impl.run"
+      },
+      "expected": {
+        "status": "LIFTED",
+        "NEAREST": [
+          "Do"
+        ],
+        "ALL": [
+          "Do"
+        ],
+        "dynamic": true
+      },
+      "rationale": "Do calls impl.run through the unexported interface runner; the edge is resolved by VTA (DYNAMIC)."
+    },
+    {
+      "id": "func_value",
+      "category": "FUNCTION_VALUE",
+      "target": {
+        "package": "vtlift/func_value",
+        "symbol": "step"
+      },
+      "expected": {
+        "status": "LIFTED",
+        "NEAREST": [
+          "Dispatch"
+        ],
+        "ALL": [
+          "Dispatch"
+        ],
+        "dynamic": true
+      },
+      "rationale": "step is stored in a map and called as table[k](); resolved by VTA (DYNAMIC)."
+    },
+    {
+      "id": "method_value",
+      "category": "METHOD_VALUE",
+      "target": {
+        "package": "vtlift/method_value",
+        "symbol": "tool.work"
+      },
+      "expected": {
+        "status": "LIFTED",
+        "NEAREST": [
+          "Use"
+        ],
+        "ALL": [
+          "Use"
+        ]
+      },
+      "rationale": "Use binds t.work to m and calls m(): a STATIC edge to the bound-method wrapper, which calls tool.work. (A first version only passed m to an unknown parameter; no call edge exists in any call graph, helper observed ROOT_ONLY, and the fixture was changed to call it.)"
+    },
+    {
+      "id": "unexported_type",
+      "category": "UNEXPORTED_TYPE",
+      "target": {
+        "package": "vtlift/unexported_type",
+        "symbol": "impl.work"
+      },
+      "expected": {
+        "status": "LIFTED",
+        "NEAREST": [
+          "Wrap"
+        ],
+        "ALL": [
+          "Wrap"
+        ]
+      },
+      "rationale": "impl.Exported is an exported method of an UNEXPORTED type, so it is not an entry point; the walk continues to the exported function Wrap."
+    },
+    {
+      "id": "internal_package",
+      "category": "INTERNAL",
+      "target": {
+        "package": "vtlift/internal_pkg/internal/core",
+        "symbol": "Core"
+      },
+      "expected": {
+        "status": "LIFTED",
+        "NEAREST": [
+          "Public"
+        ],
+        "ALL": [
+          "Public"
+        ]
+      },
+      "rationale": "Core is exported but lives under internal/, so it is not an entry point; api.Public calls it."
+    },
+    {
+      "id": "root_only_init",
+      "category": "ROOT_ONLY",
+      "target": {
+        "package": "vtlift/root_only",
+        "symbol": "orphan"
+      },
+      "expected": {
+        "status": "ROOT_ONLY",
+        "NEAREST": [],
+        "ALL": []
+      },
+      "rationale": "Called only from a package-level initialiser and init(): no exported caller."
+    },
+    {
+      "id": "never_called",
+      "category": "ROOT_ONLY",
+      "target": {
+        "package": "vtlift/never_called",
+        "symbol": "dead"
+      },
+      "expected": {
+        "status": "ROOT_ONLY",
+        "NEAREST": [],
+        "ALL": []
+      },
+      "rationale": "Nothing calls dead."
+    },
+    {
+      "id": "main_caller",
+      "category": "ROOT_ONLY",
+      "target": {
+        "package": "vtlift/main_caller",
+        "symbol": "run"
+      },
+      "expected": {
+        "status": "ROOT_ONLY",
+        "NEAREST": [],
+        "ALL": []
+      },
+      "rationale": "Only main.main calls run, and package main is never an entry point."
+    },
+    {
+      "id": "already_exported",
+      "category": "ALREADY_EXPORTED",
+      "target": {
+        "package": "vtlift/already_exported",
+        "symbol": "Parse"
+      },
+      "expected": {
+        "status": "ALREADY_EXPORTED",
+        "NEAREST": [
+          "Parse"
+        ],
+        "ALL": [
+          "Parse"
+        ]
+      },
+      "rationale": "An exported seed lifts to itself (depth 0)."
+    },
+    {
+      "id": "diamond",
+      "category": "DIAMOND",
+      "target": {
+        "package": "vtlift/diamond",
+        "symbol": "sink"
+      },
+      "expected": {
+        "status": "LIFTED",
+        "NEAREST": [
+          "Left",
+          "Right"
+        ],
+        "ALL": [
+          "Left",
+          "Right",
+          "Top"
+        ]
+      },
+      "rationale": "Left and Right reach sink through private functions; Top (exported) calls both. NEAREST stops at Left and Right; ALL also reports Top."
+    },
+    {
+      "id": "closure",
+      "category": "CLOSURE",
+      "target": {
+        "package": "vtlift/closure",
+        "symbol": "inner"
+      },
+      "expected": {
+        "status": "LIFTED",
+        "NEAREST": [
+          "Run"
+        ],
+        "ALL": [
+          "Run"
+        ]
+      },
+      "rationale": "inner is called from a closure inside Run; a closure is folded into its enclosing function."
+    },
+    {
+      "id": "generic_exported_caller",
+      "category": "GENERIC",
+      "target": {
+        "package": "vtlift/generic_seed",
+        "symbol": "priv"
+      },
+      "expected": {
+        "status": "LIFTED",
+        "NEAREST": [
+          "Each"
+        ],
+        "ALL": [
+          "Each"
+        ]
+      },
+      "rationale": "The exported generic function Each calls the ordinary function priv."
+    },
+    {
+      "id": "generic_seed",
+      "category": "GENERIC",
+      "target": {
+        "package": "vtlift/generic_seed",
+        "symbol": "Map"
+      },
+      "expected": {
+        "status": "ERROR",
+        "NEAREST": [],
+        "ALL": [],
+        "error_code": "UNSUPPORTED_SYMBOL_FORM"
+      },
+      "rationale": "A generic seed is unsupported (as in the other modes)."
+    },
+    {
+      "id": "unknown_symbol",
+      "category": "ERROR",
+      "target": {
+        "package": "vtlift/private_helper",
+        "symbol": "Nope"
+      },
+      "expected": {
+        "status": "ERROR",
+        "NEAREST": [],
+        "ALL": [],
+        "error_code": "TARGET_NOT_FOUND"
+      },
+      "rationale": "The package is loaded but has no such symbol: an error, never ROOT_ONLY."
+    },
+    {
+      "id": "depth_limit_hit",
+      "category": "DEPTH_LIMIT",
+      "target": {
+        "package": "vtlift/chain",
+        "symbol": "a"
+      },
+      "expected": {
+        "status": "ROOT_ONLY",
+        "NEAREST": [],
+        "ALL": [],
+        "limit": 2,
+        "depth_limit_reached": true
+      },
+      "rationale": "a <- b <- c <- d <- Top is 4 calls deep; with a limit of 2 nothing exported is found and the helper says the limit was reached."
+    },
+    {
+      "id": "depth_limit_enough",
+      "category": "DEPTH_LIMIT",
+      "target": {
+        "package": "vtlift/chain",
+        "symbol": "a"
+      },
+      "expected": {
+        "status": "LIFTED",
+        "NEAREST": [
+          "Top"
+        ],
+        "ALL": [
+          "Top"
+        ],
+        "limit": 4
+      },
+      "rationale": "The same chain with a limit of 4 reaches Top."
+    }
+  ]
+}

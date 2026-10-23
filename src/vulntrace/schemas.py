@@ -16,6 +16,8 @@ _FILES = {
     "vuln_case": "vuln_case.schema.json",
     "fix_evidence": "fix_evidence.schema.json",
     "release_range": "release_range.schema.json",
+    "lift_record": "lift_record.schema.json",
+    "neighbor_record": "neighbor_record.schema.json",
 }
 
 

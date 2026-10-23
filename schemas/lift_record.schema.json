@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lift_record.schema.json",
+  "title": "LiftRecord",
+  "description": "One seed's lifting outcome as produced by vulntrace.methods.lift (CP5b). Helper failures (LOAD_FAILED, TIMEOUT, ...) are status ERROR with the code in error, never dropped.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "method", "target", "status", "rules", "error", "duration_ms", "details"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "method": {"const": "LIFT_VTA"},
+    "target": {"type": "object", "additionalProperties": false, "required": ["package", "symbol"],
+               "properties": {"package": {"type": "string"}, "symbol": {"type": "string"}}},
+    "status": {"enum": ["LIFTED", "ALREADY_EXPORTED", "ROOT_ONLY", "PACKAGE_NOT_IN_PROGRAM", "ERROR"]},
+    "rules": {"type": "object"},
+    "error": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false, "required": ["code", "message"],
+         "properties": {"code": {"type": "string"}, "message": {"type": "string"}}}
+      ]
+    },
+    "duration_ms": {"type": "integer", "minimum": 0},
+    "details": {"type": "object"}
+  }
+}

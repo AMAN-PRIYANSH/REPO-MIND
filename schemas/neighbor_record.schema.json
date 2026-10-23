@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "neighbor_record.schema.json",
+  "title": "NeighborRecord",
+  "description": "One target's callers or callees answer as produced by vulntrace.methods.lift (CP5b).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "method", "query", "target", "result", "edges", "truncated", "error", "duration_ms", "details"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "method": {"const": "CALLGRAPH_NEIGHBORS"},
+    "query": {"enum": ["callers", "callees"]},
+    "target": {"type": "object", "additionalProperties": false, "required": ["package", "symbol"],
+               "properties": {"package": {"type": "string"}, "symbol": {"type": "string"}}},
+    "result": {"enum": ["FOUND", "NONE", "PACKAGE_NOT_IN_PROGRAM", "ERROR"]},
+    "edges": {"type": "array"},
+    "truncated": {"type": "boolean"},
+    "error": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false, "required": ["code", "message"],
+         "properties": {"code": {"type": "string"}, "message": {"type": "string"}}}
+      ]
+    },
+    "duration_ms": {"type": "integer", "minimum": 0},
+    "details": {"type": "object"}
+  }
+}

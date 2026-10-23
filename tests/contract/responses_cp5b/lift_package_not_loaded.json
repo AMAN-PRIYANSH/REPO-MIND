@@ -1,0 +1,121 @@
+{
+  "contract_version": "1.0",
+  "load": {
+    "first_errors": [
+      "bm/bad: /tmp/vt_contract/broken/bad/bad.go:3:14: expected ')', found '{'",
+      "bm/user: /tmp/vt_contract/broken/bad/bad.go:3:14: expected ')', found '{'"
+    ],
+    "mode": "LIBRARY",
+    "packages_matched": 3,
+    "packages_skipped": 2
+  },
+  "mode": "lift",
+  "ok": true,
+  "results": [
+    {
+      "error": null,
+      "matched_functions": [
+        "bm/good.helper"
+      ],
+      "package_not_in_program": false,
+      "rules": {
+        "ALL": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 1,
+              "dynamic": false,
+              "package": "bm/good",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "good/good.go",
+                      "line": 3
+                    },
+                    "callee": "bm/good.helper",
+                    "caller": "bm/good.Exported",
+                    "kind": "STATIC"
+                  }
+                ],
+                "entry": {
+                  "package": "bm/good",
+                  "symbol": "Exported"
+                },
+                "target": {
+                  "package": "bm/good",
+                  "symbol": "helper"
+                }
+              },
+              "symbol": "Exported"
+            }
+          ]
+        },
+        "NEAREST": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 1,
+              "dynamic": false,
+              "package": "bm/good",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "good/good.go",
+                      "line": 3
+                    },
+                    "callee": "bm/good.helper",
+                    "caller": "bm/good.Exported",
+                    "kind": "STATIC"
+                  }
+                ],
+                "entry": {
+                  "package": "bm/good",
+                  "symbol": "Exported"
+                },
+                "target": {
+                  "package": "bm/good",
+                  "symbol": "helper"
+                }
+              },
+              "symbol": "Exported"
+            }
+          ]
+        }
+      },
+      "status": "LIFTED",
+      "target": {
+        "package": "bm/good",
+        "symbol": "helper"
+      }
+    },
+    {
+      "error": {
+        "code": "PACKAGE_NOT_LOADED",
+        "message": "package bm/user was left out of the program: /tmp/vt_contract/broken/bad/bad.go:3:14: expected ')', found '{'"
+      },
+      "matched_functions": [],
+      "package_not_in_program": false,
+      "rules": {},
+      "status": "ERROR",
+      "target": {
+        "package": "bm/user",
+        "symbol": "X"
+      }
+    }
+  ],
+  "stats": {
+    "callgraph_edges": 1,
+    "callgraph_nodes": 3,
+    "duration_ms": 0,
+    "packages_loaded": 1,
+    "peak_rss_kb": null
+  },
+  "toolchain": {
+    "go_version": "go1.24.7",
+    "goarch": "amd64",
+    "goos": "linux",
+    "x_tools_version": "v0.42.0"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "contract_version": "1.0",
+  "load": {
+    "first_errors": [],
+    "mode": "LIBRARY",
+    "packages_matched": 15,
+    "packages_skipped": 0
+  },
+  "mode": "callees",
+  "ok": true,
+  "results": [
+    {
+      "edges": [
+        {
+          "call_site": {
+            "file": "diamond/p.go",
+            "line": 15
+          },
+          "callee": "vtlift/diamond.Left",
+          "caller": "vtlift/diamond.Top",
+          "hop": 1,
+          "kind": "STATIC",
+          "other": {
+            "package": "vtlift/diamond",
+            "symbol": "Left"
+          }
+        },
+        {
+          "call_site": {
+            "file": "diamond/p.go",
+            "line": 15
+          },
+          "callee": "vtlift/diamond.Right",
+          "caller": "vtlift/diamond.Top",
+          "hop": 1,
+          "kind": "STATIC",
+          "other": {
+            "package": "vtlift/diamond",
+            "symbol": "Right"
+          }
+        }
+      ],
+      "error": null,
+      "matched_functions": [
+        "vtlift/diamond.Top"
+      ],
+      "package_not_in_program": false,
+      "result": "FOUND",
+      "target": {
+        "package": "vtlift/diamond",
+        "symbol": "Top"
+      },
+      "truncated": false
+    },
+    {
+      "edges": [
+        {
+          "call_site": {
+            "file": "interface_call/p.go",
+            "line": 12
+          },
+          "callee": "vtlift/interface_call.impl.run",
+          "caller": "vtlift/interface_call.Do",
+          "hop": 1,
+          "kind": "DYNAMIC",
+          "other": {
+            "package": "vtlift/interface_call",
+            "symbol": "impl.run"
+          }
+        }
+      ],
+      "error": null,
+      "matched_functions": [
+        "vtlift/interface_call.Do"
+      ],
+      "package_not_in_program": false,
+      "result": "FOUND",
+      "target": {
+        "package": "vtlift/interface_call",
+        "symbol": "Do"
+      },
+      "truncated": false
+    }
+  ],
+  "stats": {
+    "callgraph_edges": 27,
+    "callgraph_nodes": 56,
+    "duration_ms": 0,
+    "packages_loaded": 15,
+    "peak_rss_kb": null
+  },
+  "toolchain": {
+    "go_version": "go1.24.7",
+    "goarch": "amd64",
+    "goos": "linux",
+    "x_tools_version": "v0.42.0"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "contract_version": "1.0",
+  "load": {
+    "first_errors": [],
+    "mode": "LIBRARY",
+    "packages_matched": 15,
+    "packages_skipped": 0
+  },
+  "mode": "callers",
+  "ok": true,
+  "results": [
+    {
+      "edges": [],
+      "error": null,
+      "matched_functions": [],
+      "package_not_in_program": true,
+      "result": "PACKAGE_NOT_IN_PROGRAM",
+      "target": {
+        "package": "not/there",
+        "symbol": "X"
+      },
+      "truncated": false
+    }
+  ],
+  "stats": {
+    "callgraph_edges": 27,
+    "callgraph_nodes": 56,
+    "duration_ms": 0,
+    "packages_loaded": 15,
+    "peak_rss_kb": null
+  },
+  "toolchain": {
+    "go_version": "go1.24.7",
+    "goarch": "amd64",
+    "goos": "linux",
+    "x_tools_version": "v0.42.0"
+  }
+}

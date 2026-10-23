@@ -1,0 +1,111 @@
+{
+  "contract_version": "1.0",
+  "load": {
+    "first_errors": [],
+    "mode": "LIBRARY",
+    "packages_matched": 15,
+    "packages_skipped": 0
+  },
+  "mode": "callers",
+  "ok": true,
+  "results": [
+    {
+      "edges": [
+        {
+          "call_site": {
+            "file": "diamond/p.go",
+            "line": 7
+          },
+          "callee": "vtlift/diamond.sink",
+          "caller": "vtlift/diamond.left",
+          "hop": 1,
+          "kind": "STATIC",
+          "other": {
+            "package": "vtlift/diamond",
+            "symbol": "left"
+          }
+        },
+        {
+          "call_site": {
+            "file": "diamond/p.go",
+            "line": 9
+          },
+          "callee": "vtlift/diamond.sink",
+          "caller": "vtlift/diamond.right",
+          "hop": 1,
+          "kind": "STATIC",
+          "other": {
+            "package": "vtlift/diamond",
+            "symbol": "right"
+          }
+        },
+        {
+          "call_site": {
+            "file": "diamond/p.go",
+            "line": 11
+          },
+          "callee": "vtlift/diamond.left",
+          "caller": "vtlift/diamond.Left",
+          "hop": 2,
+          "kind": "STATIC",
+          "other": {
+            "package": "vtlift/diamond",
+            "symbol": "Left"
+          }
+        },
+        {
+          "call_site": {
+            "file": "diamond/p.go",
+            "line": 13
+          },
+          "callee": "vtlift/diamond.right",
+          "caller": "vtlift/diamond.Right",
+          "hop": 2,
+          "kind": "STATIC",
+          "other": {
+            "package": "vtlift/diamond",
+            "symbol": "Right"
+          }
+        }
+      ],
+      "error": null,
+      "matched_functions": [
+        "vtlift/diamond.sink"
+      ],
+      "package_not_in_program": false,
+      "result": "FOUND",
+      "target": {
+        "package": "vtlift/diamond",
+        "symbol": "sink"
+      },
+      "truncated": false
+    },
+    {
+      "edges": [],
+      "error": null,
+      "matched_functions": [
+        "vtlift/never_called.dead"
+      ],
+      "package_not_in_program": false,
+      "result": "NONE",
+      "target": {
+        "package": "vtlift/never_called",
+        "symbol": "dead"
+      },
+      "truncated": false
+    }
+  ],
+  "stats": {
+    "callgraph_edges": 27,
+    "callgraph_nodes": 56,
+    "duration_ms": 0,
+    "packages_loaded": 15,
+    "peak_rss_kb": null
+  },
+  "toolchain": {
+    "go_version": "go1.24.7",
+    "goarch": "amd64",
+    "goos": "linux",
+    "x_tools_version": "v0.42.0"
+  }
+}

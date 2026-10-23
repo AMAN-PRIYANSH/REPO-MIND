@@ -1,0 +1,592 @@
+{
+  "contract_version": "1.0",
+  "load": {
+    "first_errors": [],
+    "mode": "LIBRARY",
+    "packages_matched": 15,
+    "packages_skipped": 0
+  },
+  "mode": "lift",
+  "ok": true,
+  "results": [
+    {
+      "error": null,
+      "matched_functions": [
+        "vtlift/private_helper.parse"
+      ],
+      "package_not_in_program": false,
+      "rules": {
+        "ALL": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 1,
+              "dynamic": false,
+              "package": "vtlift/private_helper",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "private_helper/p.go",
+                      "line": 4
+                    },
+                    "callee": "vtlift/private_helper.parse",
+                    "caller": "vtlift/private_helper.Parse",
+                    "kind": "STATIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/private_helper",
+                  "symbol": "Parse"
+                },
+                "target": {
+                  "package": "vtlift/private_helper",
+                  "symbol": "parse"
+                }
+              },
+              "symbol": "Parse"
+            }
+          ]
+        },
+        "NEAREST": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 1,
+              "dynamic": false,
+              "package": "vtlift/private_helper",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "private_helper/p.go",
+                      "line": 4
+                    },
+                    "callee": "vtlift/private_helper.parse",
+                    "caller": "vtlift/private_helper.Parse",
+                    "kind": "STATIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/private_helper",
+                  "symbol": "Parse"
+                },
+                "target": {
+                  "package": "vtlift/private_helper",
+                  "symbol": "parse"
+                }
+              },
+              "symbol": "Parse"
+            }
+          ]
+        }
+      },
+      "status": "LIFTED",
+      "target": {
+        "package": "vtlift/private_helper",
+        "symbol": "parse"
+      }
+    },
+    {
+      "error": null,
+      "matched_functions": [
+        "vtlift/interface_call.impl.run"
+      ],
+      "package_not_in_program": false,
+      "rules": {
+        "ALL": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 1,
+              "dynamic": true,
+              "package": "vtlift/interface_call",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "interface_call/p.go",
+                      "line": 12
+                    },
+                    "callee": "vtlift/interface_call.impl.run",
+                    "caller": "vtlift/interface_call.Do",
+                    "kind": "DYNAMIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/interface_call",
+                  "symbol": "Do"
+                },
+                "target": {
+                  "package": "vtlift/interface_call",
+                  "symbol": "impl.run"
+                }
+              },
+              "symbol": "Do"
+            }
+          ]
+        },
+        "NEAREST": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 1,
+              "dynamic": true,
+              "package": "vtlift/interface_call",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "interface_call/p.go",
+                      "line": 12
+                    },
+                    "callee": "vtlift/interface_call.impl.run",
+                    "caller": "vtlift/interface_call.Do",
+                    "kind": "DYNAMIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/interface_call",
+                  "symbol": "Do"
+                },
+                "target": {
+                  "package": "vtlift/interface_call",
+                  "symbol": "impl.run"
+                }
+              },
+              "symbol": "Do"
+            }
+          ]
+        }
+      },
+      "status": "LIFTED",
+      "target": {
+        "package": "vtlift/interface_call",
+        "symbol": "impl.run"
+      }
+    },
+    {
+      "error": null,
+      "matched_functions": [
+        "vtlift/func_value.step"
+      ],
+      "package_not_in_program": false,
+      "rules": {
+        "ALL": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 1,
+              "dynamic": true,
+              "package": "vtlift/func_value",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "func_value/p.go",
+                      "line": 8
+                    },
+                    "callee": "vtlift/func_value.step",
+                    "caller": "vtlift/func_value.Dispatch",
+                    "kind": "DYNAMIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/func_value",
+                  "symbol": "Dispatch"
+                },
+                "target": {
+                  "package": "vtlift/func_value",
+                  "symbol": "step"
+                }
+              },
+              "symbol": "Dispatch"
+            }
+          ]
+        },
+        "NEAREST": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 1,
+              "dynamic": true,
+              "package": "vtlift/func_value",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "func_value/p.go",
+                      "line": 8
+                    },
+                    "callee": "vtlift/func_value.step",
+                    "caller": "vtlift/func_value.Dispatch",
+                    "kind": "DYNAMIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/func_value",
+                  "symbol": "Dispatch"
+                },
+                "target": {
+                  "package": "vtlift/func_value",
+                  "symbol": "step"
+                }
+              },
+              "symbol": "Dispatch"
+            }
+          ]
+        }
+      },
+      "status": "LIFTED",
+      "target": {
+        "package": "vtlift/func_value",
+        "symbol": "step"
+      }
+    },
+    {
+      "error": null,
+      "matched_functions": [
+        "vtlift/diamond.sink"
+      ],
+      "package_not_in_program": false,
+      "rules": {
+        "ALL": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 2,
+              "dynamic": false,
+              "package": "vtlift/diamond",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 11
+                    },
+                    "callee": "vtlift/diamond.left",
+                    "caller": "vtlift/diamond.Left",
+                    "kind": "STATIC"
+                  },
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 7
+                    },
+                    "callee": "vtlift/diamond.sink",
+                    "caller": "vtlift/diamond.left",
+                    "kind": "STATIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/diamond",
+                  "symbol": "Left"
+                },
+                "target": {
+                  "package": "vtlift/diamond",
+                  "symbol": "sink"
+                }
+              },
+              "symbol": "Left"
+            },
+            {
+              "depth": 2,
+              "dynamic": false,
+              "package": "vtlift/diamond",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 13
+                    },
+                    "callee": "vtlift/diamond.right",
+                    "caller": "vtlift/diamond.Right",
+                    "kind": "STATIC"
+                  },
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 9
+                    },
+                    "callee": "vtlift/diamond.sink",
+                    "caller": "vtlift/diamond.right",
+                    "kind": "STATIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/diamond",
+                  "symbol": "Right"
+                },
+                "target": {
+                  "package": "vtlift/diamond",
+                  "symbol": "sink"
+                }
+              },
+              "symbol": "Right"
+            },
+            {
+              "depth": 3,
+              "dynamic": false,
+              "package": "vtlift/diamond",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 15
+                    },
+                    "callee": "vtlift/diamond.Left",
+                    "caller": "vtlift/diamond.Top",
+                    "kind": "STATIC"
+                  },
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 11
+                    },
+                    "callee": "vtlift/diamond.left",
+                    "caller": "vtlift/diamond.Left",
+                    "kind": "STATIC"
+                  },
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 7
+                    },
+                    "callee": "vtlift/diamond.sink",
+                    "caller": "vtlift/diamond.left",
+                    "kind": "STATIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/diamond",
+                  "symbol": "Top"
+                },
+                "target": {
+                  "package": "vtlift/diamond",
+                  "symbol": "sink"
+                }
+              },
+              "symbol": "Top"
+            }
+          ]
+        },
+        "NEAREST": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 2,
+              "dynamic": false,
+              "package": "vtlift/diamond",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 11
+                    },
+                    "callee": "vtlift/diamond.left",
+                    "caller": "vtlift/diamond.Left",
+                    "kind": "STATIC"
+                  },
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 7
+                    },
+                    "callee": "vtlift/diamond.sink",
+                    "caller": "vtlift/diamond.left",
+                    "kind": "STATIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/diamond",
+                  "symbol": "Left"
+                },
+                "target": {
+                  "package": "vtlift/diamond",
+                  "symbol": "sink"
+                }
+              },
+              "symbol": "Left"
+            },
+            {
+              "depth": 2,
+              "dynamic": false,
+              "package": "vtlift/diamond",
+              "path": {
+                "edges": [
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 13
+                    },
+                    "callee": "vtlift/diamond.right",
+                    "caller": "vtlift/diamond.Right",
+                    "kind": "STATIC"
+                  },
+                  {
+                    "call_site": {
+                      "file": "diamond/p.go",
+                      "line": 9
+                    },
+                    "callee": "vtlift/diamond.sink",
+                    "caller": "vtlift/diamond.right",
+                    "kind": "STATIC"
+                  }
+                ],
+                "entry": {
+                  "package": "vtlift/diamond",
+                  "symbol": "Right"
+                },
+                "target": {
+                  "package": "vtlift/diamond",
+                  "symbol": "sink"
+                }
+              },
+              "symbol": "Right"
+            }
+          ]
+        }
+      },
+      "status": "LIFTED",
+      "target": {
+        "package": "vtlift/diamond",
+        "symbol": "sink"
+      }
+    },
+    {
+      "error": null,
+      "matched_functions": [
+        "vtlift/root_only.orphan"
+      ],
+      "package_not_in_program": false,
+      "rules": {
+        "ALL": {
+          "depth_limit_reached": false,
+          "entries": []
+        },
+        "NEAREST": {
+          "depth_limit_reached": false,
+          "entries": []
+        }
+      },
+      "status": "ROOT_ONLY",
+      "target": {
+        "package": "vtlift/root_only",
+        "symbol": "orphan"
+      }
+    },
+    {
+      "error": null,
+      "matched_functions": [
+        "vtlift/already_exported.Parse"
+      ],
+      "package_not_in_program": false,
+      "rules": {
+        "ALL": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 0,
+              "dynamic": false,
+              "package": "vtlift/already_exported",
+              "path": {
+                "edges": [],
+                "entry": {
+                  "package": "vtlift/already_exported",
+                  "symbol": "Parse"
+                },
+                "target": {
+                  "package": "vtlift/already_exported",
+                  "symbol": "Parse"
+                }
+              },
+              "symbol": "Parse"
+            }
+          ]
+        },
+        "NEAREST": {
+          "depth_limit_reached": false,
+          "entries": [
+            {
+              "depth": 0,
+              "dynamic": false,
+              "package": "vtlift/already_exported",
+              "path": {
+                "edges": [],
+                "entry": {
+                  "package": "vtlift/already_exported",
+                  "symbol": "Parse"
+                },
+                "target": {
+                  "package": "vtlift/already_exported",
+                  "symbol": "Parse"
+                }
+              },
+              "symbol": "Parse"
+            }
+          ]
+        }
+      },
+      "status": "ALREADY_EXPORTED",
+      "target": {
+        "package": "vtlift/already_exported",
+        "symbol": "Parse"
+      }
+    },
+    {
+      "error": {
+        "code": "UNSUPPORTED_SYMBOL_FORM",
+        "message": "generic target Map: lifting generic functions is not supported"
+      },
+      "matched_functions": [],
+      "package_not_in_program": false,
+      "rules": {},
+      "status": "ERROR",
+      "target": {
+        "package": "vtlift/generic_seed",
+        "symbol": "Map"
+      }
+    },
+    {
+      "error": {
+        "code": "TARGET_NOT_FOUND",
+        "message": "symbol Nope not found in package vtlift/private_helper"
+      },
+      "matched_functions": [],
+      "package_not_in_program": false,
+      "rules": {},
+      "status": "ERROR",
+      "target": {
+        "package": "vtlift/private_helper",
+        "symbol": "Nope"
+      }
+    },
+    {
+      "error": null,
+      "matched_functions": [],
+      "package_not_in_program": true,
+      "rules": {},
+      "status": "PACKAGE_NOT_IN_PROGRAM",
+      "target": {
+        "package": "not/there",
+        "symbol": "X"
+      }
+    }
+  ],
+  "stats": {
+    "callgraph_edges": 27,
+    "callgraph_nodes": 56,
+    "duration_ms": 0,
+    "packages_loaded": 15,
+    "peak_rss_kb": null
+  },
+  "toolchain": {
+    "go_version": "go1.24.7",
+    "goarch": "amd64",
+    "goos": "linux",
+    "x_tools_version": "v0.42.0"
+  }
+}

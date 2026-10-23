@@ -1,0 +1,9 @@
+{
+  "contract_version": "1.0",
+  "error": {
+    "code": "LOAD_FAILED",
+    "message": "nl: /tmp/vt_contract/nothing/a.go:3:11: expected ')', found 'EOF'"
+  },
+  "mode": "lift",
+  "ok": false
+}

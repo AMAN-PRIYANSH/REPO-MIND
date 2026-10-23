@@ -1,0 +1,9 @@
+{
+  "contract_version": "1.0",
+  "error": {
+    "code": "LOAD_FAILED",
+    "message": "module_dir is not a directory: /nonexistent/vt"
+  },
+  "mode": "lift",
+  "ok": false
+}

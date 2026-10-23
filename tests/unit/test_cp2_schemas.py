@@ -75,6 +75,11 @@ def test_request_schema_requires_mode_fields():
     for key in ("module_dir", "main_packages", "targets"):
         bad = {k: v for k, v in ok.items() if k != key}
         assert validation_errors("helper_request", bad), key
-    assert validation_errors("helper_request", dict(ok, mode="lift"))
+    # CP5b added lift, callers and callees (additive); an unknown mode is still invalid, and the new
+    # modes need module_dir and targets but not main_packages.
+    assert validation_errors("helper_request", dict(ok, mode="teleport"))
+    validate("helper_request", dict(ok, mode="lift"))
+    validate("helper_request", {"contract_version": "1.0", "mode": "callers", "module_dir": "m", "targets": ok["targets"]})
+    assert validation_errors("helper_request", {"contract_version": "1.0", "mode": "lift", "module_dir": "m"})
     assert validation_errors("helper_request", dict(ok, contract_version="2.0"))
     assert validation_errors("helper_request", {"contract_version": "1.0", "mode": "funcs"})

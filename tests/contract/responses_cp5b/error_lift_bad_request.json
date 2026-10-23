@@ -1,0 +1,9 @@
+{
+  "contract_version": "1.0",
+  "error": {
+    "code": "BAD_REQUEST",
+    "message": "lift_rules must be NEAREST and/or ALL, got SOME"
+  },
+  "mode": "lift",
+  "ok": false
+}
