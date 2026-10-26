@@ -62,6 +62,7 @@ def cmd_eval_triage(args, argv) -> int:
         gomodcache = Path(args.gomodcache) if args.gomodcache else default_gomodcache()
         gomodcache.mkdir(parents=True, exist_ok=True)
         os.environ["GOMODCACHE"] = str(gomodcache)   # `go mod tidy`, the helper, `go build` and `go list` share it
+        os.environ["GOCACHE"] = str(gomodcache.parent / (gomodcache.name + "-gocache"))   # this run's own build cache
         os.environ["GOWORK"] = "off"
         doc = te.eval_real(args.dataset_set, case_list, {c["id"]: c for c in cases}, data_dir,
                            base_factory=factory, repo_cache=Path(args.repo_cache) if args.repo_cache else None,

@@ -438,6 +438,48 @@ def run_real_case(dataset: str, entry: dict[str, Any], case: dict[str, Any], evi
     return row, verdict, ref
 
 
+DISK_MIN_FREE_GB = 10.0
+
+
+class DiskGuard:
+    """Real modules can need gigabytes of dependencies and build cache. Before a case starts, if the
+    free space under `path` is below `min_free_gb`, wait until no case is in flight and empty this
+    process's Go module and build caches (`go clean -modcache -cache`), so a run never fails for
+    lack of disk and never cleans a cache another case of this process is using. Counted."""
+
+    def __init__(self, path: Path, min_free_gb: float = DISK_MIN_FREE_GB, cleaner=None, free_gb=None, log=print):
+        self.path, self.min_free_gb, self.log = Path(path), min_free_gb, log
+        self.cleaner = cleaner or _clean_go_caches
+        self.free_gb = free_gb or (lambda: shutil.disk_usage(self.path).free / 1e9)
+        self.cond = threading.Condition()
+        self.active = 0
+        self.cleanups = 0
+
+    def enter(self) -> None:
+        with self.cond:
+            while self.free_gb() < self.min_free_gb and self.active > 0:
+                self.cond.wait(timeout=30)
+            if self.free_gb() < self.min_free_gb:
+                before = self.free_gb()
+                self.cleaner()
+                self.cleanups += 1
+                self.log(f"disk guard: {before:.1f} GB free < {self.min_free_gb} GB; Go caches cleaned, now {self.free_gb():.1f} GB")
+            self.active += 1
+
+    def leave(self) -> None:
+        with self.cond:
+            self.active -= 1
+            self.cond.notify_all()
+
+
+def _clean_go_caches() -> None:
+    import subprocess
+
+    from vulntrace.env import go_env
+
+    subprocess.run(["go", "clean", "-modcache", "-cache"], env=go_env(), capture_output=True, timeout=1800)
+
+
 def _write_gz(path: Path, obj: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
@@ -467,8 +509,16 @@ def eval_real(dataset: str, case_list: dict[str, Any], cases_by_id: dict[str, di
     todo = [e for e in entries if rerun or not (out_dir / f"{e['id']}.row.json").is_file()]
     log(f"triage {dataset}: {len(entries)} cases, {len(entries) - len(todo)} done, {len(todo)} to run, {jobs} job(s)")
     base = base_factory()
+    guard = DiskGuard(data_dir, log=log)
 
     def work(e):
+        guard.enter()
+        try:
+            return _work(e)
+        finally:
+            guard.leave()
+
+    def _work(e):
         cid = e["id"]
         case = cases_by_id.get(cid)
         if case is None:
@@ -505,7 +555,7 @@ def eval_real(dataset: str, case_list: dict[str, Any], cases_by_id: dict[str, di
     rows = [json.loads((out_dir / f"{e['id']}.row.json").read_text(encoding="utf-8")) for e in entries
             if (out_dir / f"{e['id']}.row.json").is_file()]
     doc = {"schema_version": SCHEMA_VERSION, "set": dataset, "rows": rows, "summary": summarize_real(dataset, rows),
-           "max_mains": max_mains}
+           "max_mains": max_mains, "disk_guard": {"min_free_gb": guard.min_free_gb, "cache_cleanups": guard.cleanups}}
     if stability:
         doc["stability"] = stability_check(dataset, entries, rows, cases_by_id, data_dir, out_dir, stability, repo_cache=repo_cache,
                                            gomodcache=gomodcache, base=base, max_mains=max_mains, log=log)

@@ -97,3 +97,17 @@ def test_load_cause():
     assert te.load_cause(row("a.go:1:2: package thrift/lib is not in std")) == "GOPATH_STYLE_IMPORT"
     assert te.load_cause(row("something else")) == "OTHER"
     assert te.load_cause(row("anything", codes=("METHOD_DISAGREEMENT",))) is None
+
+
+def test_disk_guard_cleans_only_when_idle_and_low():
+    free = {"gb": 50.0}
+    cleaned = []
+    g = te.DiskGuard("/", min_free_gb=10, cleaner=lambda: (cleaned.append(1), free.update(gb=40.0)),
+                     free_gb=lambda: free["gb"], log=lambda m: None)
+    g.enter()
+    assert cleaned == [] and g.active == 1
+    g.leave()
+    free["gb"] = 5.0
+    g.enter()
+    assert cleaned == [1] and g.cleanups == 1
+    g.leave()
