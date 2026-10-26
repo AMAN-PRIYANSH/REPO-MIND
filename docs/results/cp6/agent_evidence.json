@@ -1,0 +1,2855 @@
+{
+ "commit_diffs": {
+  "GO-2020-0006": {
+   "commits": 4,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0a061cfc4309531fc6e33caf37912caba2c59ca0fa234c8d244d1a9bcf0434f8",
+   "status": "READY",
+   "with_diff": 4
+  },
+  "GO-2020-0038": {
+   "commits": 33,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "1c66198728a8306c511999aab653bcce620dc24b53ae442efc68486cf55591bc",
+   "status": "READY",
+   "with_diff": 33
+  },
+  "GO-2021-0052": {
+   "commits": 21,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "9df1f7c8ee8bbbd5422713abd39052c6d9e2e01a463fc162ce5339b4e12c9772",
+   "status": "READY",
+   "with_diff": 21
+  },
+  "GO-2022-0326": {
+   "commits": 3,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d2b8cf2197d43b00344c2979d1b4441d8974a35b58b77f6e5f0ed5db7379e53c",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2022-0391": {
+   "commits": 500,
+   "cut": 250,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d03deeb9417ebb3671b9e8a00bd1a706a1dc194e5d097806defa478010ac3846",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2022-0400": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "56b9df0841a98a7e9daa70d32981164ca94558a37cac533bab17e13ad9d460c8",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2022-0462": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "13aad912fe0adbbdaa614e3f8bbfaf1ad523372bce4a19204496f34c1213ff40",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2022-0519": {
+   "commits": 2,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "6c74fceba970746c4b3cafc9f7b54c745cfbfd04280c00bf16423a79cc9eb2ca",
+   "status": "READY",
+   "with_diff": 2
+  },
+  "GO-2022-0588": {
+   "commits": 8,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "95a9b2493f772f0b967795c7631e3b15130fc283c27f974e3834685c070234d7",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2022-1118": {
+   "commits": 66,
+   "cut": 9,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ce3864280ba4efba6989cc6441ac9006404c9cec61b80f4bc82d02f3db6f8165",
+   "status": "READY",
+   "with_diff": 66
+  },
+  "GO-2023-1547": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "caef9f61ed5a41c58259a2e2eaac81870719781943ac9b6eaa1eca4c6f71dfbe",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2023-1578": {
+   "commits": 26,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "3fe29b778a9b57a762d09741254cabe4fd6e000e98a09b2ba6b8c04a8e569b0f",
+   "status": "READY",
+   "with_diff": 26
+  },
+  "GO-2023-1602": {
+   "commits": 6,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "eb105c137d0b99ae3d0045bf875391da03e72a53bc5ec56d577bede47eb46727",
+   "status": "READY",
+   "with_diff": 6
+  },
+  "GO-2023-1664": {
+   "commits": 2,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "a6f3736581a5e710223387a70f81487fd2587f48857fd1f954bf1a6897cc5083",
+   "status": "READY",
+   "with_diff": 2
+  },
+  "GO-2023-1872": {
+   "commits": 3,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "18bf25567601a20e631f13a6438b1c74a021f26e9916b36af89484c30de31b94",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2023-2098": {
+   "commits": 28,
+   "cut": 5,
+   "errors": 0,
+   "reason": null,
+   "sha256": "710d20aa45673a050f717f7ffed6136ee337dfe2e3c2972922b5933e1f72fac8",
+   "status": "READY",
+   "with_diff": 28
+  },
+  "GO-2023-2116": {
+   "commits": 35,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "6b9c8721df2c641979f9af524d9c13680e5c624b4b48d2fdb28a659ab5ad5e68",
+   "status": "READY",
+   "with_diff": 35
+  },
+  "GO-2023-2328": {
+   "commits": 3,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "8c5e985f3f627b7eea41940fcad386b725999e56df59e6deb1a33aaa0d3d1d09",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2023-2386": {
+   "commits": 15,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d6f6d59c74be2ee96790942325762b526f47ef526837f3c490e1699491331564",
+   "status": "READY",
+   "with_diff": 15
+  },
+  "GO-2023-2402": {
+   "commits": 7,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "48947733228310694db93aa7f9f67fe1b451ee26fc943e0024c227aaf94bbd48",
+   "status": "READY",
+   "with_diff": 7
+  },
+  "GO-2024-2538": {
+   "commits": 7,
+   "cut": 4,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c464eaef89836f7203c6cfdfaa271eea078a2271425514f3c7e43a6bb3621c3b",
+   "status": "READY",
+   "with_diff": 7
+  },
+  "GO-2024-2671": {
+   "commits": 86,
+   "cut": 4,
+   "errors": 0,
+   "reason": null,
+   "sha256": "8b8b07d06e3342759904ffaba9041e0ac451389f4261793f7b4eef3a12865e7b",
+   "status": "READY",
+   "with_diff": 86
+  },
+  "GO-2024-2842": {
+   "commits": 8,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "aa73f17a82a948f85651e7611bf84fc908c3b619085a4f629c65cdcee88c73ec",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2024-3112": {
+   "commits": 27,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "66262d598dfa37c30b1fd0ff74eea9ef0d7e60699c72ce20f0e2ca494118349a",
+   "status": "READY",
+   "with_diff": 27
+  },
+  "GO-2024-3124": {
+   "commits": 16,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ee08989925c1529e8d90b7a86385a391a4ede97092b496421c05a8b353705521",
+   "status": "READY",
+   "with_diff": 16
+  },
+  "GO-2025-3476": {
+   "commits": 8,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ab98e8bc2e4f18bb151365764b23f4abfa8669695809916359e6a6c1a61109aa",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2025-3533": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "3aaeb28a074643eec2cae319cf7fe73624717ec085bf03583648233d2a038082",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2025-3600": {
+   "commits": 7,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c3f5f5d837b4a64fc95a12a61f8e7706cc573085754aabf1b760b88eb0978e54",
+   "status": "READY",
+   "with_diff": 7
+  },
+  "GO-2025-3748": {
+   "commits": 5,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "da94612c579e050c073653e733eea2c61c9466e4dce32647e5d5b3b4727f0e87",
+   "status": "READY",
+   "with_diff": 5
+  },
+  "GO-2025-3764": {
+   "commits": 6,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "4620f00edfce853bdeedd8bc4fb2bfe1c220d27a7e5198eb6669420a9c6ab418",
+   "status": "READY",
+   "with_diff": 6
+  },
+  "GO-2025-4017": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "538b2af347966c9d929fb842c6c54b03f60458ce251d9ebc6a145b22bb61080e",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-4789": {
+   "commits": 500,
+   "cut": 36,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d4ef209987dbc71879c4aae3595aedc33ace4fc781dc03ace38aaa85c6fd73c7",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-4942": {
+   "commits": 210,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "111e0d57659fb785a7551fd7841a92bdbc002d5d8ef3559ef33dbc4a8dc0dedb",
+   "status": "READY",
+   "with_diff": 210
+  },
+  "GO-2026-5051": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "af75b4d8323bd1d4c5fa43f955c8546fe99c4e3044ef2d3e1c1d905aeae15d8f",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-5052": {
+   "commits": 3,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "faa75d62421e4e9e8e2e4cb93ba3fa1dfb1874b4d4dfd383f450aa36356930a5",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2026-5069": {
+   "commits": 343,
+   "cut": 10,
+   "errors": 0,
+   "reason": null,
+   "sha256": "8f121f85a300fe5db2d650ff78359d714d9351dbf84e8894961fc86fb37e7931",
+   "status": "READY",
+   "with_diff": 343
+  },
+  "GO-2026-5073": {
+   "commits": 67,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ffe97192765f8d7b739544bef16adec0f9bd02cd53fe6bf167c78b39304e9efb",
+   "status": "READY",
+   "with_diff": 67
+  },
+  "GO-2026-5208": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c824536b4302c4a777e16961664da7e0ae530322dc5a30ddec32242ba1e9bcc4",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-5313": {
+   "commits": 61,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "b1c5ace6c108218d89f94dc2c4e31d72fcefe461ffb049694d022d219a455dab",
+   "status": "READY",
+   "with_diff": 61
+  },
+  "GO-2026-5320": {
+   "commits": 6,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "942470fac2bbdab766949384bdda74fa3dbf50f0da062c6e8027ed7916384efa",
+   "status": "READY",
+   "with_diff": 6
+  },
+  "GO-2026-5380": {
+   "commits": 61,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "374ca3bf9c289a6f4f0dbb1302251f0549e70d4d86af53bee52a653177a4d03e",
+   "status": "READY",
+   "with_diff": 61
+  },
+  "GO-2026-5410": {
+   "commits": 2,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ded0d83ebc74266400c1dc424307ecfe18751f8e33f5888d0fa857b2337e9167",
+   "status": "READY",
+   "with_diff": 2
+  },
+  "GO-2026-5427": {
+   "commits": 44,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "fcd8dfe40c7ece49c00b796c0edafec9848b34c76f7eb341591fec44bbc7eead",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-5435": {
+   "commits": 2,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "a96b4e16cb97cf37941c4e30b6b6e52b0a09538813bf598f0def50b9cf30ccf5",
+   "status": "READY",
+   "with_diff": 2
+  },
+  "GO-2026-5452": {
+   "commits": 3,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "51ddf5bb10127eb8c11670db07278cadab4e13a9f175eb70c3d80b8e2f8e4169",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2026-5463": {
+   "commits": 29,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "85d8ba6ede312db7fda6ccbf85a4d244664959b754f8c67d229d76f470496c91",
+   "status": "READY",
+   "with_diff": 29
+  },
+  "GO-2026-5466": {
+   "commits": 11,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "3d61a0f5d6d6bf14bbb8ac93f4e49cf56ecf792b3b1a2eab222ae6084ef935a5",
+   "status": "READY",
+   "with_diff": 11
+  },
+  "GO-2026-5504": {
+   "commits": 7,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "60ec95874a230b1aad080445c1921504f83da191322c8f34ee719c87a8a3b1f2",
+   "status": "READY",
+   "with_diff": 7
+  },
+  "GO-2026-5506": {
+   "commits": 65,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "33b4a5f7b14a392fe6f9215b29f900ce11d0746de40e96799780fca5050cde81",
+   "status": "READY",
+   "with_diff": 65
+  },
+  "GO-2026-5525": {
+   "commits": 46,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "3b879fa4cab8d709b29396d6955182e69156842e380892a525daf200624cfa94",
+   "status": "READY",
+   "with_diff": 46
+  },
+  "GO-2026-5529": {
+   "commits": 4,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "1586e46eaf56883d5ad75b5419276ca694a21dcbc5e97a223b9488a769a360d6",
+   "status": "READY",
+   "with_diff": 4
+  },
+  "GO-2026-5543": {
+   "commits": 29,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "297a6bca1879bd27f80fe241380074d417f19cbb79d671fe6041da4c64bb9b5e",
+   "status": "READY",
+   "with_diff": 29
+  },
+  "GO-2026-5548": {
+   "commits": 31,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "97df3a9f0cde6c8068db334b9c710a7725ab263afa7f5073128c0195d773e23e",
+   "status": "READY",
+   "with_diff": 31
+  },
+  "GO-2026-5566": {
+   "commits": 5,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "2383851f03176da21cf1d117062c8d41aeb8174df36d242831bfac88aa83230c",
+   "status": "READY",
+   "with_diff": 5
+  },
+  "GO-2026-5569": {
+   "commits": 8,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "089a69ae37250605d06de663c768e2851b2c46cf8b4d412942fbdc00af312c73",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2026-5596": {
+   "commits": 19,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "77e63905a5c8234f5c4ae98fbd2f134b482fa7c9d6179453453b24f5a6a7b9ab",
+   "status": "READY",
+   "with_diff": 19
+  },
+  "GO-2026-5606": {
+   "commits": 8,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "48a4ab825d6f208676e60e230707b65a8a82b19556cc1ed3e04b43ecf029c483",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2026-5665": {
+   "commits": 44,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "7200d92d665eb2edac459d684f3ba8d41e7c660444b8ef086969d0792933fa1b",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-5666": {
+   "commits": 5,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "a831da7678c20dba76b1adb3c59486178c6c5357a93dc8a57cb1fde9be60f83f",
+   "status": "READY",
+   "with_diff": 5
+  },
+  "GO-2026-5676": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "be7b4c0f4d5ad692d5ee82549dbcf1b557d6d563dbcdb0bf85b1c68eedafd324",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-5681": {
+   "commits": 61,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "82ed568da95fc2f6e550a593dadcf61b075a9be757e297f8b0eff8c463663135",
+   "status": "READY",
+   "with_diff": 61
+  },
+  "GO-2026-5699": {
+   "commits": 44,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d63bd28f5312dede86004b863eac206856aa71215b56340497de79fa215f4840",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-5713": {
+   "commits": 44,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "26272a6c7b97af9d5c363517139ac4841254d9152cbcaca261444cf23819b838",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-5740": {
+   "commits": 49,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "f24c0d7c4efb1447f9991d99ef2db56a06f49ebd0e941cb6599d5a5acd0b13f9",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-5748": {
+   "commits": 3,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "9183c47d2f423b89f6e6cae4f559b6b4b1b889b9b85acf9ae56c86342467dda1",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2026-5841": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "f79e0e7af5e87ab753e5672b42961d213b637d935ed659503aaf04db080b4888",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-5879": {
+   "commits": 24,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "48e529446a267bc12d49abfd72c94f4e40a4ffa5ee29176f1b27a42341ec5fe5",
+   "status": "READY",
+   "with_diff": 24
+  },
+  "GO-2026-5880": {
+   "commits": 8,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "54b183ac9aa02339cacd1f3e624299e63a9e3f8bf7b093f923cd49177f58d28b",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2026-5882": {
+   "commits": 24,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "f14e06604c6f38bc5d8f334b355701332060f061ab5541481e38cad4339daa12",
+   "status": "READY",
+   "with_diff": 24
+  },
+  "GO-2026-5884": {
+   "commits": 24,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "6467b27d65c31b245e38b7eb689d1e8bf061c7121cec2de738e6d021a29440d3",
+   "status": "READY",
+   "with_diff": 24
+  },
+  "GO-2026-5885": {
+   "commits": 24,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "90ea8593dc3efa90ebf3fee59869991a4bbee6de432d526ac6985ab5f1fcff04",
+   "status": "READY",
+   "with_diff": 24
+  },
+  "GO-2026-5954": {
+   "commits": 43,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ba4d1b703afffc12d6c57996ef61b67fbfcc8131b3da4bce6a5a3b7c89b95cad",
+   "status": "READY",
+   "with_diff": 43
+  },
+  "GO-2026-5955": {
+   "commits": 31,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c2b04e00da5b58e829aae65298aaee0d0b79a5bafd0651794fe28a9e00cab730",
+   "status": "READY",
+   "with_diff": 31
+  },
+  "GO-2026-5960": {
+   "commits": 40,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "22f5cdb4ad6cebc6cbded270799e7112fddb4d76d9bdd2d795fbfc3bd971aa52",
+   "status": "READY",
+   "with_diff": 40
+  },
+  "GO-2026-5971": {
+   "commits": 44,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "b5a47d1b7e78a429c69c7f85208ba5cd70eb70789a653ecfb899f217074a8f50",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-5983": {
+   "commits": 65,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "6c3a430925756c3d1d6a3da9a13d26e10eb0338c06ddce396beab6bbecd60c20",
+   "status": "READY",
+   "with_diff": 65
+  },
+  "GO-2026-5987": {
+   "commits": 10,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d9635d2df8a405f0a972594925bd0ce3c3cdc4adfcb0e1b2e83124970f5f9f9b",
+   "status": "READY",
+   "with_diff": 10
+  },
+  "GO-2026-5989": {
+   "commits": 10,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "f8300efc3124730bf313e01b81447ec384570d635aff87f77722e9945783d9bc",
+   "status": "READY",
+   "with_diff": 10
+  },
+  "GO-2026-6061": {
+   "commits": 3,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "6dde8547bbc515721c274587791ba714316847b4318c6c1df54961b04344d5bd",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2026-6095": {
+   "commits": 4,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "efd8a41b4dac77aca0776d0efd2f28f4cd824b12edbbb6e1e8bfa7cfe2eef20e",
+   "status": "READY",
+   "with_diff": 4
+  },
+  "GO-2026-6112": {
+   "commits": 4,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "43e274f4e09d9d957da3decb15155b787d459971d844ac5d4a68ae8fd7f53b68",
+   "status": "READY",
+   "with_diff": 4
+  },
+  "GO-2026-6114": {
+   "commits": 19,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "e94e2c83a8373f9dfc003847c759ecb9ec97fc577c1d615055d7fceb521f435e",
+   "status": "READY",
+   "with_diff": 19
+  },
+  "GO-2026-6138": {
+   "commits": 10,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0342b77bcc3cdc392cb48381ff1e27a88d3c76316410beca24557244d61a261d",
+   "status": "READY",
+   "with_diff": 10
+  },
+  "GO-2026-6139": {
+   "commits": 2,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0b37f431b9eadfeeca17fb7b615093e4f98d7dcdd00f6fc0af9da9f1d1cd9ac4",
+   "status": "READY",
+   "with_diff": 2
+  },
+  "GO-2026-6163": {
+   "reason": "no usable release range",
+   "sha256": null,
+   "status": "NO_RANGE"
+  },
+  "GO-2026-6165": {
+   "commits": 500,
+   "cut": 25,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d76e9b99c3582157d389a602fc6cfcdeae3050307de409dfc065e322e48e9b7e",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6181": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "7adf1f55ace2518322ab0deb2e732cdd9ee3d2894378c3d8d961c4f8369c86ef",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6182": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "187bc783404b3f66396bf651ae94ee0f849639a6e3e6d005fe93e9e180ad6850",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6183": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "23ec90a9bf613daf6b3df7c2524a5e62249f455df7e3be789c607a43c542497e",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6184": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "5220bb86074cae0996a860970c42deb2072f66acdb717815e39083117ab6206c",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6185": {
+   "commits": 49,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "96a8ec5f6d2355853ab982da082d6e6ac9c874d17b53c67b81b2b6de9eb924c4",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-6186": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "4d2d7732327e6d15720dd4bd19de78ff838e18b809c86ace1fb8fa610faa5b8f",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6187": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "4bb97a2f88ef2cdd63f8786dfd3c17321f7a9648f435cea2e6aba7ca1ece7586",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6188": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d5358cdb4e0f2debd4263168c0158e984ab4f4f0c84c0d3f6dd40868320ca80a",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6189": {
+   "commits": 49,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "971c07f4279cdaa04a90bb0b77e4b5dd6208d497e2f96c598630a72381149eff",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-6190": {
+   "commits": 49,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "45c4266269e89e37bf0f7ad55735b93bfd8e63d8cc38cde54f2954f38d77c592",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-6191": {
+   "commits": 49,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "020fb23baf5c2b6dba484088e02b1bf3d9fab8cb9bc8dc77a0364641a44282e6",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-6195": {
+   "commits": 49,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "45f12ef37d4c9c374cc12c1f238a740ce7b832a957c1aa06a5ac4a4abe08db13",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-6197": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c9ec414976e51b4bbd767a4be09af70bb206f304789e2e1d254b4e3a8809606c",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6199": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "31b4244cdec938ed4673fb6ad5d57f7738e0bdb48949ad4f528d3ddbd635f650",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6213": {
+   "commits": 17,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "7b591e85cf654c2cca19fd4ac56cbdfe21c824ff96832288d13dc85c0adca765",
+   "status": "READY",
+   "with_diff": 17
+  },
+  "GO-2026-6234": {
+   "commits": 6,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c6639d307dc029f46debdd1d29d7bdcd81e04b2f2f6d1a6e41fc289a2c0ca3aa",
+   "status": "READY",
+   "with_diff": 6
+  },
+  "GO-2026-6237": {
+   "commits": 1,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "826555bb494d5279ce659dceb8f19b63e6680bb33494d74c8dfc03e019993e78",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-6238": {
+   "commits": 76,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0e2d5efe4952f2aeefd573cccdee18b7d096b8ca7e463fd75a7a2c3bf7aee982",
+   "status": "READY",
+   "with_diff": 76
+  },
+  "GO-2026-6302": {
+   "commits": 116,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "7d1bdcf6cc149f1505bcb520d94680be3a7c3e83dce1d1fac106680b99daf405",
+   "status": "READY",
+   "with_diff": 116
+  },
+  "GO-2026-6348": {
+   "commits": 4,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "badbafc4fa62545d0dbdacf74fac413301ab2047d055ca5ef6c02961975f43c4",
+   "status": "READY",
+   "with_diff": 4
+  },
+  "GO-2026-6366": {
+   "commits": 500,
+   "cut": 15,
+   "errors": 0,
+   "reason": null,
+   "sha256": "bc39e7878df6dabaa44ac618aac0663ae3b6fe0f5e7b7f0baee7151a323a6b56",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6452": {
+   "commits": 40,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "bc67f40bc74a2e00e61a39ced30746d4b4f8a4fe403d834c881baeb19668e48f",
+   "status": "READY",
+   "with_diff": 40
+  },
+  "GO-2026-6453": {
+   "commits": 40,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "a8d2bb7492908366576cbeb5dea22d8e4aaf58347f95e204bb5056a38f0e84a3",
+   "status": "READY",
+   "with_diff": 40
+  },
+  "GO-2026-6489": {
+   "commits": 14,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0818befe7c6250192f103f83f7ace17a2243e4c88a723b58e9d0124f688d7f23",
+   "status": "READY",
+   "with_diff": 14
+  },
+  "GO-2026-6512": {
+   "commits": 24,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "f353260bf3079be571942ea4ae322a81b7db11e27dce48bc085af45047bb1d11",
+   "status": "READY",
+   "with_diff": 24
+  },
+  "GO-2026-6535": {
+   "reason": "no usable release range",
+   "sha256": null,
+   "status": "NO_RANGE"
+  },
+  "GO-2026-6665": {
+   "commits": 21,
+   "cut": 4,
+   "errors": 0,
+   "reason": null,
+   "sha256": "a9008f39489346cbd66048556798f1dc62708b8740ed8fd74c4eba3f4dbda916",
+   "status": "READY",
+   "with_diff": 21
+  },
+  "GO-2026-6684": {
+   "commits": 34,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "9a207f64c525f7c0b037d4c6ae77df69bf8a2403d83bd031eda5f0da1b090d28",
+   "status": "READY",
+   "with_diff": 34
+  },
+  "GO-2026-6685": {
+   "commits": 45,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "e1d056ded1462e48d6a1de6068d89f61a2c7301588150a76dd3eee85c81aaad5",
+   "status": "READY",
+   "with_diff": 45
+  },
+  "GO-2026-6686": {
+   "commits": 159,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "694675fb831c19e4e648fffc7b9fe890ad4ad875caed86951eeab3736023429b",
+   "status": "READY",
+   "with_diff": 159
+  },
+  "GO-2026-6687": {
+   "commits": 44,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "86b8807b084c5cb7f3d12d2785d852dec3cd5cabab888f54a536407ec383b63f",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-6689": {
+   "commits": 31,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0c33141058e68bb3d1fc3491f6b9aa2f1b3736fb00708db1262080dfa1c8684e",
+   "status": "READY",
+   "with_diff": 31
+  },
+  "GO-2026-6695": {
+   "commits": 48,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0930e92fc4641e028b33bcbaa9560fc22f26f43ea3b02b890202ef01233b076c",
+   "status": "READY",
+   "with_diff": 48
+  },
+  "GO-2026-6700": {
+   "commits": 33,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "01c768da83841052e27ff8caf133f1af6e8f9ab67351c834648478b3b702a743",
+   "status": "READY",
+   "with_diff": 33
+  }
+ },
+ "commit_diffs_status_counts": {
+  "NO_RANGE": 2,
+  "READY": 118
+ },
+ "environment": {
+  "command": "python -m vulntrace agent prepare --set d4 --graph --jobs 1 --summary-out /tmp/claude-0/-home-user-REPO-MIND/8ce52a54-9a9a-5ee4-913a-21a0032162a9/scratchpad/logs/agent_evidence.json",
+  "go": "go version go1.26.10 linux/amd64",
+  "os": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
+  "python": "3.13.17",
+  "repo_commit": "dc88703",
+  "repo_dirty": false
+ },
+ "graph": {
+  "GO-2020-0006": {
+   "by_status": {
+    "FOUND": 1
+   },
+   "callee_edges": 4,
+   "caller_edges": 5,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 97.4,
+   "sha256": "520fa27870a2251fde96216ee5288b30cdf61f8a1b3af98d6e192cb3b7d6adad",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2020-0038": {
+   "by_status": {
+    "FOUND": 61
+   },
+   "callee_edges": 333,
+   "caller_edges": 146,
+   "go_version": "go1.26.10",
+   "nodes": 61,
+   "reason": null,
+   "seconds": 9.6,
+   "sha256": "99569b2e5bc4b82cd2ff4a95bce6efb830ddbe062d0afa6d22ecfb8041a1e80d",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2021-0052": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 16
+   },
+   "callee_edges": 39,
+   "caller_edges": 22,
+   "go_version": "go1.26.10",
+   "nodes": 17,
+   "reason": null,
+   "seconds": 14.5,
+   "sha256": "de14a13d0d58d336d1818f8edc08090d1f5d05153711a69319278cdbb8c9cf88",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2022-0326": {
+   "by_status": {
+    "FOUND": 5
+   },
+   "callee_edges": 68,
+   "caller_edges": 12,
+   "go_version": "go1.26.10",
+   "nodes": 5,
+   "reason": null,
+   "seconds": 105.0,
+   "sha256": "1ebb8bb013477333878afec2f9fd444063912fc0888630e02e189b2558a32787",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2022-0391": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 571,
+    "NONE": 46
+   },
+   "callee_edges": 3737,
+   "caller_edges": 862,
+   "go_version": "go1.26.10",
+   "nodes": 618,
+   "reason": null,
+   "seconds": 72.1,
+   "sha256": "28a6470658bddd36f240b8143798159fda92a785cee31c9c50dd46ae78a92033",
+   "status": "READY",
+   "truncated": 2
+  },
+  "GO-2022-0400": {
+   "by_status": {
+    "FOUND": 2
+   },
+   "callee_edges": 19,
+   "caller_edges": 3,
+   "go_version": "go1.26.10",
+   "nodes": 2,
+   "reason": null,
+   "seconds": 13.1,
+   "sha256": "47bd209da725344975a64049b0253cf661e94283373308e5398f75a50ec2c466",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2022-0462": {
+   "by_status": {
+    "FOUND": 1
+   },
+   "callee_edges": 105,
+   "caller_edges": 2,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 7.7,
+   "sha256": "6bcccb1f39b59040a8c5cdc9b7c72481032c02fbda9f6dce45abd776380d6496",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2022-0519": {
+   "by_status": {
+    "FOUND": 1
+   },
+   "callee_edges": 1,
+   "caller_edges": 3,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 73.6,
+   "sha256": "0b297497455b06c56f3c248745f6ec4061540a01d19c2275f09ace199fab359b",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2022-0588": {
+   "by_status": {
+    "FOUND": 2
+   },
+   "callee_edges": 32,
+   "caller_edges": 4,
+   "go_version": "go1.26.10",
+   "nodes": 2,
+   "reason": null,
+   "seconds": 4.2,
+   "sha256": "fc4ce44b41e66d609809bb91f67061c24287865de907d230c251676d80b0ec75",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2022-1118": {
+   "by_status": {
+    "FOUND": 183,
+    "NONE": 232
+   },
+   "callee_edges": 1515,
+   "caller_edges": 297,
+   "go_version": "go1.26.10",
+   "nodes": 415,
+   "reason": null,
+   "seconds": 27.4,
+   "sha256": "32aabf5da649f01dec11abe3849faf860a6157b78e64ac6e6373425db0d7a7c9",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2023-1547": {
+   "by_status": {
+    "FOUND": 6
+   },
+   "callee_edges": 99,
+   "caller_edges": 10,
+   "go_version": "go1.26.10",
+   "nodes": 6,
+   "reason": null,
+   "seconds": 71.4,
+   "sha256": "06008d4c14da50e172a724d68c9286c8492292987cd07de86ea8030c0346effa",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2023-1578": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 31,
+    "NONE": 2,
+    "PACKAGE_NOT_IN_PROGRAM": 9
+   },
+   "callee_edges": 104,
+   "caller_edges": 50,
+   "go_version": "go1.26.10",
+   "nodes": 43,
+   "reason": null,
+   "seconds": 7.3,
+   "sha256": "9686aa57299bad5b7113ff3d41533d27367a63b014a8b6996bc86e1a19189b93",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2023-1602": {
+   "by_status": {
+    "FOUND": 8
+   },
+   "callee_edges": 27,
+   "caller_edges": 16,
+   "go_version": "go1.26.10",
+   "nodes": 8,
+   "reason": null,
+   "seconds": 9.1,
+   "sha256": "146d125e377cd7e881a8c7ee07c5ee0427d15be4c0e0c7294a9aa3eaa468bb85",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2023-1664": {
+   "by_status": {
+    "FOUND": 2
+   },
+   "callee_edges": 5,
+   "caller_edges": 2,
+   "go_version": "go1.26.10",
+   "nodes": 2,
+   "reason": null,
+   "seconds": 9.0,
+   "sha256": "be90d925bc4d39b5069199191840392f748fa1c61e6dc8b5ecc55efed22b9748",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2023-1872": {
+   "by_status": {
+    "ERROR PACKAGE_NOT_LOADED": 17
+   },
+   "callee_edges": 0,
+   "caller_edges": 0,
+   "go_version": "go1.26.10",
+   "nodes": 17,
+   "reason": null,
+   "seconds": 24.7,
+   "sha256": "375075668a463863a1a22ad4e58bfbc7b5b18dfd96d98257393c8051452e530e",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2023-2098": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 2,
+    "FOUND": 149,
+    "NONE": 13
+   },
+   "callee_edges": 1685,
+   "caller_edges": 400,
+   "go_version": "go1.26.10",
+   "nodes": 164,
+   "reason": null,
+   "seconds": 20.8,
+   "sha256": "68fe9e953b43bd585dd771d51cc5a54cdd70e5ba6106dd5c88c52d23e53eabc3",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2023-2116": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 14,
+    "FOUND": 71,
+    "NONE": 4,
+    "PACKAGE_NOT_IN_PROGRAM": 6
+   },
+   "callee_edges": 352,
+   "caller_edges": 92,
+   "go_version": "go1.26.10",
+   "nodes": 95,
+   "reason": null,
+   "seconds": 16.1,
+   "sha256": "4e369b93d550d2a1a31df0fc8493755a6f8a2c5d95fbce89e389e9f3e477e103",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2023-2328": {
+   "by_status": {
+    "FOUND": 2
+   },
+   "callee_edges": 7,
+   "caller_edges": 2,
+   "go_version": "go1.26.10",
+   "nodes": 2,
+   "reason": null,
+   "seconds": 7.9,
+   "sha256": "87ad8961089187e3abdd586b592d809dd6d920d3e2aab918a9ce27aa4ee34757",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2023-2386": {
+   "by_status": {
+    "FOUND": 4,
+    "PACKAGE_NOT_IN_PROGRAM": 1
+   },
+   "callee_edges": 5,
+   "caller_edges": 1,
+   "go_version": "go1.26.10",
+   "nodes": 5,
+   "reason": null,
+   "seconds": 5.5,
+   "sha256": "f84cbc258eec23ae1d2e4e7a368a9b6dcc4edec18cf04fa9fc313f57760265fa",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2023-2402": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 12
+   },
+   "callee_edges": 64,
+   "caller_edges": 40,
+   "go_version": "go1.26.10",
+   "nodes": 13,
+   "reason": null,
+   "seconds": 10.1,
+   "sha256": "dabe2170ac2e696c963dae7fd939243b54ca7e997086d9968e5a65ccb24d6b48",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2024-2538": {
+   "by_status": {
+    "ERROR PACKAGE_NOT_LOADED": 13,
+    "FOUND": 1
+   },
+   "callee_edges": 38,
+   "caller_edges": 1,
+   "go_version": "go1.26.10",
+   "nodes": 14,
+   "reason": null,
+   "seconds": 90.6,
+   "sha256": "cea89ed2e9c5672318e020ce1dea21d517a8cb9178d97d2c2b59f604965458c0",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2024-2671": {
+   "by_status": {
+    "ERROR PACKAGE_NOT_LOADED": 34,
+    "FOUND": 21,
+    "NONE": 3
+   },
+   "callee_edges": 283,
+   "caller_edges": 28,
+   "go_version": "go1.26.10",
+   "nodes": 58,
+   "reason": null,
+   "seconds": 79.7,
+   "sha256": "450c58f2fa7c5cc5f8181f82a915c95134e0adc2c3847d00fe76c75ce8a2bfe7",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2024-2842": {
+   "by_status": {
+    "ERROR PACKAGE_NOT_LOADED": 3,
+    "FOUND": 46,
+    "PACKAGE_NOT_IN_PROGRAM": 3
+   },
+   "callee_edges": 289,
+   "caller_edges": 165,
+   "go_version": "go1.26.10",
+   "nodes": 52,
+   "reason": null,
+   "seconds": 24.8,
+   "sha256": "143b1eceb6c9d8c06c3abe112660aa694b0632fece008bd466a894dc3d06139c",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2024-3112": {
+   "by_status": {
+    "FOUND": 15
+   },
+   "callee_edges": 118,
+   "caller_edges": 81,
+   "go_version": "go1.26.10",
+   "nodes": 15,
+   "reason": null,
+   "seconds": 34.4,
+   "sha256": "389b75dcf22f4bd999eaa1fd5d396deaaffdce1af195aa004d3c2d0902cbcf90",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2024-3124": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 118,
+    "NONE": 6,
+    "PACKAGE_NOT_IN_PROGRAM": 1
+   },
+   "callee_edges": 560,
+   "caller_edges": 275,
+   "go_version": "go1.26.10",
+   "nodes": 126,
+   "reason": null,
+   "seconds": 17.4,
+   "sha256": "f2c31458bf08f08e5972bf444b737a6629f6ff9363df982ce00247b23b294ce8",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2025-3476": {
+   "by_status": {
+    "FOUND": 4,
+    "PACKAGE_NOT_IN_PROGRAM": 1091
+   },
+   "callee_edges": 78,
+   "caller_edges": 10,
+   "go_version": "go1.26.10",
+   "nodes": 1095,
+   "reason": null,
+   "seconds": 88.7,
+   "sha256": "41d984c3cc5fb3fe6a62bd726df6b42c25d7ba1470ca74374bcde8e569ca69ea",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2025-3533": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 7
+   },
+   "callee_edges": 11,
+   "caller_edges": 8,
+   "go_version": "go1.26.10",
+   "nodes": 8,
+   "reason": null,
+   "seconds": 9.8,
+   "sha256": "d67fc870f083acfdb27a788c1ad81d32a4f7e95d3990a507c5ba66d3b0db772c",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2025-3600": {
+   "by_status": {
+    "FOUND": 8
+   },
+   "callee_edges": 138,
+   "caller_edges": 30,
+   "go_version": "go1.26.10",
+   "nodes": 8,
+   "reason": null,
+   "seconds": 13.1,
+   "sha256": "889a609bea796ed99923f03e83ae106d4e066c9f2d3b20b3143b769e315f1143",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2025-3748": {
+   "by_status": {
+    "FOUND": 2
+   },
+   "callee_edges": 3,
+   "caller_edges": 6,
+   "go_version": "go1.26.10",
+   "nodes": 2,
+   "reason": null,
+   "seconds": 5.4,
+   "sha256": "09d726fa498190e8ec55910de2cc4e26dcb2dd159402c5ee6e5534a9d68ecdf9",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2025-3764": {
+   "by_status": {
+    "FOUND": 3,
+    "NONE": 1
+   },
+   "callee_edges": 14,
+   "caller_edges": 16,
+   "go_version": "go1.26.10",
+   "nodes": 4,
+   "reason": null,
+   "seconds": 7.2,
+   "sha256": "318b0b64ecb0e070e066c1f7fe0961fc746b7d7bbde8a48d5479f7ed5c6bcb52",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2025-4017": {
+   "by_status": {
+    "FOUND": 1
+   },
+   "callee_edges": 4,
+   "caller_edges": 5,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 13.4,
+   "sha256": "b1a0b913ce3a710df966368f44b0a6625bb1e1d81ed25f0647c7db7a5b906aa5",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-4789": {
+   "by_status": {
+    "ERROR PACKAGE_NOT_LOADED": 4520,
+    "ERROR TARGET_NOT_FOUND": 96,
+    "FOUND": 146,
+    "NONE": 63,
+    "PACKAGE_NOT_IN_PROGRAM": 38
+   },
+   "callee_edges": 187,
+   "caller_edges": 146,
+   "go_version": "go1.26.10",
+   "nodes": 4863,
+   "reason": null,
+   "seconds": 135.1,
+   "sha256": "ff0cf08cfd36694f8f2ea91845e9c6220556c1806ea4088955b8d2fb0a8e6970",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-4942": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 3,
+    "FOUND": 142,
+    "NONE": 10
+   },
+   "callee_edges": 651,
+   "caller_edges": 670,
+   "go_version": "go1.26.10",
+   "nodes": 155,
+   "reason": null,
+   "seconds": 57.9,
+   "sha256": "29c7f2e23a907cbad9decc01cc0a55ec30be0b0a0718e3a8a0b7fe702a6f6746",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5051": {
+   "by_status": {
+    "FOUND": 21
+   },
+   "callee_edges": 103,
+   "caller_edges": 53,
+   "go_version": "go1.26.10",
+   "nodes": 21,
+   "reason": null,
+   "seconds": 7.4,
+   "sha256": "bfd8950cd889b2ecb7530b8a177b4d986c87633d8626301d6eca974144ace64d",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5052": {
+   "by_status": {
+    "FOUND": 1
+   },
+   "callee_edges": 2,
+   "caller_edges": 1,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 5.0,
+   "sha256": "252ca75f1a8334d74cc4f1e6302a03bd4e6d7d2088bdd57d91a948511a256489",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5069": {
+   "by_status": {
+    "FOUND": 45,
+    "NONE": 1
+   },
+   "callee_edges": 336,
+   "caller_edges": 64,
+   "go_version": "go1.26.10",
+   "nodes": 46,
+   "reason": null,
+   "seconds": 15.9,
+   "sha256": "140cab7e109c7c89e493b41dfe6a9cc34c1cdbadb554fc4d1396b711b8994734",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5073": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 82,
+    "NONE": 1
+   },
+   "callee_edges": 717,
+   "caller_edges": 942,
+   "go_version": "go1.26.10",
+   "nodes": 84,
+   "reason": null,
+   "seconds": 8.0,
+   "sha256": "908728fade4e9b10603f658690de7d99d2617bd6fcb6edc81873ca22cf039150",
+   "status": "READY",
+   "truncated": 1
+  },
+  "GO-2026-5208": {
+   "by_status": {
+    "FOUND": 1
+   },
+   "callee_edges": 0,
+   "caller_edges": 1,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 4.8,
+   "sha256": "d1c7b2bcb9cd0fd9bbb0e16b82c26d60467503b547fa549fbe21cd88e838bf9f",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5313": {
+   "by_status": {
+    "FOUND": 93,
+    "NONE": 5
+   },
+   "callee_edges": 614,
+   "caller_edges": 240,
+   "go_version": "go1.26.10",
+   "nodes": 98,
+   "reason": null,
+   "seconds": 58.8,
+   "sha256": "9449490f9cdde797b6edff5126e33da3953b070b99dc4d05d90837f5afdb663e",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5320": {
+   "by_status": {
+    "FOUND": 12
+   },
+   "callee_edges": 285,
+   "caller_edges": 18,
+   "go_version": "go1.26.10",
+   "nodes": 12,
+   "reason": null,
+   "seconds": 5.1,
+   "sha256": "f087d7d4fa0b21c31acf8e3ff6d1d79d2a5111a8f1a6bf418170227b56c56a50",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5380": {
+   "by_status": {
+    "FOUND": 93,
+    "NONE": 5
+   },
+   "callee_edges": 614,
+   "caller_edges": 240,
+   "go_version": "go1.26.10",
+   "nodes": 98,
+   "reason": null,
+   "seconds": 58.8,
+   "sha256": "25b5cf018d2c6693a7b27d5327067166e44ab58821e61b980691858efc4a891b",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5410": {
+   "by_status": {
+    "FOUND": 1
+   },
+   "callee_edges": 0,
+   "caller_edges": 1,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 9.3,
+   "sha256": "114552e1f0e1e3fbc1a1c8064543b0b0ba6ccb842b919095fe3ae9a7109fa345",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5427": {
+   "by_status": {
+    "FOUND": 106
+   },
+   "callee_edges": 1435,
+   "caller_edges": 349,
+   "go_version": "go1.26.10",
+   "nodes": 106,
+   "reason": null,
+   "seconds": 20.5,
+   "sha256": "b03e114738d8640bd9713be220b695d90a95cba8af446259c17ba2d69f933968",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5435": {
+   "by_status": {
+    "FOUND": 2
+   },
+   "callee_edges": 18,
+   "caller_edges": 7,
+   "go_version": "go1.26.10",
+   "nodes": 2,
+   "reason": null,
+   "seconds": 58.2,
+   "sha256": "230ff2ed0f9cae9a002507b48a39f38a8cf48f20a4d504e891be780c1253a43d",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5452": {
+   "by_status": {
+    "FOUND": 139,
+    "NONE": 19
+   },
+   "callee_edges": 1105,
+   "caller_edges": 490,
+   "go_version": "go1.26.10",
+   "nodes": 158,
+   "reason": null,
+   "seconds": 16.4,
+   "sha256": "913e00e7ddbef4c67a05a8579384c7da49eb3c898c3397566c3524c395633078",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5463": {
+   "by_status": {
+    "ERROR PACKAGE_NOT_LOADED": 10
+   },
+   "callee_edges": 0,
+   "caller_edges": 0,
+   "go_version": "go1.26.10",
+   "nodes": 10,
+   "reason": null,
+   "seconds": 11.8,
+   "sha256": "c9793653d2ead38d59a4f3ce9dd122c4e14a22fcec6ce40ba0d25bd92e29da8e",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5466": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 7
+   },
+   "callee_edges": 121,
+   "caller_edges": 25,
+   "go_version": "go1.26.10",
+   "nodes": 8,
+   "reason": null,
+   "seconds": 96.3,
+   "sha256": "50a8205ec684d0befe97cf37a6f0d7e61a5bbf5e67c2c7905f2edcd172d374f5",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5504": {
+   "by_status": {
+    "FOUND": 4
+   },
+   "callee_edges": 5,
+   "caller_edges": 6,
+   "go_version": "go1.26.10",
+   "nodes": 4,
+   "reason": null,
+   "seconds": 57.3,
+   "sha256": "7f062e9a0e2af2fde121e558eaebd1b8e43058a8f41eb4f459999c62f27d342b",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5506": {
+   "by_status": {
+    "FOUND": 10,
+    "NONE": 2,
+    "PACKAGE_NOT_IN_PROGRAM": 32
+   },
+   "callee_edges": 24,
+   "caller_edges": 43,
+   "go_version": "go1.26.10",
+   "nodes": 44,
+   "reason": null,
+   "seconds": 17.0,
+   "sha256": "9123a7f725cb1d399098eafe6f2f528780c6df7d8c45133ea107c480ca0c6fe2",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5525": {
+   "by_status": {
+    "FOUND": 110,
+    "NONE": 17
+   },
+   "callee_edges": 870,
+   "caller_edges": 300,
+   "go_version": "go1.26.10",
+   "nodes": 127,
+   "reason": null,
+   "seconds": 20.1,
+   "sha256": "5fb5b9039503f88697c5237f533b7a0dfa916a092ed6f1f38c343e4bc09c65d3",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5529": {
+   "by_status": {
+    "FOUND": 12
+   },
+   "callee_edges": 455,
+   "caller_edges": 22,
+   "go_version": "go1.26.10",
+   "nodes": 12,
+   "reason": null,
+   "seconds": 44.6,
+   "sha256": "4d48be8425b9ee3c22097dc2f3f1fcb7b4b49368796f91f69146f00b65503b87",
+   "status": "READY",
+   "truncated": 1
+  },
+  "GO-2026-5543": {
+   "by_status": {
+    "FOUND": 1
+   },
+   "callee_edges": 0,
+   "caller_edges": 3,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 7.7,
+   "sha256": "abb2dbfb605b4efc339c6078f7b73941f016393d1ea6c68cbe18704dd5172241",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5548": {
+   "by_status": {
+    "FOUND": 18
+   },
+   "callee_edges": 189,
+   "caller_edges": 36,
+   "go_version": "go1.26.10",
+   "nodes": 18,
+   "reason": null,
+   "seconds": 39.9,
+   "sha256": "b179711e1d9daeedfcd7a4903d7b253a598739bafa52079a3b617644980b5e04",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5566": {
+   "by_status": {
+    "FOUND": 13
+   },
+   "callee_edges": 75,
+   "caller_edges": 27,
+   "go_version": "go1.26.10",
+   "nodes": 13,
+   "reason": null,
+   "seconds": 64.3,
+   "sha256": "b6e2b4e332ba8553b2ddeca41c6e129717d092b057c2a447ba54699063835c39",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5569": {
+   "by_status": {
+    "FOUND": 12
+   },
+   "callee_edges": 216,
+   "caller_edges": 31,
+   "go_version": "go1.26.10",
+   "nodes": 12,
+   "reason": null,
+   "seconds": 52.6,
+   "sha256": "eda21790eb7ce2ea5fa58223256a060d59b23e2f97a2b3a64e614e2707ffdc57",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5596": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 31
+   },
+   "callee_edges": 639,
+   "caller_edges": 79,
+   "go_version": "go1.26.10",
+   "nodes": 32,
+   "reason": null,
+   "seconds": 91.4,
+   "sha256": "fbacfa8aeb8ef412e7f3e8b782d2facdd892203245cffb8ce55cd6fb1370b918",
+   "status": "READY",
+   "truncated": 1
+  },
+  "GO-2026-5606": {
+   "by_status": {
+    "FOUND": 11
+   },
+   "callee_edges": 36,
+   "caller_edges": 18,
+   "go_version": "go1.26.10",
+   "nodes": 11,
+   "reason": null,
+   "seconds": 48.5,
+   "sha256": "325c8673bfd8dca9ecc21d8d6203e435d6338eb76bf17bce7776cad9edd9c4bd",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5665": {
+   "by_status": {
+    "FOUND": 106
+   },
+   "callee_edges": 1435,
+   "caller_edges": 349,
+   "go_version": "go1.26.10",
+   "nodes": 106,
+   "reason": null,
+   "seconds": 20.5,
+   "sha256": "61ac64b5267a37c11821367e53cc36a6ad47581ad3f6a12eac159940cb5da335",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5666": {
+   "by_status": {
+    "FOUND": 13
+   },
+   "callee_edges": 75,
+   "caller_edges": 27,
+   "go_version": "go1.26.10",
+   "nodes": 13,
+   "reason": null,
+   "seconds": 64.3,
+   "sha256": "9523f88e64302587cb69d9fe4ba0837146892fdaf8326f9d3e280d0e97b94c06",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5676": {
+   "by_status": {
+    "FOUND": 3
+   },
+   "callee_edges": 4,
+   "caller_edges": 5,
+   "go_version": "go1.26.10",
+   "nodes": 3,
+   "reason": null,
+   "seconds": 12.7,
+   "sha256": "5b0c98478758b96065464f9ac03b69c58517cb1a89cddf5d0359c32e62b6bd84",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5681": {
+   "by_status": {
+    "FOUND": 93,
+    "NONE": 5
+   },
+   "callee_edges": 614,
+   "caller_edges": 240,
+   "go_version": "go1.26.10",
+   "nodes": 98,
+   "reason": null,
+   "seconds": 58.8,
+   "sha256": "2dbe4ca85f756bd77e753f7e34d33d2714c168b6ec21c152fc673c3b71b80afa",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5699": {
+   "by_status": {
+    "FOUND": 106
+   },
+   "callee_edges": 1435,
+   "caller_edges": 349,
+   "go_version": "go1.26.10",
+   "nodes": 106,
+   "reason": null,
+   "seconds": 20.5,
+   "sha256": "d2ea7728412eb0810f6ab68d0f40f3965637244558d8dc9eaddd48cf811c31b2",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5713": {
+   "by_status": {
+    "FOUND": 106
+   },
+   "callee_edges": 1435,
+   "caller_edges": 349,
+   "go_version": "go1.26.10",
+   "nodes": 106,
+   "reason": null,
+   "seconds": 20.5,
+   "sha256": "169472cc0b6a6d8e78efe34f8314a8468e86b9b07981904a5ffdc0050bd87da5",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5740": {
+   "by_status": {
+    "FOUND": 83,
+    "NONE": 9
+   },
+   "callee_edges": 648,
+   "caller_edges": 227,
+   "go_version": "go1.26.10",
+   "nodes": 92,
+   "reason": null,
+   "seconds": 44.9,
+   "sha256": "e9a9c4cc4b3396aa361be8ef6c2bd2ec00e3e1079ee41cf314a9d87d731301ef",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5748": {
+   "by_status": {
+    "ERROR PACKAGE_NOT_LOADED": 6,
+    "PACKAGE_NOT_IN_PROGRAM": 3
+   },
+   "callee_edges": 0,
+   "caller_edges": 0,
+   "go_version": "go1.26.10",
+   "nodes": 9,
+   "reason": null,
+   "seconds": 27.3,
+   "sha256": "efd3ed4e922271e6ae13d79f8c855a05abd1310cd1660b005a8f9204eac1b9cb",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5841": {
+   "by_status": {
+    "NONE": 1
+   },
+   "callee_edges": 0,
+   "caller_edges": 0,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 9.9,
+   "sha256": "1d286c163b1b184832b0bd43c50a9cfde327c36dc31a65e6389c848d80957d9d",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5879": {
+   "by_status": {
+    "FOUND": 19,
+    "NONE": 1
+   },
+   "callee_edges": 53,
+   "caller_edges": 53,
+   "go_version": "go1.26.10",
+   "nodes": 20,
+   "reason": null,
+   "seconds": 8.1,
+   "sha256": "3be904e521275d5c1cfd2272f7c03cce0e7cb3fd1533855b525d518c71ee1811",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5880": {
+   "by_status": {
+    "FOUND": 7
+   },
+   "callee_edges": 12,
+   "caller_edges": 13,
+   "go_version": "go1.26.10",
+   "nodes": 7,
+   "reason": null,
+   "seconds": 8.5,
+   "sha256": "453095fa56736aa05e8643e1d105a1302f791c87711ca14b42433984f4b5de37",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5882": {
+   "by_status": {
+    "FOUND": 19,
+    "NONE": 1
+   },
+   "callee_edges": 53,
+   "caller_edges": 53,
+   "go_version": "go1.26.10",
+   "nodes": 20,
+   "reason": null,
+   "seconds": 8.1,
+   "sha256": "5d347b514774a99913583fded4fff9416b11fb746190e572174cd4b78b176150",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5884": {
+   "by_status": {
+    "FOUND": 19,
+    "NONE": 1
+   },
+   "callee_edges": 53,
+   "caller_edges": 53,
+   "go_version": "go1.26.10",
+   "nodes": 20,
+   "reason": null,
+   "seconds": 8.1,
+   "sha256": "d7f0e7e4cb721ffa7f8c5796d8dc8dcb9b37fdfcd8b6cfe502e68db433e8cc7d",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5885": {
+   "by_status": {
+    "FOUND": 19,
+    "NONE": 1
+   },
+   "callee_edges": 53,
+   "caller_edges": 53,
+   "go_version": "go1.26.10",
+   "nodes": 20,
+   "reason": null,
+   "seconds": 8.1,
+   "sha256": "34d14f27a60465fa708446f6673860c2181f78b779c0e5388406e63c175fcd4c",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5954": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 101,
+    "NONE": 84
+   },
+   "callee_edges": 951,
+   "caller_edges": 129,
+   "go_version": "go1.26.10",
+   "nodes": 186,
+   "reason": null,
+   "seconds": 19.9,
+   "sha256": "c21768d004619da62cff92b5fcbdbacdfbf52b1524089fa927cda913ace3a542",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5955": {
+   "by_status": {
+    "FOUND": 75,
+    "NONE": 1
+   },
+   "callee_edges": 1055,
+   "caller_edges": 156,
+   "go_version": "go1.26.10",
+   "nodes": 76,
+   "reason": null,
+   "seconds": 19.7,
+   "sha256": "cc68c2072e41fa879e7b96d3fd0b3a7c0e87edcac765cb7388a99054d45fb18e",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5960": {
+   "by_status": {
+    "FOUND": 112
+   },
+   "callee_edges": 789,
+   "caller_edges": 477,
+   "go_version": "go1.26.10",
+   "nodes": 112,
+   "reason": null,
+   "seconds": 8.9,
+   "sha256": "9c37eff4d8db618799490070a0844d3d9a120beb4df906e6677c16e24fdc97e2",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5971": {
+   "by_status": {
+    "FOUND": 106
+   },
+   "callee_edges": 1435,
+   "caller_edges": 349,
+   "go_version": "go1.26.10",
+   "nodes": 106,
+   "reason": null,
+   "seconds": 20.5,
+   "sha256": "5ae06554a7bdc11d7b369987239f11dbffd4c3546fe56fccd9ba235f323301c5",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5983": {
+   "by_status": {
+    "ERROR PACKAGE_NOT_LOADED": 54,
+    "ERROR TARGET_NOT_FOUND": 3,
+    "FOUND": 55,
+    "NONE": 4
+   },
+   "callee_edges": 205,
+   "caller_edges": 96,
+   "go_version": "go1.26.10",
+   "nodes": 116,
+   "reason": null,
+   "seconds": 226.3,
+   "sha256": "c96efa62b0bf64e2d9859b273d4ddb419c89e66acd0ae9c0b3bb3639656af0e9",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5987": {
+   "by_status": {
+    "FOUND": 17
+   },
+   "callee_edges": 125,
+   "caller_edges": 29,
+   "go_version": "go1.26.10",
+   "nodes": 17,
+   "reason": null,
+   "seconds": 31.7,
+   "sha256": "51d85a10336447447efa7aac7114c2b73bbe4a6398e9c559d5291772cbf93725",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-5989": {
+   "by_status": {
+    "FOUND": 17
+   },
+   "callee_edges": 125,
+   "caller_edges": 29,
+   "go_version": "go1.26.10",
+   "nodes": 17,
+   "reason": null,
+   "seconds": 31.7,
+   "sha256": "7557d7b06fa93490938e31633fa836774344ba3740123315f75979b230b5df23",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6061": {
+   "by_status": {
+    "FOUND": 31
+   },
+   "callee_edges": 209,
+   "caller_edges": 71,
+   "go_version": "go1.26.10",
+   "nodes": 31,
+   "reason": null,
+   "seconds": 60.8,
+   "sha256": "1e108eed950cdd6ce0f38dd473dacd5dafa4f4977add1b5d1f76313937e333fc",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6095": {
+   "by_status": {
+    "FOUND": 5
+   },
+   "callee_edges": 20,
+   "caller_edges": 8,
+   "go_version": "go1.26.10",
+   "nodes": 5,
+   "reason": null,
+   "seconds": 10.5,
+   "sha256": "fd671872aaf353d5fd0a3631f8b54a13102cbeaf98341601a8438414e2e3e846",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6112": {
+   "by_status": {
+    "FOUND": 5
+   },
+   "callee_edges": 20,
+   "caller_edges": 8,
+   "go_version": "go1.26.10",
+   "nodes": 5,
+   "reason": null,
+   "seconds": 10.5,
+   "sha256": "0ee3a2459a3ef1cf87aa2014715d913cb96dfdd3cc02ed8a1df399660fc60102",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6114": {
+   "by_status": {
+    "FOUND": 6
+   },
+   "callee_edges": 55,
+   "caller_edges": 7,
+   "go_version": "go1.26.10",
+   "nodes": 6,
+   "reason": null,
+   "seconds": 26.4,
+   "sha256": "6cc7ec64b3f812d8a0610d80988aa3218d005a678e95af56e2791a5c083da8e3",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6138": {
+   "by_status": {
+    "FOUND": 6
+   },
+   "callee_edges": 30,
+   "caller_edges": 12,
+   "go_version": "go1.26.10",
+   "nodes": 6,
+   "reason": null,
+   "seconds": 69.1,
+   "sha256": "7741f45c88704895a56a81e60c65b9cd175b8fe37d32741461368ffea32e134c",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6139": {
+   "by_status": {
+    "FOUND": 12
+   },
+   "callee_edges": 47,
+   "caller_edges": 12,
+   "go_version": "go1.26.10",
+   "nodes": 12,
+   "reason": null,
+   "seconds": 24.5,
+   "sha256": "8c106a0fb5abe4a6d76cefd5da602d1e50f17810802965ef624519def54d492f",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6163": {
+   "reason": "no usable release range",
+   "sha256": null,
+   "status": "NO_RANGE"
+  },
+  "GO-2026-6165": {
+   "by_status": {
+    "FOUND": 1
+   },
+   "callee_edges": 2,
+   "caller_edges": 1,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 6.8,
+   "sha256": "b0f80199536d4ce1d7ab0e87d917e6d21af75b8588513805589e432bad78550e",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6181": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 22,
+    "FOUND": 259,
+    "NONE": 2
+   },
+   "callee_edges": 7484,
+   "caller_edges": 2024,
+   "go_version": "go1.26.10",
+   "nodes": 283,
+   "reason": null,
+   "seconds": 97.7,
+   "sha256": "cab7a75086fda3caef50d2efa4bee6eb9eddcee195f22e0bfd8aa0251b903ef8",
+   "status": "READY",
+   "truncated": 17
+  },
+  "GO-2026-6182": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 22,
+    "FOUND": 259,
+    "NONE": 2
+   },
+   "callee_edges": 7484,
+   "caller_edges": 2024,
+   "go_version": "go1.26.10",
+   "nodes": 283,
+   "reason": null,
+   "seconds": 97.7,
+   "sha256": "9b15d479088eb63e35a6f228cb14d0701c1dd88976dd7c0965eab52026c3dedc",
+   "status": "READY",
+   "truncated": 17
+  },
+  "GO-2026-6183": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 22,
+    "FOUND": 259,
+    "NONE": 2
+   },
+   "callee_edges": 7484,
+   "caller_edges": 2024,
+   "go_version": "go1.26.10",
+   "nodes": 283,
+   "reason": null,
+   "seconds": 97.7,
+   "sha256": "7e0f92d0b82663f460c1d5f3f772e3bcb1ddfe7645dddf704f63fb83908f8a01",
+   "status": "READY",
+   "truncated": 17
+  },
+  "GO-2026-6184": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 22,
+    "FOUND": 259,
+    "NONE": 2
+   },
+   "callee_edges": 7484,
+   "caller_edges": 2024,
+   "go_version": "go1.26.10",
+   "nodes": 283,
+   "reason": null,
+   "seconds": 97.7,
+   "sha256": "3d6d9e00bf2c6b2dfdba5549e8944d07d8980de18697d162fdb5735abc2917d6",
+   "status": "READY",
+   "truncated": 17
+  },
+  "GO-2026-6185": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 3,
+    "FOUND": 40,
+    "NONE": 1
+   },
+   "callee_edges": 771,
+   "caller_edges": 338,
+   "go_version": "go1.26.10",
+   "nodes": 44,
+   "reason": null,
+   "seconds": 71.3,
+   "sha256": "be06385f17a40853652ad3b652d6fb977dc48b407aeea8da67f01a73dfb4e6eb",
+   "status": "READY",
+   "truncated": 1
+  },
+  "GO-2026-6186": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 22,
+    "FOUND": 259,
+    "NONE": 2
+   },
+   "callee_edges": 7484,
+   "caller_edges": 2024,
+   "go_version": "go1.26.10",
+   "nodes": 283,
+   "reason": null,
+   "seconds": 97.7,
+   "sha256": "3f2cf07971bfdd67b04c9c7b748dbbe2562a5ac7ef7a316d8d4aff7afc49b8a7",
+   "status": "READY",
+   "truncated": 17
+  },
+  "GO-2026-6187": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 22,
+    "FOUND": 259,
+    "NONE": 2
+   },
+   "callee_edges": 7484,
+   "caller_edges": 2024,
+   "go_version": "go1.26.10",
+   "nodes": 283,
+   "reason": null,
+   "seconds": 97.7,
+   "sha256": "79591c3e60c6a356389dea473afc6667ea59525fb331ac266b15f4bba74c7b6f",
+   "status": "READY",
+   "truncated": 17
+  },
+  "GO-2026-6188": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 22,
+    "FOUND": 259,
+    "NONE": 2
+   },
+   "callee_edges": 7484,
+   "caller_edges": 2024,
+   "go_version": "go1.26.10",
+   "nodes": 283,
+   "reason": null,
+   "seconds": 97.7,
+   "sha256": "7b9fbc416d3505c93f11fd1f0c3c9e0d598a4b89d104b562c2a48243146603f1",
+   "status": "READY",
+   "truncated": 17
+  },
+  "GO-2026-6189": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 3,
+    "FOUND": 40,
+    "NONE": 1
+   },
+   "callee_edges": 771,
+   "caller_edges": 338,
+   "go_version": "go1.26.10",
+   "nodes": 44,
+   "reason": null,
+   "seconds": 71.3,
+   "sha256": "6e13ca1d1be3f9d46a1f548288dfc18a742bc463add6dd4aa1d30d84a444175e",
+   "status": "READY",
+   "truncated": 1
+  },
+  "GO-2026-6190": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 3,
+    "FOUND": 40,
+    "NONE": 1
+   },
+   "callee_edges": 771,
+   "caller_edges": 338,
+   "go_version": "go1.26.10",
+   "nodes": 44,
+   "reason": null,
+   "seconds": 71.3,
+   "sha256": "2334686ed4efcb71aca34a1f3ef96b3ac7f3c57860aa945b6e48f037e575c6cc",
+   "status": "READY",
+   "truncated": 1
+  },
+  "GO-2026-6191": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 3,
+    "FOUND": 40,
+    "NONE": 1
+   },
+   "callee_edges": 771,
+   "caller_edges": 338,
+   "go_version": "go1.26.10",
+   "nodes": 44,
+   "reason": null,
+   "seconds": 71.3,
+   "sha256": "36d92a9c707d11f908daae64ccf7838b37762cdff01a80978bfe0a8d21578cd8",
+   "status": "READY",
+   "truncated": 1
+  },
+  "GO-2026-6195": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 3,
+    "FOUND": 40,
+    "NONE": 1
+   },
+   "callee_edges": 771,
+   "caller_edges": 338,
+   "go_version": "go1.26.10",
+   "nodes": 44,
+   "reason": null,
+   "seconds": 71.3,
+   "sha256": "c0a066a57aba97a93bd9bea21d3bc1116dd14df429306824267f35837f92fae0",
+   "status": "READY",
+   "truncated": 1
+  },
+  "GO-2026-6197": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 22,
+    "FOUND": 259,
+    "NONE": 2
+   },
+   "callee_edges": 7484,
+   "caller_edges": 2024,
+   "go_version": "go1.26.10",
+   "nodes": 283,
+   "reason": null,
+   "seconds": 97.7,
+   "sha256": "0759d3c08b936252e0f519b7f953d32255f11349776aba5d99c26c4e37ae5c05",
+   "status": "READY",
+   "truncated": 17
+  },
+  "GO-2026-6199": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 22,
+    "FOUND": 259,
+    "NONE": 2
+   },
+   "callee_edges": 7484,
+   "caller_edges": 2024,
+   "go_version": "go1.26.10",
+   "nodes": 283,
+   "reason": null,
+   "seconds": 97.7,
+   "sha256": "267eb124f41667fbf38f1161cdf87f1f9c50cdaddae7d77cd5e71740443aa5a4",
+   "status": "READY",
+   "truncated": 17
+  },
+  "GO-2026-6213": {
+   "by_status": {
+    "FOUND": 20,
+    "NONE": 1
+   },
+   "callee_edges": 71,
+   "caller_edges": 26,
+   "go_version": "go1.26.10",
+   "nodes": 21,
+   "reason": null,
+   "seconds": 15.0,
+   "sha256": "92dba4fb54e9306cd12300ef7d06c0301fc9799d6d3e0d55233b1ff71e66a88a",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6234": {
+   "by_status": {
+    "FOUND": 2
+   },
+   "callee_edges": 2,
+   "caller_edges": 15,
+   "go_version": "go1.26.10",
+   "nodes": 2,
+   "reason": null,
+   "seconds": 22.4,
+   "sha256": "4b3075ce9d6c532b3f1dbe18126d9625231fc3c57c5cd02d22f162160c61d7b9",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6237": {
+   "by_status": {
+    "FOUND": 1
+   },
+   "callee_edges": 9,
+   "caller_edges": 1,
+   "go_version": "go1.26.10",
+   "nodes": 1,
+   "reason": null,
+   "seconds": 6.8,
+   "sha256": "546648e0ab3cce12301bc7a82d3a519cec7956170ebd8a09e9e79753f87e25ad",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6238": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 2,
+    "FOUND": 119,
+    "NONE": 2
+   },
+   "callee_edges": 737,
+   "caller_edges": 362,
+   "go_version": "go1.26.10",
+   "nodes": 123,
+   "reason": null,
+   "seconds": 8.1,
+   "sha256": "83c68e1b8f6ebb47febf013a6f5159ccfd4c97390f7d680f3d075994170bbc3b",
+   "status": "READY",
+   "truncated": 1
+  },
+  "GO-2026-6302": {
+   "by_status": {
+    "FOUND": 11,
+    "NONE": 4
+   },
+   "callee_edges": 221,
+   "caller_edges": 13,
+   "go_version": "go1.26.10",
+   "nodes": 15,
+   "reason": null,
+   "seconds": 65.8,
+   "sha256": "8034f14295e66c8c437512250442af940682f9d6aa7f010aabf8115d50ffef2a",
+   "status": "READY",
+   "truncated": 1
+  },
+  "GO-2026-6348": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 8
+   },
+   "callee_edges": 64,
+   "caller_edges": 22,
+   "go_version": "go1.26.10",
+   "nodes": 9,
+   "reason": null,
+   "seconds": 57.1,
+   "sha256": "98f25088593602bf0d6a4a80dc05c65d63580a89fee8c9d03a00ad60d9a2b091",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6366": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 1,
+    "FOUND": 642,
+    "NONE": 7
+   },
+   "callee_edges": 3582,
+   "caller_edges": 1867,
+   "go_version": "go1.26.10",
+   "nodes": 650,
+   "reason": null,
+   "seconds": 96.9,
+   "sha256": "dcd4c88e3577b1ded6d8831e5e3686c159763ad02a460b9cd856b9dd751876b9",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6452": {
+   "by_status": {
+    "FOUND": 112
+   },
+   "callee_edges": 789,
+   "caller_edges": 477,
+   "go_version": "go1.26.10",
+   "nodes": 112,
+   "reason": null,
+   "seconds": 8.9,
+   "sha256": "650b10da82545fcf8a08c81552fee5d289abb4d195a002403c3ed40f22bb99e0",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6453": {
+   "by_status": {
+    "FOUND": 112
+   },
+   "callee_edges": 789,
+   "caller_edges": 477,
+   "go_version": "go1.26.10",
+   "nodes": 112,
+   "reason": null,
+   "seconds": 8.9,
+   "sha256": "9e4a7bc1fd93af5976311ae6847288efe32e0b95bfa1bcd4a35ac4e80344c09d",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6489": {
+   "by_status": {
+    "FOUND": 24
+   },
+   "callee_edges": 365,
+   "caller_edges": 62,
+   "go_version": "go1.26.10",
+   "nodes": 24,
+   "reason": null,
+   "seconds": 41.0,
+   "sha256": "c0dd3b9286c1b38b88b634841be27ff1e36a00ac67ce67ea4cb837d42f63cddc",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6512": {
+   "by_status": {
+    "FOUND": 23,
+    "NONE": 1
+   },
+   "callee_edges": 319,
+   "caller_edges": 48,
+   "go_version": "go1.26.10",
+   "nodes": 24,
+   "reason": null,
+   "seconds": 49.4,
+   "sha256": "c3d0e074722be9dfbce4402fc521310ad22958bac2ac06b36646246283522e9e",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6535": {
+   "reason": "no usable release range",
+   "sha256": null,
+   "status": "NO_RANGE"
+  },
+  "GO-2026-6665": {
+   "by_status": {
+    "ERROR TARGET_NOT_FOUND": 4,
+    "FOUND": 114
+   },
+   "callee_edges": 1203,
+   "caller_edges": 305,
+   "go_version": "go1.26.10",
+   "nodes": 118,
+   "reason": null,
+   "seconds": 29.7,
+   "sha256": "2fa53c27e0139d2cddf89fc8e02711c6c0b211342f986d996715a8db800e9e1d",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6684": {
+   "by_status": {
+    "FOUND": 56
+   },
+   "callee_edges": 364,
+   "caller_edges": 129,
+   "go_version": "go1.26.10",
+   "nodes": 56,
+   "reason": null,
+   "seconds": 8.3,
+   "sha256": "432b37f8e6a63e0d72345955add91b691434066325bc7121bd609a09aeaa238b",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6685": {
+   "by_status": {
+    "FOUND": 68
+   },
+   "callee_edges": 412,
+   "caller_edges": 143,
+   "go_version": "go1.26.10",
+   "nodes": 68,
+   "reason": null,
+   "seconds": 8.8,
+   "sha256": "2feb24e98d30c13bf35b23b9812f29b0f3c192bd76f01ff9495e389e4584f503",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6686": {
+   "by_status": {
+    "FOUND": 11
+   },
+   "callee_edges": 16,
+   "caller_edges": 18,
+   "go_version": "go1.26.10",
+   "nodes": 11,
+   "reason": null,
+   "seconds": 3.2,
+   "sha256": "d108fd909e6d7abeb740f5e07991906b44d978f015c541c78e7a0cd4bca4199c",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6687": {
+   "by_status": {
+    "FOUND": 66
+   },
+   "callee_edges": 405,
+   "caller_edges": 141,
+   "go_version": "go1.26.10",
+   "nodes": 66,
+   "reason": null,
+   "seconds": 8.3,
+   "sha256": "2ee59bab54b0b31cd9bb19482799eb530ffba6a41a9835ce9c09e9b2f2c9c596",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6689": {
+   "by_status": {
+    "FOUND": 46
+   },
+   "callee_edges": 311,
+   "caller_edges": 108,
+   "go_version": "go1.26.10",
+   "nodes": 46,
+   "reason": null,
+   "seconds": 8.8,
+   "sha256": "816bc95ea99bb418e0e42113366d01dfe60c31ded1982560f058c617c0626161",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6695": {
+   "by_status": {
+    "FOUND": 71
+   },
+   "callee_edges": 422,
+   "caller_edges": 154,
+   "go_version": "go1.26.10",
+   "nodes": 71,
+   "reason": null,
+   "seconds": 8.7,
+   "sha256": "f11c0c57a4fd2370912c190544badd724945c282a137311265b6765f124e04b0",
+   "status": "READY",
+   "truncated": 0
+  },
+  "GO-2026-6700": {
+   "by_status": {
+    "FOUND": 15
+   },
+   "callee_edges": 125,
+   "caller_edges": 23,
+   "go_version": "go1.26.10",
+   "nodes": 15,
+   "reason": null,
+   "seconds": 6.9,
+   "sha256": "246056deae6e83ddf8b989af4fdcd87e0a8a0d6c4db02dbf71bb99b44188f514",
+   "status": "READY",
+   "truncated": 0
+  }
+ },
+ "graph_status_counts": {
+  "NO_RANGE": 2,
+  "READY": 118
+ },
+ "schema_version": "1.0",
+ "settings": {
+  "diff_store_cap": 30000,
+  "graph": "helper VTA call graph, library mode, module at the range's `from` commit; only candidates of the vulnerable release (side OLD or BOTH) are nodes",
+  "hops": 1,
+  "neighbour_max_results": 200
+ }
+}
