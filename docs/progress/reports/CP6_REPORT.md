@@ -107,7 +107,7 @@ Results session:
 - `python -m vulntrace results render --doc cp6 --input docs/results/cp6 --out docs/results/CP6_AGENT_RESULTS.md` → `wrote docs/results/CP6_AGENT_RESULTS.md`.
 - `unzip -tq cp6_results_3.zip` → `No errors detected in compressed data`. Checked by script: 4 arm files, `dry_run: false`, `counts.run` = 118 in each, 118 traces in each of the 4 trace folders, each JSON under 512 KiB (largest 153 KB), `repo_commit` 6f08c26 and `repo_dirty` false in all four, prompt sha256 `98856e73...` in all four, `evidence_vs_committed`: commit diffs 118 same / 0 different, graph 118 same / 0 different. `src/` and `notebooks/` have no diff between `6f08c26` (the commit the Colab ran) and the first commit of this session.
 - `dataset materialize --set d4` (this session, for function names) → `D4 materialize: 120 cases in 1983.9s; actions {'built': 94, 'reused': 26}; status counts {'AVAILABLE': 104, 'TRUNCATED': 14, 'EMPTY': 2} (case list: {'AVAILABLE': 104, 'EMPTY': 2, 'TRUNCATED': 14}); 0 case(s) differ`.
-- CI (GitHub Actions, via the GitHub MCP): run 93 (`564e494`) success, run 94 (`1033a34`) success; run 95 (`94ab486`) was in progress when this section was written, see section 10 for its final state.
+- CI (GitHub Actions, via the GitHub MCP): run 93 (`564e494`) success, run 94 (`1033a34`) success; run 95 (`94ab486`) was still in progress when last checked; see section 10.
 ## 5. Acceptance criteria
 
 | # | Criterion | Status | Evidence |
@@ -229,7 +229,11 @@ INVALID_ANSWER 0, server ERROR 0 in all four files. Every problem code behind ll
 Branch `claude/vulntrace-ai-build-1wfa8e` (results session; fast-forwarded onto `claude/gracious-carson-ch1i9r` at `0f4310c` first, then continued). All pushes of this session succeeded (`git push`, no errors).
 
 ```
-@@GITLOG@@
+ddd57cb CP6: report with the real results, STATUS AWAITING_REVIEW
+94ab486 CP6: failure analysis (18 wrong cases read from the Colab traces, 2 worked traces) and two renderer tables (A3 vs A2 split)
+1033a34 CP6: commit the owner's Colab results (4 arm files, colab_run, evidence summary, D4 materialize log) and render the results document
+564e494 CP6: results session starts - STATUS records branch claude/vulntrace-ai-build-1wfa8e (continues claude/gracious-carson-ch1i9r)
+(plus the commit that adds this git section)
 ```
 
-CI: @@CI@@
+CI: run 93 (`564e494`) and run 94 (`1033a34`) succeeded. **Not confirmed:** run 95 (`94ab486`, failure analysis and renderer tables) was still `in_progress` when last checked, and runs for `ddd57cb` and the final commit had not appeared. The same tests passed locally (`740 passed, 12 skipped`, section 4), but a green CI for the last commits is unverified; the supervisor should check it.
