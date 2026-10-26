@@ -13,7 +13,7 @@ Reachability only: every verdict here says whether a function can be reached in 
 ## 1. Fixtures (D2, truth by construction)
 
 - Command: `python -m vulntrace eval triage --set fixtures`
-- Repository commit: `c7383b4` (dirty: False)
+- Repository commit: `ed46380` (dirty: False)
 - OS: Linux-6.18.44-fc-v153-x86_64-with-glibc2.39; Python 3.13.17; Go: go version go1.24.7 linux/amd64
 
 Each of the 22 fixture cases is one main package and one target symbol whose truth is set by construction (CP1/CP2). TARGETS analyses that symbol directly. FIX and RELEASE use synthetic advisories built by `eval/triage_fixtures.py`: a throw-away git repository whose `v1.0.0` is the committed fixture module, a decoy commit that changes `vulnlib.Safe` and a fix commit that changes the target. The analysed app is the committed fixture module itself, restricted to the case's main package.
@@ -116,7 +116,7 @@ Every fixture verdict validated against `schemas/verdict.schema.json`.
 ## 2. D1 (Mode 1 on real fix commits)
 
 - Command: `python -m vulntrace eval triage --set d1 --jobs 2 --rerun --stability 10 --example GO-2020-0023`
-- Repository commit: `13d9c07` (dirty: False)
+- Repository commit: `2eb9a7b` (dirty: False)
 - OS: Linux-6.18.44-fc-v153-x86_64-with-glibc2.39; Python 3.13.17; Go: go version go1.24.7 linux/amd64
 
 These cases have no reachability truth: the app is the vulnerable module itself, at its vulnerable commit, with its own main packages as entry points. The numbers below are distributions, coverage and reasons, not accuracy.
@@ -138,35 +138,35 @@ These cases have no reachability truth: the app is the vulnerable module itself,
 CANT_DETERMINE reasons (final): APP_LOAD_FAILED 65, UNSUPPORTED_TARGET 26, ANALYSIS_FAILED 13, INCOMPLETE_COVERAGE 6, NO_FIX_EVIDENCE 4, METHOD_DISAGREEMENT 1, VERIFIER_REJECTED 1.
 CANT_DETERMINE reasons (before policy): APP_LOAD_FAILED 65, UNSUPPORTED_TARGET 26, ANALYSIS_FAILED 13, INCOMPLETE_COVERAGE 6, NO_FIX_EVIDENCE 4, METHOD_DISAGREEMENT 1, VERIFIER_REJECTED 1.
 
-- Per (symbol, main package) entries: NOT_REACHABLE 884, CANT_DETERMINE 358, REACHABLE 266.
-- Method result pairs (VTA + linker): NO_PATH+ABSENT 888, ERROR+ERROR 308, PATH_FOUND+PRESENT 266, NO_PATH+PRESENT 30, PATH_FOUND+ABSENT 13, PATH_FOUND+ERROR 2, ERROR+PRESENT 1.
+- Per (symbol, main package) entries: NOT_REACHABLE 884, CANT_DETERMINE 345, REACHABLE 279.
+- Method result pairs (VTA + linker): NO_PATH+ABSENT 888, ERROR+ERROR 308, PATH_FOUND+PRESENT 279, NO_PATH+PRESENT 30, PATH_FOUND+ERROR 2, ERROR+PRESENT 1.
 - Method error codes: BUILD_FAILED 310, LOAD_FAILED 288, TYPE_ERRORS 20, TARGET_NOT_FOUND 1.
-- Verifier: 12758 checks; 4 entries downgraded in 1 cases; failed checks by kind: TARGET_EXISTS 4.
-- REACHABLE verdicts without a verified path: 0; DYNAMIC edges on verified paths: 592.
+- Verifier: 12874 checks; 4 entries downgraded in 1 cases; failed checks by kind: TARGET_EXISTS 4.
+- REACHABLE verdicts without a verified path: 0; DYNAMIC edges on verified paths: 596.
 - Go toolchain reported by the helper: go1.24.7 48.
 - Cases with APP_LOAD_FAILED, by coarse cause of the first error: GO_VERSION_TOO_OLD 58, MISSING_DEPENDENCY 4, GOPATH_STYLE_IMPORT 1, TYPE_ERRORS 1, VENDOR_INCONSISTENT 1.
 
 ### Curated reference (consistency, not correctness)
 
-The same app analysed with the advisory's curated core symbols as targets: 143 cases; reference verdicts: CANT_DETERMINE 106, REACHABLE 34, NOT_REACHABLE 3. Cases whose analysed symbols include a curated core symbol: 128.
+The same app analysed with the advisory's curated core symbols as targets: 143 cases; reference verdicts: CANT_DETERMINE 105, REACHABLE 35, NOT_REACHABLE 3. Cases whose analysed symbols include a curated core symbol: 128.
 
 | pipeline (before policy) | curated reference | cases |
 |---|---|---|
 | CANT_DETERMINE | CANT_DETERMINE | 102 |
 | NOT_REACHABLE | NOT_REACHABLE | 3 |
-| REACHABLE | CANT_DETERMINE | 4 |
-| REACHABLE | REACHABLE | 34 |
+| REACHABLE | CANT_DETERMINE | 3 |
+| REACHABLE | REACHABLE | 35 |
 
 ### Cost and fallbacks
 
-- Seconds per case (preparation + triage + reference): p50 4.9, p95 205.4, max 487.6 (n 150, total 6886.4).
-- Seconds per triage run: p50 0.17, p95 151.18, max 300.64 (n 143, total 4132.4); preparation: p50 2.0, p95 46.7, max 460.1 (n 150, total 1666.5).
+- Seconds per case (preparation + triage + reference): p50 4.2, p95 173.1, max 562.2 (n 150, total 6466.9).
+- Seconds per triage run: p50 0.17, p95 123.34, max 269.28 (n 143, total 3826.9); preparation: p50 2.4, p95 33.4, max 532.2 (n 150, total 1617.9).
 - Fallbacks: Mode 1 -> Mode 2 0; retriever -; synthesised go.mod 12; vendor directory set aside 4; main packages over the limit 16.
 
 ## 3. D4 (Mode 2 on real release ranges)
 
 - Command: `python -m vulntrace eval triage --set d4 --jobs 2 --rerun --stability 10 --gomodcache <local>/.cache/vulntrace/gomod-d4`
-- Repository commit: `13d9c07` (dirty: False)
+- Repository commit: `2eb9a7b` (dirty: False)
 - OS: Linux-6.18.44-fc-v153-x86_64-with-glibc2.39; Python 3.13.17; Go: go version go1.24.7 linux/amd64
 
 These cases have no reachability truth: the app is the vulnerable module itself, at its vulnerable commit, with its own main packages as entry points. The numbers below are distributions, coverage and reasons, not accuracy.
@@ -188,10 +188,10 @@ These cases have no reachability truth: the app is the vulnerable module itself,
 CANT_DETERMINE reasons (final): APP_LOAD_FAILED 55, UNSUPPORTED_TARGET 22, ANALYSIS_FAILED 7, MODE2_NOT_REACHABLE_DOWNGRADED 5, INCOMPLETE_COVERAGE 2, NO_RELEASE_EVIDENCE 2.
 CANT_DETERMINE reasons (before policy): APP_LOAD_FAILED 55, UNSUPPORTED_TARGET 22, ANALYSIS_FAILED 7, INCOMPLETE_COVERAGE 2, NO_RELEASE_EVIDENCE 2.
 
-- Per (symbol, main package) entries: NOT_REACHABLE 369, REACHABLE 277, CANT_DETERMINE 100.
-- Method result pairs (VTA + linker): NO_PATH+ABSENT 369, PATH_FOUND+PRESENT 277, ERROR+ERROR 68, NO_PATH+PRESENT 20, PATH_FOUND+ABSENT 7, ERROR+PRESENT 5.
+- Per (symbol, main package) entries: NOT_REACHABLE 369, REACHABLE 284, CANT_DETERMINE 93.
+- Method result pairs (VTA + linker): NO_PATH+ABSENT 369, PATH_FOUND+PRESENT 284, ERROR+ERROR 68, NO_PATH+PRESENT 20, ERROR+PRESENT 5.
 - Method error codes: BUILD_FAILED 68, LOAD_FAILED 57, TYPE_ERRORS 11, TARGET_NOT_FOUND 5.
-- Verifier: 11187 checks; 0 entries downgraded in 0 cases; failed checks by kind: -.
+- Verifier: 11225 checks; 0 entries downgraded in 0 cases; failed checks by kind: -.
 - REACHABLE verdicts without a verified path: 0; DYNAMIC edges on verified paths: 511.
 - Go toolchain reported by the helper: go1.24.7 41.
 - Cases with APP_LOAD_FAILED, by coarse cause of the first error: GO_VERSION_TOO_OLD 52, MISSING_DEPENDENCY 2, TYPE_ERRORS 1.
@@ -216,8 +216,8 @@ The same app analysed with the advisory's curated core symbols as targets: 120 c
 
 ### Cost and fallbacks
 
-- Seconds per case (preparation + triage + reference): p50 6.0, p95 248.7, max 711.8 (n 120, total 6873.0).
-- Seconds per triage run: p50 0.26, p95 177.64, max 530.6 (n 120, total 4654.8); preparation: p50 2.4, p95 16.3, max 363.6 (n 120, total 895.6).
+- Seconds per case (preparation + triage + reference): p50 5.2, p95 275.5, max 969.1 (n 120, total 6859.4).
+- Seconds per triage run: p50 0.25, p95 180.99, max 675.0 (n 120, total 4470.6); preparation: p50 2.0, p95 16.9, max 629.9 (n 120, total 1184.4).
 - Fallbacks: Mode 1 -> Mode 2 0; retriever EMBEDDER_UNAVAILABLE 118; synthesised go.mod 2; vendor directory set aside 2; main packages over the limit 11.
 
 ## 4. Mode 2 NOT_REACHABLE policy (decided by code from the numbers above)
