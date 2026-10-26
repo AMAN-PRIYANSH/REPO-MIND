@@ -1,0 +1,92 @@
+{
+ "cd_analysis_failed": {
+  "mode": "TARGETS",
+  "reason_codes": [
+   "ANALYSIS_FAILED"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_app_load_failed": {
+  "mode": "TARGETS",
+  "reason_codes": [
+   "APP_LOAD_FAILED"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_incomplete_coverage": {
+  "mode": "TARGETS",
+  "reason_codes": [
+   "INCOMPLETE_COVERAGE"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_method_disagreement": {
+  "mode": "TARGETS",
+  "reason_codes": [
+   "METHOD_DISAGREEMENT"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_mode2_not_reachable_downgraded": {
+  "mode": "RELEASE",
+  "reason_codes": [
+   "MODE2_NOT_REACHABLE_DOWNGRADED"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_no_fix_evidence": {
+  "mode": "FIX",
+  "reason_codes": [
+   "NO_FIX_EVIDENCE"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_no_release_evidence": {
+  "mode": "RELEASE",
+  "reason_codes": [
+   "NO_RELEASE_EVIDENCE"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_no_target_symbols": {
+  "mode": "FIX",
+  "reason_codes": [
+   "NO_TARGET_SYMBOLS"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_unsupported_target": {
+  "mode": "TARGETS",
+  "reason_codes": [
+   "UNSUPPORTED_TARGET"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_verifier_rejected": {
+  "mode": "TARGETS",
+  "reason_codes": [
+   "VERIFIER_REJECTED"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "not_reachable": {
+  "mode": "TARGETS",
+  "reason_codes": [],
+  "verdict": "NOT_REACHABLE"
+ },
+ "reachable_mode1": {
+  "mode": "FIX",
+  "reason_codes": [],
+  "verdict": "REACHABLE"
+ },
+ "reachable_mode2_candidate_level": {
+  "mode": "RELEASE",
+  "reason_codes": [],
+  "verdict": "REACHABLE"
+ },
+ "reachable_targets": {
+  "mode": "TARGETS",
+  "reason_codes": [],
+  "verdict": "REACHABLE"
+ }
+}

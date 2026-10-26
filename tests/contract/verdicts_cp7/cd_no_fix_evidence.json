@@ -1,0 +1,122 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "local",
+    "owner": "vtfixtures",
+    "repo": "vtfixtures-parse",
+    "sha": "06358637fa4f72dc8a182828d60146634cbe1fde"
+   }
+  ],
+  "fixed_in": "1.0.0-parse-fixed",
+  "id": "FIXTURE-PARSE",
+  "module": "vtfixtures",
+  "source": "synthetic fixture advisory (CP7)",
+  "vulnerable_at": "1.0.0"
+ },
+ "case_id": "fixture:direct_call",
+ "coverage": {
+  "app_list_error": null,
+  "complete": false,
+  "fix_evidence_status": null,
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "vtfixtures/cmd/build_tag_excluded",
+   "vtfixtures/cmd/closure_never_called",
+   "vtfixtures/cmd/dead_code",
+   "vtfixtures/cmd/direct_call",
+   "vtfixtures/cmd/func_value_map",
+   "vtfixtures/cmd/generic_call",
+   "vtfixtures/cmd/generic_target",
+   "vtfixtures/cmd/goroutine",
+   "vtfixtures/cmd/init_imported",
+   "vtfixtures/cmd/inlined_small"
+  ],
+  "main_packages_skipped": [
+   "vtfixtures/cmd/interface_dispatch",
+   "vtfixtures/cmd/interface_not_instantiated",
+   "vtfixtures/cmd/interface_two_impls_one_used",
+   "vtfixtures/cmd/method_expression",
+   "vtfixtures/cmd/method_pointer_receiver",
+   "vtfixtures/cmd/method_value",
+   "vtfixtures/cmd/method_value_receiver",
+   "vtfixtures/cmd/present_but_unreachable",
+   "vtfixtures/cmd/reflect_method",
+   "vtfixtures/cmd/safe_only",
+   "vtfixtures/cmd/test_file_only",
+   "vtfixtures/cmd/unsafe_func_pointer"
+  ],
+  "max_mains": 10,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {},
+  "release_range_status": null,
+  "symbols_analysed": 0,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "12 main package(s) over the limit of 10 were not analysed, so NOT_REACHABLE cannot be concluded for this app."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "mode FIX was requested",
+  "reason": "REQUESTED",
+  "requested": "FIX"
+ },
+ "per_symbol": [],
+ "pre_policy_reason_codes": [
+  "NO_FIX_EVIDENCE"
+ ],
+ "pre_policy_verdict": "CANT_DETERMINE",
+ "provenance": {
+  "created_at": "2026-10-26T00:00:00Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": null,
+  "vulndb_commit": null
+ },
+ "reason_codes": [
+  "NO_FIX_EVIDENCE"
+ ],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [],
+ "target_app": {
+  "commit": "0d9a4d6e6f58cd213824bdbe7f1c0e7955b440e0",
+  "commit_source": "GIT_HEAD",
+  "dirty": false,
+  "module": "vtfixtures",
+  "path": "<local>/fixtures/reachability"
+ },
+ "timing": {
+  "inspect_seconds": 0.0,
+  "symbols_seconds": 0.0,
+  "total_seconds": 0.0
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  }
+ },
+ "verdict": "CANT_DETERMINE",
+ "verification": {
+  "checks_run": 0,
+  "failures": [],
+  "status": "NOT_RUN"
+ }
+}

@@ -1,0 +1,232 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "local",
+    "owner": "vtfixtures",
+    "repo": "vtfixtures-parse",
+    "sha": "06358637fa4f72dc8a182828d60146634cbe1fde"
+   }
+  ],
+  "fixed_in": "1.0.0-parse-fixed",
+  "id": "FIXTURE-PARSE",
+  "module": "vtfixtures",
+  "source": "synthetic fixture advisory (CP7)",
+  "vulnerable_at": "1.0.0"
+ },
+ "case_id": "fixture:direct_call",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "vtfixtures/cmd/direct_call"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "vtfixtures/cmd/direct_call": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.4,
+    "load_failed": false,
+    "vta_seconds": 2.39
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 1,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "vtfixtures/vulnlib.Parse"
+   ],
+   "main_package": "vtfixtures/cmd/direct_call",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/direct_call/main.go",
+        "line": 10
+       },
+       "callee": "vtfixtures/vulnlib.Parse",
+       "caller": "vtfixtures/cmd/direct_call.main",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "vtfixtures/cmd/direct_call",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "vtfixtures/vulnlib",
+      "symbol": "Parse"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "vtfixtures/vulnlib",
+    "symbol": "Parse"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/direct_call/main.go",
+       "line": 10
+      },
+      "callee": "vtfixtures/vulnlib.Parse",
+      "caller": "vtfixtures/cmd/direct_call.main",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "vtfixtures/cmd/direct_call",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "vtfixtures/vulnlib",
+     "symbol": "Parse"
+    }
+   },
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-10-26T00:00:00Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": null,
+  "vulndb_commit": null
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "vtfixtures/vulnlib",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Parse"
+  }
+ ],
+ "target_app": {
+  "commit": "0d9a4d6e6f58cd213824bdbe7f1c0e7955b440e0",
+  "commit_source": "GIT_HEAD",
+  "dirty": false,
+  "module": "vtfixtures",
+  "path": "<local>/fixtures/reachability"
+ },
+ "timing": {
+  "inspect_seconds": 0.0,
+  "methods_seconds": 0.0,
+  "symbols_seconds": 0.0,
+  "total_seconds": 0.0,
+  "verifier_seconds": 0.0
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.24.7",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.24.7",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   }
+  },
+  "checks_run": 5,
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "git show 0d9a4d6e6f58cd213824bdbe7f1c0e7955b440e0",
+  "status": "PASSED"
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "advisory": {
+  "fix_commits": [],
+  "fixed_in": null,
+  "id": "libonly",
+  "module": null,
+  "source": "vulndb",
+  "vulnerable_at": null
+ },
+ "case_id": "libonly",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": null,
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {},
+  "release_range_status": null,
+  "symbols_analysed": 1,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "TARGET_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2)."
+ ],
+ "mode": "TARGETS",
+ "mode_selection": {
+  "chosen": "TARGETS",
+  "explanation": "target symbols were given directly",
+  "reason": "TARGETS_GIVEN",
+  "requested": "TARGETS"
+ },
+ "per_symbol": [],
+ "pre_policy_reason_codes": [
+  "UNSUPPORTED_TARGET"
+ ],
+ "pre_policy_verdict": "CANT_DETERMINE",
+ "provenance": {
+  "created_at": "2026-10-26T00:00:00Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": null,
+  "vulndb_commit": null
+ },
+ "reason_codes": [
+  "UNSUPPORTED_TARGET"
+ ],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "USER",
+   "package": "libonly.example/lib",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "Parse"
+  }
+ ],
+ "target_app": {
+  "commit": null,
+  "commit_source": "NONE",
+  "dirty": null,
+  "module": "libonly.example",
+  "path": "<local>/vt_cp7_record_d9xsni4j/libonly"
+ },
+ "timing": {
+  "inspect_seconds": 0.0,
+  "symbols_seconds": 0.0,
+  "total_seconds": 0.0
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  }
+ },
+ "verdict": "CANT_DETERMINE",
+ "verification": {
+  "checks_run": 0,
+  "failures": [],
+  "status": "NOT_RUN"
+ }
+}
