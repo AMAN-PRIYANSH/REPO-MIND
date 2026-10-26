@@ -149,12 +149,19 @@ Input: advisory text. Output: one short hypothetical Go function (plain text) us
 
 | Tool | Input | Output | Notes |
 |---|---|---|---|
-| `search_code` | query text, k | ranked candidate IDs with snippets | Uses the C13 retriever |
-| `read_function` | candidate ID | code and location | Only candidates of this case |
-| `search_commits` | query text | commits in the release range with subjects | Read-only git |
-| `show_commit` | sha | diff limited to Go files, truncated to a budget | Only commits in the release range |
-| `callers` / `callees` | candidate ID | function names from the helper | Read-only |
-| `submit_answer` | candidate IDs, cited evidence | accepted / rejected | Ends the run; IDs must be in the pool |
+| `search_code` | query text, k (1-20, default 10) | ranked candidate IDs with function name, signature and first commit subject | The fixed CP4 retriever (`hybrid:bge-small`, `code+commits`) over this case's candidates; a query longer than 500 characters is cut (recorded) |
+| `read_function` | candidate ID | code (doc comment and body), file and lines, commits of the range that changed its file | Only candidates of this case |
+| `search_commits` | query text | the 10 best commits of the release range (BM25 over subject and message) with 12-character SHAs | Read-only; ties in history order |
+| `show_commit` | SHA or a prefix of at least 7 characters | message, touched candidates, diff of Go files (non-test first, vendored code left out) | Only commits in the release range; diffs precomputed by `agent prepare --diffs` (read-only `git show`) |
+| `callers` / `callees` | candidate ID | one-hop neighbours from the helper's VTA call graph of the vulnerable release, with call site and `STATIC`/`DYNAMIC`; neighbours that are candidates show their ID | Ablation arm A3 only; precomputed tables (`agent prepare --graph`); a case without a table runs without these tools |
+| `submit_answer` | 1-3 candidate IDs (most likely first) and 1-10 cited items, or `{"abstain": true}` | accepted / rejected | Ends the run. IDs must be in the case's pool; evidence must be IDs or SHAs that appeared in tool outputs. One retry after a rejection, then `INVALID_ANSWER` |
+
+**JSON action protocol (CP6).** The model emits one JSON object per turn, `{"tool": "<name>", "args": {...}}`
+(schema `schemas/agent_action.schema.json`), never provider tool calling. Code parses and validates it and never repairs it;
+an invalid reply gets one repair turn (`agent_repair_v1`), a second invalid reply in a row ends the run (`INVALID_ACTION`).
+A repeated identical call is answered with a note instead of being run again; the next repeat ends the run
+(`LOOP_DETECTED`). Every tool output is capped (default 3000 characters) and wrapped as untrusted data. Budgets per case:
+8 steps, 80,000 prompt tokens in total, 24,000 per call (below the server's context), 600 s of model plus tool time.
 
 ### Rules for all LLM use
 

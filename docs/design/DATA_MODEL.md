@@ -201,6 +201,13 @@ One indexed function. Stored in the vector store (C12).
 
 `stop_reason`: `SUBMITTED`, `BUDGET_EXCEEDED`, `INVALID_ANSWER`, `ERROR`.
 
+CP6 implementation (schema `schemas/agent_trace.schema.json`): `stop_reason` adds `ABSTAINED` (an explicit
+abstention), `INVALID_ACTION` (a second invalid reply in a row) and `LOOP_DETECTED`; `budget_reason` says which budget
+stopped the run (`STEPS`, `TOKENS`, `CONTEXT`, `TIME`). Each turn records one model call: purpose (`action`, `repair`,
+`answer_retry`), the prompt's sha256 (never the prompt), the raw reply, the parsed action, problem codes, token counts and
+latency, and the outcome (tool result summary, the candidate IDs and SHAs shown - IDs only, never code). Traces are stored
+gzipped outside git; committed result files hold one compact row per case (`schemas/agent_result_row.schema.json`).
+
 ## TargetSymbol
 
 The symbols whose reachability is checked.

@@ -74,7 +74,7 @@ Decisions:
 - **Assumption** - believed true but not yet checked.
 - **Proposal** - a design choice to be validated during implementation.
 
-## Development (CP1-CP5b)
+## Development (CP1-CP6)
 
 ```
 python -m venv .venv && .venv/bin/pip install -e ".[dev]"
@@ -86,7 +86,7 @@ python -m vulntrace helper fetch             # once: downloads the helper's Go d
 python -m vulntrace helper build             # offline build into ~/.cache/vulntrace (never into the repo)
 python -m vulntrace fixtures score --method linker [--out results/cp1] [--compare-inlining]
 python -m vulntrace fixtures score --method naive|vta|combined [--out results/cp2] [--timeout 300]
-python -m vulntrace results render --doc cp1|cp2|cp3|cp4|cp5|cp5b --input <report or dir> --out docs/results/<file>.md
+python -m vulntrace results render --doc cp1|cp2|cp3|cp4|cp5|cp5b|cp6 --input <report or dir> --out docs/results/<file>.md
 
 # CP3: datasets (network) and baselines
 python -m vulntrace dataset fetch                     # pin golang/vulndb's data/reports/ snapshot
@@ -121,6 +121,15 @@ python -m vulntrace eval select --mode release --dry-run                        
 python -m vulntrace eval lift --set d1 --jobs 2 --out docs/results/cp5b            # lifting vs derived_symbols + E1+L on the committed CP5 selections
 python -m vulntrace eval lift --set d4-ceiling --jobs 2 --out docs/results/cp5b    # needs `dataset materialize --set d4` first
 python -m vulntrace results render --doc cp5b --input docs/results/cp5b --out docs/results/CP5B_LIFTING_RESULTS.md
+
+# CP6: LangGraph investigation agent (Mode 2, D4). pip install -e ".[dev,agent]" (langgraph). Tests and --dry-run use fakes.
+python -m vulntrace agent prepare --set d4 --diffs                # Go diffs of every release-range commit (read-only git)
+python -m vulntrace agent prepare --set d4 --graph --jobs 2       # one-hop callers/callees of every candidate (Go + module proxy)
+python -m vulntrace eval symbols --strategy agent --set d4 --arm A2 --arm A3 --model llama3.1-8b --device cuda   # needs .[ml]
+python -m vulntrace eval symbols --strategy agent --set d4 --dry-run           # fake LLM + fake embedder on real evidence
+python -m vulntrace agent show-trace --trace data/agent_traces/A2__llama3.1-8b/<case>.json.gz --data-dir data
+python -m vulntrace results render --doc cp6 --input docs/results/cp6 --out docs/results/CP6_AGENT_RESULTS.md
+# Real runs: notebooks/cp6_agent_colab.ipynb (free Colab GPU + Ollama), which zips the agent result JSON and the traces.
 
 # Opt-in, not run in CI: fetches one real advisory's evidence from the real network
 VULNTRACE_NETWORK_TESTS=1 python -m pytest tests/integration/test_network_smoke.py
