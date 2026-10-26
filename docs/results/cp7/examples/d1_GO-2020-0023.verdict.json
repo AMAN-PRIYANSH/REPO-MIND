@@ -37,9 +37,9 @@
    "github.com/robbert229/jwt/example": {
     "error_codes": [],
     "first_error": null,
-    "linker_seconds": 0.5,
+    "linker_seconds": 0.61,
     "load_failed": false,
-    "vta_seconds": 1.82
+    "vta_seconds": 2.8
    }
   },
   "release_range_status": null,
@@ -154,7 +154,7 @@
  "pre_policy_reason_codes": [],
  "pre_policy_verdict": "REACHABLE",
  "provenance": {
-  "created_at": "2026-10-26T17:11:06Z",
+  "created_at": "2026-10-26T18:53:08Z",
   "helper_contract": "1.0",
   "pipeline_version": "0.1.0",
   "repo_commit": null,
@@ -186,10 +186,10 @@
  },
  "timing": {
   "inspect_seconds": 0.07,
-  "methods_seconds": 2.32,
+  "methods_seconds": 3.42,
   "symbols_seconds": 0.0,
-  "total_seconds": 4.22,
-  "verifier_seconds": 1.83
+  "total_seconds": 6.17,
+  "verifier_seconds": 2.68
  },
  "toolchain": {
   "env": {

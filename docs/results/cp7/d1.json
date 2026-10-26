@@ -1,6 +1,6 @@
 {
  "disk_guard": {
-  "cache_cleanups": 2,
+  "cache_cleanups": 1,
   "min_free_gb": 10.0
  },
  "environment": {
@@ -9,14 +9,14 @@
   "gomodcache_note": "a shared module cache; first-time downloads dominate preparation time",
   "os": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
   "python": "3.13.17",
-  "repo_commit": "9f2cc23",
+  "repo_commit": "13d9c07",
   "repo_dirty": false
  },
  "max_mains": 5,
  "rows": [
   {
    "app_list_error": null,
-   "case_seconds": 0.2,
+   "case_seconds": 0.3,
    "cluster_key": "GO-2020-0007",
    "commit": "fc0298087f328ac97a1fa781392de96b2ebb8aac",
    "context_only_symbols": 0,
@@ -84,7 +84,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 7.0,
+   "case_seconds": 10.1,
    "cluster_key": "GO-2020-0023",
    "commit": "2eb16e9a008dbd8547bfa0e73f8f72b3f30789ba",
    "context_only_symbols": 0,
@@ -121,7 +121,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.6,
+    "seconds": 0.2,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": false,
@@ -138,7 +138,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 4.22,
+   "seconds": 6.17,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -152,7 +152,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 10.4,
+   "case_seconds": 8.2,
    "cluster_key": "GO-2020-0027",
    "commit": "d4d88e16b54eaa9ba2a8dcb07ba545b60f4d4208",
    "context_only_symbols": 1,
@@ -200,7 +200,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 5.4,
+    "seconds": 0.8,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": true,
@@ -225,7 +225,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 4.77,
+   "seconds": 6.91,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -239,7 +239,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 2.5,
+   "case_seconds": 6.1,
    "cluster_key": "GO-2020-0033",
    "commit": "0bcfe2c6ffef20ac5946a1199bdaa21c1b326b3f",
    "context_only_symbols": 0,
@@ -274,7 +274,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.1,
+    "seconds": 5.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -293,7 +293,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.2,
+   "seconds": 0.26,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -307,7 +307,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 67.6,
+   "case_seconds": 92.8,
    "cluster_key": "GO-2020-0038",
    "commit": "82948855ecb86a9e0b86c8dd43d010cbc545dc94",
    "context_only_symbols": 0,
@@ -344,7 +344,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.4,
+    "seconds": 0.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -361,7 +361,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 45.03,
+   "seconds": 64.65,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -375,7 +375,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 2.9,
+   "case_seconds": 4.2,
    "cluster_key": "GO-2021-0052",
    "commit": "21125bbb3f550dbfa4c64151f7e01f58dd64e2b8",
    "context_only_symbols": 1,
@@ -412,7 +412,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.5,
+    "seconds": 3.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -431,7 +431,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.2,
+   "seconds": 0.28,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -445,7 +445,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.4,
+   "case_seconds": 1.0,
    "cluster_key": "GO-2021-0061",
    "commit": "7b8349ac747c6a24702b762d2c4fd9266cf4f1d6",
    "context_only_symbols": 1,
@@ -480,7 +480,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.3,
+    "seconds": 0.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -499,7 +499,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.07,
+   "seconds": 0.18,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -513,7 +513,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 12.6,
+   "case_seconds": 16.1,
    "cluster_key": "GO-2021-0076",
    "commit": "9f095e0732475147cbb029ffd99634b386d06651",
    "context_only_symbols": 0,
@@ -550,7 +550,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.0,
+    "seconds": 0.3,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": false,
@@ -567,7 +567,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 8.11,
+   "seconds": 10.53,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -581,7 +581,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 5.9,
+   "case_seconds": 9.2,
    "cluster_key": "GO-2021-0088",
    "commit": "41af43a0444be86894b0ffc1bf305b63300387d9",
    "context_only_symbols": 0,
@@ -626,7 +626,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.3,
+    "seconds": 2.5,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": false,
@@ -649,7 +649,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 2.08,
+   "seconds": 4.72,
    "symbols": 1,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -663,7 +663,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.2,
+   "case_seconds": 0.4,
    "cluster_key": "GO-2021-0103",
    "commit": "4ce82e695c10ddad57215bdbeafb68b8c5df2c30",
    "context_only_symbols": 2,
@@ -717,7 +717,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.05,
+   "seconds": 0.11,
    "symbols": 4,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -731,7 +731,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 80.4,
+   "case_seconds": 112.5,
    "cluster_key": "GO-2022-0246",
    "commit": "9abe2d30dc69114443ef39480e11b485dd9e830f",
    "context_only_symbols": 0,
@@ -768,7 +768,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 6.0,
+    "seconds": 0.3,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -785,7 +785,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 54.68,
+   "seconds": 73.73,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -799,7 +799,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 128.1,
+   "case_seconds": 190.0,
    "cluster_key": "GO-2022-0316",
    "commit": "d496d92b66c8614c4a03f4ab01e5a2c27218fb52",
    "context_only_symbols": 1,
@@ -842,7 +842,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 5.3,
+    "seconds": 6.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -861,7 +861,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 103.22,
+   "seconds": 152.71,
    "symbols": 3,
    "verdict": "REACHABLE",
    "verification": {
@@ -875,7 +875,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 109.7,
+   "case_seconds": 127.4,
    "cluster_key": "GO-2022-0346",
    "commit": "94dd31beb122603b9b7b44847219387ca5e2b99a",
    "context_only_symbols": 1,
@@ -916,7 +916,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 6.7,
+    "seconds": 2.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -934,7 +934,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 89.89,
+   "seconds": 106.99,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -947,7 +947,7 @@
    "verified_paths": 2
   },
   {
-   "case_seconds": 1.0,
+   "case_seconds": 2.4,
    "cluster_key": "GO-2022-0379",
    "commit": "6248a88d03badbe49c4969f802f5860b6fb2a685",
    "created": "2022-07-29",
@@ -958,7 +958,7 @@
    "prep": {
     "module_rel": null,
     "reason": "no go.mod declaring module github.com/docker/distribution in the vulnerable-side tree",
-    "seconds": 0.9,
+    "seconds": 1.8,
     "status": "NO_MODULE",
     "synthesized_go_mod": false,
     "vendor_dropped": null,
@@ -971,7 +971,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.3,
+   "case_seconds": 0.2,
    "cluster_key": "GO-2022-0411",
    "commit": "864fea799ab6516ec883dc052a9a0b15f1e529dd",
    "context_only_symbols": 0,
@@ -1025,7 +1025,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.08,
+   "seconds": 0.07,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1039,7 +1039,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 77.2,
+   "case_seconds": 116.7,
    "cluster_key": "GO-2022-0461",
    "commit": "e0b2ce3592e8e7d73713ac67b363a2e192a4cecf",
    "context_only_symbols": 1,
@@ -1078,7 +1078,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.7,
+    "seconds": 0.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1095,7 +1095,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 49.78,
+   "seconds": 82.6,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -1109,7 +1109,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 17.5,
+   "case_seconds": 24.7,
    "cluster_key": "GO-2022-0588",
    "commit": "13d17998d2858a7ee490b326e2bd852734fa6ff2",
    "context_only_symbols": 1,
@@ -1150,7 +1150,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.5,
+    "seconds": 0.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1168,7 +1168,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 11.62,
+   "seconds": 16.94,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -1182,7 +1182,7 @@
   },
   {
    "app_list_error": "go: github.com/evanphx/json-patch@v4.1.0+incompatible: module lookup disabled by GOPROXY=off",
-   "case_seconds": 1.6,
+   "case_seconds": 4.9,
    "cluster_key": "GO-2022-0621",
    "commit": "9f7e59da77270b7ce847d4101f8102fd725e427e",
    "context_only_symbols": 0,
@@ -1217,7 +1217,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.4,
+    "seconds": 3.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1236,7 +1236,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.03,
+   "seconds": 0.06,
    "symbols": 0,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1250,7 +1250,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 166.4,
+   "case_seconds": 487.6,
    "cluster_key": "GO-2022-0755",
    "commit": "88e9e38dc862391555737e2d7e2176529f78e8c1",
    "context_only_symbols": 0,
@@ -1297,7 +1297,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 134.9,
+    "seconds": 460.1,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": true,
@@ -1320,7 +1320,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 22.17,
+   "seconds": 20.42,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1334,7 +1334,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 19.4,
+   "case_seconds": 21.9,
    "cluster_key": "GO-2022-0762",
    "commit": "3cce251c9ed2a9ee66c8f8984fff3d19d45999df",
    "context_only_symbols": 1,
@@ -1373,7 +1373,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.4,
+    "seconds": 0.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1390,7 +1390,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 12.67,
+   "seconds": 14.78,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -1404,7 +1404,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.3,
+   "case_seconds": 0.2,
    "cluster_key": "GO-2022-0956",
    "commit": "bb4e33bf68bf89cad44d386192cbed201f35b241",
    "context_only_symbols": 3,
@@ -1460,7 +1460,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.06,
+   "seconds": 0.05,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1474,7 +1474,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 178.5,
+   "case_seconds": 167.5,
    "cluster_key": "GO-2022-1040",
    "commit": "46d80f68c11d8107b688b9c8299fa02bccba312f",
    "context_only_symbols": 3,
@@ -1519,7 +1519,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 10.9,
+    "seconds": 12.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1536,7 +1536,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 130.59,
+   "seconds": 124.58,
    "symbols": 16,
    "verdict": "REACHABLE",
    "verification": {
@@ -1550,7 +1550,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 53.6,
+   "case_seconds": 43.8,
    "cluster_key": "GO-2022-1188",
    "commit": "b19021ade3d0b71c89d35cb00eb9e589a121faa5",
    "context_only_symbols": 0,
@@ -1589,7 +1589,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.9,
+    "seconds": 1.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1609,7 +1609,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 50.51,
+   "seconds": 41.76,
    "symbols": 5,
    "verdict": "REACHABLE",
    "verification": {
@@ -1623,7 +1623,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 8.9,
+   "case_seconds": 5.2,
    "cluster_key": "GO-2023-1557",
    "commit": "6609090f4bd166547fcaf5242055ede5c14f8f41",
    "context_only_symbols": 1,
@@ -1658,7 +1658,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 8.1,
+    "seconds": 4.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1677,7 +1677,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.45,
+   "seconds": 0.19,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1691,7 +1691,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 48.4,
+   "case_seconds": 44.7,
    "cluster_key": "GO-2023-1664",
    "commit": "2aeb2efd8c405fb7b40aa75b591b0828ef552670",
    "context_only_symbols": 0,
@@ -1736,7 +1736,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.6,
+    "seconds": 0.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1755,7 +1755,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 39.4,
+   "seconds": 36.06,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -1769,7 +1769,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 66.9,
+   "case_seconds": 65.4,
    "cluster_key": "GO-2023-2000",
    "commit": "68ad5ea717cc48f6d9732ba7fa4c0dff68854a5d",
    "context_only_symbols": 1,
@@ -1817,7 +1817,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 7.3,
+    "seconds": 16.3,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1835,7 +1835,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 46.79,
+   "seconds": 39.47,
    "symbols": 4,
    "verdict": "REACHABLE",
    "verification": {
@@ -1849,7 +1849,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 33.9,
+   "case_seconds": 21.3,
    "cluster_key": "GO-2023-2024",
    "commit": "40978ee08bc99999366638cbc8ee4934e7c437e8",
    "context_only_symbols": 0,
@@ -1895,7 +1895,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.6,
+    "seconds": 0.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1917,7 +1917,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 30.71,
+   "seconds": 20.01,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1931,7 +1931,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 20.3,
+   "case_seconds": 22.3,
    "cluster_key": "GO-2023-2074",
    "commit": "7478c230c7cd3e7328803d89abe591d0b61c41e4",
    "context_only_symbols": 1,
@@ -1975,7 +1975,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.0,
+    "seconds": 2.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1993,7 +1993,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 14.12,
+   "seconds": 15.59,
    "symbols": 4,
    "verdict": "REACHABLE",
    "verification": {
@@ -2007,7 +2007,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.6,
+   "case_seconds": 1.1,
    "cluster_key": "GO-2023-2077",
    "commit": "494f88c9b8bffe79818d1c4d4fd9e09251a91489",
    "context_only_symbols": 0,
@@ -2042,7 +2042,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.2,
+    "seconds": 0.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2075,7 +2075,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 33.6,
+   "case_seconds": 35.9,
    "cluster_key": "GO-2023-2101",
    "commit": "ace5318b726c7185249bc9c92e1cadae701c1654",
    "context_only_symbols": 0,
@@ -2122,7 +2122,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.9,
+    "seconds": 2.0,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2146,7 +2146,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 27.35,
+   "seconds": 27.68,
    "symbols": 28,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2160,7 +2160,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 60.2,
+   "case_seconds": 79.2,
    "cluster_key": "GO-2023-2181",
    "commit": "8b366c497bd22b9be7742d057b8f59083dcadee0",
    "context_only_symbols": 0,
@@ -2206,7 +2206,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 40.6,
+    "seconds": 59.9,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": false,
@@ -2228,7 +2228,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 17.46,
+   "seconds": 18.24,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2242,7 +2242,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 94.8,
+   "case_seconds": 99.6,
    "cluster_key": "GO-2023-2333",
    "commit": "29cadaa947558f61868e43b5edee27a5d9071260",
    "context_only_symbols": 0,
@@ -2281,7 +2281,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.8,
+    "seconds": 3.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2299,7 +2299,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 80.36,
+   "seconds": 83.78,
    "symbols": 3,
    "verdict": "REACHABLE",
    "verification": {
@@ -2369,7 +2369,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.11,
+   "seconds": 0.16,
    "symbols": 4,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2383,7 +2383,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 410.0,
+   "case_seconds": 427.6,
    "cluster_key": "GO-2023-2413",
    "commit": "d245c144cc1a4e2f2bbcd78dc3b3af36d9fa0cca",
    "context_only_symbols": 0,
@@ -2422,7 +2422,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 52.6,
+    "seconds": 74.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2440,7 +2440,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 296.83,
+   "seconds": 300.64,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -2489,7 +2489,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.1,
+    "seconds": 1.0,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2508,7 +2508,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.32,
+   "seconds": 0.31,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2522,7 +2522,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 195.8,
+   "case_seconds": 217.1,
    "cluster_key": "GO-2024-2464",
    "commit": "0a9e23daf4068f5559785e8ae80c098824855325",
    "context_only_symbols": 0,
@@ -2569,7 +2569,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 32.4,
+    "seconds": 46.7,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2591,7 +2591,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 160.26,
+   "seconds": 167.6,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2605,7 +2605,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 96.9,
+   "case_seconds": 91.1,
    "cluster_key": "GO-2024-2567",
    "commit": "603c8c1e90db3f22fc332cd7cbaeeb1a52c9c584",
    "context_only_symbols": 0,
@@ -2644,7 +2644,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.2,
+    "seconds": 1.0,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2662,7 +2662,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 67.66,
+   "seconds": 58.14,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -2676,7 +2676,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 3.0,
+   "case_seconds": 2.9,
    "cluster_key": "GO-2024-2574",
    "commit": "5e30112d08b1a76f38f838a175988a3712846bd7",
    "context_only_symbols": 1,
@@ -2713,7 +2713,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.3,
+    "seconds": 2.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2732,7 +2732,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.23,
+   "seconds": 0.2,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2746,7 +2746,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 9.2,
+   "case_seconds": 7.7,
    "cluster_key": "GO-2024-2604",
    "commit": "d953675085476c98772fbc495ccaf47b9fd479df",
    "context_only_symbols": 1,
@@ -2781,7 +2781,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 7.2,
+    "seconds": 6.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2800,7 +2800,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.52,
+   "seconds": 0.49,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2814,7 +2814,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 1.5,
+   "case_seconds": 1.0,
    "cluster_key": "GO-2024-2618",
    "commit": "67e389964131d55d65cd14b4eb32d57a47312695",
    "context_only_symbols": 0,
@@ -2849,7 +2849,7 @@
    "prep": {
     "module_rel": "v2",
     "reason": null,
-    "seconds": 0.8,
+    "seconds": 0.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2868,7 +2868,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.28,
+   "seconds": 0.2,
    "symbols": 1,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2882,7 +2882,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 1.4,
+   "case_seconds": 0.9,
    "cluster_key": "GO-2024-2632",
    "commit": "3d6e0e07be993dae07ec0b8b5d3a42f58a684ffc",
    "context_only_symbols": 8,
@@ -2919,7 +2919,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.9,
+    "seconds": 0.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2938,7 +2938,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.18,
+   "seconds": 0.14,
    "symbols": 13,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2952,7 +2952,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 101.1,
+   "case_seconds": 106.9,
    "cluster_key": "GO-2024-2682",
    "commit": "9971fedd42e9cb853d05fa94809d84743ffa010f",
    "context_only_symbols": 2,
@@ -2993,7 +2993,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.1,
+    "seconds": 1.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3011,7 +3011,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 77.96,
+   "seconds": 72.37,
    "symbols": 4,
    "verdict": "REACHABLE",
    "verification": {
@@ -3025,7 +3025,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 124.6,
+   "case_seconds": 205.4,
    "cluster_key": "GO-2024-2830",
    "commit": "34498392dc1305fd60564f23bc52301f07530180",
    "context_only_symbols": 0,
@@ -3060,7 +3060,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 37.3,
+    "seconds": 86.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3082,7 +3082,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.69,
+   "seconds": 2.41,
    "symbols": 0,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3096,7 +3096,7 @@
   },
   {
    "app_list_error": "go: inconsistent vendoring in <local>/data/triage_work/d1/GO-2024-2846/tree:",
-   "case_seconds": 3.5,
+   "case_seconds": 9.7,
    "cluster_key": "GO-2024-2846",
    "commit": "104824c3dd0413e3cbb883c648807b2e28afa1a8",
    "context_only_symbols": 0,
@@ -3131,7 +3131,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.0,
+    "seconds": 7.3,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3150,7 +3150,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.03,
+   "seconds": 0.05,
    "symbols": 5,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3164,7 +3164,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.9,
+   "case_seconds": 5.1,
    "cluster_key": "GO-2024-2955",
    "commit": "30792dc079512bbd1b33f79dec23541e657b7092",
    "context_only_symbols": 0,
@@ -3199,7 +3199,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.7,
+    "seconds": 4.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3218,7 +3218,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.11,
+   "seconds": 0.37,
    "symbols": 1,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3232,7 +3232,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.9,
+   "case_seconds": 2.6,
    "cluster_key": "GO-2024-2959",
    "commit": "4262f5b5911d93afc4d4ccc68514b3732e083988",
    "context_only_symbols": 5,
@@ -3269,7 +3269,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.4,
+    "seconds": 1.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3288,7 +3288,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.18,
+   "seconds": 0.55,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3302,7 +3302,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 149.7,
+   "case_seconds": 229.6,
    "cluster_key": "GO-2024-2978",
    "commit": "355b9a557b63896fc569d8be1518905eabde0026",
    "context_only_symbols": 2,
@@ -3343,7 +3343,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.5,
+    "seconds": 12.7,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3363,7 +3363,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 145.84,
+   "seconds": 216.02,
    "symbols": 3,
    "verdict": "REACHABLE",
    "verification": {
@@ -3377,7 +3377,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 282.7,
+   "case_seconds": 430.6,
    "cluster_key": "GO-2024-3005",
    "commit": "6bc49067a6c7647db245d77e0660778c8f61f314",
    "context_only_symbols": 1,
@@ -3428,7 +3428,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 257.7,
+    "seconds": 389.5,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": true,
@@ -3453,7 +3453,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 18.53,
+   "seconds": 30.98,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3469,7 +3469,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 66.8,
+   "case_seconds": 106.1,
    "cluster_key": "GO-2024-3313",
    "commit": "f14fc05ed333006ffe344e7268bbc7fda3994596",
    "context_only_symbols": 0,
@@ -3520,7 +3520,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 9.7,
+    "seconds": 18.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3546,7 +3546,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 55.82,
+   "seconds": 85.75,
    "symbols": 1,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3560,7 +3560,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 45.3,
+   "case_seconds": 25.6,
    "cluster_key": "GO-2024-3344",
    "commit": "cda3988cc76a139426281a1d812914b71435bd18",
    "context_only_symbols": 0,
@@ -3601,7 +3601,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.2,
+    "seconds": 2.7,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3619,7 +3619,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 36.78,
+   "seconds": 17.12,
    "symbols": 6,
    "verdict": "REACHABLE",
    "verification": {
@@ -3633,7 +3633,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 34.8,
+   "case_seconds": 12.3,
    "cluster_key": "GO-2025-3533",
    "commit": "6da871e0e170b7637eb568c265c08bc2b5d6e7a3",
    "context_only_symbols": 4,
@@ -3672,7 +3672,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.1,
+    "seconds": 0.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3689,7 +3689,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 32.56,
+   "seconds": 10.99,
    "symbols": 12,
    "verdict": "NOT_REACHABLE",
    "verification": {
@@ -3703,7 +3703,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 66.9,
+   "case_seconds": 51.4,
    "cluster_key": "GO-2025-3600",
    "commit": "183ac2bea2f43351e12b972509ccaa6e16af7635",
    "context_only_symbols": 0,
@@ -3740,7 +3740,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.7,
+    "seconds": 3.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3758,7 +3758,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 49.05,
+   "seconds": 35.38,
    "symbols": 4,
    "verdict": "REACHABLE",
    "verification": {
@@ -3772,7 +3772,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 132.0,
+   "case_seconds": 106.0,
    "cluster_key": "GO-2025-3638",
    "commit": "bd6a9be3c4eac30c8bf679fe136ee9ee35673adf",
    "context_only_symbols": 0,
@@ -3809,7 +3809,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.2,
+    "seconds": 3.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3826,7 +3826,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 91.66,
+   "seconds": 68.62,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -3840,7 +3840,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 98.8,
+   "case_seconds": 116.7,
    "cluster_key": "GO-2025-3735",
    "commit": "d726a795db8391d29b180f684f74b223d40471a1",
    "context_only_symbols": 0,
@@ -3879,7 +3879,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.3,
+    "seconds": 2.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3897,7 +3897,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 73.12,
+   "seconds": 79.72,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -3911,7 +3911,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 1.3,
+   "case_seconds": 1.1,
    "cluster_key": "GO-2025-3764",
    "commit": "6e60d54a787aeebb9d53f446ae93f462d635a8a2",
    "context_only_symbols": 4,
@@ -3948,7 +3948,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.1,
+    "seconds": 0.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3967,7 +3967,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.09,
+   "seconds": 0.13,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3981,7 +3981,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 189.7,
+   "case_seconds": 255.1,
    "cluster_key": "GO-2025-4025",
    "commit": "2cd5d91d9db3fc9f4628b1a8e7af54e724f37538",
    "context_only_symbols": 4,
@@ -4022,7 +4022,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 13.2,
+    "seconds": 13.9,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4040,7 +4040,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 154.46,
+   "seconds": 206.87,
    "symbols": 12,
    "verdict": "REACHABLE",
    "verification": {
@@ -4054,7 +4054,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.5,
+   "case_seconds": 0.8,
    "cluster_key": "GO-2025-4123",
    "commit": "48ba0b76bc881767cff2723388f4dd1a47c5104a",
    "context_only_symbols": 1,
@@ -4091,7 +4091,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.2,
+    "seconds": 0.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4110,7 +4110,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.14,
+   "seconds": 0.17,
    "symbols": 5,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4124,7 +4124,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.3 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 11.3,
+   "case_seconds": 11.8,
    "cluster_key": "GO-2025-4161",
    "commit": "5a8d7984ca3d9b94f35f2c0f5359495853283d6b",
    "context_only_symbols": 0,
@@ -4161,7 +4161,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 8.9,
+    "seconds": 8.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4180,7 +4180,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.02,
+   "seconds": 0.05,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4193,31 +4193,76 @@
    "verified_paths": 0
   },
   {
-   "case_seconds": 16.8,
+   "app_list_error": "go: go.mod requires go >= 1.24.11 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 52.1,
    "cluster_key": "GO-2026-4360",
    "commit": "af5d23e75f47f3a7aa89a844acd0e62ca48ce425",
+   "context_only_symbols": 1,
    "created": "2026-03-06",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 4,
    "id": "GO-2026-4360",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.24.11 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 14.5,
+    "seconds": 41.8,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.07,
+   "symbols": 5,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 3.9,
+   "case_seconds": 4.4,
    "cluster_key": "GO-2026-4471",
    "commit": "4ff945a6d70c6bb3acb6803d05100e1c7b19ab63",
    "context_only_symbols": 0,
@@ -4252,7 +4297,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.2,
+    "seconds": 3.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4271,7 +4316,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.39,
+   "seconds": 0.25,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4285,7 +4330,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 140.5,
+   "case_seconds": 185.0,
    "cluster_key": "GO-2026-4736",
    "commit": "c3eb0db6df91379e15ce1a8709cb1b64f482248e",
    "context_only_symbols": 0,
@@ -4324,7 +4369,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 4.1,
+    "seconds": 4.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4342,7 +4387,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 119.03,
+   "seconds": 151.18,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -4356,7 +4401,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 84.4,
+   "case_seconds": 76.9,
    "cluster_key": "GO-2026-4942",
    "commit": "cccd0d4fb75066dbec314a78e13535bdf2bc857c",
    "context_only_symbols": 1,
@@ -4401,7 +4446,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 72.0,
+    "seconds": 54.6,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": true,
@@ -4424,7 +4469,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 8.01,
+   "seconds": 15.02,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4437,14 +4482,39 @@
    "verified_paths": 0
   },
   {
-   "case_seconds": 0.1,
+   "app_list_error": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.2,
    "cluster_key": "GO-2026-5051",
    "commit": "828fc89b00fb14c6d296c6d8a0a1281998f5eba6",
+   "context_only_symbols": 5,
    "created": "2026-07-21",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": false,
+   "gold_count": 2,
    "id": "GO-2026-5051",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
@@ -4454,37 +4524,102 @@
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.04,
+   "symbols": 26,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.3,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.7,
    "cluster_key": "GO-2026-5069",
    "commit": "b7913fbdfd40832266027e73818262c771ec8c8c",
+   "context_only_symbols": 0,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-5069",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.2,
+    "seconds": 0.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 7,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 2.6,
+   "case_seconds": 2.9,
    "cluster_key": "GO-2026-5073",
    "commit": "2fe6c72cfa47fa505d7dc9ac517d6e02a075840b",
    "context_only_symbols": 0,
@@ -4540,7 +4675,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.15,
+   "seconds": 0.23,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4554,7 +4689,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 12.5,
+   "case_seconds": 23.1,
    "cluster_key": "GO-2026-5208",
    "commit": "37c66b85d6ab025ba67a73ba03b7f3ef55859cca",
    "context_only_symbols": 0,
@@ -4598,7 +4733,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.1,
+    "seconds": 1.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4616,7 +4751,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 9.06,
+   "seconds": 17.93,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -4629,31 +4764,78 @@
    "verified_paths": 1
   },
   {
-   "case_seconds": 1.6,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 5.4,
    "cluster_key": "GO-2026-5313",
    "commit": "90d9f812b2cafc79ca125a829936dec9654aec64",
+   "context_only_symbols": 2,
    "created": "2026-07-07",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-5313",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 1
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.4,
+    "seconds": 4.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.05,
+   "symbols": 4,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.4,
+   "case_seconds": 0.6,
    "cluster_key": "GO-2026-5320",
    "commit": "d8b123c855fc895a2c8672c530ba9d9f2382d5ef",
    "context_only_symbols": 0,
@@ -4707,7 +4889,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.11,
+   "seconds": 0.12,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4720,54 +4902,146 @@
    "verified_paths": 0
   },
   {
-   "case_seconds": 2.8,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 4.1,
    "cluster_key": "GO-2026-5380",
    "commit": "86fbb0f7a8bbb93e2e916390de9e5a4f24bf9f50",
+   "context_only_symbols": 3,
    "created": "2026-07-07",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-5380",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 2
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.5,
+    "seconds": 3.6,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 4,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.3,
+   "app_list_error": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.5,
    "cluster_key": "GO-2026-5410",
    "commit": "c6edc2762f59b0fcd2af7f2d8eab36e2f29bad7d",
+   "context_only_symbols": 0,
    "created": "2026-07-07",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-5410",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.3,
+    "seconds": 0.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 110.7,
+   "case_seconds": 179.2,
    "cluster_key": "GO-2026-5427",
    "commit": "bc77597d42335c78464bc8e15a471d887bbdf260",
    "context_only_symbols": 0,
@@ -4806,7 +5080,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.2,
+    "seconds": 4.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4824,7 +5098,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 89.7,
+   "seconds": 151.36,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -4837,7 +5111,7 @@
    "verified_paths": 1
   },
   {
-   "case_seconds": 2.7,
+   "case_seconds": 14.9,
    "cluster_key": "GO-2026-5435",
    "commit": "25819432bf87ac0b54f0d3fa54982add2cac609e",
    "created": "2026-07-23",
@@ -4848,7 +5122,7 @@
    "prep": {
     "module_rel": null,
     "reason": "no go.mod declaring module helm.sh/helm/v3 in the vulnerable-side tree",
-    "seconds": 2.4,
+    "seconds": 14.1,
     "status": "NO_MODULE",
     "synthesized_go_mod": false,
     "vendor_dropped": null,
@@ -4861,7 +5135,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 96.8,
+   "case_seconds": 136.7,
    "cluster_key": "GO-2026-5452",
    "commit": "c9dd8076090c4beb3e0a93633905af5abc749adc",
    "context_only_symbols": 23,
@@ -4907,7 +5181,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.5,
+    "seconds": 5.0,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4927,7 +5201,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 90.9,
+   "seconds": 129.48,
    "symbols": 179,
    "verdict": "REACHABLE",
    "verification": {
@@ -4941,7 +5215,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 27.5,
+   "case_seconds": 41.2,
    "cluster_key": "GO-2026-5463",
    "commit": "38144a0e3f99217681f128057afedb7e3bafc4c6",
    "context_only_symbols": 0,
@@ -4986,7 +5260,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 5.8,
+    "seconds": 4.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5009,7 +5283,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 21.23,
+   "seconds": 35.2,
    "symbols": 1,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5022,7 +5296,7 @@
    "verified_paths": 0
   },
   {
-   "case_seconds": 3.1,
+   "case_seconds": 3.2,
    "cluster_key": "GO-2026-5466",
    "commit": "08490972a53e4e838a594a4ccbe8fbac8c4815e3",
    "created": "2026-07-21",
@@ -5033,7 +5307,7 @@
    "prep": {
     "module_rel": null,
     "reason": "no go.mod declaring module github.com/ncw/rclone in the vulnerable-side tree",
-    "seconds": 2.7,
+    "seconds": 2.0,
     "status": "NO_MODULE",
     "synthesized_go_mod": false,
     "vendor_dropped": null,
@@ -5045,31 +5319,76 @@
    "verdict": null
   },
   {
-   "case_seconds": 2.9,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 3.9,
    "cluster_key": "GO-2026-5504",
    "commit": "81a5cdca0788ca39574a17d444c9db29d0b19e27",
+   "context_only_symbols": 0,
    "created": "2026-07-07",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 3,
    "id": "GO-2026-5504",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.9,
+    "seconds": 2.5,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.22,
+   "symbols": 3,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 3.2,
+   "case_seconds": 3.9,
    "cluster_key": "GO-2026-5506",
    "commit": "707898761bea5f230aa29b35a834a72c718dc9a2",
    "context_only_symbols": 2,
@@ -5106,7 +5425,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.1,
+    "seconds": 1.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5125,7 +5444,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.35,
+   "seconds": 0.48,
    "symbols": 12,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5139,7 +5458,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 88.8,
+   "case_seconds": 142.1,
    "cluster_key": "GO-2026-5525",
    "commit": "35adaa5ff30ac4af20e9c39dacebc6f4d72ac0d4",
    "context_only_symbols": 0,
@@ -5196,7 +5515,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 71.53,
+   "seconds": 116.2,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -5210,7 +5529,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 65.9,
+   "case_seconds": 72.9,
    "cluster_key": "GO-2026-5529",
    "commit": "fe4d20e3c64a327a5e2e0150bbb2bdd3ab98f3c0",
    "context_only_symbols": 0,
@@ -5245,7 +5564,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 56.4,
+    "seconds": 54.3,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": false,
@@ -5268,7 +5587,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.27,
+   "seconds": 0.6,
    "symbols": 0,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5282,7 +5601,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.4,
+   "case_seconds": 0.5,
    "cluster_key": "GO-2026-5543",
    "commit": "6611b287a486a51b6aeb5fa0793a6a71b242287c",
    "context_only_symbols": 1,
@@ -5336,7 +5655,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.15,
+   "seconds": 0.16,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5349,123 +5668,352 @@
    "verified_paths": 0
   },
   {
-   "case_seconds": 0.6,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 1.7,
    "cluster_key": "GO-2026-5548",
    "commit": "338d672bee1a87a071aba1a0ea59ca122139ee08",
+   "context_only_symbols": 0,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "EMPTY",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": false,
+   "gold_count": 1,
    "id": "GO-2026-5548",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "NO_FIX_EVIDENCE"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.5,
+    "seconds": 1.3,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "NO_FIX_EVIDENCE"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 0,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 2.2,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 7.2,
    "cluster_key": "GO-2026-5566",
    "commit": "4e7994d4467182f535b6797c94b5b0e994a91436",
+   "context_only_symbols": 1,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": false,
+   "gold_count": 1,
    "id": "GO-2026-5566",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.9,
+    "seconds": 5.3,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.04,
+   "symbols": 2,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 1.5,
+   "app_list_error": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 5.0,
    "cluster_key": "GO-2026-5569",
    "commit": "e8988c31412249897a2e6805b61c37ed5c82a10c",
+   "context_only_symbols": 1,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-5569",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.3,
+    "seconds": 3.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.04,
+   "symbols": 3,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 1.4,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 6.3,
    "cluster_key": "GO-2026-5596",
    "commit": "2a7b0d0d3b6decabdc8a5e4d4d977ae36b619dcc",
+   "context_only_symbols": 2,
    "created": "2026-07-21",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-5596",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 3
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.3,
+    "seconds": 4.6,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 6,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 1.5,
+   "app_list_error": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 7.6,
    "cluster_key": "GO-2026-5606",
    "commit": "cf9c8f93ca2a2838ce378f9e36d052ac2f79e229",
+   "context_only_symbols": 2,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 3,
    "id": "GO-2026-5606",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 3
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.3,
+    "seconds": 6.8,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.05,
+   "symbols": 5,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 155.1,
+   "case_seconds": 197.4,
    "cluster_key": "GO-2026-5665",
    "commit": "f842cdf383fbae6f8f7336439a9ad411eb284436",
    "context_only_symbols": 0,
@@ -5508,7 +6056,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.3,
+    "seconds": 0.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5527,7 +6075,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 118.25,
+   "seconds": 151.09,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -5540,77 +6088,216 @@
    "verified_paths": 2
   },
   {
-   "case_seconds": 0.9,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 5.2,
    "cluster_key": "GO-2026-5666",
    "commit": "c61e0860ec797330a4c26a78dde7020cdc6743b1",
+   "context_only_symbols": 0,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 3,
    "id": "GO-2026-5666",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 1
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.8,
+    "seconds": 3.1,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.06,
+   "symbols": 3,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.3,
+   "app_list_error": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.6,
    "cluster_key": "GO-2026-5676",
    "commit": "678ae731b072303f1a0012caee87554c9a24cf2f",
+   "context_only_symbols": 0,
    "created": "2026-07-07",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 3,
    "id": "GO-2026-5676",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 3
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.2,
+    "seconds": 0.5,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 3,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 1.6,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 3.8,
    "cluster_key": "GO-2026-5681",
    "commit": "7d4af7a1797a6d17ff2475740e3bc6a156ecd8c1",
+   "context_only_symbols": 0,
    "created": "2026-07-07",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-5681",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.2,
+    "seconds": 3.6,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 109.9,
+   "case_seconds": 129.2,
    "cluster_key": "GO-2026-5699",
    "commit": "51ad1ada06cb41ce47b7066799981816f50b7ced",
    "context_only_symbols": 2,
@@ -5653,7 +6340,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.4,
+    "seconds": 0.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5673,7 +6360,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 108.11,
+   "seconds": 127.11,
    "symbols": 4,
    "verdict": "REACHABLE",
    "verification": {
@@ -5687,7 +6374,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 144.5,
+   "case_seconds": 210.0,
    "cluster_key": "GO-2026-5713",
    "commit": "e04d9025d075e90b13a4681c783f8a98ee2754c7",
    "context_only_symbols": 0,
@@ -5726,7 +6413,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.8,
+    "seconds": 0.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5744,7 +6431,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 111.89,
+   "seconds": 158.42,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -5757,31 +6444,78 @@
    "verified_paths": 4
   },
   {
-   "case_seconds": 1.6,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 5.0,
    "cluster_key": "GO-2026-5740",
    "commit": "f5fce935e768f4c301fb5c825e512a17f8a13e2e",
+   "context_only_symbols": 8,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 6,
    "id": "GO-2026-5740",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 14
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.2,
+    "seconds": 3.5,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.04,
+   "symbols": 22,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 98.1,
+   "case_seconds": 157.6,
    "cluster_key": "GO-2026-5748",
    "commit": "f4f0a4a47119e20a7390007fcafad4ee4984ebac",
    "context_only_symbols": 0,
@@ -5828,7 +6562,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 12.1,
+    "seconds": 22.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5853,7 +6587,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 84.38,
+   "seconds": 132.46,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5867,7 +6601,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 27.9,
+   "case_seconds": 37.9,
    "cluster_key": "GO-2026-5841",
    "commit": "ac2f5e87a3089bd58c974ca53cef71c7aa8bf877",
    "context_only_symbols": 0,
@@ -5904,7 +6638,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.5,
+    "seconds": 0.9,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5921,7 +6655,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 26.54,
+   "seconds": 35.84,
    "symbols": 1,
    "verdict": "NOT_REACHABLE",
    "verification": {
@@ -5934,27 +6668,74 @@
    "verified_paths": 0
   },
   {
-   "case_seconds": 0.2,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.3,
    "cluster_key": "GO-2026-5879",
    "commit": "7a9f4b0b9558821b0422152ebe21ae56930fe764",
+   "context_only_symbols": 1,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": false,
+   "gold_count": 2,
    "id": "GO-2026-5879",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 2
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.1,
+    "seconds": 0.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.05,
+   "symbols": 2,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "case_seconds": 0.2,
@@ -5980,37 +6761,111 @@
    "verdict": null
   },
   {
-   "case_seconds": 0.1,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.4,
    "cluster_key": "GO-2026-5882",
    "commit": "4a3e611259f57357a07f1bc0e62406f4881a0f07",
+   "context_only_symbols": 1,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": false,
+   "gold_count": 1,
    "id": "GO-2026-5882",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 1
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.1,
+    "seconds": 0.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 2,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.1,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.3,
    "cluster_key": "GO-2026-5884",
    "commit": "cc323e564d90c6b5b4bdd71d3c8d2ee2713b37e5",
+   "context_only_symbols": 0,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-5884",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 2
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
@@ -6020,20 +6875,67 @@
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 2,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.1,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.4,
    "cluster_key": "GO-2026-5885",
    "commit": "d593d504779be8b69f0ba034ac9fd407d1fc8cfc",
+   "context_only_symbols": 2,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-5885",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 1
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
@@ -6043,14 +6945,34 @@
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 3,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 114.0,
+   "case_seconds": 126.3,
    "cluster_key": "GO-2026-5954",
    "commit": "7325b9dc7ab07b6d2a55d236878be01c02bcbdf6",
    "context_only_symbols": 0,
@@ -6089,7 +7011,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.3,
+    "seconds": 0.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6107,7 +7029,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 96.63,
+   "seconds": 106.48,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -6121,7 +7043,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 153.4,
+   "case_seconds": 139.5,
    "cluster_key": "GO-2026-5955",
    "commit": "2ee365d3b0807d049d518f0dd6a9f4906963636b",
    "context_only_symbols": 0,
@@ -6178,7 +7100,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 115.96,
+   "seconds": 109.0,
    "symbols": 5,
    "verdict": "REACHABLE",
    "verification": {
@@ -6191,14 +7113,41 @@
    "verified_paths": 10
   },
   {
-   "case_seconds": 0.1,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.2,
    "cluster_key": "GO-2026-5960",
    "commit": "f4a068bbdd232fc3806dec1952d148636e37cad9",
+   "context_only_symbols": 0,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 3,
    "id": "GO-2026-5960",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 2
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
@@ -6208,14 +7157,34 @@
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 3,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 128.5,
+   "case_seconds": 127.1,
    "cluster_key": "GO-2026-5971",
    "commit": "362cce3e325f56e7a4f792ccb9689b3bdda9e682",
    "context_only_symbols": 0,
@@ -6272,7 +7241,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 92.76,
+   "seconds": 88.57,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -6285,37 +7254,111 @@
    "verified_paths": 2
   },
   {
-   "case_seconds": 2.7,
+   "app_list_error": "go: go.mod requires go >= 1.26.3 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 3.7,
    "cluster_key": "GO-2026-5983",
    "commit": "7d9d5193dfb0ad1f205cbad20640c914227e490c",
+   "context_only_symbols": 4,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 6,
    "id": "GO-2026-5983",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 11
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.3 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.2,
+    "seconds": 3.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 23,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.2,
+   "app_list_error": "go: go.mod requires go >= 1.26.4 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.3,
    "cluster_key": "GO-2026-5987",
    "commit": "853717c53d2b02450335e1b3bb1fafaa5bdba94c",
+   "context_only_symbols": 2,
    "created": "2026-07-21",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 3,
    "id": "GO-2026-5987",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 3
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.4 (running go 1.24.7; GOTOOLCHAIN=local)",
@@ -6325,152 +7368,444 @@
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 5,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.2,
+   "app_list_error": "go: go.mod requires go >= 1.26.4 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.4,
    "cluster_key": "GO-2026-5989",
    "commit": "514006029e09f1991122b86a80e7b25970bcfa98",
+   "context_only_symbols": 2,
    "created": "2026-07-22",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 3,
    "id": "GO-2026-5989",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.4 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.2,
+    "seconds": 0.3,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 5,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 1.4,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 1.6,
    "cluster_key": "GO-2026-6061",
    "commit": "9494a2cf32a0ec9d35420af401445ef3c9f66f05",
+   "context_only_symbols": 6,
    "created": "2026-07-23",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 4,
    "id": "GO-2026-6061",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 9
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.3,
+    "seconds": 1.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 37,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.9,
+   "app_list_error": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 1.5,
    "cluster_key": "GO-2026-6095",
    "commit": "c9476701743509b5c9ed05858554eacf30672398",
+   "context_only_symbols": 0,
    "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6095",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.5,
+    "seconds": 1.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.8,
+   "app_list_error": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 1.5,
    "cluster_key": "GO-2026-6112",
    "commit": "3e5d7f4d5a0c335d8085de5c0e552efe61e37e03",
+   "context_only_symbols": 0,
    "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6112",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.6,
+    "seconds": 1.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 1.0,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 2.1,
    "cluster_key": "GO-2026-6114",
    "commit": "724eb19864381c9eea355c663004fe86ba9062ff",
+   "context_only_symbols": 0,
    "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 3,
    "id": "GO-2026-6114",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "server",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.9,
+    "seconds": 1.7,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 6.5,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 8.7,
    "cluster_key": "GO-2026-6138",
    "commit": "83879426c1dce45fba83c5eacb10285155fd9a78",
+   "context_only_symbols": 0,
    "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6138",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 6.1,
+    "seconds": 7.9,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 117.1,
+   "case_seconds": 136.4,
    "cluster_key": "GO-2026-6139",
    "commit": "f0a03396bd5189af815ed4f5b26f08076f64f475",
    "context_only_symbols": 5,
@@ -6509,7 +7844,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 7.8,
+    "seconds": 9.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6526,7 +7861,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 85.63,
+   "seconds": 88.43,
    "symbols": 16,
    "verdict": "REACHABLE",
    "verification": {
@@ -6540,7 +7875,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 72.7,
+   "case_seconds": 107.7,
    "cluster_key": "GO-2026-6163",
    "commit": "01aa5b8eefd0c0934c6aebd2bd6b6fa7d3c7d715",
    "context_only_symbols": 0,
@@ -6579,7 +7914,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.8,
+    "seconds": 1.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6597,7 +7932,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 53.46,
+   "seconds": 76.15,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -6611,7 +7946,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 87.0,
+   "case_seconds": 125.7,
    "cluster_key": "GO-2026-6165",
    "commit": "e4b257d7ea9ce71c683f62a8533e06ffe1c433ee",
    "context_only_symbols": 0,
@@ -6648,7 +7983,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.6,
+    "seconds": 2.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6665,7 +8000,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 57.15,
+   "seconds": 92.26,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -6678,221 +8013,381 @@
    "verified_paths": 5
   },
   {
-   "case_seconds": 2.2,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 5.3,
    "cluster_key": "GO-2026-6181",
    "commit": "1df2b70753286c1dfe8366078cbedfdf7f96472c",
+   "context_only_symbols": 0,
    "created": "2026-08-18",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6181",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.6,
+    "seconds": 5.0,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 2.0,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 4.1,
    "cluster_key": "GO-2026-6182",
    "commit": "7543a7a87884aca957590b20b0714078d51af87b",
+   "context_only_symbols": 1,
    "created": "2026-08-18",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6182",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.7,
+    "seconds": 3.6,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.05,
+   "symbols": 2,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 2.1,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 3.5,
    "cluster_key": "GO-2026-6183",
    "commit": "52cf74dc5937e8b841488f33b57db01de9cf4770",
+   "context_only_symbols": 0,
    "created": "2026-08-18",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6183",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.9,
+    "seconds": 3.0,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 2.7,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 3.8,
    "cluster_key": "GO-2026-6184",
    "commit": "208d7df87758249be8ba9833d714a5a605cf5c6c",
+   "context_only_symbols": 0,
    "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6184",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.1,
+    "seconds": 3.3,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 3.6,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 4.3,
    "cluster_key": "GO-2026-6185",
    "commit": "c89b766cf417fddbe7eace40d31262ecb85bfa93",
+   "context_only_symbols": 0,
    "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6185",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 2
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.7,
+    "seconds": 3.0,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 3.6,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 4.3,
    "cluster_key": "GO-2026-6186",
    "commit": "cc5a189f00efe68ed0ddb32d3237b42549a9f264",
+   "context_only_symbols": 3,
    "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 14,
    "id": "GO-2026-6186",
-   "mode": null,
-   "pre_policy_verdict": null,
-   "prep": {
-    "module_rel": "",
-    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.2,
-    "status": "PREP_FAILED",
-    "synthesized_go_mod": false,
-    "vendor_dropped": false,
-    "vendored": false
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
-  },
-  {
-   "case_seconds": 2.3,
-   "cluster_key": "GO-2026-6187",
-   "commit": "5871d98c368751a6d992ed64f8cd22cb78c44cee",
-   "created": "2026-08-17",
-   "evidence_status": "AVAILABLE",
-   "id": "GO-2026-6187",
-   "mode": null,
-   "pre_policy_verdict": null,
-   "prep": {
-    "module_rel": "",
-    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.1,
-    "status": "PREP_FAILED",
-    "synthesized_go_mod": false,
-    "vendor_dropped": false,
-    "vendored": false
-   },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
-  },
-  {
-   "case_seconds": 2.4,
-   "cluster_key": "GO-2026-6188",
-   "commit": "9328763d1b73db71e97c0332b19e3747abeb9191",
-   "created": "2026-08-17",
-   "evidence_status": "AVAILABLE",
-   "id": "GO-2026-6188",
-   "mode": null,
-   "pre_policy_verdict": null,
-   "prep": {
-    "module_rel": "",
-    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.2,
-    "status": "PREP_FAILED",
-    "synthesized_go_mod": false,
-    "vendor_dropped": false,
-    "vendored": false
-   },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
-  },
-  {
-   "case_seconds": 2.4,
-   "cluster_key": "GO-2026-6189",
-   "commit": "e753736df661d8c032f86ff5d2d6e3ab45e86837",
-   "created": "2026-08-17",
-   "evidence_status": "AVAILABLE",
-   "id": "GO-2026-6189",
-   "mode": null,
-   "pre_policy_verdict": null,
-   "prep": {
-    "module_rel": "",
-    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.2,
-    "status": "PREP_FAILED",
-    "synthesized_go_mod": false,
-    "vendor_dropped": false,
-    "vendored": false
-   },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
-  },
-  {
-   "case_seconds": 2.8,
-   "cluster_key": "GO-2026-6190",
-   "commit": "7e78929575b05d71ffcfa9f3b1066fe7682a54b6",
-   "created": "2026-08-17",
-   "evidence_status": "AVAILABLE",
-   "id": "GO-2026-6190",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
@@ -6902,129 +8397,658 @@
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
-  },
-  {
-   "case_seconds": 2.8,
-   "cluster_key": "GO-2026-6191",
-   "commit": "637a8300027096ca3447cf097e56a5457c318243",
-   "created": "2026-08-17",
-   "evidence_status": "AVAILABLE",
-   "id": "GO-2026-6191",
-   "mode": null,
-   "pre_policy_verdict": null,
-   "prep": {
-    "module_rel": "",
-    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.5,
-    "status": "PREP_FAILED",
-    "synthesized_go_mod": false,
-    "vendor_dropped": false,
-    "vendored": false
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
-  },
-  {
-   "case_seconds": 2.5,
-   "cluster_key": "GO-2026-6195",
-   "commit": "1a746732441e8158f32fab35924b23701e719a8c",
-   "created": "2026-08-17",
-   "evidence_status": "AVAILABLE",
-   "id": "GO-2026-6195",
-   "mode": null,
-   "pre_policy_verdict": null,
-   "prep": {
-    "module_rel": "",
-    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.3,
-    "status": "PREP_FAILED",
-    "synthesized_go_mod": false,
-    "vendor_dropped": false,
-    "vendored": false
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 17,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
-  },
-  {
-   "case_seconds": 3.2,
-   "cluster_key": "GO-2026-6197",
-   "commit": "ed983c952d401fd032fa7eb9fa9ad46940c92db7",
-   "created": "2026-08-17",
-   "evidence_status": "AVAILABLE",
-   "id": "GO-2026-6197",
-   "mode": null,
-   "pre_policy_verdict": null,
-   "prep": {
-    "module_rel": "",
-    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.5,
-    "status": "PREP_FAILED",
-    "synthesized_go_mod": false,
-    "vendor_dropped": false,
-    "vendored": false
-   },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
-  },
-  {
-   "case_seconds": 2.9,
-   "cluster_key": "GO-2026-6199",
-   "commit": "ff43a1e3ae17627c80e523a0ca7445f96516d199",
-   "created": "2026-08-17",
-   "evidence_status": "AVAILABLE",
-   "id": "GO-2026-6199",
-   "mode": null,
-   "pre_policy_verdict": null,
-   "prep": {
-    "module_rel": "",
-    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.4,
-    "status": "PREP_FAILED",
-    "synthesized_go_mod": false,
-    "vendor_dropped": false,
-    "vendored": false
-   },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
-  },
-  {
-   "case_seconds": 0.3,
-   "cluster_key": "GO-2026-6213",
-   "commit": "4a0e66d555de5f9a30c31e2df64f445f42bd01e7",
-   "created": "2026-08-17",
-   "evidence_status": "AVAILABLE",
-   "id": "GO-2026-6213",
-   "mode": null,
-   "pre_policy_verdict": null,
-   "prep": {
-    "module_rel": "",
-    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.3,
-    "status": "PREP_FAILED",
-    "synthesized_go_mod": false,
-    "vendor_dropped": false,
-    "vendored": false
-   },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "verified_paths": 0
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.1,
+   "case_seconds": 3.0,
+   "cluster_key": "GO-2026-6187",
+   "commit": "5871d98c368751a6d992ed64f8cd22cb78c44cee",
+   "context_only_symbols": 1,
+   "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
+   "id": "GO-2026-6187",
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 1
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "prep": {
+    "module_rel": "",
+    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+    "seconds": 2.8,
+    "status": "PREP_FAILED",
+    "synthesized_go_mod": false,
+    "vendor_dropped": false,
+    "vendored": false
+   },
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 2,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 3.5,
+   "cluster_key": "GO-2026-6188",
+   "commit": "9328763d1b73db71e97c0332b19e3747abeb9191",
+   "context_only_symbols": 1,
+   "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 2,
+   "id": "GO-2026-6188",
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "prep": {
+    "module_rel": "",
+    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+    "seconds": 3.2,
+    "status": "PREP_FAILED",
+    "synthesized_go_mod": false,
+    "vendor_dropped": false,
+    "vendored": false
+   },
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 3,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 4.1,
+   "cluster_key": "GO-2026-6189",
+   "commit": "e753736df661d8c032f86ff5d2d6e3ab45e86837",
+   "context_only_symbols": 2,
+   "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 6,
+   "id": "GO-2026-6189",
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 8
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "prep": {
+    "module_rel": "",
+    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+    "seconds": 3.5,
+    "status": "PREP_FAILED",
+    "synthesized_go_mod": false,
+    "vendor_dropped": false,
+    "vendored": false
+   },
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.07,
+   "symbols": 9,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 3.8,
+   "cluster_key": "GO-2026-6190",
+   "commit": "7e78929575b05d71ffcfa9f3b1066fe7682a54b6",
+   "context_only_symbols": 0,
+   "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
+   "id": "GO-2026-6190",
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "prep": {
+    "module_rel": "",
+    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+    "seconds": 3.5,
+    "status": "PREP_FAILED",
+    "synthesized_go_mod": false,
+    "vendor_dropped": false,
+    "vendored": false
+   },
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 2,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 3.8,
+   "cluster_key": "GO-2026-6191",
+   "commit": "637a8300027096ca3447cf097e56a5457c318243",
+   "context_only_symbols": 1,
+   "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 4,
+   "id": "GO-2026-6191",
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 8
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "prep": {
+    "module_rel": "",
+    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+    "seconds": 3.1,
+    "status": "PREP_FAILED",
+    "synthesized_go_mod": false,
+    "vendor_dropped": false,
+    "vendored": false
+   },
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 5,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 4.9,
+   "cluster_key": "GO-2026-6195",
+   "commit": "1a746732441e8158f32fab35924b23701e719a8c",
+   "context_only_symbols": 0,
+   "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
+   "id": "GO-2026-6195",
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "prep": {
+    "module_rel": "",
+    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+    "seconds": 3.8,
+    "status": "PREP_FAILED",
+    "synthesized_go_mod": false,
+    "vendor_dropped": false,
+    "vendored": false
+   },
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.06,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 3.2,
+   "cluster_key": "GO-2026-6197",
+   "commit": "ed983c952d401fd032fa7eb9fa9ad46940c92db7",
+   "context_only_symbols": 2,
+   "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 2,
+   "id": "GO-2026-6197",
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 2
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "prep": {
+    "module_rel": "",
+    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+    "seconds": 2.9,
+    "status": "PREP_FAILED",
+    "synthesized_go_mod": false,
+    "vendor_dropped": false,
+    "vendored": false
+   },
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 5,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 4.7,
+   "cluster_key": "GO-2026-6199",
+   "commit": "ff43a1e3ae17627c80e523a0ca7445f96516d199",
+   "context_only_symbols": 0,
+   "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
+   "id": "GO-2026-6199",
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 1
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "prep": {
+    "module_rel": "",
+    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+    "seconds": 3.2,
+    "status": "PREP_FAILED",
+    "synthesized_go_mod": false,
+    "vendor_dropped": false,
+    "vendored": false
+   },
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.04,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.5,
+   "cluster_key": "GO-2026-6213",
+   "commit": "4a0e66d555de5f9a30c31e2df64f445f42bd01e7",
+   "context_only_symbols": 8,
+   "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 10,
+   "id": "GO-2026-6213",
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 6
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "prep": {
+    "module_rel": "",
+    "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+    "seconds": 0.4,
+    "status": "PREP_FAILED",
+    "synthesized_go_mod": false,
+    "vendor_dropped": false,
+    "vendored": false
+   },
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 19,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 4.5,
    "cluster_key": "GO-2026-6234",
    "commit": "489a658619140e5332c8e72632037728564a3173",
    "context_only_symbols": 1,
@@ -7059,7 +9083,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.9,
+    "seconds": 4.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7092,7 +9116,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 17.9,
+   "case_seconds": 18.4,
    "cluster_key": "GO-2026-6237",
    "commit": "a415979eb11e6d3ac6a8949f9e45d7a29f0279af",
    "context_only_symbols": 0,
@@ -7129,7 +9153,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.6,
+    "seconds": 4.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7146,7 +9170,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 14.1,
+   "seconds": 14.02,
    "symbols": 1,
    "verdict": "NOT_REACHABLE",
    "verification": {
@@ -7159,77 +9183,214 @@
    "verified_paths": 0
   },
   {
-   "case_seconds": 0.8,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 1.2,
    "cluster_key": "GO-2026-6238",
    "commit": "53896a30e7419fbf0839c72d845bf95139f0416e",
+   "context_only_symbols": 0,
    "created": "2026-08-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6238",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.7,
+    "seconds": 0.9,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.3,
+   "app_list_error": "go: go.mod requires go >= 1.25.9 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.4,
    "cluster_key": "GO-2026-6302",
    "commit": "38321449c424dda4633b874a4cd8e1de84023392",
+   "context_only_symbols": 0,
    "created": "2026-08-27",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6302",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.9 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.3,
+    "seconds": 0.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 1.5,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 2.6,
    "cluster_key": "GO-2026-6348",
    "commit": "c92e985770b7194d4a4f433c84d42c6c195e8ce5",
+   "context_only_symbols": 2,
    "created": "2026-09-09",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 7,
    "id": "GO-2026-6348",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 2
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.4,
+    "seconds": 1.7,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 10,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.26.4 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 10.8,
+   "case_seconds": 9.6,
    "cluster_key": "GO-2026-6366",
    "commit": "0ceeb140763f1a3dbdd00476b6b9336e75038526",
    "context_only_symbols": 1,
@@ -7266,7 +9427,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 9.6,
+    "seconds": 8.3,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7285,7 +9446,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.04,
+   "seconds": 0.06,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7298,37 +9459,111 @@
    "verified_paths": 0
   },
   {
-   "case_seconds": 0.2,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.4,
    "cluster_key": "GO-2026-6452",
    "commit": "1213a8bd7c5ab360554603ac5c995ccaf6eb4314",
+   "context_only_symbols": 2,
    "created": "2026-09-15",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6452",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 1
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.2,
+    "seconds": 0.3,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.04,
+   "symbols": 5,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.2,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 0.3,
    "cluster_key": "GO-2026-6453",
    "commit": "1213a8bd7c5ab360554603ac5c995ccaf6eb4314",
+   "context_only_symbols": 2,
    "created": "2026-09-15",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 2,
    "id": "GO-2026-6453",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 1
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
@@ -7338,83 +9573,240 @@
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 5,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 1.3,
+   "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 1.7,
    "cluster_key": "GO-2026-6489",
    "commit": "a6deb6ab902bc45fe388fe9fc63b3ce4010a3383",
+   "context_only_symbols": 1,
    "created": "2026-10-05",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 18,
    "id": "GO-2026-6489",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 2
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.2,
+    "seconds": 1.5,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 19,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.9,
+   "app_list_error": "go: go.mod requires go >= 1.25.1 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 1.1,
    "cluster_key": "GO-2026-6512",
    "commit": "4c04143261363c8e81ef33d150a6268ccdfcb077",
+   "context_only_symbols": 0,
    "created": "2026-09-22",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6512",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.1 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.8,
+    "seconds": 0.9,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 6.9,
+   "app_list_error": "go: go.mod requires go >= 1.26 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 7.3,
    "cluster_key": "GO-2026-6535",
    "commit": "2d211bce16e5022afaf95780de82dc30e0bcba98",
+   "context_only_symbols": 0,
    "created": "2026-09-22",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6535",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 6.3,
+    "seconds": 6.0,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.05,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
-   "case_seconds": 26.4,
+   "case_seconds": 12.4,
    "cluster_key": "GO-2026-6665",
    "commit": "bc2bc0c198471d83a0fde73b64d68812234df3ff",
    "context_only_symbols": 11,
@@ -7462,7 +9854,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 19.8,
+    "seconds": 5.1,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": false,
@@ -7487,7 +9879,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 6.24,
+   "seconds": 6.89,
    "symbols": 36,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7500,7 +9892,7 @@
    "verified_paths": 0
   },
   {
-   "case_seconds": 0.2,
+   "case_seconds": 0.1,
    "cluster_key": "GO-2026-6684",
    "commit": "b2841ca8eae98752e0700280dbd30e6e96275269",
    "created": "2026-10-09",
@@ -7511,7 +9903,7 @@
    "prep": {
     "module_rel": null,
     "reason": "no go.mod declaring module github.com/360EntSecGroup-Skylar/excelize/v2 in the vulnerable-side tree",
-    "seconds": 0.2,
+    "seconds": 0.1,
     "status": "NO_MODULE",
     "synthesized_go_mod": false,
     "vendor_dropped": null,
@@ -7523,7 +9915,7 @@
    "verdict": null
   },
   {
-   "case_seconds": 0.2,
+   "case_seconds": 0.1,
    "cluster_key": "GO-2026-6685",
    "commit": "8ffeb07ec9a350410f6922313f6b7e4f5cc79241",
    "created": "2026-10-09",
@@ -7534,7 +9926,7 @@
    "prep": {
     "module_rel": null,
     "reason": "no go.mod declaring module github.com/360EntSecGroup-Skylar/excelize/v2 in the vulnerable-side tree",
-    "seconds": 0.2,
+    "seconds": 0.1,
     "status": "NO_MODULE",
     "synthesized_go_mod": false,
     "vendor_dropped": null,
@@ -7547,7 +9939,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.9,
+   "case_seconds": 0.7,
    "cluster_key": "GO-2026-6686",
    "commit": "ee79b0e8cbbf36c26a182e94e0ec41c5c1c09c34",
    "context_only_symbols": 1,
@@ -7584,7 +9976,7 @@
    "prep": {
     "module_rel": "user",
     "reason": null,
-    "seconds": 0.8,
+    "seconds": 0.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7603,7 +9995,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.08,
+   "seconds": 0.07,
    "symbols": 4,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7616,14 +10008,39 @@
    "verified_paths": 0
   },
   {
+   "app_list_error": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
    "case_seconds": 0.2,
    "cluster_key": "GO-2026-6687",
    "commit": "3985c1f78c8a7e0e36c518fa79535b72ad788725",
+   "context_only_symbols": 0,
    "created": "2026-10-09",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6687",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
@@ -7633,13 +10050,33 @@
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 0.2,
+   "case_seconds": 0.1,
    "cluster_key": "GO-2026-6689",
    "commit": "ea12859e43c64d498ecf839263c5f917391f3316",
    "created": "2026-10-09",
@@ -7662,27 +10099,72 @@
    "verdict": null
   },
   {
+   "app_list_error": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
    "case_seconds": 0.2,
    "cluster_key": "GO-2026-6695",
    "commit": "5b7a2cf907209a9153a2117195074f28b88cb512",
+   "context_only_symbols": 0,
    "created": "2026-10-09",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 1,
    "id": "GO-2026-6695",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.2,
+    "seconds": 0.1,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.02,
+   "symbols": 1,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
    "app_list_error": null,
@@ -7721,7 +10203,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.4,
+    "seconds": 0.3,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7740,7 +10222,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.09,
+   "seconds": 0.15,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7753,50 +10235,144 @@
    "verified_paths": 0
   },
   {
-   "case_seconds": 1.4,
+   "app_list_error": "go: go.mod requires go >= 1.26.2 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 1.9,
    "cluster_key": "GO-2026-6773",
    "commit": "ece9395636674d1f2b7aaa5a40c1c1ea091ebf34",
+   "context_only_symbols": 9,
    "created": "2026-10-19",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 32,
    "id": "GO-2026-6773",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 22
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.2 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.3,
+    "seconds": 1.7,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 45,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   },
   {
-   "case_seconds": 1.4,
+   "app_list_error": "go: go.mod requires go >= 1.26.2 (running go 1.24.7; GOTOOLCHAIN=local)",
+   "case_seconds": 2.3,
    "cluster_key": "GO-2026-6786",
    "commit": "ece9395636674d1f2b7aaa5a40c1c1ea091ebf34",
+   "context_only_symbols": 9,
    "created": "2026-10-19",
+   "dynamic_edges_on_verified": 0,
+   "entries": {},
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
    "evidence_status": "AVAILABLE",
+   "first_method_error": null,
+   "go_version": null,
+   "gold_analysed": true,
+   "gold_count": 32,
    "id": "GO-2026-6786",
-   "mode": null,
-   "pre_policy_verdict": null,
+   "mains": 0,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_calls": {
+    "linker": 0,
+    "vta": 0
+   },
+   "method_errors": {},
+   "method_pairs": {},
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "not_covered": {
+    "ADDED_BY_FIX": 22
+   },
+   "pre_policy_reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.2 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.3,
+    "seconds": 2.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
     "vendored": false
    },
-   "reason_codes": [],
-   "reference": null,
-   "seconds": null,
-   "verdict": null
+   "reachable_ranks": [],
+   "reason_codes": [
+    "APP_LOAD_FAILED"
+   ],
+   "reference": {
+    "entries": {},
+    "reason_codes": [
+     "APP_LOAD_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 0.03,
+   "symbols": 45,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
   }
  ],
  "schema_version": "1.0",
@@ -7815,21 +10391,21 @@
    "GO-2022-0588"
   ],
   "different": [],
-  "seconds": 424.9
+  "seconds": 541.7
  },
  "summary": {
   "app_load_failure_causes": {
    "GOPATH_STYLE_IMPORT": 1,
-   "GO_VERSION_TOO_OLD": 3,
+   "GO_VERSION_TOO_OLD": 58,
    "MISSING_DEPENDENCY": 4,
    "TYPE_ERRORS": 1,
    "VENDOR_INCONSISTENT": 1
   },
   "cases": 150,
-  "cases_all_mains_load_failed": 10,
+  "cases_all_mains_load_failed": 65,
   "cases_no_main": 26,
   "cases_with_mains_skipped": 16,
-  "context_only_symbols": 102,
+  "context_only_symbols": 189,
   "dynamic_edges_on_verified": 592,
   "entry_results": {
    "CANT_DETERMINE": 358,
@@ -7868,34 +10444,34 @@
    "PATH_FOUND+PRESENT": 266
   },
   "mode": {
-   "FIX": 87
+   "FIX": 143
   },
   "mode_reason": {
-   "FIX_COMMIT_KNOWN": 87
+   "FIX_COMMIT_KNOWN": 143
   },
   "not_covered": {
-   "ADDED_BY_FIX": 204
+   "ADDED_BY_FIX": 340
   },
   "pre_policy_reason_codes": {
    "ANALYSIS_FAILED": 13,
-   "APP_LOAD_FAILED": 10,
+   "APP_LOAD_FAILED": 65,
    "INCOMPLETE_COVERAGE": 6,
    "METHOD_DISAGREEMENT": 1,
-   "NO_FIX_EVIDENCE": 3,
+   "NO_FIX_EVIDENCE": 4,
    "UNSUPPORTED_TARGET": 26,
    "VERIFIER_REJECTED": 1
   },
   "pre_policy_verdict": {
-   "CANT_DETERMINE": 46,
+   "CANT_DETERMINE": 102,
    "NOT_REACHABLE": 3,
    "REACHABLE": 38
   },
   "prep_seconds": {
-   "max": 257.7,
+   "max": 460.1,
    "n": 150,
-   "p50": 1.3,
-   "p95": 32.4,
-   "total": 1009.6
+   "p50": 2.0,
+   "p95": 46.7,
+   "total": 1666.5
   },
   "prep_status": {
    "NO_MODULE": 7,
@@ -7905,46 +10481,46 @@
   "reachable_without_verified_path": 0,
   "reason_codes": {
    "ANALYSIS_FAILED": 13,
-   "APP_LOAD_FAILED": 10,
+   "APP_LOAD_FAILED": 65,
    "INCOMPLETE_COVERAGE": 6,
    "METHOD_DISAGREEMENT": 1,
-   "NO_FIX_EVIDENCE": 3,
+   "NO_FIX_EVIDENCE": 4,
    "UNSUPPORTED_TARGET": 26,
    "VERIFIER_REJECTED": 1
   },
   "reference": {
-   "cases": 87,
-   "gold_analysed": 77,
+   "cases": 143,
+   "gold_analysed": 128,
    "pairs_pre_policy": {
-    "CANT_DETERMINE|CANT_DETERMINE": 46,
+    "CANT_DETERMINE|CANT_DETERMINE": 102,
     "NOT_REACHABLE|NOT_REACHABLE": 3,
     "REACHABLE|CANT_DETERMINE": 4,
     "REACHABLE|REACHABLE": 34
    },
    "verdict": {
-    "CANT_DETERMINE": 50,
+    "CANT_DETERMINE": 106,
     "NOT_REACHABLE": 3,
     "REACHABLE": 34
    }
   },
   "seconds": {
-   "max": 410.0,
+   "max": 487.6,
    "n": 150,
-   "p50": 2.8,
-   "p95": 153.4,
-   "total": 5358.1
+   "p50": 4.9,
+   "p95": 205.4,
+   "total": 6886.4
   },
-  "symbols": 524,
+  "symbols": 910,
   "triage_seconds": {
-   "max": 296.83,
-   "n": 87,
-   "p50": 14.12,
-   "p95": 130.59,
-   "total": 3492.5
+   "max": 300.64,
+   "n": 143,
+   "p50": 0.17,
+   "p95": 151.18,
+   "total": 4132.4
   },
-  "triaged": 87,
+  "triaged": 143,
   "verdict": {
-   "CANT_DETERMINE": 46,
+   "CANT_DETERMINE": 102,
    "NOT_REACHABLE": 3,
    "REACHABLE": 38
   },
