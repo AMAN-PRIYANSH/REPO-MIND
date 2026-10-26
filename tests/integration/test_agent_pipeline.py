@@ -234,3 +234,24 @@ def test_compare_with_summary_reports_same_different_and_missing(tmp_path):
     assert res == {"same": ["A"], "different": ["B"], "missing_here": ["C"], "not_in_summary": ["E"]}
     extras = prepare.load_case_extras(d, "A")
     assert extras[2] == {} and extras[0] is None and "not prepared" in extras[1]
+
+
+def test_prepare_graph_builds_a_shared_range_once(tiny_d4, monkeypatch):
+    case_list, vcs, data = tiny_d4
+    calls = []
+
+    def fake_build(case, rr, **kw):
+        calls.append(case["id"])
+        return {"schema_version": "1.0", "case_id": case["id"], "status": "READY", "reason": None, "n_nodes": 1,
+                "candidates": {"r1": {"status": "NONE", "callers": [], "callees": [], "truncated": {}}}, "seconds": 0.1}
+
+    monkeypatch.setattr(prepare, "build_graph_table", fake_build)
+    s = prepare.prepare_all(case_list, vcs, data, diffs=False, graph=True, repo_cache=None, gomodcache=None, binary=None,
+                            jobs=2, timeout=1)
+    assert sorted(calls) == ["GO-2026-0001", "GO-2026-0003"]          # 0001 and 0002 share one range
+    assert s["graph_status_counts"] == {"NO_RANGE": 1, "READY": 3}
+    shared = prepare.read_gz(prepare.graph_path(data, "GO-2026-0002"))
+    assert shared["case_id"] == "GO-2026-0002" and shared["shared_with"] == "GO-2026-0001"
+    again = prepare.prepare_all(case_list, vcs, data, diffs=False, graph=True, repo_cache=None, gomodcache=None,
+                                binary=None, jobs=2, timeout=1)
+    assert len(calls) == 2 and again["graph"] == s["graph"]            # resumed from the files, same hashes

@@ -214,6 +214,14 @@ def graph_summary(doc: dict[str, Any], sha256: str | None) -> dict[str, Any]:
 
 
 # --- driver ------------------------------------------------------------------------------------------
+def range_key(case: dict[str, Any], rr: dict[str, Any]) -> str:
+    """Cases with equal keys have the same graph input: module, vulnerable-side commit and candidate list."""
+    sig = hashlib.sha256(json.dumps([(c["candidate_id"], c["package_dir"], c["symbol"], c["side"]) for c in rr["candidates"]])
+                         .encode()).hexdigest()[:16]
+    return f"{datasets.pick_d4_module(case)['module']}@{rr['from']['commit']}#{sig}"
+
+
+
 def prepare_all(case_list: dict[str, Any], cases_by_id: dict[str, dict], data_dir: Path, *, diffs: bool, graph: bool,
                 repo_cache: Path | None, gomodcache: Path | None, binary: Path | None, jobs: int, timeout: float,
                 rerun: bool = False, limit: int | None = None) -> dict[str, Any]:
@@ -245,25 +253,39 @@ def prepare_all(case_list: dict[str, Any], cases_by_id: dict[str, dict], data_di
             else:
                 todo_graph.append((cid, rr))
     if graph:
-        def work(item):
-            cid, rr = item
-            p = graph_path(data_dir, cid)
-            if p.is_file() and not rerun:
-                doc = read_gz(p)
-                return cid, doc, hashlib.sha256(json.dumps(doc, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
-            doc = build_graph_table(cases_by_id[cid], rr, repo_cache=repo_cache, work_dir=Path(data_dir) / "agent_work" / cid,
-                                    gomodcache=gomodcache, binary=binary, timeout=timeout)
-            return cid, doc, write_gz(p, doc)
+        # Cases with the same release range (module, `from` commit, candidate list) share one call graph: build it once.
+        groups: dict[str, list[tuple[str, dict]]] = {}
+        for cid, rr in todo_graph:
+            groups.setdefault(range_key(cases_by_id[cid], rr), []).append((cid, rr))
+
+        def work(members):
+            out = []
+            first_cid, first_rr = members[0]
+            built = None
+            for cid, rr in members:
+                p = graph_path(data_dir, cid)
+                if p.is_file() and not rerun:
+                    doc = read_gz(p)
+                    out.append((cid, doc, hashlib.sha256(json.dumps(doc, sort_keys=True, ensure_ascii=False).encode()).hexdigest()))
+                    continue
+                if built is None:
+                    built = build_graph_table(cases_by_id[first_cid], first_rr, repo_cache=repo_cache,
+                                              work_dir=Path(data_dir) / "agent_work" / first_cid, gomodcache=gomodcache,
+                                              binary=binary, timeout=timeout)
+                doc = {**built, "case_id": cid, "shared_with": first_cid if cid != first_cid else None}
+                out.append((cid, doc, write_gz(p, doc)))
+            return out
 
         done = 0
         with cf.ThreadPoolExecutor(max_workers=max(1, jobs)) as pool:
-            for fut in cf.as_completed([pool.submit(work, it) for it in todo_graph]):
-                cid, doc, sha = fut.result()
-                summary["graph"][cid] = graph_summary(doc, sha)
-                done += 1
-                s = summary["graph"][cid]
-                _log(f"  graph {done}/{len(todo_graph)} {cid} {s['status']} nodes={s['nodes']} in {s['seconds']}s"
-                     + (f" - {str(s['reason'])[:140]}" if s["reason"] else ""))
+            for fut in cf.as_completed([pool.submit(work, m) for m in groups.values()]):
+                for cid, doc, sha in fut.result():
+                    summary["graph"][cid] = graph_summary(doc, sha)
+                    done += 1
+                    s = summary["graph"][cid]
+                    _log(f"  graph {done}/{len(todo_graph)} {cid} {s['status']} nodes={s['nodes']} in {s['seconds']}s"
+                         + (f" (shared with {doc['shared_with']})" if doc.get("shared_with") else "")
+                         + (f" - {str(s['reason'])[:140]}" if s["reason"] else ""))
         summary["graph"] = dict(sorted(summary["graph"].items()))
     for key in ("commit_diffs", "graph"):
         counts: dict[str, int] = {}
