@@ -96,6 +96,7 @@ def test_every_vulntrace_command_in_the_notebook_parses():
 
 
 def test_branch_is_this_checkpoints_branch():
-    status = (REPO_ROOT / "docs" / "progress" / "STATUS.md").read_text(encoding="utf-8")
+    # CP6 is approved, so STATUS.md has moved on; the CP6 report is the frozen record of its branches.
+    report = (REPO_ROOT / "docs" / "progress" / "reports" / "CP6_REPORT.md").read_text(encoding="utf-8")
     branch = re.search(r'^BRANCH = "([^"]+)"', _code(), flags=re.M).group(1)
-    assert f"`{branch}`" in status
+    assert f"`{branch}`" in report
