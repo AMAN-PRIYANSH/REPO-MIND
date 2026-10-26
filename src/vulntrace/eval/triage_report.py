@@ -139,10 +139,11 @@ def render_real(doc: dict[str, Any], title: str, note: str) -> list[str]:
     out = [title, ""] + _env(doc) + ["", note, ""]
     out += [f"- Cases: {s['cases']}; evidence status: {_counts(s['evidence_status'])}; harness errors: {s['harness_errors']}.",
             f"- Preparation of the vulnerable-side tree (`git archive` + `go mod tidy -e`): {_counts(s['prep_status'])}.",
-            f"- Triaged (prepared and run): {s['triaged']}; mode: {_counts(s['mode'])}; mode reason: {_counts(s['mode_reason'])}.",
+            f"- Run through the pipeline (every case with an extracted tree, including those whose preparation failed): {s['triaged']}; mode: {_counts(s['mode'])}; mode reason: {_counts(s['mode_reason'])}.",
             f"- Main packages analysed: {s['mains_analysed']} (at most {doc.get('max_mains')} per case); cases with main "
             f"packages over the limit: {s['cases_with_mains_skipped']}; cases with no main package: {s['cases_no_main']}; "
-            f"cases where every main package failed to load or build: {s['cases_all_mains_load_failed']}.",
+            f"cases with APP_LOAD_FAILED (the app cannot be listed, or every main package fails to load or build): "
+            f"{s['cases_all_mains_load_failed']}.",
             f"- Target symbols analysed: {s['symbols']}; not analysed: {_counts(s['not_covered'])}; Mode 1 symbols that "
             f"are context-only: {s['context_only_symbols']}.", ""]
     out += ["### Verdict distribution (not accuracy)", ""]
@@ -165,7 +166,8 @@ def render_real(doc: dict[str, Any], title: str, note: str) -> list[str]:
             f"The same app analysed with the advisory's curated core symbols as targets: {ref['cases']} cases; reference "
             f"verdicts: {_counts(ref['verdict'])}. Cases whose analysed symbols include a curated core symbol: "
             f"{ref['gold_analysed']}.", ""]
-    out += _table(["pipeline (before policy) | reference", "cases"], [[k, v] for k, v in sorted(ref["pairs_pre_policy"].items())])
+    out += _table(["pipeline (before policy)", "curated reference", "cases"],
+                  [[*k.split("|"), v] for k, v in sorted(ref["pairs_pre_policy"].items())])
     out += [""]
     if "without_rclone_cluster" in s:
         w = s["without_rclone_cluster"]
@@ -212,6 +214,10 @@ def render_cp7_doc(d: Path, source: str) -> str:
     out += ["## 4. Mode 2 NOT_REACHABLE policy (decided by code from the numbers above)", "", f"Rule: {POLICY_RULE_TEXT}", ""]
     out += [f"- {k}: {json.dumps(v) if isinstance(v, (dict, list)) else v}" for k, v in pol["inputs"].items()
             if not k.endswith("_ids")]
+    cb = pol["inputs"].get("d4_unsupported_share_cluster_bootstrap") or {}
+    if cb and cb.get("ci_high") == cb.get("ci_low"):
+        out += ["- (The cluster bootstrap interval is degenerate when every value is the same; the Wilson interval is the "
+                "informative one.)"]
     out += [f"- check {k}: {'pass' if v else 'FAIL'}" for k, v in pol["checks"].items()]
     out += ["", f"**Decision: {pol['decision']}.**", ""]
     return "\n".join(out).rstrip() + "\n"

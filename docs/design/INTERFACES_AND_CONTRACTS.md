@@ -20,7 +20,7 @@ Entry point: `python -m vulntrace <command>`.
 | `eval symbols --strategy llm` / `llm+lift` / `llm-topk` | CP5 | LLM selection in both modes. |
 | `eval lift --set d1` / `--set d4-ceiling` | CP5b | Lifting vs `derived_symbols` and E1+L on the committed CP5 selections; caller/callee ceiling on D4. |
 | `eval symbols --strategy agent` | CP6 | LangGraph agent. |
-| `triage --advisory <ID> --app <dir> [--mode auto/fix/release]` | CP7 | Full pipeline on one case; prints a verdict JSON. Also `--advisory-file`, `--mode targets --target <pkg>:<symbol>`, `--main`, `--max-mains` (default 10), `--k`, `--retriever` (default the fixed retriever), `--lift NEAREST/ALL` (default off), `--mode2-policy`, `--no-verify`, `--data-dir`, `--commit`. Evidence is read from `data/` (`dataset materialize`); triage itself never uses the network. |
+| `triage --advisory <ID> --app <dir> [--mode auto/fix/release]` | CP7 | Full pipeline on one case; prints a verdict JSON. Also `--advisory-file`, `--mode targets --target <pkg>:<symbol>`, `--main`, `--max-mains` (default 10), `--k`, `--retriever` (default the fixed retriever), `--lift NEAREST/ALL` (default off), `--mode2-policy` (default `DOWNGRADE`, decided in CP7; see the architecture document), `--no-verify`, `--data-dir`, `--commit`. Evidence is read from `data/` (`dataset materialize`); triage itself never uses the network. |
 | `eval triage --set fixtures/d1/d4` | CP7 | E5-lite: fixtures with truth; D1/D4 distributions and coverage only. |
 | `eval reachability --set d3` | CP7b | End-to-end evaluation on real applications. |
 | `demo` | CP7b | Starts the local demo page. |

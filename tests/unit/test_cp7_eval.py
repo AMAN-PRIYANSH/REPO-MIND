@@ -111,3 +111,12 @@ def test_disk_guard_cleans_only_when_idle_and_low():
     g.enter()
     assert cleaned == [1] and g.cleanups == 1
     g.leave()
+
+
+def test_committed_results_document_is_generated_from_committed_files():
+    from vulntrace.paths import REPO_ROOT
+
+    d = REPO_ROOT / "docs" / "results"
+    assert (d / "CP7_TRIAGE_RESULTS.md").read_text(encoding="utf-8") == tr.render_cp7_doc(d / "cp7", "docs/results/cp7")
+    for f in (d / "cp7").rglob("*.json"):
+        assert f.stat().st_size < 512 * 1024, f
