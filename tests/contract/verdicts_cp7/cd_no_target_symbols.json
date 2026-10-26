@@ -5,7 +5,7 @@
     "host": "local",
     "owner": "vtfixtures",
     "repo": "vtfixtures-parse",
-    "sha": "06358637fa4f72dc8a182828d60146634cbe1fde"
+    "sha": "86b4ea79bd06894bcb2cc41557e61d17c8004a37"
    }
   ],
   "fixed_in": "1.0.0-parse-fixed",
@@ -105,7 +105,7 @@
  "statement": "Reachability only. This verdict does not assess exploitability.",
  "symbols": [],
  "target_app": {
-  "commit": "0d9a4d6e6f58cd213824bdbe7f1c0e7955b440e0",
+  "commit": "c7383b459184d098ab0ca9c5da0cb1365a595385",
   "commit_source": "GIT_HEAD",
   "dirty": false,
   "module": "vtfixtures",

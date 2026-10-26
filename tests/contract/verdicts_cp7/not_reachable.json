@@ -30,9 +30,9 @@
    "vtfixtures/cmd/safe_only": {
     "error_codes": [],
     "first_error": null,
-    "linker_seconds": 0.43,
+    "linker_seconds": 0.45,
     "load_failed": false,
-    "vta_seconds": 2.0
+    "vta_seconds": 1.62
    }
   },
   "release_range_status": null,
@@ -107,7 +107,7 @@
   }
  ],
  "target_app": {
-  "commit": "0d9a4d6e6f58cd213824bdbe7f1c0e7955b440e0",
+  "commit": "c7383b459184d098ab0ca9c5da0cb1365a595385",
   "commit_source": "GIT_HEAD",
   "dirty": false,
   "module": "vtfixtures",
@@ -153,7 +153,7 @@
   "checks_run": 1,
   "downgraded": 0,
   "failures": [],
-  "file_source": "git show 0d9a4d6e6f58cd213824bdbe7f1c0e7955b440e0",
+  "file_source": "git show c7383b459184d098ab0ca9c5da0cb1365a595385",
   "status": "PASSED"
  }
 }

@@ -5,7 +5,7 @@
     "host": "local",
     "owner": "vtfixtures",
     "repo": "vtfixtures-parse",
-    "sha": "06358637fa4f72dc8a182828d60146634cbe1fde"
+    "sha": "86b4ea79bd06894bcb2cc41557e61d17c8004a37"
    }
   ],
   "fixed_in": "1.0.0-parse-fixed",
@@ -37,9 +37,9 @@
    "vtfixtures/cmd/interface_not_instantiated": {
     "error_codes": [],
     "first_error": null,
-    "linker_seconds": 0.46,
+    "linker_seconds": 0.4,
     "load_failed": false,
-    "vta_seconds": 1.93
+    "vta_seconds": 1.51
    }
   },
   "release_range_status": "AVAILABLE",
@@ -182,7 +182,7 @@
   }
  ],
  "target_app": {
-  "commit": "0d9a4d6e6f58cd213824bdbe7f1c0e7955b440e0",
+  "commit": "c7383b459184d098ab0ca9c5da0cb1365a595385",
   "commit_source": "GIT_HEAD",
   "dirty": false,
   "module": "vtfixtures",
@@ -228,7 +228,7 @@
   "checks_run": 2,
   "downgraded": 0,
   "failures": [],
-  "file_source": "git show 0d9a4d6e6f58cd213824bdbe7f1c0e7955b440e0",
+  "file_source": "git show c7383b459184d098ab0ca9c5da0cb1365a595385",
   "status": "PASSED"
  }
 }

@@ -1,0 +1,33 @@
+{
+ "checks": {
+  "d4_min_count": false,
+  "d4_none_contradicted": true,
+  "d4_unsupported_upper_ok": false,
+  "fixtures_zero_false_nr": true
+ },
+ "decision": "DOWNGRADE",
+ "inputs": {
+  "d4_contradicted": 0,
+  "d4_contradicted_ids": [],
+  "d4_raw_not_reachable": 5,
+  "d4_unsupported": 0,
+  "d4_unsupported_ids": [],
+  "d4_unsupported_share": {
+   "ci_high": 0.43448246865939283,
+   "ci_low": 0.0,
+   "k": 0,
+   "n": 5,
+   "rate": 0.0
+  },
+  "d4_unsupported_share_cluster_bootstrap": {
+   "ci_high": 0.0,
+   "ci_low": 0.0,
+   "mean": 0.0,
+   "n": 5,
+   "n_clusters": 5
+  },
+  "fixtures_mode2_cases": 22,
+  "fixtures_mode2_raw_false_not_reachable": 0
+ },
+ "rule": "KEEP a Mode 2 NOT_REACHABLE only if all hold: (1) on the fixtures, Mode 2 before the policy has 0 false NOT_REACHABLE; (2) on D4 there are at least 20 raw Mode 2 NOT_REACHABLE verdicts; (3) none of them is contradicted by the curated reference (curated core symbols REACHABLE in the same app); (4) the 95% Wilson upper bound of the share of raw Mode 2 NOT_REACHABLE verdicts whose analysed candidates contain no curated core symbol is at most 0.05. Otherwise DOWNGRADE to CANT_DETERMINE (MODE2_NOT_REACHABLE_DOWNGRADED)."
+}

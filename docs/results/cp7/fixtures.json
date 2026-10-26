@@ -1,0 +1,5029 @@
+{
+ "corruption_probe": {
+  "by_corruption": {
+   "BROKEN_CHAIN": {
+    "rejected": 12,
+    "total": 12
+   },
+   "EDGE_NOT_IN_GRAPH": {
+    "rejected": 12,
+    "total": 12
+   },
+   "WRONG_LINE": {
+    "rejected": 12,
+    "total": 12
+   }
+  },
+  "rejected": 36,
+  "rows": [
+   {
+    "case": "fixture:direct_call",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:direct_call",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:direct_call",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:func_value_map",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:func_value_map",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:func_value_map",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:interface_dispatch",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:interface_dispatch",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:interface_dispatch",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_value",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_value",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_value",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:goroutine",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:goroutine",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:goroutine",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:init_imported",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:init_imported",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:init_imported",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:generic_call",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:generic_call",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:generic_call",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:inlined_small",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:inlined_small",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:inlined_small",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_value_receiver",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_value_receiver",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_value_receiver",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_pointer_receiver",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_pointer_receiver",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_pointer_receiver",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:generic_target",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:generic_target",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:generic_target",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_expression",
+    "corruption": "WRONG_LINE",
+    "failed_checks": [
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_expression",
+    "corruption": "EDGE_NOT_IN_GRAPH",
+    "failed_checks": [
+     "CALL_SITE",
+     "EDGE_EXISTS",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   },
+   {
+    "case": "fixture:method_expression",
+    "corruption": "BROKEN_CHAIN",
+    "failed_checks": [
+     "PATH_STRUCTURE",
+     "REACHABLE_HAS_PATH"
+    ],
+    "reason_code": "VERIFIER_REJECTED",
+    "result": "CANT_DETERMINE"
+   }
+  ],
+  "total": 36
+ },
+ "environment": {
+  "command": "python -m vulntrace eval triage --set fixtures",
+  "go": "go version go1.24.7 linux/amd64",
+  "os": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
+  "python": "3.13.17",
+  "repo_commit": "c7383b4",
+  "repo_dirty": false
+ },
+ "method_calls": {
+  "linker": 45,
+  "vta": 45
+ },
+ "pack": {
+  "Impl.Run": {
+   "fix_candidates": [
+    "Impl.Run"
+   ],
+   "fix_status": "AVAILABLE",
+   "id": "FIXTURE-IMPL-RUN",
+   "range_candidates": [
+    "Impl.Run",
+    "Safe"
+   ],
+   "range_commits": 2,
+   "range_status": "AVAILABLE"
+  },
+  "PImpl.Run": {
+   "fix_candidates": [
+    "PImpl.Run"
+   ],
+   "fix_status": "AVAILABLE",
+   "id": "FIXTURE-PIMPL-RUN",
+   "range_candidates": [
+    "PImpl.Run",
+    "Safe"
+   ],
+   "range_commits": 2,
+   "range_status": "AVAILABLE"
+  },
+  "Parse": {
+   "fix_candidates": [
+    "Parse"
+   ],
+   "fix_status": "AVAILABLE",
+   "id": "FIXTURE-PARSE",
+   "range_candidates": [
+    "Parse",
+    "Safe"
+   ],
+   "range_commits": 2,
+   "range_status": "AVAILABLE"
+  },
+  "ParseAny[T]": {
+   "fix_candidates": [
+    "ParseAny",
+    "ParseTiny",
+    "Safe"
+   ],
+   "fix_status": "AVAILABLE",
+   "id": "FIXTURE-PARSEANY",
+   "range_candidates": [
+    "ParseAny",
+    "Safe"
+   ],
+   "range_commits": 2,
+   "range_status": "AVAILABLE"
+  },
+  "ParseTiny": {
+   "fix_candidates": [
+    "ParseAny",
+    "ParseTiny"
+   ],
+   "fix_status": "AVAILABLE",
+   "id": "FIXTURE-PARSETINY",
+   "range_candidates": [
+    "ParseTiny",
+    "Safe"
+   ],
+   "range_commits": 2,
+   "range_status": "AVAILABLE"
+  }
+ },
+ "rows": [
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "DIRECT",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "direct_call",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.92,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "DIRECT",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "direct_call",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.74,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "DIRECT",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "direct_call",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    2
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.68,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 6,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "SAFE_ONLY",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "safe_only",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 2.01,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "SAFE_ONLY",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "safe_only",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 0.11,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "SAFE_ONLY",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "safe_only",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    1
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.98,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 6,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "FUNC_VALUE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 1,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "func_value_map",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.77,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "FUNC_VALUE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 1,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "func_value_map",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.64,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "FUNC_VALUE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 2,
+   "entries": {
+    "REACHABLE": 2
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "func_value_map",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 2
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    1,
+    2
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.56,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 10,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 2
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": null,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "REFLECTION",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "reflect_method",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": null,
+   "seconds": 1.97,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": null,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "REFLECTION",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "reflect_method",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": null,
+   "seconds": 0.06,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": 2,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "REFLECTION",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1,
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "reflect_method",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 2.23,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "DEAD_CODE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "dead_code",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 2.18,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "DEAD_CODE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "dead_code",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 0.12,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "DEAD_CODE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "dead_code",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    1
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.65,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 6,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INTERFACE_DISPATCH",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 1,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "interface_dispatch",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.72,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 7,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INTERFACE_DISPATCH",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 1,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "interface_dispatch",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.71,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 7,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INTERFACE_DISPATCH",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 1,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "interface_dispatch",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    2
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.48,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 8,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INTERFACE_NOT_INSTANTIATED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "interface_not_instantiated",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.97,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INTERFACE_NOT_INSTANTIATED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "interface_not_instantiated",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 0.11,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INTERFACE_NOT_INSTANTIATED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 2
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "interface_not_instantiated",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 2
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "MODE2_NOT_REACHABLE_DOWNGRADED"
+   ],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 2.19,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 2,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_VALUE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_value",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.77,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 9,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_VALUE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_value",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.8,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 9,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_VALUE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_value",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    2
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.72,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 10,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "GOROUTINE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "goroutine",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.52,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 7,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "GOROUTINE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "goroutine",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.57,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 7,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "GOROUTINE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "goroutine",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    2
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.54,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 8,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INIT_IMPORTED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "init_imported",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.84,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 9,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INIT_IMPORTED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "init_imported",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.66,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 9,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INIT_IMPORTED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "init_imported",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    2
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.65,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 10,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "BUILD_TAG_EXCLUDED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "build_tag_excluded",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 2.04,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "BUILD_TAG_EXCLUDED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "build_tag_excluded",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 0.12,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "BUILD_TAG_EXCLUDED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 2
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "build_tag_excluded",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 2
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "MODE2_NOT_REACHABLE_DOWNGRADED"
+   ],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 2.23,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 2,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "TEST_FILE_ONLY",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "test_file_only",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 2.12,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "TEST_FILE_ONLY",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "test_file_only",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 0.12,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "TEST_FILE_ONLY",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "test_file_only",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    1
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 4.38,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 6,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "GENERIC_CALL",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 1,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "generic_call",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.78,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 9,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "GENERIC_CALL",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 1,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "generic_call",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.65,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 9,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "GENERIC_CALL",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 1,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "generic_call",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    2
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.82,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 10,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "ParseTiny"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INLINED_SMALL",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "inlined_small",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.76,
+   "symbols": 1,
+   "target": "ParseTiny",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "ParseAny"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "ParseTiny"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INLINED_SMALL",
+   "context_only_symbols": 1,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "inlined_small",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.74,
+   "symbols": 2,
+   "target": "ParseTiny",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 6,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "ParseTiny"
+    },
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INLINED_SMALL",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "inlined_small",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    1
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.89,
+   "symbols": 2,
+   "target": "ParseTiny",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 6,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": null,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "UNSAFE_FUNC_POINTER",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "unsafe_func_pointer",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": null,
+   "seconds": 1.94,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": null,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "UNSAFE_FUNC_POINTER",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "unsafe_func_pointer",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": null,
+   "seconds": 0.06,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": 2,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "UNSAFE_FUNC_POINTER",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1,
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "unsafe_func_pointer",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 2.06,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Impl.Run"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_TARGET_VALUE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_value_receiver",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 4.3,
+   "symbols": 1,
+   "target": "Impl.Run",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Impl.Run"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_TARGET_VALUE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_value_receiver",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.75,
+   "symbols": 1,
+   "target": "Impl.Run",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Impl.Run"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_TARGET_VALUE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_value_receiver",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    2
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.79,
+   "symbols": 2,
+   "target": "Impl.Run",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 6,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "PImpl.Run"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_TARGET_POINTER",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_pointer_receiver",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.61,
+   "symbols": 1,
+   "target": "PImpl.Run",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "PImpl.Run"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_TARGET_POINTER",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_pointer_receiver",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.79,
+   "symbols": 1,
+   "target": "PImpl.Run",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "PImpl.Run"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_TARGET_POINTER",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_pointer_receiver",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    2
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.76,
+   "symbols": 2,
+   "target": "PImpl.Run",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 6,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "ParseAny[T]"
+    }
+   ],
+   "app_list_error": null,
+   "category": "GENERIC_TARGET",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "generic_target",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.94,
+   "symbols": 1,
+   "target": "ParseAny[T]",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "ParseAny"
+    },
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "ParseTiny"
+    },
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    }
+   ],
+   "app_list_error": null,
+   "category": "GENERIC_TARGET",
+   "context_only_symbols": 2,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 2,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "generic_target",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 2,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.8,
+   "symbols": 3,
+   "target": "ParseAny[T]",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 7,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "ParseAny"
+    },
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    }
+   ],
+   "app_list_error": null,
+   "category": "GENERIC_TARGET",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "generic_target",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    1
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 1.89,
+   "symbols": 2,
+   "target": "ParseAny[T]",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 6,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": null,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "PRESENT_BUT_UNREACHABLE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "present_but_unreachable",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": null,
+   "seconds": 2.02,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": null,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "PRESENT_BUT_UNREACHABLE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "present_but_unreachable",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": null,
+   "seconds": 0.07,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": 2,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "PRESENT_BUT_UNREACHABLE",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1,
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "present_but_unreachable",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 2.02,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": null,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "CLOSURE_NEVER_CALLED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "closure_never_called",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": null,
+   "seconds": 1.99,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": null,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "CLOSURE_NEVER_CALLED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "closure_never_called",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "retrieval": null,
+   "seconds": 0.06,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 0,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "NOT_RUN"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "CANT_DETERMINE",
+     "rank": 2,
+     "reason_code": "METHOD_DISAGREEMENT",
+     "result": "CANT_DETERMINE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "CLOSURE_NEVER_CALLED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "closure_never_called",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+PRESENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    1
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.6,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_EXPRESSION",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_expression",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 3.62,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 9,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_EXPRESSION",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_expression",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 1.7,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 9,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "METHOD_EXPRESSION",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "method_expression",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [
+    2
+   ],
+   "reason_codes": [],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 3.49,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "REACHABLE",
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 10,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INTERFACE_TWO_IMPLS_ONE_USED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "TARGET_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "interface_two_impls_one_used",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "TARGETS",
+   "mode_reason": "TARGETS_GIVEN",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 2.08,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": null,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INTERFACE_TWO_IMPLS_ONE_USED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "interface_two_impls_one_used",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [],
+   "retrieval": null,
+   "seconds": 0.11,
+   "symbols": 1,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  },
+  {
+   "analysed": [
+    {
+     "is_target": false,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 1,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Safe"
+    },
+    {
+     "is_target": true,
+     "pre_verifier": "NOT_REACHABLE",
+     "rank": 2,
+     "reason_code": null,
+     "result": "NOT_REACHABLE",
+     "symbol": "Parse"
+    }
+   ],
+   "app_list_error": null,
+   "category": "INTERFACE_TWO_IMPLS_ONE_USED",
+   "context_only_symbols": 0,
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 2
+   },
+   "entry_reasons": {},
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "go_version": "go1.24.7",
+   "id": "interface_two_impls_one_used",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 2
+   },
+   "mode": "RELEASE",
+   "mode_reason": "REQUESTED",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reason_codes": [
+    "MODE2_NOT_REACHABLE_DOWNGRADED"
+   ],
+   "retrieval": {
+    "candidates_total": 2,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "seconds": 2.05,
+   "symbols": 2,
+   "target": "Parse",
+   "truth": "NOT_REACHABLE",
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 2,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0
+  }
+ ],
+ "schema_problems": [],
+ "schema_version": "1.0",
+ "set": "fixtures",
+ "stability": {
+  "cases": 22,
+  "mode": "TARGETS",
+  "seconds": 67.5,
+  "unstable": []
+ },
+ "summary": {
+  "FIX": {
+   "final": {
+    "accuracy": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "cant_determine": 4,
+    "coverage": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 0,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 6,
+      "REACHABLE": 0
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.6096657083436265,
+     "k": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.7575059904469021,
+     "k": 12,
+     "n": 12,
+     "rate": 1.0
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 1.0,
+     "ci_low": 0.8241207740667156,
+     "k": 18,
+     "n": 18,
+     "rate": 1.0
+    }
+   },
+   "pre_policy": {
+    "accuracy": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "cant_determine": 4,
+    "coverage": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 0,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 6,
+      "REACHABLE": 0
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.6096657083436265,
+     "k": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.7575059904469021,
+     "k": 12,
+     "n": 12,
+     "rate": 1.0
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 1.0,
+     "ci_low": 0.8241207740667156,
+     "k": 18,
+     "n": 18,
+     "rate": 1.0
+    }
+   },
+   "pre_verifier": {
+    "accuracy": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "cant_determine": 4,
+    "coverage": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 0,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 6,
+      "REACHABLE": 0
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.6096657083436265,
+     "k": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.7575059904469021,
+     "k": 12,
+     "n": 12,
+     "rate": 1.0
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 1.0,
+     "ci_low": 0.8241207740667156,
+     "k": 18,
+     "n": 18,
+     "rate": 1.0
+    }
+   },
+   "reachable_without_verified_path": 0,
+   "seconds": {
+    "max": 3.8,
+    "n": 22,
+    "p50": 1.57,
+    "p95": 3.74,
+    "total": 25.5
+   },
+   "verified_paths": 12,
+   "verifier_downgrades": 0,
+   "verifier_rejections_on_correct": 0
+  },
+  "RELEASE": {
+   "final": {
+    "accuracy": {
+     "ci_high": 0.7307970593927182,
+     "ci_low": 0.34659795182499575,
+     "k": 12,
+     "n": 22,
+     "rate": 0.5454545454545454
+    },
+    "cant_determine": 6,
+    "coverage": {
+     "ci_high": 0.8684923978853596,
+     "ci_low": 0.5184826582032107,
+     "k": 16,
+     "n": 22,
+     "rate": 0.7272727272727273
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 4,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 4,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 4
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 0.0,
+     "ci_low": 0.0,
+     "k": 0,
+     "n": 0,
+     "rate": 0.0
+    },
+    "reachable_precision": {
+     "ci_high": 0.8981793257983292,
+     "ci_low": 0.5050168327029684,
+     "k": 12,
+     "n": 16,
+     "rate": 0.75
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 0.8981793257983292,
+     "ci_low": 0.5050168327029684,
+     "k": 12,
+     "n": 16,
+     "rate": 0.75
+    }
+   },
+   "pre_policy": {
+    "accuracy": {
+     "ci_high": 0.836394069069972,
+     "ci_low": 0.47318597580088406,
+     "k": 15,
+     "n": 22,
+     "rate": 0.6818181818181818
+    },
+    "cant_determine": 3,
+    "coverage": {
+     "ci_high": 0.9525099632305449,
+     "ci_low": 0.6666501265111675,
+     "k": 19,
+     "n": 22,
+     "rate": 0.8636363636363636
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 4,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 1,
+      "NOT_REACHABLE": 3,
+      "REACHABLE": 4
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.43850296436068037,
+     "k": 3,
+     "n": 3,
+     "rate": 1.0
+    },
+    "reachable_precision": {
+     "ci_high": 0.8981793257983292,
+     "ci_low": 0.5050168327029684,
+     "k": 12,
+     "n": 16,
+     "rate": 0.75
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 0.9149232342638266,
+     "ci_low": 0.5666572136911628,
+     "k": 15,
+     "n": 19,
+     "rate": 0.7894736842105263
+    }
+   },
+   "pre_verifier": {
+    "accuracy": {
+     "ci_high": 0.836394069069972,
+     "ci_low": 0.47318597580088406,
+     "k": 15,
+     "n": 22,
+     "rate": 0.6818181818181818
+    },
+    "cant_determine": 3,
+    "coverage": {
+     "ci_high": 0.9525099632305449,
+     "ci_low": 0.6666501265111675,
+     "k": 19,
+     "n": 22,
+     "rate": 0.8636363636363636
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 4,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 1,
+      "NOT_REACHABLE": 3,
+      "REACHABLE": 4
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.43850296436068037,
+     "k": 3,
+     "n": 3,
+     "rate": 1.0
+    },
+    "reachable_precision": {
+     "ci_high": 0.8981793257983292,
+     "ci_low": 0.5050168327029684,
+     "k": 12,
+     "n": 16,
+     "rate": 0.75
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 0.9149232342638266,
+     "ci_low": 0.5666572136911628,
+     "k": 15,
+     "n": 19,
+     "rate": 0.7894736842105263
+    }
+   },
+   "reachable_without_verified_path": 0,
+   "seconds": {
+    "max": 4.38,
+    "n": 22,
+    "p50": 3.56,
+    "p95": 3.98,
+    "total": 70.7
+   },
+   "verified_paths": 17,
+   "verifier_downgrades": 0,
+   "verifier_rejections_on_correct": 0
+  },
+  "TARGETS": {
+   "final": {
+    "accuracy": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "cant_determine": 4,
+    "coverage": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 0,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 6,
+      "REACHABLE": 0
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.6096657083436265,
+     "k": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.7575059904469021,
+     "k": 12,
+     "n": 12,
+     "rate": 1.0
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 1.0,
+     "ci_low": 0.8241207740667156,
+     "k": 18,
+     "n": 18,
+     "rate": 1.0
+    }
+   },
+   "pre_policy": {
+    "accuracy": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "cant_determine": 4,
+    "coverage": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 0,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 6,
+      "REACHABLE": 0
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.6096657083436265,
+     "k": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.7575059904469021,
+     "k": 12,
+     "n": 12,
+     "rate": 1.0
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 1.0,
+     "ci_low": 0.8241207740667156,
+     "k": 18,
+     "n": 18,
+     "rate": 1.0
+    }
+   },
+   "pre_verifier": {
+    "accuracy": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "cant_determine": 4,
+    "coverage": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 0,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 6,
+      "REACHABLE": 0
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.6096657083436265,
+     "k": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.7575059904469021,
+     "k": 12,
+     "n": 12,
+     "rate": 1.0
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 1.0,
+     "ci_low": 0.8241207740667156,
+     "k": 18,
+     "n": 18,
+     "rate": 1.0
+    }
+   },
+   "reachable_without_verified_path": 0,
+   "seconds": {
+    "max": 4.3,
+    "n": 22,
+    "p50": 3.52,
+    "p95": 3.94,
+    "total": 65.9
+   },
+   "verified_paths": 12,
+   "verifier_downgrades": 0,
+   "verifier_rejections_on_correct": 0
+  }
+ }
+}
