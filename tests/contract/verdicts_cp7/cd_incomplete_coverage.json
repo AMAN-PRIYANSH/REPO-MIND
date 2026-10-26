@@ -52,9 +52,9 @@
    "vtfixtures/cmd/build_tag_excluded": {
     "error_codes": [],
     "first_error": null,
-    "linker_seconds": 0.36,
+    "linker_seconds": 0.29,
     "load_failed": false,
-    "vta_seconds": 1.57
+    "vta_seconds": 1.37
    }
   },
   "release_range_status": null,
@@ -134,7 +134,7 @@
   }
  ],
  "target_app": {
-  "commit": "c7383b459184d098ab0ca9c5da0cb1365a595385",
+  "commit": "ed4638005fe4c3255815c2131dc80f1c7b2045ce",
   "commit_source": "GIT_HEAD",
   "dirty": false,
   "module": "vtfixtures",
@@ -180,7 +180,7 @@
   "checks_run": 1,
   "downgraded": 0,
   "failures": [],
-  "file_source": "git show c7383b459184d098ab0ca9c5da0cb1365a595385",
+  "file_source": "git show ed4638005fe4c3255815c2131dc80f1c7b2045ce",
   "status": "PASSED"
  }
 }

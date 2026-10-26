@@ -30,9 +30,9 @@
    "vtfixtures/cmd/present_but_unreachable": {
     "error_codes": [],
     "first_error": null,
-    "linker_seconds": 0.4,
+    "linker_seconds": 0.38,
     "load_failed": false,
-    "vta_seconds": 1.76
+    "vta_seconds": 1.42
    }
   },
   "release_range_status": null,
@@ -113,7 +113,7 @@
   }
  ],
  "target_app": {
-  "commit": "c7383b459184d098ab0ca9c5da0cb1365a595385",
+  "commit": "ed4638005fe4c3255815c2131dc80f1c7b2045ce",
   "commit_source": "GIT_HEAD",
   "dirty": false,
   "module": "vtfixtures",
@@ -153,7 +153,7 @@
   "checks_run": 0,
   "downgraded": 0,
   "failures": [],
-  "file_source": "git show c7383b459184d098ab0ca9c5da0cb1365a595385",
+  "file_source": "git show ed4638005fe4c3255815c2131dc80f1c7b2045ce",
   "status": "NOT_RUN"
  }
 }

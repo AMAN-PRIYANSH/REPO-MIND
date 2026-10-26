@@ -30,9 +30,9 @@
    "vtfixtures/cmd/direct_call": {
     "error_codes": [],
     "first_error": null,
-    "linker_seconds": 0.37,
+    "linker_seconds": 0.32,
     "load_failed": false,
-    "vta_seconds": 1.71
+    "vta_seconds": 1.45
    }
   },
   "release_range_status": null,
@@ -148,7 +148,7 @@
   }
  ],
  "target_app": {
-  "commit": "c7383b459184d098ab0ca9c5da0cb1365a595385",
+  "commit": "ed4638005fe4c3255815c2131dc80f1c7b2045ce",
   "commit_source": "GIT_HEAD",
   "dirty": false,
   "module": "vtfixtures",
@@ -237,7 +237,7 @@
     }
    }
   ],
-  "file_source": "git show c7383b459184d098ab0ca9c5da0cb1365a595385",
+  "file_source": "git show ed4638005fe4c3255815c2131dc80f1c7b2045ce",
   "status": "FAILED"
  }
 }
