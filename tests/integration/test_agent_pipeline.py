@@ -222,3 +222,15 @@ def test_cp6_doc_with_no_files_claims_nothing(tmp_path):
 
     text = render_cp6_doc(tmp_path, "empty")
     assert "No agent result files in this directory: nothing is claimed." in text and "beats" not in text
+
+
+def test_compare_with_summary_reports_same_different_and_missing(tmp_path):
+    d = tmp_path / "data"
+    sha_a = prepare.write_gz(prepare.graph_path(d, "A"), {"status": "READY", "candidates": {}})
+    prepare.write_gz(prepare.graph_path(d, "B"), {"status": "READY", "candidates": {"r1": {}}})
+    committed = {"graph": {"A": {"sha256": sha_a}, "B": {"sha256": "0" * 64}, "C": {"sha256": "1" * 64},
+                           "D": {"sha256": None}}, "commit_diffs": {}}
+    res = prepare.compare_with_summary(["A", "B", "C", "D", "E"], d, committed)["graph"]
+    assert res == {"same": ["A"], "different": ["B"], "missing_here": ["C"], "not_in_summary": ["E"]}
+    extras = prepare.load_case_extras(d, "A")
+    assert extras[2] == {} and extras[0] is None and "not prepared" in extras[1]

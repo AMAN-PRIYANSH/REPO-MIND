@@ -273,6 +273,28 @@ def prepare_all(case_list: dict[str, Any], cases_by_id: dict[str, dict], data_di
     return summary
 
 
+def compare_with_summary(case_ids: list[str], data_dir: Path, committed: dict[str, Any]) -> dict[str, dict[str, list[str]]]:
+    """Per kind (commit_diffs, graph): which cases' evidence here has the same content hash as the
+    committed summary, which differ, which are missing here, and which the summary does not list."""
+    out: dict[str, dict[str, list[str]]] = {}
+    for kind, path_of in (("commit_diffs", diffs_path), ("graph", graph_path)):
+        res: dict[str, list[str]] = {"same": [], "different": [], "missing_here": [], "not_in_summary": []}
+        ref = committed.get(kind) or {}
+        for cid in case_ids:
+            p = path_of(data_dir, cid)
+            want = (ref.get(cid) or {}).get("sha256")
+            if cid not in ref:
+                res["not_in_summary"].append(cid)
+            elif not p.is_file():
+                if want is not None:
+                    res["missing_here"].append(cid)
+            else:
+                got = hashlib.sha256(json.dumps(read_gz(p), sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+                res["same" if got == want else "different"].append(cid)
+        out[kind] = res
+    return out
+
+
 def load_case_extras(data_dir: Path, case_id: str) -> tuple[dict | None, str | None, dict | None, str | None]:
     """(commit diffs by sha or None, why missing, neighbour table by candidate or None, why missing)."""
     diffs, dnote, table, gnote = None, None, None, None
