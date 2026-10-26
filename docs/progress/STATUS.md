@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP6 - LangGraph investigation agent (Mode 2)**
-- State: `AWAITING_COLAB` (code done; the owner's Colab run is next)
+- State: `IN_PROGRESS` (code done; the owner's Colab run is finished and `cp6_results.zip` exists; the next session does the results steps below)
 - Branch in use: `claude/gracious-carson-ch1i9r`
 - Specification: [checkpoints/CP6.md](../implementation/checkpoints/CP6.md)
 
@@ -21,7 +21,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` →) `AWAITING_REV
 | CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | APPROVED | claude/vulntrace-ai-build-9qhbjg | [CP4_REPORT](reports/CP4_REPORT.md) |
 | CP5 | Local LLM layer, root-cause selection, HyDE | APPROVED | claude/vulntrace-ai-build-o31zls | [CP5_REPORT](reports/CP5_REPORT.md) |
 | CP5b | Lifting and caller/callee queries (Go helper) | APPROVED | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
-| CP6 | LangGraph investigation agent | AWAITING_COLAB | claude/gracious-carson-ch1i9r | [CP6_REPORT](reports/CP6_REPORT.md) |
+| CP6 | LangGraph investigation agent | IN_PROGRESS | claude/gracious-carson-ch1i9r | [CP6_REPORT](reports/CP6_REPORT.md) |
 | CP7 | End-to-end triage, verifier, real apps, demo | NOT_RELEASED | - | - |
 | CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
 
@@ -49,6 +49,7 @@ Claude Code: if you stop before the checkpoint is complete, write here exactly w
 CP6 (26 Oct 2026, branch `claude/gracious-carson-ch1i9r`). **Done:** agent code, prompts `agent_v1` frozen at `42da9a4` (before any real run; no model has seen them), tests (734 passed locally, CI green), renderer, notebook, D4 evidence + commit diffs + neighbour tables built in the session (summary committed as `docs/results/cp6/agent_evidence.json`), dry run on real evidence. The neighbour tables were handed to the owner as `cp6_graph_tables.zip` (sha256 613734f574f0197ed2cf3e9de18cb7ae7c043e34172ba70db1f1dc14dbcebe1e).
 **Not done (needs the owner's run):** real A2/A3 results, failure analysis, worked traces, honest headline (criteria 5-7).
 **Owner:** upload `cp6_graph_tables.zip` to `MyDrive/vulntrace_cp6/`, then run the notebook once per PART (1-4, one Colab session each; re-run a PART that was cut off). The zip from PART 4 holds all results.
+**Supervisor note, 26 Oct 2026:** the owner's four Colab parts are done; `cp6_results.zip` (479 files: 4 result files + 472 traces) was checked by the supervisor (zip valid, 118 traces per arm and model, evidence tables identical to the committed summary). State was set from AWAITING_COLAB to IN_PROGRESS so that a new session continues on this branch (CLAUDE.md section 5 only continues IN_PROGRESS or CHANGES_REQUESTED).
 **Next session, after receiving `cp6_results.zip`:**
 1. Unzip into the scratch area. Copy only `cp6/*.json` into `docs/results/cp6/` (keep `agent_evidence.json` as committed; add `agent_evidence_colab.json`, `colab_run.json`, `D4_materialize_colab.json`, `model_problems.json`). Never commit `traces/`. Check each file is < 512 KiB, no `dry_run`, and the `counts.run` of every arm file (expect 118).
 2. `python -m vulntrace results render --doc cp6 --input docs/results/cp6 --out docs/results/CP6_AGENT_RESULTS.md`.
