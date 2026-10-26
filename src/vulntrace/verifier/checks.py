@@ -82,11 +82,15 @@ def declared_name(node: str) -> str:
 
 def is_synthetic_edge(caller: str, callee: str) -> bool:
     """Edges Go creates with no source position: a forwarder calling the method it wraps, and the
-    package initializer calling another package's initializer or its own `init` functions."""
+    package initializer calling another package's initializer or its own `init` functions. A
+    wrapper for a method promoted through an embedded field calls the embedded type's method,
+    which can be in another package (`p.Outer.M$wrapper -> q.Inner.M`, seen in quic-go and
+    antlr4-go on D1), so a forwarder only has to call a method of the same name; the `edges`
+    check still has to confirm the edge in the call graph."""
     c, e = strip_type_args(caller), strip_type_args(callee)
     for suf in FORWARDER_SUFFIXES:
         if c.endswith(suf):
-            return c[: -len(suf)] == e
+            return "." in c and c[: -len(suf)].rsplit(".", 1)[-1] == e.rsplit(".", 1)[-1]
     if c.endswith(".init") and (e.endswith(".init") or _INIT_N.search(e)):
         return True
     return False

@@ -80,6 +80,10 @@ def test_synthetic_edges_without_a_call_site():
     assert ck.check_site(edge("v.Impl.Run$thunk", "v.Impl.Run", "", 0), 0, None, None) is None
     assert ck.check_site(edge("v.Run$wrapper", "v.Run", "", 0), 0, None, None) is None
     assert ck.check_site(edge("v.Impl.Run$bound", "v.Other", "", 0), 0, None, None)      # forwards elsewhere
+    # a method promoted through an embedded field (observed on D1: quic-go, antlr4-go)
+    assert ck.check_site(edge("q.stream.Write$wrapper", "q.sendStream.Write", "", 0), 0, None, None) is None
+    assert ck.check_site(edge("a/v4.FqlParser.Notify$wrapper", "b/v4.BaseParser.Notify", "", 0), 0, None, None) is None
+    assert ck.check_site(edge("q.stream.Write$wrapper", "q.sendStream.Close", "", 0), 0, None, None)
     assert ck.check_site(edge("a.init", "b.Parse", "", 0), 0, None, None)               # init calling a function
 
 
