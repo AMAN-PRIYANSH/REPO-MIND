@@ -1,0 +1,7731 @@
+{
+ "agent_evidence": {
+  "commit_diffs": {
+   "available": 118,
+   "of": 120
+  },
+  "graph": {
+   "available": 118,
+   "of": 120
+  }
+ },
+ "arm": "A3",
+ "case_count": 120,
+ "config": {
+  "agent": "investigator_v1",
+  "arm": "A3",
+  "budget": {
+   "max_answer_ids": 3,
+   "max_prompt_tokens_per_call": 24000,
+   "max_repeated_calls": 1,
+   "max_seconds": 600.0,
+   "max_steps": 8,
+   "max_tool_chars": 3000,
+   "max_total_prompt_tokens": 80000
+  },
+  "graph_tools": true,
+  "initial_search_k": 10,
+  "prompt_set": "agent_v1",
+  "prompt_sha256": "98856e738085c0172ce77d90a6848fb2676d408c470fd83bb5915a3c9fd7f640",
+  "settings": {
+   "json_mode": true,
+   "max_tokens": 256,
+   "seed": 7,
+   "temperature": 0.0
+  }
+ },
+ "config_sha256": "88227d72167fa309d763472aeac42cde3c9ec91f165d195d78d92979faf867e7",
+ "counts": {
+  "agent_seconds": 1319.1,
+  "answer_rejections": 1,
+  "budget_reasons": {
+   "CONTEXT": 0,
+   "STEPS": 0,
+   "TIME": 0,
+   "TOKENS": 0
+  },
+  "cases": 120,
+  "cases_with_invalid_action": 14,
+  "commit_diffs_available": 118,
+  "graph_tools_available": 118,
+  "input_tokens": 2761868,
+  "invalid_actions": 16,
+  "length_stops": 0,
+  "llm_calls": 906,
+  "output_tokens": 21262,
+  "repaired_actions": 12,
+  "repeated_calls": 23,
+  "reused_traces": 0,
+  "run": 118,
+  "stop_reasons": {
+   "ABSTAINED": 0,
+   "BUDGET_EXCEEDED": 0,
+   "ERROR": 0,
+   "INVALID_ACTION": 2,
+   "INVALID_ANSWER": 0,
+   "LOOP_DETECTED": 1,
+   "NOT_RUN": 2,
+   "SUBMITTED": 115
+  },
+  "tool_errors": 3,
+  "truncated_outputs": 127,
+  "wall_seconds": 1334.4
+ },
+ "dataset": "D4",
+ "dry_run": false,
+ "embedding_model": {
+  "batch_size": 64,
+  "device": "cuda:0",
+  "dim": 384,
+  "kind": "SENTENCE_TRANSFORMERS",
+  "max_seq_length": 512,
+  "model_id": "BAAI/bge-small-en-v1.5",
+  "query_prefix": "Represent this sentence for searching relevant passages: ",
+  "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+  "versions": {
+   "sentence_transformers": "5.7.0",
+   "torch": "2.11.0+cu130",
+   "transformers": "5.20.2"
+  }
+ },
+ "environment": {
+  "command": "python -m vulntrace eval symbols --strategy agent --set d4 --arm A3 --model llama3.1-8b --data-dir /content/data --embedding-cache /content/drive/MyDrive/vulntrace_cp5/embeddings --device cuda --llm-cache /content/drive/MyDrive/vulntrace_cp6/llm_cache --trace-dir /content/drive/MyDrive/vulntrace_cp6/traces --out /content/drive/MyDrive/vulntrace_cp6/results/cp6",
+  "cuda_available": true,
+  "go": "go version go1.24.7 linux/amd64",
+  "gpu": "Tesla T4",
+  "os": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "python": "3.13.16",
+  "python_full": "3.13.16",
+  "repo_commit": "6f08c26",
+  "repo_dirty": false,
+  "torch": "2.11.0+cu130"
+ },
+ "experiment": "A3",
+ "graph_tools": true,
+ "langgraph_version": "1.2.15",
+ "limit": null,
+ "model": {
+  "alias": "llama3.1-8b",
+  "base_url": "http://localhost:11434/v1",
+  "cutoff": "2023-12-31",
+  "cutoff_source": "Meta Llama 3.1 model card, 'Data Freshness: The pretraining data has a cutoff of December 2023' (https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct). Read in the build session only through third-party copies of the card (search results, 2026-10-22); the owner should check the official page.",
+  "digest_error": null,
+  "dry_run": false,
+  "endpoint_kind": "OLLAMA",
+  "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+  "model_id": "llama3.1:8b",
+  "ollama_tag": "llama3.1:8b",
+  "params": "8B",
+  "quantization": "Ollama default (4-bit)"
+ },
+ "prompt": {
+  "set": "agent_v1",
+  "sha256": "98856e738085c0172ce77d90a6848fb2676d408c470fd83bb5915a3c9fd7f640",
+  "templates": [
+   "agent_system_v1",
+   "agent_graph_tools_v1",
+   "agent_task_v1",
+   "agent_observation_v1",
+   "agent_last_step_v1",
+   "agent_repeat_v1",
+   "agent_repair_v1"
+  ]
+ },
+ "retriever": {
+  "config": "hybrid:bge-small",
+  "variant": "code+commits"
+ },
+ "rows": [
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.861,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/miekg/dns@1.0.3..1.0.4-0.20180125103619-43913f2f4fbd",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 1,
+    "truncated_outputs": 0
+   },
+   "created": "2021-04-14",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1"
+   ],
+   "gold_ids": [
+    "r1"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2020-0006",
+   "input_tokens": 15629,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 2620,
+   "n_candidates": 1,
+   "output_tokens": 183,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "2079f3e3da91f4389465c33d",
+   "wall_seconds": 10.06
+  },
+  {
+   "a0_top3": [
+    "r42",
+    "r48",
+    "r40"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.407,
+   "answer": [
+    "r42"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/pion/dtls@1.5.1..1.5.2",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2021-04-14",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r50",
+    "r76"
+   ],
+   "gold_ids": [
+    "r50"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2020-0038",
+   "input_tokens": 25555,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4150,
+   "n_candidates": 81,
+   "output_tokens": 182,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "27ab73a82c605f9123dc2057",
+   "wall_seconds": 11.557
+  },
+  {
+   "a0_top3": [
+    "r5",
+    "r14",
+    "r21"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.7,
+   "answer": [
+    "r5"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gin-gonic/gin@1.7.6..1.7.7",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2021-04-14",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r10",
+    "r11",
+    "r12",
+    "r13",
+    "r2",
+    "r9"
+   ],
+   "gold_ids": [
+    "r1",
+    "r2"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2021-0052",
+   "input_tokens": 24858,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4428,
+   "n_candidates": 23,
+   "output_tokens": 186,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "bb1afdadcab3735c63dd3be1",
+   "wall_seconds": 11.843
+  },
+  {
+   "a0_top3": [
+    "r6",
+    "r1",
+    "r4"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.706,
+   "answer": [
+    "r6"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/sigstore/cosign@1.5.1..1.5.2",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r7"
+   ],
+   "gold_ids": [
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r7"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2022-0326",
+   "input_tokens": 21854,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3837,
+   "n_candidates": 7,
+   "output_tokens": 188,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "c1763357625059ca61fb517c",
+   "wall_seconds": 10.854
+  },
+  {
+   "a0_top3": [
+    "r11675",
+    "r11717",
+    "r11727"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.239,
+   "answer": [
+    "r11675"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/aws/aws-sdk-go@1.30.0..1.34.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2022-07-01",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r11675",
+    "r11688",
+    "r11690",
+    "r11697",
+    "r11699",
+    "r11738",
+    "r11739"
+   ],
+   "gold_ids": [
+    "r11675"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2022-0391",
+   "input_tokens": 25994,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4858,
+   "n_candidates": 13805,
+   "output_tokens": 180,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 3,
+    "search_commits": 2,
+    "show_commit": 1
+   },
+   "trace_id": "40e0f9d0af1ecf6ecb631dcc",
+   "wall_seconds": 11.377
+  },
+  {
+   "a0_top3": [
+    "r3",
+    "r2",
+    "r4"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.236,
+   "answer": [
+    "r3",
+    "r2",
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/ntbosscher/gobase@0.7.1..0.7.2",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2022-07-01",
+   "error": null,
+   "evidence": {
+    "candidates": 3,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r3"
+   ],
+   "gold_ids": [
+    "r1",
+    "r3"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2022-0400",
+   "input_tokens": 15888,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 2762,
+   "n_candidates": 4,
+   "output_tokens": 213,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "ddc121ed91d1e954fed131ee",
+   "wall_seconds": 10.383
+  },
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.298,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/pion/dtls/v2@2.1.4..2.1.5",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 3
+   },
+   "created": "2022-07-01",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1"
+   ],
+   "gold_ids": [
+    "r1"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2022-0462",
+   "input_tokens": 21854,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4324,
+   "n_candidates": 1,
+   "output_tokens": 188,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 1,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "ed9f5bfbf21dd9de2babae2b",
+   "wall_seconds": 11.419
+  },
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.684,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/flyteorg/flyteadmin@1.1.30..1.1.31",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2022-07-30",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1"
+   ],
+   "gold_ids": [
+    "r1"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2022-0519",
+   "input_tokens": 15468,
+   "llm_calls": 9,
+   "max_call_prompt_tokens": 2334,
+   "n_candidates": 1,
+   "output_tokens": 194,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "ae7907cc2a9943d82d4cb7f0",
+   "wall_seconds": 9.862
+  },
+  {
+   "a0_top3": [
+    "r1",
+    "r3",
+    "r2"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.752,
+   "answer": [
+    "r3"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/microcosm-cc/bluemonday@1.0.15..1.0.16",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2022-08-15",
+   "error": null,
+   "evidence": {
+    "candidates": 2,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2022-0588",
+   "input_tokens": 21961,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4606,
+   "n_candidates": 3,
+   "output_tokens": 188,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "df33000601235321e4ee4274",
+   "wall_seconds": 11.909
+  },
+  {
+   "a0_top3": [
+    "r446",
+    "r436",
+    "r23"
+   ],
+   "abstain": false,
+   "agent_seconds": 13.502,
+   "answer": [
+    "r434"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/codenotary/immudb@1.4.0..1.4.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 1,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r436",
+    "r444",
+    "r447",
+    "r513",
+    "r92"
+   ],
+   "gold_ids": [
+    "r436",
+    "r444",
+    "r447",
+    "r513",
+    "r92"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2022-1118",
+   "input_tokens": 29526,
+   "llm_calls": 9,
+   "max_call_prompt_tokens": 4376,
+   "n_candidates": 543,
+   "output_tokens": 234,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "706145baf95b8b7e6a2de215",
+   "wall_seconds": 13.681
+  },
+  {
+   "a0_top3": [
+    "r3",
+    "r4",
+    "r6"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.828,
+   "answer": [
+    "r3"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "helm.sh/helm/v3@3.11.0..3.11.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r5",
+    "r6"
+   ],
+   "gold_ids": [
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r5",
+    "r6"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2023-1547",
+   "input_tokens": 26133,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5027,
+   "n_candidates": 7,
+   "output_tokens": 181,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "b26345b76c8d96154906f363",
+   "wall_seconds": 11.965
+  },
+  {
+   "a0_top3": [
+    "r3",
+    "r23",
+    "r38"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.457,
+   "answer": [
+    "r19"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/hashicorp/go-getter/v2@2.0.0..2.2.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 2,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r10",
+    "r11",
+    "r13",
+    "r14",
+    "r15",
+    "r16",
+    "r17",
+    "r18",
+    "r19",
+    "r2",
+    "r20",
+    "r27",
+    "r37",
+    "r53",
+    "r9"
+   ],
+   "gold_ids": [
+    "r13",
+    "r19",
+    "r27"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2023-1578",
+   "input_tokens": 28219,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5326,
+   "n_candidates": 58,
+   "output_tokens": 184,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 4,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "96ac992011ab3f110948e5f6",
+   "wall_seconds": 12.613
+  },
+  {
+   "a0_top3": [
+    "r1",
+    "r2",
+    "r5"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.281,
+   "answer": [
+    "r7"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/russellhaering/gosaml2@0.8.1..0.9.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r5",
+    "r7",
+    "r8"
+   ],
+   "gold_ids": [
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r5",
+    "r7",
+    "r8"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2023-1602",
+   "input_tokens": 19724,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4131,
+   "n_candidates": 8,
+   "output_tokens": 167,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "34a501a94a3d4b7c43c83338",
+   "wall_seconds": 10.414
+  },
+  {
+   "a0_top3": [
+    "r4",
+    "r5",
+    "r3"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.351,
+   "answer": [
+    "r3",
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/crewjam/saml@0.4.12..0.4.13",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r4",
+    "r5"
+   ],
+   "gold_ids": [
+    "r4",
+    "r5"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2023-1664",
+   "input_tokens": 18430,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3308,
+   "n_candidates": 5,
+   "output_tokens": 194,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "91152eb34a27e894333f0379",
+   "wall_seconds": 10.501
+  },
+  {
+   "a0_top3": [
+    "r6",
+    "r5",
+    "r9"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.617,
+   "answer": [
+    "r20",
+    "r17"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/openfga/openfga@1.1.1-0.20230623171216-d180fc3e227f..1.1.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r14",
+    "r15",
+    "r16",
+    "r18"
+   ],
+   "gold_ids": [
+    "r14",
+    "r15",
+    "r16",
+    "r18"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2023-1872",
+   "input_tokens": 29377,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4840,
+   "n_candidates": 20,
+   "output_tokens": 179,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "733a0cca3dce64dea1049cdb",
+   "wall_seconds": 11.758
+  },
+  {
+   "a0_top3": [
+    "r194",
+    "r124",
+    "r263"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.293,
+   "answer": [
+    "r124",
+    "r117"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/consensys/gnark@0.9.0-alpha..0.9.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r117",
+    "r118",
+    "r120",
+    "r121",
+    "r122",
+    "r124",
+    "r126",
+    "r127",
+    "r138"
+   ],
+   "gold_ids": [
+    "r117",
+    "r118",
+    "r120",
+    "r121",
+    "r122",
+    "r124",
+    "r126",
+    "r127",
+    "r138"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2023-2098",
+   "input_tokens": 22416,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4652,
+   "n_candidates": 279,
+   "output_tokens": 170,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "a7321222227287f2df0ffa31",
+   "wall_seconds": 11.427
+  },
+  {
+   "a0_top3": [
+    "r85",
+    "r112",
+    "r89"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.969,
+   "answer": [
+    "r96",
+    "r85",
+    "r112"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gofiber/fiber/v2@2.49.2..2.50.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r101",
+    "r102",
+    "r103",
+    "r122",
+    "r124",
+    "r125",
+    "r82",
+    "r83",
+    "r85",
+    "r94",
+    "r95",
+    "r96",
+    "r97",
+    "r98"
+   ],
+   "gold_ids": [
+    "r101",
+    "r102",
+    "r103",
+    "r122",
+    "r124",
+    "r125",
+    "r82",
+    "r83",
+    "r85",
+    "r94",
+    "r95",
+    "r96",
+    "r97",
+    "r98"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2023-2116",
+   "input_tokens": 25046,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4370,
+   "n_candidates": 132,
+   "output_tokens": 196,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "7992eb733e7195ae3f5f3ff9",
+   "wall_seconds": 12.107
+  },
+  {
+   "a0_top3": [
+    "r2",
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 8.355,
+   "answer": [
+    "r2"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/go-resty/resty/v2@2.10.0..2.11.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r2"
+   ],
+   "gold_ids": [
+    "r2"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2023-2328",
+   "input_tokens": 14393,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 2682,
+   "n_candidates": 2,
+   "output_tokens": 159,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "33baf3d8f4b5495ddbc6aa0d",
+   "wall_seconds": 8.459
+  },
+  {
+   "a0_top3": [
+    "r10",
+    "r7",
+    "r6"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.422,
+   "answer": [
+    "r10"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/mojocn/base64Captcha@1.3.5..1.3.6",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r10"
+   ],
+   "gold_ids": [
+    "r10"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2023-2386",
+   "input_tokens": 19605,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3178,
+   "n_candidates": 10,
+   "output_tokens": 178,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "1791b72fcbe3d5a06dc18a29",
+   "wall_seconds": 9.541
+  },
+  {
+   "a0_top3": [
+    "r8",
+    "r4",
+    "r10"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.066,
+   "answer": [
+    "r8"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "golang.org/x/crypto@0.16.0..0.17.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r10",
+    "r11",
+    "r12",
+    "r15",
+    "r5",
+    "r6",
+    "r7",
+    "r8",
+    "r9"
+   ],
+   "gold_ids": [
+    "r10",
+    "r11",
+    "r12",
+    "r15",
+    "r6",
+    "r7",
+    "r8"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2023-2402",
+   "input_tokens": 24229,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4478,
+   "n_candidates": 15,
+   "output_tokens": 183,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "ffdfdc4d4bd6a6a816029fd0",
+   "wall_seconds": 11.203
+  },
+  {
+   "a0_top3": [
+    "r39",
+    "r38",
+    "r22"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.737,
+   "answer": [
+    "r39"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/hashicorp/nomad@1.7.3..1.7.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r22",
+    "r23",
+    "r39"
+   ],
+   "gold_ids": [
+    "r22",
+    "r23",
+    "r39"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2024-2538",
+   "input_tokens": 25251,
+   "llm_calls": 9,
+   "max_call_prompt_tokens": 4225,
+   "n_candidates": 74,
+   "output_tokens": 202,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "4219a76b3582dc3802df94d8",
+   "wall_seconds": 11.901
+  },
+  {
+   "a0_top3": [
+    "r64",
+    "r65",
+    "r69"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.69,
+   "answer": [
+    "r11"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/hashicorp/nomad@1.4.10..1.4.11",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": null,
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r69",
+    "r70"
+   ],
+   "gold_ids": [
+    "r1",
+    "r69",
+    "r70"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2024-2671",
+   "input_tokens": 28710,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4922,
+   "n_candidates": 88,
+   "output_tokens": 177,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "9d281eca2ffda6eaf0987276",
+   "wall_seconds": 11.827
+  },
+  {
+   "a0_top3": [
+    "r21",
+    "r24",
+    "r30"
+   ],
+   "abstain": false,
+   "agent_seconds": 13.048,
+   "answer": [
+    "r15",
+    "r21"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/containers/image/v5@5.30.0..5.30.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2024-05-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r10",
+    "r14",
+    "r15",
+    "r16",
+    "r17",
+    "r18",
+    "r19",
+    "r2",
+    "r20",
+    "r22",
+    "r23",
+    "r24",
+    "r25",
+    "r26",
+    "r27",
+    "r28",
+    "r29",
+    "r3",
+    "r30",
+    "r31",
+    "r32",
+    "r33",
+    "r34",
+    "r35",
+    "r36",
+    "r37",
+    "r38",
+    "r39",
+    "r4",
+    "r40",
+    "r41",
+    "r42",
+    "r43",
+    "r44",
+    "r45",
+    "r46",
+    "r47",
+    "r48",
+    "r49",
+    "r5",
+    "r51",
+    "r52",
+    "r6",
+    "r7",
+    "r8",
+    "r9"
+   ],
+   "gold_ids": [
+    "r1",
+    "r10",
+    "r14",
+    "r15",
+    "r16",
+    "r17",
+    "r18",
+    "r19",
+    "r2",
+    "r20",
+    "r22",
+    "r23",
+    "r24",
+    "r25",
+    "r26",
+    "r27",
+    "r28",
+    "r29",
+    "r3",
+    "r30",
+    "r31",
+    "r32",
+    "r33",
+    "r34",
+    "r35",
+    "r36",
+    "r37",
+    "r38",
+    "r39",
+    "r4",
+    "r40",
+    "r43",
+    "r47",
+    "r48",
+    "r49",
+    "r5",
+    "r6",
+    "r7",
+    "r8",
+    "r9"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2024-2842",
+   "input_tokens": 28271,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5301,
+   "n_candidates": 52,
+   "output_tokens": 202,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "a885f15ed2f270b45605ddbd",
+   "wall_seconds": 13.179
+  },
+  {
+   "a0_top3": [
+    "r5",
+    "r11",
+    "r17"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.466,
+   "answer": [
+    "r9",
+    "r8"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/cometbft/cometbft@0.38.11..0.38.12",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 3
+   },
+   "created": "2024-09-13",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r12",
+    "r20",
+    "r3",
+    "r5",
+    "r6",
+    "r8"
+   ],
+   "gold_ids": [
+    "r20",
+    "r3",
+    "r5",
+    "r6",
+    "r8"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2024-3112",
+   "input_tokens": 28829,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5324,
+   "n_candidates": 20,
+   "output_tokens": 182,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "f3c63c5ff469724843424d1a",
+   "wall_seconds": 12.592
+  },
+  {
+   "a0_top3": [
+    "r139",
+    "r141",
+    "r138"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.618,
+   "answer": [
+    "r139"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/osrg/gobgp/v3@3.19.0..3.20.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2024-09-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r137",
+    "r138",
+    "r139"
+   ],
+   "gold_ids": [
+    "r137",
+    "r138",
+    "r139"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2024-3124",
+   "input_tokens": 26931,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 5433,
+   "n_candidates": 271,
+   "output_tokens": 157,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "b1e1fd46372762e467a3d382",
+   "wall_seconds": 11.717
+  },
+  {
+   "a0_top3": [
+    "r1052",
+    "r990",
+    "r1093"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.313,
+   "answer": [
+    "r1093"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/cosmos/cosmos-sdk@0.50.11..0.50.12",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 3
+   },
+   "created": "2025-02-26",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1093",
+    "r1095",
+    "r1096"
+   ],
+   "gold_ids": [
+    "r1093",
+    "r1095",
+    "r1096"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2025-3476",
+   "input_tokens": 25898,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 5761,
+   "n_candidates": 1098,
+   "output_tokens": 163,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 1,
+    "search_code": 2,
+    "show_commit": 1
+   },
+   "trace_id": "898c6bc28b512fe0f5f0b106",
+   "wall_seconds": 12.436
+  },
+  {
+   "a0_top3": [
+    "r10",
+    "r3",
+    "r2"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.576,
+   "answer": [
+    "r11"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/getkin/kin-openapi@0.130.0..0.131.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2025-03-25",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r10",
+    "r11",
+    "r12",
+    "r13",
+    "r14",
+    "r7",
+    "r9"
+   ],
+   "gold_ids": [
+    "r10",
+    "r11",
+    "r12",
+    "r13",
+    "r14",
+    "r7",
+    "r9"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2025-3533",
+   "input_tokens": 23751,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4533,
+   "n_candidates": 14,
+   "output_tokens": 185,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "846d336e4fff426e2562a79b",
+   "wall_seconds": 11.703
+  },
+  {
+   "a0_top3": [
+    "r3",
+    "r8",
+    "r4"
+   ],
+   "abstain": false,
+   "agent_seconds": 13.411,
+   "answer": [
+    "r3",
+    "r8"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/nats-io/nats-server/v2@2.10.26..2.10.27",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2025-04-10",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r8"
+   ],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2025-3600",
+   "input_tokens": 28364,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5819,
+   "n_candidates": 8,
+   "output_tokens": 198,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "33d32bcf4b5ce6d30ad173a2",
+   "wall_seconds": 13.541
+  },
+  {
+   "a0_top3": [
+    "r1",
+    "r2"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.657,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/pion/interceptor@0.1.38..0.1.39",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2025-06-10",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1"
+   ],
+   "gold_ids": [
+    "r1"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2025-3748",
+   "input_tokens": 17745,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 3688,
+   "n_candidates": 2,
+   "output_tokens": 159,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "11faaf2497dab8c021ae441d",
+   "wall_seconds": 9.77
+  },
+  {
+   "a0_top3": [
+    "r4",
+    "r3",
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.63,
+   "answer": [
+    "r4"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/go-pg/pg/v10@10.14.0..10.15.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-01-16",
+   "error": null,
+   "evidence": {
+    "candidates": 3,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r2",
+    "r4"
+   ],
+   "gold_ids": [
+    "r1",
+    "r2",
+    "r4"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2025-3764",
+   "input_tokens": 19052,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3615,
+   "n_candidates": 5,
+   "output_tokens": 196,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 2,
+    "show_commit": 1
+   },
+   "trace_id": "954f5d06d62ad4d5024f0a18",
+   "wall_seconds": 10.753
+  },
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 8.485,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/quic-go/quic-go@0.54.0..0.54.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2025-11-03",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1"
+   ],
+   "gold_ids": [
+    "r1"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2025-4017",
+   "input_tokens": 13981,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 2476,
+   "n_candidates": 1,
+   "output_tokens": 173,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "0a61a3ed843fb0168e1a4911",
+   "wall_seconds": 8.617
+  },
+  {
+   "a0_top3": [
+    "r9442",
+    "r9769",
+    "r9794"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.733,
+   "answer": [
+    "r9676"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/elastic/beats/v7@7.0.0-alpha2..7.0.0-alpha2.0.20260126223743-dec1b31111ec",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-03-31",
+   "error": null,
+   "evidence": {
+    "candidates": 2,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r9429",
+    "r9430",
+    "r9431",
+    "r9432",
+    "r9703",
+    "r9737",
+    "r9741",
+    "r9746",
+    "r9752",
+    "r9753"
+   ],
+   "gold_ids": [
+    "r9429",
+    "r9430",
+    "r9431",
+    "r9432",
+    "r9703",
+    "r9737",
+    "r9741",
+    "r9746",
+    "r9752",
+    "r9753"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-4789",
+   "input_tokens": 21835,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3731,
+   "n_candidates": 15487,
+   "output_tokens": 191,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "c2f48c75d753492333380a9e",
+   "wall_seconds": 10.87
+  },
+  {
+   "a0_top3": [
+    "r111",
+    "r110",
+    "r53"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.281,
+   "answer": [
+    "r111"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/distribution/distribution/v3@3.0.0..3.1.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r111"
+   ],
+   "gold_ids": [
+    "r111"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-4942",
+   "input_tokens": 28392,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5125,
+   "n_candidates": 170,
+   "output_tokens": 186,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "db1f3007aa073afb09a588a8",
+   "wall_seconds": 12.421
+  },
+  {
+   "a0_top3": [
+    "r2",
+    "r1",
+    "r20"
+   ],
+   "abstain": false,
+   "agent_seconds": 13.036,
+   "answer": [
+    "r20",
+    "r18",
+    "r8"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/cloudsoda/go-smb2@0.0.0-20260512215926-828fc89b00fb..0.0.0-20260609183447-7b96c35f5f4b",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-21",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5051",
+   "input_tokens": 27609,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5217,
+   "n_candidates": 21,
+   "output_tokens": 191,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "c6531a64334c37293112e849",
+   "wall_seconds": 13.175
+  },
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.431,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "software.sslmate.com/src/go-pkcs12@0.7.1..0.7.2",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 1,
+    "truncated_outputs": 0
+   },
+   "created": "2026-06-22",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5052",
+   "input_tokens": 19540,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3237,
+   "n_candidates": 1,
+   "output_tokens": 188,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "9fa33ded91383002a3594d02",
+   "wall_seconds": 10.583
+  },
+  {
+   "a0_top3": [
+    "r68",
+    "r67",
+    "r73"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.565,
+   "answer": [
+    "r67"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gofiber/fiber/v3@3.1.0..3.2.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r100",
+    "r103",
+    "r63",
+    "r79",
+    "r80",
+    "r96"
+   ],
+   "gold_ids": [
+    "r100",
+    "r103",
+    "r63",
+    "r79",
+    "r80",
+    "r96"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5069",
+   "input_tokens": 25894,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4291,
+   "n_candidates": 121,
+   "output_tokens": 171,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 2,
+    "read_function": 2,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "302eefa20d021960d8400e1a",
+   "wall_seconds": 10.68
+  },
+  {
+   "a0_top3": [
+    "r2",
+    "r4",
+    "r8"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.638,
+   "answer": [
+    "r4"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/ipld/go-ipld-prime@0.21.0..0.22.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r2",
+    "r3",
+    "r4",
+    "r7"
+   ],
+   "gold_ids": [
+    "r2",
+    "r3",
+    "r4",
+    "r7"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5073",
+   "input_tokens": 26512,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4876,
+   "n_candidates": 100,
+   "output_tokens": 177,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 3,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "73bdd0eb09769b0e05bd7621",
+   "wall_seconds": 11.777
+  },
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 8.666,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gomarkdown/markdown@0.0.0-20260217112301-37c66b85d6ab..0.0.0-20260411013819-759bbc3e3207",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5208",
+   "input_tokens": 12129,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 1979,
+   "n_candidates": 1,
+   "output_tokens": 189,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 1,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "c9e1abec7790090a1af60c27",
+   "wall_seconds": 8.792
+  },
+  {
+   "a0_top3": [
+    "r29",
+    "r31",
+    "r33"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.859,
+   "answer": [
+    "r31"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gohugoio/hugo@0.161.1..0.162.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r30",
+    "r32",
+    "r38"
+   ],
+   "gold_ids": [
+    "r32"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5313",
+   "input_tokens": 20649,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4079,
+   "n_candidates": 132,
+   "output_tokens": 162,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "99ed9614fd051d546850079b",
+   "wall_seconds": 9.973
+  },
+  {
+   "a0_top3": [
+    "r12",
+    "r11",
+    "r10"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.536,
+   "answer": [
+    "r12",
+    "r11",
+    "r10"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/yuin/goldmark@1.7.16..1.7.17",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r10",
+    "r11",
+    "r12"
+   ],
+   "gold_ids": [
+    "r10",
+    "r11",
+    "r12"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5320",
+   "input_tokens": 19202,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4147,
+   "n_candidates": 12,
+   "output_tokens": 172,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "9328fe126fd0d7621b9a3d8c",
+   "wall_seconds": 10.657
+  },
+  {
+   "a0_top3": [
+    "r24",
+    "r23",
+    "r25"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.298,
+   "answer": [
+    "r23",
+    "r24"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gohugoio/hugo@0.161.1..0.162.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r25"
+   ],
+   "gold_ids": [
+    "r25"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5380",
+   "input_tokens": 24221,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4172,
+   "n_candidates": 132,
+   "output_tokens": 188,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "6f89c92a046ea88622b3d55c",
+   "wall_seconds": 11.429
+  },
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 8.821,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/slack-go/slack@0.23.0..0.23.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1"
+   ],
+   "gold_ids": [
+    "r1"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5410",
+   "input_tokens": 13899,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 2230,
+   "n_candidates": 1,
+   "output_tokens": 185,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "8d0262cc73b680fdf64eb6ec",
+   "wall_seconds": 8.939
+  },
+  {
+   "a0_top3": [
+    "r82",
+    "r91",
+    "r84"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.356,
+   "answer": [
+    "r82"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r99"
+   ],
+   "gold_ids": [
+    "r99"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5427",
+   "input_tokens": 22973,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4599,
+   "n_candidates": 125,
+   "output_tokens": 157,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "b7cf5c87a8b1da2dce8b676c",
+   "wall_seconds": 10.461
+  },
+  {
+   "a0_top3": [
+    "r2",
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.483,
+   "answer": [
+    "r2"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "helm.sh/helm/v3@3.20.1..3.20.2",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r2"
+   ],
+   "gold_ids": [
+    "r2"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5435",
+   "input_tokens": 20582,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3505,
+   "n_candidates": 2,
+   "output_tokens": 187,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "f654d188c9d5260cd7066b90",
+   "wall_seconds": 10.617
+  },
+  {
+   "a0_top3": [
+    "r230",
+    "r159",
+    "r154"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.086,
+   "answer": [
+    "r230"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/MontFerret/ferret/v2@2.0.0-alpha.3..2.0.0-alpha.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r114",
+    "r216",
+    "r229",
+    "r230"
+   ],
+   "gold_ids": [
+    "r114",
+    "r216",
+    "r229",
+    "r230"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5452",
+   "input_tokens": 24363,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4257,
+   "n_candidates": 263,
+   "output_tokens": 188,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 2
+   },
+   "trace_id": "ef9376349fc652e8c31d9591",
+   "wall_seconds": 11.217
+  },
+  {
+   "a0_top3": [
+    "r6",
+    "r10",
+    "r8"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.031,
+   "answer": [
+    "r6"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/bettercap/bettercap/v2@2.41.5..2.41.7",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r6"
+   ],
+   "gold_ids": [
+    "r6"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5463",
+   "input_tokens": 30387,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5254,
+   "n_candidates": 11,
+   "output_tokens": 174,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 4,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "9769a954815b543733121f3a",
+   "wall_seconds": 12.157
+  },
+  {
+   "a0_top3": [
+    "r3",
+    "r6",
+    "r7"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.09,
+   "answer": [
+    "r7",
+    "r8"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.73.4..1.73.5",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-21",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5466",
+   "input_tokens": 23138,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4878,
+   "n_candidates": 8,
+   "output_tokens": 162,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "a17ad4ae9509eaa033f3b7f5",
+   "wall_seconds": 11.203
+  },
+  {
+   "a0_top3": [
+    "r3",
+    "r1",
+    "r2"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.415,
+   "answer": [
+    "r3"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gohugoio/hugo@0.159.1..0.159.2",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r2",
+    "r3"
+   ],
+   "gold_ids": [
+    "r1",
+    "r2",
+    "r3"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5504",
+   "input_tokens": 21060,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3547,
+   "n_candidates": 4,
+   "output_tokens": 185,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 1,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "88f06a896e3f094a3f347c29",
+   "wall_seconds": 10.55
+  },
+  {
+   "a0_top3": [
+    "r1",
+    "r41",
+    "r2"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.083,
+   "answer": [
+    "r1",
+    "r42"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "go.opentelemetry.io/otel@1.40.0..1.41.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r2",
+    "r31",
+    "r33",
+    "r34",
+    "r36",
+    "r38",
+    "r39"
+   ],
+   "gold_ids": [
+    "r1",
+    "r2",
+    "r31",
+    "r33",
+    "r34",
+    "r36",
+    "r38",
+    "r39"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5506",
+   "input_tokens": 23554,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4295,
+   "n_candidates": 49,
+   "output_tokens": 185,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "7441aa478954e5e62bc39878",
+   "wall_seconds": 11.211
+  },
+  {
+   "a0_top3": [
+    "r222",
+    "r221",
+    "r202"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.175,
+   "answer": [
+    "r231"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/osrg/gobgp/v4@4.4.0..4.5.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r239"
+   ],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5525",
+   "input_tokens": 24968,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5181,
+   "n_candidates": 251,
+   "output_tokens": 183,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "6ccdcadf5fe13762bbd4123c",
+   "wall_seconds": 12.312
+  },
+  {
+   "a0_top3": [
+    "r6",
+    "r10",
+    "r9"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.228,
+   "answer": [
+    "r6"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/dgraph-io/dgraph/v25@25.3.0..25.3.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-07-21",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5529",
+   "input_tokens": 25095,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4505,
+   "n_candidates": 12,
+   "output_tokens": 176,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "d81759a6e6b5d7b9024b5681",
+   "wall_seconds": 11.359
+  },
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.795,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/Azure/go-ntlmssp@0.1.0..0.1.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5543",
+   "input_tokens": 15915,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 2750,
+   "n_candidates": 1,
+   "output_tokens": 199,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 2,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "7b7ba06c4531b6f8ccf8be29",
+   "wall_seconds": 9.94
+  },
+  {
+   "a0_top3": [
+    "r1",
+    "r6",
+    "r9"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.334,
+   "answer": [
+    "r17"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/pocketbase/pocketbase@0.37.3..0.37.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5548",
+   "input_tokens": 24081,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 5306,
+   "n_candidates": 22,
+   "output_tokens": 165,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "6525afb87ecc8122f6dfad57",
+   "wall_seconds": 11.438
+  },
+  {
+   "a0_top3": [
+    "r3",
+    "r12",
+    "r15"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.146,
+   "answer": [
+    "r3"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "helm.sh/helm/v4@4.1.3..4.1.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5566",
+   "input_tokens": 15396,
+   "llm_calls": 6,
+   "max_call_prompt_tokens": 3648,
+   "n_candidates": 16,
+   "output_tokens": 149,
+   "reused_trace": false,
+   "steps": 6,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 1,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "2b4ac921305491095dc03b71",
+   "wall_seconds": 9.25
+  },
+  {
+   "a0_top3": [
+    "r3",
+    "r2",
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.688,
+   "answer": [
+    "r3",
+    "r2"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gohugoio/hugo@0.163.2..0.163.3",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r2"
+   ],
+   "gold_ids": [
+    "r2"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5569",
+   "input_tokens": 21069,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3586,
+   "n_candidates": 13,
+   "output_tokens": 193,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "92b81efa78bb15a432096b32",
+   "wall_seconds": 10.823
+  },
+  {
+   "a0_top3": [
+    "r42",
+    "r41",
+    "r38"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.843,
+   "answer": [
+    "r41",
+    "r42"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.2..1.74.3",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-21",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r41"
+   ],
+   "gold_ids": [
+    "r41"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5596",
+   "input_tokens": 26726,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4712,
+   "n_candidates": 46,
+   "output_tokens": 190,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "15916c62de22af993430455b",
+   "wall_seconds": 11.993
+  },
+  {
+   "a0_top3": [
+    "r2",
+    "r3",
+    "r4"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.359,
+   "answer": [
+    "r3"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gohugoio/hugo@0.163.0..0.163.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r16",
+    "r18",
+    "r2"
+   ],
+   "gold_ids": [
+    "r16",
+    "r18",
+    "r2"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5606",
+   "input_tokens": 23238,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4863,
+   "n_candidates": 19,
+   "output_tokens": 174,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 1,
+    "search_code": 3,
+    "show_commit": 1
+   },
+   "trace_id": "2a081b59b4d83a5909506cf4",
+   "wall_seconds": 11.464
+  },
+  {
+   "a0_top3": [
+    "r100",
+    "r101",
+    "r85"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.354,
+   "answer": [
+    "r100"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r83",
+    "r94",
+    "r95"
+   ],
+   "gold_ids": [
+    "r94",
+    "r95"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5665",
+   "input_tokens": 29013,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5173,
+   "n_candidates": 125,
+   "output_tokens": 184,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 2
+   },
+   "trace_id": "bb4bfaa22794dc94fc1b260d",
+   "wall_seconds": 12.478
+  },
+  {
+   "a0_top3": [
+    "r6",
+    "r12",
+    "r7"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.997,
+   "answer": [
+    "r12",
+    "r11"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "helm.sh/helm/v4@4.1.3..4.1.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r11",
+    "r12",
+    "r13",
+    "r4",
+    "r5",
+    "r6",
+    "r9"
+   ],
+   "gold_ids": [
+    "r1",
+    "r11",
+    "r12",
+    "r13",
+    "r9"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5666",
+   "input_tokens": 22441,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4132,
+   "n_candidates": 16,
+   "output_tokens": 185,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 2,
+    "show_commit": 1
+   },
+   "trace_id": "7915a9e480ec294a3c763d55",
+   "wall_seconds": 11.114
+  },
+  {
+   "a0_top3": [
+    "r3",
+    "r1",
+    "r2"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.509,
+   "answer": [
+    "r3"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/quic-go/quic-go@0.59.0..0.59.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r2",
+    "r3"
+   ],
+   "gold_ids": [
+    "r1",
+    "r2",
+    "r3"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5676",
+   "input_tokens": 17588,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 3450,
+   "n_candidates": 6,
+   "output_tokens": 168,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "e55eb96d0f4b63a612903ea6",
+   "wall_seconds": 9.625
+  },
+  {
+   "a0_top3": [
+    "r21",
+    "r102",
+    "r32"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.506,
+   "answer": [
+    "r21"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gohugoio/hugo@0.161.1..0.162.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r102",
+    "r111",
+    "r34"
+   ],
+   "gold_ids": [
+    "r102",
+    "r111",
+    "r34"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5681",
+   "input_tokens": 25740,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4588,
+   "n_candidates": 132,
+   "output_tokens": 189,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "95691d49c471bc931d98415a",
+   "wall_seconds": 11.641
+  },
+  {
+   "a0_top3": [
+    "r100",
+    "r89",
+    "r96"
+   ],
+   "abstain": false,
+   "agent_seconds": 7.695,
+   "answer": [],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 2,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 0
+   },
+   "gold_derived_ids": [
+    "r97",
+    "r98"
+   ],
+   "gold_ids": [
+    "r97",
+    "r98"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5699",
+   "input_tokens": 14135,
+   "llm_calls": 5,
+   "max_call_prompt_tokens": 3655,
+   "n_candidates": 125,
+   "output_tokens": 111,
+   "reused_trace": false,
+   "steps": 4,
+   "stop_reason": "LOOP_DETECTED",
+   "tool_counts": {
+    "read_function": 3,
+    "search_code": 1
+   },
+   "trace_id": "a66eaf785233714653985841",
+   "wall_seconds": 7.766
+  },
+  {
+   "a0_top3": [
+    "r91",
+    "r100",
+    "r98"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.383,
+   "answer": [
+    "r91"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-07-07",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r83",
+    "r91"
+   ],
+   "gold_ids": [
+    "r83",
+    "r91"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5713",
+   "input_tokens": 18812,
+   "llm_calls": 6,
+   "max_call_prompt_tokens": 4373,
+   "n_candidates": 125,
+   "output_tokens": 136,
+   "reused_trace": false,
+   "steps": 6,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "adc21b157eae596120d3249a",
+   "wall_seconds": 9.482
+  },
+  {
+   "a0_top3": [
+    "r7",
+    "r5",
+    "r30"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.294,
+   "answer": [
+    "r17"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gohugoio/hugo@0.160.1..0.161.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r11",
+    "r126",
+    "r30",
+    "r4",
+    "r62",
+    "r70"
+   ],
+   "gold_ids": [
+    "r11",
+    "r30",
+    "r4",
+    "r62",
+    "r70"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5740",
+   "input_tokens": 22054,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3748,
+   "n_candidates": 140,
+   "output_tokens": 179,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 3,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "7444470edf6432b2d9a61836",
+   "wall_seconds": 10.424
+  },
+  {
+   "a0_top3": [
+    "r1",
+    "r11",
+    "r13"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.28,
+   "answer": [
+    "r11"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/ollama/ollama@0.17.1-rc2..0.17.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5748",
+   "input_tokens": 24091,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4352,
+   "n_candidates": 13,
+   "output_tokens": 189,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "a044ddf9e2f9e27edc6a5836",
+   "wall_seconds": 11.423
+  },
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 8.429,
+   "answer": [],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/klauspost/compress@1.18.6..1.18.7",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 2,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-07-21",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 0
+   },
+   "gold_derived_ids": [
+    "r1"
+   ],
+   "gold_ids": [
+    "r1"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5841",
+   "input_tokens": 12924,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 2536,
+   "n_candidates": 1,
+   "output_tokens": 166,
+   "reused_trace": false,
+   "steps": 5,
+   "stop_reason": "INVALID_ACTION",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "5864a393604d40a59f7598cb",
+   "wall_seconds": 8.531
+  },
+  {
+   "a0_top3": [
+    "r2",
+    "r3",
+    "r4"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.772,
+   "answer": [
+    "r3",
+    "r2"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "oras.land/oras-go/v2@2.6.0..2.6.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 2,
+    "commits": 3
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5879",
+   "input_tokens": 25416,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4960,
+   "n_candidates": 26,
+   "output_tokens": 216,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 2
+   },
+   "trace_id": "bf82eb473888a56c9c8f3466",
+   "wall_seconds": 12.905
+  },
+  {
+   "a0_top3": [
+    "r1",
+    "r2",
+    "r9"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.47,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "oras.land/oras-go/v2@2.6.1..2.6.2",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 2,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5880",
+   "input_tokens": 25496,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4526,
+   "n_candidates": 9,
+   "output_tokens": 186,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "5762bb007c26b06d7d3772ac",
+   "wall_seconds": 11.614
+  },
+  {
+   "a0_top3": [
+    "r25",
+    "r26",
+    "r15"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.897,
+   "answer": [
+    "r25"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "oras.land/oras-go/v2@2.6.0..2.6.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-5882",
+   "input_tokens": 20524,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4053,
+   "n_candidates": 26,
+   "output_tokens": 159,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "cef5f1e98e955652d88f170e",
+   "wall_seconds": 10.015
+  },
+  {
+   "a0_top3": [
+    "r22",
+    "r19",
+    "r21"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.97,
+   "answer": [
+    "r22"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "oras.land/oras-go/v2@2.6.0..2.6.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r15"
+   ],
+   "gold_ids": [
+    "r15"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5884",
+   "input_tokens": 26647,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5002,
+   "n_candidates": 26,
+   "output_tokens": 181,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "cd2202bbd22fe3b0f5dd2c5b",
+   "wall_seconds": 12.102
+  },
+  {
+   "a0_top3": [
+    "r19",
+    "r15",
+    "r22"
+   ],
+   "abstain": false,
+   "agent_seconds": 13.202,
+   "answer": [
+    "r19"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "oras.land/oras-go/v2@2.6.0..2.6.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 3
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r15"
+   ],
+   "gold_ids": [
+    "r15"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5885",
+   "input_tokens": 29728,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5943,
+   "n_candidates": 26,
+   "output_tokens": 184,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 2
+   },
+   "trace_id": "080f21c9f574945e0154f527",
+   "wall_seconds": 13.331
+  },
+  {
+   "a0_top3": [
+    "r216",
+    "r185",
+    "r180"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.517,
+   "answer": [
+    "r216"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/osrg/gobgp/v4@4.6.0..4.7.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r216"
+   ],
+   "gold_ids": [
+    "r216"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5954",
+   "input_tokens": 24736,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 5017,
+   "n_candidates": 253,
+   "output_tokens": 168,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "01eb476919986714d3064a85",
+   "wall_seconds": 11.629
+  },
+  {
+   "a0_top3": [
+    "r70",
+    "r72",
+    "r71"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.677,
+   "answer": [
+    "r87"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/osrg/gobgp/v4@4.5.0..4.6.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r68",
+    "r69",
+    "r70",
+    "r71",
+    "r72"
+   ],
+   "gold_ids": [
+    "r68",
+    "r69",
+    "r70",
+    "r71",
+    "r72"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5955",
+   "input_tokens": 23973,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4585,
+   "n_candidates": 172,
+   "output_tokens": 187,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 2,
+    "show_commit": 1
+   },
+   "trace_id": "4779f6ef1191355aa1b5ea39",
+   "wall_seconds": 11.798
+  },
+  {
+   "a0_top3": [
+    "r94",
+    "r2",
+    "r88"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.115,
+   "answer": [
+    "r94"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/xuri/excelize/v2@2.10.1..2.11.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r112",
+    "r135",
+    "r2",
+    "r4",
+    "r44",
+    "r88",
+    "r94"
+   ],
+   "gold_ids": [
+    "r2",
+    "r88",
+    "r94"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5960",
+   "input_tokens": 28436,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5045,
+   "n_candidates": 162,
+   "output_tokens": 187,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 2
+   },
+   "trace_id": "74333d5d5bc1d3dad026d1b2",
+   "wall_seconds": 12.255
+  },
+  {
+   "a0_top3": [
+    "r82",
+    "r92",
+    "r85"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.127,
+   "answer": [
+    "r83"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r83"
+   ],
+   "gold_ids": [
+    "r83"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5971",
+   "input_tokens": 26112,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 5479,
+   "n_candidates": 125,
+   "output_tokens": 168,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 2,
+    "show_commit": 1
+   },
+   "trace_id": "c569c220f303858fcc5ee583",
+   "wall_seconds": 12.257
+  },
+  {
+   "a0_top3": [
+    "r120",
+    "r129",
+    "r128"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.047,
+   "answer": [
+    "r120"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/aquasecurity/trivy@0.70.0..0.71.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r105",
+    "r107",
+    "r108",
+    "r120",
+    "r125",
+    "r87"
+   ],
+   "gold_ids": [
+    "r105",
+    "r107",
+    "r108",
+    "r120",
+    "r125",
+    "r87"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5983",
+   "input_tokens": 29398,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5137,
+   "n_candidates": 161,
+   "output_tokens": 179,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "822d205b15d0d6db615b00ef",
+   "wall_seconds": 12.178
+  },
+  {
+   "a0_top3": [
+    "r14",
+    "r35",
+    "r37"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.32,
+   "answer": [
+    "r14"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/forgekeep/nebula-mesh@0.4.0..0.5.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-21",
+   "error": null,
+   "evidence": {
+    "candidates": 2,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r14",
+    "r26",
+    "r32"
+   ],
+   "gold_ids": [
+    "r14",
+    "r26",
+    "r32"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5987",
+   "input_tokens": 24146,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4447,
+   "n_candidates": 37,
+   "output_tokens": 183,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "b29c87961afe871fe8e76073",
+   "wall_seconds": 11.453
+  },
+  {
+   "a0_top3": [
+    "r33",
+    "r36",
+    "r32"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.392,
+   "answer": [
+    "r33",
+    "r34"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/forgekeep/nebula-mesh@0.4.0..0.5.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-22",
+   "error": null,
+   "evidence": {
+    "candidates": 2,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r33",
+    "r34",
+    "r36"
+   ],
+   "gold_ids": [
+    "r33",
+    "r34",
+    "r36"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-5989",
+   "input_tokens": 23266,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4093,
+   "n_candidates": 37,
+   "output_tokens": 191,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "664bd19eb6cd8ff8a0ff209c",
+   "wall_seconds": 11.54
+  },
+  {
+   "a0_top3": [
+    "r28",
+    "r33",
+    "r30"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.315,
+   "answer": [
+    "r36",
+    "r37"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "google.golang.org/grpc@1.82.0..1.82.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-07-23",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r28",
+    "r36",
+    "r37",
+    "r4",
+    "r6"
+   ],
+   "gold_ids": [
+    "r36",
+    "r37",
+    "r4",
+    "r6"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6061",
+   "input_tokens": 27669,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5149,
+   "n_candidates": 40,
+   "output_tokens": 188,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "262571293c7288ccca717700",
+   "wall_seconds": 12.435
+  },
+  {
+   "a0_top3": [
+    "r5",
+    "r2",
+    "r4"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.058,
+   "answer": [
+    "r2"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/getkin/kin-openapi@0.143.0..0.144.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r5"
+   ],
+   "gold_ids": [
+    "r5"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6095",
+   "input_tokens": 18540,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3482,
+   "n_candidates": 5,
+   "output_tokens": 180,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "5087b6dc10c8becb7a1b9c63",
+   "wall_seconds": 10.223
+  },
+  {
+   "a0_top3": [
+    "r2",
+    "r3",
+    "r4"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.444,
+   "answer": [
+    "r2"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/getkin/kin-openapi@0.143.0..0.144.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r2"
+   ],
+   "gold_ids": [
+    "r2"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6112",
+   "input_tokens": 20219,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3457,
+   "n_candidates": 5,
+   "output_tokens": 168,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 2,
+    "read_function": 2,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "0360433005fb5c49ef9de50b",
+   "wall_seconds": 9.597
+  },
+  {
+   "a0_top3": [
+    "r5",
+    "r3",
+    "r2"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.188,
+   "answer": [
+    "r5",
+    "r6"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "go.etcd.io/etcd/server/v3@3.7.0..3.7.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r5"
+   ],
+   "gold_ids": [
+    "r5"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6114",
+   "input_tokens": 27116,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 5615,
+   "n_candidates": 8,
+   "output_tokens": 169,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "6fde41644d31e413f43d8a2f",
+   "wall_seconds": 12.308
+  },
+  {
+   "a0_top3": [
+    "r1",
+    "r4",
+    "r2"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.531,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/gotd/td@0.145.0..0.145.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1"
+   ],
+   "gold_ids": [
+    "r1"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6138",
+   "input_tokens": 26191,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4346,
+   "n_candidates": 10,
+   "output_tokens": 187,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "f2cdc8aae9c0d621d774d43d",
+   "wall_seconds": 11.67
+  },
+  {
+   "a0_top3": [
+    "r5",
+    "r2",
+    "r16"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.132,
+   "answer": [
+    "r5",
+    "r16"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/prebid/prebid-server/v4@4.3.0..4.4.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 0
+   },
+   "gold_derived_ids": [
+    "r2",
+    "r5",
+    "r7",
+    "r9"
+   ],
+   "gold_ids": [
+    "r2",
+    "r5",
+    "r7",
+    "r9"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6139",
+   "input_tokens": 24280,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 5017,
+   "n_candidates": 18,
+   "output_tokens": 162,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "fd42c388f9feec23d5216890",
+   "wall_seconds": 11.265
+  },
+  {
+   "a0_top3": [],
+   "abstain": false,
+   "agent_seconds": 0.0,
+   "answer": [],
+   "answer_ids_seen": null,
+   "budget_reason": null,
+   "cluster_key": "github.com/pion/stun/v3@3.1.4..3.1.5",
+   "commit_diffs_available": false,
+   "counters": {},
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 0
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": false,
+   "id": "GO-2026-6163",
+   "input_tokens": 0,
+   "llm_calls": 0,
+   "max_call_prompt_tokens": 0,
+   "n_candidates": 0,
+   "output_tokens": 0,
+   "reused_trace": false,
+   "steps": 0,
+   "stop_reason": "NOT_RUN",
+   "tool_counts": {},
+   "trace_id": null,
+   "wall_seconds": 0.0
+  },
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.257,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/pion/dtls/v3@3.1.3..3.1.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-6165",
+   "input_tokens": 24976,
+   "llm_calls": 9,
+   "max_call_prompt_tokens": 3701,
+   "n_candidates": 1,
+   "output_tokens": 204,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "02ab9b8d119aca2785081777",
+   "wall_seconds": 11.417
+  },
+  {
+   "a0_top3": [
+    "r385",
+    "r387",
+    "r356"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.141,
+   "answer": [
+    "r385",
+    "r386"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-08-18",
+   "error": null,
+   "evidence": {
+    "candidates": 2,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r385",
+    "r386"
+   ],
+   "gold_ids": [
+    "r385"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6181",
+   "input_tokens": 25358,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4719,
+   "n_candidates": 445,
+   "output_tokens": 201,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 2,
+    "show_commit": 1
+   },
+   "trace_id": "340baac52d06ea3a4a86d81b",
+   "wall_seconds": 12.28
+  },
+  {
+   "a0_top3": [
+    "r198",
+    "r188",
+    "r187"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.758,
+   "answer": [
+    "r198"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-08-18",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r198"
+   ],
+   "gold_ids": [
+    "r198"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6182",
+   "input_tokens": 24853,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4683,
+   "n_candidates": 445,
+   "output_tokens": 180,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "deda400ae342db09786bebaa",
+   "wall_seconds": 11.895
+  },
+  {
+   "a0_top3": [
+    "r211",
+    "r214",
+    "r174"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.294,
+   "answer": [
+    "r200",
+    "r211"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-18",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r100",
+    "r107",
+    "r108",
+    "r109",
+    "r111",
+    "r112",
+    "r115",
+    "r118",
+    "r119",
+    "r121",
+    "r122",
+    "r124",
+    "r126",
+    "r127",
+    "r132",
+    "r135",
+    "r136",
+    "r137",
+    "r141",
+    "r142",
+    "r151",
+    "r152",
+    "r153",
+    "r156",
+    "r164",
+    "r165",
+    "r166",
+    "r169",
+    "r174",
+    "r175",
+    "r177",
+    "r178",
+    "r179",
+    "r180",
+    "r181",
+    "r182",
+    "r191",
+    "r199",
+    "r2",
+    "r202",
+    "r208",
+    "r210",
+    "r211",
+    "r212",
+    "r213",
+    "r216",
+    "r219",
+    "r232",
+    "r233",
+    "r6",
+    "r62",
+    "r66",
+    "r67",
+    "r68",
+    "r74",
+    "r78",
+    "r79",
+    "r84",
+    "r85",
+    "r86",
+    "r87",
+    "r88",
+    "r89",
+    "r93",
+    "r95",
+    "r96",
+    "r97",
+    "r98"
+   ],
+   "gold_ids": [
+    "r211"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6183",
+   "input_tokens": 26579,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5104,
+   "n_candidates": 445,
+   "output_tokens": 188,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 3,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "3a5f6d7dbea95660a35c3001",
+   "wall_seconds": 12.418
+  },
+  {
+   "a0_top3": [
+    "r295",
+    "r296",
+    "r121"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.781,
+   "answer": [
+    "r295"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r295"
+   ],
+   "gold_ids": [
+    "r295"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6184",
+   "input_tokens": 23097,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4439,
+   "n_candidates": 445,
+   "output_tokens": 168,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 1,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "e8b5dee76fd2721511d1ba57",
+   "wall_seconds": 10.885
+  },
+  {
+   "a0_top3": [
+    "r27",
+    "r26",
+    "r45"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.677,
+   "answer": [
+    "r27",
+    "r26"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.3..1.74.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r26"
+   ],
+   "gold_ids": [
+    "r26"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6185",
+   "input_tokens": 22661,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4746,
+   "n_candidates": 61,
+   "output_tokens": 158,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "c27d2987a330ef8f08f083df",
+   "wall_seconds": 10.791
+  },
+  {
+   "a0_top3": [
+    "r128",
+    "r130",
+    "r127"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.222,
+   "answer": [
+    "r295",
+    "r296"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r100",
+    "r108",
+    "r109",
+    "r118",
+    "r119",
+    "r120",
+    "r121",
+    "r122",
+    "r123",
+    "r124",
+    "r125",
+    "r126",
+    "r127",
+    "r128",
+    "r129",
+    "r130",
+    "r131",
+    "r151",
+    "r152",
+    "r161",
+    "r175",
+    "r177",
+    "r178",
+    "r179",
+    "r180",
+    "r181",
+    "r182",
+    "r199",
+    "r2",
+    "r208",
+    "r210",
+    "r219",
+    "r93",
+    "r98"
+   ],
+   "gold_ids": [
+    "r100",
+    "r108",
+    "r109",
+    "r118",
+    "r119",
+    "r120",
+    "r121",
+    "r122",
+    "r123",
+    "r124",
+    "r125",
+    "r126",
+    "r127",
+    "r128",
+    "r129",
+    "r130",
+    "r131",
+    "r151",
+    "r152",
+    "r161",
+    "r177",
+    "r178",
+    "r179",
+    "r180",
+    "r181",
+    "r182",
+    "r199",
+    "r2",
+    "r208",
+    "r210",
+    "r219",
+    "r93",
+    "r98"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6186",
+   "input_tokens": 26007,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4322,
+   "n_candidates": 445,
+   "output_tokens": 185,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 2,
+    "show_commit": 1
+   },
+   "trace_id": "809fcc53bade57aa067bfffb",
+   "wall_seconds": 11.36
+  },
+  {
+   "a0_top3": [
+    "r90",
+    "r87",
+    "r89"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.249,
+   "answer": [
+    "r90",
+    "r87"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 1,
+    "length_stops": 0,
+    "repaired_actions": 1,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 3
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r111",
+    "r137",
+    "r141",
+    "r191",
+    "r212",
+    "r232",
+    "r62",
+    "r68",
+    "r78",
+    "r87"
+   ],
+   "gold_ids": [
+    "r111",
+    "r137",
+    "r141",
+    "r191",
+    "r212",
+    "r232",
+    "r62",
+    "r68",
+    "r78",
+    "r87"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6187",
+   "input_tokens": 25833,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5078,
+   "n_candidates": 445,
+   "output_tokens": 187,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "bb155b5d9bddfdaf7dc01154",
+   "wall_seconds": 12.384
+  },
+  {
+   "a0_top3": [
+    "r171",
+    "r172",
+    "r311"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.49,
+   "answer": [
+    "r171",
+    "r172"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r106",
+    "r107",
+    "r111",
+    "r112",
+    "r114",
+    "r115",
+    "r118",
+    "r121",
+    "r122",
+    "r126",
+    "r127",
+    "r132",
+    "r135",
+    "r136",
+    "r137",
+    "r141",
+    "r142",
+    "r151",
+    "r153",
+    "r156",
+    "r164",
+    "r165",
+    "r166",
+    "r169",
+    "r171",
+    "r172",
+    "r174",
+    "r175",
+    "r177",
+    "r179",
+    "r180",
+    "r182",
+    "r191",
+    "r2",
+    "r202",
+    "r204",
+    "r212",
+    "r213",
+    "r216",
+    "r219",
+    "r232",
+    "r233",
+    "r6",
+    "r62",
+    "r66",
+    "r67",
+    "r68",
+    "r74",
+    "r75",
+    "r78",
+    "r79",
+    "r84",
+    "r85",
+    "r86",
+    "r87",
+    "r88",
+    "r89",
+    "r93",
+    "r95",
+    "r96",
+    "r97",
+    "r98"
+   ],
+   "gold_ids": [
+    "r171",
+    "r172"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6188",
+   "input_tokens": 22149,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4310,
+   "n_candidates": 445,
+   "output_tokens": 163,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "e3f6b772ada0be71eb99a73a",
+   "wall_seconds": 10.595
+  },
+  {
+   "a0_top3": [
+    "r45",
+    "r46",
+    "r43"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.054,
+   "answer": [
+    "r45",
+    "r46",
+    "r47"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.3..1.74.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 2,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r38",
+    "r39",
+    "r40",
+    "r41",
+    "r42",
+    "r43"
+   ],
+   "gold_ids": [
+    "r38",
+    "r39",
+    "r40",
+    "r41",
+    "r42",
+    "r43"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6189",
+   "input_tokens": 19958,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4393,
+   "n_candidates": 61,
+   "output_tokens": 178,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "ee891504add5f719959d2784",
+   "wall_seconds": 11.156
+  },
+  {
+   "a0_top3": [
+    "r11",
+    "r13",
+    "r14"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.298,
+   "answer": [
+    "r11",
+    "r14"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.3..1.74.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 2,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r11",
+    "r14",
+    "r17"
+   ],
+   "gold_ids": [
+    "r14"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6190",
+   "input_tokens": 25011,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 5659,
+   "n_candidates": 61,
+   "output_tokens": 173,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "49eea066b8e324387d4203c5",
+   "wall_seconds": 12.418
+  },
+  {
+   "a0_top3": [
+    "r13",
+    "r8",
+    "r11"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.575,
+   "answer": [
+    "r13",
+    "r8",
+    "r12"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.3..1.74.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r11",
+    "r12",
+    "r17",
+    "r5",
+    "r6"
+   ],
+   "gold_ids": [
+    "r11",
+    "r12",
+    "r17",
+    "r5",
+    "r6"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6191",
+   "input_tokens": 26555,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4828,
+   "n_candidates": 61,
+   "output_tokens": 200,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "d295d493423ca7fcf05b7948",
+   "wall_seconds": 12.707
+  },
+  {
+   "a0_top3": [
+    "r37",
+    "r45",
+    "r47"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.86,
+   "answer": [
+    "r37"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.3..1.74.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r37"
+   ],
+   "gold_ids": [
+    "r37"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6195",
+   "input_tokens": 21232,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4033,
+   "n_candidates": 61,
+   "output_tokens": 160,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 1,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "52db8e2f6feeab05640927cb",
+   "wall_seconds": 9.979
+  },
+  {
+   "a0_top3": [
+    "r214",
+    "r419",
+    "r335"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.327,
+   "answer": [
+    "r420",
+    "r419"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r100",
+    "r107",
+    "r108",
+    "r109",
+    "r111",
+    "r112",
+    "r115",
+    "r118",
+    "r119",
+    "r121",
+    "r122",
+    "r124",
+    "r126",
+    "r127",
+    "r132",
+    "r135",
+    "r136",
+    "r137",
+    "r141",
+    "r142",
+    "r151",
+    "r152",
+    "r153",
+    "r156",
+    "r164",
+    "r165",
+    "r166",
+    "r169",
+    "r174",
+    "r175",
+    "r177",
+    "r178",
+    "r179",
+    "r180",
+    "r181",
+    "r182",
+    "r191",
+    "r199",
+    "r2",
+    "r202",
+    "r208",
+    "r210",
+    "r212",
+    "r213",
+    "r216",
+    "r219",
+    "r232",
+    "r233",
+    "r418",
+    "r6",
+    "r62",
+    "r66",
+    "r67",
+    "r68",
+    "r74",
+    "r78",
+    "r79",
+    "r84",
+    "r85",
+    "r86",
+    "r87",
+    "r88",
+    "r89",
+    "r93",
+    "r95",
+    "r96",
+    "r97",
+    "r98"
+   ],
+   "gold_ids": [
+    "r111",
+    "r137",
+    "r141",
+    "r191",
+    "r212",
+    "r232",
+    "r418",
+    "r62",
+    "r68",
+    "r78",
+    "r87"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6197",
+   "input_tokens": 20890,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4116,
+   "n_candidates": 445,
+   "output_tokens": 169,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "ed5216dce35876c0ca5db393",
+   "wall_seconds": 10.432
+  },
+  {
+   "a0_top3": [
+    "r417",
+    "r416",
+    "r237"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.538,
+   "answer": [
+    "r417"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r416"
+   ],
+   "gold_ids": [
+    "r416"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6199",
+   "input_tokens": 21209,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4262,
+   "n_candidates": 445,
+   "output_tokens": 170,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 2
+   },
+   "trace_id": "954133061fa68515737449bd",
+   "wall_seconds": 10.673
+  },
+  {
+   "a0_top3": [
+    "r16",
+    "r24",
+    "r23"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.736,
+   "answer": [
+    "r16",
+    "r23"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/go-git/go-git/v5@5.19.1..5.19.2",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r14",
+    "r15",
+    "r17",
+    "r18",
+    "r19",
+    "r20",
+    "r21",
+    "r22",
+    "r23",
+    "r25"
+   ],
+   "gold_ids": [
+    "r14",
+    "r15",
+    "r17",
+    "r18",
+    "r19",
+    "r20",
+    "r21",
+    "r22",
+    "r23",
+    "r25"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6213",
+   "input_tokens": 23283,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4852,
+   "n_candidates": 27,
+   "output_tokens": 180,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 2,
+    "show_commit": 1
+   },
+   "trace_id": "a0bc2973e0f2b0dbeede3c31",
+   "wall_seconds": 11.855
+  },
+  {
+   "a0_top3": [
+    "r2",
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 9.872,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/hyperledger/fabric-ca@1.5.20..1.5.21",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r2"
+   ],
+   "gold_ids": [
+    "r1",
+    "r2"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6234",
+   "input_tokens": 18076,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 3942,
+   "n_candidates": 2,
+   "output_tokens": 158,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "10acb0b962ee95cee6e9bcfa",
+   "wall_seconds": 9.994
+  },
+  {
+   "a0_top3": [
+    "r1"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.127,
+   "answer": [
+    "r1"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/insomniacslk/dhcp@0.0.0-20260603135910-a415979eb11e..0.0.0-20260719225207-c76316d4aa82",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1"
+   ],
+   "gold_ids": [
+    "r1"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6237",
+   "input_tokens": 19122,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 3474,
+   "n_candidates": 1,
+   "output_tokens": 186,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 1,
+    "search_code": 2,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "485a91227b479b0a5092e685",
+   "wall_seconds": 10.249
+  },
+  {
+   "a0_top3": [
+    "r7",
+    "r8",
+    "r27"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.172,
+   "answer": [
+    "r53"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/cilium/ebpf@0.21.0..0.22.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-08-17",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r14",
+    "r15",
+    "r19",
+    "r20",
+    "r7"
+   ],
+   "gold_ids": [
+    "r7"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6238",
+   "input_tokens": 26040,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4831,
+   "n_candidates": 210,
+   "output_tokens": 195,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "c57f61261f1c0ecbd44bd874",
+   "wall_seconds": 12.296
+  },
+  {
+   "a0_top3": [
+    "r11",
+    "r14",
+    "r7"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.322,
+   "answer": [
+    "r7",
+    "r11"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/crossplane/crossplane-runtime/v2@2.4.0-rc.0..2.4.0-rc.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-08-27",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r16"
+   ],
+   "gold_ids": [
+    "r16"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6302",
+   "input_tokens": 25138,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4235,
+   "n_candidates": 16,
+   "output_tokens": 188,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "21cdcccc4b4161959164d21f",
+   "wall_seconds": 11.456
+  },
+  {
+   "a0_top3": [
+    "r5",
+    "r4",
+    "r3"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.497,
+   "answer": [
+    "r4",
+    "r5"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "google.golang.org/grpc@1.83.0..1.83.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-09-09",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r14",
+    "r2",
+    "r3",
+    "r4",
+    "r6",
+    "r7",
+    "r8"
+   ],
+   "gold_ids": [
+    "r14",
+    "r2",
+    "r3",
+    "r4",
+    "r6",
+    "r7",
+    "r8"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6348",
+   "input_tokens": 24258,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4952,
+   "n_candidates": 14,
+   "output_tokens": 175,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 2,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "74d734fc49fe015569a52af6",
+   "wall_seconds": 11.613
+  },
+  {
+   "a0_top3": [
+    "r570",
+    "r118",
+    "r262"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.16,
+   "answer": [
+    "r570",
+    "r118"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/VictoriaMetrics/VictoriaMetrics@1.146.0-cluster..1.146.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-09-09",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": true,
+   "id": "GO-2026-6366",
+   "input_tokens": 26730,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5018,
+   "n_candidates": 779,
+   "output_tokens": 189,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 2
+   },
+   "trace_id": "c6bc63c7a17456c1c1a20c54",
+   "wall_seconds": 12.289
+  },
+  {
+   "a0_top3": [
+    "r46",
+    "r81",
+    "r47"
+   ],
+   "abstain": false,
+   "agent_seconds": 13.084,
+   "answer": [
+    "r46",
+    "r81"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/xuri/excelize/v2@2.10.1..2.11.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-09-15",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r135",
+    "r4",
+    "r46"
+   ],
+   "gold_ids": [
+    "r46"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6452",
+   "input_tokens": 28738,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5390,
+   "n_candidates": 162,
+   "output_tokens": 200,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "019c34f1da420ba99de81979",
+   "wall_seconds": 13.198
+  },
+  {
+   "a0_top3": [
+    "r94",
+    "r135",
+    "r91"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.06,
+   "answer": [
+    "r94",
+    "r2"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/xuri/excelize/v2@2.10.1..2.11.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-09-15",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r138",
+    "r139"
+   ],
+   "gold_ids": [
+    "r138",
+    "r139"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6453",
+   "input_tokens": 28022,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5064,
+   "n_candidates": 162,
+   "output_tokens": 181,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 3,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "73840dd054f338b5490d393c",
+   "wall_seconds": 12.179
+  },
+  {
+   "a0_top3": [
+    "r19",
+    "r1",
+    "r8"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.533,
+   "answer": [
+    "r19"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/pocketbase/pocketbase@0.39.6..0.39.7",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-10-05",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r12",
+    "r14",
+    "r15",
+    "r18",
+    "r19",
+    "r2",
+    "r20",
+    "r21",
+    "r22",
+    "r25",
+    "r3",
+    "r4",
+    "r5",
+    "r6",
+    "r7",
+    "r8"
+   ],
+   "gold_ids": [
+    "r1",
+    "r12",
+    "r18",
+    "r19",
+    "r2",
+    "r20",
+    "r21",
+    "r22",
+    "r25",
+    "r3",
+    "r4",
+    "r5",
+    "r6",
+    "r7",
+    "r8"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6489",
+   "input_tokens": 25488,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4448,
+   "n_candidates": 25,
+   "output_tokens": 189,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 2
+   },
+   "trace_id": "cd769295fbc572f3fc51899c",
+   "wall_seconds": 11.662
+  },
+  {
+   "a0_top3": [
+    "r17",
+    "r25",
+    "r20"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.538,
+   "answer": [
+    "r25"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/caddyserver/caddy/v2@2.11.3..2.11.4",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 3
+   },
+   "created": "2026-09-22",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r25"
+   ],
+   "gold_ids": [
+    "r25"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6512",
+   "input_tokens": 26768,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 6013,
+   "n_candidates": 36,
+   "output_tokens": 164,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 2,
+    "show_commit": 1
+   },
+   "trace_id": "3a0305f458dae0aded5f3e68",
+   "wall_seconds": 12.642
+  },
+  {
+   "a0_top3": [],
+   "abstain": false,
+   "agent_seconds": 0.0,
+   "answer": [],
+   "answer_ids_seen": null,
+   "budget_reason": null,
+   "cluster_key": "github.com/hatchet-dev/hatchet@0.91.1..0.91.2",
+   "commit_diffs_available": false,
+   "counters": {},
+   "created": "2026-09-22",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 0
+   },
+   "gold_derived_ids": [],
+   "gold_ids": [],
+   "gold_in_candidates": false,
+   "graph_tools_available": false,
+   "id": "GO-2026-6535",
+   "input_tokens": 0,
+   "llm_calls": 0,
+   "max_call_prompt_tokens": 0,
+   "n_candidates": 0,
+   "output_tokens": 0,
+   "reused_trace": false,
+   "steps": 0,
+   "stop_reason": "NOT_RUN",
+   "tool_counts": {},
+   "trace_id": null,
+   "wall_seconds": 0.0
+  },
+  {
+   "a0_top3": [
+    "r44",
+    "r58",
+    "r57"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.518,
+   "answer": [
+    "r58"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/snowflakedb/gosnowflake/v2@2.1.0..2.2.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-10-06",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r1",
+    "r105",
+    "r106",
+    "r108",
+    "r109",
+    "r21",
+    "r39",
+    "r40",
+    "r42",
+    "r46",
+    "r57",
+    "r69",
+    "r73",
+    "r74",
+    "r75",
+    "r76"
+   ],
+   "gold_ids": [
+    "r105",
+    "r106",
+    "r108",
+    "r109",
+    "r21",
+    "r39",
+    "r40",
+    "r42",
+    "r69",
+    "r74"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6665",
+   "input_tokens": 28304,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5132,
+   "n_candidates": 154,
+   "output_tokens": 188,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "b342eb062a44b366e8b46549",
+   "wall_seconds": 12.658
+  },
+  {
+   "a0_top3": [
+    "r27",
+    "r35",
+    "r28"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.95,
+   "answer": [
+    "r27",
+    "r35"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/xuri/excelize/v2@2.11.0..2.11.1-0.20260915055537-22f76f9acb94",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-10-09",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r27",
+    "r28",
+    "r29",
+    "r30",
+    "r31",
+    "r32",
+    "r34",
+    "r35"
+   ],
+   "gold_ids": [
+    "r28",
+    "r29",
+    "r30",
+    "r31",
+    "r32",
+    "r34",
+    "r35"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6684",
+   "input_tokens": 22779,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4801,
+   "n_candidates": 68,
+   "output_tokens": 156,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 3,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "753ace8e7b2851a76a2a4919",
+   "wall_seconds": 11.054
+  },
+  {
+   "a0_top3": [
+    "r57",
+    "r58",
+    "r59"
+   ],
+   "abstain": false,
+   "agent_seconds": 13.7,
+   "answer": [
+    "r57",
+    "r58"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/xuri/excelize/v2@2.11.0..2.11.1-0.20260930021559-01a9ff32fb3c",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-10-09",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 2
+   },
+   "gold_derived_ids": [
+    "r57",
+    "r58"
+   ],
+   "gold_ids": [
+    "r57",
+    "r58"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6685",
+   "input_tokens": 29426,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 5769,
+   "n_candidates": 81,
+   "output_tokens": 206,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 2
+   },
+   "trace_id": "c047425612a7e60f81cdbed7",
+   "wall_seconds": 13.843
+  },
+  {
+   "a0_top3": [
+    "r44",
+    "r48",
+    "r47"
+   ],
+   "abstain": false,
+   "agent_seconds": 12.11,
+   "answer": [
+    "r48",
+    "r47"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/moby/sys/user@0.4.0..0.4.1",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 2
+   },
+   "created": "2026-10-09",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r43",
+    "r44",
+    "r45",
+    "r46",
+    "r47",
+    "r48"
+   ],
+   "gold_ids": [
+    "r45",
+    "r47",
+    "r48"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6686",
+   "input_tokens": 26798,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4946,
+   "n_candidates": 57,
+   "output_tokens": 182,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 2,
+    "read_function": 3,
+    "search_code": 1,
+    "show_commit": 1
+   },
+   "trace_id": "5038e8a674eab7555326f17a",
+   "wall_seconds": 12.244
+  },
+  {
+   "a0_top3": [
+    "r60",
+    "r61",
+    "r55"
+   ],
+   "abstain": false,
+   "agent_seconds": 10.196,
+   "answer": [],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/xuri/excelize/v2@2.11.0..2.11.1-0.20260929015830-8ffeb07ec9a3",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 2,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 0
+   },
+   "created": "2026-10-09",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 0
+   },
+   "gold_derived_ids": [
+    "r60"
+   ],
+   "gold_ids": [
+    "r60"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6687",
+   "input_tokens": 21211,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 4027,
+   "n_candidates": 79,
+   "output_tokens": 165,
+   "reused_trace": false,
+   "steps": 5,
+   "stop_reason": "INVALID_ACTION",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "47c9dd26312083997a678e49",
+   "wall_seconds": 10.32
+  },
+  {
+   "a0_top3": [
+    "r26",
+    "r28",
+    "r46"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.433,
+   "answer": [
+    "r26"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/xuri/excelize/v2@2.11.0..2.11.1-0.20260912113515-5f636f9dcde5",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 1,
+    "tool_errors": 1,
+    "truncated_outputs": 1
+   },
+   "created": "2026-10-09",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r26",
+    "r28"
+   ],
+   "gold_ids": [
+    "r26",
+    "r28"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6689",
+   "input_tokens": 24967,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4428,
+   "n_candidates": 56,
+   "output_tokens": 190,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 1,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 3
+   },
+   "trace_id": "c21a5c5e9999460d7c618433",
+   "wall_seconds": 11.576
+  },
+  {
+   "a0_top3": [
+    "r58",
+    "r66",
+    "r59"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.249,
+   "answer": [
+    "r58"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/xuri/excelize/v2@2.11.0..2.11.1-0.20261003002531-6258dcebc4e2",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-10-09",
+   "error": null,
+   "evidence": {
+    "candidates": 0,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r58",
+    "r65"
+   ],
+   "gold_ids": [
+    "r58"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6695",
+   "input_tokens": 22789,
+   "llm_calls": 7,
+   "max_call_prompt_tokens": 5075,
+   "n_candidates": 84,
+   "output_tokens": 165,
+   "reused_trace": false,
+   "steps": 7,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "ec5c314afe8b09127b43644a",
+   "wall_seconds": 11.368
+  },
+  {
+   "a0_top3": [
+    "r5",
+    "r4",
+    "r8"
+   ],
+   "abstain": false,
+   "agent_seconds": 11.109,
+   "answer": [
+    "r17"
+   ],
+   "answer_ids_seen": true,
+   "budget_reason": null,
+   "cluster_key": "github.com/rabbitmq/amqp091-go@1.13.0..1.14.0",
+   "commit_diffs_available": true,
+   "counters": {
+    "answer_rejections": 0,
+    "invalid_actions": 0,
+    "length_stops": 0,
+    "repaired_actions": 0,
+    "repeated_calls": 0,
+    "tool_errors": 0,
+    "truncated_outputs": 1
+   },
+   "created": "2026-10-09",
+   "error": null,
+   "evidence": {
+    "candidates": 1,
+    "commits": 1
+   },
+   "gold_derived_ids": [
+    "r18"
+   ],
+   "gold_ids": [
+    "r18"
+   ],
+   "gold_in_candidates": true,
+   "graph_tools_available": true,
+   "id": "GO-2026-6700",
+   "input_tokens": 23503,
+   "llm_calls": 8,
+   "max_call_prompt_tokens": 4178,
+   "n_candidates": 18,
+   "output_tokens": 183,
+   "reused_trace": false,
+   "steps": 8,
+   "stop_reason": "SUBMITTED",
+   "tool_counts": {
+    "callees": 1,
+    "callers": 1,
+    "read_function": 2,
+    "search_code": 1,
+    "search_commits": 1,
+    "show_commit": 1
+   },
+   "trace_id": "44bc151f4825752d774a36b1",
+   "wall_seconds": 11.232
+  }
+ ],
+ "schema_version": "1.0",
+ "wall_seconds": 1368.3
+}

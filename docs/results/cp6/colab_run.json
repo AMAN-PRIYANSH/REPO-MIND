@@ -1,0 +1,315 @@
+{
+ "sessions": [
+  {
+   "part": 1,
+   "arm": "A2",
+   "model": "llama3.1-8b",
+   "gpu": true,
+   "evidence_restored": false,
+   "models": {
+    "llama3.1:8b": {
+     "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+     "size": 4920753328,
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "llama",
+      "families": [
+       "llama"
+      ],
+      "parameter_size": "8.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "embedding_length": 4096,
+      "runner": "ggml"
+     }
+    }
+   },
+   "timings": [
+    {
+     "part": 1,
+     "step": "fetch vulndb + build helper",
+     "seconds": 27.7
+    },
+    {
+     "part": 1,
+     "step": "materialize D4",
+     "seconds": 1615.8
+    },
+    {
+     "part": 1,
+     "step": "agent prepare --diffs",
+     "seconds": 83.9
+    },
+    {
+     "part": 1,
+     "step": "save evidence archive to Drive",
+     "seconds": 4.0
+    },
+    {
+     "part": 1,
+     "step": "embed D4 chunks (bge-small)",
+     "seconds": 126.1
+    },
+    {
+     "part": 1,
+     "step": "install + start Ollama",
+     "seconds": 31.7
+    },
+    {
+     "part": 1,
+     "step": "pull llama3.1:8b",
+     "seconds": 52.7
+    },
+    {
+     "part": 1,
+     "step": "agent A2 llama3.1-8b",
+     "seconds": 1283.4
+    }
+   ]
+  },
+  {
+   "part": 2,
+   "arm": "A2",
+   "model": "qwen2.5-coder-7b",
+   "gpu": true,
+   "evidence_restored": true,
+   "models": {
+    "qwen2.5-coder:7b-instruct": {
+     "digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+     "size": 4683087561,
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen2",
+      "families": [
+       "qwen2"
+      ],
+      "parameter_size": "7.6B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 32768,
+      "embedding_length": 3584,
+      "runner": "ggml"
+     }
+    },
+    "llama3.1:8b": {
+     "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+     "size": 4920753328,
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "llama",
+      "families": [
+       "llama"
+      ],
+      "parameter_size": "8.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "embedding_length": 4096,
+      "runner": "ggml"
+     }
+    }
+   },
+   "timings": [
+    {
+     "part": 2,
+     "step": "fetch vulndb + build helper",
+     "seconds": 0.5
+    },
+    {
+     "part": 2,
+     "step": "restore D4 evidence from Drive",
+     "seconds": 0.8
+    },
+    {
+     "part": 2,
+     "step": "embed D4 chunks (bge-small)",
+     "seconds": 39.4
+    },
+    {
+     "part": 2,
+     "step": "install + start Ollama",
+     "seconds": 0.3
+    },
+    {
+     "part": 2,
+     "step": "pull qwen2.5-coder:7b-instruct",
+     "seconds": 114.7
+    },
+    {
+     "part": 2,
+     "step": "agent A2 qwen2.5-coder-7b",
+     "seconds": 1210.1
+    }
+   ]
+  },
+  {
+   "part": 3,
+   "arm": "A3",
+   "model": "llama3.1-8b",
+   "gpu": true,
+   "evidence_restored": true,
+   "models": {
+    "llama3.1:8b": {
+     "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+     "size": 4920753328,
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "llama",
+      "families": [
+       "llama"
+      ],
+      "parameter_size": "8.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "embedding_length": 4096,
+      "runner": "ggml"
+     }
+    },
+    "qwen2.5-coder:7b-instruct": {
+     "digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+     "size": 4683087561,
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen2",
+      "families": [
+       "qwen2"
+      ],
+      "parameter_size": "7.6B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 32768,
+      "embedding_length": 3584,
+      "runner": "ggml"
+     }
+    }
+   },
+   "timings": [
+    {
+     "part": 3,
+     "step": "fetch vulndb + build helper",
+     "seconds": 0.6
+    },
+    {
+     "part": 3,
+     "step": "restore D4 evidence from Drive",
+     "seconds": 0.7
+    },
+    {
+     "part": 3,
+     "step": "embed D4 chunks (bge-small)",
+     "seconds": 39.6
+    },
+    {
+     "part": 3,
+     "step": "install + start Ollama",
+     "seconds": 0.3
+    },
+    {
+     "part": 3,
+     "step": "pull llama3.1:8b",
+     "seconds": 0.7
+    },
+    {
+     "part": 3,
+     "step": "agent A3 llama3.1-8b",
+     "seconds": 1391.3
+    }
+   ]
+  },
+  {
+   "part": 4,
+   "arm": "A3",
+   "model": "qwen2.5-coder-7b",
+   "gpu": true,
+   "evidence_restored": true,
+   "models": {
+    "qwen2.5-coder:7b-instruct": {
+     "digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+     "size": 4683087561,
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen2",
+      "families": [
+       "qwen2"
+      ],
+      "parameter_size": "7.6B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 32768,
+      "embedding_length": 3584,
+      "runner": "ggml"
+     }
+    },
+    "llama3.1:8b": {
+     "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+     "size": 4920753328,
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "llama",
+      "families": [
+       "llama"
+      ],
+      "parameter_size": "8.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "embedding_length": 4096,
+      "runner": "ggml"
+     }
+    }
+   },
+   "timings": [
+    {
+     "part": 4,
+     "step": "fetch vulndb + build helper",
+     "seconds": 0.6
+    },
+    {
+     "part": 4,
+     "step": "restore D4 evidence from Drive",
+     "seconds": 1.0
+    },
+    {
+     "part": 4,
+     "step": "embed D4 chunks (bge-small)",
+     "seconds": 39.3
+    },
+    {
+     "part": 4,
+     "step": "install + start Ollama",
+     "seconds": 0.2
+    },
+    {
+     "part": 4,
+     "step": "pull qwen2.5-coder:7b-instruct",
+     "seconds": 0.5
+    },
+    {
+     "part": 4,
+     "step": "agent A3 qwen2.5-coder-7b",
+     "seconds": 1236.7
+    }
+   ]
+  }
+ ],
+ "dry_run": false,
+ "context_tokens": 32768,
+ "limit": null,
+ "graph_tables_from_zip": true,
+ "evidence_vs_committed": {
+  "commit_diffs": {
+   "same": 118,
+   "different": 0,
+   "missing_here": 0,
+   "not_in_summary": 0
+  },
+  "graph": {
+   "same": 118,
+   "different": 0,
+   "missing_here": 0,
+   "not_in_summary": 0
+  }
+ }
+}

@@ -293,12 +293,75 @@ def headline(agent: dict, a1: dict, per_model: dict) -> list[str]:
                             f"{np.mean([r['llm']['latency_s'] for r in asked]):.1f} s")
         parts.append(f"`{alias}` ({label}, n = {n}, denominator (b) all cases): " + "; ".join(bits) + ". Cost: "
                      + "; ".join(cost) + ".")
-    beat_any = any("beats" in p for p in parts)
-    lead = ("**Main finding.** " + ("The agent beats a baseline in at least one comparison below (interval excludes 0). "
-                                    if beat_any else
-                                    "The agent does not beat the non-agent baselines: no comparison below has an interval "
-                                    "that excludes 0 in its favour. "))
+    lead = _lead(per_model)
     return [lead + " ".join(parts), ""]
+
+
+def _lead(per_model: dict) -> str:
+    """The first sentences of the headline. They name the comparison that matters (against retrieval, A0), say
+    where a win is only a win over a weak A1, and warn that any-hit@3 is not like for like. Everything is derived
+    from the paired intervals and the lists, never from a fixed claim."""
+    wins0, worse0, wins1, weak = [], [], [], {}
+    ids = []
+    for alias, pm in per_model.items():
+        cases, lists, mask = pm["cases"], pm["lists"], pm["head_mask"]
+        for arm in ("A2", "A3"):
+            if arm not in lists:
+                continue
+            ids += [len(x) for x in lists[arm] if x]
+            for base, wins in (("A0", wins0), ("A1", wins1)):
+                d = paired(cases, lists, mask, arm, base)
+                if d is None:
+                    continue
+                if d["ci_low"] > 0:
+                    wins.append(f"{arm} ({alias})" if base == "A0" else f"{arm} vs A1 ({alias})")
+                elif d["ci_high"] < 0 and base == "A0":
+                    worse0.append(f"{arm} ({alias})")
+        if "A1" in lists:
+            weak[alias] = float(np.mean([bool(x) for x in lists["A1"]]))
+    text = ["**Main finding.** "]
+    if wins0:
+        text.append(f"An agent arm beats retrieval (A0) on any-hit@1: {', '.join(wins0)}. ")
+    else:
+        text.append("The agent does not beat retrieval (A0): on any-hit@1 no agent arm has a paired interval that excludes 0 "
+                    "in its favour. ")
+    if worse0:
+        text.append(f"It is worse than A0 on any-hit@1 for: {', '.join(worse0)}. ")
+    if wins1:
+        shares = "; ".join(f"A1 answered {100 * weak[a]:.0f}% of cases for `{a}`" for a in sorted(weak)
+                           if any(f"({a})" in w for w in wins1))
+        text.append(f"It beats the one-shot LLM (A1) in: {', '.join(wins1)}. {shares}; a win over a baseline that mostly "
+                    "did not answer says little about the agent, and it is not a win over retrieval. ")
+    if ids:
+        text.append(f"Agent answers list {np.mean(ids):.1f} IDs on average where A0 always lists 3, so any-hit@3 is not like "
+                    "for like (see the list-length table); any-hit@1 is the fair comparison. ")
+    return "".join(text)
+
+
+def agreement_table(agent: dict) -> list[str]:
+    """How each agent answer relates to A0, the agent's own first search (all cases run)."""
+    out = ["| Model | Arm | answered | IDs per answer (mean) | answers with 1 / 2 / 3 IDs | top-1 same as A0 | top-1 changed | "
+           "changed: A0 wrong, agent right | changed: A0 right, agent wrong | no answer although A0's top-1 was right |",
+           "|---|---|---|---|---|---|---|---|---|---|"]
+    for (arm, alias), doc in sorted(agent.items(), key=lambda kv: (kv[0][1], kv[0][0])):
+        rows = [r for r in doc["rows"] if r["stop_reason"] != "NOT_RUN"]
+        ans = [r for r in rows if r["answer"]]
+
+        def hit(ids, r):
+            return bool(ids[:1]) and ids[0] in set(r["gold_ids"])
+
+        same = [r for r in ans if r["a0_top3"] and r["answer"][0] == r["a0_top3"][0]]
+        changed = [r for r in ans if not (r["a0_top3"] and r["answer"][0] == r["a0_top3"][0])]
+        gain = sum(1 for r in changed if hit(r["answer"], r) and not hit(r["a0_top3"], r))
+        loss = sum(1 for r in changed if hit(r["a0_top3"], r) and not hit(r["answer"], r))
+        lost = sum(1 for r in rows if not r["answer"] and hit(r["a0_top3"], r))
+        n_ids = [sum(1 for r in ans if len(r["answer"]) == k) for k in (1, 2, 3)]
+        out.append(f"| `{alias}` | {arm} | {len(ans)} of {len(rows)} | "
+                   f"{(np.mean([len(r['answer']) for r in ans]) if ans else float('nan')):.2f} | {n_ids[0]} / {n_ids[1]} / {n_ids[2]} | "
+                   f"{len(same)} | {len(changed)} | {gain} | {loss} | {lost} |")
+    return out + ["", "Counted over all cases run (both denominators together). A0 is the retriever's list, which is what the agent "
+                  "is shown first. \"Changed\" cases where A0 and the agent are both wrong, or both right, are in neither gain "
+                  "column.", ""]
 
 
 def render_cp6_doc(results_dir: Path, source: str, cp5_dir: Path = CP5_DIR) -> str:
@@ -364,6 +427,7 @@ def render_cp6_doc(results_dir: Path, source: str, cp5_dir: Path = CP5_DIR) -> s
                 lines += arms_table(cases, lists, [m and d for m, d in zip(mask, dmask)])
     if agent:
         lines += ["## Tool use", ""] + tool_use_table(agent)
+        lines += ["## List length and agreement with A0", ""] + agreement_table(agent)
     lines += failure_section(data["failures"])
     lines += ["## Limits of this measurement", "",
               "- The pool is closed: the agent can only answer with functions the release changed. Cases whose gold function "

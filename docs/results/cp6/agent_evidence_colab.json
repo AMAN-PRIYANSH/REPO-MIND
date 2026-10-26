@@ -1,0 +1,1097 @@
+{
+ "commit_diffs": {
+  "GO-2020-0006": {
+   "commits": 4,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0a061cfc4309531fc6e33caf37912caba2c59ca0fa234c8d244d1a9bcf0434f8",
+   "status": "READY",
+   "with_diff": 4
+  },
+  "GO-2020-0038": {
+   "commits": 33,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "1c66198728a8306c511999aab653bcce620dc24b53ae442efc68486cf55591bc",
+   "status": "READY",
+   "with_diff": 33
+  },
+  "GO-2021-0052": {
+   "commits": 21,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "9df1f7c8ee8bbbd5422713abd39052c6d9e2e01a463fc162ce5339b4e12c9772",
+   "status": "READY",
+   "with_diff": 21
+  },
+  "GO-2022-0326": {
+   "commits": 3,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d2b8cf2197d43b00344c2979d1b4441d8974a35b58b77f6e5f0ed5db7379e53c",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2022-0391": {
+   "commits": 500,
+   "cut": 250,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d03deeb9417ebb3671b9e8a00bd1a706a1dc194e5d097806defa478010ac3846",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2022-0400": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "56b9df0841a98a7e9daa70d32981164ca94558a37cac533bab17e13ad9d460c8",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2022-0462": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "13aad912fe0adbbdaa614e3f8bbfaf1ad523372bce4a19204496f34c1213ff40",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2022-0519": {
+   "commits": 2,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "6c74fceba970746c4b3cafc9f7b54c745cfbfd04280c00bf16423a79cc9eb2ca",
+   "status": "READY",
+   "with_diff": 2
+  },
+  "GO-2022-0588": {
+   "commits": 8,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "95a9b2493f772f0b967795c7631e3b15130fc283c27f974e3834685c070234d7",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2022-1118": {
+   "commits": 66,
+   "cut": 9,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ce3864280ba4efba6989cc6441ac9006404c9cec61b80f4bc82d02f3db6f8165",
+   "status": "READY",
+   "with_diff": 66
+  },
+  "GO-2023-1547": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "caef9f61ed5a41c58259a2e2eaac81870719781943ac9b6eaa1eca4c6f71dfbe",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2023-1578": {
+   "commits": 26,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "3fe29b778a9b57a762d09741254cabe4fd6e000e98a09b2ba6b8c04a8e569b0f",
+   "status": "READY",
+   "with_diff": 26
+  },
+  "GO-2023-1602": {
+   "commits": 6,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "eb105c137d0b99ae3d0045bf875391da03e72a53bc5ec56d577bede47eb46727",
+   "status": "READY",
+   "with_diff": 6
+  },
+  "GO-2023-1664": {
+   "commits": 2,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "a6f3736581a5e710223387a70f81487fd2587f48857fd1f954bf1a6897cc5083",
+   "status": "READY",
+   "with_diff": 2
+  },
+  "GO-2023-1872": {
+   "commits": 3,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "18bf25567601a20e631f13a6438b1c74a021f26e9916b36af89484c30de31b94",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2023-2098": {
+   "commits": 28,
+   "cut": 5,
+   "errors": 0,
+   "reason": null,
+   "sha256": "710d20aa45673a050f717f7ffed6136ee337dfe2e3c2972922b5933e1f72fac8",
+   "status": "READY",
+   "with_diff": 28
+  },
+  "GO-2023-2116": {
+   "commits": 35,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "6b9c8721df2c641979f9af524d9c13680e5c624b4b48d2fdb28a659ab5ad5e68",
+   "status": "READY",
+   "with_diff": 35
+  },
+  "GO-2023-2328": {
+   "commits": 3,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "8c5e985f3f627b7eea41940fcad386b725999e56df59e6deb1a33aaa0d3d1d09",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2023-2386": {
+   "commits": 15,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d6f6d59c74be2ee96790942325762b526f47ef526837f3c490e1699491331564",
+   "status": "READY",
+   "with_diff": 15
+  },
+  "GO-2023-2402": {
+   "commits": 7,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "48947733228310694db93aa7f9f67fe1b451ee26fc943e0024c227aaf94bbd48",
+   "status": "READY",
+   "with_diff": 7
+  },
+  "GO-2024-2538": {
+   "commits": 7,
+   "cut": 4,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c464eaef89836f7203c6cfdfaa271eea078a2271425514f3c7e43a6bb3621c3b",
+   "status": "READY",
+   "with_diff": 7
+  },
+  "GO-2024-2671": {
+   "commits": 86,
+   "cut": 4,
+   "errors": 0,
+   "reason": null,
+   "sha256": "8b8b07d06e3342759904ffaba9041e0ac451389f4261793f7b4eef3a12865e7b",
+   "status": "READY",
+   "with_diff": 86
+  },
+  "GO-2024-2842": {
+   "commits": 8,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "aa73f17a82a948f85651e7611bf84fc908c3b619085a4f629c65cdcee88c73ec",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2024-3112": {
+   "commits": 27,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "66262d598dfa37c30b1fd0ff74eea9ef0d7e60699c72ce20f0e2ca494118349a",
+   "status": "READY",
+   "with_diff": 27
+  },
+  "GO-2024-3124": {
+   "commits": 16,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ee08989925c1529e8d90b7a86385a391a4ede97092b496421c05a8b353705521",
+   "status": "READY",
+   "with_diff": 16
+  },
+  "GO-2025-3476": {
+   "commits": 8,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ab98e8bc2e4f18bb151365764b23f4abfa8669695809916359e6a6c1a61109aa",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2025-3533": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "3aaeb28a074643eec2cae319cf7fe73624717ec085bf03583648233d2a038082",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2025-3600": {
+   "commits": 7,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c3f5f5d837b4a64fc95a12a61f8e7706cc573085754aabf1b760b88eb0978e54",
+   "status": "READY",
+   "with_diff": 7
+  },
+  "GO-2025-3748": {
+   "commits": 5,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "da94612c579e050c073653e733eea2c61c9466e4dce32647e5d5b3b4727f0e87",
+   "status": "READY",
+   "with_diff": 5
+  },
+  "GO-2025-3764": {
+   "commits": 6,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "4620f00edfce853bdeedd8bc4fb2bfe1c220d27a7e5198eb6669420a9c6ab418",
+   "status": "READY",
+   "with_diff": 6
+  },
+  "GO-2025-4017": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "538b2af347966c9d929fb842c6c54b03f60458ce251d9ebc6a145b22bb61080e",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-4789": {
+   "commits": 500,
+   "cut": 36,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d4ef209987dbc71879c4aae3595aedc33ace4fc781dc03ace38aaa85c6fd73c7",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-4942": {
+   "commits": 210,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "111e0d57659fb785a7551fd7841a92bdbc002d5d8ef3559ef33dbc4a8dc0dedb",
+   "status": "READY",
+   "with_diff": 210
+  },
+  "GO-2026-5051": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "af75b4d8323bd1d4c5fa43f955c8546fe99c4e3044ef2d3e1c1d905aeae15d8f",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-5052": {
+   "commits": 3,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "faa75d62421e4e9e8e2e4cb93ba3fa1dfb1874b4d4dfd383f450aa36356930a5",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2026-5069": {
+   "commits": 343,
+   "cut": 10,
+   "errors": 0,
+   "reason": null,
+   "sha256": "8f121f85a300fe5db2d650ff78359d714d9351dbf84e8894961fc86fb37e7931",
+   "status": "READY",
+   "with_diff": 343
+  },
+  "GO-2026-5073": {
+   "commits": 67,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ffe97192765f8d7b739544bef16adec0f9bd02cd53fe6bf167c78b39304e9efb",
+   "status": "READY",
+   "with_diff": 67
+  },
+  "GO-2026-5208": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c824536b4302c4a777e16961664da7e0ae530322dc5a30ddec32242ba1e9bcc4",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-5313": {
+   "commits": 61,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "b1c5ace6c108218d89f94dc2c4e31d72fcefe461ffb049694d022d219a455dab",
+   "status": "READY",
+   "with_diff": 61
+  },
+  "GO-2026-5320": {
+   "commits": 6,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "942470fac2bbdab766949384bdda74fa3dbf50f0da062c6e8027ed7916384efa",
+   "status": "READY",
+   "with_diff": 6
+  },
+  "GO-2026-5380": {
+   "commits": 61,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "374ca3bf9c289a6f4f0dbb1302251f0549e70d4d86af53bee52a653177a4d03e",
+   "status": "READY",
+   "with_diff": 61
+  },
+  "GO-2026-5410": {
+   "commits": 2,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ded0d83ebc74266400c1dc424307ecfe18751f8e33f5888d0fa857b2337e9167",
+   "status": "READY",
+   "with_diff": 2
+  },
+  "GO-2026-5427": {
+   "commits": 44,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "fcd8dfe40c7ece49c00b796c0edafec9848b34c76f7eb341591fec44bbc7eead",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-5435": {
+   "commits": 2,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "a96b4e16cb97cf37941c4e30b6b6e52b0a09538813bf598f0def50b9cf30ccf5",
+   "status": "READY",
+   "with_diff": 2
+  },
+  "GO-2026-5452": {
+   "commits": 3,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "51ddf5bb10127eb8c11670db07278cadab4e13a9f175eb70c3d80b8e2f8e4169",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2026-5463": {
+   "commits": 29,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "85d8ba6ede312db7fda6ccbf85a4d244664959b754f8c67d229d76f470496c91",
+   "status": "READY",
+   "with_diff": 29
+  },
+  "GO-2026-5466": {
+   "commits": 11,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "3d61a0f5d6d6bf14bbb8ac93f4e49cf56ecf792b3b1a2eab222ae6084ef935a5",
+   "status": "READY",
+   "with_diff": 11
+  },
+  "GO-2026-5504": {
+   "commits": 7,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "60ec95874a230b1aad080445c1921504f83da191322c8f34ee719c87a8a3b1f2",
+   "status": "READY",
+   "with_diff": 7
+  },
+  "GO-2026-5506": {
+   "commits": 65,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "33b4a5f7b14a392fe6f9215b29f900ce11d0746de40e96799780fca5050cde81",
+   "status": "READY",
+   "with_diff": 65
+  },
+  "GO-2026-5525": {
+   "commits": 46,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "3b879fa4cab8d709b29396d6955182e69156842e380892a525daf200624cfa94",
+   "status": "READY",
+   "with_diff": 46
+  },
+  "GO-2026-5529": {
+   "commits": 4,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "1586e46eaf56883d5ad75b5419276ca694a21dcbc5e97a223b9488a769a360d6",
+   "status": "READY",
+   "with_diff": 4
+  },
+  "GO-2026-5543": {
+   "commits": 29,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "297a6bca1879bd27f80fe241380074d417f19cbb79d671fe6041da4c64bb9b5e",
+   "status": "READY",
+   "with_diff": 29
+  },
+  "GO-2026-5548": {
+   "commits": 31,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "97df3a9f0cde6c8068db334b9c710a7725ab263afa7f5073128c0195d773e23e",
+   "status": "READY",
+   "with_diff": 31
+  },
+  "GO-2026-5566": {
+   "commits": 5,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "2383851f03176da21cf1d117062c8d41aeb8174df36d242831bfac88aa83230c",
+   "status": "READY",
+   "with_diff": 5
+  },
+  "GO-2026-5569": {
+   "commits": 8,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "089a69ae37250605d06de663c768e2851b2c46cf8b4d412942fbdc00af312c73",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2026-5596": {
+   "commits": 19,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "77e63905a5c8234f5c4ae98fbd2f134b482fa7c9d6179453453b24f5a6a7b9ab",
+   "status": "READY",
+   "with_diff": 19
+  },
+  "GO-2026-5606": {
+   "commits": 8,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "48a4ab825d6f208676e60e230707b65a8a82b19556cc1ed3e04b43ecf029c483",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2026-5665": {
+   "commits": 44,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "7200d92d665eb2edac459d684f3ba8d41e7c660444b8ef086969d0792933fa1b",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-5666": {
+   "commits": 5,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "a831da7678c20dba76b1adb3c59486178c6c5357a93dc8a57cb1fde9be60f83f",
+   "status": "READY",
+   "with_diff": 5
+  },
+  "GO-2026-5676": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "be7b4c0f4d5ad692d5ee82549dbcf1b557d6d563dbcdb0bf85b1c68eedafd324",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-5681": {
+   "commits": 61,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "82ed568da95fc2f6e550a593dadcf61b075a9be757e297f8b0eff8c463663135",
+   "status": "READY",
+   "with_diff": 61
+  },
+  "GO-2026-5699": {
+   "commits": 44,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d63bd28f5312dede86004b863eac206856aa71215b56340497de79fa215f4840",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-5713": {
+   "commits": 44,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "26272a6c7b97af9d5c363517139ac4841254d9152cbcaca261444cf23819b838",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-5740": {
+   "commits": 49,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "f24c0d7c4efb1447f9991d99ef2db56a06f49ebd0e941cb6599d5a5acd0b13f9",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-5748": {
+   "commits": 3,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "9183c47d2f423b89f6e6cae4f559b6b4b1b889b9b85acf9ae56c86342467dda1",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2026-5841": {
+   "commits": 1,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "f79e0e7af5e87ab753e5672b42961d213b637d935ed659503aaf04db080b4888",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-5879": {
+   "commits": 24,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "48e529446a267bc12d49abfd72c94f4e40a4ffa5ee29176f1b27a42341ec5fe5",
+   "status": "READY",
+   "with_diff": 24
+  },
+  "GO-2026-5880": {
+   "commits": 8,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "54b183ac9aa02339cacd1f3e624299e63a9e3f8bf7b093f923cd49177f58d28b",
+   "status": "READY",
+   "with_diff": 8
+  },
+  "GO-2026-5882": {
+   "commits": 24,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "f14e06604c6f38bc5d8f334b355701332060f061ab5541481e38cad4339daa12",
+   "status": "READY",
+   "with_diff": 24
+  },
+  "GO-2026-5884": {
+   "commits": 24,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "6467b27d65c31b245e38b7eb689d1e8bf061c7121cec2de738e6d021a29440d3",
+   "status": "READY",
+   "with_diff": 24
+  },
+  "GO-2026-5885": {
+   "commits": 24,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "90ea8593dc3efa90ebf3fee59869991a4bbee6de432d526ac6985ab5f1fcff04",
+   "status": "READY",
+   "with_diff": 24
+  },
+  "GO-2026-5954": {
+   "commits": 43,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "ba4d1b703afffc12d6c57996ef61b67fbfcc8131b3da4bce6a5a3b7c89b95cad",
+   "status": "READY",
+   "with_diff": 43
+  },
+  "GO-2026-5955": {
+   "commits": 31,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c2b04e00da5b58e829aae65298aaee0d0b79a5bafd0651794fe28a9e00cab730",
+   "status": "READY",
+   "with_diff": 31
+  },
+  "GO-2026-5960": {
+   "commits": 40,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "22f5cdb4ad6cebc6cbded270799e7112fddb4d76d9bdd2d795fbfc3bd971aa52",
+   "status": "READY",
+   "with_diff": 40
+  },
+  "GO-2026-5971": {
+   "commits": 44,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "b5a47d1b7e78a429c69c7f85208ba5cd70eb70789a653ecfb899f217074a8f50",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-5983": {
+   "commits": 65,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "6c3a430925756c3d1d6a3da9a13d26e10eb0338c06ddce396beab6bbecd60c20",
+   "status": "READY",
+   "with_diff": 65
+  },
+  "GO-2026-5987": {
+   "commits": 10,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d9635d2df8a405f0a972594925bd0ce3c3cdc4adfcb0e1b2e83124970f5f9f9b",
+   "status": "READY",
+   "with_diff": 10
+  },
+  "GO-2026-5989": {
+   "commits": 10,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "f8300efc3124730bf313e01b81447ec384570d635aff87f77722e9945783d9bc",
+   "status": "READY",
+   "with_diff": 10
+  },
+  "GO-2026-6061": {
+   "commits": 3,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "6dde8547bbc515721c274587791ba714316847b4318c6c1df54961b04344d5bd",
+   "status": "READY",
+   "with_diff": 3
+  },
+  "GO-2026-6095": {
+   "commits": 4,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "efd8a41b4dac77aca0776d0efd2f28f4cd824b12edbbb6e1e8bfa7cfe2eef20e",
+   "status": "READY",
+   "with_diff": 4
+  },
+  "GO-2026-6112": {
+   "commits": 4,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "43e274f4e09d9d957da3decb15155b787d459971d844ac5d4a68ae8fd7f53b68",
+   "status": "READY",
+   "with_diff": 4
+  },
+  "GO-2026-6114": {
+   "commits": 19,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "e94e2c83a8373f9dfc003847c759ecb9ec97fc577c1d615055d7fceb521f435e",
+   "status": "READY",
+   "with_diff": 19
+  },
+  "GO-2026-6138": {
+   "commits": 10,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0342b77bcc3cdc392cb48381ff1e27a88d3c76316410beca24557244d61a261d",
+   "status": "READY",
+   "with_diff": 10
+  },
+  "GO-2026-6139": {
+   "commits": 2,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0b37f431b9eadfeeca17fb7b615093e4f98d7dcdd00f6fc0af9da9f1d1cd9ac4",
+   "status": "READY",
+   "with_diff": 2
+  },
+  "GO-2026-6163": {
+   "reason": "no usable release range",
+   "sha256": null,
+   "status": "NO_RANGE"
+  },
+  "GO-2026-6165": {
+   "commits": 500,
+   "cut": 25,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d76e9b99c3582157d389a602fc6cfcdeae3050307de409dfc065e322e48e9b7e",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6181": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "7adf1f55ace2518322ab0deb2e732cdd9ee3d2894378c3d8d961c4f8369c86ef",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6182": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "187bc783404b3f66396bf651ae94ee0f849639a6e3e6d005fe93e9e180ad6850",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6183": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "23ec90a9bf613daf6b3df7c2524a5e62249f455df7e3be789c607a43c542497e",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6184": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "5220bb86074cae0996a860970c42deb2072f66acdb717815e39083117ab6206c",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6185": {
+   "commits": 49,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "96a8ec5f6d2355853ab982da082d6e6ac9c874d17b53c67b81b2b6de9eb924c4",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-6186": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "4d2d7732327e6d15720dd4bd19de78ff838e18b809c86ace1fb8fa610faa5b8f",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6187": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "4bb97a2f88ef2cdd63f8786dfd3c17321f7a9648f435cea2e6aba7ca1ece7586",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6188": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "d5358cdb4e0f2debd4263168c0158e984ab4f4f0c84c0d3f6dd40868320ca80a",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6189": {
+   "commits": 49,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "971c07f4279cdaa04a90bb0b77e4b5dd6208d497e2f96c598630a72381149eff",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-6190": {
+   "commits": 49,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "45c4266269e89e37bf0f7ad55735b93bfd8e63d8cc38cde54f2954f38d77c592",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-6191": {
+   "commits": 49,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "020fb23baf5c2b6dba484088e02b1bf3d9fab8cb9bc8dc77a0364641a44282e6",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-6195": {
+   "commits": 49,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "45f12ef37d4c9c374cc12c1f238a740ce7b832a957c1aa06a5ac4a4abe08db13",
+   "status": "READY",
+   "with_diff": 49
+  },
+  "GO-2026-6197": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c9ec414976e51b4bbd767a4be09af70bb206f304789e2e1d254b4e3a8809606c",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6199": {
+   "commits": 500,
+   "cut": 6,
+   "errors": 0,
+   "reason": null,
+   "sha256": "31b4244cdec938ed4673fb6ad5d57f7738e0bdb48949ad4f528d3ddbd635f650",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6213": {
+   "commits": 17,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "7b591e85cf654c2cca19fd4ac56cbdfe21c824ff96832288d13dc85c0adca765",
+   "status": "READY",
+   "with_diff": 17
+  },
+  "GO-2026-6234": {
+   "commits": 6,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "c6639d307dc029f46debdd1d29d7bdcd81e04b2f2f6d1a6e41fc289a2c0ca3aa",
+   "status": "READY",
+   "with_diff": 6
+  },
+  "GO-2026-6237": {
+   "commits": 1,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "826555bb494d5279ce659dceb8f19b63e6680bb33494d74c8dfc03e019993e78",
+   "status": "READY",
+   "with_diff": 1
+  },
+  "GO-2026-6238": {
+   "commits": 76,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0e2d5efe4952f2aeefd573cccdee18b7d096b8ca7e463fd75a7a2c3bf7aee982",
+   "status": "READY",
+   "with_diff": 76
+  },
+  "GO-2026-6302": {
+   "commits": 116,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "7d1bdcf6cc149f1505bcb520d94680be3a7c3e83dce1d1fac106680b99daf405",
+   "status": "READY",
+   "with_diff": 116
+  },
+  "GO-2026-6348": {
+   "commits": 4,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "badbafc4fa62545d0dbdacf74fac413301ab2047d055ca5ef6c02961975f43c4",
+   "status": "READY",
+   "with_diff": 4
+  },
+  "GO-2026-6366": {
+   "commits": 500,
+   "cut": 15,
+   "errors": 0,
+   "reason": null,
+   "sha256": "bc39e7878df6dabaa44ac618aac0663ae3b6fe0f5e7b7f0baee7151a323a6b56",
+   "status": "READY",
+   "with_diff": 500
+  },
+  "GO-2026-6452": {
+   "commits": 40,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "bc67f40bc74a2e00e61a39ced30746d4b4f8a4fe403d834c881baeb19668e48f",
+   "status": "READY",
+   "with_diff": 40
+  },
+  "GO-2026-6453": {
+   "commits": 40,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "a8d2bb7492908366576cbeb5dea22d8e4aaf58347f95e204bb5056a38f0e84a3",
+   "status": "READY",
+   "with_diff": 40
+  },
+  "GO-2026-6489": {
+   "commits": 14,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0818befe7c6250192f103f83f7ace17a2243e4c88a723b58e9d0124f688d7f23",
+   "status": "READY",
+   "with_diff": 14
+  },
+  "GO-2026-6512": {
+   "commits": 24,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "f353260bf3079be571942ea4ae322a81b7db11e27dce48bc085af45047bb1d11",
+   "status": "READY",
+   "with_diff": 24
+  },
+  "GO-2026-6535": {
+   "reason": "no usable release range",
+   "sha256": null,
+   "status": "NO_RANGE"
+  },
+  "GO-2026-6665": {
+   "commits": 21,
+   "cut": 4,
+   "errors": 0,
+   "reason": null,
+   "sha256": "a9008f39489346cbd66048556798f1dc62708b8740ed8fd74c4eba3f4dbda916",
+   "status": "READY",
+   "with_diff": 21
+  },
+  "GO-2026-6684": {
+   "commits": 34,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "9a207f64c525f7c0b037d4c6ae77df69bf8a2403d83bd031eda5f0da1b090d28",
+   "status": "READY",
+   "with_diff": 34
+  },
+  "GO-2026-6685": {
+   "commits": 45,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "e1d056ded1462e48d6a1de6068d89f61a2c7301588150a76dd3eee85c81aaad5",
+   "status": "READY",
+   "with_diff": 45
+  },
+  "GO-2026-6686": {
+   "commits": 159,
+   "cut": 0,
+   "errors": 0,
+   "reason": null,
+   "sha256": "694675fb831c19e4e648fffc7b9fe890ad4ad875caed86951eeab3736023429b",
+   "status": "READY",
+   "with_diff": 159
+  },
+  "GO-2026-6687": {
+   "commits": 44,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "86b8807b084c5cb7f3d12d2785d852dec3cd5cabab888f54a536407ec383b63f",
+   "status": "READY",
+   "with_diff": 44
+  },
+  "GO-2026-6689": {
+   "commits": 31,
+   "cut": 2,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0c33141058e68bb3d1fc3491f6b9aa2f1b3736fb00708db1262080dfa1c8684e",
+   "status": "READY",
+   "with_diff": 31
+  },
+  "GO-2026-6695": {
+   "commits": 48,
+   "cut": 3,
+   "errors": 0,
+   "reason": null,
+   "sha256": "0930e92fc4641e028b33bcbaa9560fc22f26f43ea3b02b890202ef01233b076c",
+   "status": "READY",
+   "with_diff": 48
+  },
+  "GO-2026-6700": {
+   "commits": 33,
+   "cut": 1,
+   "errors": 0,
+   "reason": null,
+   "sha256": "01c768da83841052e27ff8caf133f1af6e8f9ab67351c834648478b3b702a743",
+   "status": "READY",
+   "with_diff": 33
+  }
+ },
+ "commit_diffs_status_counts": {
+  "NO_RANGE": 2,
+  "READY": 118
+ },
+ "environment": {
+  "command": "python -m vulntrace agent prepare --set d4 --diffs --data-dir /content/data --summary-out /content/drive/MyDrive/vulntrace_cp6/agent_evidence_colab.json",
+  "go": "go version go1.24.7 linux/amd64",
+  "os": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "python": "3.13.16",
+  "repo_commit": "6f08c26",
+  "repo_dirty": false
+ },
+ "graph": {},
+ "graph_status_counts": {},
+ "schema_version": "1.0",
+ "settings": {
+  "diff_store_cap": 30000,
+  "graph": "helper VTA call graph, library mode, module at the range's `from` commit; only candidates of the vulnerable release (side OLD or BOTH) are nodes",
+  "hops": 1,
+  "neighbour_max_results": 200
+ }
+}
