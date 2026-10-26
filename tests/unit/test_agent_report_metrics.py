@@ -67,3 +67,15 @@ def test_agreement_table_counts_gain_loss_and_lost_answers():
     rows.append({**row(["g"], []), "stop_reason": "NOT_RUN"})   # not counted
     text = "\n".join(R.agreement_table({("A2", "m"): {"rows": rows}}))
     assert "| `m` | A2 | 4 of 5 | 1.00 | 4 / 0 / 0 | 1 | 3 | 1 | 1 | 1 |" in text
+
+
+def test_graph_split_table_separates_more_answers_from_better_answers():
+    def row(i, ans, tools=None, gold="g", stop=None):
+        return {"id": i, "stop_reason": stop or ("SUBMITTED" if ans else "LOOP_DETECTED"), "answer": ans, "gold_ids": [gold],
+                "tool_counts": tools or {}}
+    a2 = {"rows": [row("a", ["g"]), row("b", ["x"]), row("c", ["g"]), row("d", []), row("e", []), row("z", [], stop="NOT_RUN")]}
+    a3 = {"rows": [row("a", ["g"], {"callers": 1}), row("b", ["g"], {"callees": 2}), row("c", [], {}), row("d", ["g"], {}),
+                   row("e", []), row("z", [], stop="NOT_RUN")]}
+    text = "\n".join(R.graph_split_table({("A2", "m"): a2, ("A3", "m"): a3}))
+    # both answered: a, b (A2 hits 1, A3 hits 2); only A2: c (hit); only A3: d (hit); neither: e; graph tools: a, b (2 hits of 2) / without 1 of 3
+    assert "| `m` | 2 | 1 / 2 | 1 (1) | 1 (1) | 1 | 2; any-hit@1 2 of 2 with, 1 of 3 without |" in text

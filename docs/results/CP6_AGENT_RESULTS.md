@@ -341,9 +341,72 @@ Tool columns: mean calls per case (a repeated identical call counts; it is answe
 
 Counted over all cases run (both denominators together). A0 is the retriever's list, which is what the agent is shown first. "Changed" cases where A0 and the agent are both wrong, or both right, are in neither gain column.
 
+## Where A3 differs from A2
+
+| Model | cases answered by both arms | any-hit@1 there: A2 / A3 | answered only by A2 (hits) | answered only by A3 (hits) | answered by neither | A3 cases that called `callers` or `callees` |
+|---|---|---|---|---|---|---|
+| `llama3.1-8b` | 105 | 55 / 55 | 3 (2) | 10 (5) | 0 | 117; any-hit@1 60 of 117 with, 0 of 1 without |
+| `qwen2.5-coder-7b` | 63 | 25 / 35 | 12 (7) | 29 (14) | 14 | 87; any-hit@1 41 of 87 with, 8 of 31 without |
+
+Counted over all cases run. A hit is a gold ID first in the answer.
+
 ## Failure analysis (traces read by hand)
 
-**Not done yet.** It needs the traces of the owner's real run: at least 10 cases where the agent was wrong, each read from its trace and classified (wrong tool use, ignored evidence, gave up, format failure, label convention), and two worked traces. Commit the classification as `docs/results/cp6/failure_analysis.json` and re-render.
+18 wrong cases classified by the CP6 results session (Claude Code) from their traces (agent show-trace on the Colab traces, with function names from `dataset materialize --set d4` (names only, no code, are written to this file). The 18 cases were chosen by the session to cover every stop reason, both models and both arms, not drawn at random: the cause counts describe these cases only and are not rates. Causes: wrong tool use = repeated calls that ended the run, or tool calls spent on the agent's own pick instead of comparing candidates; ignored evidence = the gold, or A0's right top-1, was in the trace (initial list, a search, a commit) and the answer left it out; gave up = the agent abstained although candidates related to the advisory were in front of it; format failure = INVALID_ACTION; label convention = the answered function was changed by the same fix as the gold one and the difference looks like which function the curators named (a judgement; the code was not read to confirm); gold not reachable = no gold function is a candidate.). Causes: format failure: 2, gave up: 2, gold not reachable: 1, ignored evidence: 6, label convention: 3, wrong tool use: 4.
+
+| Case | Model | Arm | Stop | Answer | Gold | Cause | What the trace shows |
+|---|---|---|---|---|---|---|---|
+| GO-2022-0519 | `qwen2.5-coder-7b` | A2 | LOOP_DETECTED | - | r1 | wrong tool use | Pool of one: r1 ResourceServer.ValidateAccessToken, which is also A0's only result. The agent read r1, searched commits, showed the commit (it touches r1), then repeated read_function r1 and search_commits 'fix expired tokens'; the second repeat ended the run. It never called submit_answer for a question with one possible answer. |
+| GO-2022-0519 | `llama3.1-8b` | A2 | LOOP_DETECTED | - | r1 | wrong tool use | Same pool of one. One ARG_TYPE reply was repaired; then it repeated read_function r1 and show_commit a1ec282d0270, and the second repeat ended the run after 8 model calls with no answer. |
+| GO-2020-0006 | `llama3.1-8b` | A2 | INVALID_ACTION | - | r1 | format failure | Pool of one: r1 Server.serveTCP (= A0's answer = gold). After read_function, search_commits and show_commit it replied search_code with "k": "10" (a string): ARG_TYPE. The repair turn returned the identical reply, so INVALID_ACTION and no answer. |
+| GO-2025-4017 | `llama3.1-8b` | A2 | INVALID_ACTION | - | r1 | format failure | Pool of one: r1 Conn.handleHandshakeConfirmed (= A0's answer = gold). Same failure: search_code with "k": "15" (a string), identical reply on the repair turn, INVALID_ACTION. |
+| GO-2022-0391 | `llama3.1-8b` | A2 | SUBMITTED | r11653, r11717 | r11675 | ignored evidence | A0's top-1 r11675 encodeMeta (gold) was in the initial list of a 13,805-candidate pool. The agent replaced it with its own two-word query 'plaintext hash', whose ranking does not contain r11675, never read r11675, and answered r11653 computeBodyHashes and r11717 md5Reader.GetValue. |
+| GO-2026-6238 | `llama3.1-8b` | A2 | SUBMITTED | r8 | r7 | ignored evidence | A0's top-1 r7 loadRawSpec is gold. The agent found the fix commit (it touches r6, r7, r8), read only r8 parseBTFHeader and answered r8. It never read r7, which was first in the initial list and in that commit. |
+| GO-2022-0400 | `qwen2.5-coder-7b` | A2 | SUBMITTED | r2 | r1, r3 | ignored evidence | It read A0's top-1 r3 middleware (gold) first, was shown a commit touching 4 candidates, then read r2 cloneServer and answered r2 alone. The read_function output for r2 says its code is from the fixed release (the function is new there), so it cannot contain the code that was vulnerable in the vulnerable release. |
+| GO-2026-5884 | `llama3.1-8b` | A2 | SUBMITTED | r22 | r15 | ignored evidence | Gold r15 Client.Do was 4th in the initial list and 4th in both of the agent's own searches, but was never read. A commit found with a guessed query touches only r22 ServerAddressFromRegistry (A0's top-1); the agent answered r22 alone. |
+| GO-2026-5313 | `qwen2.5-coder-7b` | A3 | SUBMITTED | r31 | r32 | wrong tool use | Gold r32 pageMetaSource.initFrontMatter is in the 5-candidate commit the agent showed, but it was never read. Steps 5-6 went to callers and callees of the agent's own pick r31 getContentConverter (A0's rank 2); the answer was r31. |
+| GO-2023-1664 | `qwen2.5-coder-7b` | A2 | LOOP_DETECTED | - | r4, r5 | wrong tool use | Pool of 5; A0's top 2 (r4 NewIdpAuthnRequest, r5 ServiceProvider.ValidateLogoutResponseRedirect) are gold. The agent searched commits twice and called show_commit 8e9236867d17 three times (the third call ended the run), reading only r3. No answer. |
+| GO-2025-3476 | `qwen2.5-coder-7b` | A2 | ABSTAINED | - | r1093, r1095, r1096 | gave up | Pool of 1,098; gold r1093 Keeper.UpdateGroupMembers is third in the initial list and matches the advisory title (groups module). The agent anchored on A0's top-1 name 'DecodeEntry', read r1052 tableImpl.DecodeEntry and abstained. The prompt says to abstain only if nothing seen is plausibly related. |
+| GO-2023-1602 | `qwen2.5-coder-7b` | A3 | ABSTAINED | - | r1, r2, r3, r4, r5, r7 | gave up | Pool of 8; A0's top 3 are all gold. It read r7 maybeDeflate (gold), ran two more commit searches, replied {"tool": "abstain"} (UNKNOWN_TOOL) and the repair turn became a submit_answer abstention. |
+| GO-2026-6185 | `llama3.1-8b` | A2 | SUBMITTED | r27, r26 | r26 | label convention | Gold r26 ArchiveExtract; A0's order [r27 destPath, r26] was kept after reading both. The commit found touches exactly r26 and r27. Plausibly a label-convention case (the fix edits the helper destPath, the advisory names ArchiveExtract); not verified from the code. |
+| GO-2026-5885 | `llama3.1-8b` | A2 | SUBMITTED | r19, r26 | r15 | label convention | Gold r15 Client.Do was never read (A0 rank 2). The commit the agent found with a guessed query touches only r25 and r26; it answered r19 validateRealm and r26 sameUploadHost. Plausibly label convention (advisory names the entry point Client.Do, the fix edits helpers); not verified from the code. |
+| GO-2026-5569 | `llama3.1-8b` | A3 | SUBMITTED | r3, r2 | r2 | label convention | Gold r2 WritePreStart; A0's order was [r3 inlineCodeAttrs, r2, r1]. The fix commit touches exactly r2 and r3; the agent read both, spent steps 6-7 on callers and callees of r3 only, and answered [r3, r2], so the gold is listed second. Two changed functions, one labelled; not verified from the code. |
+| GO-2026-5427 | `llama3.1-8b` | A2 | SUBMITTED | r82, r92, r88 | r99 | ignored evidence | Its own first search ranked gold r99 parseRibEntry first, it read r99 and showed commit 76d911046344, which touches only r99, then spent steps 4-6 on other BGP functions and answered r82, r92, r88 while citing that commit as evidence. See the worked failure trace. |
+| GO-2024-3112 | `qwen2.5-coder-7b` | A2 | SUBMITTED | r4 | r20, r3, r5, r6, r8 | ignored evidence | It read A0's top-1 r5 initializeWithTrustOptions (gold) first, then was shown a commit touching 12 candidates, searched the name compareFirstLightBlockWithWitnesses, read r4 (not gold; the gold r3 compareFirstHeaderWithWitnesses has a near-duplicate name) and answered r4 alone, dropping r5. |
+| GO-2026-5052 | `llama3.1-8b` | A2 | LOOP_DETECTED | - | - | gold not reachable | No advisory symbol (Decode, DecodeChain, DecodeTrustStore, ToPEM) is a changed function; the pool is the single changed function doPBMAC1. A miss for every arm. The run also ended with LOOP_DETECTED after repeating read_function r1 and a search query. |
+
+### Worked trace (success): GO-2023-1578, `llama3.1-8b`, A3
+
+```
+GO-2023-1578 arm A3 model llama3.1:8b: SUBMITTED; answer ['r19=ZipDecompressor.Decompress']; steps 8, calls 8, tokens 28219/184, 12.457 s
+  initial search showed: r3=Client.get, r23=Getter.Mode, r38=HttpGetter.GetFile, r54=Getter.Get, r28=GitGetter.Get, r2=Client.Get, r8=init, r19=ZipDecompressor.Decompress, r40=HttpGetter.getXTerraformSource, r55=Getter.GetFile
+  [1] action: search_code {"k": 10, "query": "decompression bomb"} -> tool: 10 candidates; shown ['r11=TarDecompressor.Decompress', 'r12=tarDecompressor.Decompress', 'r16=TarXzDecompressor.Decompress', 'r15=TarGzipDecompressor.Decompress', 'r14=TarBzip2Decompressor.Decompress', 'r22=Getter.GetFile', 'r17=TarZstdDecompressor.Decompress', 'r8=init', 'r55=Getter.GetFile', 'r53=Request.CopyReader']
+  [2] action: read_function {"candidate_id": "r11"} -> tool: 19 lines; shown ['r11=TarDecompressor.Decompress']
+  [3] action: read_function {"candidate_id": "r19"} -> tool: 76 lines; shown ['r19=ZipDecompressor.Decompress']
+  [4] action: show_commit {"sha": "017a2ee8897e"} -> tool: commit, 24 candidates, diff shown; shown ['r8=init', 'r9=Bzip2Decompressor.Decompress', 'r10=GzipDecompressor.Decompress', 'r11=TarDecompressor.Decompress', 'r12=tarDecompressor.Decompress', 'r13=untar', 'r14=TarBzip2Decompressor.Decompress', 'r15=TarGzipDecompressor.Decompress', 'r16=TarXzDecompressor.Decompress', 'r17=TarZstdDecompressor.Decompress']
+  [5] action: callers {"candidate_id": "r19"} -> tool: 1 callers; shown ['r19=ZipDecompressor.Decompress', 'r3=Client.get']
+  [6] action: read_function {"candidate_id": "r3"} -> tool: 184 lines; shown ['r3=Client.get']
+  [7] action: read_function {"candidate_id": "r11"} -> repeat
+  [8] action: submit_answer {"candidate_ids": ["r19"], "evidence": ["r11", "r3", "017a2ee8897e"]} -> answer_accepted
+```
+
+A0's top 3 (Client.get, Getter.Mode, HttpGetter.GetFile) are all wrong. The agent's first search, 'decompression bomb', lists the Decompress functions; it reads r11 and r19 ZipDecompressor.Decompress (already 8th in the initial list), shows the 24-candidate commit and r19's caller, and answers r19, a gold function. It lists one of three gold functions, so recall is partial. It cost 8 steps and 28,219 prompt tokens where A0 costs no model call. llama A3 turned an A0 miss into a hit at top-1 in 11 cases and an A0 hit into a miss in 8 (table 'List length and agreement with A0').
+
+### Worked trace (failure): GO-2026-5427, `llama3.1-8b`, A2
+
+```
+GO-2026-5427 arm A2 model llama3.1:8b: SUBMITTED; answer ['r82=BGPHeader.DecodeFromBytes', 'r92=PathAttributeAigp.DecodeFromBytes', 'r88=LsPrefixV6NLRI.DecodeFromBytes']; steps 7, calls 7, tokens 23563/178, 11.793 s
+  initial search showed: r82=BGPHeader.DecodeFromBytes, r91=ParseIP6Extended, r84=CapFQDN.DecodeFromBytes, r88=LsPrefixV6NLRI.DecodeFromBytes, r92=PathAttributeAigp.DecodeFromBytes, r85=CapSoftwareVersion.DecodeFromBytes, r87=LsPrefixV4NLRI.DecodeFromBytes, r89=LsTLVNodeDescriptor.DecodeFromBytes, r100=fsmHandler.established, r90=NewPathAttributeMpReachNLRI
+  [1] action: search_code {"k": 10, "query": "uint16 underflow"} -> tool: 10 candidates; shown ['r99=parseRibEntry', 'r82=BGPHeader.DecodeFromBytes', 'r92=PathAttributeAigp.DecodeFromBytes', 'r89=LsTLVNodeDescriptor.DecodeFromBytes', 'r88=LsPrefixV6NLRI.DecodeFromBytes', 'r90=NewPathAttributeMpReachNLRI', 'r91=ParseIP6Extended', 'r86=LsLinkNLRI.DecodeFromBytes', 'r87=LsPrefixV4NLRI.DecodeFromBytes', 'r83=BGPUpdate.DecodeFromBytes']
+  [2] action: read_function {"candidate_id": "r99"} -> tool: 57 lines; shown ['r99=parseRibEntry']
+  [3] action: show_commit {"sha": "76d911046344"} -> tool: commit, 1 candidates, diff shown; shown ['r99=parseRibEntry']
+  [4] action: search_commits {"query": "fix uint16 underflow"} -> tool: 10 commits
+  [5] action: read_function {"candidate_id": "r82"} -> tool: 14 lines; shown ['r82=BGPHeader.DecodeFromBytes']
+  [6] action: search_code {"query": "BGP-LS sub-TLV length tracking"} -> tool: 10 candidates; shown ['r88=LsPrefixV6NLRI.DecodeFromBytes', 'r87=LsPrefixV4NLRI.DecodeFromBytes', 'r89=LsTLVNodeDescriptor.DecodeFromBytes', 'r86=LsLinkNLRI.DecodeFromBytes', 'r92=PathAttributeAigp.DecodeFromBytes', 'r82=BGPHeader.DecodeFromBytes', 'r83=BGPUpdate.DecodeFromBytes', 'r85=CapSoftwareVersion.DecodeFromBytes', 'r84=CapFQDN.DecodeFromBytes', 'r90=NewPathAttributeMpReachNLRI']
+  [7] action: submit_answer {"candidate_ids": ["r82", "r92", "r88"], "evidence": ["76d911046344", "f842cdf383fb"]} -> answer_accepted
+```
+
+The answer was in the trace by step 3: the agent's own first search ranks r99 parseRibEntry first, it reads it, and the commit it shows touches only r99. It then spends three steps on other BGP functions and answers r82, r92, r88, citing that same commit as evidence. The answer validator only checks that cited evidence appeared in a tool output, not that it supports the answer, so the contradiction is accepted. A0's list (r82, r91, r84) was wrong too, so this case is a miss for both.
 
 ## Limits of this measurement
 

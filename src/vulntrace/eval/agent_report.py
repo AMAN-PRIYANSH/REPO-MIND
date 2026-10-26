@@ -364,6 +364,34 @@ def agreement_table(agent: dict) -> list[str]:
                   "column.", ""]
 
 
+def graph_split_table(agent: dict) -> list[str]:
+    """Where A3 differs from A2: it answers more cases, or it answers the same cases better. Descriptive only: the graph tools
+    also change the length and order of the interaction, so a difference is not attributed to graph information."""
+    out = ["| Model | cases answered by both arms | any-hit@1 there: A2 / A3 | answered only by A2 (hits) | answered only by A3 (hits) | "
+           "answered by neither | A3 cases that called `callers` or `callees` |",
+           "|---|---|---|---|---|---|---|"]
+    for alias in sorted({a for _arm, a in agent}):
+        if ("A2", alias) not in agent or ("A3", alias) not in agent:
+            continue
+        a2 = {r["id"]: r for r in agent[("A2", alias)]["rows"] if r["stop_reason"] != "NOT_RUN"}
+        a3 = {r["id"]: r for r in agent[("A3", alias)]["rows"] if r["stop_reason"] != "NOT_RUN"}
+        ids = [i for i in a2 if i in a3]
+
+        def hit(r):
+            return bool(r["answer"][:1]) and r["answer"][0] in set(r["gold_ids"])
+
+        both = [i for i in ids if a2[i]["answer"] and a3[i]["answer"]]
+        only2 = [i for i in ids if a2[i]["answer"] and not a3[i]["answer"]]
+        only3 = [i for i in ids if a3[i]["answer"] and not a2[i]["answer"]]
+        used = [i for i in ids if a3[i]["tool_counts"].get("callers", 0) + a3[i]["tool_counts"].get("callees", 0) > 0]
+        unused = [i for i in ids if i not in used]
+        out.append(f"| `{alias}` | {len(both)} | {sum(hit(a2[i]) for i in both)} / {sum(hit(a3[i]) for i in both)} | "
+                   f"{len(only2)} ({sum(hit(a2[i]) for i in only2)}) | {len(only3)} ({sum(hit(a3[i]) for i in only3)}) | "
+                   f"{len(ids) - len(both) - len(only2) - len(only3)} | {len(used)}; any-hit@1 {sum(hit(a3[i]) for i in used)} of "
+                   f"{len(used)} with, {sum(hit(a3[i]) for i in unused)} of {len(unused)} without |")
+    return out + ["", "Counted over all cases run. A hit is a gold ID first in the answer.", ""]
+
+
 def render_cp6_doc(results_dir: Path, source: str, cp5_dir: Path = CP5_DIR) -> str:
     data = load_cp6(results_dir, cp5_dir)
     agent, a1 = data["agent"], data["a1"]
@@ -428,6 +456,7 @@ def render_cp6_doc(results_dir: Path, source: str, cp5_dir: Path = CP5_DIR) -> s
     if agent:
         lines += ["## Tool use", ""] + tool_use_table(agent)
         lines += ["## List length and agreement with A0", ""] + agreement_table(agent)
+        lines += ["## Where A3 differs from A2", ""] + graph_split_table(agent)
     lines += failure_section(data["failures"])
     lines += ["## Limits of this measurement", "",
               "- The pool is closed: the agent can only answer with functions the release changed. Cases whose gold function "
