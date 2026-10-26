@@ -31,13 +31,13 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 
 CP6 (from the specification's deliverables):
 
-- [ ] D1 Agent graph (`src/vulntrace/agent/`): LangGraph loop act -> tools -> budget check; state (pool, history, steps, tokens); tools `search_code`, `read_function`, `search_commits`, `show_commit`, `submit_answer`, ablation `callers`/`callees` from precomputed neighbour tables; closed pool; truncation budget; submit validation (1-3 IDs, cited evidence, one retry, `INVALID_ANSWER`, `abstain`); budgets (steps, chars per call, prompt tokens, wall clock) recorded; temperature 0, fixed seed; full trace per case
+- [x] D1 Agent graph (`src/vulntrace/agent/`): LangGraph loop act -> tools -> budget check; state (pool, history, steps, tokens); tools `search_code`, `read_function`, `search_commits`, `show_commit`, `submit_answer`, ablation `callers`/`callees` from precomputed neighbour tables; closed pool; truncation budget; submit validation (1-3 IDs, cited evidence, one retry, `INVALID_ANSWER`, `abstain`); budgets (steps, chars per call, prompt tokens, wall clock) recorded; temperature 0, fixed seed; full trace per case
 - [ ] D1b Neighbour tables for `callers`/`callees` built from CP5b helper modes (gitignored evidence dir), counts of cases without tables
-- [ ] D2 Prompts `agent_system_v1`, `agent_repair_v1` frozen before any real run
-- [ ] D3 Fake LLM and fake tools; scripted sequences for: success, invalid JSON then repair, out-of-pool ID, budget stop by steps / tokens / time, abstention, `LOOP_DETECTED`, tool error
-- [ ] D4 `eval symbols --strategy agent --set d4`: arms A0-A3, metrics with both denominators, cluster bootstrap, paired vs A0 and A1, cost table, contamination split, failure analysis tooling, results JSON in `docs/results/cp6/`, renderer to `docs/results/CP6_AGENT_RESULTS.md`
-- [ ] D5 Colab notebook `notebooks/cp6_agent_colab.ipynb` (gate, `sys.path`, resumable cache, real-generate check, results zip)
-- [ ] D6 Tests: unit, contract, integration with fakes; CI green
+- [x] D2 Prompts `agent_system_v1`, `agent_repair_v1` frozen before any real run
+- [x] D3 Fake LLM and fake tools; scripted sequences for: success, invalid JSON then repair, out-of-pool ID, budget stop by steps / tokens / time, abstention, `LOOP_DETECTED`, tool error
+- [x] D4 `eval symbols --strategy agent --set d4`: arms A0-A3, metrics with both denominators, cluster bootstrap, paired vs A0 and A1, cost table, contamination split, failure analysis tooling, results JSON in `docs/results/cp6/`, renderer to `docs/results/CP6_AGENT_RESULTS.md`
+- [x] D5 Colab notebook `notebooks/cp6_agent_colab.ipynb` (gate, `sys.path`, resumable cache, real-generate check, results zip)
+- [x] D6 Tests: unit, contract, integration with fakes; CI green
 - [ ] Dry run with the fake LLM on real D4 evidence (session)
 - [ ] Owner's Colab run (A2/A3 real numbers), failure analysis from real traces, honest headline
 - [ ] Report `docs/progress/reports/CP6_REPORT.md`
@@ -45,5 +45,7 @@ CP6 (from the specification's deliverables):
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
+
+CP6 (26 Oct 2026, branch `claude/gracious-carson-ch1i9r`): code, prompts (frozen at 42da9a4), tests, renderer and notebook are done. D4 evidence materialised in the session (0 cases differ), commit diffs built (118 cases), A2 dry run on real evidence done. In progress: neighbour tables (`agent prepare --graph`, go1.26.10 from the module proxy in the scratch area), then the A3 dry run, the committed summary `docs/results/cp6/agent_evidence.json`, the report. After that the owner's Colab run is the next step (STATUS becomes `AWAITING_COLAB`).
 
 (CP5b was approved on 23 Oct 2026; read the review notes at the end of checkpoints/CP3.md to CP5b.md - they bind CP6. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists.)
