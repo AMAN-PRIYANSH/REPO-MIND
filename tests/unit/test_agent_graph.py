@@ -29,7 +29,7 @@ def run(replies, arm="A2", graph_tools=False, budget=None, world=None, **fake_kw
 def test_normal_success_submits_a_ranked_answer_with_seen_evidence():
     t, c = run([READ_R1, SUBMIT_R1])
     assert t["stop_reason"] == B.SUBMITTED and t["final"] == {"candidate_ids": ["r1", "r2"], "evidence": ["r1"],
-                                                               "abstain": False, "valid": True}
+                                                               "abstain": False, "valid": True, "answer_ids_seen": True}
     assert t["totals"]["steps"] == 2 and t["totals"]["llm_calls"] == 2 == len(c.calls)
     assert [x["outcome"] for x in t["turns"]] == ["tool", "answer_accepted"]
     assert all(v == 0 for v in t["counters"].values())
@@ -116,7 +116,7 @@ def test_context_guard_stops_before_a_prompt_the_server_would_truncate():
 def test_explicit_abstention_is_counted_and_has_no_answer():
     t, _ = run([action("submit_answer", abstain=True)])
     assert t["stop_reason"] == B.ABSTAINED and t["final"] == {"candidate_ids": [], "evidence": [], "abstain": True,
-                                                               "valid": True}
+                                                               "valid": True, "answer_ids_seen": True}
 
 
 def test_abstain_with_ids_is_a_protocol_error():
