@@ -1,0 +1,15 @@
+<<<BEGIN ADVISORY>>>
+Summary: $summary
+
+Details:
+$details
+<<<END ADVISORY>>>
+
+The candidate pool has $n_candidates functions: the functions changed between the vulnerable and the fixed release.
+An automatic search of the pool with the advisory text returned these best matches, best first:
+
+<<<BEGIN TOOL OUTPUT>>>
+$initial_search
+<<<END TOOL OUTPUT>>>
+
+You have $max_steps steps. Start the investigation: reply with one JSON action.

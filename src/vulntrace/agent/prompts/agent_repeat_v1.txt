@@ -1,0 +1,1 @@
+You already made this exact call at step $first_step; its output is above. Repeating a call again ends the investigation.

@@ -1,0 +1,7 @@
+Output of $tool (step $step of $max_steps):
+
+<<<BEGIN TOOL OUTPUT>>>
+$output
+<<<END TOOL OUTPUT>>>
+
+Steps left: $steps_left.$note Reply with one JSON action.

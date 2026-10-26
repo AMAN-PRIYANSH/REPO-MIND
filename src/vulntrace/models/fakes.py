@@ -155,3 +155,87 @@ def dry_run_text_responder(messages: Messages) -> str:
     request hash, so the hypothetical differs between cases."""
     k = request_key(messages)[:6]
     return f"func handle{k}(input string) error {{\n\treturn nil\n}}"
+
+
+# --- fake LLM for the agent (CP6) --------------------------------------------------------------
+def action(tool: str, **args) -> str:
+    return json.dumps({"tool": tool, "args": args})
+
+
+class SequenceLLMClient(LLMClient):
+    """Returns scripted replies in order, whatever the input (an agent run's calls all share their
+    first two messages, so a run is one script). `latencies` and `input_tokens` (lists, same
+    length or shorter; the last value repeats) let tests drive the time and token budgets; by
+    default input tokens are characters // 4 and latency is 0. Running past the script raises
+    AssertionError, so a test notices an unexpected extra call. `errors` maps a call index to an
+    LLMError to raise there (server failure)."""
+
+    endpoint_kind = "FAKE"
+
+    def __init__(self, replies: list[str], latencies: list[float] | None = None, input_tokens: list[int] | None = None,
+                 errors: dict | None = None, model_id: str = FAKE_LLM_ID):
+        self.replies, self.latencies, self.input_tokens = list(replies), latencies, input_tokens
+        self.errors = errors or {}
+        self.model_id = model_id
+        self.calls: list[Messages] = []
+
+    @property
+    def model_digest(self) -> str | None:
+        return "fake-digest"
+
+    def info(self):
+        return {"model_id": self.model_id, "model_digest": "fake-digest", "endpoint_kind": "FAKE", "kind": "FAKE"}
+
+    @staticmethod
+    def _pick(values, i, default):
+        return default if not values else values[min(i, len(values) - 1)]
+
+    def complete(self, messages, settings=None, json_schema=None, tools=None) -> LLMResponse:
+        i = len(self.calls)
+        self.calls.append([dict(m) for m in messages])
+        if i in self.errors:
+            raise self.errors[i]
+        assert i < len(self.replies), f"the agent made call {i + 1}, but the script has only {len(self.replies)} replies"
+        s = settings or LLMSettings()
+        text = self.replies[i]
+        n_in = self._pick(self.input_tokens, i, sum(len(m["content"]) for m in messages) // 4)
+        return LLMResponse(text=text, model=self.model_id, model_digest="fake-digest", settings=s.as_dict(),
+                           input_tokens=n_in, output_tokens=len(text) // 4, latency_s=float(self._pick(self.latencies, i, 0.0)),
+                           finish_reason="stop")
+
+
+def agent_dry_run_responder(messages: Messages) -> str:
+    """Deterministic stand-in for the agent on real evidence (dry runs). It reads the candidate IDs
+    (`[r17]`) and 12-character commit SHAs shown so far and follows a fixed plan - read the first
+    search hit, search commits, show a commit, ask for callers when the tool exists, then submit
+    the first three hits - with, chosen by a hash of the case, an invalid first reply (repair
+    path), an out-of-pool answer (answer retry), an abstention, or a repeated call (loop stop).
+    Its numbers mean nothing; it exercises code paths."""
+    user_text = "\n".join(m["content"] for m in messages if m["role"] == "user")
+    ids = list(dict.fromkeys(re.findall(r"\[(r\d+)\]", user_text)))
+    shas = list(dict.fromkeys(re.findall(r"^([0-9a-f]{12}) ", user_text, flags=re.MULTILINE)))
+    turn = sum(1 for m in messages if m["role"] == "assistant")
+    roll = int(request_key(messages)[:8], 16) % 20
+    last = messages[-1]["content"]
+    graph = "- callers, args" in messages[0]["content"]
+    if not ids:
+        return action("submit_answer", abstain=True)
+    submit = action("submit_answer", candidate_ids=ids[:3], evidence=ids[:1])
+    if last.startswith("Your last reply was rejected"):
+        return submit
+    if roll == 0 and turn == 0:
+        return "```json\n" + action("read_function", candidate_id=ids[0]) + "\n```"
+    if roll == 3 and turn in (1, 2):
+        return action("read_function", candidate_id=ids[0])          # repeats turn 0's call: loop stop
+    plan = [action("read_function", candidate_id=ids[0]),
+            action("search_commits", query=" ".join(re.findall(r"[A-Za-z]{4,}", user_text)[:4]) or "fix"),
+            action("show_commit", sha=shas[0]) if shas else action("search_code", query="validate input", k=5)]
+    if graph:
+        plan.append(action("callers", candidate_id=ids[0]))
+    if turn < len(plan):
+        return plan[turn]
+    if roll == 1 and turn == len(plan):
+        return action("submit_answer", candidate_ids=["not-a-candidate"], evidence=ids[:1])
+    if roll == 2:
+        return action("submit_answer", abstain=True)
+    return submit

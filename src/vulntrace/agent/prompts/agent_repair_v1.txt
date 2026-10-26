@@ -1,0 +1,3 @@
+Your last reply was rejected: $problems
+
+Reply again with exactly one JSON object of the form {"tool": "<tool name>", "args": {...}}, using one of these tools: $tools. Valid candidate IDs are the IDs of the candidate pool shown in tool outputs. No markdown, no other text.

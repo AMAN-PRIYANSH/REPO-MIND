@@ -1,0 +1,2 @@
+- callers, args {"candidate_id": "<ID>"}: returns the functions that directly call this candidate, from the call graph of the vulnerable release; callers that are themselves candidates show their ID.
+- callees, args {"candidate_id": "<ID>"}: returns the functions this candidate directly calls, from the call graph of the vulnerable release; callees that are themselves candidates show their ID.

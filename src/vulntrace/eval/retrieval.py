@@ -202,7 +202,7 @@ class Harness:
         self._indexed: set[tuple[str, str]] = set()
         self._rerankers: dict[str, Any] = {}
         self._qvec: dict[tuple[str, str], Any] = {}
-        self._dense_rankings: dict[tuple[str, str, str], list[str]] = {}
+        self._dense_rankings: dict[tuple[str, str, str, str], list[str]] = {}
         self.embed_stats: dict[str, dict] = {}
 
     def set_queries(self, queries: dict[str, str] | None) -> None:
@@ -269,7 +269,7 @@ class Harness:
         return ranking.rank(ids, bm.scores(code_tokens(case.query)), case.case_id, self.seed)
 
     def _dense_ranking(self, case: EvalCase, alias: str, variant: str) -> list[str]:
-        key = (alias, variant, case.case_id)
+        key = (alias, variant, case.case_id, case.query)  # the query is part of the key (CP6 agent queries)
         if key not in self._dense_rankings:
             e = self.embedder(alias)
             self.prepare_dense(alias, variant)
@@ -307,6 +307,12 @@ class Harness:
             return hybrid
         text_of = {c.candidate_id: c.text(variant).text for c in self.ranges[case.range_key]}
         return rerank.rerank(self.reranker(cfg.reranker), case.query, hybrid, text_of, self.rerank_top_n)
+
+    def rank_query(self, cfg: Config, case: EvalCase, variant: str, query: str) -> list[str]:
+        """The ranking `rank_case` gives, but for another query text over the same case's candidates
+        (the CP6 agent's `search_code`). Same components, same seeded tie-break; for
+        `query == case.query` it is exactly `rank_case`."""
+        return self.rank_case(cfg, case if query == case.query else dataclasses.replace(case, query=query), variant)
 
     def run(self, cfg: Config, variant: str) -> dict[str, Any]:
         variant = NO_VARIANT if cfg.text_free else variant
