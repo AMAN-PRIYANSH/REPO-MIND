@@ -38,7 +38,8 @@ class Budget:
     max_prompt_tokens_per_call: int = 24000
     max_seconds: float = 600.0
     max_answer_ids: int = 3
-    max_repeated_calls: int = 1   # the next identical call after this many repeats stops the run (LOOP_DETECTED)
+    max_repeated_calls: int = 1   # repeats of earlier calls allowed per run (each answered with a note); the next
+                                  # repeat of any earlier call stops the run (LOOP_DETECTED)
 
     def as_dict(self) -> dict[str, Any]:
         return asdict(self)
