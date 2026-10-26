@@ -28,7 +28,7 @@ jobs:
         run: |
           set -o pipefail
           python -m pip install --upgrade pip
-          pip install -e ".[dev,db]"
+          pip install -e ".[dev,db,agent]"
 
       - name: Unit and contract tests (Python only, no Go needed)
         run: |
@@ -84,7 +84,7 @@ jobs:
         run: |
           set -o pipefail
           python -m pip install --upgrade pip
-          pip install -e ".[dev,db]"
+          pip install -e ".[dev,db,agent]"
 
       - name: VectorStore contract suite on both backends
         run: |
