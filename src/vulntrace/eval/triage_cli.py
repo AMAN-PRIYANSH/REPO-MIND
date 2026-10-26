@@ -24,7 +24,7 @@ def _log(msg: str) -> None:
 
 
 def _write(path: Path, obj) -> int:
-    n = te.write_json(path, obj)
+    n = te.write_json(path, te.example_verdict(obj))   # local absolute paths become <local>
     if n > MAX_RESULT_BYTES:
         _log(f"error: {path} is {n} bytes, over the 512 KiB limit for committed results")
         raise SystemExit(EXIT_UNEXPECTED)

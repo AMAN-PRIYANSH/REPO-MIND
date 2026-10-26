@@ -576,9 +576,9 @@ def write_json(path: Path, obj: Any) -> int:
     return len(text.encode("utf-8"))
 
 
-def example_verdict(v: dict[str, Any]) -> dict[str, Any]:
-    """A committed example: the real verdict, with local absolute paths reduced to a placeholder."""
+def example_verdict(v: Any) -> Any:
+    """Anything committed (a verdict, a results file): local absolute paths become `<local>`."""
     text = json.dumps(v)
-    for root in (str(REPO_ROOT), tempfile.gettempdir(), str(Path.home())):
-        text = text.replace(root, "<local>")
+    for root in sorted({str(REPO_ROOT), tempfile.gettempdir(), str(Path.home())}, key=len, reverse=True):
+        text = text.replace(json.dumps(root)[1:-1], "<local>")
     return json.loads(text)
