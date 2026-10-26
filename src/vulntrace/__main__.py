@@ -69,10 +69,52 @@ def build_parser() -> argparse.ArgumentParser:
     ev = sub.add_parser("eval", help="baselines and evaluation (CP3+)")
     esub = ev.add_subparsers(dest="eval_command", required=True)
     es = esub.add_parser("symbols", help="symbol-identification baselines")
-    es.add_argument("--strategy", required=True, choices=["e0", "id-search"])
+    es.add_argument("--strategy", required=True, choices=["e0", "id-search", "agent"])
     es.add_argument("--cases", default=None, help="D1/D4 case-list JSON (default: docs/results/datasets/D1|D4_cases.json)")
     es.add_argument("--cache", default=None, help="vulndb cache directory")
-    es.add_argument("--out", default=None, help="output directory (default: results/cp3)")
+    es.add_argument("--out", default=None, help="output directory (default: results/cp3; agent: results/cp6)")
+    # CP6 agent (--strategy agent)
+    es.add_argument("--set", default=None, choices=["d4"], dest="dataset_set", help="agent: the dataset (D4 only)")
+    es.add_argument("--arm", action="append", default=None, help="agent: A2 (no graph tools) and/or A3 (with callers/"
+                                                                  "callees); repeatable; default both")
+    es.add_argument("--data-dir", default=None, help="agent: materialised evidence directory (default: data/)")
+    es.add_argument("--embedding-cache", default=None, help="agent: embedding cache directory (default: data/embeddings)")
+    es.add_argument("--device", default=None, help="agent: embedder device, e.g. cuda or cpu")
+    es.add_argument("--store", choices=["memory", "pgvector"], default="memory", help="agent: vector store backend")
+    es.add_argument("--dsn", default=None, help="agent: PostgreSQL DSN for --store pgvector")
+    es.add_argument("--allow-missing", action="store_true", help="agent: score cases without evidence as misses")
+    es.add_argument("--trace-dir", default=None, help="agent: where per-case traces go (default: <data-dir>/agent_traces)")
+    es.add_argument("--rerun", action="store_true", help="agent: ignore finished traces (default: resume)")
+    es.add_argument("--limit", type=int, default=None, help="agent: only the first N cases (a trial run)")
+    for flag, help_text in (("--max-steps", "steps"), ("--max-tool-chars", "characters of one tool output"),
+                            ("--max-total-prompt-tokens", "prompt tokens per case"),
+                            ("--max-prompt-tokens-per-call", "prompt tokens of one call"),
+                            ("--max-seconds", "model plus tool seconds per case")):
+        es.add_argument(flag, type=float if flag == "--max-seconds" else int, default=None,
+                        help=f"agent budget: {help_text} (default from agent/budget.py; recorded in the results)")
+    _add_llm_args(es)
+
+    ag = sub.add_parser("agent", help="CP6 agent evidence and traces")
+    agsub = ag.add_subparsers(dest="agent_command", required=True)
+    ap = agsub.add_parser("prepare", help="commit diffs (git) and call-graph neighbour tables (Go helper) for the "
+                                          "agent's tools; uses the network for Go modules; resumable")
+    ap.add_argument("--set", required=True, choices=["d4"], dest="dataset_set")
+    ap.add_argument("--diffs", action="store_true", help="Go diffs of every release-range commit (read-only git)")
+    ap.add_argument("--graph", action="store_true", help="one-hop callers/callees of every candidate (needs Go)")
+    ap.add_argument("--cases", default=None, help="case list (default: docs/results/datasets/D4_cases.json)")
+    ap.add_argument("--cache", default=None, help="vulndb cache directory")
+    ap.add_argument("--data-dir", default=None, help="materialised evidence directory (default: data/)")
+    ap.add_argument("--repo-cache", default=None, help="git cache that `dataset materialize` used")
+    ap.add_argument("--gomodcache", default=None, help="Go module cache for the analysed modules (default: <cache>/gomod)")
+    ap.add_argument("--jobs", type=int, default=2, help="neighbour tables built in parallel (default 2)")
+    ap.add_argument("--timeout", type=float, default=900.0, help="seconds per helper call (default 900)")
+    ap.add_argument("--limit", type=int, default=None, help="only the first N cases (a trial run)")
+    ap.add_argument("--rerun", action="store_true", help="rebuild evidence that already exists")
+    ap.add_argument("--summary-out", default=None, help="summary JSON (default: results/cp6/agent_evidence.json)")
+    st = agsub.add_parser("show-trace", help="print one agent trace in readable form (IDs and actions, no code)")
+    st.add_argument("--trace", required=True, help="a <case>.json.gz file from the trace directory")
+    st.add_argument("--data-dir", default=None, help="evidence directory, to print function names next to IDs")
+    st.add_argument("--raw", action="store_true", help="also print the model's raw replies")
     er = esub.add_parser("retrieval", help="Mode 2 retrieval evaluation on D4 (CP4)")
     er.add_argument("--config", action="append", default=None,
                     help="random | size | bid | bid-only | bm25 | dense:<e> | hybrid:<e> | hybrid+rerank:<e>+<r> "
@@ -491,8 +533,20 @@ def main(argv: list[str] | None = None) -> int:
             return _cmd_render(args)
         if args.command == "dataset":
             return _cmd_dataset(args)
+        if args.command == "eval" and args.eval_command == "symbols" and args.strategy == "agent":
+            from vulntrace.eval import agent_cli
+
+            return agent_cli.cmd_eval_agent(args, argv, _load_eval_set)
         if args.command == "eval" and args.eval_command == "symbols":
             return _cmd_eval_symbols(args)
+        if args.command == "agent" and args.agent_command == "prepare":
+            from vulntrace.eval import agent_cli
+
+            return agent_cli.cmd_agent_prepare(args, argv)
+        if args.command == "agent" and args.agent_command == "show-trace":
+            from vulntrace.eval import agent_cli
+
+            return agent_cli.cmd_show_trace(args)
         if args.command == "eval" and args.eval_command == "retrieval":
             return _cmd_eval_retrieval(args, argv)
         if args.command == "eval" and args.eval_command == "select":

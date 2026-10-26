@@ -10,6 +10,8 @@ from vulntrace.models.llm_cache import CachedLLMClient, LLMCache
 
 
 def _fake_responder(messages):
+    if "investigating a vulnerability in a Go module" in messages[0]["content"]:   # CP6 agent system prompt
+        return fakes.agent_dry_run_responder(messages)
     if "code search engine" in messages[0]["content"]:
         return fakes.dry_run_text_responder(messages)
     return fakes.dry_run_responder(messages)
