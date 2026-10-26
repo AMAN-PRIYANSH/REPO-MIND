@@ -6,7 +6,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 
 - Current checkpoint: **CP6 - LangGraph investigation agent (Mode 2)**
 - State: `IN_PROGRESS` (code done; the owner's Colab run is finished and `cp6_results.zip` exists; the next session does the results steps below)
-- Branch in use: `claude/gracious-carson-ch1i9r`
+- Branch in use: `claude/vulntrace-ai-build-1wfa8e` (continues `claude/gracious-carson-ch1i9r`, fast-forwarded at `0f4310c`)
 - Specification: [checkpoints/CP6.md](../implementation/checkpoints/CP6.md)
 
 State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` →) `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
@@ -21,7 +21,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` →) `AWAITING_REV
 | CP4 | Retrieval stack: chunking, pgvector, BM25, embeddings, fusion, reranker | APPROVED | claude/vulntrace-ai-build-9qhbjg | [CP4_REPORT](reports/CP4_REPORT.md) |
 | CP5 | Local LLM layer, root-cause selection, HyDE | APPROVED | claude/vulntrace-ai-build-o31zls | [CP5_REPORT](reports/CP5_REPORT.md) |
 | CP5b | Lifting and caller/callee queries (Go helper) | APPROVED | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
-| CP6 | LangGraph investigation agent | IN_PROGRESS | claude/gracious-carson-ch1i9r | [CP6_REPORT](reports/CP6_REPORT.md) |
+| CP6 | LangGraph investigation agent | IN_PROGRESS | claude/vulntrace-ai-build-1wfa8e (continues claude/gracious-carson-ch1i9r) | [CP6_REPORT](reports/CP6_REPORT.md) |
 | CP7 | End-to-end triage, verifier, real apps, demo | NOT_RELEASED | - | - |
 | CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
 
