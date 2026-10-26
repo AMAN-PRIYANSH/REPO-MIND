@@ -20,9 +20,10 @@ Entry point: `python -m vulntrace <command>`.
 | `eval symbols --strategy llm` / `llm+lift` / `llm-topk` | CP5 | LLM selection in both modes. |
 | `eval lift --set d1` / `--set d4-ceiling` | CP5b | Lifting vs `derived_symbols` and E1+L on the committed CP5 selections; caller/callee ceiling on D4. |
 | `eval symbols --strategy agent` | CP6 | LangGraph agent. |
-| `triage --advisory <ID> --app <dir> [--mode auto/fix/release]` | CP7 | Full pipeline on one case; prints a verdict JSON. |
-| `eval reachability --set d3` | CP7 | End-to-end evaluation. |
-| `demo` | CP7 | Starts the local demo page. |
+| `triage --advisory <ID> --app <dir> [--mode auto/fix/release]` | CP7 | Full pipeline on one case; prints a verdict JSON. Also `--advisory-file`, `--mode targets --target <pkg>:<symbol>`, `--main`, `--max-mains` (default 10), `--k`, `--retriever` (default the fixed retriever), `--lift NEAREST/ALL` (default off), `--mode2-policy`, `--no-verify`, `--data-dir`, `--commit`. Evidence is read from `data/` (`dataset materialize`); triage itself never uses the network. |
+| `eval triage --set fixtures/d1/d4` | CP7 | E5-lite: fixtures with truth; D1/D4 distributions and coverage only. |
+| `eval reachability --set d3` | CP7b | End-to-end evaluation on real applications. |
+| `demo` | CP7b | Starts the local demo page. |
 
 Exit codes: `0` success (including `CANT_DETERMINE` verdicts), `2` invalid input, `3` missing prerequisite, `1` unexpected error.
 
@@ -183,3 +184,11 @@ For each verdict, the verifier checks:
 | Every `REACHABLE` has at least one verified path | Structural check |
 
 Any failed check downgrades the affected symbol to `CANT_DETERMINE` with `VERIFIER_REJECTED`. The verifier never upgrades a result.
+
+CP7 implementation (`src/vulntrace/verifier/`):
+
+- The checks run per `per_symbol` entry (one target symbol analysed from one main package). `REACHABLE` entries get all five checks; `NOT_REACHABLE` entries get the existence check; `CANT_DETERMINE` entries are left alone.
+- Existence: `go list` locates the target's package in the app (no code runs) and helper `funcs` must declare the symbol in its files. A `NOT_REACHABLE` whose package is not in the program passes only if the package cannot be in the build at all (no module of the app's build list provides it); a package that should exist but is not found (for example a wrong import path) is rejected.
+- Call sites: module files are read with `git show <commit>:<path>` when the app is a clean work tree at the recorded commit, otherwise from the analysed tree (an extracted tree is the content of its commit); `$GOROOT/...` and module-cache files from disk. The line must exist and lie inside the caller's declaration (closures, `init#n`, type arguments and forwarder suffixes map to their declaration; a package-variable initializer of `init` lies outside every function). An edge with no call site is accepted only for Go's synthetic edges: a forwarder (`$bound`, `$thunk`, `$wrapper`, `$instwrapper`) calling the method it wraps, or a package initializer calling an initializer.
+- Edges: one helper `edges` request per main package with every edge of every path, matched on caller, callee and exact call site.
+- A `REACHABLE` entry keeps the first path that passes every check, unchanged, as `verified_path`; with none it becomes `CANT_DETERMINE` / `VERIFIER_REJECTED` and its failed checks are listed in `verifier_failures`. A verifier error (for example `edges` timing out) also rejects. `assert_downgrade_only` checks every output: same entries, same method results and paths, no result stronger.

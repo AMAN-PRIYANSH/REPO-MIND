@@ -304,6 +304,13 @@ One reachability method's answer for one target symbol.
 - `reason_codes`: `NO_TARGET_SYMBOLS`, `NO_FIX_EVIDENCE`, `METHOD_DISAGREEMENT`, `ANALYSIS_FAILED`, `VERIFIER_REJECTED`, `UNSUPPORTED_TARGET` (e.g. no `main` package).
 - `statement` is fixed text and always present.
 
+CP7 extension (`schemas/verdict.schema.json`; optional properties and enum values only, so CP2 verdicts still validate):
+
+- `reason_codes` adds `APP_LOAD_FAILED` (the app cannot be listed, or every main package failed to load or build), `NO_RELEASE_EVIDENCE` (Mode 2 without a usable release range), `INCOMPLETE_COVERAGE` (main packages over the limit were not analysed, so `NOT_REACHABLE` cannot be concluded) and `MODE2_NOT_REACHABLE_DOWNGRADED` (the Mode 2 policy).
+- `per_symbol` has one entry per target symbol **and main package** (`main_package`), with `origin`, `rank` and `score` (Mode 2), `decides_verdict` (false for `LIFTED`), `evidence_level`, `pre_verifier_result`, every returned path (`paths`), `package_not_in_program`, `linker_matched` and `verifier_failures`. The case is `REACHABLE` if any deciding entry is, `NOT_REACHABLE` only if all are and coverage is complete.
+- Top level: `mode` (`FIX`, `RELEASE`, `TARGETS`) and `mode_selection` (requested, chosen, reason, explanation); `evidence_level` (`TARGET_LEVEL`, `CHANGED_FUNCTION_LEVEL` for Mode 1, `CANDIDATE_LEVEL` for Mode 2, required for a Mode 2 `REACHABLE`); `pre_policy_verdict`, `pre_policy_reason_codes` and `policy`; `advisory`; `symbols` (every target symbol with its origin; Mode 1 symbols carry `context_only`); `retrieval` (Mode 2: retriever requested and used, fallback and reason, k, ranked top-k); `coverage` (main packages analysed and skipped, symbols not analysed with a reason, per-main errors, lifting); `toolchain` (helper and linker Go versions, x/tools, build flags, `GOTOOLCHAIN=local`, `CGO_ENABLED=0`, `GOPROXY=off`); `limitations` (plain sentences); `timing`.
+- `TargetSymbol.origin` adds `FIX_CHANGED` (Mode 1), `RANKED_CANDIDATE` (Mode 2) and `USER`.
+
 ## FixtureManifest (synthetic suite, CP1)
 
 ```json
