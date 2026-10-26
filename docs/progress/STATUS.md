@@ -48,6 +48,7 @@ Claude Code: if you stop before the checkpoint is complete, write here exactly w
 
 CP6 (26 Oct 2026, branch `claude/gracious-carson-ch1i9r`). **Done:** agent code, prompts `agent_v1` frozen at `42da9a4` (before any real run; no model has seen them), tests (734 passed locally, CI green), renderer, notebook, D4 evidence + commit diffs + neighbour tables built in the session (summary committed as `docs/results/cp6/agent_evidence.json`), dry run on real evidence. The neighbour tables were handed to the owner as `cp6_graph_tables.zip` (sha256 613734f574f0197ed2cf3e9de18cb7ae7c043e34172ba70db1f1dc14dbcebe1e).
 **Not done (needs the owner's run):** real A2/A3 results, failure analysis, worked traces, honest headline (criteria 5-7).
+**Owner:** upload `cp6_graph_tables.zip` to `MyDrive/vulntrace_cp6/`, then run the notebook once per PART (1-4, one Colab session each; re-run a PART that was cut off). The zip from PART 4 holds all results.
 **Next session, after receiving `cp6_results.zip`:**
 1. Unzip into the scratch area. Copy only `cp6/*.json` into `docs/results/cp6/` (keep `agent_evidence.json` as committed; add `agent_evidence_colab.json`, `colab_run.json`, `D4_materialize_colab.json`, `model_problems.json`). Never commit `traces/`. Check each file is < 512 KiB, no `dry_run`, and the `counts.run` of every arm file (expect 118).
 2. `python -m vulntrace results render --doc cp6 --input docs/results/cp6 --out docs/results/CP6_AGENT_RESULTS.md`.

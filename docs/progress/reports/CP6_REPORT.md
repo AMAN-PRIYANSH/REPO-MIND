@@ -129,7 +129,7 @@ Diagnostic (dry run plus tables): of the 101 D4 cases with a gold function among
 
 ## 8. Blockers and limitations
 
-- **No real run.** There is no GPU, model or registry access here. The arms' numbers, the cost table, the failure analysis and the headline all wait for the owner's Colab run. The notebook's running-time estimate (1-2 h per arm and model, 4-8 h in total) is extrapolated from CP5's ~5 s per call and is **not measured**. Expect more than one Colab session; resume is by trace files and the cache on Drive.
+- **No real run.** There is no GPU, model or registry access here. The arms' numbers, the cost table, the failure analysis and the headline all wait for the owner's Colab run. The running-time estimate (1-2 h per arm and model) is extrapolated from CP5's ~5 s per call and is **not measured**. The notebook is therefore split into four parts (one arm x one model per Colab session); resume is by trace files and the response cache on Drive, and the D4 evidence is saved to Drive after the first session so later sessions skip the ~25-minute rebuild.
 - **Neighbour-table coverage is partial.** About a third of the candidate nodes (4,657 of 14,427) are in packages the helper skipped at load, mostly packages with their own load errors, so `callers`/`callees` answer "no call-graph information" for them. The gold candidate has neighbours in 95 of 101 cases. As CP5b said, A3 is an ablation, and the tools only point to other candidates; they cannot add a function outside the pool.
 - **A transient helper failure.** In the first 2-job build, the one rclone range (116k nodes, 1.06M edges; shared by 5 cases) came back `BAD_RESPONSE` for 41 of 44 nodes. Run alone it did not reproduce (44/44 matching results), and a 1-job rebuild gave 40 FOUND, 1 NONE, 3 TARGET_NOT_FOUND. The likely cause is memory pressure with two large helpers running at once; this is not proven. The Colab fallback rebuild (2 jobs, 2 CPUs, ~12 GB) could hit it too; using the zip avoids that.
 - **Reproducibility of the tables.** They were built with go1.26.10 from the module proxy and `go mod tidy -e` against the proxy of 26 Oct 2026. A rebuild elsewhere can differ where a module's requirements are incomplete. The notebook reports same/different/missing per case against the committed hashes; it does not stop on a difference.
@@ -167,6 +167,13 @@ dfb0b66 CP6: start - STATUS IN_PROGRESS, branch, task list
 
 ## What the owner does next
 
-1. Upload `cp6_graph_tables.zip` (sent with this session's final message) to Google Drive as `MyDrive/vulntrace_cp6/cp6_graph_tables.zip`.
-2. In Colab (T4 GPU), open `notebooks/cp6_agent_colab.ipynb` from branch `claude/gracious-carson-ch1i9r` and run all cells. Re-run after a disconnect; finished cases are reused.
-3. Hand `MyDrive/vulntrace_cp6/cp6_results.zip` (result JSON + traces) to the next Claude Code session.
+The notebook runs in **four parts, one per Colab session** (a free session lasts about 2.5 hours): PART 1 = A2 llama3.1-8b,
+PART 2 = A2 qwen2.5-coder-7b, PART 3 = A3 llama3.1-8b, PART 4 = A3 qwen2.5-coder-7b.
+
+1. Upload `cp6_graph_tables.zip` to Google Drive as `MyDrive/vulntrace_cp6/cp6_graph_tables.zip`. It is the only file to upload.
+2. Session 1: open `notebooks/cp6_agent_colab.ipynb` from branch `claude/gracious-carson-ch1i9r`, T4 GPU, leave `PART = 1`, Run all.
+   This session also rebuilds the D4 evidence (~25 min) and saves it to Drive as `d4_evidence.tar.gz`; later sessions restore it.
+3. Sessions 2-4: set `PART = 2`, `3`, `4` in turn and Run all. If a session is cut off before its last cell says
+   "PART n complete", run the same PART again; finished cases are resumed from Drive.
+4. The last cell downloads `cp6_results.zip`, which is an **output** (all finished parts so far). Hand the one from PART 4 to the
+   next Claude Code session.

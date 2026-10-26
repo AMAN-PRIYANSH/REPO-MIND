@@ -37,18 +37,25 @@ def test_no_outputs_and_no_paid_api():
 def test_steps_in_order_with_local_disk_gates_and_resume():
     src = _code()
     steps = ["git\", \"clone", 'pip install -q -e ".[ml,agent]"', "materialize --set d4", "evidence_gate", "agent prepare --set d4 --diffs",
-             "agent prepare --set d4 --graph", "compare_with_summary", "index build --set d4", "\"serve\"", "ollama\", \"pull",
-             "ollama_setup.ensure_working", "eval symbols --strategy agent", "results render --doc cp6", "zipfile.ZipFile(zpath"]
+             "agent prepare --set d4 --graph", "compare_with_summary", "tarfile.open(tmp, \"w:gz\")", "index build --set d4", "\"serve\"",
+             "ollama\", \"pull", "ollama_setup.ensure_working", "eval symbols --strategy agent", "results render --doc cp6",
+             "zipfile.ZipFile(zpath"]
     positions = [src.index(s) for s in steps]
     assert positions == sorted(positions)
     assert 'DATA = "/content/data"' in src and 'CACHE = "/content/cache"' in src
     assert 'os.environ["VULNTRACE_CACHE"] = CACHE' in src and "WORK}/cache" not in src and "WORK}/data" not in src
     assert 'TRACES = f"{WORK}/traces' in src and '--trace-dir "{TRACES}"' in src      # traces on Drive: a disconnect resumes
     assert 'LLM_CACHE = f"{WORK}/llm_cache' in src
-    assert src.count("raise SystemExit") >= 3           # evidence gate, unsafe zip member, refuse-empty zip
+    assert src.count("raise SystemExit") >= 4           # gate, unsafe zip member, pull failure, unfinished part
     assert 'OLLAMA_HOST="127.0.0.1:11434"' in src.replace("'", '"')
     assert "Timings" in src
-    assert src.index("for arm in ARMS:") < src.index("for m in MODELS_TO_RUN:\n        T.start(f\"agent")   # A2 for both models first
+
+
+def test_restored_evidence_passes_the_same_gate_and_is_extracted_safely():
+    src = _code()
+    assert src.index('tf.extractall(DATA, filter="data")') < src.index("evidence_gate.check_evidence")
+    assert src.index("materialize --set d4") < src.index("evidence_gate.check_evidence")
+    assert "REBUILD_EVIDENCE = False" in src and "if not RESTORED:" in src   # diffs come from the archive when restored
 
 
 def test_install_is_checked_with_a_generate_call_and_can_be_repaired():
@@ -57,19 +64,26 @@ def test_install_is_checked_with_a_generate_call_and_can_be_repaired():
     assert src.index('"pull"') < src.index("ollama_setup.ensure_working") < src.index("eval symbols --strategy agent")
 
 
-def test_same_two_models_as_cp5_and_known_arms():
+def test_four_parts_cover_every_arm_and_model_exactly_once():
     from vulntrace.eval.agent_eval import ARMS
     from vulntrace.llm.models_config import MODELS
 
-    m = re.search(r"^MODELS = (\[.*?\])", _code(), flags=re.M).group(1)
-    assert json.loads(m.replace("'", '"')) == ["qwen2.5-coder-7b", "llama3.1-8b"] and set(MODELS) >= {"qwen2.5-coder-7b"}
-    arms = json.loads(re.search(r"^ARMS = (\[.*?\])", _code(), flags=re.M).group(1))
+    src = _code()
+    models = json.loads(re.search(r"^MODELS = (\[.*?\])", src, flags=re.M).group(1))
+    assert sorted(models) == ["llama3.1-8b", "qwen2.5-coder-7b"] and set(models) <= set(MODELS)
+    arms = json.loads(re.search(r"^ARMS = (\[.*?\])", src, flags=re.M).group(1))
     assert arms == ["A2", "A3"] and set(arms) == set(ARMS)
+    parts = eval(re.search(r"^PARTS = (\{.*?\})$", src, flags=re.M).group(1))
+    assert sorted(parts) == [1, 2, 3, 4] and sorted(parts.values()) == sorted((a, m) for a in arms for m in models)
+    assert [parts[p][0] for p in (1, 2)] == ["A2", "A2"]        # the main comparison runs first
+    assert re.search(r"^PART = [1-4]$", src, flags=re.M) and "ARM, MODEL = PARTS[PART]" in src
+    assert "--arm {ARM} --model {RUN_MODEL}" in src and src.count("eval symbols --strategy agent") == 1
 
 
 def test_every_vulntrace_command_in_the_notebook_parses():
     ns = {"DATA": "/d", "WORK": "/w", "OUT": "/o", "DRY": "--dry-run", "DEVICE": "cuda", "LLM_CACHE": "/c", "m": "fake",
-          "arm": "A2", "EMB": "/e", "TRACES": "/t", "LIM": "--limit 3"}
+          "arm": "A2", "EMB": "/e", "TRACES": "/t", "LIM": "--limit 3",
+          "ARM": "A2", "RUN_MODEL": "llama3.1-8b"}
     parser = build_parser()
     seen = 0
     for line in _code().splitlines():
