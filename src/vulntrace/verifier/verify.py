@@ -45,6 +45,7 @@ class PackageLocation:
     status: str                     # FOUND, NOT_IN_BUILD, MISSING, UNKNOWN
     files: list[str] = field(default_factory=list)   # FileSource file forms of the package's Go files
     reason: str = ""
+    ignored: list[str] = field(default_factory=list)  # files of the package excluded by build constraints
 
 
 FuncsFn = Callable[[str, str], list[dict[str, Any]] | None]           # (file name, text) -> decls, None if unparsable
@@ -106,7 +107,7 @@ def go_list_locator(module_dir: Path, runner=subprocess.run, timeout: float = 30
     def build_list() -> list[str] | None:
         if "mods" not in state:
             try:
-                p = runner(["go", "list", "-m", "-f", "{{.Path}}", "all"], cwd=module_dir, capture_output=True,
+                p = runner(["go", "list", "-m", "-e", "-f", "{{.Path}}", "all"], cwd=module_dir, capture_output=True,
                            text=True, env=go_env(), timeout=timeout)
                 state["mods"] = p.stdout.split() if p.returncode == 0 else None
             except (OSError, subprocess.SubprocessError):
@@ -115,22 +116,27 @@ def go_list_locator(module_dir: Path, runner=subprocess.run, timeout: float = 30
 
     def locate(pkg: str) -> PackageLocation:
         try:
-            p = runner(["go", "list", "-e", "-json=ImportPath,Dir,GoFiles,Error,Standard", pkg], cwd=module_dir,
-                       capture_output=True, text=True, env=go_env(), timeout=timeout)
+            p = runner(["go", "list", "-e", "-json=ImportPath,Dir,GoFiles,IgnoredGoFiles,Error,Standard", pkg],
+                       cwd=module_dir, capture_output=True, text=True, env=go_env(), timeout=timeout)
             info = json.loads(p.stdout) if p.stdout.strip() else {}
         except (OSError, subprocess.SubprocessError, json.JSONDecodeError) as exc:
             return PackageLocation(UNKNOWN, reason=f"go list failed: {exc}")
         err = (info.get("Error") or {}).get("Err")
-        if info.get("Dir") and info.get("GoFiles") and not err:
-            d = Path(info["Dir"])
-            files = []
-            for g in info["GoFiles"]:
+
+        def forms(names):
+            d, out = Path(info["Dir"]), []
+            for g in names or []:
                 f = d / g
                 try:
-                    files.append(f.relative_to(module_dir).as_posix())
+                    out.append(f.relative_to(module_dir).as_posix())
                 except ValueError:
-                    files.append(f.as_posix())
-            return PackageLocation(FOUND, files=files)
+                    out.append(f.as_posix())
+            return out
+
+        excluded_all = bool(err) and "build constraints exclude all Go files" in err
+        if info.get("Dir") and (info.get("GoFiles") or excluded_all) and (not err or excluded_all):
+            return PackageLocation(FOUND, files=forms(info.get("GoFiles")), ignored=forms(info.get("IgnoredGoFiles")),
+                                   reason="every Go file is excluded by build constraints" if excluded_all else "")
         mods = build_list()
         if mods is None:
             return PackageLocation(UNKNOWN, reason="package not found and the build list could not be read: "
@@ -177,7 +183,17 @@ def _target_check(entry: dict[str, Any], ctx: VerifyContext, files: _Files,
             decls += d
         if ck.declares(decls, sym):
             return None, False
-        return ck.Failure(ck.TARGET_EXISTS, f"package {pkg} does not declare {ck.normalise_symbol(sym)}"), False
+        # Declared only in files this build configuration excludes: no code of it is in the build, which
+        # supports NOT_REACHABLE (for this configuration, as every verdict states) but never REACHABLE.
+        if entry["result"] == NOT_REACHABLE and loc.ignored:
+            ignored: list[dict[str, Any]] = []
+            for f in loc.ignored:
+                _, d = files.info(f)
+                ignored += d or []
+            if ck.declares(ignored, sym):
+                return None, True
+        return ck.Failure(ck.TARGET_EXISTS, f"package {pkg} does not declare {ck.normalise_symbol(sym)}"
+                          + (f" ({loc.reason})" if loc.reason else "")), False
     if loc.status == NOT_IN_BUILD and entry["result"] == NOT_REACHABLE and entry.get("package_not_in_program"):
         return None, True
     return ck.Failure(ck.TARGET_EXISTS, f"{loc.status}: {loc.reason}"), False

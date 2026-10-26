@@ -207,3 +207,41 @@ def test_random_inputs_never_stronger():
         after = vf.verify(before, ctx(FILES, edges, located, incomplete=rng.random() < 0.2))
         ag.assert_downgrade_only(before, after)
         assert after["verification"]["status"] in ("PASSED", "FAILED", "NOT_RUN")
+
+
+def test_symbol_only_in_constraint_excluded_files():
+    """Declared only in a file the build configuration excludes: supports NOT_REACHABLE, never REACHABLE."""
+    files = dict(FILES, **{"/m/lib_darwin.go": "package lib\n\nfunc Parse(s string) string {\n}\n", "/m/lib.go": "package lib\n"})
+    loc = {LIB: vf.PackageLocation(vf.FOUND, files=["/m/lib.go"], ignored=["/m/lib_darwin.go"])}
+    nr = vf.verify(verdict([entry(NR, not_in_program=True)]), ctx(files, GOOD_EDGES, loc))
+    assert nr["per_symbol"][0]["result"] == NR and nr["verification"]["checks_by_kind"]["TARGET_EXISTS"]["skipped"] == 1
+    r = vf.verify(verdict([entry(R)]), ctx(files, GOOD_EDGES, loc))
+    assert r["per_symbol"][0]["result"] == CD
+    gone = {LIB: vf.PackageLocation(vf.FOUND, files=["/m/lib.go"], ignored=["/m/lib.go"])}
+    assert vf.verify(verdict([entry(NR, not_in_program=True)]), ctx(files, GOOD_EDGES, gone))["per_symbol"][0]["result"] == CD
+
+
+def test_go_list_locator_classifies(tmp_path):
+    import json as _json
+
+    def runner(cmd, **kw):
+        class P:
+            returncode = 0
+            stderr = ""
+        p = P()
+        if cmd[2] == "-m":
+            p.stdout = "example.com/app\nexample.com/lib\n"
+        elif cmd[-1] == "example.com/lib/darwinonly":
+            p.stdout = _json.dumps({"ImportPath": cmd[-1], "Dir": "/x/darwinonly", "IgnoredGoFiles": ["a_darwin.go"],
+                                    "Error": {"Err": "build constraints exclude all Go files in /x/darwinonly"}})
+        elif cmd[-1] == "example.com/lib/typo":
+            p.stdout = _json.dumps({"ImportPath": cmd[-1], "Error": {"Err": "no Go files"}})
+        else:
+            p.stdout = _json.dumps({"ImportPath": cmd[-1], "Error": {"Err": "no required module provides package"}})
+        return p
+
+    loc = vf.go_list_locator(tmp_path, runner=runner)
+    d = loc("example.com/lib/darwinonly")
+    assert d.status == vf.FOUND and d.files == [] and d.ignored == ["/x/darwinonly/a_darwin.go"]
+    assert loc("example.com/lib/typo").status == vf.MISSING
+    assert loc("other.org/pkg").status == vf.NOT_IN_BUILD
