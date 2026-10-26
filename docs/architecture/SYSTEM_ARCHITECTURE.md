@@ -98,6 +98,13 @@ Case level: `REACHABLE` if any symbol is `REACHABLE`; `NOT_REACHABLE` only if al
 
 Open question: the linker is conservative, so `NO_PATH` + `PRESENT` may be common on real code. Measured in CP7.
 
+### As implemented in CP7 (`src/vulntrace/pipeline/`, `src/vulntrace/verifier/`)
+
+- One entry per target symbol **and main package**: both methods run per main package (`main` and `init` are the roots), and the row above applies to each entry. The case aggregation runs over the deciding entries; `LIFTED` symbols are reported but never decide.
+- The verifier column is applied by the evidence verifier (interfaces, section 6). It can only weaken: a `REACHABLE` entry without a path that passes every check, or a `NOT_REACHABLE` entry whose target cannot be confirmed at the analysed version, becomes `CANT_DETERMINE` / `VERIFIER_REJECTED`.
+- Case-level codes: `NO_FIX_EVIDENCE`, `NO_RELEASE_EVIDENCE`, `NO_TARGET_SYMBOLS`, `UNSUPPORTED_TARGET` (no main package), `APP_LOAD_FAILED` (the app cannot be listed, or every main package fails to load or build), `INCOMPLETE_COVERAGE` (main packages over the limit; a case can then be `REACHABLE` but never `NOT_REACHABLE`).
+- Mode 1 checks every changed non-test function of the fix (no LLM narrowing; CP5 E1). Mode 2 checks the fixed retriever's top-k (no agent; CP6). A `REACHABLE` carries `evidence_level`: `CHANGED_FUNCTION_LEVEL` (Mode 1) or `CANDIDATE_LEVEL` (Mode 2, with the candidate's rank and score), because a reachable changed function need not be the vulnerable one.
+
 ## Confidence and uncertainty
 
 - No numeric confidence. LLM self-reported confidence is never used.
