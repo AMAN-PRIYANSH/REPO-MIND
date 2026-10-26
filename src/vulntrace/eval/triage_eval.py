@@ -454,7 +454,7 @@ def _read_gz(path: Path) -> Any:
 def eval_real(dataset: str, case_list: dict[str, Any], cases_by_id: dict[str, dict], data_dir: Path, *,
               base_factory: Callable[[], triage.Runners], repo_cache: Path | None, gomodcache: Path, jobs: int = 2,
               max_mains: int = EVAL_MAX_MAINS, limit: int | None = None, only: list[str] | None = None,
-              rerun: bool = False, log=print) -> dict[str, Any]:
+              rerun: bool = False, stability: int = 0, log=print) -> dict[str, Any]:
     from vulntrace.pipeline.inputs import load_evidence
 
     out_dir = Path(data_dir) / "triage" / dataset
@@ -504,8 +504,35 @@ def eval_real(dataset: str, case_list: dict[str, Any], cases_by_id: dict[str, di
                      "cluster_key": next((e.get("cluster_key") for e in todo if e["id"] == cid), cid)}), encoding="utf-8")
     rows = [json.loads((out_dir / f"{e['id']}.row.json").read_text(encoding="utf-8")) for e in entries
             if (out_dir / f"{e['id']}.row.json").is_file()]
-    return {"schema_version": SCHEMA_VERSION, "set": dataset, "rows": rows, "summary": summarize_real(dataset, rows),
-            "max_mains": max_mains}
+    doc = {"schema_version": SCHEMA_VERSION, "set": dataset, "rows": rows, "summary": summarize_real(dataset, rows),
+           "max_mains": max_mains}
+    if stability:
+        doc["stability"] = stability_check(dataset, entries, rows, cases_by_id, data_dir, out_dir, stability, repo_cache=repo_cache,
+                                           gomodcache=gomodcache, base=base, max_mains=max_mains, log=log)
+    return doc
+
+
+def stability_check(dataset, entries, rows, cases_by_id, data_dir, out_dir, n, *, repo_cache, gomodcache, base, max_mains,
+                    log=print) -> dict[str, Any]:
+    """Re-run the first `n` cases (by id) that produced per-symbol entries, from a fresh tree and an
+    empty method cache, and compare verdict, reasons, entry results, method results and verified
+    paths with the saved verdict."""
+    from vulntrace.pipeline.inputs import load_evidence
+
+    by_id = {e["id"]: e for e in entries}
+    picked = [r["id"] for r in sorted(rows, key=lambda r: r["id"]) if sum((r.get("entries") or {}).values()) > 0
+              and (out_dir / f"{r['id']}.verdict.json.gz").is_file()][:n]
+    work_root = Path(data_dir) / WORK_SUBDIR / f"{dataset}-stability"
+    differ, t0 = [], time.monotonic()
+    for cid in picked:
+        _, v, _ = run_real_case(dataset, by_id[cid], cases_by_id[cid], load_evidence(cid, data_dir), repo_cache=repo_cache,
+                                gomodcache=gomodcache, work_root=work_root, base=base, max_mains=max_mains)
+        saved = _read_gz(out_dir / f"{cid}.verdict.json.gz")
+        same = v is not None and _stable_view(v) == _stable_view(saved)
+        log(f"stability {cid}: {'same' if same else 'DIFFERENT'}")
+        if not same:
+            differ.append(cid)
+    return {"cases": picked, "different": differ, "seconds": round(time.monotonic() - t0, 1)}
 
 
 PSEUDO_REPLICATE_PREFIX = "github.com/rclone/rclone@"  # CP3 review finding 1: nine rclone cases share one range

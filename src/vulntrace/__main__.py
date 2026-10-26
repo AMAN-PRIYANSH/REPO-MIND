@@ -134,6 +134,8 @@ def build_parser() -> argparse.ArgumentParser:
     et.add_argument("--limit", type=int, default=None, help="only the first N cases (a trial run)")
     et.add_argument("--only", action="append", default=None, help="only this case id (repeatable)")
     et.add_argument("--rerun", action="store_true", help="ignore finished cases (default: resume)")
+    et.add_argument("--stability", type=int, default=0,
+                    help="d1/d4: re-run this many triaged cases from scratch and compare the verdicts (default 0)")
     et.add_argument("--example", action="append", default=None,
                     help="commit this case's full verdict as an example under <out>/examples/ (repeatable)")
     er = esub.add_parser("retrieval", help="Mode 2 retrieval evaluation on D4 (CP4)")

@@ -66,7 +66,7 @@ def cmd_eval_triage(args, argv) -> int:
         doc = te.eval_real(args.dataset_set, case_list, {c["id"]: c for c in cases}, data_dir,
                            base_factory=factory, repo_cache=Path(args.repo_cache) if args.repo_cache else None,
                            gomodcache=gomodcache, jobs=args.jobs, max_mains=args.max_mains or te.EVAL_MAX_MAINS,
-                           limit=args.limit, only=args.only, rerun=args.rerun, log=_log)
+                           limit=args.limit, only=args.only, rerun=args.rerun, stability=args.stability, log=_log)
         doc["environment"] = env
         doc["environment"]["gomodcache_note"] = "a shared module cache; first-time downloads dominate preparation time"
         if args.limit or args.only:

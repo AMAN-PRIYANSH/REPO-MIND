@@ -48,6 +48,11 @@ def _env(doc: dict[str, Any]) -> list[str]:
             f"- OS: {e.get('os')}; Python {e.get('python')}; Go: {e.get('go')}"]
 
 
+def _modes(fx: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
+    order = ["TARGETS", "FIX", "RELEASE"]
+    return sorted(fx["summary"].items(), key=lambda kv: order.index(kv[0]) if kv[0] in order else 9)
+
+
 def render_fixtures(fx: dict[str, Any]) -> list[str]:
     out = ["## 1. Fixtures (D2, truth by construction)", ""] + _env(fx) + [""]
     out += ["Each of the 22 fixture cases is one main package and one target symbol whose truth is set by "
@@ -63,7 +68,7 @@ def render_fixtures(fx: dict[str, Any]) -> list[str]:
             "a hunk by its whole span); Mode 1 keeps them, as E0 did, and flags them `context_only`.", ""]
     out += ["### Summary per mode (false NOT_REACHABLE first)", ""]
     rows = []
-    for mode, s in fx["summary"].items():
+    for mode, s in _modes(fx):
         f, p = s["final"], s["pre_policy"]
         rows.append([MODE_LABEL.get(mode, mode), f["false_not_reachable"], p["false_not_reachable"], f["false_reachable"],
                      f["cant_determine"], pct(f["accuracy"]), pct(f["coverage"]), pct(f["selective_accuracy"]),
@@ -76,7 +81,7 @@ def render_fixtures(fx: dict[str, Any]) -> list[str]:
     out += ["", "Rates are point estimates with 95% Wilson intervals and raw counts. Accuracy counts CANT_DETERMINE as "
             "not correct. RELEASE \"final\" is after the Mode 2 policy; \"before policy\" is the raw rule-table verdict.", ""]
     out += ["### Confusion matrices (truth rows, verdict columns)", ""]
-    for mode, s in fx["summary"].items():
+    for mode, s in _modes(fx):
         for label, key in (("final", "final"), ("before policy", "pre_policy")):
             if mode != "RELEASE" and key == "pre_policy":
                 continue
