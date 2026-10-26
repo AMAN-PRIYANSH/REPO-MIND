@@ -115,6 +115,54 @@ def match_symbols(nm_symbols: list[tuple[str, str]], patterns: list[str]) -> lis
                   if typ in TEXT_SYMBOL_TYPES and (name in exact or name.startswith(prefixes))})
 
 
+def _close_bracket(s: str, i: int) -> int | None:
+    """Index of the `]` that closes the `[` at `s[i]`, or None."""
+    depth = 0
+    for j in range(i, len(s)):
+        if s[j] == "[":
+            depth += 1
+        elif s[j] == "]":
+            depth -= 1
+            if depth == 0:
+                return j
+    return None
+
+
+def is_generic_instance(name: str, package: str, symbol: str) -> bool:
+    """Whether binary symbol `name` is an instantiation of the target written in vulndb form
+    without type parameters (CP7). Observed with Go 1.24.7 and -gcflags=all=-l: a generic
+    function `F` appears as `pkg.F[go.shape.int,go.shape.string]`, a method of a generic type
+    as `pkg.T[go.shape.X].M` (value receiver) or `pkg.(*T[go.shape.X]).M` (pointer receiver).
+    The bracket group is matched as a balanced unit and nothing may follow the method name, so
+    a closure (`...].func1`) or another type's method does not match. A non-generic function
+    never has a name of this form, so this cannot make a non-generic target PRESENT."""
+    pkg = escape_pkg_path(package)
+    sym = symbol.strip()
+    if "[" in sym or "]" in sym:
+        return False
+    m = re.fullmatch(r"\(\*(\w+)\)\.(\w+)", sym)
+    parts = [m.group(1), m.group(2)] if m else sym.lstrip("*").split(".")
+    if not all(_IDENT.match(x) for x in parts) or len(parts) not in (1, 2):
+        return False
+    if len(parts) == 1:
+        head = f"{pkg}.{parts[0]}["
+        if not name.startswith(head):
+            return False
+        end = _close_bracket(name, len(head) - 1)
+        return end == len(name) - 1
+    recv, meth = parts
+    for head, tail in ((f"{pkg}.{recv}[", f".{meth}"), (f"{pkg}.(*{recv}[", f").{meth}")):
+        if name.startswith(head):
+            end = _close_bracket(name, len(head) - 1)
+            if end is not None and name[end + 1:] == tail:
+                return True
+    return False
+
+
+def match_generic_instances(nm_symbols: list[tuple[str, str]], package: str, symbol: str) -> list[str]:
+    return sorted({n for typ, n in nm_symbols if typ in TEXT_SYMBOL_TYPES and is_generic_instance(n, package, symbol)})
+
+
 def binary_name(goos: str) -> str:
     return "vt_linker_bin.exe" if goos == "windows" else "vt_linker_bin"
 
@@ -207,6 +255,10 @@ def run_linker_method(
             results.append(make(t, "ERROR", details, {"code": build_error.code, "message": build_error.message}))
         else:
             matched = match_symbols(nm_symbols, patterns[i])
+            if not matched:
+                # vulndb names a generic function or a method of a generic type without type parameters
+                matched = match_generic_instances(nm_symbols, t["package"], t["symbol"])
+                details["generic_instances"] = bool(matched)
             details["matched_binary_symbols"] = matched
             results.append(make(t, "PRESENT" if matched else "ABSENT", details, None))
     return results
