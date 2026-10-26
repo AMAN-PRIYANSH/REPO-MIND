@@ -1,0 +1,250 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "robbert229",
+    "repo": "jwt",
+    "sha": "ca1404ee6e83fcbafb66b09ed0d543850a15b654"
+   }
+  ],
+  "fixed_in": "0.0.0-20170426191122-ca1404ee6e83",
+  "id": "GO-2020-0023",
+  "module": "github.com/robbert229/jwt",
+  "source": "vulndb",
+  "vulnerable_at": "0.0.0-20170303194658-2eb16e9a008d"
+ },
+ "case_id": "GO-2020-0023",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/robbert229/jwt/example"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 5,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/robbert229/jwt/example": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.5,
+    "load_failed": false,
+    "vta_seconds": 1.82
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 1,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "github.com/robbert229/jwt.(*Algorithm).validateSignature"
+   ],
+   "main_package": "github.com/robbert229/jwt/example",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "example/example.go",
+        "line": 26
+       },
+       "callee": "github.com/robbert229/jwt.Algorithm.Validate",
+       "caller": "github.com/robbert229/jwt/example.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "algorithms.go",
+        "line": 115
+       },
+       "callee": "github.com/robbert229/jwt.Algorithm.validateSignature",
+       "caller": "github.com/robbert229/jwt.Algorithm.Validate",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/robbert229/jwt/example",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/robbert229/jwt",
+      "symbol": "Algorithm.validateSignature"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/robbert229/jwt",
+    "symbol": "Algorithm.validateSignature"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "example/example.go",
+       "line": 26
+      },
+      "callee": "github.com/robbert229/jwt.Algorithm.Validate",
+      "caller": "github.com/robbert229/jwt/example.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "algorithms.go",
+       "line": 115
+      },
+      "callee": "github.com/robbert229/jwt.Algorithm.validateSignature",
+      "caller": "github.com/robbert229/jwt.Algorithm.Validate",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/robbert229/jwt/example",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/robbert229/jwt",
+     "symbol": "Algorithm.validateSignature"
+    }
+   },
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-10-26T17:11:06Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": null,
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/robbert229/jwt",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Algorithm.validateSignature"
+  }
+ ],
+ "target_app": {
+  "commit": "2eb16e9a008dbd8547bfa0e73f8f72b3f30789ba",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/robbert229/jwt",
+  "path": "<local>/data/triage_work/d1/GO-2020-0023/tree"
+ },
+ "timing": {
+  "inspect_seconds": 0.07,
+  "methods_seconds": 2.32,
+  "symbols_seconds": 0.0,
+  "total_seconds": 4.22,
+  "verifier_seconds": 1.83
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.24.7",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.24.7",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   }
+  },
+  "checks_run": 7,
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}
