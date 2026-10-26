@@ -408,7 +408,9 @@ def run_real_case(dataset: str, entry: dict[str, Any], case: dict[str, Any], evi
     row["commit"] = sha
     reference_targets = curated_targets(module) if module else []
     verdict = ref = None
-    if prep["status"] == lift_prep.READY:
+    # a tree that was extracted but whose `go mod tidy` failed (most often: go.mod needs a newer Go than
+    # GOTOOLCHAIN=local provides) still goes through the pipeline, which must answer CANT_DETERMINE itself
+    if prep["status"] == lift_prep.READY or (prep["status"] == lift_prep.PREP_FAILED and prep.get("module_dir")):
         runners = memo_runners(base, reference_targets)
         common = dict(app=Path(prep["module_dir"]), commit=sha, module_rel=prep["module_rel"] or "", max_mains=max_mains,
                       advisory=adv, vulndb_commit=(case.get("source") or {}).get("vulndb_commit"))
