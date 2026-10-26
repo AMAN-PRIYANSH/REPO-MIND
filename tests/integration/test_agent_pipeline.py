@@ -200,3 +200,25 @@ def test_neighbour_table_from_recorded_helper_response():
     err = lift_method.to_neighbor_records("callers", targets, None, HelperError("TIMEOUT", "slow"), 1)
     table = prepare.table_from_records(nodes, {"callees": recs, "callers": err})
     assert table["r1"]["status"] == "ERROR TIMEOUT" and table["r1"]["callees"]   # a problem in one direction wins
+
+
+# --- results document --------------------------------------------------------------------------------
+def test_cp6_doc_renders_from_dry_run_files_with_the_fake_warning(cli_env, tmp_path):
+    base, out, data = cli_env
+    assert main(["eval", "symbols", "--strategy", "agent", "--set", "d4", "--dry-run", *base]) == 0
+    md = tmp_path / "doc.md"
+    assert main(["results", "render", "--doc", "cp6", "--input", str(out), "--out", str(md)]) == 0
+    text = md.read_text()
+    assert text.startswith("# CP6 results") and "WARNING: some results come from the FAKE LLM" in text
+    for part in ("**Main finding.**", "The cost table is part of this headline", "## Setup", "denominator (b) all cases",
+                 "denominator (a) gold among the candidates", "| A2 − A0 |", "| A3 − A2 |", "A1 S1 top-10 selection (CP5, "
+                 "reused) | not run", "## Tool use", "## Failure analysis", "**Not done yet.**", "budget stop"):
+        assert part in text, part
+    assert "os.Rename" not in text and "cleanPath does not reject" not in text
+
+
+def test_cp6_doc_with_no_files_claims_nothing(tmp_path):
+    from vulntrace.eval.agent_report import render_cp6_doc
+
+    text = render_cp6_doc(tmp_path, "empty")
+    assert "No agent result files in this directory: nothing is claimed." in text and "beats" not in text

@@ -505,6 +505,10 @@ def render(doc: str, input_path: Path) -> str:
         from vulntrace.eval.lift_report import render_cp5b_doc
 
         return render_cp5b_doc(Path(input_path), source.rstrip("/"))
+    if doc == "cp6":
+        from vulntrace.eval.agent_report import render_cp6_doc
+
+        return render_cp6_doc(Path(input_path), source.rstrip("/"))
     raise ValueError(f"unknown results document: {doc}")
 
 

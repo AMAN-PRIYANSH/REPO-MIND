@@ -31,7 +31,7 @@ def build_parser() -> argparse.ArgumentParser:
     rs = sub.add_parser("results", help="committed results documents")
     rsub = rs.add_subparsers(dest="results_command", required=True)
     rr = rsub.add_parser("render", help="generate a docs/results/ document from a score report file")
-    rr.add_argument("--doc", required=True, choices=["cp1", "cp2", "cp3", "cp4", "cp5", "cp5b"])
+    rr.add_argument("--doc", required=True, choices=["cp1", "cp2", "cp3", "cp4", "cp5", "cp5b", "cp6"])
     rr.add_argument("--input", required=True,
                     help="cp1: linker score JSON; cp2/cp3: directory with the relevant score JSON files")
     rr.add_argument("--out", required=True, help="Markdown file to write")
