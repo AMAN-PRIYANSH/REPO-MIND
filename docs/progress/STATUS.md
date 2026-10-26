@@ -5,8 +5,8 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP7 - End-to-end triage and evidence verifier**
-- State: `READY`
-- Branch in use: (none yet; the CP7 session records its own `claude/...` branch)
+- State: `IN_PROGRESS`
+- Branch in use: `claude/vulntrace-ai-build-exhh01`
 - Specification: [checkpoints/CP7.md](../implementation/checkpoints/CP7.md)
 
 State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` →) `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
@@ -22,7 +22,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` →) `AWAITING_REV
 | CP5 | Local LLM layer, root-cause selection, HyDE | APPROVED | claude/vulntrace-ai-build-o31zls | [CP5_REPORT](reports/CP5_REPORT.md) |
 | CP5b | Lifting and caller/callee queries (Go helper) | APPROVED | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
 | CP6 | LangGraph investigation agent (negative result) | APPROVED | claude/vulntrace-ai-build-1wfa8e | [CP6_REPORT](reports/CP6_REPORT.md) |
-| CP7 | End-to-end triage and evidence verifier | READY | - | - |
+| CP7 | End-to-end triage and evidence verifier | IN_PROGRESS | claude/vulntrace-ai-build-exhh01 | - |
 | CP7b | Real applications (D3) and demo | NOT_RELEASED | - | - |
 | CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
 
@@ -30,7 +30,15 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` →) `AWAITING_REV
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-(CP7: not started.)
+CP7 (started 26 Oct 2026 on `claude/vulntrace-ai-build-exhh01`, fresh from `main`; no earlier CP7 branch existed):
+
+- [ ] 0. Environment check recorded (OS, Python, Go, git, Docker, network)
+- [ ] 1. Pipeline `src/vulntrace/pipeline/` and `python -m vulntrace triage` (Mode 1 all changed non-test functions, Mode 2 retriever top-k, `auto` mode choice, optional lifting as `LIFTED` seeds, two methods per symbol + `verdict.py`, failure as `CANT_DETERMINE` with a reason code, safety flags)
+- [ ] 2. Evidence verifier `src/vulntrace/verifier/` (funcs, call-site file/line, `edges`, entry/target structure, every `REACHABLE` has a verified path; downgrade-only; corrupted-path tests; no-upgrade proof by test)
+- [ ] 3. `schemas/verdict.schema.json` extended without breaking old files; contract tests with recorded outputs per verdict and reason code
+- [ ] 4. `python -m vulntrace eval triage`: D2 fixture metrics; D1/D4 distribution, coverage, `CANT_DETERMINE` reasons; Mode 2 `NOT_REACHABLE` policy; cost; results in `docs/results/cp7/` and `docs/results/CP7_TRIAGE_RESULTS.md` (headline fixed before results)
+- [ ] 5. Tests (unit, contract, integration); CI green on the last commit
+- [ ] 6. Report `docs/progress/reports/CP7_REPORT.md`; STATUS `AWAITING_REVIEW`
 
 ## Handoff notes
 
