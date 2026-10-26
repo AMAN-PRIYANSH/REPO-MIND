@@ -9623,14 +9623,16 @@
    "failed_by_kind": {}
   },
   "without_rclone_cluster": {
+   "cases_in_cluster": 9,
+   "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
    "pre_policy_verdict": {
-    "CANT_DETERMINE": 67,
+    "CANT_DETERMINE": 74,
     "NOT_REACHABLE": 5,
     "REACHABLE": 32
    },
-   "triaged": 104,
+   "triaged": 111,
    "verdict": {
-    "CANT_DETERMINE": 72,
+    "CANT_DETERMINE": 79,
     "REACHABLE": 32
    }
   }

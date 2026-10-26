@@ -210,7 +210,7 @@ The same app analysed with the advisory's curated core symbols as targets: 120 c
 
 ### D4 clustering (CP3 review finding 1)
 
-- Without the rclone pseudo-replicate cluster: 104 triaged; before policy CANT_DETERMINE 67, REACHABLE 32, NOT_REACHABLE 5; final CANT_DETERMINE 72, REACHABLE 32.
+- Without the rclone pseudo-replicate cluster (9 cases sharing `github.com/rclone/rclone@1.74.4..1.75.0`): 111 triaged; before policy CANT_DETERMINE 74, REACHABLE 32, NOT_REACHABLE 5; final CANT_DETERMINE 79, REACHABLE 32.
 - Distinct release ranges per verdict before policy: CANT_DETERMINE 61, REACHABLE 28, NOT_REACHABLE 5.
 - Share REACHABLE before policy, cluster bootstrap: 0.267 [0.171, 0.376] over 120 cases in 94 clusters.
 

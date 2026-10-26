@@ -135,7 +135,9 @@ def render_fixtures(fx: dict[str, Any]) -> list[str]:
 
 
 def render_real(doc: dict[str, Any], title: str, note: str) -> list[str]:
-    s = doc["summary"]
+    from vulntrace.eval.triage_eval import summarize_real
+
+    s = summarize_real(doc["set"], doc["rows"])   # always from the rows, never a stored summary
     out = [title, ""] + _env(doc) + ["", note, ""]
     out += [f"- Cases: {s['cases']}; evidence status: {_counts(s['evidence_status'])}; harness errors: {s['harness_errors']}.",
             f"- Preparation of the vulnerable-side tree (`git archive` + `go mod tidy -e`): {_counts(s['prep_status'])}.",
@@ -173,7 +175,7 @@ def render_real(doc: dict[str, Any], title: str, note: str) -> list[str]:
         w = s["without_rclone_cluster"]
         ci = s.get("pre_policy_reachable_share_cluster_ci") or {}
         out += ["### D4 clustering (CP3 review finding 1)", "",
-                f"- Without the rclone pseudo-replicate cluster: {w['triaged']} triaged; before policy {_counts(w['pre_policy_verdict'])}; "
+                f"- Without the rclone pseudo-replicate cluster ({w['cases_in_cluster']} cases sharing `{w['cluster_key']}`): {w['triaged']} triaged; before policy {_counts(w['pre_policy_verdict'])}; "
                 f"final {_counts(w['verdict'])}.",
                 f"- Distinct release ranges per verdict before policy: {_counts(s['distinct_ranges'])}.",
                 f"- Share REACHABLE before policy, cluster bootstrap: {ci.get('mean', 0):.3f} [{ci.get('ci_low', 0):.3f}, "

@@ -587,7 +587,7 @@ def stability_check(dataset, entries, rows, cases_by_id, data_dir, out_dir, n, *
     return {"cases": picked, "different": differ, "seconds": round(time.monotonic() - t0, 1)}
 
 
-PSEUDO_REPLICATE_PREFIX = "github.com/rclone/rclone@"  # CP3 review finding 1: nine rclone cases share one range
+PSEUDO_REPLICATE_CASE = "GO-2026-6181"  # CP3 review finding 1: nine rclone advisories (GO-2026-6181..6199) share one range
 
 
 LOAD_CAUSES = (  # first match wins; patterns are go command / go/packages messages
@@ -666,8 +666,10 @@ def summarize_real(dataset: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
     # D4 pseudo-replication: also without the rclone cluster, and the number of distinct ranges per verdict
     if dataset == "d4":
-        no_rc = [r for r in ran if not str(r.get("cluster_key", "")).startswith(PSEUDO_REPLICATE_PREFIX)]
-        out["without_rclone_cluster"] = {"triaged": len(no_rc), "verdict": dist(no_rc), "pre_policy_verdict": dist(no_rc, "pre_policy_verdict")}
+        key = next((r.get("cluster_key") for r in rows if r["id"] == PSEUDO_REPLICATE_CASE), None)
+        no_rc = [r for r in ran if r.get("cluster_key") != key]
+        out["without_rclone_cluster"] = {"cluster_key": key, "cases_in_cluster": sum(1 for r in rows if r.get("cluster_key") == key),
+                                         "triaged": len(no_rc), "verdict": dist(no_rc), "pre_policy_verdict": dist(no_rc, "pre_policy_verdict")}
         out["distinct_ranges"] = {v: len({r["cluster_key"] for r in ran if r.get("pre_policy_verdict") == v}) for v in VERDICTS}
         flags = [1.0 if r.get("pre_policy_verdict") == REACHABLE else 0.0 for r in ran]
         out["pre_policy_reachable_share_cluster_ci"] = metrics.cluster_bootstrap_ci(flags, [r["cluster_key"] for r in ran], SEED) if ran else None
