@@ -1,8 +1,9 @@
 """Verdict rule (C5): combine VTA and linker presence per target symbol, then per case.
 
-Implements the rule table in docs/architecture/SYSTEM_ARCHITECTURE.md exactly. The verifier
-(C6) arrives in CP7; until then `verification.status` is NOT_RUN and the "verifier passes"
-column is treated as not yet applicable, so PATH_FOUND + PRESENT gives REACHABLE.
+Implements the rule table in docs/architecture/SYSTEM_ARCHITECTURE.md exactly. `build_verdict`
+is the CP2 form (no verifier: `verification.status` NOT_RUN). The CP7 pipeline
+(`vulntrace.pipeline`) uses `symbol_verdict` for every symbol and the verifier
+(`vulntrace.verifier`) supplies the "verifier" column.
 """
 
 from datetime import datetime, timezone
@@ -17,9 +18,16 @@ STATEMENT = "Reachability only. This verdict does not assess exploitability."
 REACHABLE, NOT_REACHABLE, CANT_DETERMINE = "REACHABLE", "NOT_REACHABLE", "CANT_DETERMINE"
 
 NO_TARGET_SYMBOLS = "NO_TARGET_SYMBOLS"
+NO_FIX_EVIDENCE = "NO_FIX_EVIDENCE"
 METHOD_DISAGREEMENT = "METHOD_DISAGREEMENT"
 ANALYSIS_FAILED = "ANALYSIS_FAILED"
 VERIFIER_REJECTED = "VERIFIER_REJECTED"
+UNSUPPORTED_TARGET = "UNSUPPORTED_TARGET"
+# CP7 additions (case level; the per-symbol rule table above is unchanged)
+APP_LOAD_FAILED = "APP_LOAD_FAILED"
+NO_RELEASE_EVIDENCE = "NO_RELEASE_EVIDENCE"
+INCOMPLETE_COVERAGE = "INCOMPLETE_COVERAGE"
+MODE2_NOT_REACHABLE_DOWNGRADED = "MODE2_NOT_REACHABLE_DOWNGRADED"
 
 VTA_RESULTS = ("PATH_FOUND", "NO_PATH", "ERROR")
 LINKER_RESULTS = ("PRESENT", "ABSENT", "ERROR")

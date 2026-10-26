@@ -31,7 +31,7 @@ def build_parser() -> argparse.ArgumentParser:
     rs = sub.add_parser("results", help="committed results documents")
     rsub = rs.add_subparsers(dest="results_command", required=True)
     rr = rsub.add_parser("render", help="generate a docs/results/ document from a score report file")
-    rr.add_argument("--doc", required=True, choices=["cp1", "cp2", "cp3", "cp4", "cp5", "cp5b", "cp6"])
+    rr.add_argument("--doc", required=True, choices=["cp1", "cp2", "cp3", "cp4", "cp5", "cp5b", "cp6", "cp7"])
     rr.add_argument("--input", required=True,
                     help="cp1: linker score JSON; cp2/cp3: directory with the relevant score JSON files")
     rr.add_argument("--out", required=True, help="Markdown file to write")
@@ -65,6 +65,10 @@ def build_parser() -> argparse.ArgumentParser:
     ddiag.add_argument("--cases", default=None, help="case list (default: docs/results/datasets/D4_cases.json)")
     ddiag.add_argument("--cache", default=None, help="vulndb cache directory")
     ddiag.add_argument("--repo-cache", default=None, help="cache directory for fetched third-party repositories")
+
+    from vulntrace.pipeline import cli as triage_cli
+
+    triage_cli.add_parser(sub)
 
     ev = sub.add_parser("eval", help="baselines and evaluation (CP3+)")
     esub = ev.add_subparsers(dest="eval_command", required=True)
@@ -115,6 +119,23 @@ def build_parser() -> argparse.ArgumentParser:
     st.add_argument("--trace", required=True, help="a <case>.json.gz file from the trace directory")
     st.add_argument("--data-dir", default=None, help="evidence directory, to print function names next to IDs")
     st.add_argument("--raw", action="store_true", help="also print the model's raw replies")
+    et = esub.add_parser("triage", help="CP7: end-to-end triage on the fixtures (truth) or on D1/D4 (distributions only)")
+    et.add_argument("--set", required=True, choices=["fixtures", "d1", "d4"], dest="dataset_set")
+    et.add_argument("--out", default=None, help="results directory (default: docs/results/cp7)")
+    et.add_argument("--data-dir", default=None, help="materialised evidence directory (default: data/)")
+    et.add_argument("--cases", default=None, help="case list (default: docs/results/datasets/D1|D4_cases.json)")
+    et.add_argument("--cache", default=None, help="vulndb cache directory")
+    et.add_argument("--repo-cache", default=None, help="git cache that `dataset materialize` used")
+    et.add_argument("--gomodcache", default=None, help="Go module cache for the analysed modules (default: <cache>/gomod)")
+    et.add_argument("--jobs", type=int, default=2, help="cases run in parallel (default 2)")
+    et.add_argument("--max-mains", type=int, default=None, help="main packages analysed per app (default 5)")
+    et.add_argument("--timeout", type=float, default=300.0, help="seconds per helper call (default 300)")
+    et.add_argument("--build-timeout", type=float, default=600.0, help="seconds per linker build (default 600)")
+    et.add_argument("--limit", type=int, default=None, help="only the first N cases (a trial run)")
+    et.add_argument("--only", action="append", default=None, help="only this case id (repeatable)")
+    et.add_argument("--rerun", action="store_true", help="ignore finished cases (default: resume)")
+    et.add_argument("--example", action="append", default=None,
+                    help="commit this case's full verdict as an example under <out>/examples/ (repeatable)")
     er = esub.add_parser("retrieval", help="Mode 2 retrieval evaluation on D4 (CP4)")
     er.add_argument("--config", action="append", default=None,
                     help="random | size | bid | bid-only | bm25 | dense:<e> | hybrid:<e> | hybrid+rerank:<e>+<r> "
@@ -525,6 +546,10 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "doctor":
             return _cmd_doctor()
+        if args.command == "triage":
+            from vulntrace.pipeline import cli as triage_cli
+
+            return triage_cli.cmd_triage(args)
         if args.command == "fixtures" and args.fixtures_command == "score":
             return _cmd_score(args, argv)
         if args.command == "helper":
@@ -547,6 +572,10 @@ def main(argv: list[str] | None = None) -> int:
             from vulntrace.eval import agent_cli
 
             return agent_cli.cmd_show_trace(args)
+        if args.command == "eval" and args.eval_command == "triage":
+            from vulntrace.eval import triage_cli
+
+            return triage_cli.cmd_eval_triage(args, argv)
         if args.command == "eval" and args.eval_command == "retrieval":
             return _cmd_eval_retrieval(args, argv)
         if args.command == "eval" and args.eval_command == "select":

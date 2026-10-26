@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "verdict.schema.json",
   "title": "Verdict",
+  "description": "CP2 created this schema; CP7 extended it by adding optional properties and enum values only, so every CP2 verdict still validates. Reachability only, never exploitability.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "case_id", "target_app", "verdict", "reason_codes", "per_symbol", "verification", "statement", "provenance"],
@@ -16,10 +17,12 @@
         "path": {"type": "string", "minLength": 1},
         "module": {"type": ["string", "null"]},
         "commit": {"type": ["string", "null"]},
-        "main_package": {"type": "string", "minLength": 1}
+        "main_package": {"type": "string", "minLength": 1},
+        "commit_source": {"description": "CP7: where `commit` came from", "enum": ["GIT_HEAD", "EVIDENCE", "USER", "NONE"]},
+        "dirty": {"description": "CP7: the app's git working tree differed from `commit` when it was analysed", "type": ["boolean", "null"]}
       }
     },
-    "verdict": {"enum": ["REACHABLE", "NOT_REACHABLE", "CANT_DETERMINE"]},
+    "verdict": {"$ref": "#/$defs/verdict_value"},
     "reason_codes": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/reason_code"}},
     "per_symbol": {
       "type": "array",
@@ -28,13 +31,8 @@
         "additionalProperties": false,
         "required": ["target", "result", "reason_code", "methods", "verified_path"],
         "properties": {
-          "target": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["package", "symbol"],
-            "properties": {"package": {"type": "string", "minLength": 1}, "symbol": {"type": "string", "minLength": 1}}
-          },
-          "result": {"enum": ["REACHABLE", "NOT_REACHABLE", "CANT_DETERMINE"]},
+          "target": {"$ref": "#/$defs/target"},
+          "result": {"$ref": "#/$defs/verdict_value"},
           "reason_code": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/reason_code"}]},
           "methods": {
             "type": "object",
@@ -53,7 +51,20 @@
               "LINKER_PRESENCE": {"type": "string", "minLength": 1}
             }
           },
-          "verified_path": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/call_path"}]}
+          "verified_path": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/call_path"}]},
+          "main_package": {"description": "CP7: the main package this entry was analysed from (one entry per symbol and main package)", "type": "string", "minLength": 1},
+          "origin": {"$ref": "#/$defs/origin"},
+          "rank": {"description": "CP7 Mode 2: the candidate's 1-based retrieval rank", "type": ["integer", "null"], "minimum": 1},
+          "score": {"description": "CP7 Mode 2: the retriever's score for the candidate (RRF or BM25)", "type": ["number", "null"]},
+          "candidate_id": {"type": ["string", "null"]},
+          "decides_verdict": {"description": "CP7: false for LIFTED symbols, which are reported but never decide the case verdict", "type": "boolean"},
+          "evidence_level": {"$ref": "#/$defs/evidence_level"},
+          "pre_verifier_result": {"description": "CP7: the rule-table result before the verifier ran", "$ref": "#/$defs/verdict_value"},
+          "paths": {"description": "CP7: every call path the call-graph method returned (at most max_paths_per_target)", "type": "array", "items": {"$ref": "#/$defs/call_path"}},
+          "paths_omitted": {"type": ["string", "null"]},
+          "package_not_in_program": {"type": "boolean"},
+          "linker_matched": {"type": "array", "items": {"type": "string"}},
+          "verifier_failures": {"type": "array", "items": {"$ref": "#/$defs/verifier_failure"}}
         },
         "allOf": [
           {
@@ -71,7 +82,10 @@
       "properties": {
         "status": {"enum": ["PASSED", "FAILED", "NOT_RUN"]},
         "checks_run": {"type": "integer", "minimum": 0},
-        "failures": {"type": "array"}
+        "failures": {"type": "array"},
+        "checks_by_kind": {"description": "CP7: {check kind: {run, failed, skipped}}", "type": "object"},
+        "downgraded": {"description": "CP7: entries whose result the verifier changed to CANT_DETERMINE", "type": "integer", "minimum": 0},
+        "file_source": {"description": "CP7: where call-site files were read from", "type": "string"}
       }
     },
     "statement": {"const": "Reachability only. This verdict does not assess exploitability."},
@@ -83,19 +97,106 @@
         "pipeline_version": {"type": "string", "minLength": 1},
         "helper_contract": {"type": "string", "minLength": 1},
         "vulndb_commit": {"type": ["string", "null"]},
-        "created_at": {"type": "string", "format": "date-time"}
+        "created_at": {"type": "string", "format": "date-time"},
+        "repo_commit": {"type": ["string", "null"]}
       }
-    }
+    },
+    "mode": {"description": "CP7: FIX (Mode 1, fix commit), RELEASE (Mode 2, release range), TARGETS (symbols given directly, e.g. fixtures)", "enum": ["FIX", "RELEASE", "TARGETS"]},
+    "mode_selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested", "chosen", "reason"],
+      "properties": {
+        "requested": {"enum": ["AUTO", "FIX", "RELEASE", "TARGETS"]},
+        "chosen": {"enum": ["FIX", "RELEASE", "TARGETS"]},
+        "reason": {"type": "string", "minLength": 1},
+        "explanation": {"type": "string"}
+      }
+    },
+    "evidence_level": {"$ref": "#/$defs/evidence_level"},
+    "pre_policy_verdict": {"$ref": "#/$defs/verdict_value"},
+    "pre_policy_reason_codes": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/reason_code"}},
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "applied", "rule"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "applied": {"type": "boolean"},
+        "rule": {"type": "string", "minLength": 1}
+      }
+    },
+    "advisory": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string"},
+        "module": {"type": ["string", "null"]},
+        "vulnerable_at": {"type": ["string", "null"]},
+        "fixed_in": {"type": ["string", "null"]},
+        "fix_commits": {"type": "array"},
+        "source": {"type": "string"}
+      }
+    },
+    "symbols": {"description": "CP7: every target symbol considered, with its origin", "type": "array", "items": {"$ref": "#/$defs/target_symbol"}},
+    "retrieval": {"description": "CP7 Mode 2: the retriever used and the ranked top-k", "type": ["object", "null"]},
+    "coverage": {"description": "CP7: what was and was not analysed", "type": "object"},
+    "toolchain": {"type": "object"},
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "timing": {"type": "object"}
   },
   "allOf": [
     {
       "if": {"properties": {"verdict": {"const": "CANT_DETERMINE"}}},
       "then": {"properties": {"reason_codes": {"minItems": 1}}},
       "else": {"properties": {"reason_codes": {"maxItems": 0}}}
+    },
+    {
+      "if": {"required": ["mode"], "properties": {"mode": {"const": "RELEASE"}, "verdict": {"const": "REACHABLE"}}},
+      "then": {"required": ["evidence_level"], "properties": {"evidence_level": {"const": "CANDIDATE_LEVEL"}}}
     }
   ],
   "$defs": {
-    "reason_code": {"enum": ["NO_TARGET_SYMBOLS", "NO_FIX_EVIDENCE", "METHOD_DISAGREEMENT", "ANALYSIS_FAILED", "VERIFIER_REJECTED", "UNSUPPORTED_TARGET"]},
+    "verdict_value": {"enum": ["REACHABLE", "NOT_REACHABLE", "CANT_DETERMINE"]},
+    "reason_code": {"enum": ["NO_TARGET_SYMBOLS", "NO_FIX_EVIDENCE", "METHOD_DISAGREEMENT", "ANALYSIS_FAILED", "VERIFIER_REJECTED", "UNSUPPORTED_TARGET",
+                             "APP_LOAD_FAILED", "NO_RELEASE_EVIDENCE", "INCOMPLETE_COVERAGE", "MODE2_NOT_REACHABLE_DOWNGRADED"]},
+    "origin": {"enum": ["CURATED_CORE", "CURATED_DERIVED", "ROOT_CAUSE", "LIFTED", "ROOT_ONLY", "FIXTURE", "FIX_CHANGED", "RANKED_CANDIDATE", "USER"]},
+    "evidence_level": {"description": "TARGET_LEVEL: the symbols were given as the vulnerable ones; CHANGED_FUNCTION_LEVEL: Mode 1, any function the fix changed; CANDIDATE_LEVEL: Mode 2, a retrieved candidate", "enum": ["TARGET_LEVEL", "CHANGED_FUNCTION_LEVEL", "CANDIDATE_LEVEL"]},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "symbol"],
+      "properties": {"package": {"type": "string", "minLength": 1}, "symbol": {"type": "string", "minLength": 1}}
+    },
+    "target_symbol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "symbol", "origin"],
+      "properties": {
+        "package": {"type": "string", "minLength": 1},
+        "symbol": {"type": "string", "minLength": 1},
+        "origin": {"$ref": "#/$defs/origin"},
+        "rank": {"type": ["integer", "null"], "minimum": 1},
+        "score": {"type": ["number", "null"]},
+        "candidate_id": {"type": ["string", "null"]},
+        "side": {"enum": ["OLD", "NEW", "BOTH", null]},
+        "lifted_from": {"type": "array", "items": {"type": "string"}},
+        "decides_verdict": {"type": "boolean"},
+        "context_only": {"description": "Mode 1: true if none of the symbol's lines changed (a candidate only through diff context lines)", "type": ["boolean", "null"]}
+      }
+    },
+    "verifier_failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check", "reason"],
+      "properties": {
+        "check": {"enum": ["TARGET_EXISTS", "CALL_SITE", "EDGE_EXISTS", "PATH_STRUCTURE", "REACHABLE_HAS_PATH", "VERIFIER_ERROR"]},
+        "reason": {"type": "string", "minLength": 1},
+        "target": {"$ref": "#/$defs/target"},
+        "main_package": {"type": "string"},
+        "path_index": {"type": ["integer", "null"], "minimum": 0},
+        "edge_index": {"type": ["integer", "null"], "minimum": 0}
+      }
+    },
     "call_path": {
       "type": "object",
       "additionalProperties": false,
