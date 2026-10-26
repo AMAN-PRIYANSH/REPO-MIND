@@ -74,3 +74,18 @@ Verifier, end-to-end triage, Mode 1 agent, real applications, multi-agent (CP8),
 ## Review notes
 
 (The supervising assistant adds notes here.)
+
+**Supervisor review, 26 Oct 2026 - APPROVED as a negative result** (branch `claude/vulntrace-ai-build-1wfa8e` at `ff4d63b`, which carries `claude/gracious-carson-ch1i9r` and the owner's Colab run).
+
+Checked by the supervisor: `pytest tests/unit tests/contract` -> 621 passed, 10 skipped; CI green on every commit of the branch including the last (the builder reported the last three as unconfirmed; they passed). The owner's `cp6_results.zip` was checked before the results session (valid zip, 118 traces per arm and model, evidence identical to the committed summary). The headline numbers were recomputed from the committed result files (any-hit@1 against A0, per model's headline group; the supervisor's group sizes differ by two cases because of a simple date filter, differences agree to within 0.004). No traces, caches or `data/` are tracked; every result file is under 512 KiB.
+
+What the results say (numbers in `docs/results/CP6_AGENT_RESULTS.md`):
+
+1. **The agent does not beat plain retrieval (A0).** llama3.1-8b: A2 and A3 both equal A0 at top-1 (difference 0.000). qwen2.5-coder-7b: A2 is worse than A0 by about 0.21 (interval excludes 0); A3 is lower by about 0.09.
+2. **The only win is over a weak baseline** (qwen A3 over the one-shot A1, which answered only 35% of cases); this is not evidence for the agent.
+3. **Cost is high:** about 5 times the prompt tokens and about twice the seconds of the one-shot LLM.
+4. **qwen's loss is mostly the frozen loop rule:** 40 of 118 A2 runs ended with `LOOP_DETECTED` and no answer; in 18 of them A0's top-1 was right. Whether a looser rule changes the verdict is untested. Do not tune it on D4; a v2 would need a labelled post-hoc row.
+5. **The builder changed the renderer's headline after seeing the results** (the original sentence was true only because of the weak-A1 win). No prompt, budget or number changed, and the change is disclosed as deviations 16-17. Accepted: the new wording is the more honest one. The rule stays: headline wording is fixed before results are seen.
+6. The failure analysis is a purposive sample (18 cases chosen to cover stop reasons, models and arms), so cause counts are not rates. The three "label convention" calls were not checked against code.
+
+Design decision for CP7 (binding): **the end-to-end pipeline does not use the agent.** Mode 2 uses the retriever's top-k (A0) as its candidate list; the agent stays in the repository as a measured negative result and as the starting point for CP8's optional experiment. An interview-ready sentence: "I built the agent, measured it against the strongest simple baseline, and it did not win, so the product uses retrieval."

@@ -24,6 +24,7 @@ Only CP1 has a full specification now. Each later specification is written by th
 | CP5b | Opus 5.5 | high | Go call-graph lifting and caller/callee queries (subtle analysis code) |
 | CP6 | Opus 5.5 | high | Agent design, tools, budgets, failure handling |
 | CP7 | Opus 5.5 | high | Verifier and end-to-end integration |
+| CP7b | Sonnet 5.5 | high | D3 real applications, adjudication sheets, demo |
 | CP8 | Sonnet 5.5 | medium | Experiment variant, reports, README |
 
 Never use Fable or 1M-context models (they can use paid credits). Avoid `max` effort.
@@ -77,12 +78,18 @@ Full spec: [checkpoints/CP5.md](checkpoints/CP5.md). `LLMClient` (any OpenAI-com
 - Evaluated on D4 against the best non-agent retrieval pipeline.
 - Gate: agent vs pipeline report, including cost in time and tokens, failures and traces.
 
-### CP7 - End-to-end triage, verifier, real applications, demo (week 4)
+### CP7 - End-to-end triage and verifier (week 4)
 
-- Evidence verifier (downgrade-only), `triage` command for both modes.
+- `triage` command for both modes: symbols (Mode 1: all changed non-test functions, no LLM narrowing; Mode 2: retrieval top-k), optional lifting as candidate widening only, two-method reachability, verdict rule, downgrade-only evidence verifier.
+- No agent in the pipeline (CP6 negative result).
+- Evaluated on D1/D4 evidence and the fixtures: verdict distribution, false NOT_REACHABLE rate, verifier rejections.
+- Gate: every `REACHABLE` has a verified path; every `NOT_REACHABLE` states what it covers; failures reported.
+
+### CP7b - Real applications and demo (week 4)
+
 - D3: 5 real applications, adjudicated by the owner with the supervising assistant's help.
-- A minimal local demo (CLI output plus a small Streamlit page) showing verdict, path and evidence.
-- Gate: every `REACHABLE` has a verified path; D3 results reported with failures.
+- A minimal local demo (CLI output, plus a small Streamlit page if time allows).
+- Gate: D3 results reported with failures and the owner's adjudication.
 
 ### CP8 - Multi-agent experiment (stretch) and final report (week 4)
 
