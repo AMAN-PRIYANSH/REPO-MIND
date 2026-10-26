@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent_trace.schema.json",
+  "title": "AgentTrace",
+  "description": "One case's full agent trace (CP6; extends DATA_MODEL.md AgentTrace). Stored gzipped outside git: it holds the model's raw replies. It never holds prompts (only their sha256) or tool output text (only code-free summaries and the IDs shown).",
+  "type": "object",
+  "required": ["schema_version", "trace_id", "case_id", "agent", "arm", "config", "config_sha256", "model", "tools",
+               "graph_tools_available", "pool_size", "initial", "turns", "final", "stop_reason", "budget_reason", "error",
+               "counters", "tool_counts", "totals"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "trace_id": {"type": "string"},
+    "case_id": {"type": "string"},
+    "agent": {"const": "investigator_v1"},
+    "arm": {"enum": ["A2", "A3"]},
+    "config": {"type": "object", "required": ["arm", "graph_tools", "budget", "settings", "agent", "prompt_set", "prompt_sha256"]},
+    "config_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "model": {"type": "object", "required": ["model_id", "model_digest"]},
+    "tools": {"type": "array", "items": {"type": "string"}},
+    "graph_tools_available": {"type": "boolean"},
+    "pool_size": {"type": "integer", "minimum": 0},
+    "initial": {"type": "object", "required": ["initial_candidates_shown", "advisory_details_truncated", "delimiter_escapes"]},
+    "turns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["n", "step", "purpose", "prompt_sha256", "prompt_messages", "prompt_chars", "estimated_prompt_tokens", "outcome"],
+        "not": {"anyOf": [{"required": ["prompt"]}, {"required": ["messages"]}, {"required": ["output"]}]},
+        "properties": {
+          "purpose": {"enum": ["action", "repair", "answer_retry"]},
+          "prompt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "outcome": {"enum": ["tool", "repeat", "loop_stop", "invalid", "invalid_after_repair", "answer_accepted",
+                               "answer_rejected", "llm_error"]},
+          "parsed": {"oneOf": [{"type": "null"}, {"$ref": "agent_action.schema.json"}]},
+          "problems": {"type": "array", "items": {"type": "string"}},
+          "shown_ids": {"type": "array", "items": {"type": "string"}, "maxItems": 20}
+        }
+      }
+    },
+    "final": {"type": "object", "additionalProperties": false,
+              "required": ["candidate_ids", "evidence", "abstain", "valid", "answer_ids_seen"],
+              "properties": {"candidate_ids": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
+                             "evidence": {"type": "array", "items": {"type": "string"}, "maxItems": 10},
+                             "abstain": {"type": "boolean"}, "valid": {"type": "boolean"}, "answer_ids_seen": {"type": "boolean"}}},
+    "stop_reason": {"enum": ["SUBMITTED", "ABSTAINED", "INVALID_ANSWER", "INVALID_ACTION", "LOOP_DETECTED", "BUDGET_EXCEEDED", "ERROR"]},
+    "budget_reason": {"enum": [null, "STEPS", "TOKENS", "CONTEXT", "TIME"]},
+    "counters": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "totals": {"type": "object", "required": ["steps", "llm_calls", "input_tokens", "output_tokens", "max_call_prompt_tokens",
+                                              "agent_seconds", "wall_seconds"]}
+  }
+}

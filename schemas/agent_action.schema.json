@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent_action.schema.json",
+  "title": "AgentAction",
+  "description": "One action of the CP6 agent's JSON action protocol: exactly the keys tool and args. Mirrors vulntrace.agent.protocol.ARG_SPECS (checked by tests/contract/test_agent_contract.py). submit_answer has a second, content-level check in code (pool membership, 1..3 IDs, evidence seen).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tool", "args"],
+  "properties": {
+    "tool": {"enum": ["search_code", "read_function", "search_commits", "show_commit", "callers", "callees", "submit_answer"]},
+    "args": {"type": "object"}
+  },
+  "oneOf": [
+    {"properties": {"tool": {"const": "search_code"}, "args": {"type": "object", "additionalProperties": false, "required": ["query"],
+      "properties": {"query": {"type": "string", "minLength": 1}, "k": {"type": "integer", "minimum": 1, "maximum": 20}}}}},
+    {"properties": {"tool": {"const": "read_function"}, "args": {"type": "object", "additionalProperties": false, "required": ["candidate_id"],
+      "properties": {"candidate_id": {"type": "string"}}}}},
+    {"properties": {"tool": {"const": "search_commits"}, "args": {"type": "object", "additionalProperties": false, "required": ["query"],
+      "properties": {"query": {"type": "string", "minLength": 1}}}}},
+    {"properties": {"tool": {"const": "show_commit"}, "args": {"type": "object", "additionalProperties": false, "required": ["sha"],
+      "properties": {"sha": {"type": "string"}}}}},
+    {"properties": {"tool": {"const": "callers"}, "args": {"type": "object", "additionalProperties": false, "required": ["candidate_id"],
+      "properties": {"candidate_id": {"type": "string"}}}}},
+    {"properties": {"tool": {"const": "callees"}, "args": {"type": "object", "additionalProperties": false, "required": ["candidate_id"],
+      "properties": {"candidate_id": {"type": "string"}}}}},
+    {"properties": {"tool": {"const": "submit_answer"}, "args": {"oneOf": [
+      {"type": "object", "additionalProperties": false, "required": ["abstain"], "properties": {"abstain": {"const": true}}},
+      {"type": "object", "additionalProperties": false, "required": ["candidate_ids", "evidence"],
+       "properties": {"candidate_ids": {"type": "array", "items": {"type": "string"}},
+                      "evidence": {"type": "array", "items": {"type": "string"}},
+                      "abstain": {"const": false}}}
+    ]}}}
+  ]
+}

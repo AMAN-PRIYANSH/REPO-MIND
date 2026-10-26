@@ -18,6 +18,9 @@ _FILES = {
     "release_range": "release_range.schema.json",
     "lift_record": "lift_record.schema.json",
     "neighbor_record": "neighbor_record.schema.json",
+    "agent_action": "agent_action.schema.json",
+    "agent_trace": "agent_trace.schema.json",
+    "agent_result_row": "agent_result_row.schema.json",
 }
 
 
@@ -25,11 +28,20 @@ def load_schema(name: str, schemas_dir: Path = SCHEMAS_DIR) -> dict:
     return json.loads((Path(schemas_dir) / _FILES[name]).read_text(encoding="utf-8"))
 
 
+def _registry():
+    """Every schema of this repository under its `$id`, so a `$ref` between them resolves locally
+    (never over the network)."""
+    from referencing import Registry, Resource
+
+    schemas = [load_schema(n) for n in _FILES]
+    return Registry().with_resources([(s["$id"], Resource.from_contents(s)) for s in schemas if "$id" in s])
+
+
 def validation_errors(name: str, instance: object) -> list[str]:
     """Return human-readable schema violations (empty list means valid)."""
     import jsonschema
 
-    validator = jsonschema.Draft202012Validator(load_schema(name))
+    validator = jsonschema.Draft202012Validator(load_schema(name), registry=_registry())
     return [
         f"{'/'.join(str(p) for p in e.absolute_path) or '<root>'}: {e.message}"
         for e in sorted(validator.iter_errors(instance), key=lambda e: list(e.absolute_path))
