@@ -54,3 +54,25 @@ def test_linker_method_uses_the_rule_only_when_exact_patterns_miss():
                                                            {"package": P, "symbol": "Missing"}], runner=runner)
     assert [r["result"] for r in res] == ["PRESENT", "PRESENT", "ABSENT"]
     assert res[0]["details"]["generic_instances"] is True and "generic_instances" not in res[1]["details"]
+
+
+def test_targets_in_the_main_package_use_main_names():
+    """Go names every symbol of the main package `main.` in the binary (observed on fixtures/cmd/interface_dispatch)."""
+    from vulntrace.methods.linker import binary_package
+
+    nm = "\n".join(f"  4000 T {n}" for n in ("main.main", "main.worker.Run", "main.(*quiet).Run",
+                                                "main.apply[go.shape.string]", "probe.example/lib.Map[go.shape.int]"))
+
+    def runner(cmd, **kw):
+        class P_:
+            returncode = 0
+            stdout = {"version": "go version go1.24.7 linux/amd64", "env": "linux\namd64\n"}.get(cmd[1], nm)
+            stderr = ""
+        return P_()
+
+    main = "example.com/app/cmd/x"
+    res = run_linker_method("/x", main, [{"package": main, "symbol": "worker.Run"}, {"package": main, "symbol": "quiet.Run"},
+                                         {"package": main, "symbol": "apply"}, {"package": main, "symbol": "main"},
+                                         {"package": "example.com/app/cmd/other", "symbol": "main"}], runner=runner)
+    assert [r["result"] for r in res] == ["PRESENT", "PRESENT", "PRESENT", "PRESENT", "ABSENT"]
+    assert binary_package("example.com/lib", main) == "example.com/lib"

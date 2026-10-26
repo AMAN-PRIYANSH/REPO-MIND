@@ -184,3 +184,11 @@ def test_generic_symbols_in_vulndb_form_on_a_real_binary(binary, tmp_path):
     v = triage.run_triage(triage.TriageRequest(case_id="probe", app=tmp_path, mode="targets", targets=targets),
                           default_runners(binary=binary))
     assert [e["result"] for e in v["per_symbol"]] == ["REACHABLE"] * 3 and v["verification"]["status"] == "PASSED"
+
+
+def test_target_inside_the_main_package(runners):
+    """The linker method must see main-package symbols (named `main.` in the binary)."""
+    t = {"package": "vtfixtures/cmd/interface_dispatch", "symbol": "worker.Run"}
+    v = _run(runners, mode="targets", targets=[t], mains=["./cmd/interface_dispatch"])
+    e = v["per_symbol"][0]
+    assert e["methods"] == {"CALLGRAPH_VTA": "PATH_FOUND", "LINKER_PRESENCE": "PRESENT"} and v["verdict"] == "REACHABLE"

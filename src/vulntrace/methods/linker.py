@@ -163,6 +163,14 @@ def match_generic_instances(nm_symbols: list[tuple[str, str]], package: str, sym
     return sorted({n for typ, n in nm_symbols if typ in TEXT_SYMBOL_TYPES and is_generic_instance(n, package, symbol)})
 
 
+def binary_package(package: str, main_package: str) -> str:
+    """The package path a target's symbols carry in the binary built from `main_package`: the
+    linker names everything in the main package `main.` (observed: `main.worker.Run`, never
+    `<import path>.worker.Run`; CP7). Any other package keeps its import path; a target in a
+    *different* main package cannot be in this binary, so its import path never matches."""
+    return "main" if normalize_import_path(package) == normalize_import_path(main_package) else package
+
+
 def binary_name(goos: str) -> str:
     return "vt_linker_bin.exe" if goos == "windows" else "vt_linker_bin"
 
@@ -230,7 +238,7 @@ def run_linker_method(
     unsupported: dict[int, str] = {}
     for i, t in enumerate(targets):
         try:
-            patterns[i] = symbol_patterns(t["package"], t["symbol"])
+            patterns[i] = symbol_patterns(binary_package(t["package"], main_package), t["symbol"])
         except UnsupportedSymbolForm as exc:
             unsupported[i] = str(exc)
 
@@ -257,7 +265,7 @@ def run_linker_method(
             matched = match_symbols(nm_symbols, patterns[i])
             if not matched:
                 # vulndb names a generic function or a method of a generic type without type parameters
-                matched = match_generic_instances(nm_symbols, t["package"], t["symbol"])
+                matched = match_generic_instances(nm_symbols, binary_package(t["package"], main_package), t["symbol"])
                 details["generic_instances"] = bool(matched)
             details["matched_binary_symbols"] = matched
             results.append(make(t, "PRESENT" if matched else "ABSENT", details, None))
