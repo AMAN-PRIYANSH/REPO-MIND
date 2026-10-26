@@ -32,10 +32,10 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 
 CP7 (started 26 Oct 2026 on `claude/vulntrace-ai-build-exhh01`, fresh from `main`; no earlier CP7 branch existed):
 
-- [ ] 0. Environment check recorded (OS, Python, Go, git, Docker, network)
-- [ ] 1. Pipeline `src/vulntrace/pipeline/` and `python -m vulntrace triage` (Mode 1 all changed non-test functions, Mode 2 retriever top-k, `auto` mode choice, optional lifting as `LIFTED` seeds, two methods per symbol + `verdict.py`, failure as `CANT_DETERMINE` with a reason code, safety flags)
-- [ ] 2. Evidence verifier `src/vulntrace/verifier/` (funcs, call-site file/line, `edges`, entry/target structure, every `REACHABLE` has a verified path; downgrade-only; corrupted-path tests; no-upgrade proof by test)
-- [ ] 3. `schemas/verdict.schema.json` extended without breaking old files; contract tests with recorded outputs per verdict and reason code
+- [x] 0. Environment check recorded (OS, Python, Go, git, Docker, network); pre-existing red test on `main` fixed (commit "CP7 task 0")
+- [x] 1. Pipeline `src/vulntrace/pipeline/` and `python -m vulntrace triage` (Mode 1 all changed non-test functions, Mode 2 retriever top-k, `auto` mode choice, optional lifting as `LIFTED` seeds, two methods per symbol + `verdict.py`, failure as `CANT_DETERMINE` with a reason code, safety flags)
+- [x] 2. Evidence verifier `src/vulntrace/verifier/` (funcs, call-site file/line, `edges`, entry/target structure, every `REACHABLE` has a verified path; downgrade-only; corrupted-path tests; no-upgrade proof by test)
+- [x] 3. `schemas/verdict.schema.json` extended without breaking old files; contract tests with recorded outputs per verdict and reason code
 - [ ] 4. `python -m vulntrace eval triage`: D2 fixture metrics; D1/D4 distribution, coverage, `CANT_DETERMINE` reasons; Mode 2 `NOT_REACHABLE` policy; cost; results in `docs/results/cp7/` and `docs/results/CP7_TRIAGE_RESULTS.md` (headline fixed before results)
 - [ ] 5. Tests (unit, contract, integration); CI green on the last commit
 - [ ] 6. Report `docs/progress/reports/CP7_REPORT.md`; STATUS `AWAITING_REVIEW`
@@ -43,5 +43,7 @@ CP7 (started 26 Oct 2026 on `claude/vulntrace-ai-build-exhh01`, fresh from `main
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
+
+CP7 (26 Oct 2026, session on `claude/vulntrace-ai-build-exhh01`): done - pipeline, verifier, schema, triage CLI, unit/contract/integration tests, linker fix for vulndb-form generic symbols, fixture evaluation. In progress - `eval triage --set d1` and `--set d4` (rows resume from `data/triage/<set>/`; rebuild evidence first with `dataset materialize --set d1|d4`), then the results document (`results render --doc cp7`), docs updates (Mode 2 policy) and the report. HuggingFace is blocked from this session, so Mode 2 ranks with the fixed retriever's BM25 fallback (recorded in every verdict).
 
 (CP6 was approved on 26 Oct 2026 as a negative result; read the review notes at the end of checkpoints/CP3.md to CP6.md - they bind CP7. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists.)
