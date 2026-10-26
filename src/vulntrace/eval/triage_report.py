@@ -158,7 +158,8 @@ def render_real(doc: dict[str, Any], title: str, note: str) -> list[str]:
             f"{_counts(s['verification']['failed_by_kind'])}.",
             f"- REACHABLE verdicts without a verified path: {s['reachable_without_verified_path']}; DYNAMIC edges on "
             f"verified paths: {s['dynamic_edges_on_verified']}.",
-            f"- Go toolchain reported by the helper: {_counts(s['go_versions'])}.", ""]
+            f"- Go toolchain reported by the helper: {_counts(s['go_versions'])}.",
+            f"- Cases with APP_LOAD_FAILED, by coarse cause of the first error: {_counts(s.get('app_load_failure_causes'))}.", ""]
     ref = s["reference"]
     out += ["### Curated reference (consistency, not correctness)", "",
             f"The same app analysed with the advisory's curated core symbols as targets: {ref['cases']} cases; reference "

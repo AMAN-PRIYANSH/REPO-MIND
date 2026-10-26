@@ -87,3 +87,13 @@ def test_headline_is_fixed():
 def test_renderer_handles_missing_files(tmp_path):
     text = tr.render_cp7_doc(tmp_path, "docs/results/cp7")
     assert tr.HEADLINE in text and "Not run" in text and "Decision: DOWNGRADE" in text
+
+
+def test_load_cause():
+    row = lambda text, codes=("ANALYSIS_FAILED", "APP_LOAD_FAILED"): {"pre_policy_reason_codes": list(codes),  # noqa: E731
+                                                                       "first_method_error": text}
+    assert te.load_cause(row("go: go.mod requires go >= 1.25.0 (running go 1.24.7)")) == "GO_VERSION_TOO_OLD"
+    assert te.load_cause(row("main.go:3:2: no required module provides package x/y")) == "MISSING_DEPENDENCY"
+    assert te.load_cause(row("a.go:1:2: package thrift/lib is not in std")) == "GOPATH_STYLE_IMPORT"
+    assert te.load_cause(row("something else")) == "OTHER"
+    assert te.load_cause(row("anything", codes=("METHOD_DISAGREEMENT",))) is None

@@ -538,6 +538,31 @@ def stability_check(dataset, entries, rows, cases_by_id, data_dir, out_dir, n, *
 PSEUDO_REPLICATE_PREFIX = "github.com/rclone/rclone@"  # CP3 review finding 1: nine rclone cases share one range
 
 
+LOAD_CAUSES = (  # first match wins; patterns are go command / go/packages messages
+    ("GO_VERSION_TOO_OLD", ("requires go >=", "go.mod requires go", "toolchain")),
+    ("MISSING_DEPENDENCY", ("no required module provides", "missing go.sum entry", "cannot find module",
+                            "module lookup disabled", "unknown revision", "updates to go.mod needed")),
+    ("GOPATH_STYLE_IMPORT", ("is not in std",)),
+    ("CGO_OR_BUILD_CONSTRAINTS", ("build constraints exclude", "cgo", "C source files not allowed")),
+    ("VENDOR_INCONSISTENT", ("inconsistent vendoring", "vendor/modules.txt")),
+    ("TIMEOUT", ("exceeded", "timed out")),
+    ("TYPE_ERRORS", ("TYPE_ERRORS", "undefined:", "cannot use", "not enough arguments")),
+)
+
+
+def load_cause(row: dict[str, Any]) -> str | None:
+    """A coarse cause for a case where the app could not be listed or every main package failed to
+    load or build (None otherwise). From the first error line recorded in the row."""
+    codes = row.get("pre_policy_reason_codes") or []
+    if "APP_LOAD_FAILED" not in codes:
+        return None
+    text = (row.get("app_list_error") or row.get("first_method_error") or "")
+    for cause, needles in LOAD_CAUSES:
+        if any(n in text for n in needles):
+            return cause
+    return "OTHER"
+
+
 def summarize_real(dataset: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
     def dist(rs, key="verdict"):
         return dict(Counter(r.get(key) or "NOT_RUN" for r in rs))
@@ -578,6 +603,7 @@ def summarize_real(dataset: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
             "mains_over_limit": sum(1 for r in ran if r.get("mains_skipped")),
         },
         "go_versions": dict(Counter(r.get("go_version") for r in ran if r.get("go_version"))),
+        "app_load_failure_causes": dict(Counter(c for c in (load_cause(r) for r in ran) if c)),
     }
     with_ref = [r for r in ran if r.get("reference")]
     out["reference"] = {
