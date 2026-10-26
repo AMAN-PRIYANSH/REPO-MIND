@@ -9,14 +9,14 @@
   "gomodcache_note": "a shared module cache; first-time downloads dominate preparation time",
   "os": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
   "python": "3.13.17",
-  "repo_commit": "13d9c07",
+  "repo_commit": "2eb9a7b",
   "repo_dirty": false
  },
  "max_mains": 5,
  "rows": [
   {
    "app_list_error": null,
-   "case_seconds": 11.6,
+   "case_seconds": 11.5,
    "cluster_key": "github.com/miekg/dns@1.0.3..1.0.4-0.20180125103619-43913f2f4fbd",
    "commit": "5ec25f2a5044291b6c8abf43ed8a201da241e69e",
    "context_only_symbols": 0,
@@ -61,7 +61,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 6.4,
+    "seconds": 7.3,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": true,
@@ -89,7 +89,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 4.34,
+   "seconds": 3.31,
    "symbols": 1,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -103,20 +103,17 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 94.3,
+   "case_seconds": 91.0,
    "cluster_key": "github.com/pion/dtls@1.5.1..1.5.2",
    "commit": "91d652d3f91d6c08c193e4d297067f8f653775f9",
    "context_only_symbols": 0,
    "created": "2021-04-14",
    "dynamic_edges_on_verified": 4,
    "entries": {
-    "CANT_DETERMINE": 4,
     "NOT_REACHABLE": 18,
-    "REACHABLE": 10
+    "REACHABLE": 14
    },
-   "entry_reasons": {
-    "METHOD_DISAGREEMENT": 4
-   },
+   "entry_reasons": {},
    "evidence_level": "CANDIDATE_LEVEL",
    "evidence_status": "AVAILABLE",
    "first_method_error": null,
@@ -134,8 +131,7 @@
    "method_errors": {},
    "method_pairs": {
     "NO_PATH+ABSENT": 18,
-    "PATH_FOUND+ABSENT": 4,
-    "PATH_FOUND+PRESENT": 10
+    "PATH_FOUND+PRESENT": 14
    },
    "mode": "RELEASE",
    "mode_reason": "REQUESTED",
@@ -149,7 +145,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.3,
+    "seconds": 1.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -157,7 +153,11 @@
    },
    "reachable_ranks": [
     1,
+    2,
+    3,
+    4,
     6,
+    7,
     10
    ],
    "reason_codes": [],
@@ -175,17 +175,17 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 63.85,
+   "seconds": 61.61,
    "symbols": 8,
    "verdict": "REACHABLE",
    "verification": {
-    "checks_run": 104,
+    "checks_run": 116,
     "downgraded": 0,
     "failed_by_kind": {},
     "failures": 0,
     "status": "PASSED"
    },
-   "verified_paths": 10
+   "verified_paths": 14
   },
   {
    "app_list_error": null,
@@ -227,7 +227,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.5,
+    "seconds": 3.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -251,7 +251,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.21,
+   "seconds": 0.27,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -265,7 +265,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 711.8,
+   "case_seconds": 969.1,
    "cluster_key": "github.com/sigstore/cosign@1.5.1..1.5.2",
    "commit": "c3e4d8b7cd2f6f065941510b260f173b70c695fa",
    "context_only_symbols": 0,
@@ -306,7 +306,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.5,
+    "seconds": 78.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -335,7 +335,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 530.6,
+   "seconds": 675.0,
    "symbols": 5,
    "verdict": "REACHABLE",
    "verification": {
@@ -349,7 +349,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 41.2,
+   "case_seconds": 47.1,
    "cluster_key": "github.com/aws/aws-sdk-go@1.30.0..1.34.0",
    "commit": "29baa385efd1227728f6a7eb6a31a4f9bc152ee0",
    "context_only_symbols": 0,
@@ -389,7 +389,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 4.5,
+    "seconds": 6.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -413,7 +413,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 30.97,
+   "seconds": 37.65,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -427,7 +427,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 53.2,
+   "case_seconds": 57.3,
    "cluster_key": "github.com/ntbosscher/gobase@0.7.1..0.7.2",
    "commit": "94022b23b906b2dd47ad04dc74af18ba9cba80a0",
    "context_only_symbols": 0,
@@ -468,7 +468,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.7,
+    "seconds": 3.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -494,7 +494,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 38.6,
+   "seconds": 40.39,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -508,7 +508,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 120.1,
+   "case_seconds": 130.2,
    "cluster_key": "github.com/pion/dtls/v2@2.1.4..2.1.5",
    "commit": "a6397ff7282bc56dc37a68ea9211702edb4de1de",
    "context_only_symbols": 0,
@@ -545,7 +545,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.4,
+    "seconds": 2.9,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -569,7 +569,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 82.97,
+   "seconds": 85.43,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -583,7 +583,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 248.7,
+   "case_seconds": 375.7,
    "cluster_key": "github.com/flyteorg/flyteadmin@1.1.30..1.1.31",
    "commit": "f18839d61860dfa837c1540aa16d8a2beb9e4d89",
    "context_only_symbols": 0,
@@ -622,7 +622,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.9,
+    "seconds": 30.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -647,7 +647,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 187.9,
+   "seconds": 294.16,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -661,7 +661,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 20.1,
+   "case_seconds": 22.2,
    "cluster_key": "github.com/microcosm-cc/bluemonday@1.0.15..1.0.16",
    "commit": "f0057e2386fef8ce4ee3ede8a56b59d27449d49f",
    "context_only_symbols": 0,
@@ -700,7 +700,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.1,
+    "seconds": 0.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -726,7 +726,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 14.14,
+   "seconds": 15.15,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -740,7 +740,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 232.5,
+   "case_seconds": 290.2,
    "cluster_key": "github.com/codenotary/immudb@1.4.0..1.4.1",
    "commit": "15d0309e159f36e0b3e2775e91a695a509c47542",
    "context_only_symbols": 0,
@@ -786,7 +786,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.9,
+    "seconds": 6.0,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -817,7 +817,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 162.62,
+   "seconds": 208.14,
    "symbols": 6,
    "verdict": "REACHABLE",
    "verification": {
@@ -831,19 +831,16 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 120.4,
+   "case_seconds": 257.6,
    "cluster_key": "helm.sh/helm/v3@3.11.0..3.11.1",
    "commit": "472c5736ab01133de504a826bd9ee12cbe4e7904",
    "context_only_symbols": 0,
    "created": null,
    "dynamic_edges_on_verified": 4,
    "entries": {
-    "CANT_DETERMINE": 2,
-    "REACHABLE": 4
+    "REACHABLE": 6
    },
-   "entry_reasons": {
-    "METHOD_DISAGREEMENT": 2
-   },
+   "entry_reasons": {},
    "evidence_level": "CANDIDATE_LEVEL",
    "evidence_status": "AVAILABLE",
    "first_method_error": null,
@@ -860,8 +857,7 @@
    },
    "method_errors": {},
    "method_pairs": {
-    "PATH_FOUND+ABSENT": 2,
-    "PATH_FOUND+PRESENT": 4
+    "PATH_FOUND+PRESENT": 6
    },
    "mode": "RELEASE",
    "mode_reason": "REQUESTED",
@@ -874,7 +870,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.4,
+    "seconds": 45.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -883,14 +879,15 @@
    "reachable_ranks": [
     1,
     2,
+    3,
     4,
-    5
+    5,
+    6
    ],
    "reason_codes": [],
    "reference": {
     "entries": {
-     "CANT_DETERMINE": 2,
-     "REACHABLE": 4
+     "REACHABLE": 6
     },
     "reason_codes": [],
     "verdict": "REACHABLE"
@@ -902,21 +899,21 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 84.49,
+   "seconds": 180.99,
    "symbols": 6,
    "verdict": "REACHABLE",
    "verification": {
-    "checks_run": 180,
+    "checks_run": 203,
     "downgraded": 0,
     "failed_by_kind": {},
     "failures": 0,
     "status": "PASSED"
    },
-   "verified_paths": 4
+   "verified_paths": 6
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.7,
+   "case_seconds": 0.6,
    "cluster_key": "github.com/hashicorp/go-getter/v2@2.0.0..2.2.0",
    "commit": "0054847f032d201611cb592762fc6fd4fbfd5e9d",
    "context_only_symbols": 0,
@@ -953,7 +950,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.4,
+    "seconds": 0.3,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -977,7 +974,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.14,
+   "seconds": 0.16,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -991,7 +988,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 23.8,
+   "case_seconds": 34.9,
    "cluster_key": "github.com/russellhaering/gosaml2@0.8.1..0.9.0",
    "commit": "00b95befb2d2960cb7c3855afac2699ae786e4c1",
    "context_only_symbols": 0,
@@ -1058,7 +1055,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 17.04,
+   "seconds": 22.67,
    "symbols": 8,
    "verdict": "REACHABLE",
    "verification": {
@@ -1072,7 +1069,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 62.5,
+   "case_seconds": 91.0,
    "cluster_key": "github.com/crewjam/saml@0.4.12..0.4.13",
    "commit": "5049389b651c221c331aba4b07060159c11c401a",
    "context_only_symbols": 0,
@@ -1117,7 +1114,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 7.6,
+    "seconds": 1.9,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1143,7 +1140,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 44.27,
+   "seconds": 75.27,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -1157,7 +1154,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 23.1,
+   "case_seconds": 18.3,
    "cluster_key": "github.com/openfga/openfga@1.1.1-0.20230623171216-d180fc3e227f..1.1.1",
    "commit": "d180fc3e227f9ec11ff3adb3367ac00a2e21ca81",
    "context_only_symbols": 0,
@@ -1205,7 +1202,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 15.1,
+    "seconds": 9.7,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1233,7 +1230,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 7.42,
+   "seconds": 7.96,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1247,7 +1244,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 133.8,
+   "case_seconds": 156.1,
    "cluster_key": "github.com/consensys/gnark@0.9.0-alpha..0.9.0",
    "commit": "f9dfb87201d5166b25f0e0d44606df54c4ad3036",
    "context_only_symbols": 0,
@@ -1289,7 +1286,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 4.2,
+    "seconds": 7.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1314,7 +1311,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 89.47,
+   "seconds": 107.59,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -1328,7 +1325,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 7.2,
+   "case_seconds": 3.3,
    "cluster_key": "github.com/gofiber/fiber/v2@2.49.2..2.50.0",
    "commit": "2af907d98d949f710553ebed3d3f9da37bd94966",
    "context_only_symbols": 0,
@@ -1366,7 +1363,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 6.1,
+    "seconds": 2.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1390,7 +1387,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.55,
+   "seconds": 0.31,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1439,7 +1436,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.0,
+    "seconds": 0.7,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1463,7 +1460,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.23,
+   "seconds": 0.28,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1477,7 +1474,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 1.8,
+   "case_seconds": 1.3,
    "cluster_key": "github.com/mojocn/base64Captcha@1.3.5..1.3.6",
    "commit": "1a6d007056a31d2525bb29780d37fc396634caee",
    "context_only_symbols": 0,
@@ -1514,7 +1511,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.4,
+    "seconds": 1.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1538,7 +1535,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.26,
+   "seconds": 0.1,
    "symbols": 5,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1552,7 +1549,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 18.6,
+   "case_seconds": 18.4,
    "cluster_key": "golang.org/x/crypto@0.16.0..0.17.0",
    "commit": "325b735346247f48971d2b37d24dd180a35f391f",
    "context_only_symbols": 0,
@@ -1592,7 +1589,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 4.3,
+    "seconds": 2.0,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1616,7 +1613,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 12.79,
+   "seconds": 14.7,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1630,7 +1627,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 313.1,
+   "case_seconds": 333.5,
    "cluster_key": "github.com/hashicorp/nomad@1.7.3..1.7.4",
    "commit": "60ee328f97d19d2d2d9761251b895b06d82eb1a1",
    "context_only_symbols": 0,
@@ -1679,7 +1676,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 39.4,
+    "seconds": 37.0,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1706,7 +1703,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 271.4,
+   "seconds": 292.94,
    "symbols": 1,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1720,7 +1717,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 350.8,
+   "case_seconds": 275.5,
    "cluster_key": "github.com/hashicorp/nomad@1.4.10..1.4.11",
    "commit": "b94618f18655b06673525823c272a3663d8c35c6",
    "context_only_symbols": 0,
@@ -1769,7 +1766,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 71.8,
+    "seconds": 37.7,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1796,7 +1793,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 275.45,
+   "seconds": 233.44,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1810,7 +1807,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 21.8,
+   "case_seconds": 8.4,
    "cluster_key": "github.com/containers/image/v5@5.30.0..5.30.1",
    "commit": "b29bde59df344f7cf3b379430d8d3534907495b6",
    "context_only_symbols": 0,
@@ -1847,7 +1844,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 20.4,
+    "seconds": 7.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1871,7 +1868,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.62,
+   "seconds": 0.43,
    "symbols": 10,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -1885,7 +1882,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 285.7,
+   "case_seconds": 147.4,
    "cluster_key": "github.com/cometbft/cometbft@0.38.11..0.38.12",
    "commit": "e1b4453baf0af6487ad187c7f17dc50517126673",
    "context_only_symbols": 0,
@@ -1927,7 +1924,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 25.9,
+    "seconds": 14.7,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -1955,7 +1952,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 235.51,
+   "seconds": 111.37,
    "symbols": 7,
    "verdict": "REACHABLE",
    "verification": {
@@ -1969,7 +1966,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 87.3,
+   "case_seconds": 100.6,
    "cluster_key": "github.com/osrg/gobgp/v3@3.19.0..3.20.0",
    "commit": "ed5732bb6ede6624e7e29e91257352c2ca149b6f",
    "context_only_symbols": 0,
@@ -2011,7 +2008,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.8,
+    "seconds": 1.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2041,7 +2038,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 69.72,
+   "seconds": 82.16,
    "symbols": 7,
    "verdict": "REACHABLE",
    "verification": {
@@ -2055,7 +2052,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 28.4,
+   "case_seconds": 19.3,
    "cluster_key": "github.com/cosmos/cosmos-sdk@0.50.11..0.50.12",
    "commit": "eb1a8e88a4ddf77bc2fe235fc07c57016b7386f0",
    "context_only_symbols": 0,
@@ -2092,7 +2089,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 25.5,
+    "seconds": 16.9,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2116,7 +2113,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 1.01,
+   "seconds": 0.98,
    "symbols": 10,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2130,7 +2127,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 11.4,
+   "case_seconds": 12.7,
    "cluster_key": "github.com/getkin/kin-openapi@0.130.0..0.131.0",
    "commit": "6da871e0e170b7637eb568c265c08bc2b5d6e7a3",
    "context_only_symbols": 0,
@@ -2170,7 +2167,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.5,
+    "seconds": 0.9,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2194,7 +2191,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 10.46,
+   "seconds": 11.32,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2208,7 +2205,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 52.3,
+   "case_seconds": 59.6,
    "cluster_key": "github.com/nats-io/nats-server/v2@2.10.26..2.10.27",
    "commit": "14fa949d74bcb07a8cce684a59ce39262bd4b00b",
    "context_only_symbols": 0,
@@ -2245,7 +2242,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.4,
+    "seconds": 3.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2277,7 +2274,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 36.42,
+   "seconds": 41.98,
    "symbols": 8,
    "verdict": "REACHABLE",
    "verification": {
@@ -2291,7 +2288,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 10.5,
+   "case_seconds": 11.4,
    "cluster_key": "github.com/pion/interceptor@0.1.38..0.1.39",
    "commit": "5003ed5644abdbf663b0f025a7b0a44356dbf0ce",
    "context_only_symbols": 0,
@@ -2330,7 +2327,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.6,
+    "seconds": 0.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2354,7 +2351,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 6.62,
+   "seconds": 7.1,
    "symbols": 2,
    "verdict": "REACHABLE",
    "verification": {
@@ -2368,7 +2365,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 2.3,
+   "case_seconds": 3.3,
    "cluster_key": "github.com/go-pg/pg/v10@10.14.0..10.15.0",
    "commit": "bce00adc25696cc87008ccc4daf10f6350bbdae8",
    "context_only_symbols": 0,
@@ -2405,7 +2402,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.0,
+    "seconds": 2.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2429,7 +2426,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.16,
+   "seconds": 0.23,
    "symbols": 4,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2443,7 +2440,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 82.1,
+   "case_seconds": 94.1,
    "cluster_key": "github.com/quic-go/quic-go@0.54.0..0.54.1",
    "commit": "c2e784aaf21fe66f55b166249d8c9dc9b0aa0fc7",
    "context_only_symbols": 0,
@@ -2482,7 +2479,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.8,
+    "seconds": 4.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2507,7 +2504,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 58.61,
+   "seconds": 69.84,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -2521,7 +2518,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 386.5,
+   "case_seconds": 663.2,
    "cluster_key": "github.com/elastic/beats/v7@7.0.0-alpha2..7.0.0-alpha2.0.20260126223743-dec1b31111ec",
    "commit": "7b0ea697e7506832a5b13fa5e47328681023674a",
    "context_only_symbols": 0,
@@ -2571,7 +2568,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 363.6,
+    "seconds": 629.9,
     "status": "READY",
     "synthesized_go_mod": true,
     "vendor_dropped": true,
@@ -2600,7 +2597,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 17.12,
+   "seconds": 26.39,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2614,7 +2611,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 237.6,
+   "case_seconds": 220.2,
    "cluster_key": "github.com/distribution/distribution/v3@3.0.0..3.1.0",
    "commit": "9ed95e7365224025ee89365e12cf128e1f1bf965",
    "context_only_symbols": 0,
@@ -2655,7 +2652,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.9,
+    "seconds": 2.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2689,7 +2686,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 177.64,
+   "seconds": 167.09,
    "symbols": 10,
    "verdict": "REACHABLE",
    "verification": {
@@ -2764,7 +2761,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.03,
+   "seconds": 0.02,
    "symbols": 10,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2813,7 +2810,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.4,
+    "seconds": 0.3,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2851,7 +2848,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 0.5,
+   "case_seconds": 0.2,
    "cluster_key": "github.com/gofiber/fiber/v3@3.1.0..3.2.0",
    "commit": "3c24ebefe5009e88f9f9258b472e8021160179bf",
    "context_only_symbols": 0,
@@ -2889,7 +2886,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.3,
+    "seconds": 0.1,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2913,7 +2910,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.11,
+   "seconds": 0.06,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -2927,7 +2924,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 1.7,
+   "case_seconds": 2.7,
    "cluster_key": "github.com/ipld/go-ipld-prime@0.21.0..0.22.0",
    "commit": "b6717c4b2f7fbbb4a7fa2d328c757abebe005fef",
    "context_only_symbols": 0,
@@ -2965,7 +2962,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.0,
+    "seconds": 2.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -2989,7 +2986,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.26,
+   "seconds": 0.28,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3003,7 +3000,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 15.1,
+   "case_seconds": 14.6,
    "cluster_key": "github.com/gomarkdown/markdown@0.0.0-20260217112301-37c66b85d6ab..0.0.0-20260411013819-759bbc3e3207",
    "commit": "37c66b85d6ab025ba67a73ba03b7f3ef55859cca",
    "context_only_symbols": 0,
@@ -3047,7 +3044,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.2,
+    "seconds": 1.9,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3072,7 +3069,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 10.36,
+   "seconds": 10.3,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -3086,7 +3083,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 1.6,
+   "case_seconds": 1.4,
    "cluster_key": "github.com/gohugoio/hugo@0.161.1..0.162.0",
    "commit": "ea8f66a7ce988664dcc84c052fc96757042e2e4a",
    "context_only_symbols": 0,
@@ -3124,7 +3121,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.4,
+    "seconds": 1.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3223,7 +3220,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.06,
+   "seconds": 0.07,
    "symbols": 10,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3299,7 +3296,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.12,
+   "seconds": 0.06,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3313,7 +3310,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 0.3,
+   "case_seconds": 0.2,
    "cluster_key": "github.com/slack-go/slack@0.23.0..0.23.1",
    "commit": "35d8f31a076f73db88bf08304a8418846ed7b865",
    "context_only_symbols": 0,
@@ -3386,7 +3383,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 144.4,
+   "case_seconds": 108.9,
    "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
    "commit": "c3eb0db6df91379e15ce1a8709cb1b64f482248e",
    "context_only_symbols": 0,
@@ -3431,7 +3428,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.6,
+    "seconds": 2.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3465,7 +3462,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 118.37,
+   "seconds": 92.98,
    "symbols": 10,
    "verdict": "REACHABLE",
    "verification": {
@@ -3479,7 +3476,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 1.2,
+   "case_seconds": 1.4,
    "cluster_key": "helm.sh/helm/v3@3.20.1..3.20.2",
    "commit": "a2369ca71c0ef633bf6e4fccd66d634eb379b371",
    "context_only_symbols": 0,
@@ -3514,7 +3511,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.8,
+    "seconds": 0.9,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3538,7 +3535,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.03,
+   "seconds": 0.04,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3552,7 +3549,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 61.8,
+   "case_seconds": 48.2,
    "cluster_key": "github.com/MontFerret/ferret/v2@2.0.0-alpha.3..2.0.0-alpha.4",
    "commit": "52dcb789af7efe86eafa3daa4c79e8df320fb17b",
    "context_only_symbols": 0,
@@ -3598,7 +3595,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 4.9,
+    "seconds": 2.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3626,7 +3623,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 56.08,
+   "seconds": 44.43,
    "symbols": 4,
    "verdict": "REACHABLE",
    "verification": {
@@ -3640,7 +3637,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 35.6,
+   "case_seconds": 18.1,
    "cluster_key": "github.com/bettercap/bettercap/v2@2.41.5..2.41.7",
    "commit": "e71140334ed0d309413512462b2c35c6f513b832",
    "context_only_symbols": 0,
@@ -3687,7 +3684,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.5,
+    "seconds": 2.7,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3715,7 +3712,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 30.85,
+   "seconds": 14.91,
    "symbols": 10,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3729,7 +3726,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.8,
+   "case_seconds": 2.4,
    "cluster_key": "github.com/rclone/rclone@1.73.4..1.73.5",
    "commit": "984d07c9c3f71f0a65d44064c2e4cda7c1878a0f",
    "context_only_symbols": 0,
@@ -3764,7 +3761,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 3.1,
+    "seconds": 2.1,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3788,7 +3785,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.03,
+   "seconds": 0.02,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3802,7 +3799,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.6,
+   "case_seconds": 2.2,
    "cluster_key": "github.com/gohugoio/hugo@0.159.1..0.159.2",
    "commit": "86c7d3afacab79dc53325602d77ef884b7570268",
    "context_only_symbols": 0,
@@ -3837,7 +3834,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 3.3,
+    "seconds": 2.0,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3861,7 +3858,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.04,
+   "seconds": 0.02,
    "symbols": 4,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3875,7 +3872,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 3.8,
+   "case_seconds": 2.3,
    "cluster_key": "go.opentelemetry.io/otel@1.40.0..1.41.0",
    "commit": "a3a5317c5caed1656fb5b301b66dfeb3c4c944e0",
    "context_only_symbols": 0,
@@ -3912,7 +3909,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.6,
+    "seconds": 1.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -3936,7 +3933,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.44,
+   "seconds": 0.27,
    "symbols": 10,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -3950,7 +3947,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 186.0,
+   "case_seconds": 108.4,
    "cluster_key": "github.com/osrg/gobgp/v4@4.4.0..4.5.0",
    "commit": "12b4ebaef14f61e1c7c7403c770b67826f0b8cf4",
    "context_only_symbols": 0,
@@ -3991,7 +3988,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.7,
+    "seconds": 2.3,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4025,7 +4022,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 150.15,
+   "seconds": 88.67,
    "symbols": 10,
    "verdict": "REACHABLE",
    "verification": {
@@ -4039,7 +4036,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.7 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.1,
+   "case_seconds": 1.9,
    "cluster_key": "github.com/dgraph-io/dgraph/v25@25.3.0..25.3.1",
    "commit": "788883001e1049d6c482fd1053b730a9a02a54d5",
    "context_only_symbols": 0,
@@ -4076,7 +4073,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.7 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.7,
+    "seconds": 1.3,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4100,7 +4097,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.07,
+   "seconds": 0.04,
    "symbols": 10,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4114,7 +4111,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.5,
+   "case_seconds": 0.4,
    "cluster_key": "github.com/Azure/go-ntlmssp@0.1.0..0.1.1",
    "commit": "679c777cd4d937215e617d47aa5f1de0dfad6240",
    "context_only_symbols": 0,
@@ -4173,7 +4170,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.14,
+   "seconds": 0.13,
    "symbols": 1,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4187,7 +4184,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 2.1,
+   "case_seconds": 1.1,
    "cluster_key": "github.com/pocketbase/pocketbase@0.37.3..0.37.4",
    "commit": "83e44a7cfbc7312c3f5e3d2f643da45512fcbc52",
    "context_only_symbols": 0,
@@ -4225,7 +4222,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.5,
+    "seconds": 1.0,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4249,7 +4246,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.15,
+   "seconds": 0.06,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4263,7 +4260,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.8,
+   "case_seconds": 2.2,
    "cluster_key": "helm.sh/helm/v4@4.1.3..4.1.4",
    "commit": "c94d381b03be117e7e57908edbf642104e00eb8f",
    "context_only_symbols": 0,
@@ -4301,7 +4298,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 3.4,
+    "seconds": 1.9,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4325,7 +4322,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.04,
+   "seconds": 0.02,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4339,7 +4336,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 4.6,
+   "case_seconds": 3.3,
    "cluster_key": "github.com/gohugoio/hugo@0.163.2..0.163.3",
    "commit": "19a5cec0b9618163bb519487382e861d29edf383",
    "context_only_symbols": 0,
@@ -4377,7 +4374,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 4.0,
+    "seconds": 2.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4401,7 +4398,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.05,
+   "seconds": 0.02,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4415,7 +4412,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 6.0,
+   "case_seconds": 2.7,
    "cluster_key": "github.com/rclone/rclone@1.74.2..1.74.3",
    "commit": "b22fe9811c672e4d226ae2c054d7c965d8783805",
    "context_only_symbols": 0,
@@ -4453,7 +4450,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 4.6,
+    "seconds": 2.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4477,7 +4474,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.1,
+   "seconds": 0.06,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4491,7 +4488,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 13.4,
+   "case_seconds": 4.7,
    "cluster_key": "github.com/gohugoio/hugo@0.163.0..0.163.1",
    "commit": "4a9485336a3ff2cea07ab88e2a17ec34d5baaa6e",
    "context_only_symbols": 0,
@@ -4529,7 +4526,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 12.7,
+    "seconds": 4.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4553,7 +4550,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.13,
+   "seconds": 0.03,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4567,7 +4564,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 177.9,
+   "case_seconds": 135.8,
    "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
    "commit": "c3eb0db6df91379e15ce1a8709cb1b64f482248e",
    "context_only_symbols": 0,
@@ -4608,7 +4605,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.0,
+    "seconds": 0.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4643,7 +4640,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 122.13,
+   "seconds": 92.84,
    "symbols": 10,
    "verdict": "REACHABLE",
    "verification": {
@@ -4657,7 +4654,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.3,
+   "case_seconds": 5.2,
    "cluster_key": "helm.sh/helm/v4@4.1.3..4.1.4",
    "commit": "c94d381b03be117e7e57908edbf642104e00eb8f",
    "context_only_symbols": 0,
@@ -4695,7 +4692,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.1,
+    "seconds": 4.1,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4719,7 +4716,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.04,
+   "seconds": 0.07,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4733,7 +4730,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 127.9,
+   "case_seconds": 110.1,
    "cluster_key": "github.com/quic-go/quic-go@0.59.0..0.59.1",
    "commit": "7659dd8e0fa06b41290ad29af323d93d673c6b36",
    "context_only_symbols": 0,
@@ -4774,7 +4771,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 3.0,
+    "seconds": 4.1,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4801,7 +4798,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 98.78,
+   "seconds": 85.92,
    "symbols": 3,
    "verdict": "REACHABLE",
    "verification": {
@@ -4815,7 +4812,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 5.7,
+   "case_seconds": 6.0,
    "cluster_key": "github.com/gohugoio/hugo@0.161.1..0.162.0",
    "commit": "ea8f66a7ce988664dcc84c052fc96757042e2e4a",
    "context_only_symbols": 0,
@@ -4853,7 +4850,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 4.4,
+    "seconds": 5.8,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4877,7 +4874,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.09,
+   "seconds": 0.05,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -4891,7 +4888,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 136.1,
+   "case_seconds": 110.7,
    "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
    "commit": "c3eb0db6df91379e15ce1a8709cb1b64f482248e",
    "context_only_symbols": 0,
@@ -4933,7 +4930,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.6,
+    "seconds": 0.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -4965,7 +4962,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 134.7,
+   "seconds": 109.25,
    "symbols": 6,
    "verdict": "REACHABLE",
    "verification": {
@@ -4979,7 +4976,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 208.9,
+   "case_seconds": 145.2,
    "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
    "commit": "c3eb0db6df91379e15ce1a8709cb1b64f482248e",
    "context_only_symbols": 0,
@@ -5057,7 +5054,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 162.72,
+   "seconds": 108.39,
    "symbols": 9,
    "verdict": "REACHABLE",
    "verification": {
@@ -5071,7 +5068,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.6,
+   "case_seconds": 2.8,
    "cluster_key": "github.com/gohugoio/hugo@0.160.1..0.161.0",
    "commit": "d6bc8165e62b29d7d70ede01ed01d0f88de327e6",
    "context_only_symbols": 0,
@@ -5109,7 +5106,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 3.0,
+    "seconds": 1.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5133,7 +5130,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.08,
+   "seconds": 0.07,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5147,7 +5144,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 159.3,
+   "case_seconds": 120.9,
    "cluster_key": "github.com/ollama/ollama@0.17.1-rc2..0.17.1",
    "commit": "7f9efd53dfa6dd87ac423695f5ca8ffff5a6222c",
    "context_only_symbols": 0,
@@ -5197,7 +5194,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 14.1,
+    "seconds": 16.5,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5227,7 +5224,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 139.53,
+   "seconds": 97.37,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5241,7 +5238,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 37.9,
+   "case_seconds": 34.2,
    "cluster_key": "github.com/klauspost/compress@1.18.6..1.18.7",
    "commit": "ac2f5e87a3089bd58c974ca53cef71c7aa8bf877",
    "context_only_symbols": 0,
@@ -5278,7 +5275,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.9,
+    "seconds": 0.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5302,7 +5299,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 34.5,
+   "seconds": 31.46,
    "symbols": 1,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5316,7 +5313,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 1.2,
+   "case_seconds": 0.7,
    "cluster_key": "oras.land/oras-go/v2@2.6.0..2.6.1",
    "commit": "05a2b09cbf2eab1df691411884dc4df741ec56ab",
    "context_only_symbols": 0,
@@ -5354,7 +5351,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.8,
+    "seconds": 0.3,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5378,7 +5375,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.18,
+   "seconds": 0.19,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5392,7 +5389,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 0.3,
+   "case_seconds": 0.2,
    "cluster_key": "oras.land/oras-go/v2@2.6.1..2.6.2",
    "commit": "47b7c804cb38a4af659ec735e473d3854c63a3c0",
    "context_only_symbols": 0,
@@ -5429,7 +5426,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.2,
+    "seconds": 0.1,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5453,7 +5450,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.05,
+   "seconds": 0.02,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5467,7 +5464,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.9,
+   "case_seconds": 0.7,
    "cluster_key": "oras.land/oras-go/v2@2.6.0..2.6.1",
    "commit": "05a2b09cbf2eab1df691411884dc4df741ec56ab",
    "context_only_symbols": 0,
@@ -5529,7 +5526,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.24,
+   "seconds": 0.21,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5543,7 +5540,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 1.2,
+   "case_seconds": 0.7,
    "cluster_key": "oras.land/oras-go/v2@2.6.0..2.6.1",
    "commit": "05a2b09cbf2eab1df691411884dc4df741ec56ab",
    "context_only_symbols": 0,
@@ -5581,7 +5578,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.5,
+    "seconds": 0.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5605,7 +5602,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.41,
+   "seconds": 0.21,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5619,7 +5616,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 0.7,
+   "case_seconds": 0.8,
    "cluster_key": "oras.land/oras-go/v2@2.6.0..2.6.1",
    "commit": "05a2b09cbf2eab1df691411884dc4df741ec56ab",
    "context_only_symbols": 0,
@@ -5681,7 +5678,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.2,
+   "seconds": 0.22,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5695,7 +5692,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 151.2,
+   "case_seconds": 111.4,
    "cluster_key": "github.com/osrg/gobgp/v4@4.6.0..4.7.0",
    "commit": "51511000d5b566e9c6d20c7b90e6d9cd23140c51",
    "context_only_symbols": 0,
@@ -5736,7 +5733,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.6,
+    "seconds": 0.7,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5770,7 +5767,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 119.77,
+   "seconds": 93.08,
    "symbols": 10,
    "verdict": "REACHABLE",
    "verification": {
@@ -5784,7 +5781,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 201.4,
+   "case_seconds": 132.5,
    "cluster_key": "github.com/osrg/gobgp/v4@4.5.0..4.6.0",
    "commit": "5f191066a78e2c1e929c54b5b75fe2c683c166e4",
    "context_only_symbols": 0,
@@ -5826,7 +5823,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 1.0,
+    "seconds": 0.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5856,7 +5853,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 148.08,
+   "seconds": 106.67,
    "symbols": 6,
    "verdict": "REACHABLE",
    "verification": {
@@ -5870,7 +5867,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 2.9,
+   "case_seconds": 2.0,
    "cluster_key": "github.com/xuri/excelize/v2@2.10.1..2.11.0",
    "commit": "5ad5ab3af0054c55bdce09f1530085600e9f2e45",
    "context_only_symbols": 0,
@@ -5908,7 +5905,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.4,
+    "seconds": 1.7,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -5932,7 +5929,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.42,
+   "seconds": 0.19,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -5946,7 +5943,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 197.1,
+   "case_seconds": 126.4,
    "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
    "commit": "c3eb0db6df91379e15ce1a8709cb1b64f482248e",
    "context_only_symbols": 0,
@@ -6025,7 +6022,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 146.54,
+   "seconds": 85.34,
    "symbols": 10,
    "verdict": "REACHABLE",
    "verification": {
@@ -6039,7 +6036,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.8 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 9.8,
+   "case_seconds": 4.6,
    "cluster_key": "github.com/aquasecurity/trivy@0.70.0..0.71.0",
    "commit": "8a3177aedf7ee0864920eb1852eef031cd3742b8",
    "context_only_symbols": 0,
@@ -6077,7 +6074,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.8 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 5.0,
+    "seconds": 3.0,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6101,7 +6098,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.11,
+   "seconds": 0.07,
    "symbols": 4,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -6115,7 +6112,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.26.4 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 0.4,
+   "case_seconds": 0.5,
    "cluster_key": "github.com/forgekeep/nebula-mesh@0.4.0..0.5.0",
    "commit": "853717c53d2b02450335e1b3bb1fafaa5bdba94c",
    "context_only_symbols": 0,
@@ -6153,7 +6150,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.4 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.2,
+    "seconds": 0.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6177,7 +6174,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.07,
+   "seconds": 0.03,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -6191,7 +6188,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.26.4 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 0.7,
+   "case_seconds": 0.5,
    "cluster_key": "github.com/forgekeep/nebula-mesh@0.4.0..0.5.0",
    "commit": "853717c53d2b02450335e1b3bb1fafaa5bdba94c",
    "context_only_symbols": 0,
@@ -6229,7 +6226,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26.4 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.3,
+    "seconds": 0.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6253,7 +6250,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.08,
+   "seconds": 0.04,
    "symbols": 5,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -6267,7 +6264,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.7,
+   "case_seconds": 1.6,
    "cluster_key": "google.golang.org/grpc@1.82.0..1.82.1",
    "commit": "bd239854f0ab7f1ee63457d47f7c1d2675e1f736",
    "context_only_symbols": 0,
@@ -6305,7 +6302,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.9,
+    "seconds": 1.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6329,7 +6326,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.15,
+   "seconds": 0.04,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -6343,7 +6340,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 2.8,
+   "case_seconds": 1.5,
    "cluster_key": "github.com/getkin/kin-openapi@0.143.0..0.144.0",
    "commit": "30e292371a89ca6d1f91a9553e0aa518b49f838d",
    "context_only_symbols": 0,
@@ -6378,7 +6375,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.6,
+    "seconds": 1.5,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6402,7 +6399,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.06,
+   "seconds": 0.02,
    "symbols": 5,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -6416,7 +6413,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 2.1,
+   "case_seconds": 1.6,
    "cluster_key": "github.com/getkin/kin-openapi@0.143.0..0.144.0",
    "commit": "30e292371a89ca6d1f91a9553e0aa518b49f838d",
    "context_only_symbols": 0,
@@ -6451,7 +6448,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.7,
+    "seconds": 1.3,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6475,7 +6472,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.04,
+   "seconds": 0.03,
    "symbols": 5,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -6489,7 +6486,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.26 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 2.8,
+   "case_seconds": 2.2,
    "cluster_key": "go.etcd.io/etcd/server/v3@3.7.0..3.7.1",
    "commit": "4d71f7c83a2cef992d57abd3284edfaf66c91a4a",
    "context_only_symbols": 0,
@@ -6526,7 +6523,7 @@
    "prep": {
     "module_rel": "server",
     "reason": "go: go.mod requires go >= 1.26 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.9,
+    "seconds": 1.8,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6550,7 +6547,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.03,
+   "seconds": 0.05,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -6564,7 +6561,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 9.7,
+   "case_seconds": 8.7,
    "cluster_key": "github.com/gotd/td@0.145.0..0.145.1",
    "commit": "012643213c53db2af2450c45e37c32b7bc92b0f8",
    "context_only_symbols": 0,
@@ -6601,7 +6598,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 9.0,
+    "seconds": 8.3,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6625,7 +6622,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.04,
+   "seconds": 0.02,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -6639,7 +6636,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 192.7,
+   "case_seconds": 121.6,
    "cluster_key": "github.com/prebid/prebid-server/v4@4.3.0..4.4.0",
    "commit": "b4476c2ca5353753df428745f11c299fd7534070",
    "context_only_symbols": 0,
@@ -6679,7 +6676,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 11.9,
+    "seconds": 9.0,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6709,7 +6706,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 144.88,
+   "seconds": 80.91,
    "symbols": 7,
    "verdict": "REACHABLE",
    "verification": {
@@ -6723,7 +6720,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 92.0,
+   "case_seconds": 81.5,
    "cluster_key": "github.com/pion/stun/v3@3.1.4..3.1.5",
    "commit": "6a869cb3ce12869699dbf007fa48e1ce6760eca5",
    "context_only_symbols": 0,
@@ -6758,7 +6755,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.1,
+    "seconds": 2.8,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6778,7 +6775,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.35,
+   "seconds": 0.63,
    "symbols": 0,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -6792,7 +6789,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 118.7,
+   "case_seconds": 124.2,
    "cluster_key": "github.com/pion/dtls/v3@3.1.3..3.1.4",
    "commit": "49458d604a4f3ebce1bf9587a0f3e5f3f6b4a55e",
    "context_only_symbols": 0,
@@ -6829,7 +6826,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.5,
+    "seconds": 1.6,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6853,7 +6850,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 82.93,
+   "seconds": 89.48,
    "symbols": 1,
    "verdict": "REACHABLE",
    "verification": {
@@ -6867,7 +6864,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 5.6,
+   "case_seconds": 5.4,
    "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
    "commit": "5bc93a2a7ab0ebd0a11352bc4968eabeffb18027",
    "context_only_symbols": 0,
@@ -6905,7 +6902,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 4.8,
+    "seconds": 3.4,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -6929,7 +6926,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.34,
+   "seconds": 0.73,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -6943,7 +6940,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 8.3,
+   "case_seconds": 4.5,
    "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
    "commit": "5bc93a2a7ab0ebd0a11352bc4968eabeffb18027",
    "context_only_symbols": 0,
@@ -6981,7 +6978,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 6.6,
+    "seconds": 3.7,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7005,7 +7002,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.56,
+   "seconds": 0.25,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7019,7 +7016,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 6.0,
+   "case_seconds": 5.0,
    "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
    "commit": "5bc93a2a7ab0ebd0a11352bc4968eabeffb18027",
    "context_only_symbols": 0,
@@ -7057,7 +7054,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 4.3,
+    "seconds": 4.0,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7081,7 +7078,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.25,
+   "seconds": 0.33,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7095,7 +7092,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 4.8,
+   "case_seconds": 5.9,
    "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
    "commit": "5bc93a2a7ab0ebd0a11352bc4968eabeffb18027",
    "context_only_symbols": 0,
@@ -7133,7 +7130,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 3.8,
+    "seconds": 4.0,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7171,7 +7168,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 9.7,
+   "case_seconds": 3.4,
    "cluster_key": "github.com/rclone/rclone@1.74.3..1.74.4",
    "commit": "37e4117f48bdef0fa1ba27f6467d7a891b0b55ba",
    "context_only_symbols": 0,
@@ -7209,7 +7206,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 8.7,
+    "seconds": 2.7,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7233,7 +7230,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.06,
+   "seconds": 0.07,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7284,7 +7281,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 5.4,
+    "seconds": 5.1,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7308,7 +7305,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.34,
+   "seconds": 0.44,
    "symbols": 10,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7322,7 +7319,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 5.2,
+   "case_seconds": 7.8,
    "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
    "commit": "5bc93a2a7ab0ebd0a11352bc4968eabeffb18027",
    "context_only_symbols": 0,
@@ -7360,7 +7357,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 3.8,
+    "seconds": 6.7,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7384,7 +7381,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.21,
+   "seconds": 0.49,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7398,7 +7395,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 4.6,
+   "case_seconds": 6.9,
    "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
    "commit": "5bc93a2a7ab0ebd0a11352bc4968eabeffb18027",
    "context_only_symbols": 0,
@@ -7436,7 +7433,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 3.1,
+    "seconds": 5.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7460,7 +7457,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.23,
+   "seconds": 0.81,
    "symbols": 2,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7474,7 +7471,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.7,
+   "case_seconds": 5.6,
    "cluster_key": "github.com/rclone/rclone@1.74.3..1.74.4",
    "commit": "37e4117f48bdef0fa1ba27f6467d7a891b0b55ba",
    "context_only_symbols": 0,
@@ -7512,7 +7509,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.8,
+    "seconds": 3.9,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7550,7 +7547,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.2,
+   "case_seconds": 3.5,
    "cluster_key": "github.com/rclone/rclone@1.74.3..1.74.4",
    "commit": "37e4117f48bdef0fa1ba27f6467d7a891b0b55ba",
    "context_only_symbols": 0,
@@ -7588,7 +7585,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.9,
+    "seconds": 2.8,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7626,7 +7623,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 6.3,
+   "case_seconds": 5.0,
    "cluster_key": "github.com/rclone/rclone@1.74.3..1.74.4",
    "commit": "37e4117f48bdef0fa1ba27f6467d7a891b0b55ba",
    "context_only_symbols": 0,
@@ -7664,7 +7661,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 5.9,
+    "seconds": 4.3,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7688,7 +7685,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.09,
+   "seconds": 0.06,
    "symbols": 4,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7702,7 +7699,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 7.9,
+   "case_seconds": 5.2,
    "cluster_key": "github.com/rclone/rclone@1.74.3..1.74.4",
    "commit": "37e4117f48bdef0fa1ba27f6467d7a891b0b55ba",
    "context_only_symbols": 0,
@@ -7740,7 +7737,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 7.5,
+    "seconds": 3.9,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7764,7 +7761,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.09,
+   "seconds": 0.07,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7778,7 +7775,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 4.0,
+   "case_seconds": 5.8,
    "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
    "commit": "5bc93a2a7ab0ebd0a11352bc4968eabeffb18027",
    "context_only_symbols": 0,
@@ -7816,7 +7813,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.4,
+    "seconds": 4.7,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7840,7 +7837,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.2,
+   "seconds": 0.23,
    "symbols": 7,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7854,7 +7851,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 4.3,
+   "case_seconds": 4.8,
    "cluster_key": "github.com/rclone/rclone@1.74.4..1.75.0",
    "commit": "5bc93a2a7ab0ebd0a11352bc4968eabeffb18027",
    "context_only_symbols": 0,
@@ -7892,7 +7889,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.9,
+    "seconds": 4.1,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -7916,7 +7913,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.32,
+   "seconds": 0.17,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -7930,7 +7927,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 0.7,
+   "case_seconds": 0.9,
    "cluster_key": "github.com/go-git/go-git/v5@5.19.1..5.19.2",
    "commit": "3c3be601aa6c0fd0d536c0d1e4f898b4c60e65fe",
    "context_only_symbols": 0,
@@ -7968,7 +7965,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.6,
+    "seconds": 0.7,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8006,7 +8003,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 5.5,
+   "case_seconds": 5.6,
    "cluster_key": "github.com/hyperledger/fabric-ca@1.5.20..1.5.21",
    "commit": "0727b136fc5e89dc349de5cfcf3e99f5a59fd03a",
    "context_only_symbols": 0,
@@ -8041,7 +8038,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 4.5,
+    "seconds": 5.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8079,7 +8076,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 18.7,
+   "case_seconds": 21.2,
    "cluster_key": "github.com/insomniacslk/dhcp@0.0.0-20260603135910-a415979eb11e..0.0.0-20260719225207-c76316d4aa82",
    "commit": "a415979eb11e6d3ac6a8949f9e45d7a29f0279af",
    "context_only_symbols": 0,
@@ -8116,7 +8113,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.9,
+    "seconds": 4.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8140,7 +8137,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 15.57,
+   "seconds": 16.62,
    "symbols": 1,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -8154,7 +8151,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 149.4,
+   "case_seconds": 103.5,
    "cluster_key": "github.com/cilium/ebpf@0.21.0..0.22.0",
    "commit": "fd33a781ea9ebf9d1bff748707793deccc412c05",
    "context_only_symbols": 0,
@@ -8193,7 +8190,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 10.4,
+    "seconds": 2.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8226,7 +8223,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 96.31,
+   "seconds": 67.37,
    "symbols": 10,
    "verdict": "REACHABLE",
    "verification": {
@@ -8240,7 +8237,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.9 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 0.6,
+   "case_seconds": 0.4,
    "cluster_key": "github.com/crossplane/crossplane-runtime/v2@2.4.0-rc.0..2.4.0-rc.1",
    "commit": "301f28c13d44494c816ca845e3e837d2c405fab3",
    "context_only_symbols": 0,
@@ -8278,7 +8275,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.9 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.3,
+    "seconds": 0.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8302,7 +8299,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.09,
+   "seconds": 0.05,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -8316,7 +8313,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 2.4,
+   "case_seconds": 2.6,
    "cluster_key": "google.golang.org/grpc@1.83.0..1.83.1",
    "commit": "4c226daff88f54441d70f710815e07b81fb162b2",
    "context_only_symbols": 0,
@@ -8354,7 +8351,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 2.0,
+    "seconds": 1.5,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8378,7 +8375,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.07,
+   "seconds": 0.04,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -8392,7 +8389,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.26.4 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 17.7,
+   "case_seconds": 12.5,
    "cluster_key": "github.com/VictoriaMetrics/VictoriaMetrics@1.146.0-cluster..1.146.0",
    "commit": "e8cfb1e17236a7df5770fce768e29e48f1ccf49a",
    "context_only_symbols": 0,
@@ -8430,7 +8427,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 16.3,
+    "seconds": 8.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8454,7 +8451,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.39,
+   "seconds": 0.33,
    "symbols": 6,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -8468,7 +8465,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 3.1,
+   "case_seconds": 0.6,
    "cluster_key": "github.com/xuri/excelize/v2@2.10.1..2.11.0",
    "commit": "5ad5ab3af0054c55bdce09f1530085600e9f2e45",
    "context_only_symbols": 0,
@@ -8506,7 +8503,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 2.8,
+    "seconds": 0.3,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8530,7 +8527,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.16,
+   "seconds": 0.18,
    "symbols": 3,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -8544,7 +8541,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 1.0,
+   "case_seconds": 0.6,
    "cluster_key": "github.com/xuri/excelize/v2@2.10.1..2.11.0",
    "commit": "5ad5ab3af0054c55bdce09f1530085600e9f2e45",
    "context_only_symbols": 0,
@@ -8606,7 +8603,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.39,
+   "seconds": 0.21,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -8620,7 +8617,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 3.4,
+   "case_seconds": 1.6,
    "cluster_key": "github.com/pocketbase/pocketbase@0.39.6..0.39.7",
    "commit": "de3c3f715bcab86d87ce51af96fdc05570afb25e",
    "context_only_symbols": 0,
@@ -8658,7 +8655,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 3.2,
+    "seconds": 1.0,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8682,7 +8679,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.07,
+   "seconds": 0.05,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -8696,7 +8693,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 1.9,
+   "case_seconds": 0.9,
    "cluster_key": "github.com/caddyserver/caddy/v2@2.11.3..2.11.4",
    "commit": "cc58caa1099240ef1a4c280b892260b380a85c86",
    "context_only_symbols": 0,
@@ -8734,7 +8731,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 1.6,
+    "seconds": 0.6,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8758,7 +8755,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.14,
+   "seconds": 0.04,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -8772,7 +8769,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.26 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 13.3,
+   "case_seconds": 8.6,
    "cluster_key": "github.com/hatchet-dev/hatchet@0.91.1..0.91.2",
    "commit": "06c1fe43543e853ea98ecc2e6a575e2b8310bbeb",
    "context_only_symbols": 0,
@@ -8807,7 +8804,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.26 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 10.3,
+    "seconds": 6.8,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8826,7 +8823,7 @@
    },
    "retrieval": null,
    "schema_errors": [],
-   "seconds": 0.02,
+   "seconds": 0.03,
    "symbols": 0,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -8840,20 +8837,19 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 419.8,
+   "case_seconds": 366.7,
    "cluster_key": "github.com/snowflakedb/gosnowflake/v2@2.1.0..2.2.0",
    "commit": "9dbf61b99e689c3b930d7e204c5aef0fc5e0412d",
    "context_only_symbols": 0,
    "created": "2026-10-06",
    "dynamic_edges_on_verified": 58,
    "entries": {
-    "CANT_DETERMINE": 6,
+    "CANT_DETERMINE": 5,
     "NOT_REACHABLE": 4,
-    "REACHABLE": 25
+    "REACHABLE": 26
    },
    "entry_reasons": {
-    "ANALYSIS_FAILED": 5,
-    "METHOD_DISAGREEMENT": 1
+    "ANALYSIS_FAILED": 5
    },
    "evidence_level": "CANDIDATE_LEVEL",
    "evidence_status": "AVAILABLE",
@@ -8875,8 +8871,7 @@
    "method_pairs": {
     "ERROR+PRESENT": 5,
     "NO_PATH+ABSENT": 4,
-    "PATH_FOUND+ABSENT": 1,
-    "PATH_FOUND+PRESENT": 25
+    "PATH_FOUND+PRESENT": 26
    },
    "mode": "RELEASE",
    "mode_reason": "REQUESTED",
@@ -8890,7 +8885,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 11.8,
+    "seconds": 15.9,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8899,6 +8894,7 @@
    "reachable_ranks": [
     2,
     3,
+    5,
     6,
     8,
     10
@@ -8919,21 +8915,21 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 298.04,
+   "seconds": 268.71,
    "symbols": 7,
    "verdict": "REACHABLE",
    "verification": {
-    "checks_run": 799,
+    "checks_run": 802,
     "downgraded": 0,
     "failed_by_kind": {},
     "failures": 0,
     "status": "PASSED"
    },
-   "verified_paths": 25
+   "verified_paths": 26
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 1.2,
+   "case_seconds": 0.5,
    "cluster_key": "github.com/xuri/excelize/v2@2.11.0..2.11.1-0.20260915055537-22f76f9acb94",
    "commit": "90ff348959dd842cbf3a4fbd93a78afbe18db476",
    "context_only_symbols": 0,
@@ -8970,7 +8966,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.5,
+    "seconds": 0.3,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -8994,7 +8990,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.35,
+   "seconds": 0.13,
    "symbols": 10,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -9008,7 +9004,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 1.1,
+   "case_seconds": 0.3,
    "cluster_key": "github.com/xuri/excelize/v2@2.11.0..2.11.1-0.20260930021559-01a9ff32fb3c",
    "commit": "90ff348959dd842cbf3a4fbd93a78afbe18db476",
    "context_only_symbols": 0,
@@ -9046,7 +9042,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.3,
+    "seconds": 0.1,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -9070,7 +9066,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.57,
+   "seconds": 0.15,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -9084,7 +9080,7 @@
   },
   {
    "app_list_error": null,
-   "case_seconds": 1.8,
+   "case_seconds": 0.5,
    "cluster_key": "github.com/moby/sys/user@0.4.0..0.4.1",
    "commit": "71f0c5ead442a11945a589a7aafd6ef5976fffc8",
    "context_only_symbols": 0,
@@ -9122,7 +9118,7 @@
    "prep": {
     "module_rel": "user",
     "reason": null,
-    "seconds": 1.4,
+    "seconds": 0.2,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -9146,7 +9142,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.24,
+   "seconds": 0.22,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -9160,7 +9156,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 0.4,
+   "case_seconds": 0.3,
    "cluster_key": "github.com/xuri/excelize/v2@2.11.0..2.11.1-0.20260929015830-8ffeb07ec9a3",
    "commit": "90ff348959dd842cbf3a4fbd93a78afbe18db476",
    "context_only_symbols": 0,
@@ -9221,7 +9217,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.15,
+   "seconds": 0.08,
    "symbols": 10,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -9235,7 +9231,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 0.5,
+   "case_seconds": 0.4,
    "cluster_key": "github.com/xuri/excelize/v2@2.11.0..2.11.1-0.20260912113515-5f636f9dcde5",
    "commit": "90ff348959dd842cbf3a4fbd93a78afbe18db476",
    "context_only_symbols": 0,
@@ -9273,7 +9269,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.3,
+    "seconds": 0.2,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -9297,7 +9293,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.15,
+   "seconds": 0.1,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -9311,7 +9307,7 @@
   },
   {
    "app_list_error": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-   "case_seconds": 0.4,
+   "case_seconds": 0.3,
    "cluster_key": "github.com/xuri/excelize/v2@2.11.0..2.11.1-0.20261003002531-6258dcebc4e2",
    "commit": "90ff348959dd842cbf3a4fbd93a78afbe18db476",
    "context_only_symbols": 0,
@@ -9349,7 +9345,7 @@
    "prep": {
     "module_rel": "",
     "reason": "go: go.mod requires go >= 1.25.0 (running go 1.24.7; GOTOOLCHAIN=local)",
-    "seconds": 0.2,
+    "seconds": 0.1,
     "status": "PREP_FAILED",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -9373,7 +9369,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.14,
+   "seconds": 0.07,
    "symbols": 8,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -9425,7 +9421,7 @@
    "prep": {
     "module_rel": "",
     "reason": null,
-    "seconds": 0.5,
+    "seconds": 0.4,
     "status": "READY",
     "synthesized_go_mod": false,
     "vendor_dropped": false,
@@ -9449,7 +9445,7 @@
     "k": 10
    },
    "schema_errors": [],
-   "seconds": 0.19,
+   "seconds": 0.24,
    "symbols": 9,
    "verdict": "CANT_DETERMINE",
    "verification": {
@@ -9478,7 +9474,7 @@
    "GO-2023-1547"
   ],
   "different": [],
-  "seconds": 1416.9
+  "seconds": 1212.3
  },
  "summary": {
   "app_load_failure_causes": {
@@ -9498,9 +9494,9 @@
   },
   "dynamic_edges_on_verified": 511,
   "entry_results": {
-   "CANT_DETERMINE": 100,
+   "CANT_DETERMINE": 93,
    "NOT_REACHABLE": 369,
-   "REACHABLE": 277
+   "REACHABLE": 284
   },
   "evidence_status": {
    "AVAILABLE": 104,
@@ -9532,8 +9528,7 @@
    "ERROR+PRESENT": 5,
    "NO_PATH+ABSENT": 369,
    "NO_PATH+PRESENT": 20,
-   "PATH_FOUND+ABSENT": 7,
-   "PATH_FOUND+PRESENT": 277
+   "PATH_FOUND+PRESENT": 284
   },
   "mode": {
    "RELEASE": 120
@@ -9566,11 +9561,11 @@
    "REACHABLE": 32
   },
   "prep_seconds": {
-   "max": 363.6,
+   "max": 629.9,
    "n": 120,
-   "p50": 2.4,
-   "p95": 16.3,
-   "total": 895.6
+   "p50": 2.0,
+   "p95": 16.9,
+   "total": 1184.4
   },
   "prep_status": {
    "PREP_FAILED": 51,
@@ -9602,19 +9597,19 @@
    }
   },
   "seconds": {
-   "max": 711.8,
+   "max": 969.1,
    "n": 120,
-   "p50": 6.0,
-   "p95": 248.7,
-   "total": 6873.0
+   "p50": 5.2,
+   "p95": 275.5,
+   "total": 6859.4
   },
   "symbols": 745,
   "triage_seconds": {
-   "max": 530.6,
+   "max": 675.0,
    "n": 120,
-   "p50": 0.26,
-   "p95": 177.64,
-   "total": 4654.8
+   "p50": 0.25,
+   "p95": 180.99,
+   "total": 4470.6
   },
   "triaged": 120,
   "verdict": {
@@ -9623,7 +9618,7 @@
   },
   "verification": {
    "cases_with_downgrade": 0,
-   "checks_run": 11187,
+   "checks_run": 11225,
    "downgraded_entries": 0,
    "failed_by_kind": {}
   },

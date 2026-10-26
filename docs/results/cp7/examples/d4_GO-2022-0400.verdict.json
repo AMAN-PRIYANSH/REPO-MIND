@@ -55,16 +55,16 @@
    "github.com/ntbosscher/gobase": {
     "error_codes": [],
     "first_error": null,
-    "linker_seconds": 6.34,
+    "linker_seconds": 10.79,
     "load_failed": false,
-    "vta_seconds": 14.79
+    "vta_seconds": 12.44
    },
    "github.com/ntbosscher/gobase/auth/httpauth/jwtgen": {
     "error_codes": [],
     "first_error": null,
-    "linker_seconds": 1.89,
+    "linker_seconds": 1.69,
     "load_failed": false,
-    "vta_seconds": 3.61
+    "vta_seconds": 4.44
    }
   },
   "release_range_status": "AVAILABLE",
@@ -347,7 +347,7 @@
  "pre_policy_reason_codes": [],
  "pre_policy_verdict": "REACHABLE",
  "provenance": {
-  "created_at": "2026-10-26T18:55:50Z",
+  "created_at": "2026-10-26T20:51:52Z",
   "helper_contract": "1.0",
   "pipeline_version": "0.1.0",
   "repo_commit": null,
@@ -419,11 +419,11 @@
   "path": "<local>/data/triage_work/d4/GO-2022-0400/tree"
  },
  "timing": {
-  "inspect_seconds": 0.36,
-  "methods_seconds": 26.64,
+  "inspect_seconds": 0.27,
+  "methods_seconds": 29.35,
   "symbols_seconds": 0.0,
-  "total_seconds": 38.6,
-  "verifier_seconds": 11.6
+  "total_seconds": 40.39,
+  "verifier_seconds": 10.77
  },
  "toolchain": {
   "env": {
