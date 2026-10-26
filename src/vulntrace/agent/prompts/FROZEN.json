@@ -1,0 +1,13 @@
+{
+ "comment": "CP6 agent prompt templates, frozen before the first real run (no model has seen them yet). A change after seeing real results is a NEW file with a new _vN suffix (the old file stays), a new prompt-set name, and a labelled post-hoc row in the results; it never replaces v1. tests/unit/test_agent_prompts_frozen.py enforces this.",
+ "prompt_set": "agent_v1",
+ "sha256": {
+  "agent_graph_tools_v1.txt": "31d74c0f55e9910b03c8495be215f109a680b59155cb38e775dbd9afe7e1c394",
+  "agent_last_step_v1.txt": "d430579e50dbc3f4ec75945c8d6cb5adb237433d05dfd13c6f71400f19cc4c5b",
+  "agent_observation_v1.txt": "252c952aca11fd92c05fa314c52e843d45a955e35dfe14693259313c8522b297",
+  "agent_repair_v1.txt": "bf7ec1882d10c71d71fa76416503be1e965c399f5b62ac431f15e9c05de4176c",
+  "agent_repeat_v1.txt": "669f02b39f25434cba0361f7979bb0323431df46099b66f6b9e0f75f20eee04f",
+  "agent_system_v1.txt": "735bc0893e9463da3a76e3f8d990da4d4d0363965b4e24f77d4567bfb1399b95",
+  "agent_task_v1.txt": "a7350702baf85548f6874d4c2b9c230499b48ba01a9d20c109083e84edbe72df"
+ }
+}
