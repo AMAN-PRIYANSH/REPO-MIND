@@ -4,12 +4,12 @@ This file is the single source of truth for where the build stands. Claude Code 
 
 ## Current
 
-- Current checkpoint: **CP7 - End-to-end triage and evidence verifier**
-- State: `AWAITING_REVIEW`
-- Branch in use: `claude/vulntrace-ai-build-exhh01`
-- Specification: [checkpoints/CP7.md](../implementation/checkpoints/CP7.md)
+- Current checkpoint: **CP7b - Real applications (D3) and demo**
+- State: `READY`
+- Branch in use: (none yet; the CP7b session records its own `claude/...` branch)
+- Specification: [checkpoints/CP7b.md](../implementation/checkpoints/CP7b.md)
 
-State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` →) `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
+State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDICATION` →) `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
 
 ## Checkpoint ledger
 
@@ -22,28 +22,18 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` →) `AWAITING_REV
 | CP5 | Local LLM layer, root-cause selection, HyDE | APPROVED | claude/vulntrace-ai-build-o31zls | [CP5_REPORT](reports/CP5_REPORT.md) |
 | CP5b | Lifting and caller/callee queries (Go helper) | APPROVED | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
 | CP6 | LangGraph investigation agent (negative result) | APPROVED | claude/vulntrace-ai-build-1wfa8e | [CP6_REPORT](reports/CP6_REPORT.md) |
-| CP7 | End-to-end triage and evidence verifier | AWAITING_REVIEW | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
-| CP7b | Real applications (D3) and demo | NOT_RELEASED | - | - |
+| CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
+| CP7b | Real applications (D3) and demo | READY | - | - |
 | CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
 
 ## Current checkpoint task list
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-CP7 (started 26 Oct 2026 on `claude/vulntrace-ai-build-exhh01`, fresh from `main`; no earlier CP7 branch existed):
-
-- [x] 0. Environment check recorded (OS, Python, Go, git, Docker, network); pre-existing red test on `main` fixed (commit "CP7 task 0")
-- [x] 1. Pipeline `src/vulntrace/pipeline/` and `python -m vulntrace triage` (Mode 1 all changed non-test functions, Mode 2 retriever top-k, `auto` mode choice, optional lifting as `LIFTED` seeds, two methods per symbol + `verdict.py`, failure as `CANT_DETERMINE` with a reason code, safety flags)
-- [x] 2. Evidence verifier `src/vulntrace/verifier/` (funcs, call-site file/line, `edges`, entry/target structure, every `REACHABLE` has a verified path; downgrade-only; corrupted-path tests; no-upgrade proof by test)
-- [x] 3. `schemas/verdict.schema.json` extended without breaking old files; contract tests with recorded outputs per verdict and reason code
-- [x] 4. `python -m vulntrace eval triage`: D2 fixture metrics; D1/D4 distribution, coverage, `CANT_DETERMINE` reasons; Mode 2 `NOT_REACHABLE` policy; cost; results in `docs/results/cp7/` and `docs/results/CP7_TRIAGE_RESULTS.md` (headline fixed before results)
-- [x] 5. Tests (unit, contract, integration); CI green on the last commit
-- [x] 6. Report `docs/progress/reports/CP7_REPORT.md`; STATUS `AWAITING_REVIEW`
+(CP7b: not started.)
 
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-CP7 (26 Oct 2026, `claude/vulntrace-ai-build-exhh01`): complete, `AWAITING_REVIEW`. Everything is in `docs/progress/reports/CP7_REPORT.md` and `docs/results/CP7_TRIAGE_RESULTS.md`. Mode 2 NOT_REACHABLE policy: DOWNGRADE (5 raw D4 NOT_REACHABLE; the rule needs 20). The `data/` evidence and `data/triage/` verdicts are not committed; rebuild with `dataset materialize --set d1|d4`, then `eval triage --set d1|d4 --rerun`.
-
-(CP6 was approved on 26 Oct 2026 as a negative result; read the review notes at the end of checkpoints/CP3.md to CP6.md - they bind CP7. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists.)
+(CP7 was approved on 27 Oct 2026; read the review notes at the end of checkpoints/CP3.md to CP7.md - they bind CP7b. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists. If the CP7b session stops at AWAITING_ADJUDICATION, the supervisor sets the state to IN_PROGRESS on the builder branch once the sheets are filled, so a new session continues.)

@@ -71,3 +71,18 @@ D3 and real applications, the demo page, any new model run, retrieval or prompt 
 ## Review notes
 
 (The supervising assistant adds notes here.)
+
+**Supervisor review, 27 Oct 2026 - APPROVED** (branch `claude/vulntrace-ai-build-exhh01` at `a3c3ac1`).
+
+Checked by the supervisor: `pytest tests/unit tests/contract` -> 763 passed, 10 skipped; CI green on the last three commits (the earlier red run 121 is disclosed in the report: result files committed before re-rendering the document); every result file is under 512 KiB; no `data/`, traces or archives tracked. The results document's headline sentence was fixed in the renderer before any result existed, and was not edited afterwards.
+
+What the results say (numbers in `docs/results/CP7_TRIAGE_RESULTS.md`):
+
+1. **Fixtures (truth known):** zero false NOT_REACHABLE and zero false REACHABLE for "given targets" and Mode 1; accuracy 18/22 with 4 `CANT_DETERMINE`. Mode 2 shows 4 false REACHABLE by construction (an unrelated function changed in the same release range is reachable): this is why Mode 2 answers are labelled candidate level. The verifier rejected 0 correct outputs and 36 of 36 corrupted paths.
+2. **The pipeline is conservative on real modules:** D1 102 of 143 runs and D4 88 of 120 end in `CANT_DETERMINE`. Main causes: modules that need Go 1.25 or newer (58 D1, 52 D4) while CI and the review environment have Go 1.24.7, and libraries with no `main` package (26, 22). Stability: re-running 10 cases per set gave identical verdicts. These are distributions, not accuracy.
+3. **Mode 2 `NOT_REACHABLE` is downgraded to `CANT_DETERMINE`** by a rule fixed in code before the results (the rule needs at least 20 raw verdicts; D4 gave 5). Accepted.
+4. **Real defects found by running on real modules, all fixed and re-run:** two linker-method defects (generic functions named without type parameters; functions in the analysed `main` package named `main.X`), which could have produced a false NOT_REACHABLE the second method did not catch; and two verifier false rejections (promoted methods, build-constrained files). This is a good interview point: the real runs found bugs the fixtures did not.
+5. **Mode 2 ranked candidates with BM25** (CP4's documented fallback) because Hugging Face is blocked in the builder's environment; each verdict records this. Mode 2 results here are therefore not the intended `hybrid:bge-small` retriever; state it wherever Mode 2 numbers are used.
+6. The stale CP6 notebook test (red on `main` since the CP6 approval commit, a side effect of the supervisor's STATUS edit) was repointed in its own commit without weakening it. Accepted.
+
+Carried into CP7b: choose applications that are `main` packages and that load with the available toolchain; use the same documented toolchain approach as CP5b (a newer Go fetched into a scratch directory, `GOTOOLCHAIN=local`, recorded in every result).

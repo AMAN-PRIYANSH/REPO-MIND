@@ -24,7 +24,7 @@ Only CP1 has a full specification now. Each later specification is written by th
 | CP5b | Opus 5.5 | high | Go call-graph lifting and caller/callee queries (subtle analysis code) |
 | CP6 | Opus 5.5 | high | Agent design, tools, budgets, failure handling |
 | CP7 | Opus 5.5 | high | Verifier and end-to-end integration |
-| CP7b | Sonnet 5.5 | high | D3 real applications, adjudication sheets, demo |
+| CP7b | Sonnet 5.5 | high | D3 real applications, adjudication sheets, static demo page (Streamlit dropped) |
 | CP8 | Sonnet 5.5 | medium | Experiment variant, reports, README |
 
 Never use Fable or 1M-context models (they can use paid credits). Avoid `max` effort.
