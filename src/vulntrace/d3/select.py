@@ -547,7 +547,7 @@ def diversity_note(kept: list[dict[str, Any]]) -> str:
     dup = len(set(owners)) != len(owners) or len(set(domains)) != len(domains)
     return (f"{len(kept)} applications, {len(set(owners))} distinct owners, {len(set(domains))} distinct domains "
             f"({', '.join(domains)}); " + ("DUPLICATE owner or domain" if dup else
-                                           "no two share an owner or a domain, so none is a fork or sibling of another"))
+                                           "no two share an owner or a domain (fork relations are not checked by code)"))
 
 
 def case_list(kept: list[dict[str, Any]]) -> list[dict[str, Any]]:
