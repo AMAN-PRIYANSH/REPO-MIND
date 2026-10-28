@@ -46,6 +46,8 @@ def cmd_eval_triage(args, argv) -> int:
         return default_runners(args.timeout, args.build_timeout, binary)
 
     env = run_info(["eval", "triage", *argv[2:]] if argv[:2] == ["eval", "triage"] else argv)
+    if args.dataset_set == "d3":
+        return cmd_eval_d3(args, binary, factory, env)
     if args.dataset_set == "fixtures":
         with tempfile.TemporaryDirectory(prefix="vt_cp7_fixtures_") as tmp:
             doc = te.eval_fixtures(factory, Path(tmp), binary, log=_log)
@@ -84,4 +86,55 @@ def cmd_eval_triage(args, argv) -> int:
         pol = te.decide_mode2_policy(json.loads(fx.read_text(encoding="utf-8"))["rows"],
                                      json.loads(d4.read_text(encoding="utf-8"))["rows"])
         _write(out_dir / "mode2_policy.json", pol)
+    return EXIT_OK
+
+
+def cmd_eval_d3(args, binary, factory, env) -> int:
+    """CP7b deliverable 2 (and the optional govulncheck reference, deliverable 3)."""
+    from vulntrace.d3 import govuln
+    from vulntrace.d3 import triage_run as tr
+    from vulntrace.dataset import vulndb
+
+    out_dir = Path(args.out) if args.out else tr.results_root()
+    case_path = Path(args.cases) if args.cases else tr.results_root() / "d3_cases.json"
+    if not case_path.is_file():
+        print(f"missing prerequisite: {case_path} (run `python -m vulntrace d3 select`)", file=sys.stderr)
+        return EXIT_MISSING_PREREQUISITE
+    case_doc = json.loads(case_path.read_text(encoding="utf-8"))
+    vcache = Path(args.cache) if args.cache else None
+    cases, _ = datasets.load_all_cases(vcache)
+    if not cases:
+        print("missing prerequisite: no vulndb snapshot (run `python -m vulntrace dataset fetch`)", file=sys.stderr)
+        return EXIT_MISSING_PREREQUISITE
+    data_dir = Path(args.data_dir) if args.data_dir else dataset_build.DATA_DIR / "d3"
+    gomodcache = Path(args.gomodcache) if args.gomodcache else default_gomodcache()
+    cache_root = gomodcache.parent
+    tr.setup_env(gomodcache)
+    gv_exe = gv_db = None
+    if not args.no_govulncheck:
+        gv_exe, err = govuln.ensure_govulncheck(cache_root / "tools", cache_root / "gomod-tools")
+        if err:
+            _log(f"govulncheck could not be built ({err}); the reference comparison is skipped")
+        else:
+            gv_db, err = govuln.ensure_db(cache_root / "osv-db" / vulndb.pinned_commit()[:12], vcache)
+            if err:
+                _log(f"govulncheck database could not be prepared ({err}); the reference comparison is skipped")
+                gv_exe = None
+    from vulntrace.pipeline.cli import repo_commit
+
+    doc, verdicts = tr.eval_d3(case_doc, cases_by_id={c["id"]: c for c in cases}, data_dir=data_dir, gomodcache=gomodcache,
+                               cache_root=cache_root, base=factory(), binary=binary,
+                               vulndb_commit=vulndb.pinned_commit(), repo_commit=repo_commit(), gv_exe=gv_exe,
+                               gv_db=gv_db, only=args.only, rerun=args.rerun, log=_log)
+    doc["environment"] = env
+    doc["govulncheck"] = ({"module": govuln.GOVULNCHECK_MODULE, "version": govuln.GOVULNCHECK_VERSION,
+                           "db": f"pinned vulndb snapshot {vulndb.pinned_commit()} data/osv (flat directory)",
+                           "mode": "source, -scan symbol, main packages as roots, GOPROXY=off"}
+                          if gv_exe else {"skipped": True})
+    if args.only:
+        doc["partial_run"] = {"only": args.only}
+    root = tr.goroot()
+    _write(out_dir / "d3_triage.json", tr.sanitise(doc, gomodcache, root))
+    for cid, v in sorted(verdicts.items()):
+        _write(out_dir / "verdicts" / f"{cid}.json", tr.sanitise(v, gomodcache, root))
     return EXIT_OK
