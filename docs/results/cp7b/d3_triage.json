@@ -10,7 +10,7 @@
   "go": "go version go1.26.10 linux/amd64",
   "os": "Linux-6.18.44-fc-v180-x86_64-with-glibc2.39",
   "python": "3.13.17",
-  "repo_commit": "0a2b5ad",
+  "repo_commit": "f9d85de",
   "repo_dirty": false
  },
  "govulncheck": {
@@ -795,8 +795,8 @@
      "github.com/smallstep/cli/command/ca/acme/eab.listAction (command/ca/acme/eab/list.go:137)",
      "github.com/urfave/cli.HandleAction (app.go:522)",
      "github.com/urfave/cli.App.Run (app.go:286)",
-     "github.com/smallstep/cli/internal/cmd.run (internal/cmd<local>.go:62)",
-     "github.com/smallstep/cli/internal/cmd.Run (internal/cmd<local>.go:47)",
+     "github.com/smallstep/cli/internal/cmd.run (internal/cmd/root.go:62)",
+     "github.com/smallstep/cli/internal/cmd.Run (internal/cmd/root.go:47)",
      "github.com/smallstep/cli/cmd/step.main (cmd/step/main.go:28)"
     ],
     "verdict": "REACHABLE"
@@ -1373,5 +1373,14 @@
    "PASSED": 11
   },
   "verifier_downgrades": 5
+ },
+ "verdict_provenance": {
+  "cases_resumed": 14,
+  "cases_run_in_this_invocation": 0,
+  "created_at_first": "2026-10-28T16:40:06Z",
+  "created_at_last": "2026-10-28T16:52:10Z",
+  "repo_commits": [
+   "0a2b5ad"
+  ]
  }
 }

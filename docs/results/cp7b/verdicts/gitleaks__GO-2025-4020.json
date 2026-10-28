@@ -169,7 +169,7 @@
       },
       {
        "call_site": {
-        "file": "cmd<local>.go",
+        "file": "cmd/root.go",
         "line": 225
        },
        "callee": "github.com/spf13/cobra.Command.Execute",
@@ -271,7 +271,7 @@
       },
       {
        "call_site": {
-        "file": "cmd<local>.go",
+        "file": "cmd/root.go",
         "line": 225
        },
        "callee": "github.com/spf13/cobra.Command.Execute",
@@ -373,7 +373,7 @@
       },
       {
        "call_site": {
-        "file": "cmd<local>.go",
+        "file": "cmd/root.go",
         "line": 225
        },
        "callee": "github.com/spf13/cobra.Command.Execute",
@@ -486,7 +486,7 @@
      },
      {
       "call_site": {
-       "file": "cmd<local>.go",
+       "file": "cmd/root.go",
        "line": 225
       },
       "callee": "github.com/spf13/cobra.Command.Execute",

@@ -52,8 +52,11 @@ def test_no_local_paths_in_committed_d3_files():
         pytest.skip("no cp7b results yet")
     for p in CP7B.rglob("*"):
         if p.is_file():
-            hits = LOCAL.findall(p.read_text(encoding="utf-8"))
+            text = p.read_text(encoding="utf-8")
+            hits = LOCAL.findall(text)
             assert not hits, f"{p}: {hits[:3]}"
+            glued = re.findall(r"[A-Za-z0-9_.-]<local>", text)        # a placeholder inside a name: a corrupted path
+            assert not glued, f"{p}: {glued[:3]}"
 
 
 def test_adjudication_sheet_matches_triage_and_uses_allowed_values():

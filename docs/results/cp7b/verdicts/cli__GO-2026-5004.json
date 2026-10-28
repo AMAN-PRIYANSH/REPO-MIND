@@ -117,7 +117,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -126,7 +126,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -291,7 +291,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -300,7 +300,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -465,7 +465,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -474,7 +474,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -650,7 +650,7 @@
      },
      {
       "call_site": {
-       "file": "internal/cmd<local>.go",
+       "file": "internal/cmd/root.go",
        "line": 47
       },
       "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -659,7 +659,7 @@
      },
      {
       "call_site": {
-       "file": "internal/cmd<local>.go",
+       "file": "internal/cmd/root.go",
        "line": 62
       },
       "callee": "github.com/urfave/cli.App.Run",
@@ -842,7 +842,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -851,7 +851,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -1016,7 +1016,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -1025,7 +1025,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -1190,7 +1190,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -1199,7 +1199,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -1375,7 +1375,7 @@
      },
      {
       "call_site": {
-       "file": "internal/cmd<local>.go",
+       "file": "internal/cmd/root.go",
        "line": 47
       },
       "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -1384,7 +1384,7 @@
      },
      {
       "call_site": {
-       "file": "internal/cmd<local>.go",
+       "file": "internal/cmd/root.go",
        "line": 62
       },
       "callee": "github.com/urfave/cli.App.Run",
@@ -1567,7 +1567,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -1576,7 +1576,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -1741,7 +1741,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -1750,7 +1750,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -1915,7 +1915,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -1924,7 +1924,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -2100,7 +2100,7 @@
      },
      {
       "call_site": {
-       "file": "internal/cmd<local>.go",
+       "file": "internal/cmd/root.go",
        "line": 47
       },
       "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -2109,7 +2109,7 @@
      },
      {
       "call_site": {
-       "file": "internal/cmd<local>.go",
+       "file": "internal/cmd/root.go",
        "line": 62
       },
       "callee": "github.com/urfave/cli.App.Run",
@@ -2292,7 +2292,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -2301,7 +2301,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -2466,7 +2466,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -2475,7 +2475,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -2640,7 +2640,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 47
        },
        "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -2649,7 +2649,7 @@
       },
       {
        "call_site": {
-        "file": "internal/cmd<local>.go",
+        "file": "internal/cmd/root.go",
         "line": 62
        },
        "callee": "github.com/urfave/cli.App.Run",
@@ -2825,7 +2825,7 @@
      },
      {
       "call_site": {
-       "file": "internal/cmd<local>.go",
+       "file": "internal/cmd/root.go",
        "line": 47
       },
       "callee": "github.com/smallstep/cli/internal/cmd.run",
@@ -2834,7 +2834,7 @@
      },
      {
       "call_site": {
-       "file": "internal/cmd<local>.go",
+       "file": "internal/cmd/root.go",
        "line": 62
       },
       "callee": "github.com/urfave/cli.App.Run",
