@@ -22,8 +22,8 @@ Entry point: `python -m vulntrace <command>`.
 | `eval symbols --strategy agent` | CP6 | LangGraph agent. |
 | `triage --advisory <ID> --app <dir> [--mode auto/fix/release]` | CP7 | Full pipeline on one case; prints a verdict JSON. Also `--advisory-file`, `--mode targets --target <pkg>:<symbol>`, `--main`, `--max-mains` (default 10), `--k`, `--retriever` (default the fixed retriever), `--lift NEAREST/ALL` (default off), `--mode2-policy` (default `DOWNGRADE`, decided in CP7; see the architecture document), `--no-verify`, `--data-dir`, `--commit`. Evidence is read from `data/` (`dataset materialize`); triage itself never uses the network. |
 | `eval triage --set fixtures/d1/d4` | CP7 | E5-lite: fixtures with truth; D1/D4 distributions and coverage only. |
-| `eval reachability --set d3` | CP7b | End-to-end evaluation on real applications. |
-| `demo` | CP7b | Starts the local demo page. |
+| `d3 select` / `eval triage --set d3` / `d3 sheet` / `d3 report` | CP7b | Real applications: selection by the written rules (`docs/evaluation/D3_SELECTION_RULES.md`), end-to-end triage with the optional govulncheck reference, adjudication sheets, and scoring of the filled sheet. |
+| `demo build --verdict <file> / --dir <dir> [--out <file>]` | CP7b | Writes one self-contained static HTML page from verdict files (no server, no network, no scripts). |
 
 Exit codes: `0` success (including `CANT_DETERMINE` verdicts), `2` invalid input, `3` missing prerequisite, `1` unexpected error.
 
