@@ -197,6 +197,7 @@ def eval_d3(case_doc: dict[str, Any], *, cases_by_id: dict[str, dict], data_dir:
     work_root = data_dir / "apps"
     probe = sl.Probe(cache_root=cache_root, work_root=work_root, gomodcache=gomodcache, log=log)
     rows, verdicts = [], {}
+    ran_now = 0
     by_app: dict[str, list[dict[str, Any]]] = {}
     for c in cases:
         by_app.setdefault(c["app_repo"], []).append(c)
@@ -218,10 +219,11 @@ def eval_d3(case_doc: dict[str, Any], *, cases_by_id: dict[str, dict], data_dir:
                 gv = govuln.run_govulncheck(gv_exe, gv_db, app_dir, app_cases[0]["mains"], gomodcache)
                 gv["seconds"] = round(time.monotonic() - t1, 1)
                 log(f"  govulncheck: ok={gv['ok']} {gv.get('error') or ''} ({gv['seconds']}s)")
-        runners = te.memo_runners(base)
+        runners = te.memo_runners(base) if todo else None
         for c in app_cases:
             row_path = out_dir / f"{c['id']}.row.json"
             if c in todo:
+                ran_now += 1
                 row, v = run_case(c, cases_by_id.get(c["advisory"]), evidence_dir=evidence_dir, app_dir=app_dir,
                                   app_error=app_err, runners=runners, binary=binary, gv=gv, vulndb_commit=vulndb_commit,
                                   repo_commit=repo_commit)
@@ -241,7 +243,14 @@ def eval_d3(case_doc: dict[str, Any], *, cases_by_id: dict[str, dict], data_dir:
             if vp.is_file():
                 with gzip.open(vp, "rt", encoding="utf-8") as f:
                     verdicts[c["id"]] = json.load(f)
+    prov = [v.get("provenance") or {} for v in verdicts.values()]
+    created = sorted(p.get("created_at") for p in prov if p.get("created_at"))
     doc = {"schema_version": SCHEMA_VERSION, "set": "d3", "rows": rows, "summary": summarise(rows),
+           # cases finished by an earlier invocation are resumed, not recomputed: say where verdicts come from
+           "verdict_provenance": {"repo_commits": sorted({p.get("repo_commit") or "unknown" for p in prov}),
+                                  "created_at_first": created[0] if created else None,
+                                  "created_at_last": created[-1] if created else None,
+                                  "cases_run_in_this_invocation": ran_now, "cases_resumed": len(rows) - ran_now},
            "max_mains": MAX_MAINS, "mode2_policy": "DOWNGRADE",
            "env": {"GOTOOLCHAIN": "local", "CGO_ENABLED": "0", "GOPROXY": "off (analysis)", "GOFLAGS": "-mod=readonly"},
            "statement": "REACHABLE means reachable in the call graph from a main package, not exploitable. "

@@ -202,7 +202,7 @@ def case_markdown(row: dict[str, Any], v: dict[str, Any] | None, reason: str | N
         for i, p in enumerate(paths[:MAX_PATHS_PER_CASE], start=1):
             out += ["", f"### Path {i}: {code_span(p['target'])} from {code_span(p['main'])}", ""]
             for j, e in enumerate(p["path"]["edges"], start=1):
-                cs = e.get("call_site") or {}
+                cs = e.get("call_site") if (e.get("call_site") or {}).get("file") else {}   # Go's synthetic edges have none
                 head = f"{j}. {code_span(e['caller'])} calls {code_span(e['callee'])} ({md(e.get('kind'))})"
                 if cs:
                     link = source_link(cs["file"], cs["line"], row["app_repo"], row["app_commit"], go_version)

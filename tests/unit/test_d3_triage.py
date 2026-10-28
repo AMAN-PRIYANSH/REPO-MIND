@@ -170,3 +170,22 @@ def test_sanitise_rewrites_module_cache_and_goroot_paths(tmp_path):
     v = {"a": f"{mc}/github.com/x/y@v1.0.0/f.go", "b": "/usr/local/go/src/net/http/server.go", "c": "cmd/a/main.go"}
     out = tr.sanitise(v, mc, "/usr/local/go")
     assert out == {"a": "$GOMODCACHE/github.com/x/y@v1.0.0/f.go", "b": "$GOROOT/src/net/http/server.go", "c": "cmd/a/main.go"}
+
+
+def test_resumed_run_records_where_verdicts_came_from(tmp_path, monkeypatch):
+    """A second invocation re-reads finished cases and must say they were not recomputed."""
+    import gzip
+
+    data = tmp_path / "d3"
+    (data / "triage").mkdir(parents=True)
+    row = {"id": CASE["id"], "app_repo": CASE["app_repo"], "verdict": "REACHABLE", "reason_codes": []}
+    (data / "triage" / f"{CASE['id']}.row.json").write_text(json.dumps(row), encoding="utf-8")
+    with gzip.open(data / "triage" / f"{CASE['id']}.verdict.json.gz", "wt", encoding="utf-8") as f:
+        json.dump({"verdict": "REACHABLE", "provenance": {"repo_commit": "0a2b5ad", "created_at": "2026-10-28T16:40:00Z"}}, f)
+    doc, verdicts = tr.eval_d3({"cases": [CASE]}, cases_by_id={}, data_dir=data, gomodcache=tmp_path / "m",
+                               cache_root=tmp_path, base=None, binary=None, vulndb_commit="v", repo_commit="new",
+                               gv_exe=None, gv_db=None, log=lambda m: None)
+    assert doc["verdict_provenance"] == {"repo_commits": ["0a2b5ad"], "created_at_first": "2026-10-28T16:40:00Z",
+                                         "created_at_last": "2026-10-28T16:40:00Z", "cases_run_in_this_invocation": 0,
+                                         "cases_resumed": 1}
+    assert list(verdicts) == [CASE["id"]]

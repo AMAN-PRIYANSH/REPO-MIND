@@ -88,7 +88,7 @@ def _example(title: str, cid: str | None, rows: dict[str, dict], adj: dict[str, 
         p = paths[0]
         out += ["", f"Path to {sh.code_span(p['target'])} from {sh.code_span(p['main'])}:", ""]
         for i, e in enumerate(p["path"]["edges"], start=1):
-            cs = e.get("call_site") or {}
+            cs = e.get("call_site") if (e.get("call_site") or {}).get("file") else {}   # Go's synthetic edges have none
             where = sh.code_span(f"{cs.get('file')}:{cs.get('line')}") if cs else "(synthetic edge)"
             out.append(f"{i}. {sh.code_span(e['caller'])} calls {sh.code_span(e['callee'])} at {where} ({sh.md(e.get('kind'))})")
     return out + [""]

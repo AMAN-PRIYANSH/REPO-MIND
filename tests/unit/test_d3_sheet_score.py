@@ -237,3 +237,14 @@ def test_cli_report_refuses_an_unfilled_sheet(tmp_path):
     (tmp_path / "adjudication" / "adjudication.json").write_text(json.dumps(_filled()), encoding="utf-8")
     assert main(["d3", "report", "--results", str(tmp_path), "--out", str(out)]) == 0
     assert out.read_text(encoding="utf-8").startswith("# " + rp.TITLE)
+
+
+def test_synthetic_edge_without_call_site_is_labelled_not_located():
+    v = copy.deepcopy(_v("reachable_mode1.json"))
+    e = next(e for e in v["per_symbol"] if e.get("verified_path"))
+    e["verified_path"]["edges"][0]["call_site"] = {"file": "", "line": 0}
+    text = _case_section(_row("a", "REACHABLE"), v)
+    assert "synthetic edge, no call site" in text and "`:0`" not in text
+    from vulntrace.demo import page
+    html_text = page.build_page([("x", v)])
+    assert "synthetic edge, no call site" in html_text and ">:0<" not in html_text

@@ -89,7 +89,7 @@ def _path(p: dict[str, Any] | None) -> str:
         return '<p class="muted">no path</p>'
     items = [f"<li>entry {_target(p.get('entry'))}</li>"]
     for e in p.get("edges") or []:
-        cs = e.get("call_site") or {}
+        cs = e.get("call_site") if (e.get("call_site") or {}).get("file") else {}   # Go's synthetic edges have none
         where = f"<code>{esc(cs.get('file'))}:{esc(cs.get('line'))}</code>" if cs else '<span class="muted">synthetic edge, no call site</span>'
         items.append(f"<li><code>{esc(e.get('caller'))}</code> calls <code>{esc(e.get('callee'))}</code> at {where} "
                      f'<span class="kind">{esc(e.get("kind"))}</span></li>')
