@@ -70,6 +70,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     triage_cli.add_parser(sub)
 
+    from vulntrace.d3 import cli as d3_cli
+
+    d3_cli.add_parser(sub)
+
     ev = sub.add_parser("eval", help="baselines and evaluation (CP3+)")
     esub = ev.add_subparsers(dest="eval_command", required=True)
     es = esub.add_parser("symbols", help="symbol-identification baselines")
@@ -552,6 +556,10 @@ def main(argv: list[str] | None = None) -> int:
             from vulntrace.pipeline import cli as triage_cli
 
             return triage_cli.cmd_triage(args)
+        if args.command == "d3":
+            from vulntrace.d3 import cli as d3_cli
+
+            return d3_cli.dispatch(args, argv)
         if args.command == "fixtures" and args.fixtures_command == "score":
             return _cmd_score(args, argv)
         if args.command == "helper":
