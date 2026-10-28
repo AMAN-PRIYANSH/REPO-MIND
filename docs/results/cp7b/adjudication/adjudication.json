@@ -1,0 +1,213 @@
+{
+ "allowed_adjudications": [
+  "CORRECT",
+  "INFEASIBLE_PATH",
+  "WRONG",
+  "CANNOT_JUDGE"
+ ],
+ "allowed_truth": [
+  "REACHABLE",
+  "NOT_REACHABLE",
+  "UNKNOWN"
+ ],
+ "cases": [
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-4610",
+   "app_repo": "github.com/wagoodman/dive",
+   "by": null,
+   "id": "dive__GO-2026-4610",
+   "mode": "RELEASE",
+   "note": null,
+   "reason_codes": [
+    "VERIFIER_REJECTED"
+   ],
+   "sample_reason": "all 3 CANT_DETERMINE cases",
+   "truth": null,
+   "verdict": "CANT_DETERMINE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-5841",
+   "app_repo": "github.com/wagoodman/dive",
+   "by": null,
+   "id": "dive__GO-2026-5841",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "all 4 NOT_REACHABLE cases",
+   "truth": null,
+   "verdict": "NOT_REACHABLE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2025-3900",
+   "app_repo": "github.com/wagoodman/dive",
+   "by": null,
+   "id": "dive__GO-2025-3900",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [
+    "ANALYSIS_FAILED"
+   ],
+   "sample_reason": "all 3 CANT_DETERMINE cases",
+   "truth": null,
+   "verdict": "CANT_DETERMINE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2025-4188",
+   "app_repo": "github.com/sosedoff/pgweb",
+   "by": null,
+   "id": "pgweb__GO-2025-4188",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "sample_reason": "all 3 CANT_DETERMINE cases",
+   "truth": null,
+   "verdict": "CANT_DETERMINE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-5841",
+   "app_repo": "github.com/gitleaks/gitleaks",
+   "by": null,
+   "id": "gitleaks__GO-2026-5841",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "all 4 NOT_REACHABLE cases",
+   "truth": null,
+   "verdict": "NOT_REACHABLE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2025-4020",
+   "app_repo": "github.com/gitleaks/gitleaks",
+   "by": null,
+   "id": "gitleaks__GO-2025-4020",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "every REACHABLE case",
+   "verdict": "REACHABLE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-5506",
+   "app_repo": "github.com/smallstep/cli",
+   "by": null,
+   "id": "cli__GO-2026-5506",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "every REACHABLE case",
+   "verdict": "REACHABLE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-5052",
+   "app_repo": "github.com/smallstep/cli",
+   "by": null,
+   "id": "cli__GO-2026-5052",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "every REACHABLE case",
+   "verdict": "REACHABLE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-4503",
+   "app_repo": "github.com/smallstep/cli",
+   "by": null,
+   "id": "cli__GO-2026-4503",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "all 4 NOT_REACHABLE cases",
+   "truth": null,
+   "verdict": "NOT_REACHABLE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-5004",
+   "app_repo": "github.com/smallstep/cli",
+   "by": null,
+   "id": "cli__GO-2026-5004",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "every REACHABLE case",
+   "verdict": "REACHABLE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-5676",
+   "app_repo": "github.com/XTLS/Xray-core",
+   "by": null,
+   "id": "Xray-core__GO-2026-5676",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "every REACHABLE case",
+   "verdict": "REACHABLE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-4512",
+   "app_repo": "github.com/XTLS/Xray-core",
+   "by": null,
+   "id": "Xray-core__GO-2026-4512",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "every REACHABLE case",
+   "verdict": "REACHABLE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-5841",
+   "app_repo": "github.com/XTLS/Xray-core",
+   "by": null,
+   "id": "Xray-core__GO-2026-5841",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "all 4 NOT_REACHABLE cases",
+   "truth": null,
+   "verdict": "NOT_REACHABLE"
+  },
+  {
+   "adjudicate": true,
+   "adjudication": null,
+   "advisory": "GO-2026-6061",
+   "app_repo": "github.com/XTLS/Xray-core",
+   "by": null,
+   "id": "Xray-core__GO-2026-6061",
+   "mode": "FIX",
+   "note": null,
+   "reason_codes": [],
+   "sample_reason": "every REACHABLE case",
+   "verdict": "REACHABLE"
+  }
+ ],
+ "instructions": "How to adjudicate (the same text for every case):\n\n- Judge the **reachability claim**, not exploitability. `REACHABLE` means a call path from a `main` package to the\n  target function exists in the call graph.\n- `adjudication` is one of `CORRECT`, `INFEASIBLE_PATH`, `WRONG`, `CANNOT_JUDGE`.\n  - `REACHABLE`: `CORRECT` if every step of the path below is a real call that can run in the application;\n    `INFEASIBLE_PATH` if the calls exist but the path cannot run (for example a dynamic call that never takes this\n    target, or code behind a condition that is never true); `WRONG` if a step does not exist or does not call the next\n    function; `CANNOT_JUDGE` otherwise. If the case has more than one reachable target, judge the first path shown.\n  - `NOT_REACHABLE`: `CORRECT` if, reading the code, none of the listed targets can be called from the application's\n    `main` packages; `WRONG` if one can (a false NOT_REACHABLE: please say which in `note`).\n  - `CANT_DETERMINE`: `CORRECT` if abstaining is reasonable (the answer is not clear from the code either); `WRONG`\n    if reading the code gives a clear answer.\n- `truth` (optional, NOT_REACHABLE and CANT_DETERMINE only): `REACHABLE`, `NOT_REACHABLE` or `UNKNOWN`, what reading\n  the code says.\n- `by`: who adjudicated (for example `owner` or `supervisor`). `note`: one or two sentences.\n- Fill `adjudication.json`; the Markdown files are for reading. govulncheck is shown as a reference, not as truth.\n",
+ "sample_rule": "All REACHABLE cases. Of NOT_REACHABLE and of CANT_DETERMINE cases: all if there are at most 5, otherwise 5 in ascending order of sha256(\"20261028:\" + case id).",
+ "schema_version": "1.0"
+}

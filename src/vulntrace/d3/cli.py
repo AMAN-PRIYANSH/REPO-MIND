@@ -143,6 +143,11 @@ def cmd_sheet(args) -> int:
     data_dir = Path(args.data_dir) if args.data_dir else DATA_DIR / "d3"
     gomodcache = Path(args.gomodcache) if args.gomodcache else default_gomodcache()
     reasons = sh.sample(doc["rows"])
+    from vulntrace.dataset import datasets
+
+    summaries = {c["id"]: c["summary"] for c in datasets.load_all_cases()[0]}   # empty without the snapshot
+    if not summaries:
+        _log("note: no vulndb snapshot; sheets are written without advisory summaries")
     by_app: dict = {}
     for r in doc["rows"]:
         by_app.setdefault(r["app_repo"], []).append(r)
@@ -151,7 +156,7 @@ def cmd_sheet(args) -> int:
     for repo, rows in by_app.items():
         roots = {"app": sl.app_tree_dir(data_dir / "apps", repo, rows[0]["app_commit"]),
                  "$GOMODCACHE": gomodcache, "$GOROOT": Path(root) if root else None}
-        text = sh.app_markdown(repo, rows, verdicts, reasons, roots, go_version, kept.get(repo))
+        text = sh.app_markdown(repo, rows, verdicts, reasons, roots, go_version, kept.get(repo), summaries)
         path = out_dir / sh.app_file_name(repo)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8")

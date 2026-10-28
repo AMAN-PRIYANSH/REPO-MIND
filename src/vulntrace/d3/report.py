@@ -118,7 +118,10 @@ def render(selection: dict[str, Any], case_doc: dict[str, Any], triage_doc: dict
             f"- adjudicated {r['adjudicated']} of {r['of_total']}; counts {sh.md(r['counts'])}",
             f"- precision (CORRECT among CORRECT, INFEASIBLE_PATH, WRONG): {_rate(r['precision'])}",
             f"- the path exists in the code (CORRECT or INFEASIBLE_PATH): {_rate(r['path_exists_rate'])}",
-            f"- CANNOT_JUDGE (left out of both rates): {r['cannot_judge']}", ""]
+            f"- CANNOT_JUDGE (left out of both rates): {r['cannot_judge']}"]
+    ctx_only = sorted(cid for cid, v in verdicts.items() if v.get("verdict") == "REACHABLE" and sh.only_context_reachable(v))
+    out += [f"- REACHABLE cases whose every reachable target is context-only (none of its lines changed in the fix): "
+            f"{len(ctx_only)} of {v['REACHABLE']}" + (f" ({', '.join(sh.code_span(i) for i in ctx_only)})" if ctx_only else ""), ""]
     c = s["cant_determine"]
     out += ["## CANT_DETERMINE", "", f"- share of triaged cases: {_rate(c['share'])}",
             f"- adjudicated {c['adjudicated']}: {sh.md(c['counts'])}; truth by reading the code: {sh.md(c['truth'])}", ""]

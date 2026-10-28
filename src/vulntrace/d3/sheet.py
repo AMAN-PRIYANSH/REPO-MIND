@@ -162,25 +162,41 @@ def _target(t: dict[str, Any]) -> str:
     return f"{t.get('package')}.{t.get('symbol')}"
 
 
+def _context_only(v: dict[str, Any]) -> dict[str, Any]:
+    return {_target(s): s.get("context_only") for s in v.get("symbols") or []}
+
+
 def reachable_paths(v: dict[str, Any]) -> list[dict[str, Any]]:
-    """First verified path per REACHABLE target (deciding entries first), in verdict order."""
+    """First verified path per REACHABLE target: deciding entries first, then targets the fix really
+    changed before context-only ones (Mode 1 keeps a function that only touched diff context, flagged
+    `context_only`), otherwise in verdict order."""
+    ctx = _context_only(v)
     seen, out = set(), []
-    for e in sorted(v.get("per_symbol") or [], key=lambda e: not e.get("decides_verdict", True)):
+    for e in sorted(v.get("per_symbol") or [], key=lambda e: (not e.get("decides_verdict", True),
+                                                              ctx.get(_target(e["target"])) is True)):
         if e.get("result") != "REACHABLE" or not e.get("verified_path"):
             continue
         key = _target(e["target"])
         if key not in seen:
             seen.add(key)
             out.append({"target": key, "main": e.get("main_package"), "origin": e.get("origin"), "rank": e.get("rank"),
-                        "path": e["verified_path"]})
+                        "context_only": ctx.get(key), "path": e["verified_path"]})
     return out
 
 
+def only_context_reachable(v: dict[str, Any]) -> bool:
+    """A REACHABLE verdict whose every reachable deciding target is context-only (no changed line)."""
+    paths = [p for p in reachable_paths(v)]
+    return bool(paths) and all(p["context_only"] is True for p in paths)
+
+
 def case_markdown(row: dict[str, Any], v: dict[str, Any] | None, reason: str | None, roots: dict[str, Path],
-                  go_version: str | None) -> str:
+                  go_version: str | None, summary: str | None = None) -> str:
+    """`summary`: the advisory's summary from the pinned vulndb snapshot (copied, escaped)."""
     out = [f"## {md(row['id'])}", ""]
     adv = (v or {}).get("advisory") or {}
-    facts = [("advisory", code_span(row["advisory"]) + (" " + md(adv.get("summary")) if adv.get("summary") else "")),
+    summary = adv.get("summary") or summary
+    facts = [("advisory", code_span(row["advisory"]) + (" " + md(summary) if summary else "")),
              ("vulnerable module", code_span(f"{row.get('module')}@{row.get('version_selected')}")),
              ("verdict", f"**{md(row.get('verdict'))}**"),
              ("reason codes", md(", ".join(row.get("reason_codes") or [])) or "none"),
@@ -198,9 +214,12 @@ def case_markdown(row: dict[str, Any], v: dict[str, Any] | None, reason: str | N
         out += ["", "No verdict file (the case was not triaged)."]
     elif row.get("verdict") == "REACHABLE":
         paths = reachable_paths(v)
-        out += ["", f"Reachable targets ({len(paths)}): " + ", ".join(code_span(p["target"]) for p in paths)]
+        out += ["", f"Reachable targets ({len(paths)}): " + ", ".join(
+            code_span(p["target"]) + (" (context only)" if p["context_only"] is True else "") for p in paths)]
         for i, p in enumerate(paths[:MAX_PATHS_PER_CASE], start=1):
-            out += ["", f"### Path {i}: {code_span(p['target'])} from {code_span(p['main'])}", ""]
+            out += ["", f"### Path {i}: {code_span(p['target'])} from {code_span(p['main'])}", "",
+                    f"Target context only (no line of it changed in the fix, it touched diff context): "
+                    f"{md(p['context_only'])}", ""]
             for j, e in enumerate(p["path"]["edges"], start=1):
                 cs = e.get("call_site") if (e.get("call_site") or {}).get("file") else {}   # Go's synthetic edges have none
                 head = f"{j}. {code_span(e['caller'])} calls {code_span(e['callee'])} ({md(e.get('kind'))})"
@@ -241,7 +260,8 @@ def case_markdown(row: dict[str, Any], v: dict[str, Any] | None, reason: str | N
 
 
 def app_markdown(app_repo: str, rows: list[dict[str, Any]], verdicts: dict[str, dict], reasons: dict[str, str],
-                 roots: dict[str, Path], go_version: str | None, selection: dict[str, Any] | None) -> str:
+                 roots: dict[str, Path], go_version: str | None, selection: dict[str, Any] | None,
+                 summaries: dict[str, str] | None = None) -> str:
     first = rows[0]
     head = [f"# Adjudication: {md(app_repo)}", "",
             f"- application: {code_span(app_repo)} at tag {code_span(first.get('app_tag'))}, commit "
@@ -251,7 +271,8 @@ def app_markdown(app_repo: str, rows: list[dict[str, Any]], verdicts: dict[str, 
     if selection:
         head.append(f"- main packages analysed: " + ", ".join(code_span(m) for m in selection.get("mains") or []))
     head += ["", INSTRUCTIONS]
-    body = [case_markdown(r, verdicts.get(r["id"]), reasons.get(r["id"]), roots, go_version) for r in rows]
+    body = [case_markdown(r, verdicts.get(r["id"]), reasons.get(r["id"]), roots, go_version,
+                          (summaries or {}).get(r["advisory"])) for r in rows]
     return "\n".join(head) + "\n" + "\n".join(body)
 
 

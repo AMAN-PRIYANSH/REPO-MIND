@@ -248,3 +248,28 @@ def test_synthetic_edge_without_call_site_is_labelled_not_located():
     from vulntrace.demo import page
     html_text = page.build_page([("x", v)])
     assert "synthetic edge, no call site" in html_text and ">:0<" not in html_text
+
+
+def test_summary_from_vulndb_is_copied_escaped_when_the_verdict_has_none():
+    v = copy.deepcopy(_v("cd_method_disagreement.json"))
+    v["advisory"].pop("summary", None)
+    text = sh.case_markdown(_row("a", "CANT_DETERMINE"), v, None, {}, None, summary=EVIL)
+    assert "\\[click\\]" in text and "<script" not in text
+
+
+def test_context_only_targets_are_flagged_and_listed_after_changed_ones():
+    v = copy.deepcopy(_v("reachable_mode1.json"))
+    e = next(e for e in v["per_symbol"] if e.get("verified_path"))
+    key = (e["target"]["package"], e["target"]["symbol"])
+    for s_ in v["symbols"]:
+        if (s_["package"], s_["symbol"]) == key:
+            s_["context_only"] = True
+    assert sh.only_context_reachable(v) is True
+    text = _case_section(_row("a", "REACHABLE"), v)
+    assert "(context only)" in text and "Target context only" in text and "True" in text
+    other = copy.deepcopy(e)
+    other["target"] = {"package": key[0], "symbol": "Changed"}
+    v["per_symbol"].insert(0, other)
+    v["symbols"].append({"package": key[0], "symbol": "Changed", "origin": "FIX_CHANGED", "context_only": False})
+    paths = sh.reachable_paths(v)
+    assert [p["context_only"] for p in paths] == [False, True] and sh.only_context_reachable(v) is False
