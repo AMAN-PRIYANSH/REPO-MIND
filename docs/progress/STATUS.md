@@ -5,8 +5,8 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP7b - Real applications (D3) and demo**
-- State: `READY`
-- Branch in use: (none yet; the CP7b session records its own `claude/...` branch)
+- State: `IN_PROGRESS`
+- Branch in use: `claude/sleepy-tesla-smt1xr`
 - Specification: [checkpoints/CP7b.md](../implementation/checkpoints/CP7b.md)
 
 State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDICATION` →) `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
@@ -23,14 +23,24 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP5b | Lifting and caller/callee queries (Go helper) | APPROVED | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
 | CP6 | LangGraph investigation agent (negative result) | APPROVED | claude/vulntrace-ai-build-1wfa8e | [CP6_REPORT](reports/CP6_REPORT.md) |
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
-| CP7b | Real applications (D3) and demo | READY | - | - |
+| CP7b | Real applications (D3) and demo | IN_PROGRESS | claude/sleepy-tesla-smt1xr | - |
 | CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
 
 ## Current checkpoint task list
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-(CP7b: not started.)
+CP7b (session branch `claude/sleepy-tesla-smt1xr`):
+
+- [ ] 0. Environment check (OS, Python, Go, git, Docker, network: Go proxy, GitHub, vulndb)
+- [ ] 1. Application selection - `python -m vulntrace d3 select`: written rules applied by code before any triage result; every candidate printed with the rule that kept/dropped it; diversity note; committed case list (repo URL, commit, advisory, module version)
+- [ ] 2. Triage run - `python -m vulntrace eval triage --set d3`: verdicts, paths with file:line, verifier outcome, CANT_DETERMINE reasons, seconds per case, toolchain; results to `docs/results/cp7b/` (< 512 KiB each)
+- [ ] 3. Reference comparison (optional, labelled not truth): govulncheck source mode where it runs; per-case agreement; disagreements listed
+- [ ] 4. Adjudication sheet - `docs/results/cp7b/adjudication/` (Markdown per application + one JSON with blank fields); all REACHABLE; stated sample (>=5 or all) of NOT_REACHABLE and CANT_DETERMINE; stop at `AWAITING_ADJUDICATION`
+- [ ] 5. Scoring and results document (second session, after adjudication): scoring code and renderer with headline fixed before results built now; `docs/results/CP7B_REAL_APPS_RESULTS.md` rendered only after the sheet is filled
+- [ ] 6. Demo - `python -m vulntrace demo build`: self-contained offline HTML from verdict JSON; `docs/DEMO.md`
+- [ ] 7. Tests: selection rules, sheet generation (no invented verdict text), scoring from a filled sheet, page generator escaping; CI green on the last commit
+- [ ] Report `docs/progress/reports/CP7b_REPORT.md`
 
 ## Handoff notes
 
