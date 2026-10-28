@@ -1,0 +1,1374 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "go-viper",
+    "repo": "mapstructure",
+    "sha": "742921c9ba2854d27baa64272487fc5075d2c39c"
+   }
+  ],
+  "fixed_in": "2.4.0",
+  "id": "GO-2025-3900",
+  "module": "github.com/go-viper/mapstructure/v2",
+  "source": "vulndb",
+  "vulnerable_at": "2.3.0"
+ },
+ "case_id": "dive__GO-2025-3900",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/wagoodman/dive"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [
+   {
+    "candidate_id": "c26",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "netParseError.Error"
+   },
+   {
+    "candidate_id": "c27",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "netParseError.Unwrap"
+   },
+   {
+    "candidate_id": "c28",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "strconvNumError.Error"
+   },
+   {
+    "candidate_id": "c29",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "strconvNumError.Unwrap"
+   },
+   {
+    "candidate_id": "c30",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "timeParseError.Error"
+   },
+   {
+    "candidate_id": "c31",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "timeParseError.Unwrap"
+   },
+   {
+    "candidate_id": "c32",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "urlError.Error"
+   },
+   {
+    "candidate_id": "c33",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "urlError.Unwrap"
+   },
+   {
+    "candidate_id": "c34",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "wrapNetIPParseAddrError"
+   },
+   {
+    "candidate_id": "c35",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "wrapNetIPParseAddrPortError"
+   },
+   {
+    "candidate_id": "c36",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "wrapNetIPParsePrefixError"
+   },
+   {
+    "candidate_id": "c37",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "wrapNetParseError"
+   },
+   {
+    "candidate_id": "c38",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "wrapStrconvNumError"
+   },
+   {
+    "candidate_id": "c39",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "wrapTimeParseDurationError"
+   },
+   {
+    "candidate_id": "c40",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "wrapTimeParseError"
+   },
+   {
+    "candidate_id": "c41",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "wrapUrlError"
+   }
+  ],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/wagoodman/dive": {
+    "error_codes": [
+     "TARGET_NOT_FOUND"
+    ],
+    "first_error": "symbol StringToNetIPPrefixHookFunc not found in package github.com/go-viper/mapstructure/v2",
+    "linker_seconds": 2.29,
+    "load_failed": false,
+    "vta_seconds": 8.48
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 29,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "16 candidate function(s) not analysed: ADDED_BY_FIX."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToBoolHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToComplex128HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToComplex64HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c4",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToFloat32HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c5",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToFloat64HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c6",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToIPHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c7",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToIPNetHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c8",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToInt16HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c9",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToInt32HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c10",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToInt64HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c11",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToInt8HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c12",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToIntHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c13",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToNetIPAddrHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c14",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToNetIPAddrPortHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c15",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToNetIPPrefixHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c16",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToTimeDurationHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c17",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToTimeHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c18",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToURLHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c19",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToUint16HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c20",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToUint32HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c21",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToUint64HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c22",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToUint8HookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c23",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "StringToUintHookFunc"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c24",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "UnconvertibleTypeError.Error"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c25",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "UnconvertibleTypeError.mapstructure"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c42",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "Decoder.decodeBool"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c43",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "Decoder.decodeFloat"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c44",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "Decoder.decodeInt"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c45",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/go-viper/mapstructure/v2",
+    "symbol": "Decoder.decodeUint"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [
+  "ANALYSIS_FAILED"
+ ],
+ "pre_policy_verdict": "CANT_DETERMINE",
+ "provenance": {
+  "created_at": "2026-10-28T16:40:46Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "0a2b5ad",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [
+  "ANALYSIS_FAILED"
+ ],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToBoolHookFunc"
+  },
+  {
+   "candidate_id": "c2",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToComplex128HookFunc"
+  },
+  {
+   "candidate_id": "c3",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToComplex64HookFunc"
+  },
+  {
+   "candidate_id": "c4",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToFloat32HookFunc"
+  },
+  {
+   "candidate_id": "c5",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToFloat64HookFunc"
+  },
+  {
+   "candidate_id": "c6",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToIPHookFunc"
+  },
+  {
+   "candidate_id": "c7",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToIPNetHookFunc"
+  },
+  {
+   "candidate_id": "c8",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToInt16HookFunc"
+  },
+  {
+   "candidate_id": "c9",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToInt32HookFunc"
+  },
+  {
+   "candidate_id": "c10",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToInt64HookFunc"
+  },
+  {
+   "candidate_id": "c11",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToInt8HookFunc"
+  },
+  {
+   "candidate_id": "c12",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToIntHookFunc"
+  },
+  {
+   "candidate_id": "c13",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToNetIPAddrHookFunc"
+  },
+  {
+   "candidate_id": "c14",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToNetIPAddrPortHookFunc"
+  },
+  {
+   "candidate_id": "c15",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToNetIPPrefixHookFunc"
+  },
+  {
+   "candidate_id": "c16",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToTimeDurationHookFunc"
+  },
+  {
+   "candidate_id": "c17",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToTimeHookFunc"
+  },
+  {
+   "candidate_id": "c18",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToURLHookFunc"
+  },
+  {
+   "candidate_id": "c19",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToUint16HookFunc"
+  },
+  {
+   "candidate_id": "c20",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToUint32HookFunc"
+  },
+  {
+   "candidate_id": "c21",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToUint64HookFunc"
+  },
+  {
+   "candidate_id": "c22",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToUint8HookFunc"
+  },
+  {
+   "candidate_id": "c23",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "StringToUintHookFunc"
+  },
+  {
+   "candidate_id": "c24",
+   "context_only": true,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "UnconvertibleTypeError.Error"
+  },
+  {
+   "candidate_id": "c25",
+   "context_only": true,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "UnconvertibleTypeError.mapstructure"
+  },
+  {
+   "candidate_id": "c42",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Decoder.decodeBool"
+  },
+  {
+   "candidate_id": "c43",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Decoder.decodeFloat"
+  },
+  {
+   "candidate_id": "c44",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Decoder.decodeInt"
+  },
+  {
+   "candidate_id": "c45",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/go-viper/mapstructure/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Decoder.decodeUint"
+  }
+ ],
+ "target_app": {
+  "commit": "fe98c8a2eb08c443a36e3cc7568078909e298433",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/wagoodman/dive",
+  "path": "<local>/data/d3/apps/github.com_wagoodman_dive/fe98c8a2eb08"
+ },
+ "timing": {
+  "inspect_seconds": 0.11,
+  "methods_seconds": 10.77,
+  "symbols_seconds": 0.0,
+  "total_seconds": 10.97,
+  "verifier_seconds": 0.09
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "CANT_DETERMINE",
+ "verification": {
+  "checks_by_kind": {
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 26,
+    "skipped": 0
+   }
+  },
+  "checks_run": 26,
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}

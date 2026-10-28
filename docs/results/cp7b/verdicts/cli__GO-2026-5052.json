@@ -1,0 +1,599 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "SSLMate",
+    "repo": "go-pkcs12",
+    "sha": "03c441f6b0267f695ca02464133c0b373bf4dd55"
+   }
+  ],
+  "fixed_in": "0.7.2",
+  "id": "GO-2026-5052",
+  "module": "software.sslmate.com/src/go-pkcs12",
+  "source": "vulndb",
+  "vulnerable_at": "0.7.1"
+ },
+ "case_id": "cli__GO-2026-5052",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/smallstep/cli/cmd/step"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/smallstep/cli/cmd/step": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 3.98,
+    "load_failed": false,
+    "vta_seconds": 41.52
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 1,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "2 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "software.sslmate.com/src/go-pkcs12.doPBMAC1"
+   ],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/step/main.go",
+        "line": 28
+       },
+       "callee": "github.com/smallstep/cli/internal/cmd.Run",
+       "caller": "github.com/smallstep/cli/cmd/step.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd<local>.go",
+        "line": 47
+       },
+       "callee": "github.com/smallstep/cli/internal/cmd.run",
+       "caller": "github.com/smallstep/cli/internal/cmd.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd<local>.go",
+        "line": 62
+       },
+       "callee": "github.com/urfave/cli.App.Run",
+       "caller": "github.com/smallstep/cli/internal/cmd.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.17/app.go",
+        "line": 286
+       },
+       "callee": "github.com/urfave/cli.HandleAction",
+       "caller": "github.com/urfave/cli.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.17/app.go",
+        "line": 522
+       },
+       "callee": "github.com/smallstep/cli-utils/command.ActionFunc$1",
+       "caller": "github.com/urfave/cli.HandleAction",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/smallstep/cli-utils@v0.12.2/command/command.go",
+        "line": 38
+       },
+       "callee": "github.com/smallstep/cli/command/certificate.p12Action",
+       "caller": "github.com/smallstep/cli-utils/command.ActionFunc$1",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "command/certificate/p12.go",
+        "line": 173
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.Encoder.Encode",
+       "caller": "github.com/smallstep/cli/command/certificate.p12Action",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 709
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.computeMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.Encoder.Encode",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 163
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.computeMac",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 127
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+       "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "doPBMAC1"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/step/main.go",
+        "line": 28
+       },
+       "callee": "github.com/smallstep/cli/internal/cmd.Run",
+       "caller": "github.com/smallstep/cli/cmd/step.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd<local>.go",
+        "line": 47
+       },
+       "callee": "github.com/smallstep/cli/internal/cmd.run",
+       "caller": "github.com/smallstep/cli/internal/cmd.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd<local>.go",
+        "line": 62
+       },
+       "callee": "github.com/urfave/cli.App.Run",
+       "caller": "github.com/smallstep/cli/internal/cmd.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.17/app.go",
+        "line": 286
+       },
+       "callee": "github.com/urfave/cli.HandleAction",
+       "caller": "github.com/urfave/cli.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.17/app.go",
+        "line": 524
+       },
+       "callee": "github.com/smallstep/cli-utils/command.ActionFunc$1",
+       "caller": "github.com/urfave/cli.HandleAction",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/smallstep/cli-utils@v0.12.2/command/command.go",
+        "line": 38
+       },
+       "callee": "github.com/smallstep/cli/command/certificate.p12Action",
+       "caller": "github.com/smallstep/cli-utils/command.ActionFunc$1",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "command/certificate/p12.go",
+        "line": 173
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.Encoder.Encode",
+       "caller": "github.com/smallstep/cli/command/certificate.p12Action",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 709
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.computeMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.Encoder.Encode",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 163
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.computeMac",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 127
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+       "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "doPBMAC1"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/step/main.go",
+        "line": 28
+       },
+       "callee": "github.com/smallstep/cli/internal/cmd.Run",
+       "caller": "github.com/smallstep/cli/cmd/step.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd<local>.go",
+        "line": 47
+       },
+       "callee": "github.com/smallstep/cli/internal/cmd.run",
+       "caller": "github.com/smallstep/cli/internal/cmd.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd<local>.go",
+        "line": 62
+       },
+       "callee": "github.com/urfave/cli.App.Run",
+       "caller": "github.com/smallstep/cli/internal/cmd.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.17/app.go",
+        "line": 286
+       },
+       "callee": "github.com/urfave/cli.HandleAction",
+       "caller": "github.com/urfave/cli.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.17/app.go",
+        "line": 522
+       },
+       "callee": "github.com/smallstep/cli-utils/command.ActionFunc$1",
+       "caller": "github.com/urfave/cli.HandleAction",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/smallstep/cli-utils@v0.12.2/command/command.go",
+        "line": 38
+       },
+       "callee": "github.com/smallstep/cli/command/certificate.p12Action",
+       "caller": "github.com/smallstep/cli-utils/command.ActionFunc$1",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "command/certificate/p12.go",
+        "line": 186
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.Encoder.EncodeTrustStoreEntries",
+       "caller": "github.com/smallstep/cli/command/certificate.p12Action",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 876
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.computeMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.Encoder.EncodeTrustStoreEntries",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 163
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.computeMac",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 127
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+       "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "doPBMAC1"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "doPBMAC1"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/step/main.go",
+       "line": 28
+      },
+      "callee": "github.com/smallstep/cli/internal/cmd.Run",
+      "caller": "github.com/smallstep/cli/cmd/step.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/cmd<local>.go",
+       "line": 47
+      },
+      "callee": "github.com/smallstep/cli/internal/cmd.run",
+      "caller": "github.com/smallstep/cli/internal/cmd.Run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/cmd<local>.go",
+       "line": 62
+      },
+      "callee": "github.com/urfave/cli.App.Run",
+      "caller": "github.com/smallstep/cli/internal/cmd.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.17/app.go",
+       "line": 286
+      },
+      "callee": "github.com/urfave/cli.HandleAction",
+      "caller": "github.com/urfave/cli.App.Run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.17/app.go",
+       "line": 522
+      },
+      "callee": "github.com/smallstep/cli-utils/command.ActionFunc$1",
+      "caller": "github.com/urfave/cli.HandleAction",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/smallstep/cli-utils@v0.12.2/command/command.go",
+       "line": 38
+      },
+      "callee": "github.com/smallstep/cli/command/certificate.p12Action",
+      "caller": "github.com/smallstep/cli-utils/command.ActionFunc$1",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "command/certificate/p12.go",
+       "line": 173
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.Encoder.Encode",
+      "caller": "github.com/smallstep/cli/command/certificate.p12Action",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+       "line": 709
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.computeMac",
+      "caller": "software.sslmate.com/src/go-pkcs12.Encoder.Encode",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+       "line": 163
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+      "caller": "software.sslmate.com/src/go-pkcs12.computeMac",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+       "line": 127
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+      "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/smallstep/cli/cmd/step",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "software.sslmate.com/src/go-pkcs12",
+     "symbol": "doPBMAC1"
+    }
+   },
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-10-28T16:46:11Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "0a2b5ad",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "software.sslmate.com/src/go-pkcs12",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "doPBMAC1"
+  }
+ ],
+ "target_app": {
+  "commit": "1d193897bb723c1c621c30d6803ed4d7561c94a2",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/smallstep/cli",
+  "path": "<local>/data/d3/apps/github.com_smallstep_cli/1d193897bb72"
+ },
+ "timing": {
+  "inspect_seconds": 0.28,
+  "methods_seconds": 45.5,
+  "symbols_seconds": 0.0,
+  "total_seconds": 78.77,
+  "verifier_seconds": 32.98
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 30,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 30,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 3,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   }
+  },
+  "checks_run": 65,
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}

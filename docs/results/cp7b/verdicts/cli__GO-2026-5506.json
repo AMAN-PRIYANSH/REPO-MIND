@@ -1,0 +1,1977 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "open-telemetry",
+    "repo": "opentelemetry-go",
+    "sha": "aa1894e09e3fe66860c7885cb40f98901b35277f"
+   }
+  ],
+  "fixed_in": "1.41.0",
+  "id": "GO-2026-5506",
+  "module": "go.opentelemetry.io/otel",
+  "source": "vulndb",
+  "vulnerable_at": "1.40.0"
+ },
+ "case_id": "cli__GO-2026-5506",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/smallstep/cli/cmd/step"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [
+   {
+    "candidate_id": "c4",
+    "package_dir": "internal/errorhandler",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ErrDelegator.Handle"
+   },
+   {
+    "candidate_id": "c5",
+    "package_dir": "internal/errorhandler",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ErrDelegator.setDelegate"
+   },
+   {
+    "candidate_id": "c6",
+    "package_dir": "internal/errorhandler",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "GetErrorHandler"
+   },
+   {
+    "candidate_id": "c7",
+    "package_dir": "internal/errorhandler",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetErrorHandler"
+   },
+   {
+    "candidate_id": "c8",
+    "package_dir": "internal/errorhandler",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "defaultErrorHandler"
+   }
+  ],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/smallstep/cli/cmd/step": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 35.88,
+    "load_failed": false,
+    "vta_seconds": 38.78
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 12,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "5 candidate function(s) not analysed: ADDED_BY_FIX.",
+  "3 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/baggage",
+    "symbol": "New"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/baggage",
+    "symbol": "Parse"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/baggage",
+    "symbol": "parseMember"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c9",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "go.opentelemetry.io/otel/internal/global.(*ErrDelegator).Handle"
+   ],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/certificates/ca.init",
+       "caller": "github.com/smallstep/cli/cmd/step.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "crypto/tls.init",
+       "caller": "github.com/smallstep/certificates/ca.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "crypto/fips140.init",
+       "caller": "crypto/tls.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/crypto/fips140/enforcement.go",
+        "line": 31
+       },
+       "callee": "internal/godebug.Setting.Value",
+       "caller": "crypto/fips140.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/internal/godebug/godebug.go",
+        "line": 158
+       },
+       "callee": "sync.Once.Do",
+       "caller": "internal/godebug.Setting.Value",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 69
+       },
+       "callee": "sync.Once.doSlow",
+       "caller": "sync.Once.Do",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 78
+       },
+       "callee": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "caller": "sync.Once.doSlow",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/cloud.google.com/go/auth@v0.17.0/grpctransport/grpctransport.go",
+        "line": 73
+       },
+       "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "caller": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc@v0.61.0/stats_handler.go",
+        "line": 206
+       },
+       "callee": "go.opentelemetry.io/otel.Handle",
+       "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/handler.go",
+        "line": 33
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+       "caller": "go.opentelemetry.io/otel.Handle",
+       "kind": "DYNAMIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "go.opentelemetry.io/otel/internal/global",
+      "symbol": "ErrDelegator.Handle"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/certificates/ca.init",
+       "caller": "github.com/smallstep/cli/cmd/step.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "net/http.init",
+       "caller": "github.com/smallstep/certificates/ca.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "net/http.init#2",
+       "caller": "net/http.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/servemux121.go",
+        "line": 32
+       },
+       "callee": "internal/godebug.Setting.Value",
+       "caller": "net/http.init#2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/internal/godebug/godebug.go",
+        "line": 158
+       },
+       "callee": "sync.Once.Do",
+       "caller": "internal/godebug.Setting.Value",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 69
+       },
+       "callee": "sync.Once.doSlow",
+       "caller": "sync.Once.Do",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 78
+       },
+       "callee": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "caller": "sync.Once.doSlow",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/cloud.google.com/go/auth@v0.17.0/grpctransport/grpctransport.go",
+        "line": 73
+       },
+       "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "caller": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc@v0.61.0/stats_handler.go",
+        "line": 206
+       },
+       "callee": "go.opentelemetry.io/otel.Handle",
+       "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/handler.go",
+        "line": 33
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+       "caller": "go.opentelemetry.io/otel.Handle",
+       "kind": "DYNAMIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "go.opentelemetry.io/otel/internal/global",
+      "symbol": "ErrDelegator.Handle"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/certificates/ca.init",
+       "caller": "github.com/smallstep/cli/cmd/step.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/go-chi/chi/v5/middleware.init",
+       "caller": "github.com/smallstep/certificates/ca.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/go-chi/chi/v5/middleware.init#2",
+       "caller": "github.com/go-chi/chi/v5/middleware.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/go-chi/chi/v5@v5.2.3/middleware/request_id.go",
+        "line": 56
+       },
+       "callee": "strings.Replacer.Replace",
+       "caller": "github.com/go-chi/chi/v5/middleware.init#2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/strings/replace.go",
+        "line": 96
+       },
+       "callee": "sync.Once.Do",
+       "caller": "strings.Replacer.Replace",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 69
+       },
+       "callee": "sync.Once.doSlow",
+       "caller": "sync.Once.Do",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 78
+       },
+       "callee": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "caller": "sync.Once.doSlow",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/cloud.google.com/go/auth@v0.17.0/grpctransport/grpctransport.go",
+        "line": 73
+       },
+       "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "caller": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc@v0.61.0/stats_handler.go",
+        "line": 206
+       },
+       "callee": "go.opentelemetry.io/otel.Handle",
+       "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/handler.go",
+        "line": 33
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+       "caller": "go.opentelemetry.io/otel.Handle",
+       "kind": "DYNAMIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "go.opentelemetry.io/otel/internal/global",
+      "symbol": "ErrDelegator.Handle"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/internal/global",
+    "symbol": "ErrDelegator.Handle"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/smallstep/certificates/ca.init",
+      "caller": "github.com/smallstep/cli/cmd/step.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "crypto/tls.init",
+      "caller": "github.com/smallstep/certificates/ca.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "crypto/fips140.init",
+      "caller": "crypto/tls.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/crypto/fips140/enforcement.go",
+       "line": 31
+      },
+      "callee": "internal/godebug.Setting.Value",
+      "caller": "crypto/fips140.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/internal/godebug/godebug.go",
+       "line": 158
+      },
+      "callee": "sync.Once.Do",
+      "caller": "internal/godebug.Setting.Value",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/sync/once.go",
+       "line": 69
+      },
+      "callee": "sync.Once.doSlow",
+      "caller": "sync.Once.Do",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/sync/once.go",
+       "line": 78
+      },
+      "callee": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+      "caller": "sync.Once.doSlow",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/cloud.google.com/go/auth@v0.17.0/grpctransport/grpctransport.go",
+       "line": 73
+      },
+      "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+      "caller": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc@v0.61.0/stats_handler.go",
+       "line": 206
+      },
+      "callee": "go.opentelemetry.io/otel.Handle",
+      "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/handler.go",
+       "line": 33
+      },
+      "callee": "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+      "caller": "go.opentelemetry.io/otel.Handle",
+      "kind": "DYNAMIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/smallstep/cli/cmd/step",
+     "symbol": "init"
+    },
+    "target": {
+     "package": "go.opentelemetry.io/otel/internal/global",
+     "symbol": "ErrDelegator.Handle"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c10",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/internal/global",
+    "symbol": "ErrDelegator.setDelegate"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c11",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "go.opentelemetry.io/otel/internal/global.GetErrorHandler"
+   ],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/certificates/ca.init",
+       "caller": "github.com/smallstep/cli/cmd/step.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "crypto/tls.init",
+       "caller": "github.com/smallstep/certificates/ca.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "crypto/fips140.init",
+       "caller": "crypto/tls.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/crypto/fips140/enforcement.go",
+        "line": 31
+       },
+       "callee": "internal/godebug.Setting.Value",
+       "caller": "crypto/fips140.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/internal/godebug/godebug.go",
+        "line": 158
+       },
+       "callee": "sync.Once.Do",
+       "caller": "internal/godebug.Setting.Value",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 69
+       },
+       "callee": "sync.Once.doSlow",
+       "caller": "sync.Once.Do",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 78
+       },
+       "callee": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "caller": "sync.Once.doSlow",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/cloud.google.com/go/auth@v0.17.0/grpctransport/grpctransport.go",
+        "line": 73
+       },
+       "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "caller": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc@v0.61.0/stats_handler.go",
+        "line": 206
+       },
+       "callee": "go.opentelemetry.io/otel.Handle",
+       "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/handler.go",
+        "line": 33
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.GetErrorHandler",
+       "caller": "go.opentelemetry.io/otel.Handle",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "go.opentelemetry.io/otel/internal/global",
+      "symbol": "GetErrorHandler"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/certificates/ca.init",
+       "caller": "github.com/smallstep/cli/cmd/step.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "net/http.init",
+       "caller": "github.com/smallstep/certificates/ca.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "net/http.init#2",
+       "caller": "net/http.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/servemux121.go",
+        "line": 32
+       },
+       "callee": "internal/godebug.Setting.Value",
+       "caller": "net/http.init#2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/internal/godebug/godebug.go",
+        "line": 158
+       },
+       "callee": "sync.Once.Do",
+       "caller": "internal/godebug.Setting.Value",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 69
+       },
+       "callee": "sync.Once.doSlow",
+       "caller": "sync.Once.Do",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 78
+       },
+       "callee": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "caller": "sync.Once.doSlow",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/cloud.google.com/go/auth@v0.17.0/grpctransport/grpctransport.go",
+        "line": 73
+       },
+       "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "caller": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc@v0.61.0/stats_handler.go",
+        "line": 206
+       },
+       "callee": "go.opentelemetry.io/otel.Handle",
+       "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/handler.go",
+        "line": 33
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.GetErrorHandler",
+       "caller": "go.opentelemetry.io/otel.Handle",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "go.opentelemetry.io/otel/internal/global",
+      "symbol": "GetErrorHandler"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/certificates/ca.init",
+       "caller": "github.com/smallstep/cli/cmd/step.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/go-chi/chi/v5/middleware.init",
+       "caller": "github.com/smallstep/certificates/ca.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/go-chi/chi/v5/middleware.init#2",
+       "caller": "github.com/go-chi/chi/v5/middleware.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/go-chi/chi/v5@v5.2.3/middleware/request_id.go",
+        "line": 56
+       },
+       "callee": "strings.Replacer.Replace",
+       "caller": "github.com/go-chi/chi/v5/middleware.init#2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/strings/replace.go",
+        "line": 96
+       },
+       "callee": "sync.Once.Do",
+       "caller": "strings.Replacer.Replace",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 69
+       },
+       "callee": "sync.Once.doSlow",
+       "caller": "sync.Once.Do",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/sync/once.go",
+        "line": 78
+       },
+       "callee": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "caller": "sync.Once.doSlow",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/cloud.google.com/go/auth@v0.17.0/grpctransport/grpctransport.go",
+        "line": 73
+       },
+       "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "caller": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc@v0.61.0/stats_handler.go",
+        "line": 206
+       },
+       "callee": "go.opentelemetry.io/otel.Handle",
+       "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/handler.go",
+        "line": 33
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.GetErrorHandler",
+       "caller": "go.opentelemetry.io/otel.Handle",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "go.opentelemetry.io/otel/internal/global",
+      "symbol": "GetErrorHandler"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/internal/global",
+    "symbol": "GetErrorHandler"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/smallstep/certificates/ca.init",
+      "caller": "github.com/smallstep/cli/cmd/step.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "crypto/tls.init",
+      "caller": "github.com/smallstep/certificates/ca.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "crypto/fips140.init",
+      "caller": "crypto/tls.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/crypto/fips140/enforcement.go",
+       "line": 31
+      },
+      "callee": "internal/godebug.Setting.Value",
+      "caller": "crypto/fips140.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/internal/godebug/godebug.go",
+       "line": 158
+      },
+      "callee": "sync.Once.Do",
+      "caller": "internal/godebug.Setting.Value",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/sync/once.go",
+       "line": 69
+      },
+      "callee": "sync.Once.doSlow",
+      "caller": "sync.Once.Do",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/sync/once.go",
+       "line": 78
+      },
+      "callee": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+      "caller": "sync.Once.doSlow",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/cloud.google.com/go/auth@v0.17.0/grpctransport/grpctransport.go",
+       "line": 73
+      },
+      "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+      "caller": "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc@v0.61.0/stats_handler.go",
+       "line": 206
+      },
+      "callee": "go.opentelemetry.io/otel.Handle",
+      "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/handler.go",
+       "line": 33
+      },
+      "callee": "go.opentelemetry.io/otel/internal/global.GetErrorHandler",
+      "caller": "go.opentelemetry.io/otel.Handle",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/smallstep/cli/cmd/step",
+     "symbol": "init"
+    },
+    "target": {
+     "package": "go.opentelemetry.io/otel/internal/global",
+     "symbol": "GetErrorHandler"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c12",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/internal/global",
+    "symbol": "SetErrorHandler"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c13",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/internal/global",
+    "symbol": "SetMeterProvider"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c14",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "go.opentelemetry.io/otel/internal/global.defaultErrorHandler"
+   ],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/cli/internal/cmd.init",
+       "caller": "github.com/smallstep/cli/cmd/step.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/certificates/cas/cloudcas.init",
+       "caller": "github.com/smallstep/cli/internal/cmd.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "cloud.google.com/go/security/privateca/apiv1.init",
+       "caller": "github.com/smallstep/certificates/cas/cloudcas.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "google.golang.org/api/transport/grpc.init",
+       "caller": "cloud.google.com/go/security/privateca/apiv1.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.init",
+       "caller": "google.golang.org/api/transport/grpc.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/otel.init",
+       "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.init",
+       "caller": "go.opentelemetry.io/otel.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/internal/global/state.go",
+        "line": 35
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.defaultErrorHandler",
+       "caller": "go.opentelemetry.io/otel/internal/global.init",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "go.opentelemetry.io/otel/internal/global",
+      "symbol": "defaultErrorHandler"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/cli/internal/cmd.init",
+       "caller": "github.com/smallstep/cli/cmd/step.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/certificates/cas/cloudcas.init",
+       "caller": "github.com/smallstep/cli/internal/cmd.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "cloud.google.com/go/security/privateca/apiv1.init",
+       "caller": "github.com/smallstep/certificates/cas/cloudcas.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "google.golang.org/api/transport/http.init",
+       "caller": "cloud.google.com/go/security/privateca/apiv1.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp.init",
+       "caller": "google.golang.org/api/transport/http.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/otel.init",
+       "caller": "go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.init",
+       "caller": "go.opentelemetry.io/otel.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/internal/global/state.go",
+        "line": 35
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.defaultErrorHandler",
+       "caller": "go.opentelemetry.io/otel/internal/global.init",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "go.opentelemetry.io/otel/internal/global",
+      "symbol": "defaultErrorHandler"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/internal/global",
+    "symbol": "defaultErrorHandler"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/smallstep/cli/internal/cmd.init",
+      "caller": "github.com/smallstep/cli/cmd/step.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/smallstep/certificates/cas/cloudcas.init",
+      "caller": "github.com/smallstep/cli/internal/cmd.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "cloud.google.com/go/security/privateca/apiv1.init",
+      "caller": "github.com/smallstep/certificates/cas/cloudcas.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "google.golang.org/api/transport/grpc.init",
+      "caller": "cloud.google.com/go/security/privateca/apiv1.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.init",
+      "caller": "google.golang.org/api/transport/grpc.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "go.opentelemetry.io/otel.init",
+      "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "go.opentelemetry.io/otel/internal/global.init",
+      "caller": "go.opentelemetry.io/otel.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/internal/global/state.go",
+       "line": 35
+      },
+      "callee": "go.opentelemetry.io/otel/internal/global.defaultErrorHandler",
+      "caller": "go.opentelemetry.io/otel/internal/global.init",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/smallstep/cli/cmd/step",
+     "symbol": "init"
+    },
+    "target": {
+     "package": "go.opentelemetry.io/otel/internal/global",
+     "symbol": "defaultErrorHandler"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c15",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "go.opentelemetry.io/otel/internal/global.defaultTracerValue"
+   ],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/cli/internal/cmd.init",
+       "caller": "github.com/smallstep/cli/cmd/step.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/certificates/cas/cloudcas.init",
+       "caller": "github.com/smallstep/cli/internal/cmd.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "cloud.google.com/go/security/privateca/apiv1.init",
+       "caller": "github.com/smallstep/certificates/cas/cloudcas.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "google.golang.org/api/transport/grpc.init",
+       "caller": "cloud.google.com/go/security/privateca/apiv1.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.init",
+       "caller": "google.golang.org/api/transport/grpc.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/otel.init",
+       "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.init",
+       "caller": "go.opentelemetry.io/otel.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/internal/global/state.go",
+        "line": 36
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.defaultTracerValue",
+       "caller": "go.opentelemetry.io/otel/internal/global.init",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "go.opentelemetry.io/otel/internal/global",
+      "symbol": "defaultTracerValue"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/cli/internal/cmd.init",
+       "caller": "github.com/smallstep/cli/cmd/step.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/smallstep/certificates/cas/cloudcas.init",
+       "caller": "github.com/smallstep/cli/internal/cmd.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "cloud.google.com/go/security/privateca/apiv1.init",
+       "caller": "github.com/smallstep/certificates/cas/cloudcas.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "google.golang.org/api/transport/http.init",
+       "caller": "cloud.google.com/go/security/privateca/apiv1.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp.init",
+       "caller": "google.golang.org/api/transport/http.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/otel.init",
+       "caller": "go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.init",
+       "caller": "go.opentelemetry.io/otel.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/internal/global/state.go",
+        "line": 36
+       },
+       "callee": "go.opentelemetry.io/otel/internal/global.defaultTracerValue",
+       "caller": "go.opentelemetry.io/otel/internal/global.init",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/smallstep/cli/cmd/step",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "go.opentelemetry.io/otel/internal/global",
+      "symbol": "defaultTracerValue"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/internal/global",
+    "symbol": "defaultTracerValue"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/smallstep/cli/internal/cmd.init",
+      "caller": "github.com/smallstep/cli/cmd/step.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/smallstep/certificates/cas/cloudcas.init",
+      "caller": "github.com/smallstep/cli/internal/cmd.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "cloud.google.com/go/security/privateca/apiv1.init",
+      "caller": "github.com/smallstep/certificates/cas/cloudcas.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "google.golang.org/api/transport/grpc.init",
+      "caller": "cloud.google.com/go/security/privateca/apiv1.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.init",
+      "caller": "google.golang.org/api/transport/grpc.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "go.opentelemetry.io/otel.init",
+      "caller": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "go.opentelemetry.io/otel/internal/global.init",
+      "caller": "go.opentelemetry.io/otel.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/go.opentelemetry.io/otel@v1.38.0/internal/global/state.go",
+       "line": 36
+      },
+      "callee": "go.opentelemetry.io/otel/internal/global.defaultTracerValue",
+      "caller": "go.opentelemetry.io/otel/internal/global.init",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/smallstep/cli/cmd/step",
+     "symbol": "init"
+    },
+    "target": {
+     "package": "go.opentelemetry.io/otel/internal/global",
+     "symbol": "defaultTracerValue"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c16",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/propagation",
+    "symbol": "extractMultiBaggage"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c17",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/smallstep/cli/cmd/step",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "go.opentelemetry.io/otel/propagation",
+    "symbol": "extractSingleBaggage"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-10-28T16:44:44Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "0a2b5ad",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/baggage",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "New"
+  },
+  {
+   "candidate_id": "c2",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/baggage",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Parse"
+  },
+  {
+   "candidate_id": "c3",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/baggage",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "parseMember"
+  },
+  {
+   "candidate_id": "c9",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/internal/global",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "ErrDelegator.Handle"
+  },
+  {
+   "candidate_id": "c10",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/internal/global",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "ErrDelegator.setDelegate"
+  },
+  {
+   "candidate_id": "c11",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/internal/global",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "GetErrorHandler"
+  },
+  {
+   "candidate_id": "c12",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/internal/global",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "SetErrorHandler"
+  },
+  {
+   "candidate_id": "c13",
+   "context_only": true,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/internal/global",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "SetMeterProvider"
+  },
+  {
+   "candidate_id": "c14",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/internal/global",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "defaultErrorHandler"
+  },
+  {
+   "candidate_id": "c15",
+   "context_only": true,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/internal/global",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "defaultTracerValue"
+  },
+  {
+   "candidate_id": "c16",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/propagation",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "extractMultiBaggage"
+  },
+  {
+   "candidate_id": "c17",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "go.opentelemetry.io/otel/propagation",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "extractSingleBaggage"
+  }
+ ],
+ "target_app": {
+  "commit": "1d193897bb723c1c621c30d6803ed4d7561c94a2",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/smallstep/cli",
+  "path": "<local>/data/d3/apps/github.com_smallstep_cli/1d193897bb72"
+ },
+ "timing": {
+  "inspect_seconds": 0.37,
+  "methods_seconds": 74.67,
+  "symbols_seconds": 0.0,
+  "total_seconds": 113.79,
+  "verifier_seconds": 38.75
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 92,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 92,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 10,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 4,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 12,
+    "skipped": 0
+   }
+  },
+  "checks_run": 210,
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}

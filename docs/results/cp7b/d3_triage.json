@@ -1,0 +1,1377 @@
+{
+ "env": {
+  "CGO_ENABLED": "0",
+  "GOFLAGS": "-mod=readonly",
+  "GOPROXY": "off (analysis)",
+  "GOTOOLCHAIN": "local"
+ },
+ "environment": {
+  "command": "python -m vulntrace eval triage --set d3",
+  "go": "go version go1.26.10 linux/amd64",
+  "os": "Linux-6.18.44-fc-v180-x86_64-with-glibc2.39",
+  "python": "3.13.17",
+  "repo_commit": "0a2b5ad",
+  "repo_dirty": false
+ },
+ "govulncheck": {
+  "db": "pinned vulndb snapshot e0bad56276e98711a598adbab976de7cd914013a data/osv (flat directory)",
+  "mode": "source, -scan symbol, main packages as roots, GOPROXY=off",
+  "module": "golang.org/x/vuln",
+  "version": "v1.9.0"
+ },
+ "max_mains": 10,
+ "mode2_policy": "DOWNGRADE",
+ "rows": [
+  {
+   "advisory": "GO-2026-4610",
+   "app_commit": "fe98c8a2eb08c443a36e3cc7568078909e298433",
+   "app_list_error": null,
+   "app_repo": "github.com/wagoodman/dive",
+   "app_tag": "v0.13.1",
+   "case_seconds": 53.6,
+   "cluster_key": "github.com/wagoodman/dive",
+   "context_only_symbols": 0,
+   "created": "2026-03-06",
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 1,
+    "NOT_REACHABLE": 4
+   },
+   "entry_reasons": {
+    "VERIFIER_REJECTED": 1
+   },
+   "evidence_level": "CANDIDATE_LEVEL",
+   "first_method_error": null,
+   "fix_candidates": 0,
+   "fix_evidence_status": "EMPTY",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "NOT_COMPARABLE",
+    "error": null,
+    "fixed_version": "v29.2.0+incompatible",
+    "level": "MODULE",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 12.6
+    },
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "dive__GO-2026-4610",
+   "linker_go_version": "go1.26.10",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 5
+   },
+   "mode": "RELEASE",
+   "mode_reason": "FIX_EVIDENCE_UNUSABLE_FALLBACK_TO_RELEASE",
+   "module": "github.com/docker/cli",
+   "not_covered": {
+    "ADDED_BY_FIX": 1
+   },
+   "pre_policy_reason_codes": [
+    "VERIFIER_REJECTED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [],
+   "reason_codes": [
+    "VERIFIER_REJECTED"
+   ],
+   "release_range_status": "AVAILABLE",
+   "retrieval": {
+    "candidates_total": 6,
+    "config_used": "bm25",
+    "fallback": "EMBEDDER_UNAVAILABLE",
+    "k": 10
+   },
+   "schema_errors": [],
+   "seconds": 30.23,
+   "symbols": 5,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 1,
+    "failed_by_kind": {
+     "TARGET_EXISTS": 1
+    },
+    "failures": 1,
+    "status": "FAILED"
+   },
+   "verified_paths": 0,
+   "version_selected": "v28.0.2+incompatible"
+  },
+  {
+   "advisory": "GO-2026-5841",
+   "app_commit": "fe98c8a2eb08c443a36e3cc7568078909e298433",
+   "app_list_error": null,
+   "app_repo": "github.com/wagoodman/dive",
+   "app_tag": "v0.13.1",
+   "case_seconds": 26.7,
+   "cluster_key": "github.com/wagoodman/dive",
+   "context_only_symbols": 0,
+   "created": "2026-07-21",
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "fix_candidates": 1,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "AGREE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "MODULE",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 12.6
+    },
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "dive__GO-2026-5841",
+   "linker_go_version": "go1.26.10",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "github.com/klauspost/compress",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 13.02,
+   "symbols": 1,
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0,
+   "version_selected": "v1.18.0"
+  },
+  {
+   "advisory": "GO-2025-3900",
+   "app_commit": "fe98c8a2eb08c443a36e3cc7568078909e298433",
+   "app_list_error": null,
+   "app_repo": "github.com/wagoodman/dive",
+   "app_tag": "v0.13.1",
+   "case_seconds": 12.6,
+   "cluster_key": "github.com/wagoodman/dive",
+   "context_only_symbols": 2,
+   "created": "2025-08-27",
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 3,
+    "NOT_REACHABLE": 26
+   },
+   "entry_reasons": {
+    "ANALYSIS_FAILED": 3
+   },
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": "symbol StringToNetIPPrefixHookFunc not found in package github.com/go-viper/mapstructure/v2",
+   "fix_candidates": 45,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "NOT_COMPARABLE",
+    "error": null,
+    "fixed_version": "v2.4.0",
+    "level": "PACKAGE",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 12.6
+    },
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "dive__GO-2025-3900",
+   "linker_go_version": "go1.26.10",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {
+    "TARGET_NOT_FOUND": 3
+   },
+   "method_pairs": {
+    "ERROR+ABSENT": 3,
+    "NO_PATH+ABSENT": 26
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "github.com/go-viper/mapstructure/v2",
+   "not_covered": {
+    "ADDED_BY_FIX": 16
+   },
+   "pre_policy_reason_codes": [
+    "ANALYSIS_FAILED"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reachable_symbols": [],
+   "reason_codes": [
+    "ANALYSIS_FAILED"
+   ],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 10.97,
+   "symbols": 29,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 26,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0,
+   "version_selected": "v2.2.1"
+  },
+  {
+   "advisory": "GO-2025-4188",
+   "app_commit": "6b0b0244d1aefd6971999b03481eeeaa4ec7cf55",
+   "app_list_error": null,
+   "app_repo": "github.com/sosedoff/pgweb",
+   "app_tag": "v0.17.0",
+   "case_seconds": 29.2,
+   "cluster_key": "github.com/sosedoff/pgweb",
+   "context_only_symbols": 3,
+   "created": "2025-12-15",
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "CANT_DETERMINE": 5,
+    "NOT_REACHABLE": 5
+   },
+   "entry_reasons": {
+    "METHOD_DISAGREEMENT": 5
+   },
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "fix_candidates": 5,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "NOT_COMPARABLE",
+    "error": null,
+    "fixed_version": "v1.9.1",
+    "level": "PACKAGE",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 11.9
+    },
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "pgweb__GO-2025-4188",
+   "linker_go_version": "go1.26.10",
+   "mains": 2,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 5,
+    "NO_PATH+PRESENT": 5
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "github.com/sirupsen/logrus",
+   "not_covered": {},
+   "pre_policy_reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "pre_policy_verdict": "CANT_DETERMINE",
+   "pre_verifier_verdict": "CANT_DETERMINE",
+   "reachable_ranks": [],
+   "reachable_symbols": [],
+   "reason_codes": [
+    "METHOD_DISAGREEMENT"
+   ],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 28.07,
+   "symbols": 5,
+   "verdict": "CANT_DETERMINE",
+   "verification": {
+    "checks_run": 5,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0,
+   "version_selected": "v1.9.0"
+  },
+  {
+   "advisory": "GO-2026-5841",
+   "app_commit": "6eaad039603a4de39fddd1cf5f727391efe9974e",
+   "app_list_error": null,
+   "app_repo": "github.com/gitleaks/gitleaks",
+   "app_tag": "v8.30.0",
+   "case_seconds": 31.1,
+   "cluster_key": "github.com/gitleaks/gitleaks",
+   "context_only_symbols": 0,
+   "created": "2026-07-21",
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 2
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "fix_candidates": 1,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "AGREE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "PACKAGE",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 11.9
+    },
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "gitleaks__GO-2026-5841",
+   "linker_go_version": "go1.26.10",
+   "mains": 2,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 2
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "github.com/klauspost/compress",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 31.13,
+   "symbols": 1,
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 2,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0,
+   "version_selected": "v1.17.11"
+  },
+  {
+   "advisory": "GO-2025-4020",
+   "app_commit": "6eaad039603a4de39fddd1cf5f727391efe9974e",
+   "app_list_error": null,
+   "app_repo": "github.com/gitleaks/gitleaks",
+   "app_tag": "v8.30.0",
+   "case_seconds": 34.1,
+   "cluster_key": "github.com/gitleaks/gitleaks",
+   "context_only_symbols": 4,
+   "created": "2025-11-03",
+   "dynamic_edges_on_verified": 3,
+   "entries": {
+    "CANT_DETERMINE": 9,
+    "NOT_REACHABLE": 2,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {
+    "ANALYSIS_FAILED": 8,
+    "METHOD_DISAGREEMENT": 1
+   },
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": "symbol packedFileReader.newArchiveFileFrom not found in package github.com/nwaples/rardecode/v2",
+   "fix_candidates": 7,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "DISAGREE",
+    "error": null,
+    "fixed_version": "v2.2.0",
+    "level": "PACKAGE",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 11.9
+    },
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "gitleaks__GO-2025-4020",
+   "linker_go_version": "go1.26.10",
+   "mains": 2,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {
+    "TARGET_NOT_FOUND": 8
+   },
+   "method_pairs": {
+    "ERROR+ABSENT": 8,
+    "NO_PATH+ABSENT": 2,
+    "NO_PATH+PRESENT": 1,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "github.com/nwaples/rardecode/v2",
+   "not_covered": {
+    "ADDED_BY_FIX": 1
+   },
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [
+    "github.com/nwaples/rardecode/v2.FileSystem"
+   ],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 32.85,
+   "symbols": 6,
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 67,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1,
+   "version_selected": "v2.1.0"
+  },
+  {
+   "advisory": "GO-2026-5506",
+   "app_commit": "1d193897bb723c1c621c30d6803ed4d7561c94a2",
+   "app_list_error": null,
+   "app_repo": "github.com/smallstep/cli",
+   "app_tag": "v0.29.0",
+   "case_seconds": 116.5,
+   "cluster_key": "github.com/smallstep/cli",
+   "context_only_symbols": 2,
+   "created": "2026-07-23",
+   "dynamic_edges_on_verified": 3,
+   "entries": {
+    "NOT_REACHABLE": 8,
+    "REACHABLE": 4
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "fix_candidates": 17,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "AGREE",
+    "error": null,
+    "fixed_version": "v1.41.0",
+    "level": "SYMBOL",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 42.7
+    },
+    "symbols": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+     "go.opentelemetry.io/otel/internal/global.GetErrorHandler"
+    ],
+    "trace": [
+     "go.opentelemetry.io/otel/internal/global.GetErrorHandler (internal/global/state.go:55)",
+     "go.opentelemetry.io/otel.Handle (handler.go:33)",
+     "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler (stats_handler.go:206)",
+     "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1 (grpctransport/grpctransport.go:73)",
+     "sync.Once.doSlow (src/sync/once.go:78)",
+     "sync.Once.Do (src/sync/once.go:69)",
+     "strings.Replacer.Replace (src/strings/replace.go:96)",
+     "github.com/go-chi/chi/v5/middleware.init#2 (middleware/request_id.go:56)",
+     "github.com/go-chi/chi/v5/middleware.init (middleware/basic_auth.go:1)",
+     "github.com/smallstep/certificates/ca.init (ca/ca.go:20)",
+     "github.com/smallstep/cli/cmd/step.init (cmd/step/main.go:4)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "cli__GO-2026-5506",
+   "linker_go_version": "go1.26.10",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 8,
+    "PATH_FOUND+PRESENT": 4
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "go.opentelemetry.io/otel",
+   "not_covered": {
+    "ADDED_BY_FIX": 5
+   },
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [
+    "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+    "go.opentelemetry.io/otel/internal/global.GetErrorHandler",
+    "go.opentelemetry.io/otel/internal/global.defaultErrorHandler",
+    "go.opentelemetry.io/otel/internal/global.defaultTracerValue"
+   ],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 113.79,
+   "symbols": 12,
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 210,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 4,
+   "version_selected": "v1.38.0"
+  },
+  {
+   "advisory": "GO-2026-5052",
+   "app_commit": "1d193897bb723c1c621c30d6803ed4d7561c94a2",
+   "app_list_error": null,
+   "app_repo": "github.com/smallstep/cli",
+   "app_tag": "v0.29.0",
+   "case_seconds": 80.4,
+   "cluster_key": "github.com/smallstep/cli",
+   "context_only_symbols": 0,
+   "created": "2026-06-22",
+   "dynamic_edges_on_verified": 2,
+   "entries": {
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "fix_candidates": 1,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "DISAGREE",
+    "error": null,
+    "fixed_version": "v0.7.2",
+    "level": "PACKAGE",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 42.7
+    },
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "cli__GO-2026-5052",
+   "linker_go_version": "go1.26.10",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "software.sslmate.com/src/go-pkcs12",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [
+    "software.sslmate.com/src/go-pkcs12.doPBMAC1"
+   ],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 78.77,
+   "symbols": 1,
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 65,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1,
+   "version_selected": "v0.6.0"
+  },
+  {
+   "advisory": "GO-2026-4503",
+   "app_commit": "1d193897bb723c1c621c30d6803ed4d7561c94a2",
+   "app_list_error": null,
+   "app_repo": "github.com/smallstep/cli",
+   "app_tag": "v0.29.0",
+   "case_seconds": 42.5,
+   "cluster_key": "github.com/smallstep/cli",
+   "context_only_symbols": 0,
+   "created": "2026-02-17",
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "fix_candidates": 1,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "AGREE",
+    "error": null,
+    "fixed_version": "v1.1.1",
+    "level": "PACKAGE",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 42.7
+    },
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "cli__GO-2026-4503",
+   "linker_go_version": "go1.26.10",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "filippo.io/edwards25519",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 41.41,
+   "symbols": 1,
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 1,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0,
+   "version_selected": "v1.1.0"
+  },
+  {
+   "advisory": "GO-2026-5004",
+   "app_commit": "1d193897bb723c1c621c30d6803ed4d7561c94a2",
+   "app_list_error": null,
+   "app_repo": "github.com/smallstep/cli",
+   "app_tag": "v0.29.0",
+   "case_seconds": 68.9,
+   "cluster_key": "github.com/smallstep/cli",
+   "context_only_symbols": 2,
+   "created": "2026-05-21",
+   "dynamic_edges_on_verified": 11,
+   "entries": {
+    "REACHABLE": 4
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "fix_candidates": 7,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "AGREE",
+    "error": null,
+    "fixed_version": "v5.9.2",
+    "level": "SYMBOL",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 42.7
+    },
+    "symbols": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL"
+    ],
+    "trace": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL (internal/sanitize/sanitize.go:433)",
+     "github.com/jackc/pgx/v5.Conn.sanitizeForSimpleQuery (conn.go:1243)",
+     "github.com/jackc/pgx/v5.Conn.Query (conn.go:831)",
+     "github.com/jackc/pgx/v5/stdlib.Conn.QueryContext (stdlib/sql.go:494)",
+     "database/sql.ctxDriverQuery (src/database/sql/ctxutil.go:48)",
+     "database/sql.queryDC$1 (src/database/sql/sql.go:1786)",
+     "database/sql.withLock (src/database/sql/sql.go:3572)",
+     "database/sql.driverConn.finalClose (src/database/sql/sql.go:683)",
+     "os/exec.Start$2 (src/os/exec/exec.go:757)",
+     "os/exec.Cmd.Start (src/os/exec/exec.go:756)",
+     "github.com/smallstep/cli/command/ca/acme/eab.listAction (command/ca/acme/eab/list.go:137)",
+     "github.com/urfave/cli.HandleAction (app.go:522)",
+     "github.com/urfave/cli.App.Run (app.go:286)",
+     "github.com/smallstep/cli/internal/cmd.run (internal/cmd<local>.go:62)",
+     "github.com/smallstep/cli/internal/cmd.Run (internal/cmd<local>.go:47)",
+     "github.com/smallstep/cli/cmd/step.main (cmd/step/main.go:28)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "cli__GO-2026-5004",
+   "linker_go_version": "go1.26.10",
+   "mains": 1,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "PATH_FOUND+PRESENT": 4
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "github.com/jackc/pgx/v5",
+   "not_covered": {
+    "ADDED_BY_FIX": 3
+   },
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [
+    "github.com/jackc/pgx/v5/internal/sanitize.QuoteBytes",
+    "github.com/jackc/pgx/v5/internal/sanitize.escapeStringState",
+    "github.com/jackc/pgx/v5/internal/sanitize.placeholderState",
+    "github.com/jackc/pgx/v5/internal/sanitize.rawState"
+   ],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 67.65,
+   "symbols": 4,
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 452,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 4,
+   "version_selected": "v5.7.5"
+  },
+  {
+   "advisory": "GO-2026-5676",
+   "app_commit": "81f8f398c7b2b845853b1e85087c6122acc6db0b",
+   "app_list_error": null,
+   "app_repo": "github.com/XTLS/Xray-core",
+   "app_tag": "v25.12.8",
+   "case_seconds": 74.7,
+   "cluster_key": "github.com/XTLS/Xray-core",
+   "context_only_symbols": 0,
+   "created": "2026-07-07",
+   "dynamic_edges_on_verified": 9,
+   "entries": {
+    "CANT_DETERMINE": 3,
+    "NOT_REACHABLE": 4,
+    "REACHABLE": 2
+   },
+   "entry_reasons": {
+    "ANALYSIS_FAILED": 1,
+    "VERIFIER_REJECTED": 2
+   },
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": "symbol decodeTrailers not found in package github.com/quic-go/quic-go/http3",
+   "fix_candidates": 6,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "AGREE",
+    "error": null,
+    "fixed_version": "v0.59.1",
+    "level": "SYMBOL",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 22.7
+    },
+    "symbols": [
+     "github.com/quic-go/quic-go/http3.ConfigureTLSConfig",
+     "github.com/quic-go/quic-go/http3.Error.Error",
+     "github.com/quic-go/quic-go/http3.RequestStream.Close",
+     "github.com/quic-go/quic-go/http3.RequestStream.Write",
+     "github.com/quic-go/quic-go/http3.Server.Close",
+     "github.com/quic-go/quic-go/http3.Server.ServeListener",
+     "github.com/quic-go/quic-go/http3.Transport.Close",
+     "github.com/quic-go/quic-go/http3.Transport.CloseIdleConnections",
+     "github.com/quic-go/quic-go/http3.Transport.RoundTrip",
+     "github.com/quic-go/quic-go/http3.body.Close",
+     "github.com/quic-go/quic-go/http3.body.Read",
+     "github.com/quic-go/quic-go/http3.cancelingReader.Read",
+     "github.com/quic-go/quic-go/http3.countingByteReader.Read",
+     "github.com/quic-go/quic-go/http3.countingByteReader.ReadByte",
+     "github.com/quic-go/quic-go/http3.errConnUnusable.Error",
+     "github.com/quic-go/quic-go/http3.gzipReader.Close",
+     "github.com/quic-go/quic-go/http3.gzipReader.Read",
+     "github.com/quic-go/quic-go/http3.hijackableBody.Close",
+     "github.com/quic-go/quic-go/http3.hijackableBody.Read",
+     "github.com/quic-go/quic-go/http3.qpackError.Error",
+     "github.com/quic-go/quic-go/http3.responseWriter.Flush",
+     "github.com/quic-go/quic-go/http3.responseWriter.Write",
+     "github.com/quic-go/quic-go/http3.responseWriter.WriteHeader",
+     "github.com/quic-go/quic-go/http3.stateTrackingStream.Read",
+     "github.com/quic-go/quic-go/http3.tracingReader.Read"
+    ],
+    "trace": [
+     "github.com/quic-go/quic-go/http3.gzipReader.Close (http3/gzip_reader.go:37)",
+     "github.com/xtls/xray-core/main/commands/all/api.fetchHTTPContent (main/commands/all/api/shared.go:97)",
+     "github.com/xtls/xray-core/main/commands/all/api.loadArg (main/commands/all/api/shared.go:59)",
+     "github.com/xtls/xray-core/main/commands/all/api.executeRemoveInbounds (main/commands/all/api/inbounds_remove.go:44)",
+     "github.com/xtls/xray-core/main/commands/base.Execute (main/commands/base/execute.go:64)",
+     "github.com/xtls/xray-core/main.main (main/main.go:22)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "Xray-core__GO-2026-5676",
+   "linker_go_version": "go1.26.10",
+   "mains": 3,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {
+    "TARGET_NOT_FOUND": 1
+   },
+   "method_pairs": {
+    "ERROR+ABSENT": 1,
+    "NO_PATH+ABSENT": 6,
+    "PATH_FOUND+PRESENT": 2
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "github.com/quic-go/quic-go",
+   "not_covered": {
+    "ADDED_BY_FIX": 3
+   },
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [
+    "github.com/quic-go/quic-go/http3.parseHeaders",
+    "github.com/quic-go/quic-go/http3.parseTrailers"
+   ],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 73.24,
+   "symbols": 3,
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 153,
+    "downgraded": 2,
+    "failed_by_kind": {
+     "TARGET_EXISTS": 2
+    },
+    "failures": 2,
+    "status": "FAILED"
+   },
+   "verified_paths": 2,
+   "version_selected": "v0.57.1"
+  },
+  {
+   "advisory": "GO-2026-4512",
+   "app_commit": "81f8f398c7b2b845853b1e85087c6122acc6db0b",
+   "app_list_error": null,
+   "app_repo": "github.com/XTLS/Xray-core",
+   "app_tag": "v25.12.8",
+   "case_seconds": 49.7,
+   "cluster_key": "github.com/XTLS/Xray-core",
+   "context_only_symbols": 0,
+   "created": "2026-02-19",
+   "dynamic_edges_on_verified": 1,
+   "entries": {
+    "NOT_REACHABLE": 2,
+    "REACHABLE": 1
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "fix_candidates": 1,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "AGREE",
+    "error": null,
+    "fixed_version": "v1.8.2",
+    "level": "SYMBOL",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 22.7
+    },
+    "symbols": [
+     "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+     "github.com/refraction-networking/utls.UConn.Handshake",
+     "github.com/refraction-networking/utls.UConn.HandshakeContext",
+     "github.com/refraction-networking/utls.UConn.Read",
+     "github.com/refraction-networking/utls.UConn.Write"
+    ],
+    "trace": [
+     "github.com/refraction-networking/utls.UConn.Read (u_conn.go:861)",
+     "github.com/gorilla/websocket.flateReadWrapper.Read (compression.go:130)",
+     "io.ReadAll (src/io/io.go:722)",
+     "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson (main/commands/all/convert/json.go:56)",
+     "github.com/xtls/xray-core/main/commands/base.Execute (main/commands/base/execute.go:64)",
+     "github.com/xtls/xray-core/main.main (main/main.go:22)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "Xray-core__GO-2026-4512",
+   "linker_go_version": "go1.26.10",
+   "mains": 3,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 2,
+    "PATH_FOUND+PRESENT": 1
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "github.com/refraction-networking/utls",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [
+    "github.com/refraction-networking/utls.utlsIdToSpec"
+   ],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 48.29,
+   "symbols": 1,
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 79,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 1,
+   "version_selected": "v1.8.1"
+  },
+  {
+   "advisory": "GO-2026-5841",
+   "app_commit": "81f8f398c7b2b845853b1e85087c6122acc6db0b",
+   "app_list_error": null,
+   "app_repo": "github.com/XTLS/Xray-core",
+   "app_tag": "v25.12.8",
+   "case_seconds": 31.5,
+   "cluster_key": "github.com/XTLS/Xray-core",
+   "context_only_symbols": 0,
+   "created": "2026-07-21",
+   "dynamic_edges_on_verified": 0,
+   "entries": {
+    "NOT_REACHABLE": 3
+   },
+   "entry_reasons": {},
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": null,
+   "fix_candidates": 1,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "AGREE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "MODULE",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 22.7
+    },
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "Xray-core__GO-2026-5841",
+   "linker_go_version": "go1.26.10",
+   "mains": 3,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {},
+   "method_pairs": {
+    "NO_PATH+ABSENT": 3
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "github.com/klauspost/compress",
+   "not_covered": {},
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "NOT_REACHABLE",
+   "pre_verifier_verdict": "NOT_REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 31.45,
+   "symbols": 1,
+   "verdict": "NOT_REACHABLE",
+   "verification": {
+    "checks_run": 3,
+    "downgraded": 0,
+    "failed_by_kind": {},
+    "failures": 0,
+    "status": "PASSED"
+   },
+   "verified_paths": 0,
+   "version_selected": "v1.17.4"
+  },
+  {
+   "advisory": "GO-2026-6061",
+   "app_commit": "81f8f398c7b2b845853b1e85087c6122acc6db0b",
+   "app_list_error": null,
+   "app_repo": "github.com/XTLS/Xray-core",
+   "app_tag": "v25.12.8",
+   "case_seconds": 55.5,
+   "cluster_key": "github.com/XTLS/Xray-core",
+   "context_only_symbols": 6,
+   "created": "2026-07-23",
+   "dynamic_edges_on_verified": 109,
+   "entries": {
+    "CANT_DETERMINE": 7,
+    "NOT_REACHABLE": 76,
+    "REACHABLE": 28
+   },
+   "entry_reasons": {
+    "ANALYSIS_FAILED": 1,
+    "METHOD_DISAGREEMENT": 4,
+    "VERIFIER_REJECTED": 2
+   },
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "first_method_error": "symbol loopyWriter.updateStreamAfterWrite not found in package google.golang.org/grpc/internal/transport",
+   "fix_candidates": 46,
+   "fix_evidence_status": "AVAILABLE",
+   "go_version": "go1.26.10",
+   "govulncheck": {
+    "agreement": "AGREE",
+    "error": null,
+    "fixed_version": "v1.82.1",
+    "level": "SYMBOL",
+    "run": {
+     "error": null,
+     "exit_code": 0,
+     "go_version": "go1.26.10",
+     "scanner": "govulncheck@v1.9.0",
+     "seconds": 22.7
+    },
+    "symbols": [
+     "google.golang.org/grpc/internal/transport.ClientStream.Close",
+     "google.golang.org/grpc/internal/transport.ClientStream.Header",
+     "google.golang.org/grpc/internal/transport.ClientStream.Read",
+     "google.golang.org/grpc/internal/transport.ClientStream.RecvCompress",
+     "google.golang.org/grpc/internal/transport.ClientStream.TrailersOnly",
+     "google.golang.org/grpc/internal/transport.ClientStream.Write",
+     "google.golang.org/grpc/internal/transport.NewHTTP2Client",
+     "google.golang.org/grpc/internal/transport.NewServerTransport",
+     "google.golang.org/grpc/internal/transport.ServerStream.Read",
+     "google.golang.org/grpc/internal/transport.ServerStream.Write",
+     "google.golang.org/grpc/internal/transport.ServerStream.WriteStatus",
+     "google.golang.org/grpc/internal/transport.Stream.ReadMessageHeader",
+     "google.golang.org/grpc/internal/transport.http2Client.Close",
+     "google.golang.org/grpc/internal/transport.http2Client.GracefulClose",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/transport.http2Server.Drain",
+     "google.golang.org/grpc/internal/transport.http2Server.HandleStreams"
+    ],
+    "trace": [
+     "google.golang.org/grpc/internal/transport.ClientStream.Close (internal/transport/client_stream.go:65)",
+     "google.golang.org/grpc.csAttempt.finish (stream.go:1203)",
+     "google.golang.org/grpc.clientStream.finish (stream.go:1050)",
+     "google.golang.org/grpc.clientStream.RecvMsg (stream.go:999)",
+     "google.golang.org/grpc.invoke (call.go:73)",
+     "google.golang.org/grpc.ClientConn.Invoke (call.go:37)",
+     "github.com/xtls/xray-core/app/log/command.loggerServiceClient.RestartLogger (app/log/command/config_grpc.pb.go:43)",
+     "github.com/xtls/xray-core/main/commands/all/api.executeRestartLogger (main/commands/all/api/logger_restart.go:39)",
+     "github.com/xtls/xray-core/main/commands/base.Execute (main/commands/base/execute.go:64)",
+     "github.com/xtls/xray-core/main.main (main/main.go:22)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "helper_go_version": "go1.26.10",
+   "id": "Xray-core__GO-2026-6061",
+   "linker_go_version": "go1.26.10",
+   "mains": 3,
+   "mains_load_failed": 0,
+   "mains_skipped": 0,
+   "method_errors": {
+    "TARGET_NOT_FOUND": 1
+   },
+   "method_pairs": {
+    "ERROR+ABSENT": 1,
+    "NO_PATH+ABSENT": 78,
+    "NO_PATH+PRESENT": 4,
+    "PATH_FOUND+PRESENT": 28
+   },
+   "mode": "FIX",
+   "mode_reason": "FIX_COMMIT_KNOWN",
+   "module": "google.golang.org/grpc",
+   "not_covered": {
+    "ADDED_BY_FIX": 9
+   },
+   "pre_policy_reason_codes": [],
+   "pre_policy_verdict": "REACHABLE",
+   "pre_verifier_verdict": "REACHABLE",
+   "reachable_ranks": [],
+   "reachable_symbols": [
+    "google.golang.org/grpc/internal/envconfig.boolFromEnv",
+    "google.golang.org/grpc/internal/transport.cleanupStream.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.closeConnection.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.controlBuffer.executeAndPut",
+    "google.golang.org/grpc/internal/transport.controlBuffer.finish",
+    "google.golang.org/grpc/internal/transport.controlBuffer.getOnceLocked",
+    "google.golang.org/grpc/internal/transport.dataFrame.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.earlyAbortStream.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.goAway.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.headerFrame.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+    "google.golang.org/grpc/internal/transport.http2Server.deleteStream",
+    "google.golang.org/grpc/internal/transport.http2Server.finishStream",
+    "google.golang.org/grpc/internal/transport.http2Server.handleData",
+    "google.golang.org/grpc/internal/transport.http2Server.writeHeaderLocked",
+    "google.golang.org/grpc/internal/transport.http2Server.writeStatus",
+    "google.golang.org/grpc/internal/transport.incomingGoAway.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.incomingSettings.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.incomingWindowUpdate.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.itemList.isEmpty",
+    "google.golang.org/grpc/internal/transport.loopyWriter.handle",
+    "google.golang.org/grpc/internal/transport.loopyWriter.headerHandler",
+    "google.golang.org/grpc/internal/transport.loopyWriter.originateStream",
+    "google.golang.org/grpc/internal/transport.loopyWriter.registerStreamHandler",
+    "google.golang.org/grpc/internal/transport.outgoingSettings.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.outgoingWindowUpdate.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.ping.isTransportResponseFrame",
+    "google.golang.org/grpc/internal/transport.registerStream.isTransportResponseFrame"
+   ],
+   "reason_codes": [],
+   "release_range_status": null,
+   "retrieval": null,
+   "schema_errors": [],
+   "seconds": 52.37,
+   "symbols": 37,
+   "verdict": "REACHABLE",
+   "verification": {
+    "checks_run": 2078,
+    "downgraded": 2,
+    "failed_by_kind": {
+     "TARGET_EXISTS": 2
+    },
+    "failures": 2,
+    "status": "FAILED"
+   },
+   "verified_paths": 28,
+   "version_selected": "v1.77.0"
+  }
+ ],
+ "schema_version": "1.0",
+ "set": "d3",
+ "statement": "REACHABLE means reachable in the call graph from a main package, not exploitable. govulncheck is a reference, not truth; truth comes from the adjudication sheets.",
+ "summary": {
+  "cant_determine_reasons": {
+   "ANALYSIS_FAILED": 1,
+   "METHOD_DISAGREEMENT": 1,
+   "VERIFIER_REJECTED": 1
+  },
+  "cases": 14,
+  "govulncheck": {
+   "agreement": {
+    "AGREE": 9,
+    "DISAGREE": 2,
+    "NOT_COMPARABLE": 3
+   },
+   "disagreements": [
+    {
+     "govulncheck": "NOT_REACHABLE",
+     "id": "gitleaks__GO-2025-4020",
+     "level": "PACKAGE",
+     "ours": "REACHABLE"
+    },
+    {
+     "govulncheck": "NOT_REACHABLE",
+     "id": "cli__GO-2026-5052",
+     "level": "PACKAGE",
+     "ours": "REACHABLE"
+    }
+   ],
+   "not_affected": [],
+   "runs": 14,
+   "verdicts": {
+    "NOT_REACHABLE": 9,
+    "REACHABLE": 5
+   }
+  },
+  "modes": {
+   "FIX": 13,
+   "RELEASE": 1
+  },
+  "not_triaged": [],
+  "per_app": {
+   "github.com/XTLS/Xray-core": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 3
+   },
+   "github.com/gitleaks/gitleaks": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 1
+   },
+   "github.com/smallstep/cli": {
+    "NOT_REACHABLE": 1,
+    "REACHABLE": 3
+   },
+   "github.com/sosedoff/pgweb": {
+    "CANT_DETERMINE": 1
+   },
+   "github.com/wagoodman/dive": {
+    "CANT_DETERMINE": 2,
+    "NOT_REACHABLE": 1
+   }
+  },
+  "pre_policy_verdicts": {
+   "CANT_DETERMINE": 3,
+   "NOT_REACHABLE": 4,
+   "REACHABLE": 7
+  },
+  "seconds_per_case": {
+   "max": 116.5,
+   "n": 14,
+   "p50": 42.5,
+   "p95": 80.4,
+   "total": 707.0
+  },
+  "toolchain": {
+   "helper": [
+    "go1.26.10"
+   ],
+   "linker": [
+    "go1.26.10"
+   ]
+  },
+  "triage_seconds": {
+   "max": 113.79,
+   "n": 14,
+   "p50": 32.85,
+   "p95": 78.77,
+   "total": 653.2
+  },
+  "triaged": 14,
+  "verdicts": {
+   "CANT_DETERMINE": 3,
+   "NOT_REACHABLE": 4,
+   "REACHABLE": 7
+  },
+  "verification": {
+   "FAILED": 3,
+   "PASSED": 11
+  },
+  "verifier_downgrades": 5
+ }
+}

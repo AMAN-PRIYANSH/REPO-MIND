@@ -1,0 +1,1453 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "quic-go",
+    "repo": "quic-go",
+    "sha": "c56e8c79d1627cc1ed6005b421b4b0adadd83665"
+   }
+  ],
+  "fixed_in": "0.59.1",
+  "id": "GO-2026-5676",
+  "module": "github.com/quic-go/quic-go",
+  "source": "vulndb",
+  "vulnerable_at": "0.59.0"
+ },
+ "case_id": "Xray-core__GO-2026-5676",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/xtls/xray-core/infra/vformat",
+   "github.com/xtls/xray-core/infra/vprotogen",
+   "github.com/xtls/xray-core/main"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [
+   {
+    "candidate_id": "c4",
+    "package_dir": "http3",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "validateHeaderFieldNameAndValue"
+   },
+   {
+    "candidate_id": "c5",
+    "package_dir": "http3",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "validateRegularHeaderField"
+   },
+   {
+    "candidate_id": "c6",
+    "package_dir": "http3",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "validateTrailerHeaderField"
+   }
+  ],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/xtls/xray-core/infra/vformat": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.49,
+    "load_failed": false,
+    "vta_seconds": 2.13
+   },
+   "github.com/xtls/xray-core/infra/vprotogen": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.84,
+    "load_failed": false,
+    "vta_seconds": 4.91
+   },
+   "github.com/xtls/xray-core/main": {
+    "error_codes": [
+     "TARGET_NOT_FOUND"
+    ],
+    "first_error": "symbol decodeTrailers not found in package github.com/quic-go/quic-go/http3",
+    "linker_seconds": 22.12,
+    "load_failed": false,
+    "vta_seconds": 22.59
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 3,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "3 candidate function(s) not analysed: ADDED_BY_FIX.",
+  "9 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/xtls/xray-core/infra/vformat",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "decodeTrailers"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package github.com/quic-go/quic-go/http3 does not declare decodeTrailers"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/xtls/xray-core/infra/vformat",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "parseHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/xtls/xray-core/infra/vformat",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "parseTrailers"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/xtls/xray-core/infra/vprotogen",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "decodeTrailers"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package github.com/quic-go/quic-go/http3 does not declare decodeTrailers"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/xtls/xray-core/infra/vprotogen",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "parseHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/xtls/xray-core/infra/vprotogen",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "parseTrailers"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/xtls/xray-core/main",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "decodeTrailers"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "github.com/quic-go/quic-go/http3.parseHeaders"
+   ],
+   "main_package": "github.com/xtls/xray-core/main",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main/main.go",
+        "line": 22
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "caller": "github.com/xtls/xray-core/main.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/execute.go",
+        "line": 64
+       },
+       "callee": "github.com/xtls/xray-core/main.executeRun",
+       "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main/run.go",
+        "line": 90
+       },
+       "callee": "github.com/xtls/xray-core/core.Instance.Start",
+       "caller": "github.com/xtls/xray-core/main.executeRun",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "core/xray.go",
+        "line": 390
+       },
+       "callee": "github.com/xtls/xray-core/app/proxyman/inbound.Manager.Start",
+       "caller": "github.com/xtls/xray-core/core.Instance.Start",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "app/proxyman/inbound/inbound.go",
+        "line": 115
+       },
+       "callee": "github.com/xtls/xray-core/app/proxyman/inbound.AlwaysOnInboundHandler.Start",
+       "caller": "github.com/xtls/xray-core/app/proxyman/inbound.Manager.Start",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "app/proxyman/inbound/always.go",
+        "line": 160
+       },
+       "callee": "github.com/xtls/xray-core/app/proxyman/inbound.dsWorker.Start",
+       "caller": "github.com/xtls/xray-core/app/proxyman/inbound.AlwaysOnInboundHandler.Start",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "app/proxyman/inbound/worker.go",
+        "line": 540
+       },
+       "callee": "github.com/xtls/xray-core/transport/internet.ListenUnix",
+       "caller": "github.com/xtls/xray-core/app/proxyman/inbound.dsWorker.Start",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "transport/internet/tcp_hub.go",
+        "line": 45
+       },
+       "callee": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH",
+       "caller": "github.com/xtls/xray-core/transport/internet.ListenUnix",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "transport/internet/splithttp/hub.go",
+        "line": 410
+       },
+       "callee": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH$1",
+       "caller": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "transport/internet/splithttp/hub.go",
+        "line": 411
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.ServeListener",
+       "caller": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 288
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.serveListener",
+       "caller": "github.com/quic-go/quic-go/http3.Server.ServeListener",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 302
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.serveListener$1",
+       "caller": "github.com/quic-go/quic-go/http3.Server.serveListener",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 304
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.handleConn",
+       "caller": "github.com/quic-go/quic-go/http3.Server.serveListener$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 564
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.handleConn$2",
+       "caller": "github.com/quic-go/quic-go/http3.Server.handleConn",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 568
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.handleRequest",
+       "caller": "github.com/quic-go/quic-go/http3.Server.handleConn$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 633
+       },
+       "callee": "github.com/quic-go/quic-go/http3.requestFromHeaders",
+       "caller": "github.com/quic-go/quic-go/http3.Server.handleRequest",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/headers.go",
+        "line": 180
+       },
+       "callee": "github.com/quic-go/quic-go/http3.parseHeaders",
+       "caller": "github.com/quic-go/quic-go/http3.requestFromHeaders",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/xtls/xray-core/main",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go/http3",
+      "symbol": "parseHeaders"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main/main.go",
+        "line": 22
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "caller": "github.com/xtls/xray-core/main.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/execute.go",
+        "line": 64
+       },
+       "callee": "github.com/xtls/xray-core/main.executeRun",
+       "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main/run.go",
+        "line": 90
+       },
+       "callee": "github.com/xtls/xray-core/core.Instance.Start",
+       "caller": "github.com/xtls/xray-core/main.executeRun",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "core/xray.go",
+        "line": 390
+       },
+       "callee": "github.com/xtls/xray-core/app/proxyman/inbound.Manager.Start",
+       "caller": "github.com/xtls/xray-core/core.Instance.Start",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "app/proxyman/inbound/inbound.go",
+        "line": 121
+       },
+       "callee": "github.com/xtls/xray-core/app/proxyman/inbound.AlwaysOnInboundHandler.Start",
+       "caller": "github.com/xtls/xray-core/app/proxyman/inbound.Manager.Start",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "app/proxyman/inbound/always.go",
+        "line": 160
+       },
+       "callee": "github.com/xtls/xray-core/app/proxyman/inbound.dsWorker.Start",
+       "caller": "github.com/xtls/xray-core/app/proxyman/inbound.AlwaysOnInboundHandler.Start",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "app/proxyman/inbound/worker.go",
+        "line": 540
+       },
+       "callee": "github.com/xtls/xray-core/transport/internet.ListenUnix",
+       "caller": "github.com/xtls/xray-core/app/proxyman/inbound.dsWorker.Start",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "transport/internet/tcp_hub.go",
+        "line": 45
+       },
+       "callee": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH",
+       "caller": "github.com/xtls/xray-core/transport/internet.ListenUnix",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "transport/internet/splithttp/hub.go",
+        "line": 410
+       },
+       "callee": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH$1",
+       "caller": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "transport/internet/splithttp/hub.go",
+        "line": 411
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.ServeListener",
+       "caller": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 288
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.serveListener",
+       "caller": "github.com/quic-go/quic-go/http3.Server.ServeListener",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 302
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.serveListener$1",
+       "caller": "github.com/quic-go/quic-go/http3.Server.serveListener",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 304
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.handleConn",
+       "caller": "github.com/quic-go/quic-go/http3.Server.serveListener$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 564
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.handleConn$2",
+       "caller": "github.com/quic-go/quic-go/http3.Server.handleConn",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 568
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.handleRequest",
+       "caller": "github.com/quic-go/quic-go/http3.Server.handleConn$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 633
+       },
+       "callee": "github.com/quic-go/quic-go/http3.requestFromHeaders",
+       "caller": "github.com/quic-go/quic-go/http3.Server.handleRequest",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/headers.go",
+        "line": 180
+       },
+       "callee": "github.com/quic-go/quic-go/http3.parseHeaders",
+       "caller": "github.com/quic-go/quic-go/http3.requestFromHeaders",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/xtls/xray-core/main",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go/http3",
+      "symbol": "parseHeaders"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main/main.go",
+        "line": 22
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "caller": "github.com/xtls/xray-core/main.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/execute.go",
+        "line": 64
+       },
+       "callee": "github.com/xtls/xray-core/main.executeRun",
+       "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main/run.go",
+        "line": 90
+       },
+       "callee": "github.com/xtls/xray-core/core.Instance.Start",
+       "caller": "github.com/xtls/xray-core/main.executeRun",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "core/xray.go",
+        "line": 390
+       },
+       "callee": "github.com/xtls/xray-core/app/proxyman/inbound.Manager.Start",
+       "caller": "github.com/xtls/xray-core/core.Instance.Start",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "app/proxyman/inbound/inbound.go",
+        "line": 115
+       },
+       "callee": "github.com/xtls/xray-core/app/proxyman/inbound.AlwaysOnInboundHandler.Start",
+       "caller": "github.com/xtls/xray-core/app/proxyman/inbound.Manager.Start",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "app/proxyman/inbound/always.go",
+        "line": 160
+       },
+       "callee": "github.com/xtls/xray-core/app/proxyman/inbound.tcpWorker.Start",
+       "caller": "github.com/xtls/xray-core/app/proxyman/inbound.AlwaysOnInboundHandler.Start",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "app/proxyman/inbound/worker.go",
+        "line": 142
+       },
+       "callee": "github.com/xtls/xray-core/transport/internet.ListenTCP",
+       "caller": "github.com/xtls/xray-core/app/proxyman/inbound.tcpWorker.Start",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "transport/internet/tcp_hub.go",
+        "line": 74
+       },
+       "callee": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH",
+       "caller": "github.com/xtls/xray-core/transport/internet.ListenTCP",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "transport/internet/splithttp/hub.go",
+        "line": 410
+       },
+       "callee": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH$1",
+       "caller": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "transport/internet/splithttp/hub.go",
+        "line": 411
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.ServeListener",
+       "caller": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 288
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.serveListener",
+       "caller": "github.com/quic-go/quic-go/http3.Server.ServeListener",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 302
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.serveListener$1",
+       "caller": "github.com/quic-go/quic-go/http3.Server.serveListener",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 304
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.handleConn",
+       "caller": "github.com/quic-go/quic-go/http3.Server.serveListener$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 564
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.handleConn$2",
+       "caller": "github.com/quic-go/quic-go/http3.Server.handleConn",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 568
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Server.handleRequest",
+       "caller": "github.com/quic-go/quic-go/http3.Server.handleConn$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+        "line": 633
+       },
+       "callee": "github.com/quic-go/quic-go/http3.requestFromHeaders",
+       "caller": "github.com/quic-go/quic-go/http3.Server.handleRequest",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/headers.go",
+        "line": 180
+       },
+       "callee": "github.com/quic-go/quic-go/http3.parseHeaders",
+       "caller": "github.com/quic-go/quic-go/http3.requestFromHeaders",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/xtls/xray-core/main",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go/http3",
+      "symbol": "parseHeaders"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "parseHeaders"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main/main.go",
+       "line": 22
+      },
+      "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+      "caller": "github.com/xtls/xray-core/main.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main/commands/base/execute.go",
+       "line": 64
+      },
+      "callee": "github.com/xtls/xray-core/main.executeRun",
+      "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "main/run.go",
+       "line": 90
+      },
+      "callee": "github.com/xtls/xray-core/core.Instance.Start",
+      "caller": "github.com/xtls/xray-core/main.executeRun",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "core/xray.go",
+       "line": 390
+      },
+      "callee": "github.com/xtls/xray-core/app/proxyman/inbound.Manager.Start",
+      "caller": "github.com/xtls/xray-core/core.Instance.Start",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "app/proxyman/inbound/inbound.go",
+       "line": 115
+      },
+      "callee": "github.com/xtls/xray-core/app/proxyman/inbound.AlwaysOnInboundHandler.Start",
+      "caller": "github.com/xtls/xray-core/app/proxyman/inbound.Manager.Start",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "app/proxyman/inbound/always.go",
+       "line": 160
+      },
+      "callee": "github.com/xtls/xray-core/app/proxyman/inbound.dsWorker.Start",
+      "caller": "github.com/xtls/xray-core/app/proxyman/inbound.AlwaysOnInboundHandler.Start",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "app/proxyman/inbound/worker.go",
+       "line": 540
+      },
+      "callee": "github.com/xtls/xray-core/transport/internet.ListenUnix",
+      "caller": "github.com/xtls/xray-core/app/proxyman/inbound.dsWorker.Start",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "transport/internet/tcp_hub.go",
+       "line": 45
+      },
+      "callee": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH",
+      "caller": "github.com/xtls/xray-core/transport/internet.ListenUnix",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "transport/internet/splithttp/hub.go",
+       "line": 410
+      },
+      "callee": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH$1",
+      "caller": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "transport/internet/splithttp/hub.go",
+       "line": 411
+      },
+      "callee": "github.com/quic-go/quic-go/http3.Server.ServeListener",
+      "caller": "github.com/xtls/xray-core/transport/internet/splithttp.ListenXH$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+       "line": 288
+      },
+      "callee": "github.com/quic-go/quic-go/http3.Server.serveListener",
+      "caller": "github.com/quic-go/quic-go/http3.Server.ServeListener",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+       "line": 302
+      },
+      "callee": "github.com/quic-go/quic-go/http3.Server.serveListener$1",
+      "caller": "github.com/quic-go/quic-go/http3.Server.serveListener",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+       "line": 304
+      },
+      "callee": "github.com/quic-go/quic-go/http3.Server.handleConn",
+      "caller": "github.com/quic-go/quic-go/http3.Server.serveListener$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+       "line": 564
+      },
+      "callee": "github.com/quic-go/quic-go/http3.Server.handleConn$2",
+      "caller": "github.com/quic-go/quic-go/http3.Server.handleConn",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+       "line": 568
+      },
+      "callee": "github.com/quic-go/quic-go/http3.Server.handleRequest",
+      "caller": "github.com/quic-go/quic-go/http3.Server.handleConn$2",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/server.go",
+       "line": 633
+      },
+      "callee": "github.com/quic-go/quic-go/http3.requestFromHeaders",
+      "caller": "github.com/quic-go/quic-go/http3.Server.handleRequest",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/headers.go",
+       "line": 180
+      },
+      "callee": "github.com/quic-go/quic-go/http3.parseHeaders",
+      "caller": "github.com/quic-go/quic-go/http3.requestFromHeaders",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/xtls/xray-core/main",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/quic-go/quic-go/http3",
+     "symbol": "parseHeaders"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "github.com/quic-go/quic-go/http3.parseTrailers"
+   ],
+   "main_package": "github.com/xtls/xray-core/main",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main/main.go",
+        "line": 22
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "caller": "github.com/xtls/xray-core/main.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/execute.go",
+        "line": 64
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+       "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/all/convert/json.go",
+        "line": 56
+       },
+       "callee": "io.ReadAll",
+       "caller": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 722
+       },
+       "callee": "github.com/quic-go/quic-go/http3.hijackableBody.Read",
+       "caller": "io.ReadAll",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/body.go",
+        "line": 113
+       },
+       "callee": "github.com/quic-go/quic-go/http3.body.Read",
+       "caller": "github.com/quic-go/quic-go/http3.hijackableBody.Read",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/body.go",
+        "line": 62
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Stream.Read",
+       "caller": "github.com/quic-go/quic-go/http3.body.Read",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/stream.go",
+        "line": 97
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Conn.openRequestStream$2",
+       "caller": "github.com/quic-go/quic-go/http3.Stream.Read",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/conn.go",
+        "line": 180
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Conn.decodeTrailers",
+       "caller": "github.com/quic-go/quic-go/http3.Conn.openRequestStream$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/conn.go",
+        "line": 211
+       },
+       "callee": "github.com/quic-go/quic-go/http3.parseTrailers",
+       "caller": "github.com/quic-go/quic-go/http3.Conn.decodeTrailers",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/xtls/xray-core/main",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go/http3",
+      "symbol": "parseTrailers"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main/main.go",
+        "line": 22
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "caller": "github.com/xtls/xray-core/main.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/execute.go",
+        "line": 64
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+       "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/all/convert/json.go",
+        "line": 56
+       },
+       "callee": "io.ReadAll",
+       "caller": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 722
+       },
+       "callee": "github.com/quic-go/quic-go/http3.requestBody.Read$wrapper",
+       "caller": "io.ReadAll",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/quic-go/quic-go/http3.body.Read",
+       "caller": "github.com/quic-go/quic-go/http3.requestBody.Read$wrapper",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/body.go",
+        "line": 62
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Stream.Read",
+       "caller": "github.com/quic-go/quic-go/http3.body.Read",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/stream.go",
+        "line": 97
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Conn.openRequestStream$2",
+       "caller": "github.com/quic-go/quic-go/http3.Stream.Read",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/conn.go",
+        "line": 180
+       },
+       "callee": "github.com/quic-go/quic-go/http3.Conn.decodeTrailers",
+       "caller": "github.com/quic-go/quic-go/http3.Conn.openRequestStream$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/conn.go",
+        "line": 211
+       },
+       "callee": "github.com/quic-go/quic-go/http3.parseTrailers",
+       "caller": "github.com/quic-go/quic-go/http3.Conn.decodeTrailers",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/xtls/xray-core/main",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go/http3",
+      "symbol": "parseTrailers"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "parseTrailers"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main/main.go",
+       "line": 22
+      },
+      "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+      "caller": "github.com/xtls/xray-core/main.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main/commands/base/execute.go",
+       "line": 64
+      },
+      "callee": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+      "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "main/commands/all/convert/json.go",
+       "line": 56
+      },
+      "callee": "io.ReadAll",
+      "caller": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/io/io.go",
+       "line": 722
+      },
+      "callee": "github.com/quic-go/quic-go/http3.hijackableBody.Read",
+      "caller": "io.ReadAll",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/body.go",
+       "line": 113
+      },
+      "callee": "github.com/quic-go/quic-go/http3.body.Read",
+      "caller": "github.com/quic-go/quic-go/http3.hijackableBody.Read",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/body.go",
+       "line": 62
+      },
+      "callee": "github.com/quic-go/quic-go/http3.Stream.Read",
+      "caller": "github.com/quic-go/quic-go/http3.body.Read",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/stream.go",
+       "line": 97
+      },
+      "callee": "github.com/quic-go/quic-go/http3.Conn.openRequestStream$2",
+      "caller": "github.com/quic-go/quic-go/http3.Stream.Read",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/conn.go",
+       "line": 180
+      },
+      "callee": "github.com/quic-go/quic-go/http3.Conn.decodeTrailers",
+      "caller": "github.com/quic-go/quic-go/http3.Conn.openRequestStream$2",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.57.1/http3/conn.go",
+       "line": 211
+      },
+      "callee": "github.com/quic-go/quic-go/http3.parseTrailers",
+      "caller": "github.com/quic-go/quic-go/http3.Conn.decodeTrailers",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/xtls/xray-core/main",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/quic-go/quic-go/http3",
+     "symbol": "parseTrailers"
+    }
+   },
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-10-28T16:49:54Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "0a2b5ad",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "decodeTrailers"
+  },
+  {
+   "candidate_id": "c2",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "parseHeaders"
+  },
+  {
+   "candidate_id": "c3",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "parseTrailers"
+  }
+ ],
+ "target_app": {
+  "commit": "81f8f398c7b2b845853b1e85087c6122acc6db0b",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/xtls/xray-core",
+  "path": "<local>/data/d3/apps/github.com_XTLS_Xray-core/81f8f398c7b2"
+ },
+ "timing": {
+  "inspect_seconds": 0.35,
+  "methods_seconds": 54.09,
+  "symbols_seconds": 0.0,
+  "total_seconds": 73.24,
+  "verifier_seconds": 18.8
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 69,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 69,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 5,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 2,
+    "run": 8,
+    "skipped": 0
+   }
+  },
+  "checks_run": 153,
+  "downgraded": 2,
+  "failures": [
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/xtls/xray-core/infra/vformat",
+    "path_index": null,
+    "reason": "package github.com/quic-go/quic-go/http3 does not declare decodeTrailers",
+    "target": {
+     "package": "github.com/quic-go/quic-go/http3",
+     "symbol": "decodeTrailers"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/xtls/xray-core/infra/vprotogen",
+    "path_index": null,
+    "reason": "package github.com/quic-go/quic-go/http3 does not declare decodeTrailers",
+    "target": {
+     "package": "github.com/quic-go/quic-go/http3",
+     "symbol": "decodeTrailers"
+    }
+   }
+  ],
+  "file_source": "analysed tree on disk",
+  "status": "FAILED"
+ }
+}

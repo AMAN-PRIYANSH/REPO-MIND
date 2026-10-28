@@ -1,0 +1,203 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "klauspost",
+    "repo": "compress",
+    "sha": "8668e357e776d5152ed62f33c17f21b8690664fa"
+   }
+  ],
+  "fixed_in": "1.18.7",
+  "id": "GO-2026-5841",
+  "module": "github.com/klauspost/compress",
+  "source": "vulndb",
+  "vulnerable_at": "1.18.6"
+ },
+ "case_id": "gitleaks__GO-2026-5841",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/zricethezav/gitleaks/v8",
+   "github.com/zricethezav/gitleaks/v8/cmd/generate/config"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/zricethezav/gitleaks/v8": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 7.88,
+    "load_failed": false,
+    "vta_seconds": 11.55
+   },
+   "github.com/zricethezav/gitleaks/v8/cmd/generate/config": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.75,
+    "load_failed": false,
+    "vta_seconds": 9.56
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 1,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/klauspost/compress/s2",
+    "symbol": "NewDict"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8/cmd/generate/config",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/klauspost/compress/s2",
+    "symbol": "NewDict"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "NOT_REACHABLE",
+ "provenance": {
+  "created_at": "2026-10-28T16:42:10Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "0a2b5ad",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/klauspost/compress/s2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "NewDict"
+  }
+ ],
+ "target_app": {
+  "commit": "6eaad039603a4de39fddd1cf5f727391efe9974e",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/zricethezav/gitleaks/v8",
+  "path": "<local>/data/d3/apps/github.com_gitleaks_gitleaks/6eaad039603a"
+ },
+ "timing": {
+  "inspect_seconds": 0.15,
+  "methods_seconds": 30.74,
+  "symbols_seconds": 0.0,
+  "total_seconds": 31.13,
+  "verifier_seconds": 0.23
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "NOT_REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   }
+  },
+  "checks_run": 2,
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}

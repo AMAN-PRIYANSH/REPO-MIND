@@ -1,0 +1,396 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "docker",
+    "repo": "cli",
+    "sha": "13759330b1f7e7cb0d67047ea42c5482548ba7fa"
+   }
+  ],
+  "fixed_in": "29.2.0+incompatible",
+  "id": "GO-2026-4610",
+  "module": "github.com/docker/cli",
+  "source": "vulndb",
+  "vulnerable_at": "29.2.0-rc.2+incompatible"
+ },
+ "case_id": "dive__GO-2026-4610",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "EMPTY",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/wagoodman/dive"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [
+   {
+    "candidate_id": "r6",
+    "package_dir": "templates",
+    "rank": 6,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "joinElements"
+   }
+  ],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/wagoodman/dive": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 19.37,
+    "load_failed": false,
+    "vta_seconds": 10.08
+   }
+  },
+  "release_range_status": "AVAILABLE",
+  "symbols_analysed": 5,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CANDIDATE_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 2 checks only the retriever's top 10 candidates (CANDIDATE_LEVEL): REACHABLE means one of them is reachable, not that the vulnerable function is; the candidate list missed the root cause in about 16-19% of D4 cases (CP4-CP6).",
+  "The fixed retriever hybrid:bge-small was not available (ModuleNotFoundError: No module named 'sentence_transformers'); candidates were ranked with bm25.",
+  "1 candidate function(s) not analysed: ADDED_BY_FIX."
+ ],
+ "mode": "RELEASE",
+ "mode_selection": {
+  "chosen": "RELEASE",
+  "explanation": "the advisory names a fix commit but its evidence is not usable (EMPTY); Mode 2 on the release range instead",
+  "reason": "FIX_EVIDENCE_UNUSABLE_FALLBACK_TO_RELEASE",
+  "requested": "AUTO"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "r4",
+   "decides_verdict": true,
+   "evidence_level": "CANDIDATE_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "RANKED_CANDIDATE",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": 1,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": 4.1457955943760165,
+   "target": {
+    "package": "github.com/docker/cli/cli/command/container",
+    "symbol": "createContainer"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "r1",
+   "decides_verdict": true,
+   "evidence_level": "CANDIDATE_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "RANKED_CANDIDATE",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": 2,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": 2.604531107080971,
+   "target": {
+    "package": "github.com/docker/cli/cli/command/container",
+    "symbol": "cidFile.Close"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "r3",
+   "decides_verdict": true,
+   "evidence_level": "CANDIDATE_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "RANKED_CANDIDATE",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": 3,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": 2.599089989269825,
+   "target": {
+    "package": "github.com/docker/cli/cli/command/container",
+    "symbol": "copyDockerConfigIntoContainer"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package github.com/docker/cli/cli/command/container does not declare copyDockerConfigIntoContainer"
+    }
+   ]
+  },
+  {
+   "candidate_id": "r5",
+   "decides_verdict": true,
+   "evidence_level": "CANDIDATE_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "RANKED_CANDIDATE",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": 4,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": 2.5026117214722783,
+   "target": {
+    "package": "github.com/docker/cli/cli/command/container",
+    "symbol": "parseSecurityOpts"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "r2",
+   "decides_verdict": true,
+   "evidence_level": "CANDIDATE_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/wagoodman/dive",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "RANKED_CANDIDATE",
+   "package_not_in_program": true,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": 5,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": 1.5694661250146213,
+   "target": {
+    "package": "github.com/docker/cli/cli/command/container",
+    "symbol": "cidFile.Write"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  }
+ ],
+ "policy": {
+  "applied": false,
+  "name": "MODE2_NOT_REACHABLE_POLICY",
+  "rule": "Mode 2 checks only the retriever's top-k candidates, and the candidate list misses the root cause in a measured share of cases, so a Mode 2 NOT_REACHABLE only says that none of the analysed candidates is reachable. It is reported as CANT_DETERMINE with MODE2_NOT_REACHABLE_DOWNGRADED; the raw verdict is kept in pre_policy_verdict."
+ },
+ "pre_policy_reason_codes": [
+  "VERIFIER_REJECTED"
+ ],
+ "pre_policy_verdict": "CANT_DETERMINE",
+ "provenance": {
+  "created_at": "2026-10-28T16:40:06Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "0a2b5ad",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [
+  "VERIFIER_REJECTED"
+ ],
+ "retrieval": {
+  "candidates_total": 6,
+  "config_requested": "hybrid:bge-small",
+  "config_used": "bm25",
+  "embedder": null,
+  "fallback": "EMBEDDER_UNAVAILABLE",
+  "fallback_reason": "ModuleNotFoundError: No module named 'sentence_transformers'",
+  "k": 10,
+  "query_chars": 124,
+  "top": [
+   {
+    "candidate_id": "r4",
+    "rank": 1,
+    "score": 4.145796
+   },
+   {
+    "candidate_id": "r1",
+    "rank": 2,
+    "score": 2.604531
+   },
+   {
+    "candidate_id": "r3",
+    "rank": 3,
+    "score": 2.59909
+   },
+   {
+    "candidate_id": "r5",
+    "rank": 4,
+    "score": 2.502612
+   },
+   {
+    "candidate_id": "r2",
+    "rank": 5,
+    "score": 1.569466
+   },
+   {
+    "candidate_id": "r6",
+    "rank": 6,
+    "score": 0.600982
+   }
+  ],
+  "variant": "code+commits"
+ },
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "r4",
+   "decides_verdict": true,
+   "origin": "RANKED_CANDIDATE",
+   "package": "github.com/docker/cli/cli/command/container",
+   "rank": 1,
+   "score": 4.1457955943760165,
+   "side": "BOTH",
+   "symbol": "createContainer"
+  },
+  {
+   "candidate_id": "r1",
+   "decides_verdict": true,
+   "origin": "RANKED_CANDIDATE",
+   "package": "github.com/docker/cli/cli/command/container",
+   "rank": 2,
+   "score": 2.604531107080971,
+   "side": "BOTH",
+   "symbol": "cidFile.Close"
+  },
+  {
+   "candidate_id": "r3",
+   "decides_verdict": true,
+   "origin": "RANKED_CANDIDATE",
+   "package": "github.com/docker/cli/cli/command/container",
+   "rank": 3,
+   "score": 2.599089989269825,
+   "side": "BOTH",
+   "symbol": "copyDockerConfigIntoContainer"
+  },
+  {
+   "candidate_id": "r5",
+   "decides_verdict": true,
+   "origin": "RANKED_CANDIDATE",
+   "package": "github.com/docker/cli/cli/command/container",
+   "rank": 4,
+   "score": 2.5026117214722783,
+   "side": "BOTH",
+   "symbol": "parseSecurityOpts"
+  },
+  {
+   "candidate_id": "r2",
+   "decides_verdict": true,
+   "origin": "RANKED_CANDIDATE",
+   "package": "github.com/docker/cli/cli/command/container",
+   "rank": 5,
+   "score": 1.5694661250146213,
+   "side": "BOTH",
+   "symbol": "cidFile.Write"
+  }
+ ],
+ "target_app": {
+  "commit": "fe98c8a2eb08c443a36e3cc7568078909e298433",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/wagoodman/dive",
+  "path": "<local>/data/d3/apps/github.com_wagoodman_dive/fe98c8a2eb08"
+ },
+ "timing": {
+  "inspect_seconds": 0.13,
+  "methods_seconds": 29.45,
+  "symbols_seconds": 0.03,
+  "total_seconds": 30.23,
+  "verifier_seconds": 0.62
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "CANT_DETERMINE",
+ "verification": {
+  "checks_by_kind": {
+   "TARGET_EXISTS": {
+    "failed": 1,
+    "run": 5,
+    "skipped": 0
+   }
+  },
+  "checks_run": 5,
+  "downgraded": 1,
+  "failures": [
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/wagoodman/dive",
+    "path_index": null,
+    "reason": "package github.com/docker/cli/cli/command/container does not declare copyDockerConfigIntoContainer",
+    "target": {
+     "package": "github.com/docker/cli/cli/command/container",
+     "symbol": "copyDockerConfigIntoContainer"
+    }
+   }
+  ],
+  "file_source": "analysed tree on disk",
+  "status": "FAILED"
+ }
+}
