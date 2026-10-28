@@ -75,6 +75,16 @@ def test_example_verdict_strips_local_paths(tmp_path):
     assert "<local>" in out["a"] and str(REPO_ROOT) not in json.dumps(out)
 
 
+def test_replace_root_only_replaces_path_prefixes():
+    """CP7b regression: with HOME=/root a plain replace turned `internal/cmd/root.go` into `internal/cmd<local>.go`."""
+    text = json.dumps({"rel": "internal/cmd/root.go", "rel2": "a/root/b.go", "abs": "/root/.cache/x.go", "bare": "/root",
+                       "msg": "open /root/x: denied", "other": "/rootfs/y", "word": "chroot/z"})
+    out = json.loads(te.replace_root(text, "/root", "<local>"))
+    assert out == {"rel": "internal/cmd/root.go", "rel2": "a/root/b.go", "abs": "<local>/.cache/x.go", "bare": "<local>",
+                   "msg": "open <local>/x: denied", "other": "/rootfs/y", "word": "chroot/z"}
+    assert json.loads(te.replace_root(json.dumps(["C:\\work\\app\\x.go"]), "C:\\work\\app", "<local>")) == ["<local>\\x.go"]
+
+
 def test_headline_is_fixed():
     """Fixed before any CP7 result existed (CP6 review note 5); changing it needs a disclosed reason."""
     assert tr.HEADLINE == (

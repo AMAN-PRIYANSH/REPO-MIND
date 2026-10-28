@@ -99,7 +99,7 @@ def sanitise(obj: Any, gomodcache: Path, goroot: str | None = None) -> Any:
     for root, label in ((str(gomodcache.resolve()), "$GOMODCACHE"), (str(gomodcache), "$GOMODCACHE"),
                         (goroot or "", "$GOROOT")):
         if root:
-            text = text.replace(json.dumps(root.rstrip("/"))[1:-1], label)
+            text = te.replace_root(text, root, label)
     return te.example_verdict(json.loads(text))
 
 

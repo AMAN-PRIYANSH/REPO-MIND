@@ -22,6 +22,7 @@ import gzip
 import json
 import math
 import os
+import re
 import shutil
 import tempfile
 import threading
@@ -683,9 +684,21 @@ def write_json(path: Path, obj: Any) -> int:
     return len(text.encode("utf-8"))
 
 
+def replace_root(text: str, root: str, label: str) -> str:
+    """Replace the local directory `root` in JSON `text` only where it begins an absolute path (not
+    preceded by a path or name character, followed by a separator, the end of the string or of the
+    text). A plain replace corrupted repository paths: with HOME=/root, `cmd/root.go` became
+    `cmd<local>.go` (found in CP7b)."""
+    root = root.rstrip("/\\") if len(root) > 1 else root
+    if not root:
+        return text
+    pat = r"(?<![A-Za-z0-9_.~/\\-])" + re.escape(json.dumps(root)[1:-1]) + r'(?=/|\\\\|"|$)'
+    return re.sub(pat, lambda m: label, text)
+
+
 def example_verdict(v: Any) -> Any:
     """Anything committed (a verdict, a results file): local absolute paths become `<local>`."""
     text = json.dumps(v)
     for root in sorted({str(REPO_ROOT), tempfile.gettempdir(), str(Path.home())}, key=len, reverse=True):
-        text = text.replace(json.dumps(root)[1:-1], "<local>")
+        text = replace_root(text, root, "<local>")
     return json.loads(text)
