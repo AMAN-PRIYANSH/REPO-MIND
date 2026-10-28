@@ -74,6 +74,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     d3_cli.add_parser(sub)
 
+    from vulntrace.demo import cli as demo_cli
+
+    demo_cli.add_parser(sub)
+
     ev = sub.add_parser("eval", help="baselines and evaluation (CP3+)")
     esub = ev.add_subparsers(dest="eval_command", required=True)
     es = esub.add_parser("symbols", help="symbol-identification baselines")
@@ -124,8 +128,10 @@ def build_parser() -> argparse.ArgumentParser:
     st.add_argument("--data-dir", default=None, help="evidence directory, to print function names next to IDs")
     st.add_argument("--raw", action="store_true", help="also print the model's raw replies")
     et = esub.add_parser("triage", help="CP7: end-to-end triage on the fixtures (truth) or on D1/D4 (distributions only)")
-    et.add_argument("--set", required=True, choices=["fixtures", "d1", "d4"], dest="dataset_set")
-    et.add_argument("--out", default=None, help="results directory (default: docs/results/cp7)")
+    et.add_argument("--set", required=True, choices=["fixtures", "d1", "d4", "d3"], dest="dataset_set")
+    et.add_argument("--out", default=None, help="results directory (default: docs/results/cp7; d3: docs/results/cp7b)")
+    et.add_argument("--no-govulncheck", action="store_true",
+                    help="d3: skip the optional govulncheck reference (default: run it where it builds)")
     et.add_argument("--data-dir", default=None, help="materialised evidence directory (default: data/)")
     et.add_argument("--cases", default=None, help="case list (default: docs/results/datasets/D1|D4_cases.json)")
     et.add_argument("--cache", default=None, help="vulndb cache directory")
@@ -556,6 +562,10 @@ def main(argv: list[str] | None = None) -> int:
             from vulntrace.pipeline import cli as triage_cli
 
             return triage_cli.cmd_triage(args)
+        if args.command == "demo" and args.demo_command == "build":
+            from vulntrace.demo import cli as demo_cli
+
+            return demo_cli.cmd_build(args)
         if args.command == "d3":
             from vulntrace.d3 import cli as d3_cli
 
