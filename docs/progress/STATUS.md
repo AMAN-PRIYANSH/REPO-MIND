@@ -55,5 +55,7 @@ Markdown sheets next to it). Then the supervisor sets the state to `IN_PROGRESS`
 headline rendered from the unchanged template, (3) commits `docs/results/CP7B_REAL_APPS_RESULTS.md`, adds the
 scoring results to the report, sets `AWAITING_REVIEW`. No network, Go or data/ is needed for that step: it reads only
 committed files.
+CI: green on every commit of the branch; last checked run 139 (success) on `c045ca6`, the report commit. This
+note is a docs-only commit after it.
 
 (CP7 was approved on 27 Oct 2026; read the review notes at the end of checkpoints/CP3.md to CP7.md - they bind CP7b. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists. If the CP7b session stops at AWAITING_ADJUDICATION, the supervisor sets the state to IN_PROGRESS on the builder branch once the sheets are filled, so a new session continues.)
