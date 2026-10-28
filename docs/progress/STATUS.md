@@ -32,13 +32,13 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 
 CP7b (session branch `claude/sleepy-tesla-smt1xr`):
 
-- [ ] 0. Environment check (OS, Python, Go, git, Docker, network: Go proxy, GitHub, vulndb)
-- [ ] 1. Application selection - `python -m vulntrace d3 select`: written rules applied by code before any triage result; every candidate printed with the rule that kept/dropped it; diversity note; committed case list (repo URL, commit, advisory, module version)
+- [x] 0. Environment check (OS, Python, Go, git, Docker, network: Go proxy, GitHub, vulndb) - recorded in the report
+- [x] 1. Application selection - `python -m vulntrace d3 select`: written rules applied by code before any triage result; every candidate printed with the rule that kept/dropped it; diversity note; committed case list (repo URL, commit, advisory, module version)
 - [ ] 2. Triage run - `python -m vulntrace eval triage --set d3`: verdicts, paths with file:line, verifier outcome, CANT_DETERMINE reasons, seconds per case, toolchain; results to `docs/results/cp7b/` (< 512 KiB each)
 - [ ] 3. Reference comparison (optional, labelled not truth): govulncheck source mode where it runs; per-case agreement; disagreements listed
 - [ ] 4. Adjudication sheet - `docs/results/cp7b/adjudication/` (Markdown per application + one JSON with blank fields); all REACHABLE; stated sample (>=5 or all) of NOT_REACHABLE and CANT_DETERMINE; stop at `AWAITING_ADJUDICATION`
 - [ ] 5. Scoring and results document (second session, after adjudication): scoring code and renderer with headline fixed before results built now; `docs/results/CP7B_REAL_APPS_RESULTS.md` rendered only after the sheet is filled
-- [ ] 6. Demo - `python -m vulntrace demo build`: self-contained offline HTML from verdict JSON; `docs/DEMO.md`
+- [ ] 6. Demo - `python -m vulntrace demo build`: self-contained offline HTML from verdict JSON; `docs/DEMO.md` (generator + tests done; DEMO.md after the D3 run)
 - [ ] 7. Tests: selection rules, sheet generation (no invented verdict text), scoring from a filled sheet, page generator escaping; CI green on the last commit
 - [ ] Report `docs/progress/reports/CP7b_REPORT.md`
 
