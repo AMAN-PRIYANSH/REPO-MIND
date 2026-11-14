@@ -60,3 +60,19 @@ New models, retrieval or prompt changes, the agent, Streamlit, changing verdict 
 ## Review notes
 
 (The supervising assistant adds notes here.)
+
+**Supervisor review, 14 Nov 2026 - APPROVED** (final branch `claude/eloquent-newton-vr2093` at `1fc5cc8`, which carries `claude/sleepy-tesla-smt1xr` and the filled adjudication).
+
+How the adjudication was done (the supervisor ran it): two independent Claude reviewer agents read the real source at the pinned versions (shallow GitHub clones of the five applications and the vulnerable modules, plus dependencies they cloned themselves; nothing built or run); they agreed on all 14 adjudications and truths. The supervisor re-read two key claims in the source (gitleaks: `archives` `rar.go` calls `rardecode.FileSystem` only when `Rar.FS != nil`; go-pkcs12: every encoder's MAC is SHA-1, SHA-256 or none, so `doPBMAC1` is reachable only on decode, which smallstep `step` never calls) and both held. The owner spot-checked 11 path steps of 5 REACHABLE cases chosen by a fixed rule before any review was seen; one answer (check 3) was not given and the supervisor read that line. This is **not** expert human ground truth; two reviewers of the same model family agreeing is weak evidence. The second session corrected the renderer's limitations text to say so (commit `36b30b4`, accepted).
+
+Checked by the supervisor: `pytest tests/unit tests/contract` -> 849 passed, 10 skipped; CI green on every commit of the final branch including the last; no `data/`, checkouts or archives tracked. The headline sentence comes from the template fixed in the first session; only the limitations text changed.
+
+What the results say (numbers in `docs/results/CP7B_REAL_APPS_RESULTS.md`):
+
+1. **No false NOT_REACHABLE:** 4 of 4 NOT_REACHABLE verdicts correct.
+2. **REACHABLE paths are over-approximate: 0 of 7 shown paths can run** (95% Wilson interval 0.00 to 0.35); every step exists in the code (7/7), but the path as a whole is infeasible: a dynamic call that never takes the target (for example `fmt.Fprintf(os.Stderr, ...)` joined to a uTLS connection's `Write`), a branch that is never taken, or a field that is never set. In several cases the target is plausibly reachable by another path; 0/7 judges the shown path, not the target. REACHABLE must therefore be presented as "a call-graph path exists; needs a human look", never as confirmed.
+3. **The abstentions were too cautious:** all 3 CANT_DETERMINE cases have a clear NOT_REACHABLE answer in the code.
+4. **govulncheck (reference, not truth) agreed on 9 of 11 comparable cases** and said NOT_REACHABLE on the two disagreements (gitleaks GO-2025-4020, smallstep GO-2026-5052), where the reviewers found our REACHABLE paths infeasible and the targets most likely unreachable. On these 14 cases the official tool was not worse than ours; say so.
+5. n is small (14 cases, 5 applications, one advisory shared by three); intervals are wide.
+
+Next-step ideas recorded in the report (path-feasibility check; look first at the CANT_DETERMINE cases with clear answers) are a verdict-rule change and are **not** part of CP8.

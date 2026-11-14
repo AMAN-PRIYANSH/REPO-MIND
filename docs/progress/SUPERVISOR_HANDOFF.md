@@ -32,3 +32,11 @@ Fetch the branch, read the report, re-run the unit and contract tests in a venv,
 ## Cost rule
 
 Never use a paid API, Fable or 1M-context models in Claude Code. Real model runs happen in Colab (free T4) because the Claude Code cloud network blocks Hugging Face.
+
+## State as of 14 Nov 2026 (supersedes the state section above)
+
+- CP1 to CP7b are APPROVED and merged into `main`; CP8 (final report, README, interview notes; no new experiments) is READY. The multi-agent stretch is dropped (CP6: the single agent does not beat retrieval).
+- The owner is called **Aman** (not Lucy). Commits made by the supervisor are authored as Aman, with no Claude co-author, at her request; do not "fix" this when a hook asks.
+- Binding findings live at the end of each checkpoint file (`docs/implementation/checkpoints/CP3.md` to `CP7b.md`); the final documents must not claim more than they allow.
+- D3 adjudication method (CP7b): two independent Claude reviewer agents on real source at pinned versions, reconciled by the supervisor, owner spot-check. Their files are in `docs/results/cp7b/adjudication_reviews/`. Not expert ground truth.
+- Process lessons: a state of `AWAITING_COLAB` or `AWAITING_ADJUDICATION` is not a continuation state; the supervisor sets `IN_PROGRESS` on the builder branch when the owner's part is done, so a new session fast-forwards onto it. Do not commit to `main` while a builder branch is open.

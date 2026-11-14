@@ -4,10 +4,10 @@ This file is the single source of truth for where the build stands. Claude Code 
 
 ## Current
 
-- Current checkpoint: **CP7b - Real applications (D3) and demo**
-- State: `AWAITING_REVIEW` (scoring session finished 14 Nov 2026; report `reports/CP7b_REPORT.md`, results `docs/results/CP7B_REAL_APPS_RESULTS.md`)
-- Branch in use: `claude/eloquent-newton-vr2093` (continues `claude/sleepy-tesla-smt1xr`, fast-forwarded; the scoring session)
-- Specification: [checkpoints/CP7b.md](../implementation/checkpoints/CP7b.md)
+- Current checkpoint: **CP8 - Final report, README and interview notes**
+- State: `READY`
+- Branch in use: (none yet; the CP8 session records its own `claude/...` branch)
+- Specification: [checkpoints/CP8.md](../implementation/checkpoints/CP8.md)
 
 State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDICATION` →) `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
 
@@ -23,43 +23,17 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP5b | Lifting and caller/callee queries (Go helper) | APPROVED | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
 | CP6 | LangGraph investigation agent (negative result) | APPROVED | claude/vulntrace-ai-build-1wfa8e | [CP6_REPORT](reports/CP6_REPORT.md) |
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
-| CP7b | Real applications (D3) and demo | AWAITING_REVIEW | claude/sleepy-tesla-smt1xr, then claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
-| CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
+| CP7b | Real applications (D3) and demo | APPROVED | claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
+| CP8 | Final report, README and interview notes (multi-agent dropped) | READY | - | - |
 
 ## Current checkpoint task list
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-CP7b (session branch `claude/sleepy-tesla-smt1xr`):
-
-- [x] 0. Environment check (OS, Python, Go, git, Docker, network: Go proxy, GitHub, vulndb) - recorded in the report
-- [x] 1. Application selection - `python -m vulntrace d3 select`: written rules applied by code before any triage result; every candidate printed with the rule that kept/dropped it; diversity note; committed case list (repo URL, commit, advisory, module version)
-- [x] 2. Triage run - `python -m vulntrace eval triage --set d3`: verdicts, paths with file:line, verifier outcome, CANT_DETERMINE reasons, seconds per case, toolchain; results to `docs/results/cp7b/` (< 512 KiB each)
-- [x] 3. Reference comparison (optional, labelled not truth): govulncheck source mode where it runs; per-case agreement; disagreements listed
-- [x] 4. Adjudication sheet - `docs/results/cp7b/adjudication/` (Markdown per application + one JSON with blank fields); all REACHABLE; stated sample (>=5 or all) of NOT_REACHABLE and CANT_DETERMINE; stop at `AWAITING_ADJUDICATION`
-- [x] 5. Scoring and results document: `docs/results/CP7B_REAL_APPS_RESULTS.md` rendered by `d3 report` from the filled sheet (headline template unchanged)
-- [x] 6. Demo - `python -m vulntrace demo build`: self-contained offline HTML from verdict JSON; `docs/DEMO.md`
-- [x] 7. Tests: selection rules, sheet generation (no invented verdict text), scoring from a filled sheet, page generator escaping; CI green on the last commit
-- [x] Report `docs/progress/reports/CP7b_REPORT.md` (completed by the scoring session)
+(CP8: not started.)
 
 ## Handoff notes
 
-**Scoring session, 14 Nov 2026 (branch `claude/eloquent-newton-vr2093`):** checkpoint complete, state `AWAITING_REVIEW`. Headline (unchanged template): 7 REACHABLE, 0 of 7 judged CORRECT (all `INFEASIBLE_PATH`); 0 false NOT_REACHABLE of 4; 3 CANT_DETERMINE, all judged `WRONG`. The adjudication is two Claude reviewers + supervisor + partial owner spot-check, NOT expert human ground truth; only the path shown was judged. One disclosed change: the renderer's fixed limitation text wrongly said the owner and supervisor did the reading; corrected in `36b30b4` with a test. CI: run 143 (success) on `01dba52`, the last code/results commit; the later commits are docs-only (report, STATUS), and their runs were not yet visible when this was written. Reviewer next step: read report section 6a and 7 item 11; decide whether the 0/7 is carried into CP8's final report as a negative result.
-
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-**Supervisor note, 14 Nov 2026:** `adjudication.json` is filled for all 14 cases. Method: two independent Claude reviewer agents read the real source at the pinned versions (outputs in `docs/results/cp7b/adjudication_reviews/reviewA.json` and `reviewB.json`; they agree on all 14 adjudications and truths); the supervisor re-read two key claims (gitleaks `rar.go` `FS != nil` guard; go-pkcs12 encoders never use PBMAC1) and reconciled; the owner spot-checked 11 path steps of 5 REACHABLE cases chosen by a fixed rule before any review was seen (`owner_spotcheck.json`). Do NOT describe this as expert human ground truth: say "two independent LLM reviewers, reconciled by the supervising assistant, owner spot-check". State set to IN_PROGRESS so a new session continues here.
-
-CP7b (28 Oct 2026, branch `claude/sleepy-tesla-smt1xr`): stopped at `AWAITING_ADJUDICATION` as the specification says.
-Done: selection (5 apps, 14 cases), D3 triage run (14/14 triaged: 7 REACHABLE, 4 NOT_REACHABLE, 3 CANT_DETERMINE),
-govulncheck reference, adjudication sheets, demo, tests, report. Waiting: the owner and the supervising assistant fill
-`docs/results/cp7b/adjudication/adjudication.json` (fields `adjudication`, `by`, `note`, optional `truth`; read the
-Markdown sheets next to it). Then the supervisor sets the state to `IN_PROGRESS` on this branch and the next session:
-(1) runs `python -m vulntrace d3 report` (it refuses an incomplete sheet and lists what is missing), (2) checks the
-headline rendered from the unchanged template, (3) commits `docs/results/CP7B_REAL_APPS_RESULTS.md`, adds the
-scoring results to the report, sets `AWAITING_REVIEW`. No network, Go or data/ is needed for that step: it reads only
-committed files.
-CI: green on every commit of the branch; last checked run 139 (success) on `c045ca6`, the report commit. This
-note is a docs-only commit after it.
-
-(CP7 was approved on 27 Oct 2026; read the review notes at the end of checkpoints/CP3.md to CP7.md - they bind CP7b. The evidence in `data/` is NOT available in a new session: `dataset materialize --set d1` and `--set d4` rebuild it from the committed case lists. If the CP7b session stops at AWAITING_ADJUDICATION, the supervisor sets the state to IN_PROGRESS on the builder branch once the sheets are filled, so a new session continues.)
+(CP7b was approved on 14 Nov 2026; read the review notes at the end of checkpoints/CP3.md to CP7b.md - they bind CP8, especially the wording limits. CP8 needs no `data/`, no models and no network beyond GitHub.)
