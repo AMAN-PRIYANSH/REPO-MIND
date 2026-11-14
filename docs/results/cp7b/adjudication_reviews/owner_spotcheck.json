@@ -1,0 +1,92 @@
+{
+ "by": "owner (Aman)",
+ "date": "2026-11-14",
+ "method": "Opened each GitHub permalink at the pinned commit/tag and checked the highlighted line; selection of the 5 REACHABLE cases fixed by sha256('20261114:'+id) before any reviewer result was seen.",
+ "checks": [
+  {
+   "n": 1,
+   "case": "cli__GO-2026-5052",
+   "line": "smallstep/cli cmd/step/main.go:28",
+   "question": "word Run present",
+   "answer": "yes"
+  },
+  {
+   "n": 2,
+   "case": "cli__GO-2026-5052",
+   "line": "smallstep/cli command/certificate/p12.go:173",
+   "question": "word Encode present",
+   "answer": "yes"
+  },
+  {
+   "n": 3,
+   "case": "cli__GO-2026-5052",
+   "line": "SSLMate/go-pkcs12 v0.6.0 pkcs12.go:159",
+   "question": "word after macAlgorithm:",
+   "answer": "not written (answered 'yes'); the supervisor read the line: oidSHA256"
+  },
+  {
+   "n": 4,
+   "case": "Xray-core__GO-2026-4512",
+   "line": "Xray-core main/main.go:22",
+   "question": "word Execute present",
+   "answer": "yes"
+  },
+  {
+   "n": 5,
+   "case": "Xray-core__GO-2026-4512",
+   "line": "Xray-core main/commands/base/execute.go:72",
+   "question": "word Fprintf present",
+   "answer": "yes"
+  },
+  {
+   "n": 6,
+   "case": "Xray-core__GO-2026-4512",
+   "line": "same as 5",
+   "question": "first argument of Fprintf",
+   "answer": "os.Stderr"
+  },
+  {
+   "n": 7,
+   "case": "Xray-core__GO-2026-5676",
+   "line": "Xray-core app/proxyman/inbound/worker.go:540",
+   "question": "word ListenUnix present",
+   "answer": "yes"
+  },
+  {
+   "n": 8,
+   "case": "Xray-core__GO-2026-5676",
+   "line": "Xray-core transport/internet/splithttp/hub.go:411",
+   "question": "word ServeListener present",
+   "answer": "yes"
+  },
+  {
+   "n": 9,
+   "case": "Xray-core__GO-2026-5676",
+   "line": "quic-go v0.57.1 http3/headers.go:180",
+   "question": "word parseHeaders present",
+   "answer": "yes"
+  },
+  {
+   "n": 10,
+   "case": "Xray-core__GO-2026-6061",
+   "line": "Xray-core main/commands/all/api/shared.go:49",
+   "question": "word Close present",
+   "answer": "yes"
+  },
+  {
+   "n": 11,
+   "case": "Xray-core__GO-2026-6061",
+   "line": "grpc-go v1.77.0 internal/transport/controlbuf.go:387",
+   "question": "word isTransportResponseFrame present",
+   "answer": "yes"
+  },
+  {
+   "n": 12,
+   "case": "cli__GO-2026-5004",
+   "line": "pgx v5.7.5 internal/sanitize/sanitize.go:435",
+   "question": "word init present",
+   "answer": "yes"
+  }
+ ],
+ "summary": "11 of 11 step checks confirmed by the owner; the Fprintf call writes to os.Stderr (supports INFEASIBLE_PATH for Xray-core__GO-2026-4512). Check 3 was not answered with the word."
+}

@@ -1,0 +1,213 @@
+{
+ "reviewer": "B",
+ "cases": [
+  {
+   "id": "dive__GO-2026-5841",
+   "verdict": "NOT_REACHABLE",
+   "adjudication": "CORRECT",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "dive imports only klauspost/compress/zstd, whose non-test import closure (fse, huff0, internal/*, zstd/internal/xxhash) never includes s2; docker/cli's vendored compress has no s2 at all, and no other dive dependency imports s2. s2.NewDict also has no internal callers in compress v1.18.0.",
+   "evidence": [
+    "src/wagoodman_dive@v0.13.1/dive/image/docker/image_archive.go:15",
+    "src/wagoodman_dive@v0.13.1/go.mod:13",
+    "src/klauspost_compress@v1.18.0/s2/dict.go:41",
+    "src/docker_cli@v28.0.2/vendor/modules.txt:179-187"
+   ]
+  },
+  {
+   "id": "gitleaks__GO-2026-5841",
+   "verdict": "NOT_REACHABLE",
+   "adjudication": "CORRECT",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "The s2 package is compiled in (mholt/archives sz.go uses s2.NewReader/NewWriter), but nothing calls s2.NewDict: archives only uses reader/writer options, s2 itself never calls NewDict in non-test code, and bodgit/sevenzip uses only zstd/flate.",
+   "evidence": [
+    "reviewB_extra/mholt_archives@v0.1.2/sz.go:9,98,114",
+    "src/klauspost_compress@v1.17.11/s2/dict.go:41",
+    "reviewB_extra/bodgit_sevenzip@v1.6.0/internal/zstd/reader.go:11",
+    "src/gitleaks_gitleaks@v8.30.0/sources/file.go:14"
+   ]
+  },
+  {
+   "id": "cli__GO-2026-4503",
+   "verdict": "NOT_REACHABLE",
+   "adjudication": "CORRECT",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "filippo.io/edwards25519 is used by go-sql-driver/mysql v1.9.2 (auth.go) and go.step.sm/crypto v0.74.0 (x25519), but they only use NewScalar/ScalarBaseMult/VarTimeDoubleScalarBaseMult/SetBytes etc.; no code calls Point.MultiScalarMult, and edwards25519 itself has no internal caller of it.",
+   "evidence": [
+    "src/FiloSottile_edwards25519@v1.1.0/extra.go:243",
+    "reviewB_extra/go-sql-driver_mysql@v1.9.2/auth.go:237-259",
+    "reviewB_extra/smallstep_crypto@v0.74.0/x25519/x25519.go:174-320",
+    "src/smallstep_cli@v0.29.0/go.mod:47"
+   ]
+  },
+  {
+   "id": "Xray-core__GO-2026-5841",
+   "verdict": "NOT_REACHABLE",
+   "adjudication": "CORRECT",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "Xray does not import klauspost/compress; its only user in the module graph is utls (u_handshake_client.go imports compress/zstd), and xtls/reality, quic-go and grpc do not import it, so s2 is not even built; s2.NewDict has no internal callers in v1.17.4.",
+   "evidence": [
+    "src/XTLS_Xray-core@v25.12.8/go.mod:42",
+    "src/refraction-networking_utls@v1.8.1/u_handshake_client.go:16",
+    "reviewB_extra/xtls_reality@e4eec4520535 (no klauspost import)",
+    "src/klauspost_compress@v1.17.4/s2/dict.go"
+   ]
+  },
+  {
+   "id": "dive__GO-2026-4610",
+   "verdict": "CANT_DETERMINE",
+   "adjudication": "WRONG",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "dive imports only docker/cli cli/config, cli/connhelper, cli/context/docker and cli/context/store; their transitive docker/cli import closure (config/*, connhelper/*, context, context/store) contains neither cli-plugins/manager nor cli/command/container, so no listed target or the advisory package is even compiled. The code gives a clear NOT_REACHABLE.",
+   "evidence": [
+    "src/wagoodman_dive@v0.13.1/dive/image/docker/engine_resolver.go:10-14",
+    "src/docker_cli@v28.0.2/cli/context/docker",
+    "src/docker_cli@v28.0.2/cli/connhelper",
+    "src/docker_cli@v28.0.2/cli/config"
+   ]
+  },
+  {
+   "id": "dive__GO-2025-3900",
+   "verdict": "CANT_DETERMINE",
+   "adjudication": "WRONG",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "mapstructure v2 is used only by viper v1.20.0 (viper.go), and only via decode()/defaultDecoderConfig, which are called only from Unmarshal, UnmarshalKey, UnmarshalExact and decodeStructKeys; dive never calls any of these (it uses Get*/SetDefault/BindPFlag/AllSettings/ReadInConfig only). The missing symbol (StringToNetIPPrefixHookFunc) does not exist in v2.2.1 so it cannot be reached either.",
+   "evidence": [
+    "reviewB_extra/spf13_viper@v1.20.0/viper.go:925,948,954,971-985,1020,1035",
+    "src/wagoodman_dive@v0.13.1/cmd/root.go:175",
+    "src/go-viper_mapstructure@v2.2.1/decode_hooks.go"
+   ]
+  },
+  {
+   "id": "pgweb__GO-2025-4188",
+   "verdict": "CANT_DETERMINE",
+   "adjudication": "WRONG",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "medium",
+   "note": "No pgweb dependency imports logrus, and pgweb's own code never calls Writer/WriterLevel on a Logger or Entry (no such call anywhere, no interface with that method, no MethodByName/template use); writerScanner/writerFinalizer are only reached from Entry.WriterLevel. Linker PRESENT is most likely method retention, not a call; the code gives a clear NOT_REACHABLE.",
+   "evidence": [
+    "src/sirupsen_logrus@v1.9.0/writer.go:10-68",
+    "src/sosedoff_pgweb@v0.17.0/pkg/cli/cli.go:40",
+    "src/sosedoff_pgweb@v0.17.0/pkg/api/logger.go:23-56",
+    "src/sosedoff_pgweb@v0.17.0/go.mod"
+   ]
+  },
+  {
+   "id": "gitleaks__GO-2025-4020",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": true,
+   "confidence": "high",
+   "note": "Steps 1-9 exist (detect Run -> DetectSource -> File.Fragments -> extractorFragments -> Rar.Extract), but step 10 calls rardecode.FileSystem only if r.FS != nil; the Rar value comes from archives.Identify, which returns the zero Rar{} registered in init, and neither gitleaks nor archives ever sets FS. Target is also context only.",
+   "evidence": [
+    "reviewB_extra/mholt_archives@v0.1.2/rar.go:20,91-93",
+    "reviewB_extra/mholt_archives@v0.1.2/formats.go:40-100",
+    "src/gitleaks_gitleaks@v8.30.0/sources/file.go:53,77-78,114",
+    "src/gitleaks_gitleaks@v8.30.0/cmd/detect.go:46,76",
+    "https://github.com/mholt/archives/blob/v0.1.2/rar.go#L92"
+   ]
+  },
+  {
+   "id": "cli__GO-2026-5506",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "medium",
+   "note": "Step 7 splices two unrelated sync.Once uses: on this path Once.Do is called from internal/godebug.Setting.Value with godebug's own closure (lookup of the setting), so doSlow's f() cannot be grpctransport.otelGRPCStatsHandler$1 here. Remaining steps (otelgrpc.NewClientHandler -> otel.Handle -> ErrDelegator.Handle) exist but this path from crypto/fips140 init cannot run.",
+   "evidence": [
+    "/usr/local/go/src/internal/godebug/godebug.go:157-163 (go1.24 local copy; sheet cites go1.26.10)",
+    "https://github.com/golang/go/blob/go1.26.10/src/sync/once.go#L78",
+    "src/open-telemetry_opentelemetry-go@v1.38.0/handler.go:33",
+    "src/open-telemetry_opentelemetry-go@v1.38.0/internal/global/state.go:55,177-180"
+   ]
+  },
+  {
+   "id": "cli__GO-2026-5052",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "high",
+   "note": "doMac calls doPBMAC1 only when macData.Mac.Algorithm is oidPBMAC1, but on this path Encode sets it to enc.macAlgorithm, and p12Action uses pkcs12.Modern (SHA-256) or LegacyRC2 (SHA-1); no encoder can carry PBMAC1. Also step 4->5 uses App.Run's default a.Action (a custom closure in root.go:134), not the p12 subcommand action.",
+   "evidence": [
+    "src/SSLMate_go-pkcs12@v0.6.0/mac.go:119-127",
+    "src/SSLMate_go-pkcs12@v0.6.0/pkcs12.go:97,118,159,701-709",
+    "src/smallstep_cli@v0.29.0/command/certificate/p12.go:104-106,173",
+    "src/smallstep_cli@v0.29.0/internal/cmd/root.go:134"
+   ]
+  },
+  {
+   "id": "cli__GO-2026-5004",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "high",
+   "note": "createDatabase calls conn.Exec with only a SQL string and no arguments; pgx exec then uses the simple protocol, but execSimpleProtocol calls sanitizeForSimpleQuery only if len(arguments) > 0, so step 15 (and the sanitize target) never runs on this path. Step 4->5 is also a splice (App.Run default Action is the root closure, not ca initAction).",
+   "evidence": [
+    "reviewB_extra/smallstep_nosql@v0.7.0/postgresql/postgresql.go:51",
+    "src/jackc_pgx@v5.7.5/conn.go:500-503,553-559",
+    "src/smallstep_cli@v0.29.0/internal/cmd/root.go:134"
+   ]
+  },
+  {
+   "id": "Xray-core__GO-2026-5676",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "high",
+   "note": "The path goes dsWorker.Start -> internet.ListenUnix, which always passes net.Port(0) to ListenXH; in ListenXH the port==0 branch takes the UNIX-socket listener, and the HTTP/3 goroutine (hub.go:410-411) is only in the else-if isH3 branch, so it cannot run via ListenUnix. (HTTP/3 is plausibly reachable via a TCP worker, but not on this path.)",
+   "evidence": [
+    "src/XTLS_Xray-core@v25.12.8/app/proxyman/inbound/worker.go:540",
+    "src/XTLS_Xray-core@v25.12.8/transport/internet/tcp_hub.go:45",
+    "src/XTLS_Xray-core@v25.12.8/transport/internet/splithttp/hub.go:382-415"
+   ]
+  },
+  {
+   "id": "Xray-core__GO-2026-4512",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "high",
+   "note": "Step 3 is impossible: base.Execute calls fmt.Fprintf(os.Stderr, ...) at execute.go:72, so w.Write inside Fprintf is (*os.File).Write, never utls.UConn.Write. The utls steps 5-12 exist but this path cannot reach them.",
+   "evidence": [
+    "src/XTLS_Xray-core@v25.12.8/main/commands/base/execute.go:72",
+    "https://github.com/golang/go/blob/go1.26.10/src/fmt/print.go#L225",
+    "src/refraction-networking_utls@v1.8.1/u_parrots.go:30,2751"
+   ]
+  },
+  {
+   "id": "Xray-core__GO-2026-6061",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "medium",
+   "note": "Steps 1-9 check out (api adu command -> dialAPIServer close closure -> ClientConn.Close -> tearDown -> http2Client.Close -> controlBuf.put), but at step 10 the item flowing through this path is the *goAway built at http2_client.go:1030, so it.isTransportResponseFrame() calls goAway's method, not cleanupStream's. The callee is valid elsewhere (closeStream), so this is a context splice; medium only because of how strictly per-path context is judged.",
+   "evidence": [
+    "src/grpc_grpc-go@v1.77.0/internal/transport/http2_client.go:1030",
+    "src/grpc_grpc-go@v1.77.0/internal/transport/controlbuf.go:353-387",
+    "src/grpc_grpc-go@v1.77.0/clientconn.go:1173-1175,1589",
+    "src/XTLS_Xray-core@v25.12.8/main/commands/all/api/shared.go:41-51",
+    "src/XTLS_Xray-core@v25.12.8/main/commands/all/api/inbound_user_add.go:47-48"
+   ]
+  }
+ ]
+}

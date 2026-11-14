@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP7b - Real applications (D3) and demo**
-- State: `AWAITING_ADJUDICATION`
+- State: `IN_PROGRESS` (adjudication filled on 14 Nov 2026; the next session runs the scoring steps in the handoff notes)
 - Branch in use: `claude/sleepy-tesla-smt1xr`
 - Specification: [checkpoints/CP7b.md](../implementation/checkpoints/CP7b.md)
 
@@ -23,7 +23,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP5b | Lifting and caller/callee queries (Go helper) | APPROVED | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
 | CP6 | LangGraph investigation agent (negative result) | APPROVED | claude/vulntrace-ai-build-1wfa8e | [CP6_REPORT](reports/CP6_REPORT.md) |
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
-| CP7b | Real applications (D3) and demo | AWAITING_ADJUDICATION | claude/sleepy-tesla-smt1xr | [CP7b_REPORT](reports/CP7b_REPORT.md) |
+| CP7b | Real applications (D3) and demo | IN_PROGRESS | claude/sleepy-tesla-smt1xr | [CP7b_REPORT](reports/CP7b_REPORT.md) |
 | CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
 
 ## Current checkpoint task list
@@ -45,6 +45,8 @@ CP7b (session branch `claude/sleepy-tesla-smt1xr`):
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
+
+**Supervisor note, 14 Nov 2026:** `adjudication.json` is filled for all 14 cases. Method: two independent Claude reviewer agents read the real source at the pinned versions (outputs in `docs/results/cp7b/adjudication_reviews/reviewA.json` and `reviewB.json`; they agree on all 14 adjudications and truths); the supervisor re-read two key claims (gitleaks `rar.go` `FS != nil` guard; go-pkcs12 encoders never use PBMAC1) and reconciled; the owner spot-checked 11 path steps of 5 REACHABLE cases chosen by a fixed rule before any review was seen (`owner_spotcheck.json`). Do NOT describe this as expert human ground truth: say "two independent LLM reviewers, reconciled by the supervising assistant, owner spot-check". State set to IN_PROGRESS so a new session continues here.
 
 CP7b (28 Oct 2026, branch `claude/sleepy-tesla-smt1xr`): stopped at `AWAITING_ADJUDICATION` as the specification says.
 Done: selection (5 apps, 14 cases), D3 triage run (14/14 triaged: 7 REACHABLE, 4 NOT_REACHABLE, 3 CANT_DETERMINE),

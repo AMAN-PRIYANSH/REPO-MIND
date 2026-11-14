@@ -1,0 +1,239 @@
+{
+ "reviewer": "A",
+ "cases": [
+  {
+   "id": "dive__GO-2026-4610",
+   "verdict": "CANT_DETERMINE",
+   "adjudication": "WRONG",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "dive imports only docker/cli packages cli/config, cli/connhelper, cli/context/docker and cli/context/store; their transitive docker/cli imports (config/*, connhelper/*, context, context/store) never include cli-plugins/manager (the advisory package) nor cli/command/container (the analysed targets). The code gives a clear NOT_REACHABLE, so abstaining was not needed.",
+   "evidence": [
+    "wagoodman_dive@v0.13.1/dive/image/docker/engine_resolver.go:10-13",
+    "wagoodman_dive@v0.13.1/go.mod:9",
+    "docker_cli@v28.0.2/cli/context/docker/load.go (imports)",
+    "docker_cli@v28.0.2/cli/config/config.go (imports)",
+    "docker_cli@v28.0.2/cli/connhelper/connhelper.go (imports)"
+   ]
+  },
+  {
+   "id": "dive__GO-2026-5841",
+   "verdict": "NOT_REACHABLE",
+   "adjudication": "CORRECT",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "dive imports only klauspost/compress/zstd, whose non-test imports do not include s2; docker/cli's vendored deps (incl. docker/docker) also use only zstd. s2.NewDict has no non-test caller inside compress v1.18.0, so it cannot be called.",
+   "evidence": [
+    "wagoodman_dive@v0.13.1/dive/image/docker/image_archive.go:15",
+    "klauspost_compress@v1.18.0/s2/dict.go:41",
+    "klauspost_compress@v1.18.0/zstd/*.go (imports)",
+    "docker_cli@v28.0.2/vendor/modules.txt:179-187"
+   ]
+  },
+  {
+   "id": "dive__GO-2025-3900",
+   "verdict": "CANT_DETERMINE",
+   "adjudication": "WRONG",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "mapstructure/v2 enters dive only via spf13/viper v1.20.0, where it is used solely in Unmarshal/UnmarshalKey/UnmarshalExact/decodeStructKeys (decode and defaultDecoderConfig); dive only calls viper Get*/Set*/BindPFlag/ReadInConfig/ReadConfig/AllSettings and never Unmarshal. docker/cli's mapstructure user (cli/compose/loader) is not imported by dive. The ANALYSIS_FAILED was a tool error (StringToNetIPPrefixHookFunc absent in v2.2.1); the code answer is clear.",
+   "evidence": [
+    "reviewA_extra/viper@v1.20.0/viper.go:924-948",
+    "reviewA_extra/viper@v1.20.0/viper.go:971-1023",
+    "reviewA_extra/viper@v1.20.0/viper.go:1034-1051",
+    "wagoodman_dive@v0.13.1/cmd/root.go:116-175",
+    "wagoodman_dive@v0.13.1/cmd/ci.go:12-27",
+    "docker_cli@v28.0.2/cli/compose/loader/loader.go (only docker/cli importer of mapstructure)"
+   ]
+  },
+  {
+   "id": "pgweb__GO-2025-4188",
+   "verdict": "CANT_DETERMINE",
+   "adjudication": "WRONG",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "pgweb uses logrus only for New/StandardLogger/SetLevel/SetFormatter/WithField/Info/Debugf etc.; nothing in pgweb calls Writer/WriterLevel, logrus calls them only from each other (writer.go), and no other pgweb dependency imports logrus; the example main does not import logrus. Linker PRESENT reflects method retention, not a call; the code gives a clear NOT_REACHABLE.",
+   "evidence": [
+    "sosedoff_pgweb@v0.17.0/pkg/cli/cli.go:40,172-185",
+    "sosedoff_pgweb@v0.17.0/pkg/api/logger.go:16-60",
+    "sosedoff_pgweb@v0.17.0/config/examples/connect_backend_go/main.go:1-20",
+    "sirupsen_logrus@v1.9.0/writer.go:10-68",
+    "sosedoff_pgweb@v0.17.0/go.mod"
+   ]
+  },
+  {
+   "id": "gitleaks__GO-2026-5841",
+   "verdict": "NOT_REACHABLE",
+   "adjudication": "CORRECT",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "s2 is linked via mholt/archives sz.go (s2.NewReader/NewWriter) and minio/minlz (s2.Decode/DecodedLen), but nothing calls s2.NewDict: no non-test caller in compress v1.17.11, archives v0.1.2, minlz v1.0.0, sevenzip v1.6.0, STARRY-S/zip v0.2.1 or gitleaks itself.",
+   "evidence": [
+    "klauspost_compress@v1.17.11/s2/dict.go:41",
+    "reviewA_extra/archives@v0.1.2/sz.go:69-116",
+    "reviewA_extra/minio_minlz@v1.0.0/reader.go:26,399",
+    "reviewA_extra/minio_minlz@v1.0.0/decode.go:60-63",
+    "gitleaks_gitleaks@v8.30.0/go.mod"
+   ]
+  },
+  {
+   "id": "gitleaks__GO-2025-4020",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": true,
+   "confidence": "high",
+   "note": "Steps 1-9 exist (detect command registered with Run: runDetect; File.Fragments -> extractorFragments -> extractor.Extract). But step 10 rardecode.FileSystem at archives rar.go:92 runs only if r.FS != nil, and Rar.FS is never set: archives registers Rar{} and Identify returns that zero value, and gitleaks never sets FS. Also step 7 uses *sources.Files from runDetect (File.Fragments is reached via stdin's *sources.File elsewhere). Target is context only (fix did not change it).",
+   "evidence": [
+    "https://github.com/gitleaks/gitleaks/blob/6eaad039603a4de39fddd1cf5f727391efe9974e/main.go#L18",
+    "gitleaks_gitleaks@v8.30.0/cmd/root.go:225",
+    "gitleaks_gitleaks@v8.30.0/cmd/detect.go:34,46,76",
+    "gitleaks_gitleaks@v8.30.0/detect/detect.go:209",
+    "gitleaks_gitleaks@v8.30.0/sources/file.go:53,78,114",
+    "reviewA_extra/cobra@v1.9.1/command.go:1019,1071,1148",
+    "reviewA_extra/archives@v0.1.2/rar.go:20,91-93",
+    "gitleaks_gitleaks@v8.30.0/cmd/stdin.go:39-43"
+   ]
+  },
+  {
+   "id": "cli__GO-2026-5506",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "high",
+   "note": "Path 1 goes crypto/fips140.init -> godebug.Setting.Value -> sync.Once.Do -> doSlow -> grpctransport.otelGRPCStatsHandler$1, but godebug's once.Do passes its own closure; otelGRPCStatsHandler$1 is only passed to initOtelStatsHandlerOnce.Do in grpctransport.go:72, so this dynamic step never takes that callee. Target ErrDelegator.Handle is not context only; separately, Path 3 (otel/internal/global init -> defaultErrorHandler via cloudcas import chain) looks real, so the verdict may be right but path 1 is not.",
+   "evidence": [
+    "/usr/local/go1.24.7/src/internal/godebug/godebug.go:157-158",
+    "/usr/local/go1.24.7/src/sync/once.go:69-78",
+    "reviewA_extra/gcloud_auth@v0.17.0/auth/grpctransport/grpctransport.go:71-76",
+    "open-telemetry_opentelemetry-go@v1.38.0/handler.go:33",
+    "open-telemetry_opentelemetry-go@v1.38.0/internal/global/state.go:35",
+    "smallstep_cli@v0.29.0/internal/cmd/root.go:26"
+   ]
+  },
+  {
+   "id": "cli__GO-2026-5052",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "high",
+   "note": "Steps 1-9 exist (step certificate p12 -> encoder.Encode -> computeMac -> doMac), but doMac calls doPBMAC1 (mac.go:127) only when the MAC OID is PBMAC1; p12Action uses pkcs12.Modern (=Modern2023, macAlgorithm oidSHA256) or LegacyRC2 (oidSHA1), and no Encoder in v0.6.0 uses oidPBMAC1, so the branch is never true on the encode path. smallstep cli has no pkcs12.Decode call. Target not context only.",
+   "evidence": [
+    "smallstep_cli@v0.29.0/cmd/step/main.go:28",
+    "smallstep_cli@v0.29.0/internal/cmd/root.go:35,47,62",
+    "smallstep_cli@v0.29.0/command/certificate/p12.go:25,104-107,173",
+    "SSLMate_go-pkcs12@v0.6.0/pkcs12.go:96-97,158-159,184,701-709",
+    "SSLMate_go-pkcs12@v0.6.0/mac.go:116-128,162-163"
+   ]
+  },
+  {
+   "id": "cli__GO-2026-4503",
+   "verdict": "NOT_REACHABLE",
+   "adjudication": "CORRECT",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "Point.MultiScalarMult has no non-test caller inside edwards25519 v1.1.0; the module's users in step's build (go-sql-driver/mysql v1.9.2 auth.go and go.step.sm/crypto v0.74.0 x25519) use only ScalarBaseMult, VarTimeDoubleScalarBaseMult, Negate, SetBytes and Scalar ops; smallstep cli and certificates do not use the package directly.",
+   "evidence": [
+    "FiloSottile_edwards25519@v1.1.0/extra.go:243",
+    "reviewA_extra/go-sql-driver_mysql@v1.9.2/auth.go:237-259",
+    "reviewA_extra/smallstep_crypto@v0.74.0/x25519/x25519.go:174-320",
+    "smallstep_cli@v0.29.0/go.mod:47,78"
+   ]
+  },
+  {
+   "id": "cli__GO-2026-5004",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "high",
+   "note": "Steps 1-9 exist (ca init -> PKI.Save -> GenerateConfig -> db.New -> nosql.New; db.New runs only with --remote-management), but GenerateConfig hardcodes cfg.DB Type \"badgerv2\" and initAction passes no ConfigOption, so nosql.New picks badgerV2.DB and the dynamic step 10 to postgresql.DB.Open never runs. Target placeholderState is not context only.",
+   "evidence": [
+    "smallstep_cli@v0.29.0/command/ca/init.go:236,621-626,717",
+    "reviewA_extra/smallstep_certificates@v0.29.0/pki/pki.go:799-823,900-904,927,984",
+    "reviewA_extra/smallstep_certificates@v0.29.0/db/db.go:115-126",
+    "reviewA_extra/smallstep_nosql@v0.7.0/nosql.go:63-79",
+    "reviewA_extra/smallstep_nosql@v0.7.0/postgresql/postgresql.go:51,85"
+   ]
+  },
+  {
+   "id": "Xray-core__GO-2026-5676",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "high",
+   "note": "Steps 1-8 exist (run -> Instance.Start -> inbound Manager -> AlwaysOnInboundHandler -> dsWorker.Start -> ListenUnix -> registered ListenXH), but ListenUnix always passes net.Port(0), and ListenXH takes the unix branch when port == 0 (hub.go:382); the HTTP/3 branch with the ServeListener goroutine (hub.go:391-413) runs only for non-zero ports. So this UDS path never reaches http3. (The http3 server is likely reachable via ListenTCP with h3 ALPN, but that is not the path shown.) Target not context only.",
+   "evidence": [
+    "XTLS_Xray-core@v25.12.8/main/main.go:22",
+    "XTLS_Xray-core@v25.12.8/main/commands/base/execute.go:64",
+    "XTLS_Xray-core@v25.12.8/main/run.go:47,90",
+    "XTLS_Xray-core@v25.12.8/core/xray.go:390",
+    "XTLS_Xray-core@v25.12.8/app/proxyman/inbound/inbound.go:115",
+    "XTLS_Xray-core@v25.12.8/app/proxyman/inbound/always.go:160",
+    "XTLS_Xray-core@v25.12.8/app/proxyman/inbound/worker.go:540",
+    "XTLS_Xray-core@v25.12.8/transport/internet/tcp_hub.go:31-45",
+    "XTLS_Xray-core@v25.12.8/transport/internet/splithttp/hub.go:382-413,489",
+    "quic-go_quic-go@v0.57.1/http3/server.go:288,302,304,564,568,633",
+    "quic-go_quic-go@v0.57.1/http3/headers.go:180"
+   ]
+  },
+  {
+   "id": "Xray-core__GO-2026-4512",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "high",
+   "note": "Step 2 is fmt.Fprintf(os.Stderr, ...) at execute.go:72, so the dynamic w.Write in step 3 always targets *os.File, never utls.UConn.Write. Steps 5-12 inside utls (Write -> Handshake -> ... -> applyPresetByID -> UTLSIdToSpec -> utlsIdToSpec) do exist, so the target is plausibly reachable through Xray's real uTLS client use, but not by this path. Target not context only.",
+   "evidence": [
+    "XTLS_Xray-core@v25.12.8/main/commands/base/execute.go:72",
+    "refraction-networking_utls@v1.8.1/u_conn.go:97,129,301,314,376,440",
+    "refraction-networking_utls@v1.8.1/u_parrots.go:30,2751"
+   ]
+  },
+  {
+   "id": "Xray-core__GO-2026-5841",
+   "verdict": "NOT_REACHABLE",
+   "adjudication": "CORRECT",
+   "truth": "NOT_REACHABLE",
+   "context_only_target": null,
+   "confidence": "high",
+   "note": "klauspost/compress v1.17.4 enters Xray via utls (u_handshake_client.go imports only zstd) and xtls/reality (indirect only); Xray itself does not import klauspost, and s2.NewDict has no non-test caller in compress v1.17.4.",
+   "evidence": [
+    "XTLS_Xray-core@v25.12.8/go.mod:42",
+    "refraction-networking_utls@v1.8.1/u_handshake_client.go:16",
+    "refraction-networking_utls@v1.8.1/go.mod:12",
+    "reviewA_extra/xtls_reality (commit e4eec4520535) go.mod:16",
+    "klauspost_compress@v1.17.4/s2/dict.go:41"
+   ]
+  },
+  {
+   "id": "Xray-core__GO-2026-6061",
+   "verdict": "REACHABLE",
+   "adjudication": "INFEASIBLE_PATH",
+   "truth": null,
+   "context_only_target": false,
+   "confidence": "medium",
+   "note": "Steps 1-9 exist (xray api adu registered via commands/all -> executeAddInboundUsers -> deferred dialAPIServer closure -> conn.Close -> tearDown -> http2Client.Close -> controlBuf.put). But the put at http2_client.go:1030 enqueues &goAway{}, so the dynamic it.isTransportResponseFrame() at controlbuf.go:387 calls goAway's method, not cleanupStream's on this path. cleanupStream items are enqueued elsewhere (http2_client.go:953/982), so the target is likely reachable by another path; not context only.",
+   "evidence": [
+    "XTLS_Xray-core@v25.12.8/main/distro/all/all.go:81",
+    "XTLS_Xray-core@v25.12.8/main/commands/all/commands.go:11-14",
+    "XTLS_Xray-core@v25.12.8/main/commands/all/api/api.go:26",
+    "XTLS_Xray-core@v25.12.8/main/commands/all/api/inbound_user_add.go:38,47-48",
+    "XTLS_Xray-core@v25.12.8/main/commands/all/api/shared.go:41-51",
+    "grpc_grpc-go@v1.77.0/clientconn.go:1173-1175,1589",
+    "grpc_grpc-go@v1.77.0/internal/transport/http2_client.go:1030,953,982",
+    "grpc_grpc-go@v1.77.0/internal/transport/controlbuf.go:147,212,352-387"
+   ]
+  }
+ ]
+}
