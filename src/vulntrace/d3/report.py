@@ -26,8 +26,14 @@ FIXED_LIMITATIONS = [
     "Five applications are case studies, not a sample of Go software: rates below describe these cases only.",
     "Cases of one application share code, toolchain and dependencies, so they are not independent; Wilson intervals "
     "assume independence and therefore understate the uncertainty.",
-    "Truth is human adjudication of the call path (reachability), not exploitability, and it was done by the owner and "
-    "the supervising assistant, who also built or reviewed the system.",
+    "The adjudication judges the call path (reachability), not exploitability. It is NOT expert human ground truth: "
+    "two independent Claude reviewer agents read the source at the pinned versions and agreed on every case, the "
+    "supervising assistant reconciled them and re-read two key claims, and the owner spot-checked a fixed sample of path "
+    "steps (reviewer files in docs/results/cp7b/adjudication_reviews/). The reviewers are language models related to the "
+    "system's builder and not independent of each other in their blind spots; the supervisor also reviewed the system.",
+    "INFEASIBLE_PATH judges the path shown (changed targets first), not the target: the reviewers' notes record that for "
+    "several REACHABLE cases the target looks reachable by another path that the system did not show. Precision here is "
+    "therefore the rate at which the shown path is correct, not the rate at which the target is truly reachable.",
     "Applications are pinned to releases from 2025 or earlier (selection rule A3); their current versions may differ.",
     "Selection rule V1 requires a GitHub fix commit, which excludes most golang.org/x advisories (fix links are "
     "go.dev/cl); D3 therefore says nothing about those.",

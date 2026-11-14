@@ -273,3 +273,11 @@ def test_context_only_targets_are_flagged_and_listed_after_changed_ones():
     v["symbols"].append({"package": key[0], "symbol": "Changed", "origin": "FIX_CHANGED", "context_only": False})
     paths = sh.reachable_paths(v)
     assert [p["context_only"] for p in paths] == [False, True] and sh.only_context_reachable(v) is False
+
+
+def test_limitations_do_not_claim_human_expert_truth():
+    text = " ".join(rp.FIXED_LIMITATIONS)
+    assert "NOT expert human ground truth" in text
+    assert "language models" in text
+    assert "judges the path shown" in text
+    assert "done by the owner and the supervising assistant" not in text
