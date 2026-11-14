@@ -2,6 +2,8 @@
 
 This document traces one case from input to verdict. Component names (C0 to C8) refer to [system architecture](SYSTEM_ARCHITECTURE.md). Object names refer to [data model](../design/DATA_MODEL.md).
 
+> **Superseded in part (CP8 note).** C2 (the LLM root-cause selector) and C14 (the agent) are shown here as designed; the built pipeline does not use them (Mode 1 keeps every changed function; Mode 2 uses the retriever's top-k). See the [final report](../FINAL_REPORT.md).
+
 ## Inputs
 
 1. An advisory ID (for example `GO-2026-5504`) and a local copy of `golang/vulndb`.

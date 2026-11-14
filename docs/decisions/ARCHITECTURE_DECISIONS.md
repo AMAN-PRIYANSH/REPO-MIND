@@ -40,6 +40,7 @@ Evidence references point to [feasibility findings](../research/FEASIBILITY_FIND
 - Decision: With a fix commit, the LLM receives the advisory and the complete non-test diff and selects candidate IDs.
 - Why: All 59 sampled fix diffs fit in context (max about 24k estimated tokens); median 2 changed functions (trial 2).
 - Validation: E1 vs E0 (CP5).
+- Outcome (CP8 note): **not adopted.** E1 showed the LLM selection lowers recall against E0; the built pipeline analyses every changed function in Mode 1 (CP5 review notes, [final report](../FINAL_REPORT.md)).
 
 ## ADR-006 JSON files for cases and results
 
@@ -54,6 +55,7 @@ Evidence references point to [feasibility findings](../research/FEASIBILITY_FIND
 - Why: Without the fix commit, candidate sets reach hundreds to thousands of functions (trial 5: 12/45 releases with 100+, max 2,558). Ranking is a real problem. pgvector keeps vectors next to relational metadata (module, version, package, hash, model) that every query filters on; PostgreSQL 16 is preinstalled in Claude Code cloud sessions and familiar to the owner.
 - Alternatives: dedicated vector databases (Qdrant, Milvus, Chroma) add a second datastore without a capability we need; pure in-memory search is fine for one case but does not show versioned indexing.
 - Validation: Q1-Q5 ablations vs B-ID baseline (CP4-CP5). Every component must earn its place; any that does not is reported as such.
+- Outcome (CP8 note): retrieval is adopted for Mode 2 (BM25 as the documented fallback); cross-encoder reranking and HyDE did not earn their place and are not used; the retrieval stack remains in the repository (CP4, CP5 review notes).
 
 ## ADR-008 Single LangGraph agent for Mode 2; multi-agent only as a measured stretch
 
@@ -61,6 +63,7 @@ Evidence references point to [feasibility findings](../research/FEASIBILITY_FIND
 - Decision: One tool-using agent built with LangGraph for Mode 2 investigation, with step and time budgets and closed-set answers. A two-agent investigator + sceptic variant is tested in CP8 only if time allows.
 - Why: Release ranges include commit messages, callers and diffs that a fixed pipeline cannot follow adaptively; an agent can. Published analysis of multi-agent systems reports minimal gains and many coordination failures, so multi-agent is tested, not assumed.
 - Alternatives: no agent (kept as the baseline S1); multi-agent by default (rejected).
+- Outcome (CP8 note): **not adopted in the product.** The single agent did not beat retrieval (CP6), so Mode 2 uses the retriever's top-k and the multi-agent stretch was dropped (CP6 review notes, [final report](../FINAL_REPORT.md)).
 
 ## ADR-009 No knowledge graph
 

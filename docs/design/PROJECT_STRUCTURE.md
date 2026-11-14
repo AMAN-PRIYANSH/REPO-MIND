@@ -2,6 +2,8 @@
 
 This is the planned layout. None of the code directories exist yet. Each checkpoint creates only the parts listed for it.
 
+> **Superseded (CP8 note).** This is the layout planned before the build, kept as design history; the code directories now exist and differ in detail. For the layout as built see the repository map in the [README](../../README.md).
+
 ```
 REPO-MIND/
 ├── README.md

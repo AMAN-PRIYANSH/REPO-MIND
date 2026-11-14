@@ -33,7 +33,7 @@ Testing checks that code does what it is specified to do. Evaluation measures ho
 - **CP5:** LLM client request building, output validation (valid / invalid ID / malformed / empty), cache keys, HyDE switch, lifting on fixtures.
 - **CP6:** each agent tool in isolation, budget enforcement, rejection of out-of-set answers, trace completeness, recovery from tool errors.
 - **CP7:** each verifier check failing independently, downgrade-only behaviour, full pipeline on cached cases, demo page starts.
-- **CP8:** the multi-agent variant reuses the same validation and budgets; it cannot bypass them.
+- **CP8:** (superseded: the multi-agent variant was dropped) the final documents are tested instead: the results summary regenerates exactly from the committed result files, every number in the README, final report and interview notes must be in `summary.json`, and relative links must resolve.
 
 ## Commands
 

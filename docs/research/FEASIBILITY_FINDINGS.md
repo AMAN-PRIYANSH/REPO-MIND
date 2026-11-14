@@ -67,6 +67,7 @@ Implications (proposals, not measured):
 
 - The full fix diff fits in an LLM context window for every sampled case, so retrieval over the diff is not needed for cases that have a fix commit.
 - The LLM's job is precision (drop refactoring noise from about 2 to 10 candidates), not retrieval.
+  - (CP8 note: this proposal was tested as E1 and **not confirmed**: LLM narrowing lowered recall against keeping every changed function; see the [final report](../FINAL_REPORT.md).)
 - "Lifting" a private root-cause function to its nearest public callers should be a deterministic call-graph step, not an LLM step.
 
 Limitations of this trial:

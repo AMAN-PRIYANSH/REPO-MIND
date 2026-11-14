@@ -31,7 +31,7 @@ This document combines the originally proposed `EVALUATION_PLAN.md` and `METRICS
 | Q5 | Best of Q1-Q4 + HyDE query | D4 | CP5 | Required |
 | S1 | LLM selects from best retrieval top-k | D4 | CP5 | Required |
 | A1 | LangGraph single agent | D4 | CP6 | Required |
-| MA1 | Investigator + sceptic multi-agent | D4 | CP8 | Stretch |
+| MA1 | Investigator + sceptic multi-agent | D4 | CP8 | Stretch - dropped (CP8 note: the single agent A1 did not beat retrieval) |
 | E5 | Full pipeline end to end | D3 | CP7 | Required |
 
 R1 and B-ID are included on purpose. R1 shows why name-only graphs are unsafe. B-ID is a cheap, strong baseline: if retrieval cannot beat it, the report must say so.

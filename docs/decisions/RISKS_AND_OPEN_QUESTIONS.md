@@ -7,7 +7,7 @@
 | Where does Claude Code run? | Claude Code cloud sessions (Linux, 4 vCPU, 16 GB RAM, Go, Python, PostgreSQL 16, Docker preinstalled). |
 | Which LLM provider, what budget? | Free open models only, via Ollama or sentence-transformers. Budget: zero. |
 | Where do real model runs happen? | Google Colab free GPU; laptop CPU for the demo. |
-| Time budget? | About 4 weeks, 8 checkpoints; multi-agent is a stretch goal. |
+| Time budget? | About 4 weeks, 8 checkpoints; multi-agent is a stretch goal (CP8 note: dropped after CP6). |
 | Rename the repository? | Not now. Revisit at the end (GitHub redirects old URLs after a rename). |
 
 ## Open questions

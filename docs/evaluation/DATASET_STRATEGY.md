@@ -52,6 +52,7 @@ Rules: truth follows from the code and is justified in `rationale`; debatable ca
 - 5 pairs of (advisory, real Go application at a commit depending on the vulnerable version). Small-to-medium apps that build with `CGO_ENABLED=0` and fit in 16 GB RAM, with a `package main`.
 - Mix of expected reachable and expected not reachable.
 - Truth: owner adjudication with written reasoning. Two-method agreement or govulncheck agreement is not accepted as truth on its own.
+- (CP8 note: superseded. The adjudication was done by two Claude reviewer agents reading the real source, reconciled by the supervising assistant, with an owner spot-check of path steps. It is not expert human ground truth; see `docs/results/CP7B_REAL_APPS_RESULTS.md`.)
 - 5 cases are case studies, not statistics. More can be added after the 4-week build.
 
 ## Contamination and splits

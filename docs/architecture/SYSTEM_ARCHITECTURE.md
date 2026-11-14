@@ -2,6 +2,8 @@
 
 This document combines the originally proposed `SYSTEM_ARCHITECTURE.md` and `COMPONENT_DESIGN.md`.
 
+> **Superseded in part (CP8 note).** This document is the design as proposed before the experiments. As built, the pipeline differs in four ways, each from a measured result (see the [final report](../FINAL_REPORT.md) and the review notes at the end of `docs/implementation/checkpoints/CP5.md` to `CP7b.md`): (1) **C2 root-cause selector (LLM):** not in the pipeline; Mode 1 analyses every changed function, because LLM narrowing lost recall (E1). (2) **C14 investigation agent:** not in the pipeline; Mode 2 uses the retriever's top-k, because the agent did not beat retrieval (CP6). The agent, HyDE and the reranker remain in the repository as measured negative results. (3) **C3 lifter:** reported but never decides a verdict (CP5b). (4) **Multi-agent variant:** dropped. Where the text below says an LLM or the agent selects candidates, read it as the original proposal.
+
 ## Design principles
 
 1. **The LLM proposes, code confirms.** The LLM (or agent) may only choose among candidates that code has extracted. Every claim in a verdict is checked by deterministic code.
@@ -69,6 +71,8 @@ Agent (C14), built with LangGraph:
 - The agent never decides reachability. It only produces a `RootCauseSelection`.
 
 Multi-agent variant (CP8, stretch): an investigator agent and a sceptic agent that tries to refute the investigator's choice using the same tools. It is kept only if it beats the single agent on the evaluation set.
+
+> **Superseded in part (CP8 note).** Dropped: the single agent did not beat plain retrieval (CP6), so a second agent has no measured reason to exist.
 
 ## Models (all free)
 

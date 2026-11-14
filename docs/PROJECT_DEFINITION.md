@@ -42,6 +42,8 @@ VulnTrace AI never outputs a claim about exploitability. Output text must say "r
 4. "Tell me clearly when the tool cannot decide, and why."
 5. "There is no fix commit linked, only a fixed release. Search what changed and find the likely vulnerable function, with evidence I can check."
 
+> **Superseded in part (CP8 note).** The two-mode description below is the original design. Measured outcome: in Mode 1 an LLM choosing the root-cause function lost recall against analysing every changed function, so the built pipeline analyses every changed function; in Mode 2 neither the agent, HyDE nor reranking beat plain retrieval, so the built pipeline ranks candidates with retrieval only. See the [final report](FINAL_REPORT.md).
+
 ## Two modes
 
 **Mode 1 - fix commit available.** The fix commit is known. Its diff is small (median 2 changed functions in the feasibility sample), fits in an LLM prompt, and needs no retrieval. An LLM chooses the root-cause function from a closed list; code does everything else.
