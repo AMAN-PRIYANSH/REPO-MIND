@@ -6,7 +6,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 
 - Current checkpoint: **CP7b - Real applications (D3) and demo**
 - State: `IN_PROGRESS` (adjudication filled on 14 Nov 2026; the next session runs the scoring steps in the handoff notes)
-- Branch in use: `claude/sleepy-tesla-smt1xr`
+- Branch in use: `claude/eloquent-newton-vr2093` (continues `claude/sleepy-tesla-smt1xr`, fast-forwarded; the scoring session)
 - Specification: [checkpoints/CP7b.md](../implementation/checkpoints/CP7b.md)
 
 State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDICATION` →) `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
@@ -23,7 +23,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP5b | Lifting and caller/callee queries (Go helper) | APPROVED | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
 | CP6 | LangGraph investigation agent (negative result) | APPROVED | claude/vulntrace-ai-build-1wfa8e | [CP6_REPORT](reports/CP6_REPORT.md) |
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
-| CP7b | Real applications (D3) and demo | IN_PROGRESS | claude/sleepy-tesla-smt1xr | [CP7b_REPORT](reports/CP7b_REPORT.md) |
+| CP7b | Real applications (D3) and demo | IN_PROGRESS | claude/sleepy-tesla-smt1xr, then claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
 | CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
 
 ## Current checkpoint task list
