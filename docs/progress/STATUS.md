@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP7b - Real applications (D3) and demo**
-- State: `IN_PROGRESS` (adjudication filled on 14 Nov 2026; the next session runs the scoring steps in the handoff notes)
+- State: `AWAITING_REVIEW` (scoring session finished 14 Nov 2026; report `reports/CP7b_REPORT.md`, results `docs/results/CP7B_REAL_APPS_RESULTS.md`)
 - Branch in use: `claude/eloquent-newton-vr2093` (continues `claude/sleepy-tesla-smt1xr`, fast-forwarded; the scoring session)
 - Specification: [checkpoints/CP7b.md](../implementation/checkpoints/CP7b.md)
 
@@ -23,7 +23,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP5b | Lifting and caller/callee queries (Go helper) | APPROVED | claude/eloquent-shannon-baphva | [CP5b_REPORT](reports/CP5b_REPORT.md) |
 | CP6 | LangGraph investigation agent (negative result) | APPROVED | claude/vulntrace-ai-build-1wfa8e | [CP6_REPORT](reports/CP6_REPORT.md) |
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
-| CP7b | Real applications (D3) and demo | IN_PROGRESS | claude/sleepy-tesla-smt1xr, then claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
+| CP7b | Real applications (D3) and demo | AWAITING_REVIEW | claude/sleepy-tesla-smt1xr, then claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
 | CP8 | Multi-agent experiment (stretch) and final report | NOT_RELEASED | - | - |
 
 ## Current checkpoint task list
@@ -37,12 +37,14 @@ CP7b (session branch `claude/sleepy-tesla-smt1xr`):
 - [x] 2. Triage run - `python -m vulntrace eval triage --set d3`: verdicts, paths with file:line, verifier outcome, CANT_DETERMINE reasons, seconds per case, toolchain; results to `docs/results/cp7b/` (< 512 KiB each)
 - [x] 3. Reference comparison (optional, labelled not truth): govulncheck source mode where it runs; per-case agreement; disagreements listed
 - [x] 4. Adjudication sheet - `docs/results/cp7b/adjudication/` (Markdown per application + one JSON with blank fields); all REACHABLE; stated sample (>=5 or all) of NOT_REACHABLE and CANT_DETERMINE; stop at `AWAITING_ADJUDICATION`
-- [ ] 5. Scoring and results document: code, tests and fixed headline DONE; rendering `docs/results/CP7B_REAL_APPS_RESULTS.md` waits for the filled sheet
+- [x] 5. Scoring and results document: `docs/results/CP7B_REAL_APPS_RESULTS.md` rendered by `d3 report` from the filled sheet (headline template unchanged)
 - [x] 6. Demo - `python -m vulntrace demo build`: self-contained offline HTML from verdict JSON; `docs/DEMO.md`
 - [x] 7. Tests: selection rules, sheet generation (no invented verdict text), scoring from a filled sheet, page generator escaping; CI green on the last commit
-- [x] Report `docs/progress/reports/CP7b_REPORT.md` (criterion 4 waits for adjudication)
+- [x] Report `docs/progress/reports/CP7b_REPORT.md` (completed by the scoring session)
 
 ## Handoff notes
+
+**Scoring session, 14 Nov 2026 (branch `claude/eloquent-newton-vr2093`):** checkpoint complete, state `AWAITING_REVIEW`. Headline (unchanged template): 7 REACHABLE, 0 of 7 judged CORRECT (all `INFEASIBLE_PATH`); 0 false NOT_REACHABLE of 4; 3 CANT_DETERMINE, all judged `WRONG`. The adjudication is two Claude reviewers + supervisor + partial owner spot-check, NOT expert human ground truth; only the path shown was judged. One disclosed change: the renderer's fixed limitation text wrongly said the owner and supervisor did the reading; corrected in `36b30b4` with a test. Reviewer next step: read report section 6a and 7 item 11; decide whether the 0/7 is carried into CP8's final report as a negative result.
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 

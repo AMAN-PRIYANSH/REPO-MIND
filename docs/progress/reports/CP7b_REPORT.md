@@ -1,11 +1,31 @@
 # CP7b report - Real applications (D3) and demo
 
-Session branch: `claude/sleepy-tesla-smt1xr`. State at the end of this session: **`AWAITING_ADJUDICATION`**.
-Deliverables 1-4, 6 and 7 are done; deliverable 5 (scoring and the results document) has its code, tests and fixed
-headline in place, but the results document is rendered only after the owner and the supervising assistant fill
-`docs/results/cp7b/adjudication/adjudication.json` (CP7b specification, deliverable 5: "in a second short session").
+Branches: the build session used `claude/sleepy-tesla-smt1xr` and stopped at `AWAITING_ADJUDICATION`; this report was
+completed by the scoring session on `claude/eloquent-newton-vr2093` (fast-forwarded onto the first, as CLAUDE.md
+section 5 requires). State at the end: **`AWAITING_REVIEW`**.
+
+**Addendum for the scoring session (sections marked "scoring session" are new; the rest is the first session's report,
+unchanged except where stated).** The adjudication sheet was filled before this session by two independent Claude
+reviewer agents, reconciled by the supervising assistant, with an owner spot-check of 11 path steps; it is **not**
+expert human ground truth (STATUS.md handoff note). In this session I ran `python -m vulntrace d3 report`, committed
+`docs/results/CP7B_REAL_APPS_RESULTS.md`, and fixed one wrong sentence in the renderer's fixed limitations (section 7,
+item 11).
+
+**Headline, as rendered by the unchanged template:** on 5 real Go applications (14 cases), VulnTrace answered 11 and
+abstained on 3; adjudication judged **0 of 7 REACHABLE paths correct** (precision 0.00, Wilson 0.00 to 0.35) and found 0
+false NOT_REACHABLE among 4. All 7 were judged `INFEASIBLE_PATH`; all 3 `CANT_DETERMINE` were judged `WRONG` (the code
+gives a clear NOT_REACHABLE). This is a negative result for the REACHABLE verdicts and is reported as such.
 
 ## 1. Environment
+
+**Scoring session (`claude/eloquent-newton-vr2093`), as printed:** `Linux vm 6.18.44-fc-v470 #1 SMP PREEMPT_DYNAMIC @0
+x86_64`; `Python 3.13.18` (project `.venv`, `pip install -e ".[dev,db,agent]"`); `go version go1.24.7 linux/amd64`;
+`git version 2.43.0`; `Docker version 29.9.2, build a82e528` (not used). `proxy.golang.org` answered 200; `git ls-remote
+https://github.com/golang/vulndb HEAD` worked. The scoring step reads only committed files; no Go toolchain, network or
+`data/` was needed for it, and no analysis was re-run in this session (the D3 triage and its toolchain, go1.26.10, are
+the first session's, recorded below).
+
+**Build session:**
 
 | Item | As printed |
 |---|---|
@@ -61,6 +81,11 @@ verdict records this.
 | `docs/results/cp7b/adjudication/*.md` (5), `adjudication.json` | The adjudication sheets (blank fields) |
 | `docs/DEMO.md` | Exact commands for the demo on one fixture and one D3 case |
 | `docs/design/INTERFACES_AND_CONTRACTS.md` | CLI table rows for CP7b aligned with the commands the CP7b specification names |
+| `docs/results/CP7B_REAL_APPS_RESULTS.md` | (scoring session) Results document rendered by `d3 report` from the filled sheet |
+| `docs/results/cp7b/adjudication/adjudication.json` | (supervisor, before this session) filled `adjudication`, `by`, `note`, `truth` fields |
+| `docs/results/cp7b/adjudication_reviews/{reviewA,reviewB,owner_spotcheck}.json` | (supervisor) the two reviewers' outputs and the owner's spot-check |
+| `src/vulntrace/d3/report.py` | (scoring session) fixed limitations text corrected; headline template untouched |
+| `tests/unit/test_d3_sheet_score.py` | (scoring session) test that the limitations do not claim human expert truth |
 | `docs/progress/STATUS.md` | State, branch, task list, handoff notes |
 | `docs/progress/reports/CP7b_REPORT.md` | This report |
 
@@ -71,8 +96,8 @@ verdict records this.
 | 1 | Application selection (`d3 select`) | **Done.** Rules written and committed (`0ab9f08`) before any candidate was probed; code committed (`e3fd034`) before its first run. 5 applications, 14 cases. Identical output in three runs; the committed one is from a clean tree (`c8bb2af`) |
 | 2 | Triage run (`eval triage --set d3`) | **Done.** 14 of 14 cases triaged from a clean tree (`0a2b5ad`), go1.26.10 recorded in every verdict; results in `docs/results/cp7b/`, every file under 512 KiB |
 | 3 | govulncheck reference (optional) | **Done**, labelled not truth: ran on all 5 applications; 9 agree, 2 disagree, 3 not comparable (our CANT_DETERMINE) |
-| 4 | Adjudication sheet | **Done (prepared).** 5 Markdown files plus `adjudication.json` with blank fields; all 14 cases are in the sample (7 REACHABLE, all 4 NOT_REACHABLE, all 3 CANT_DETERMINE, since each is at most 5). The builder stops at `AWAITING_ADJUDICATION` |
-| 5 | Scoring and results document | **Partly done, by design.** Scoring, validation, worked-example rule and renderer exist and are tested; the headline was fixed in code (`97eec05`) before any D3 triage result existed. The document itself is rendered after adjudication (`python -m vulntrace d3 report`, which refuses an unfilled sheet) |
+| 4 | Adjudication sheet | **Done (prepared, then filled by others).** 5 Markdown files plus `adjudication.json`; all 14 cases are in the sample (7 REACHABLE, all 4 NOT_REACHABLE, all 3 CANT_DETERMINE, since each is at most 5). The builder stopped at `AWAITING_ADJUDICATION`; the sheet was then filled (see addendum) |
+| 5 | Scoring and results document | **Done (scoring session).** Rendered by `python -m vulntrace d3 report` from the filled sheet into `docs/results/CP7B_REAL_APPS_RESULTS.md`; the headline template is the one fixed in `97eec05` before any D3 triage result existed (not edited) |
 | 6 | Demo (`demo build`, `docs/DEMO.md`) | **Done.** Static page; every command in `docs/DEMO.md` was run in this session (fixture: REACHABLE, verifier PASSED; D3 case `gitleaks__GO-2025-4020`; all 14 D3 verdicts on one page) |
 | 7 | Tests | **Done** locally (section 4). CI on the last commit: see section 10 |
 
@@ -88,6 +113,15 @@ verdict records this.
 | Demo in a real browser (Playwright, offline context): fixture page, one D3 case, all 14 D3 cases | `{"externalRequests":[],"consoleErrors":[],"mobileHorizontalOverflow":false}` for each |
 | `python -m vulntrace triage --advisory-file data/demo/fixture_advisory.json --app fixtures/reachability --mode targets --target vtfixtures/vulnlib:Parse --main ./cmd/direct_call --out data/demo/fixture_direct_call.json` | `REACHABLE PASSED go1.26.10` (14.5 s) |
 
+Scoring session (all commands run in this session):
+
+| Command | Printed summary |
+|---|---|
+| `.venv/bin/python -m vulntrace d3 report` | `wrote /home/user/REPO-MIND/docs/results/CP7B_REAL_APPS_RESULTS.md` |
+| `.venv/bin/python -m pytest -q tests/unit tests/contract` (after the renderer fix and the new test) | `849 passed, 10 skipped in 14.64s` |
+| `.venv/bin/python -m pytest -q tests/integration` (first attempt, helper modules not in the cache) | `62 passed, 74 skipped in 35.78s`: the Go-helper tests skipped with "vt-helper could not be built (GOPROXY=off ...)"; not a pass of those tests |
+| `.venv/bin/python -m vulntrace helper fetch`, then `.venv/bin/python -m pytest -q tests/integration` (system go1.24.7) | `helper modules downloaded`; `134 passed, 2 skipped in 195.01s (0:03:15)` (both skips: opt-in network test) |
+
 Not run: `go test ./...` in `helper/` (the helper was not changed in CP7b; CI runs it).
 
 One local failure on the way, disclosed: the first full unit run failed `test_cp6_notebook.py` with
@@ -100,8 +134,8 @@ extras `.[dev,db,agent]` it passed. Not a code problem.
 |---|---|---|---|
 | 1 | Five applications chosen by written rules applied by code before results; rejected candidates listed with reasons | **Met** | Rules `0ab9f08` before code `e3fd034` before the run; `d3_selection.json` lists all 37 candidates with rule and detail (12 `TOO_LARGE`, 1 `TOO_MANY_MAINS`, 2 `NO_ELIGIBLE_ADVISORY`, 1 `NO_TAG_BEFORE_CUTOFF`, 5 `KEPT`, 16 `NOT_EVALUATED_QUOTA_FILLED`); diversity note printed |
 | 2 | Triage run on all D3 cases; failures counted with reasons; toolchain recorded | **Met** | `d3_triage.json`: 14/14 triaged, `not_triaged: []`; CANT_DETERMINE reasons counted; helper and linker go1.26.10 in every verdict and in the summary |
-| 3 | Adjudication sheet complete and prepared; builder stops at `AWAITING_ADJUDICATION` | **Met** | `docs/results/cp7b/adjudication/`; STATUS set to `AWAITING_ADJUDICATION` |
-| 4 | After adjudication: scoring, results document, worked examples, limitations | **Not met yet (by design)** | Needs the filled sheet; code and tests are ready (`d3 report`) |
+| 3 | Adjudication sheet complete and prepared; builder stops at `AWAITING_ADJUDICATION` | **Met** | `docs/results/cp7b/adjudication/`; the first session set STATUS to `AWAITING_ADJUDICATION` |
+| 4 | After adjudication: scoring, results document, worked examples, limitations | **Met**, with the caveat that the adjudication is not expert human ground truth | `docs/results/CP7B_REAL_APPS_RESULTS.md` (three worked examples, limitations); section 6a |
 | 5 | No analysed code executed; `GOTOOLCHAIN=local`, `CGO_ENABLED=0`; no checkouts or caches committed | **Met** | Trees come from `git archive` (no hooks); dependencies from `go mod download` with `-mod=readonly`; main packages compiled only to a temp file that is deleted (selection A10) and by the linker method (`go tool nm` only); govulncheck in source mode, `GOPROXY=off`. Every verdict's `toolchain.env` shows `GOTOOLCHAIN=local`, `CGO_ENABLED=0`, `GOPROXY=off`. `git ls-files` lists 498 files; none under `data/`, no `.gz`, binaries, module caches or venv |
 | 6 | Demo page builds from verdict files, escapes untrusted text, works offline | **Met** | `tests/unit/test_demo_page.py` (hostile advisory, symbol and path text; no script, link, img or src; CSP `default-src 'none'`); Playwright check above |
 | 7 | All tests pass locally and in CI (last commit); report | **Met locally; CI see section 10** | Section 4; this report |
@@ -166,6 +200,47 @@ Observations for the reviewers (facts, not judgements):
 - `Xray-core__GO-2026-6061.json` is 510,242 bytes, under the 524,288-byte limit but close to it (111 per-symbol
   entries over 3 main packages).
 
+## 6a. Scoring session results (copied from `docs/results/CP7B_REAL_APPS_RESULTS.md`, produced by `d3 report`)
+
+| Quantity | Value |
+|---|---|
+| REACHABLE adjudicated | 7 of 7: `INFEASIBLE_PATH` 7, `CORRECT` 0, `WRONG` 0 |
+| REACHABLE precision (CORRECT among CORRECT, INFEASIBLE_PATH, WRONG) | 0/7 = 0.00 [0.00, 0.35] |
+| Path exists in the code (CORRECT or INFEASIBLE_PATH) | 7/7 = 1.00 [0.65, 1.00] (every step is a real call edge in the call graph, but a branch or dynamic dispatch on the path stops it running) |
+| NOT_REACHABLE adjudicated | 4 of 4 `CORRECT`; 0 false NOT_REACHABLE |
+| CANT_DETERMINE | 3/14 = 0.21 [0.08, 0.48] of triaged cases; all 3 adjudicated `WRONG` (reading the code gives NOT_REACHABLE) |
+| govulncheck (not truth), where both answered | 9/11 agree; the 2 disagreements are the same two REACHABLE cases that were judged `INFEASIBLE_PATH` |
+| REACHABLE whose every target is context-only | 1 of 7 (`gitleaks__GO-2025-4020`) |
+
+How to read this, without softening it:
+
+- **The REACHABLE verdicts did not survive adjudication.** Not one of 7 shown paths was judged runnable. Causes named
+  in the notes: a dynamic call that never takes the target (cli 5506, Xray 4512, Xray 6061), a branch that is never taken
+  with the application's configuration (cli 5052: `doPBMAC1` only for a PBMAC1 MAC OID; cli 5004: the Postgres
+  driver is never chosen; Xray 5676: `ListenUnix` passes port 0 so the HTTP/3 branch is skipped; gitleaks 4020: `Rar.FS`
+  is never set). Plain call-graph reachability over-approximates, and here the over-approximation produced
+  zero confirmed paths among 7.
+- **The abstentions were not justified either.** For all 3 `CANT_DETERMINE` cases the reviewers say reading the code
+  gives a clear NOT_REACHABLE (a tool error, a linker-presence signal that reflects method retention, and a verifier
+  rejection). The system's three NOT_REACHABLE answers that were adjudicated were all right, but they are the easy case
+  (the advisory's package is not imported or the function has no caller).
+- **Precision is for the path shown, not for the target.** The adjudication judges the path the system displays (changed
+  targets first). The reviewers' notes record that for several REACHABLE cases the target is plausibly reachable by a
+  different path that was not shown (cli 5506 path 3, Xray 4512, Xray 5676 via TCP with h3, Xray 6061). I did not
+  re-adjudicate that; the 0/7 is the number the sheet gives, and "the targets are all unreachable" does not follow
+  from it. The renderer's fixed limitations now say so (item 11 below).
+- 14 cases from 5 applications, three of them sharing one advisory; the Wilson intervals assume independence and are
+  therefore too narrow.
+
+**Who adjudicated, exactly.** Two independent Claude reviewer agents read the source at the pinned versions and agreed
+on all 14 adjudications and truths (I compared `reviewA.json`, `reviewB.json` and `adjudication.json` in this session:
+identical on every case). Perfect agreement between two reviewers of the same model family is weak evidence of
+correctness, because their blind spots are correlated. The supervisor re-read two key claims (gitleaks `rar.go`
+`FS != nil`; go-pkcs12 encoders never use PBMAC1) and reconciled. The owner spot-checked 11 path steps of 5 REACHABLE
+cases, chosen by a fixed rule before the reviews were seen; the spot-check file records that on one step the owner's
+answer was "not written (answered 'yes')" and the supervisor read the line instead. I did not read the analysed source
+myself in this session and cannot vouch for any individual adjudication.
+
 ## 7. Design deviations
 
 1. **Toolchain go1.26.10, not CI's 1.24.** As CP7's review asked, D3 used a newer Go fetched into a scratch
@@ -198,12 +273,19 @@ Observations for the reviewers (facts, not judgements):
    were re-written from the stored raw verdicts (`34ae419`), and `d3_triage.json` now records
    `verdict_provenance` (`repo_commits: ["0a2b5ad"]`, 0 cases run in the re-writing invocation, 14 resumed) next to
    the re-writing invocation's own environment (`f9d85de`, clean).
+11. **Renderer limitation text corrected (scoring session).** The fixed limitations in `src/vulntrace/d3/report.py`
+    said the truth "was done by the owner and the supervising assistant". That is not what happened (two Claude reviewer
+    agents did the reading; see section 6a). I replaced it with a statement of the real method and added one sentence
+    that `INFEASIBLE_PATH` judges the shown path, not the target; a unit test guards both. Commit `36b30b4`. The headline template, the scoring and the verdicts were not touched, no case was
+    recomputed, and no analysis code changed.
 10. **Command names** follow the CP7b specification (`eval triage --set d3`, `demo build`); the interfaces document's
     CLI table said `eval reachability --set d3` and a `demo` that starts a page, and was aligned.
 
 ## 8. Blockers and limitations
 
-- **Adjudication is not done** (the owner's and supervisor's step); criterion 4 waits for it.
+- **The adjudication is LLM-based (two reviewer agents), reconciled by the supervisor, with a partial owner spot-check;
+  it is not expert human ground truth.** I did not independently verify any adjudication by reading source.
+- Only the path shown was judged; whether the REACHABLE targets are reachable by some other path was not determined.
 - Five applications and 14 cases are case studies; cases of one application are dependent.
 - Mode 1 targets come from the fix commit's parent; when the application's dependency version differs, targets can
   be missing (dive GO-2025-3900: 3 of 29 targets missing, so CANT_DETERMINE) or differ from the code the application
@@ -216,8 +298,11 @@ Observations for the reviewers (facts, not judgements):
 
 ## 9. Suggestions for the next checkpoint (not implemented)
 
-- Second short session: fill the sheet, `python -m vulntrace d3 report`, commit the document; check that the
-  headline renders unchanged.
+- Treat the 0/7 as the main finding for the final report. The failure pattern (dynamic dispatch, config-dependent
+  branches such as port 0, the MAC OID, the default DB type) suggests a verifier or path-feasibility step, but that is
+  a verdict-rule change and out of CP7b's scope; it needs its own checkpoint, measured on cases other than these 14.
+- The `CANT_DETERMINE` cases where the code gives a clear NOT_REACHABLE (tool error on a missing target, linker
+  PRESENT from method retention) are a separate, cheaper thing to examine.
 - Decide whether context-only candidates should stay deciding in Mode 1 (one D3 REACHABLE rests only on one); this
   needs a measured reason, not D3 tuning.
 - If D3 is extended, raise A6 (150 `require` entries excluded 12 of 21 evaluated candidates, caddy at 151) as a new,
@@ -248,3 +333,17 @@ Every push succeeded. CI (GitHub Actions) was green on every completed run of th
 the runs for `34ae419` and `b7e79a0` were still in progress when this report was written, and the result for the
 final commit is recorded in STATUS.md's handoff notes after it was checked. No pull request was opened (the session
 wrapper says the supervising assistant handles merging).
+
+**Scoring session** (branch `claude/eloquent-newton-vr2093`, fast-forwarded onto `claude/sleepy-tesla-smt1xr` at `9461ef5`;
+`git log --oneline 9461ef5..HEAD` before the commit that contains this report):
+
+```
+01dba52 CP7b: results document CP7B_REAL_APPS_RESULTS.md rendered by code from the filled sheet
+36b30b4 CP7b: results limitations state how the adjudication was really done (two Claude reviewers, supervisor, owner spot-check; not human ground truth) and that INFEASIBLE_PATH judges the shown path; headline template unchanged; test
+18fab0f CP7b: scoring session starts; STATUS records branch claude/eloquent-newton-vr2093 (fast-forwarded from claude/sleepy-tesla-smt1xr)
+```
+
+Pushes: every push of this session succeeded (the first, which recorded the branch, created `origin/claude/eloquent-newton-vr2093`;
+the second pushed `01dba52`). The report commit and the STATUS change follow in the next commit. CI: see the STATUS
+handoff note, which records the result for the last code commit after it was checked; I did not open a pull request, as
+instructed.
