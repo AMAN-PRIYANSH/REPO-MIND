@@ -1,136 +1,148 @@
 # VulnTrace AI
 
-VulnTrace AI is a Go vulnerability reachability triage system.
+VulnTrace AI is a triage tool for Go dependency advisories. Given an advisory and a Go application's source, it asks whether a call path exists from the application's `main` package to a function the advisory's fix changed, and it shows the path so a person can check it.
 
-Given a vulnerability advisory and a Go application's source code, it answers:
+It returns one of three verdicts:
 
-> Can this application's code actually reach the vulnerable function?
+- `REACHABLE`: a call-graph path exists from a `main` package to a target function. It needs a human look; it is not confirmed.
+- `NOT_REACHABLE`: two independent analysis methods agree that no path exists.
+- `CANT_DETERMINE`: evidence is missing, the analysis failed, the methods disagree, or the verifier rejected the evidence.
 
-It returns one of three verdicts, with evidence:
+**Reachability, never exploitability.** No output says an application can be attacked.
 
-- `REACHABLE` - a verified call path exists from the application's entry point to a vulnerable function.
-- `NOT_REACHABLE` - two independent analysis methods agree that no path exists.
-- `CANT_DETERMINE` - evidence is missing, analysis failed, or the methods disagree.
+The repository is named `REPO-MIND` for historical reasons (the project began as a codebase-chat idea). Everything runs on free, open models or on none at all; the cost of building and running it was zero.
 
-It reports reachability, not exploitability.
+## How it works
 
-## Two modes
-
-**Mode 1 - fix commit available.** The fix diff is small, so a local LLM reads the whole diff and picks the root-cause function from a closed list. No retrieval needed.
-
-**Mode 2 - investigation mode.** No fix commit. The system searches the functions that changed between the vulnerable and the fixed release, which can be hundreds or thousands. This mode uses advanced RAG (hybrid BM25 + dense search, Reciprocal Rank Fusion, cross-encoder reranking, HyDE query rewriting), a PostgreSQL + pgvector store with versioned indexing, and a LangGraph investigation agent. Every one of these is measured against simpler baselines.
-
-Both modes end in deterministic reachability analysis (a VTA call graph and a linker check) and an evidence verifier that can only downgrade a verdict.
-
-Everything runs on free, open models (local or Google Colab). Total cost: zero.
-
-## Project status
-
-Design complete. Implementation runs in 8 checkpoints; see [progress status](docs/progress/STATUS.md) and the [roadmap](docs/implementation/IMPLEMENTATION_ROADMAP.md).
-
-The repository is named `REPO-MIND` for historical reasons (the project started as a codebase-chat idea called RepoMind).
-
-## How the build works
-
-- Claude Code builds one checkpoint at a time, following [CLAUDE.md](CLAUDE.md).
-- Start every Claude Code session by pasting [the session wrapper](prompts/SESSION_WRAPPER.md).
-- Progress and handoff notes live in [docs/progress/STATUS.md](docs/progress/STATUS.md).
-- Each checkpoint ends with a report in `docs/progress/reports/` and waits for review.
-
-## Documents
-
-Start here:
-
-1. [Project definition](docs/PROJECT_DEFINITION.md) - problem, two modes, scope, zero-cost constraint, success criteria.
-2. [Feasibility findings](docs/research/FEASIBILITY_FINDINGS.md) - what was measured before design, and what was not.
-3. [System architecture](docs/architecture/SYSTEM_ARCHITECTURE.md) - components, models, verdict rule.
-
-Design detail:
-
-- [Data flow](docs/architecture/DATA_FLOW.md)
-- [Data model](docs/design/DATA_MODEL.md)
-- [Interfaces and contracts](docs/design/INTERFACES_AND_CONTRACTS.md)
-- [Planned project structure](docs/design/PROJECT_STRUCTURE.md)
-
-Evaluation and testing:
-
-- [Evaluation plan, metrics and baselines](docs/evaluation/EVALUATION_PLAN.md)
-- [Dataset strategy](docs/evaluation/DATASET_STRATEGY.md)
-- [Testing strategy](docs/testing/TESTING_STRATEGY.md)
-
-Delivery:
-
-- [Implementation roadmap](docs/implementation/IMPLEMENTATION_ROADMAP.md)
-- [Checkpoint 1 specification](docs/implementation/checkpoints/CP1.md)
-
-Decisions:
-
-- [Architecture decisions](docs/decisions/ARCHITECTURE_DECISIONS.md)
-- [Risks and open questions](docs/decisions/RISKS_AND_OPEN_QUESTIONS.md)
-
-## How facts are labelled
-
-- **Verified** - observed in a recorded experiment or stated in a cited primary source.
-- **Assumption** - believed true but not yet checked.
-- **Proposal** - a design choice to be validated during implementation.
-
-## Development (CP1-CP6)
-
+```mermaid
+flowchart LR
+    A["Advisory and app source"] --> B{"Fix commit known?"}
+    B -- "yes: Mode 1" --> C["Targets: every function the fix changed"]
+    B -- "no: Mode 2" --> D["Targets: retriever top-k of the functions changed in the release range"]
+    C --> E["Per main package: VTA call graph and linker presence"]
+    D --> E
+    E --> F["Verdict rule table"]
+    F --> G["Evidence verifier: can only downgrade"]
+    G --> H["Verdict, call path with file and line, reason codes"]
 ```
-python -m venv .venv && .venv/bin/pip install -e ".[dev]"
-python -m pytest tests/unit tests/contract   # needs only Python
-python -m pytest tests/integration           # needs Go and git; skips with a message if missing
-(cd helper && GOTOOLCHAIN=local GOPROXY=off go test ./...)
-python -m vulntrace doctor
-python -m vulntrace helper fetch             # once: downloads the helper's Go dependencies (network)
-python -m vulntrace helper build             # offline build into ~/.cache/vulntrace (never into the repo)
-python -m vulntrace fixtures score --method linker [--out results/cp1] [--compare-inlining]
-python -m vulntrace fixtures score --method naive|vta|combined [--out results/cp2] [--timeout 300]
-python -m vulntrace results render --doc cp1|cp2|cp3|cp4|cp5|cp5b|cp6 --input <report or dir> --out docs/results/<file>.md
 
-# CP3: datasets (network) and baselines
-python -m vulntrace dataset fetch                     # pin golang/vulndb's data/reports/ snapshot
-python -m vulntrace dataset build --mode fix           # D1: FixEvidence for 150 sampled advisories
-python -m vulntrace dataset build --mode release       # D4: ReleaseRange for 120 sampled advisories
-python -m vulntrace eval symbols --strategy e0          # baseline: every changed function
-python -m vulntrace eval symbols --strategy id-search   # baseline: commit-message identifier search
+- Two reachability methods run on every target: a VTA call graph (a path from `main`) and a linker check (does the symbol survive in a binary built with inlining off). They must agree for `NOT_REACHABLE`; disagreement gives `CANT_DETERMINE`.
+- The verifier re-checks every symbol, file, line and call edge of the evidence and can only weaken a verdict.
+- A false `NOT_REACHABLE` is the worst error, so every design choice leans towards abstaining.
+- Mode 2 `NOT_REACHABLE` is downgraded to `CANT_DETERMINE` by a rule fixed before the results (too few such verdicts to trust).
 
-# CP4: re-materialise evidence for the committed case lists (network; resumable; never re-selects)
-python -m vulntrace dataset materialize --set d4       # data/release_range + data/candidate_code
-python -m vulntrace dataset materialize --set d1       # data/fix_evidence (for E0 re-scoring)
-# CP4: retrieval (fakes and BM25 need no model; real models via .[ml], normally in Colab)
-pip install -e ".[dev,db]"                             # db: psycopg + pgvector for the pgvector store
-docker compose up -d pgvector                          # optional: PostgreSQL 16 + pgvector on localhost
-VULNTRACE_REQUIRE_PG=1 python -m pytest tests/contract/test_vector_store.py   # both backends, no skips
-python -m vulntrace eval retrieval --config random --config size --config bid --config bid-only --config bm25
-python -m vulntrace index build --set d4 --embedder bge-small --device cuda     # needs .[ml]
-python -m vulntrace eval retrieval --config dense:bge-small --config hybrid:bge-small \
-    --config hybrid+rerank:bge-small+minilm --device cuda                       # needs .[ml]
-# Real-model runs: notebooks/cp4_retrieval_colab.ipynb (free Colab GPU), which zips results/cp4 JSON.
+### Where RAG and LLMs were tried, and what is in the product
 
-# CP5: local LLM layer (Ollama on localhost only; paid API hosts are refused). Tests and --dry-run use fakes.
-python -m vulntrace eval select --mode fix --model qwen2.5-coder-7b                # E1 on D1, E0 in the same file
-python -m vulntrace eval select --mode release --model qwen2.5-coder-7b --k 10     # S1 on D4, retriever top-1 in the same file
-python -m vulntrace eval retrieval --hyde query+hyde --hyde hyde-only --model qwen2.5-coder-7b   # HyDE on D4
-python -m vulntrace eval select --mode release --dry-run                           # pipeline check with fake LLM + fake embedder
-# Real runs: notebooks/cp5_llm_colab.ipynb (free Colab GPU + Ollama), which zips results/cp5 JSON.
+| Component | Tried | In the pipeline? |
+|---|---|---|
+| Hybrid retrieval (BM25, dense embeddings, Reciprocal Rank Fusion), pgvector store | Yes, measured against baselines | Mode 2 ranks candidates with it; the measured end-to-end run used the BM25 fallback because no embedder was available |
+| Cross-encoder reranking | Yes | No: it did not help |
+| LLM picks the root-cause function (E1, S1) | Yes, two local models | No: E1 lost recall |
+| HyDE query rewriting | Yes | No: weak at best |
+| LangGraph investigation agent | Yes | No: it did not beat retrieval and cost about five times the tokens |
 
-# CP5b: lifting and call-graph queries (Go helper modes lift, callers, callees; no model). `eval lift` uses the network
-# (module proxy, GitHub via the materialised git cache) and writes per-case evidence under data/lift (gitignored).
-# Modules that need a newer Go than the local one fail with the first error line; use a newer local `go` on PATH (GOTOOLCHAIN stays local).
-python -m vulntrace eval lift --set d1 --jobs 2 --out docs/results/cp5b            # lifting vs derived_symbols + E1+L on the committed CP5 selections
-python -m vulntrace eval lift --set d4-ceiling --jobs 2 --out docs/results/cp5b    # needs `dataset materialize --set d4` first
-python -m vulntrace results render --doc cp5b --input docs/results/cp5b --out docs/results/CP5B_LIFTING_RESULTS.md
+## Key results
 
-# CP6: LangGraph investigation agent (Mode 2, D4). pip install -e ".[dev,agent]" (langgraph). Tests and --dry-run use fakes.
-python -m vulntrace agent prepare --set d4 --diffs                # Go diffs of every release-range commit (read-only git)
-python -m vulntrace agent prepare --set d4 --graph --jobs 2       # one-hop callers/callees of every candidate (Go + module proxy)
-python -m vulntrace eval symbols --strategy agent --set d4 --arm A2 --arm A3 --model llama3.1-8b --device cuda   # needs .[ml]
-python -m vulntrace eval symbols --strategy agent --set d4 --dry-run           # fake LLM + fake embedder on real evidence
-python -m vulntrace agent show-trace --trace data/agent_traces/A2__llama3.1-8b/<case>.json.gz --data-dir data
-python -m vulntrace results render --doc cp6 --input docs/results/cp6 --out docs/results/CP6_AGENT_RESULTS.md
-# Real runs: notebooks/cp6_agent_colab.ipynb (free Colab GPU + Ollama), which zips the agent result JSON and the traces.
+The table below is generated from [docs/results/summary.json](docs/results/summary.json) by `python -m vulntrace results summary`; a test fails if it is stale. Intervals are 95%.
 
-# Opt-in, not run in CI: fetches one real advisory's evidence from the real network
-VULNTRACE_NETWORK_TESTS=1 python -m pytest tests/integration/test_network_smoke.py
+<!-- BEGIN KEY RESULTS (generated by `python -m vulntrace results summary`; do not edit) -->
+| Result | Value | Reading |
+|---|---|---|
+| Mode 2 retrieval beats the commit-message baseline (MRR, hybrid; baseline B-ID) | 0.599 [0.519, 0.683] | baseline 0.397 [0.317, 0.478] |
+| ...but hybrid is not clearly better than BM25 (paired MRR difference) | 0.028 [-0.011, 0.065] | no detectable difference |
+| An LLM narrowing a fix diff loses recall against keeping every changed function (llama, paired) | -0.271 [-0.337, -0.207] | worse |
+| HyDE query rewriting: paired MRR difference (qwen, the one borderline interval) | 0.055 [0.003, 0.110] | better; lower bound barely above zero; one of many uncorrected comparisons |
+| The agent against plain retrieval, any-hit@1 (qwen, A2 minus A0) | -0.208 [-0.304, -0.112] | worse |
+| Agent cost: prompt tokens per case against the one-shot LLM (llama, A2) | 5.2x |  |
+| Fixtures (truth known): false NOT_REACHABLE, Mode 1 | 0 of 22 | truth by construction |
+| Fixtures: accuracy, Mode 1 (CANT_DETERMINE counts as not correct) | 18/22 = 0.818 [0.615, 0.927] | truth by construction |
+| Real modules analysed as their own app, Mode 2 run: ended in CANT_DETERMINE (D4) | 88 of 120 | a distribution, not accuracy |
+| Real applications: NOT_REACHABLE verdicts judged wrong | 0 of 4 | adjudicated by reviewers, not expert ground truth |
+| Real applications: REACHABLE paths judged able to run | 0/7 = 0.000 [0.000, 0.354] | judges the shown path, not the target |
+| Real applications: govulncheck agreement where both answered | 9/11 = 0.818 [0.523, 0.949] | reference, not truth |
+
+Full table with sources: [docs/results/SUMMARY.md](docs/results/SUMMARY.md).
+<!-- END KEY RESULTS -->
+
+Read these with their limits: the fixtures have known truth by construction; the real-application adjudication was done by two Claude reviewer agents reconciled by the supervising assistant, with an owner spot-check of path steps, and is not expert human ground truth; n is small. Details, datasets and threats to validity are in the [final report](docs/FINAL_REPORT.md).
+
+## What did not work
+
+- **An LLM choosing the root-cause function loses recall.** Against "keep every changed function", both local models lowered recall, and a wrongly narrowed pick is exactly the error that could produce a false `NOT_REACHABLE`. The pipeline keeps every changed function in Mode 1.
+- **Neural retrieval and reranking do not clearly beat BM25 here.** Commit subjects in the chunk text were the main gain. The retriever ranks candidates; it cannot recover a function that is not a candidate.
+- **HyDE is weak.** At most one of many comparisons excludes zero, with no correction for multiple comparisons. It is not used.
+- **The investigation agent does not beat plain retrieval and costs about five times the prompt tokens.** The product uses retrieval; the agent stays as a measured negative result.
+- **`REACHABLE` paths on real applications are over-approximate.** None of the shown paths could run as a whole, although every step exists in the code. `REACHABLE` therefore means "a call-graph path exists; needs a human look". The official govulncheck was not worse than this pipeline on these cases.
+- **The pipeline abstains a lot on real modules**, mostly because modules need a newer Go than the 1.24 toolchain used for the runs, or are libraries with no `main` package.
+
+## Quickstart (offline, on a fixture)
+
+Needs Python 3.11+ and Go 1.24 on `PATH`. The one network step is downloading the Go helper's dependencies; after that nothing needs the network (set `GOPROXY=off` to prove it). No model, GPU or API key is involved.
+
+```bash
+python -m venv .venv
 ```
+
+```bash
+.venv/bin/pip install -e ".[dev]"
+```
+
+```bash
+.venv/bin/python -m vulntrace helper fetch
+```
+
+```bash
+mkdir -p data/demo && printf '%s' '{"id": "FIXTURE-PARSE", "summary": "vulnlib.Parse mishandles input (synthetic fixture)", "module": "vtfixtures", "fix_commits": []}' > data/demo/fixture_advisory.json
+```
+
+```bash
+.venv/bin/python -m vulntrace triage --advisory-file data/demo/fixture_advisory.json --app fixtures/reachability --mode targets --target vtfixtures/vulnlib:Parse --main ./cmd/direct_call --out data/demo/fixture_direct_call.json
+```
+
+```bash
+.venv/bin/python -m vulntrace demo build --verdict data/demo/fixture_direct_call.json --out data/demo/fixture.html
+```
+
+Open `data/demo/fixture.html` in a browser: verdict, target, call path with file and line, the verifier's checks. To see a real application, build the page from a committed verdict with no network: see [docs/DEMO.md](docs/DEMO.md).
+
+Run the tests (Python only; Go tests and integration tests need Go):
+
+```bash
+.venv/bin/python -m pytest tests/unit tests/contract
+```
+
+Regenerate the results summary and the table above from the committed result files:
+
+```bash
+.venv/bin/python -m vulntrace results summary
+```
+
+## Zero cost
+
+No paid API is used anywhere. Language models run locally through an OpenAI-compatible endpoint (Ollama) or on a free Colab GPU; embedding and reranker models are free open models. Tests never download or call a model; they use deterministic fakes.
+
+## Repository map
+
+| Path | What is in it |
+|---|---|
+| `src/vulntrace/` | The Python package: pipeline, verdict rule, verifier, retrieval, LLM layer, agent, evaluation and report code |
+| `helper/` | The Go helper (call graph, linker queries, lifting, caller/callee queries) with its Go tests |
+| `fixtures/` | Synthetic Go modules with known reachability truth |
+| `tests/` | Unit, contract and integration tests |
+| `docs/results/` | Committed result files, the generated results documents, `SUMMARY.md` and `summary.json` |
+| `docs/FINAL_REPORT.md` | The final report |
+| `docs/INTERVIEW_NOTES.md` | A pitch and likely questions with evidence links |
+| `docs/DEMO.md` | Offline demo commands |
+| `docs/architecture/`, `docs/design/`, `docs/decisions/` | Design documents and decisions (design history, see the notes in them for what was superseded) |
+| `docs/evaluation/`, `docs/testing/` | Evaluation plan, dataset strategy, testing strategy |
+| `docs/progress/` | Checkpoint ledger, per-checkpoint reports, supervisor handoff |
+| `notebooks/` | Colab notebooks for the model runs |
+| `CLAUDE.md`, `prompts/` | The rules and the session wrapper the build followed |
+
+## Build process
+
+The project was built one checkpoint at a time by Claude Code under the rules in [CLAUDE.md](CLAUDE.md), with a separate supervising assistant reviewing each checkpoint before the next was released. The ledger is [docs/progress/STATUS.md](docs/progress/STATUS.md); each checkpoint has a report in `docs/progress/reports/` and the reviewers' verdicts are at the end of each file in `docs/implementation/checkpoints/`.
+
+## Licence
+
+No licence file is committed, so no licence is granted for reuse of this repository's code yet; choosing one is an open decision for the owner. Advisory data comes from the Go vulnerability database (`golang/vulndb`), whose data is CC-BY-4.0 and whose code is BSD-style; the repository commits only advisory IDs, dates, counts and statuses, never advisory text (see `vulndb.json`).

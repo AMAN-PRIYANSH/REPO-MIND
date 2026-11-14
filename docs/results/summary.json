@@ -1,0 +1,2334 @@
+{
+ "schema_version": "1.0",
+ "generated_by": "python -m vulntrace results summary",
+ "go_versions": [
+  "1.24.7",
+  "1.26.10"
+ ],
+ "parameters": {
+  "interval_percent": 95,
+  "s1_top_k_values": [
+   10,
+   5
+  ],
+  "mode2_policy_min_raw_not_reachable": 20,
+  "stability_cases_per_set": 10
+ },
+ "sections": [
+  {
+   "id": "datasets",
+   "title": "Datasets",
+   "question": "How big are the datasets the experiments ran on?",
+   "interval": "none",
+   "caveats": [
+    "D4 contains nine advisories that share one identical release range, so its cases are not independent; intervals on D4 use cluster resampling.",
+    "D3 has few cases from few applications; its intervals are wide and the cases of one application are not independent."
+   ],
+   "rows": [
+    {
+     "id": "d1.cases",
+     "label": "D1 (Mode 1): sampled advisories with a fix commit",
+     "kind": "count",
+     "k": 150,
+     "n": 506,
+     "source": [
+      "docs/results/datasets/D1_cases.json"
+     ]
+    },
+    {
+     "id": "d1.available",
+     "label": "D1 cases whose fix evidence was AVAILABLE",
+     "kind": "count",
+     "k": 146,
+     "n": 150,
+     "source": [
+      "docs/results/datasets/D1_cases.json"
+     ]
+    },
+    {
+     "id": "d4.cases",
+     "label": "D4 (Mode 2): sampled advisories with a release range",
+     "kind": "count",
+     "k": 120,
+     "n": 500,
+     "source": [
+      "docs/results/datasets/D4_cases.json"
+     ]
+    },
+    {
+     "id": "d4.clusters",
+     "label": "D4 distinct release ranges (clusters)",
+     "kind": "count",
+     "k": 94,
+     "n": 120,
+     "source": [
+      "docs/results/datasets/D4_cases.json"
+     ]
+    },
+    {
+     "id": "d4.rclone",
+     "label": "D4 cases that share one identical range (the rclone cluster)",
+     "kind": "count",
+     "k": 9,
+     "n": 120,
+     "source": [
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "d4.small",
+     "label": "D4 cases with at most 10 candidate functions",
+     "kind": "count",
+     "k": 34,
+     "n": 120,
+     "source": [
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "d4.medium",
+     "label": "D4 cases with 11 to 100 candidate functions",
+     "kind": "count",
+     "k": 48,
+     "n": 120,
+     "source": [
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "d4.large",
+     "label": "D4 cases with more than 100 candidate functions",
+     "kind": "count",
+     "k": 38,
+     "n": 120,
+     "source": [
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "d4.no_gold",
+     "label": "D4 cases with no labelled vulnerable function among the candidates (a ceiling for Mode 2)",
+     "kind": "count",
+     "k": 19,
+     "n": 120,
+     "source": [
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "d2.fixtures",
+     "label": "D2: synthetic fixture cases (truth by construction)",
+     "kind": "count",
+     "k": 22,
+     "n": 22,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "d3.cases",
+     "label": "D3: real-application cases (application x advisory)",
+     "kind": "count",
+     "k": 14,
+     "n": 14,
+     "source": [
+      "docs/results/cp7b/d3_triage.json"
+     ]
+    },
+    {
+     "id": "d3.apps",
+     "label": "D3: real applications",
+     "kind": "count",
+     "k": 5,
+     "n": 5,
+     "source": [
+      "docs/results/cp7b/d3_triage.json"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cp4",
+   "title": "CP4: Mode 2 retrieval on D4",
+   "question": "Do hybrid search and reranking find the vulnerable function among a release range's changed functions better than simple baselines?",
+   "interval": "cluster-bootstrap (D4 ranges)",
+   "caveats": [
+    "BM25, dense and hybrid retrieval are statistically indistinguishable on this data; the paired intervals include zero.",
+    "Rerankers do not help; the code-search embedder is worse than bge-small.",
+    "Retrieval only ranks the candidates a range contains; it cannot recover a labelled function that is not a candidate.",
+    "The advisory-ID control is weak: no query contains an advisory ID."
+   ],
+   "rows": [
+    {
+     "id": "cp4.mrr.random",
+     "label": "MRR, all scored cases: random",
+     "kind": "mean",
+     "value": 0.281159,
+     "ci_low": 0.208752,
+     "ci_high": 0.366027,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/random__any.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.r10.random",
+     "label": "Recall@10, all scored cases: random",
+     "kind": "mean",
+     "value": 0.475,
+     "ci_low": 0.376042,
+     "ci_high": 0.579367,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/random__any.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr.size",
+     "label": "MRR, all scored cases: size",
+     "kind": "mean",
+     "value": 0.309776,
+     "ci_low": 0.235703,
+     "ci_high": 0.392059,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/size__any.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.r10.size",
+     "label": "Recall@10, all scored cases: size",
+     "kind": "mean",
+     "value": 0.55,
+     "ci_low": 0.456891,
+     "ci_high": 0.652542,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/size__any.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr.bid",
+     "label": "MRR, all scored cases: B-ID (commit-message identifier search)",
+     "kind": "mean",
+     "value": 0.397159,
+     "ci_low": 0.317275,
+     "ci_high": 0.478134,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/bid__any.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.r10.bid",
+     "label": "Recall@10, all scored cases: B-ID (commit-message identifier search)",
+     "kind": "mean",
+     "value": 0.641667,
+     "ci_low": 0.539216,
+     "ci_high": 0.733333,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/bid__any.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr.bm25",
+     "label": "MRR, all scored cases: BM25",
+     "kind": "mean",
+     "value": 0.570627,
+     "ci_low": 0.494746,
+     "ci_high": 0.651367,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/bm25__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.r10.bm25",
+     "label": "Recall@10, all scored cases: BM25",
+     "kind": "mean",
+     "value": 0.775,
+     "ci_low": 0.689655,
+     "ci_high": 0.855932,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/bm25__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr.dense",
+     "label": "MRR, all scored cases: dense bge-small",
+     "kind": "mean",
+     "value": 0.602181,
+     "ci_low": 0.521962,
+     "ci_high": 0.684022,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/dense_bge-small__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.r10.dense",
+     "label": "Recall@10, all scored cases: dense bge-small",
+     "kind": "mean",
+     "value": 0.775,
+     "ci_low": 0.699029,
+     "ci_high": 0.85124,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/dense_bge-small__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr.hybrid",
+     "label": "MRR, all scored cases: hybrid bge-small + BM25 (RRF)",
+     "kind": "mean",
+     "value": 0.598928,
+     "ci_low": 0.519019,
+     "ci_high": 0.682667,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/hybrid_bge-small__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.r10.hybrid",
+     "label": "Recall@10, all scored cases: hybrid bge-small + BM25 (RRF)",
+     "kind": "mean",
+     "value": 0.783333,
+     "ci_low": 0.697473,
+     "ci_high": 0.862912,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/hybrid_bge-small__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr.rerank_minilm",
+     "label": "MRR, all scored cases: hybrid + MiniLM cross-encoder rerank",
+     "kind": "mean",
+     "value": 0.580589,
+     "ci_low": 0.497735,
+     "ci_high": 0.659443,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/hybrid-rerank_bge-small-minilm__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.r10.rerank_minilm",
+     "label": "Recall@10, all scored cases: hybrid + MiniLM cross-encoder rerank",
+     "kind": "mean",
+     "value": 0.8,
+     "ci_low": 0.721297,
+     "ci_high": 0.875,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/hybrid-rerank_bge-small-minilm__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr.rerank_bge",
+     "label": "MRR, all scored cases: hybrid + bge-reranker rerank",
+     "kind": "mean",
+     "value": 0.564968,
+     "ci_low": 0.491475,
+     "ci_high": 0.640625,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/hybrid-rerank_bge-small-bge-reranker__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.r10.rerank_bge",
+     "label": "Recall@10, all scored cases: hybrid + bge-reranker rerank",
+     "kind": "mean",
+     "value": 0.775,
+     "ci_low": 0.686567,
+     "ci_high": 0.854704,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/hybrid-rerank_bge-small-bge-reranker__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr.dense_code",
+     "label": "MRR, all scored cases: dense code-search embedder (128-token limit)",
+     "kind": "mean",
+     "value": 0.465594,
+     "ci_low": 0.393269,
+     "ci_high": 0.54124,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/dense_codesearch__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.r10.dense_code",
+     "label": "Recall@10, all scored cases: dense code-search embedder (128-token limit)",
+     "kind": "mean",
+     "value": 0.658333,
+     "ci_low": 0.579364,
+     "ci_high": 0.737288,
+     "n": 120,
+     "n_clusters": 94,
+     "source": [
+      "docs/results/cp4/runs/dense_codesearch__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr_large.bid",
+     "label": "MRR, cases with more than 100 candidates: B-ID (commit-message identifier search)",
+     "kind": "mean",
+     "value": 0.210662,
+     "ci_low": 0.052302,
+     "ci_high": 0.361997,
+     "n": 38,
+     "n_clusters": 22,
+     "source": [
+      "docs/results/cp4/runs/bid__any.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr_large.bm25",
+     "label": "MRR, cases with more than 100 candidates: BM25",
+     "kind": "mean",
+     "value": 0.522672,
+     "ci_low": 0.363421,
+     "ci_high": 0.658919,
+     "n": 38,
+     "n_clusters": 22,
+     "source": [
+      "docs/results/cp4/runs/bm25__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr_large.dense",
+     "label": "MRR, cases with more than 100 candidates: dense bge-small",
+     "kind": "mean",
+     "value": 0.551253,
+     "ci_low": 0.389201,
+     "ci_high": 0.713199,
+     "n": 38,
+     "n_clusters": 22,
+     "source": [
+      "docs/results/cp4/runs/dense_bge-small__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.mrr_large.hybrid",
+     "label": "MRR, cases with more than 100 candidates: hybrid bge-small + BM25 (RRF)",
+     "kind": "mean",
+     "value": 0.589975,
+     "ci_low": 0.413399,
+     "ci_high": 0.739031,
+     "n": 38,
+     "n_clusters": 22,
+     "source": [
+      "docs/results/cp4/runs/hybrid_bge-small__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.d_mrr.dense_vs_bm25",
+     "label": "Paired MRR difference: dense vs BM25",
+     "kind": "delta",
+     "value": 0.031555,
+     "ci_low": -0.023388,
+     "ci_high": 0.083983,
+     "n": 120,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp4/runs/dense_bge-small__code-commits.json",
+      "docs/results/cp4/runs/bm25__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp4.d_mrr.hybrid_vs_bm25",
+     "label": "Paired MRR difference: hybrid vs BM25",
+     "kind": "delta",
+     "value": 0.028302,
+     "ci_low": -0.010818,
+     "ci_high": 0.065034,
+     "n": 120,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp4/runs/hybrid_bge-small__code-commits.json",
+      "docs/results/cp4/runs/bm25__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp4.d_mrr.hybrid_vs_dense",
+     "label": "Paired MRR difference: hybrid vs dense",
+     "kind": "delta",
+     "value": -0.003253,
+     "ci_low": -0.042323,
+     "ci_high": 0.038897,
+     "n": 120,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp4/runs/hybrid_bge-small__code-commits.json",
+      "docs/results/cp4/runs/dense_bge-small__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp4.d_mrr.dense_vs_bid",
+     "label": "Paired MRR difference: dense vs B-ID",
+     "kind": "delta",
+     "value": 0.205022,
+     "ci_low": 0.138023,
+     "ci_high": 0.281617,
+     "n": 120,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp4/runs/dense_bge-small__code-commits.json",
+      "docs/results/cp4/runs/bid__any.json",
+      "docs/results/cp4/cases.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp4.d_mrr.rerank_minilm_vs_hybrid",
+     "label": "Paired MRR difference: MiniLM rerank vs hybrid",
+     "kind": "delta",
+     "value": -0.01834,
+     "ci_low": -0.06981,
+     "ci_high": 0.034157,
+     "n": 120,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp4/runs/hybrid-rerank_bge-small-minilm__code-commits.json",
+      "docs/results/cp4/runs/hybrid_bge-small__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp4.d_mrr.rerank_bge_vs_hybrid",
+     "label": "Paired MRR difference: bge-reranker rerank vs hybrid",
+     "kind": "delta",
+     "value": -0.03396,
+     "ci_low": -0.103493,
+     "ci_high": 0.038038,
+     "n": 120,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp4/runs/hybrid-rerank_bge-small-bge-reranker__code-commits.json",
+      "docs/results/cp4/runs/hybrid_bge-small__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp4.d_mrr.dense_code_vs_dense",
+     "label": "Paired MRR difference: code-search embedder vs bge-small (dense)",
+     "kind": "delta",
+     "value": -0.136587,
+     "ci_low": -0.208191,
+     "ci_high": -0.060491,
+     "n": 120,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp4/runs/dense_codesearch__code-commits.json",
+      "docs/results/cp4/runs/dense_bge-small__code-commits.json",
+      "docs/results/cp4/cases.json"
+     ],
+     "reading": "worse"
+    },
+    {
+     "id": "cp4.d_mrr.commits_hybrid",
+     "label": "Paired MRR difference: commit subjects in the chunk text vs code only (hybrid)",
+     "kind": "delta",
+     "value": 0.073293,
+     "ci_low": 0.025899,
+     "ci_high": 0.121218,
+     "n": 120,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp4/runs/hybrid_bge-small__code-commits.json",
+      "docs/results/cp4/runs/hybrid_bge-small__code_only.json",
+      "docs/results/cp4/cases.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp4.d_mrr.commits_bm25",
+     "label": "Paired MRR difference: commit subjects in the chunk text vs code only (bm25)",
+     "kind": "delta",
+     "value": 0.063661,
+     "ci_low": 0.028042,
+     "ci_high": 0.102078,
+     "n": 120,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp4/runs/bm25__code-commits.json",
+      "docs/results/cp4/runs/bm25__code_only.json",
+      "docs/results/cp4/cases.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp4.d_mrr.idmask_hybrid",
+     "label": "Paired MRR difference: advisory IDs masked vs not (hybrid, the control)",
+     "kind": "delta",
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 120,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp4/runs/hybrid_bge-small__code-commits.json",
+      "docs/results/cp4/runs/hybrid_bge-small__code-commits_idmasked.json",
+      "docs/results/cp4/cases.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp4.gold_in_candidates",
+     "label": "Scored cases whose labelled function is among the candidates",
+     "kind": "count",
+     "k": 101,
+     "n": 120,
+     "source": [
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "cp4.runs",
+     "label": "Retrieval runs compared",
+     "kind": "count",
+     "k": 31,
+     "n": 31,
+     "source": [
+      "docs/results/cp4/runs"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cp5",
+   "title": "CP5: LLM selection (E1, S1) and HyDE",
+   "question": "Does a local LLM improve on (E1) predicting every changed function of a fix commit, (S1) the retriever's top-1, and does a hypothetical-document query (HyDE) improve retrieval?",
+   "interval": "cluster-bootstrap (clusters by fix commit or release range)",
+   "caveats": [
+    "E1: choosing one function from a fix diff lowers recall against the baseline that keeps all of them; a wrong narrowing is the error that could cause a false NOT_REACHABLE later.",
+    "S1: one model improves on top-1 only when it answers; the other abstains often because the frozen prompt invites abstention; this measures instruction following, not code understanding.",
+    "HyDE: at most one of many comparisons excludes zero, with no correction for multiple comparisons; not a finding.",
+    "Headline groups use cases created after each model's documented training cutoff; where no cutoff is documented, every dated case counts as possibly seen."
+   ],
+   "rows": [
+    {
+     "id": "cp5.e1.llama3.1-8b.recall",
+     "label": "E1 recall, LLM `llama3.1-8b` (post-cutoff headline group)",
+     "kind": "mean",
+     "value": 0.569452,
+     "ci_low": 0.490383,
+     "ci_high": 0.643035,
+     "n": 111,
+     "n_clusters": 109,
+     "source": [
+      "docs/results/cp5/select_fix__llama3.1-8b.json"
+     ]
+    },
+    {
+     "id": "cp5.e1.llama3.1-8b.recall_e0",
+     "label": "E1 recall, E0 baseline (every changed function), same cases",
+     "kind": "mean",
+     "value": 0.840019,
+     "ci_low": 0.774089,
+     "ci_high": 0.90116,
+     "n": 111,
+     "n_clusters": 109,
+     "source": [
+      "docs/results/cp5/select_fix__llama3.1-8b.json"
+     ]
+    },
+    {
+     "id": "cp5.e1.llama3.1-8b.f1",
+     "label": "E1 F1, LLM `llama3.1-8b`",
+     "kind": "mean",
+     "value": 0.562155,
+     "ci_low": 0.489185,
+     "ci_high": 0.634032,
+     "n": 111,
+     "n_clusters": 109,
+     "source": [
+      "docs/results/cp5/select_fix__llama3.1-8b.json"
+     ]
+    },
+    {
+     "id": "cp5.e1.llama3.1-8b.f1_e0",
+     "label": "E1 F1, E0 baseline",
+     "kind": "mean",
+     "value": 0.628757,
+     "ci_low": 0.562378,
+     "ci_high": 0.692977,
+     "n": 111,
+     "n_clusters": 109,
+     "source": [
+      "docs/results/cp5/select_fix__llama3.1-8b.json"
+     ]
+    },
+    {
+     "id": "cp5.e1.llama3.1-8b.d_recall",
+     "label": "E1 paired recall difference, LLM `llama3.1-8b` minus E0",
+     "kind": "delta",
+     "value": -0.270567,
+     "ci_low": -0.337041,
+     "ci_high": -0.207454,
+     "n": 111,
+     "n_clusters": 109,
+     "source": [
+      "docs/results/cp5/select_fix__llama3.1-8b.json"
+     ],
+     "reading": "worse"
+    },
+    {
+     "id": "cp5.e1.llama3.1-8b.d_f1",
+     "label": "E1 paired F1 difference, LLM `llama3.1-8b` minus E0",
+     "kind": "delta",
+     "value": -0.066602,
+     "ci_low": -0.11226,
+     "ci_high": -0.024711,
+     "n": 111,
+     "n_clusters": 109,
+     "source": [
+      "docs/results/cp5/select_fix__llama3.1-8b.json"
+     ],
+     "reading": "worse"
+    },
+    {
+     "id": "cp5.e1.llama3.1-8b.d_anyhit",
+     "label": "E1 paired any-hit difference, LLM `llama3.1-8b` minus E0",
+     "kind": "delta",
+     "value": -0.099099,
+     "ci_low": -0.160714,
+     "ci_high": -0.045045,
+     "n": 111,
+     "n_clusters": 109,
+     "source": [
+      "docs/results/cp5/select_fix__llama3.1-8b.json"
+     ],
+     "reading": "worse"
+    },
+    {
+     "id": "cp5.e1.llama3.1-8b.d_precision",
+     "label": "E1 paired precision difference, LLM `llama3.1-8b` minus E0",
+     "kind": "delta",
+     "value": 0.048056,
+     "ci_low": 0.009095,
+     "ci_high": 0.086044,
+     "n": 111,
+     "n_clusters": 109,
+     "source": [
+      "docs/results/cp5/select_fix__llama3.1-8b.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp5.e1.qwen2.5-coder-7b.recall",
+     "label": "E1 recall, LLM `qwen2.5-coder-7b` (post-cutoff headline group)",
+     "kind": "mean",
+     "value": 0.545803,
+     "ci_low": 0.46503,
+     "ci_high": 0.625378,
+     "n": 132,
+     "n_clusters": 130,
+     "source": [
+      "docs/results/cp5/select_fix__qwen2.5-coder-7b.json"
+     ]
+    },
+    {
+     "id": "cp5.e1.qwen2.5-coder-7b.recall_e0",
+     "label": "E1 recall, E0 baseline (every changed function), same cases",
+     "kind": "mean",
+     "value": 0.835167,
+     "ci_low": 0.770078,
+     "ci_high": 0.892589,
+     "n": 132,
+     "n_clusters": 130,
+     "source": [
+      "docs/results/cp5/select_fix__qwen2.5-coder-7b.json"
+     ]
+    },
+    {
+     "id": "cp5.e1.qwen2.5-coder-7b.f1",
+     "label": "E1 F1, LLM `qwen2.5-coder-7b`",
+     "kind": "mean",
+     "value": 0.543346,
+     "ci_low": 0.465471,
+     "ci_high": 0.616278,
+     "n": 132,
+     "n_clusters": 130,
+     "source": [
+      "docs/results/cp5/select_fix__qwen2.5-coder-7b.json"
+     ]
+    },
+    {
+     "id": "cp5.e1.qwen2.5-coder-7b.f1_e0",
+     "label": "E1 F1, E0 baseline",
+     "kind": "mean",
+     "value": 0.617771,
+     "ci_low": 0.555822,
+     "ci_high": 0.674984,
+     "n": 132,
+     "n_clusters": 130,
+     "source": [
+      "docs/results/cp5/select_fix__qwen2.5-coder-7b.json"
+     ]
+    },
+    {
+     "id": "cp5.e1.qwen2.5-coder-7b.d_recall",
+     "label": "E1 paired recall difference, LLM `qwen2.5-coder-7b` minus E0",
+     "kind": "delta",
+     "value": -0.289365,
+     "ci_low": -0.355873,
+     "ci_high": -0.223767,
+     "n": 132,
+     "n_clusters": 130,
+     "source": [
+      "docs/results/cp5/select_fix__qwen2.5-coder-7b.json"
+     ],
+     "reading": "worse"
+    },
+    {
+     "id": "cp5.e1.qwen2.5-coder-7b.d_f1",
+     "label": "E1 paired F1 difference, LLM `qwen2.5-coder-7b` minus E0",
+     "kind": "delta",
+     "value": -0.074425,
+     "ci_low": -0.125349,
+     "ci_high": -0.024194,
+     "n": 132,
+     "n_clusters": 130,
+     "source": [
+      "docs/results/cp5/select_fix__qwen2.5-coder-7b.json"
+     ],
+     "reading": "worse"
+    },
+    {
+     "id": "cp5.e1.qwen2.5-coder-7b.d_anyhit",
+     "label": "E1 paired any-hit difference, LLM `qwen2.5-coder-7b` minus E0",
+     "kind": "delta",
+     "value": -0.143939,
+     "ci_low": -0.207724,
+     "ci_high": -0.083333,
+     "n": 132,
+     "n_clusters": 130,
+     "source": [
+      "docs/results/cp5/select_fix__qwen2.5-coder-7b.json"
+     ],
+     "reading": "worse"
+    },
+    {
+     "id": "cp5.e1.qwen2.5-coder-7b.d_precision",
+     "label": "E1 paired precision difference, LLM `qwen2.5-coder-7b` minus E0",
+     "kind": "delta",
+     "value": 0.047475,
+     "ci_low": -0.003498,
+     "ci_high": 0.097447,
+     "n": 132,
+     "n_clusters": 130,
+     "source": [
+      "docs/results/cp5/select_fix__qwen2.5-coder-7b.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp5.s1.llama3.1-8b.k10.anyhit",
+     "label": "S1 any-hit, LLM `llama3.1-8b` choosing from the top-10",
+     "kind": "mean",
+     "value": 0.716216,
+     "ci_low": 0.578309,
+     "ci_high": 0.840597,
+     "n": 74,
+     "n_clusters": 55,
+     "source": [
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.llama3.1-8b.k10.top1",
+     "label": "S1 any-hit, retriever top-1, same cases (top-10)",
+     "kind": "mean",
+     "value": 0.621622,
+     "ci_low": 0.5,
+     "ci_high": 0.742867,
+     "n": 74,
+     "n_clusters": 55,
+     "source": [
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.llama3.1-8b.k10.d_anyhit",
+     "label": "S1 paired any-hit difference, LLM `llama3.1-8b` minus retriever top-1 (top-10)",
+     "kind": "delta",
+     "value": 0.094595,
+     "ci_low": 0.030303,
+     "ci_high": 0.162507,
+     "n": 74,
+     "n_clusters": 55,
+     "source": [
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp5.s1.llama3.1-8b.k10.abstained",
+     "label": "S1 cases where `llama3.1-8b` abstained (top-10, all asked cases)",
+     "kind": "count",
+     "k": 1,
+     "n": 118,
+     "source": [
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.llama3.1-8b.k5.anyhit",
+     "label": "S1 any-hit, LLM `llama3.1-8b` choosing from the top-5",
+     "kind": "mean",
+     "value": 0.764706,
+     "ci_low": 0.651497,
+     "ci_high": 0.871019,
+     "n": 68,
+     "n_clusters": 52,
+     "source": [
+      "docs/results/cp5/select_release__llama3.1-8b__k5.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.llama3.1-8b.k5.top1",
+     "label": "S1 any-hit, retriever top-1, same cases (top-5)",
+     "kind": "mean",
+     "value": 0.676471,
+     "ci_low": 0.545455,
+     "ci_high": 0.806452,
+     "n": 68,
+     "n_clusters": 52,
+     "source": [
+      "docs/results/cp5/select_release__llama3.1-8b__k5.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.llama3.1-8b.k5.d_anyhit",
+     "label": "S1 paired any-hit difference, LLM `llama3.1-8b` minus retriever top-1 (top-5)",
+     "kind": "delta",
+     "value": 0.088235,
+     "ci_low": 0.028975,
+     "ci_high": 0.15942,
+     "n": 68,
+     "n_clusters": 52,
+     "source": [
+      "docs/results/cp5/select_release__llama3.1-8b__k5.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp5.s1.llama3.1-8b.k5.abstained",
+     "label": "S1 cases where `llama3.1-8b` abstained (top-5, all asked cases)",
+     "kind": "count",
+     "k": 1,
+     "n": 118,
+     "source": [
+      "docs/results/cp5/select_release__llama3.1-8b__k5.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.qwen2.5-coder-7b.k10.anyhit",
+     "label": "S1 any-hit, LLM `qwen2.5-coder-7b` choosing from the top-10",
+     "kind": "mean",
+     "value": 0.325,
+     "ci_low": 0.216826,
+     "ci_high": 0.462714,
+     "n": 80,
+     "n_clusters": 61,
+     "source": [
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.qwen2.5-coder-7b.k10.top1",
+     "label": "S1 any-hit, retriever top-1, same cases (top-10)",
+     "kind": "mean",
+     "value": 0.6375,
+     "ci_low": 0.520398,
+     "ci_high": 0.761212,
+     "n": 80,
+     "n_clusters": 61,
+     "source": [
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.qwen2.5-coder-7b.k10.d_anyhit",
+     "label": "S1 paired any-hit difference, LLM `qwen2.5-coder-7b` minus retriever top-1 (top-10)",
+     "kind": "delta",
+     "value": -0.3125,
+     "ci_low": -0.430114,
+     "ci_high": -0.197183,
+     "n": 80,
+     "n_clusters": 61,
+     "source": [
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ],
+     "reading": "worse"
+    },
+    {
+     "id": "cp5.s1.qwen2.5-coder-7b.k10.abstained",
+     "label": "S1 cases where `qwen2.5-coder-7b` abstained (top-10, all asked cases)",
+     "kind": "count",
+     "k": 76,
+     "n": 118,
+     "source": [
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.qwen2.5-coder-7b.k5.anyhit",
+     "label": "S1 any-hit, LLM `qwen2.5-coder-7b` choosing from the top-5",
+     "kind": "mean",
+     "value": 0.378378,
+     "ci_low": 0.271429,
+     "ci_high": 0.5,
+     "n": 74,
+     "n_clusters": 58,
+     "source": [
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k5.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.qwen2.5-coder-7b.k5.top1",
+     "label": "S1 any-hit, retriever top-1, same cases (top-5)",
+     "kind": "mean",
+     "value": 0.689189,
+     "ci_low": 0.573529,
+     "ci_high": 0.807705,
+     "n": 74,
+     "n_clusters": 58,
+     "source": [
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k5.json"
+     ]
+    },
+    {
+     "id": "cp5.s1.qwen2.5-coder-7b.k5.d_anyhit",
+     "label": "S1 paired any-hit difference, LLM `qwen2.5-coder-7b` minus retriever top-1 (top-5)",
+     "kind": "delta",
+     "value": -0.310811,
+     "ci_low": -0.4375,
+     "ci_high": -0.189189,
+     "n": 74,
+     "n_clusters": 58,
+     "source": [
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k5.json"
+     ],
+     "reading": "worse"
+    },
+    {
+     "id": "cp5.s1.qwen2.5-coder-7b.k5.abstained",
+     "label": "S1 cases where `qwen2.5-coder-7b` abstained (top-5, all asked cases)",
+     "kind": "count",
+     "k": 73,
+     "n": 118,
+     "source": [
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k5.json"
+     ]
+    },
+    {
+     "id": "cp5.hyde.llama3.1-8b.mrr_plain",
+     "label": "HyDE MRR, plain query (hybrid:bge-small), `llama3.1-8b` headline group",
+     "kind": "mean",
+     "value": 0.576737,
+     "ci_low": 0.480184,
+     "ci_high": 0.675251,
+     "n": 98,
+     "n_clusters": 72,
+     "source": [
+      "docs/results/cp5/hyde__llama3.1-8b/runs",
+      "docs/results/cp5/hyde__llama3.1-8b/hyde_meta.json"
+     ]
+    },
+    {
+     "id": "cp5.hyde.llama3.1-8b.mrr_hyde",
+     "label": "HyDE MRR, query + HyDE (hybrid:bge-small), `llama3.1-8b`",
+     "kind": "mean",
+     "value": 0.61144,
+     "ci_low": 0.529214,
+     "ci_high": 0.692591,
+     "n": 98,
+     "n_clusters": 72,
+     "source": [
+      "docs/results/cp5/hyde__llama3.1-8b/runs",
+      "docs/results/cp5/hyde__llama3.1-8b/hyde_meta.json"
+     ]
+    },
+    {
+     "id": "cp5.hyde.llama3.1-8b.d_mrr",
+     "label": "HyDE paired MRR difference, query + HyDE minus plain query (hybrid:bge-small), `llama3.1-8b`",
+     "kind": "delta",
+     "value": 0.034703,
+     "ci_low": -0.049799,
+     "ci_high": 0.117187,
+     "n": 98,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp5/hyde__llama3.1-8b/runs",
+      "docs/results/cp5/hyde__llama3.1-8b/hyde_meta.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp5.hyde.llama3.1-8b.excl",
+     "label": "HyDE MRR comparisons whose paired interval excludes 0, `llama3.1-8b` (of all comparisons made, uncorrected)",
+     "kind": "count",
+     "k": 0,
+     "n": 32,
+     "source": [
+      "docs/results/cp5/hyde__llama3.1-8b/runs",
+      "docs/results/cp5/hyde__llama3.1-8b/hyde_meta.json"
+     ]
+    },
+    {
+     "id": "cp5.hyde.qwen2.5-coder-7b.mrr_plain",
+     "label": "HyDE MRR, plain query (hybrid:bge-small), `qwen2.5-coder-7b` headline group",
+     "kind": "mean",
+     "value": 0.582738,
+     "ci_low": 0.493796,
+     "ci_high": 0.674842,
+     "n": 106,
+     "n_clusters": 80,
+     "source": [
+      "docs/results/cp5/hyde__qwen2.5-coder-7b/runs",
+      "docs/results/cp5/hyde__qwen2.5-coder-7b/hyde_meta.json"
+     ]
+    },
+    {
+     "id": "cp5.hyde.qwen2.5-coder-7b.mrr_hyde",
+     "label": "HyDE MRR, query + HyDE (hybrid:bge-small), `qwen2.5-coder-7b`",
+     "kind": "mean",
+     "value": 0.637419,
+     "ci_low": 0.557833,
+     "ci_high": 0.718671,
+     "n": 106,
+     "n_clusters": 80,
+     "source": [
+      "docs/results/cp5/hyde__qwen2.5-coder-7b/runs",
+      "docs/results/cp5/hyde__qwen2.5-coder-7b/hyde_meta.json"
+     ]
+    },
+    {
+     "id": "cp5.hyde.qwen2.5-coder-7b.d_mrr",
+     "label": "HyDE paired MRR difference, query + HyDE minus plain query (hybrid:bge-small), `qwen2.5-coder-7b`",
+     "kind": "delta",
+     "value": 0.054681,
+     "ci_low": 0.002696,
+     "ci_high": 0.110439,
+     "n": 106,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp5/hyde__qwen2.5-coder-7b/runs",
+      "docs/results/cp5/hyde__qwen2.5-coder-7b/hyde_meta.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp5.hyde.qwen2.5-coder-7b.excl",
+     "label": "HyDE MRR comparisons whose paired interval excludes 0, `qwen2.5-coder-7b` (of all comparisons made, uncorrected)",
+     "kind": "count",
+     "k": 2,
+     "n": 24,
+     "source": [
+      "docs/results/cp5/hyde__qwen2.5-coder-7b/runs",
+      "docs/results/cp5/hyde__qwen2.5-coder-7b/hyde_meta.json"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cp5b",
+   "title": "CP5b: lifting and caller/callee queries",
+   "question": "Can walking up the call graph from a changed internal function to its exported callers recover the functions the advisory names, and can graph expansion rescue the Mode 2 ceiling?",
+   "interval": "cluster-bootstrap (D1 clusters); counts for the ceiling",
+   "caveats": [
+    "Lifting ran with go1.26.10 fetched into a scratch directory because many modules need a newer Go than CI; the lifting evaluation is not reproducible inside CI.",
+    "Neither lifting rule is good enough to sit inside the verdict path; it is a candidate-widening aid only.",
+    "E1+L beats E1 by adding symbols, but nothing beats the E0 baseline; it does not rescue the LLM pick.",
+    "The D4 ceiling investigation has a tiny n; the graph tools are an ablation, not a promised gain."
+   ],
+   "rows": [
+    {
+     "id": "cp5b.coverage",
+     "label": "Lifting: D1 cases (with curated derived symbols) where a core symbol lifted",
+     "kind": "count",
+     "k": 86,
+     "n": 99,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ]
+    },
+    {
+     "id": "cp5b.nearest.precision",
+     "label": "Lifting rule NEAREST: precision of new symbols vs curated derived symbols",
+     "kind": "mean",
+     "value": 0.726654,
+     "ci_low": 0.613261,
+     "ci_high": 0.836695,
+     "n": 53,
+     "n_clusters": 53,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ]
+    },
+    {
+     "id": "cp5b.nearest.recall",
+     "label": "Lifting rule NEAREST: recall of new symbols vs curated derived symbols",
+     "kind": "mean",
+     "value": 0.253212,
+     "ci_low": 0.186229,
+     "ci_high": 0.326557,
+     "n": 86,
+     "n_clusters": 85,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ]
+    },
+    {
+     "id": "cp5b.all.precision",
+     "label": "Lifting rule ALL: precision of new symbols vs curated derived symbols",
+     "kind": "mean",
+     "value": 0.473123,
+     "ci_low": 0.359294,
+     "ci_high": 0.587203,
+     "n": 55,
+     "n_clusters": 55,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ]
+    },
+    {
+     "id": "cp5b.all.recall",
+     "label": "Lifting rule ALL: recall of new symbols vs curated derived symbols",
+     "kind": "mean",
+     "value": 0.466448,
+     "ci_low": 0.368913,
+     "ci_high": 0.568909,
+     "n": 86,
+     "n_clusters": 85,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ]
+    },
+    {
+     "id": "cp5b.e1l.llama3.1-8b.add_NEAREST.d_f1_e1",
+     "label": "E1+L F1 difference vs E1, variant add/NEAREST, `llama3.1-8b` (gold: core + derived)",
+     "kind": "delta",
+     "value": 0.06991,
+     "ci_low": 0.03196,
+     "ci_high": 0.110962,
+     "n": 104,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp5b.e1l.llama3.1-8b.add_NEAREST.d_f1_e0",
+     "label": "E1+L F1 difference vs E0, variant add/NEAREST, `llama3.1-8b` (gold: core + derived)",
+     "kind": "delta",
+     "value": 0.001824,
+     "ci_low": -0.049687,
+     "ci_high": 0.053536,
+     "n": 104,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp5b.e1l.llama3.1-8b.add_ALL.d_f1_e1",
+     "label": "E1+L F1 difference vs E1, variant add/ALL, `llama3.1-8b` (gold: core + derived)",
+     "kind": "delta",
+     "value": 0.054422,
+     "ci_low": 0.00604,
+     "ci_high": 0.11049,
+     "n": 104,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp5b.e1l.llama3.1-8b.add_ALL.d_f1_e0",
+     "label": "E1+L F1 difference vs E0, variant add/ALL, `llama3.1-8b` (gold: core + derived)",
+     "kind": "delta",
+     "value": -0.013664,
+     "ci_low": -0.072186,
+     "ci_high": 0.051908,
+     "n": 104,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp5b.e1l.qwen2.5-coder-7b.add_NEAREST.d_f1_e1",
+     "label": "E1+L F1 difference vs E1, variant add/NEAREST, `qwen2.5-coder-7b` (gold: core + derived)",
+     "kind": "delta",
+     "value": 0.090088,
+     "ci_low": 0.054087,
+     "ci_high": 0.126569,
+     "n": 124,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp5b.e1l.qwen2.5-coder-7b.add_NEAREST.d_f1_e0",
+     "label": "E1+L F1 difference vs E0, variant add/NEAREST, `qwen2.5-coder-7b` (gold: core + derived)",
+     "kind": "delta",
+     "value": 0.015828,
+     "ci_low": -0.036494,
+     "ci_high": 0.068704,
+     "n": 124,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp5b.e1l.qwen2.5-coder-7b.add_ALL.d_f1_e1",
+     "label": "E1+L F1 difference vs E1, variant add/ALL, `qwen2.5-coder-7b` (gold: core + derived)",
+     "kind": "delta",
+     "value": 0.082933,
+     "ci_low": 0.034786,
+     "ci_high": 0.132519,
+     "n": 124,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp5b.e1l.qwen2.5-coder-7b.add_ALL.d_f1_e0",
+     "label": "E1+L F1 difference vs E0, variant add/ALL, `qwen2.5-coder-7b` (gold: core + derived)",
+     "kind": "delta",
+     "value": 0.008674,
+     "ci_low": -0.050001,
+     "ci_high": 0.071545,
+     "n": 124,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp5b/lift_d1.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp5b.ceiling.within1",
+     "label": "D4 ceiling cases with a candidate within 1 call-graph hop of the missing function",
+     "kind": "count",
+     "k": 1,
+     "n": 17,
+     "source": [
+      "docs/results/cp5b/lift_d4_ceiling.json"
+     ]
+    },
+    {
+     "id": "cp5b.ceiling.within2",
+     "label": "D4 ceiling cases with a candidate within 2 hops",
+     "kind": "count",
+     "k": 4,
+     "n": 17,
+     "source": [
+      "docs/results/cp5b/lift_d4_ceiling.json"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cp6",
+   "title": "CP6: the LangGraph investigation agent (Mode 2)",
+   "question": "Does an agent that can read diffs and walk callers/callees pick the vulnerable function better than the retriever's top-1 (A0), and at what cost?",
+   "interval": "cluster-bootstrap (D4 ranges)",
+   "caveats": [
+    "The agent does not beat plain retrieval (A0). Any win is over the one-shot LLM baseline, which mostly did not answer for one model.",
+    "Cost is about five times the prompt tokens and about twice the seconds of the one-shot LLM.",
+    "The frozen loop rule ended many runs without an answer for one model; whether a looser rule helps was not tested and must not be tuned on D4.",
+    "Headline wording was fixed before results; the failure analysis is a purposive sample, so its cause counts are not rates."
+   ],
+   "rows": [
+    {
+     "id": "cp6.llama3.1-8b.A0.hit1",
+     "label": "Agent experiment any-hit@1, arm A0, `llama3.1-8b` (headline group)",
+     "kind": "mean",
+     "value": 0.469388,
+     "ci_low": 0.355764,
+     "ci_high": 0.585125,
+     "n": 98,
+     "n_clusters": 72,
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.llama3.1-8b.A1.hit1",
+     "label": "Agent experiment any-hit@1, arm A1, `llama3.1-8b` (headline group)",
+     "kind": "mean",
+     "value": 0.469388,
+     "ci_low": 0.359171,
+     "ci_high": 0.585867,
+     "n": 98,
+     "n_clusters": 72,
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.llama3.1-8b.A2.hit1",
+     "label": "Agent experiment any-hit@1, arm A2, `llama3.1-8b` (headline group)",
+     "kind": "mean",
+     "value": 0.469388,
+     "ci_low": 0.371125,
+     "ci_high": 0.571459,
+     "n": 98,
+     "n_clusters": 72,
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.llama3.1-8b.A3.hit1",
+     "label": "Agent experiment any-hit@1, arm A3, `llama3.1-8b` (headline group)",
+     "kind": "mean",
+     "value": 0.469388,
+     "ci_low": 0.373827,
+     "ci_high": 0.574257,
+     "n": 98,
+     "n_clusters": 72,
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.llama3.1-8b.d_A2_A0",
+     "label": "Paired any-hit@1 difference, A2 minus A0, `llama3.1-8b`",
+     "kind": "delta",
+     "value": 0.0,
+     "ci_low": -0.081651,
+     "ci_high": 0.082496,
+     "n": 98,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp6.llama3.1-8b.d_A3_A0",
+     "label": "Paired any-hit@1 difference, A3 minus A0, `llama3.1-8b`",
+     "kind": "delta",
+     "value": 0.0,
+     "ci_low": -0.084211,
+     "ci_high": 0.09186,
+     "n": 98,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp6.llama3.1-8b.d_A3_A1",
+     "label": "Paired any-hit@1 difference, A3 minus A1, `llama3.1-8b`",
+     "kind": "delta",
+     "value": 0.0,
+     "ci_low": -0.084348,
+     "ci_high": 0.087914,
+     "n": 98,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp6.llama3.1-8b.A1_answered",
+     "label": "Share of all cases the one-shot LLM (A1) answered, `llama3.1-8b`",
+     "kind": "value",
+     "value": 0.975,
+     "fmt": "{:.3f}",
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.llama3.1-8b.A2.token_ratio",
+     "label": "Prompt tokens per case, A2 divided by the one-shot LLM (A1), `llama3.1-8b`",
+     "kind": "value",
+     "value": 5.205008,
+     "fmt": "{:.1f}x",
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.llama3.1-8b.A2.seconds_ratio",
+     "label": "Model+tool seconds per case, A2 divided by A1, `llama3.1-8b`",
+     "kind": "value",
+     "value": 2.079651,
+     "fmt": "{:.1f}x",
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.llama3.1-8b.A3.token_ratio",
+     "label": "Prompt tokens per case, A3 divided by the one-shot LLM (A1), `llama3.1-8b`",
+     "kind": "value",
+     "value": 6.54859,
+     "fmt": "{:.1f}x",
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.llama3.1-8b.A3.seconds_ratio",
+     "label": "Model+tool seconds per case, A3 divided by A1, `llama3.1-8b`",
+     "kind": "value",
+     "value": 2.271116,
+     "fmt": "{:.1f}x",
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json",
+      "docs/results/cp6/agent__A3__llama3.1-8b.json",
+      "docs/results/cp5/select_release__llama3.1-8b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.llama3.1-8b.A2.loops",
+     "label": "Runs ended by the loop rule with no answer, A2, `llama3.1-8b` (of the runs that ran)",
+     "kind": "count",
+     "k": 8,
+     "n": 118,
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json"
+     ]
+    },
+    {
+     "id": "cp6.llama3.1-8b.A2.loops_a0_right",
+     "label": "...of those, runs where retrieval's top-1 was right, A2, `llama3.1-8b`",
+     "kind": "count",
+     "k": 2,
+     "n": 8,
+     "source": [
+      "docs/results/cp6/agent__A2__llama3.1-8b.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A0.hit1",
+     "label": "Agent experiment any-hit@1, arm A0, `qwen2.5-coder-7b` (headline group)",
+     "kind": "mean",
+     "value": 0.481132,
+     "ci_low": 0.377175,
+     "ci_high": 0.59051,
+     "n": 106,
+     "n_clusters": 80,
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A1.hit1",
+     "label": "Agent experiment any-hit@1, arm A1, `qwen2.5-coder-7b` (headline group)",
+     "kind": "mean",
+     "value": 0.245283,
+     "ci_low": 0.163265,
+     "ci_high": 0.336735,
+     "n": 106,
+     "n_clusters": 80,
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A2.hit1",
+     "label": "Agent experiment any-hit@1, arm A2, `qwen2.5-coder-7b` (headline group)",
+     "kind": "mean",
+     "value": 0.273585,
+     "ci_low": 0.191908,
+     "ci_high": 0.357177,
+     "n": 106,
+     "n_clusters": 80,
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A3.hit1",
+     "label": "Agent experiment any-hit@1, arm A3, `qwen2.5-coder-7b` (headline group)",
+     "kind": "mean",
+     "value": 0.396226,
+     "ci_low": 0.309259,
+     "ci_high": 0.486737,
+     "n": 106,
+     "n_clusters": 80,
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.d_A2_A0",
+     "label": "Paired any-hit@1 difference, A2 minus A0, `qwen2.5-coder-7b`",
+     "kind": "delta",
+     "value": -0.207547,
+     "ci_low": -0.304358,
+     "ci_high": -0.112066,
+     "n": 106,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ],
+     "reading": "worse"
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.d_A3_A0",
+     "label": "Paired any-hit@1 difference, A3 minus A0, `qwen2.5-coder-7b`",
+     "kind": "delta",
+     "value": -0.084906,
+     "ci_low": -0.163462,
+     "ci_high": 0.0,
+     "n": 106,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ],
+     "reading": "no detectable difference"
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.d_A3_A1",
+     "label": "Paired any-hit@1 difference, A3 minus A1, `qwen2.5-coder-7b`",
+     "kind": "delta",
+     "value": 0.150943,
+     "ci_low": 0.055556,
+     "ci_high": 0.247527,
+     "n": 106,
+     "n_clusters": null,
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ],
+     "reading": "better"
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A1_answered",
+     "label": "Share of all cases the one-shot LLM (A1) answered, `qwen2.5-coder-7b`",
+     "kind": "value",
+     "value": 0.35,
+     "fmt": "{:.3f}",
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A2.token_ratio",
+     "label": "Prompt tokens per case, A2 divided by the one-shot LLM (A1), `qwen2.5-coder-7b`",
+     "kind": "value",
+     "value": 4.963358,
+     "fmt": "{:.1f}x",
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A2.seconds_ratio",
+     "label": "Model+tool seconds per case, A2 divided by A1, `qwen2.5-coder-7b`",
+     "kind": "value",
+     "value": 2.334565,
+     "fmt": "{:.1f}x",
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A3.token_ratio",
+     "label": "Prompt tokens per case, A3 divided by the one-shot LLM (A1), `qwen2.5-coder-7b`",
+     "kind": "value",
+     "value": 5.526507,
+     "fmt": "{:.1f}x",
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A3.seconds_ratio",
+     "label": "Model+tool seconds per case, A3 divided by A1, `qwen2.5-coder-7b`",
+     "kind": "value",
+     "value": 2.383935,
+     "fmt": "{:.1f}x",
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json",
+      "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json",
+      "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A2.loops",
+     "label": "Runs ended by the loop rule with no answer, A2, `qwen2.5-coder-7b` (of the runs that ran)",
+     "kind": "count",
+     "k": 40,
+     "n": 118,
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json"
+     ]
+    },
+    {
+     "id": "cp6.qwen2.5-coder-7b.A2.loops_a0_right",
+     "label": "...of those, runs where retrieval's top-1 was right, A2, `qwen2.5-coder-7b`",
+     "kind": "count",
+     "k": 18,
+     "n": 40,
+     "source": [
+      "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cp7",
+   "title": "CP7: end-to-end triage and the evidence verifier",
+   "question": "Does the whole pipeline (two reachability methods, the verdict rule table, the verifier, the Mode 2 policy) give correct verdicts where the truth is known, and how does it behave on real modules?",
+   "interval": "Wilson (fixtures); counts for distributions",
+   "caveats": [
+    "Fixture accuracy is measured against truth by construction; the D1 and D4 rows are verdict distributions on real modules analysed as their own application, not accuracy.",
+    "Mode 2 shows false REACHABLE verdicts on the fixtures by construction (an unrelated function changed in the same range is reachable), so Mode 2 answers are candidate level.",
+    "Mode 2 numbers here ranked candidates with BM25, the documented fallback, not the intended hybrid retriever.",
+    "Most CANT_DETERMINE verdicts on real modules come from modules needing a newer Go than the review toolchain and from libraries with no main package."
+   ],
+   "rows": [
+    {
+     "id": "cp7.fx.targets.false_nr",
+     "label": "Fixtures (given target): false NOT_REACHABLE",
+     "kind": "count",
+     "k": 0,
+     "n": 22,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.targets.false_r",
+     "label": "Fixtures (given target): false REACHABLE",
+     "kind": "count",
+     "k": 0,
+     "n": 22,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.targets.cd",
+     "label": "Fixtures (given target): CANT_DETERMINE",
+     "kind": "count",
+     "k": 4,
+     "n": 22,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.targets.accuracy",
+     "label": "Fixtures (given target): accuracy (CANT_DETERMINE counts as not correct)",
+     "kind": "rate",
+     "k": 18,
+     "n": 22,
+     "value": 0.818182,
+     "ci_low": 0.614834,
+     "ci_high": 0.926931,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.fix.false_nr",
+     "label": "Fixtures (Mode 1): false NOT_REACHABLE",
+     "kind": "count",
+     "k": 0,
+     "n": 22,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.fix.false_r",
+     "label": "Fixtures (Mode 1): false REACHABLE",
+     "kind": "count",
+     "k": 0,
+     "n": 22,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.fix.cd",
+     "label": "Fixtures (Mode 1): CANT_DETERMINE",
+     "kind": "count",
+     "k": 4,
+     "n": 22,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.fix.accuracy",
+     "label": "Fixtures (Mode 1): accuracy (CANT_DETERMINE counts as not correct)",
+     "kind": "rate",
+     "k": 18,
+     "n": 22,
+     "value": 0.818182,
+     "ci_low": 0.614834,
+     "ci_high": 0.926931,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.release.false_nr",
+     "label": "Fixtures (Mode 2): false NOT_REACHABLE",
+     "kind": "count",
+     "k": 0,
+     "n": 22,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.release.false_r",
+     "label": "Fixtures (Mode 2): false REACHABLE",
+     "kind": "count",
+     "k": 4,
+     "n": 22,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.release.cd",
+     "label": "Fixtures (Mode 2): CANT_DETERMINE",
+     "kind": "count",
+     "k": 6,
+     "n": 22,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.release.accuracy",
+     "label": "Fixtures (Mode 2): accuracy (CANT_DETERMINE counts as not correct)",
+     "kind": "rate",
+     "k": 12,
+     "n": 22,
+     "value": 0.545455,
+     "ci_low": 0.346598,
+     "ci_high": 0.730797,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.verifier_rejections_on_correct",
+     "label": "Evidence verifier: correct outputs it rejected (fixtures, given target)",
+     "kind": "count",
+     "k": 0,
+     "n": 12,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.fx.verifier_corrupted",
+     "label": "Evidence verifier: deliberately corrupted paths it rejected",
+     "kind": "count",
+     "k": 36,
+     "n": 36,
+     "source": [
+      "docs/results/cp7/fixtures.json"
+     ]
+    },
+    {
+     "id": "cp7.d1.reachable",
+     "label": "D1 modules analysed as their own application: REACHABLE",
+     "kind": "count",
+     "k": 38,
+     "n": 143,
+     "source": [
+      "docs/results/cp7/d1.json"
+     ]
+    },
+    {
+     "id": "cp7.d1.not_reachable",
+     "label": "D1: NOT_REACHABLE",
+     "kind": "count",
+     "k": 3,
+     "n": 143,
+     "source": [
+      "docs/results/cp7/d1.json"
+     ]
+    },
+    {
+     "id": "cp7.d1.cd",
+     "label": "D1: CANT_DETERMINE",
+     "kind": "count",
+     "k": 102,
+     "n": 143,
+     "source": [
+      "docs/results/cp7/d1.json"
+     ]
+    },
+    {
+     "id": "cp7.d1.go_too_old",
+     "label": "D1: cases whose module needs a newer Go than the 1.24 toolchain",
+     "kind": "count",
+     "k": 58,
+     "n": 143,
+     "source": [
+      "docs/results/cp7/d1.json"
+     ]
+    },
+    {
+     "id": "cp7.d1.no_main",
+     "label": "D1: cases with no main package (a library)",
+     "kind": "count",
+     "k": 26,
+     "n": 143,
+     "source": [
+      "docs/results/cp7/d1.json"
+     ]
+    },
+    {
+     "id": "cp7.d1.unstable",
+     "label": "D1: re-run cases whose verdict changed",
+     "kind": "count",
+     "k": 0,
+     "n": 10,
+     "source": [
+      "docs/results/cp7/d1.json"
+     ]
+    },
+    {
+     "id": "cp7.d4.reachable",
+     "label": "D4 modules analysed as their own application: REACHABLE",
+     "kind": "count",
+     "k": 32,
+     "n": 120,
+     "source": [
+      "docs/results/cp7/d4.json"
+     ]
+    },
+    {
+     "id": "cp7.d4.not_reachable",
+     "label": "D4: NOT_REACHABLE",
+     "kind": "count",
+     "k": 0,
+     "n": 120,
+     "source": [
+      "docs/results/cp7/d4.json"
+     ]
+    },
+    {
+     "id": "cp7.d4.cd",
+     "label": "D4: CANT_DETERMINE",
+     "kind": "count",
+     "k": 88,
+     "n": 120,
+     "source": [
+      "docs/results/cp7/d4.json"
+     ]
+    },
+    {
+     "id": "cp7.d4.go_too_old",
+     "label": "D4: cases whose module needs a newer Go than the 1.24 toolchain",
+     "kind": "count",
+     "k": 52,
+     "n": 120,
+     "source": [
+      "docs/results/cp7/d4.json"
+     ]
+    },
+    {
+     "id": "cp7.d4.no_main",
+     "label": "D4: cases with no main package (a library)",
+     "kind": "count",
+     "k": 22,
+     "n": 120,
+     "source": [
+      "docs/results/cp7/d4.json"
+     ]
+    },
+    {
+     "id": "cp7.d4.unstable",
+     "label": "D4: re-run cases whose verdict changed",
+     "kind": "count",
+     "k": 0,
+     "n": 10,
+     "source": [
+      "docs/results/cp7/d4.json"
+     ]
+    },
+    {
+     "id": "cp7.d4.bm25_fallback",
+     "label": "D4 Mode 2 runs that ranked candidates with BM25 because no embedder was available",
+     "kind": "count",
+     "k": 118,
+     "n": 120,
+     "source": [
+      "docs/results/cp7/d4.json"
+     ]
+    },
+    {
+     "id": "cp7.d4.mode2_raw_nr",
+     "label": "D4 raw Mode 2 NOT_REACHABLE verdicts (downgraded to CANT_DETERMINE by the Mode 2 policy)",
+     "kind": "count",
+     "k": 5,
+     "n": 120,
+     "source": [
+      "docs/results/cp7/mode2_policy.json"
+     ]
+    },
+    {
+     "id": "cp7.d4.mode2_policy_min",
+     "label": "D4 raw Mode 2 NOT_REACHABLE verdicts versus the minimum the policy requires to keep them",
+     "kind": "count",
+     "k": 5,
+     "n": 20,
+     "source": [
+      "docs/results/cp7/mode2_policy.json"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cp7b",
+   "title": "CP7b: real applications (D3), adjudicated",
+   "question": "On real Go applications, are the REACHABLE paths real, are the NOT_REACHABLE verdicts safe, and how does the official govulncheck compare?",
+   "interval": "Wilson",
+   "caveats": [
+    "REACHABLE means a call-graph path exists from a main package and needs a human look; it is never exploitability and, here, never confirmed.",
+    "The adjudication was done by two Claude reviewer agents reading the source, reconciled by the supervising assistant, with an owner spot-check of path steps; it is not expert human ground truth.",
+    "The path-feasibility figure judges the path shown, not whether the target is reachable by another path.",
+    "On these cases the official tool was not worse than this pipeline.",
+    "Analysis ran with go1.26.10 on the review machine (outside CI); n is small, from few applications, so intervals are wide."
+   ],
+   "rows": [
+    {
+     "id": "cp7b.cases",
+     "label": "D3 application-advisory cases triaged",
+     "kind": "count",
+     "k": 14,
+     "n": 14,
+     "source": [
+      "docs/results/cp7b/d3_triage.json"
+     ]
+    },
+    {
+     "id": "cp7b.reachable",
+     "label": "Verdict REACHABLE",
+     "kind": "count",
+     "k": 7,
+     "n": 14,
+     "source": [
+      "docs/results/cp7b/d3_triage.json"
+     ]
+    },
+    {
+     "id": "cp7b.not_reachable",
+     "label": "Verdict NOT_REACHABLE",
+     "kind": "count",
+     "k": 4,
+     "n": 14,
+     "source": [
+      "docs/results/cp7b/d3_triage.json"
+     ]
+    },
+    {
+     "id": "cp7b.cd",
+     "label": "Verdict CANT_DETERMINE",
+     "kind": "count",
+     "k": 3,
+     "n": 14,
+     "source": [
+      "docs/results/cp7b/d3_triage.json"
+     ]
+    },
+    {
+     "id": "cp7b.false_nr",
+     "label": "NOT_REACHABLE verdicts adjudicated as wrong (false NOT_REACHABLE)",
+     "kind": "count",
+     "k": 0,
+     "n": 4,
+     "source": [
+      "docs/results/cp7b/d3_triage.json",
+      "docs/results/cp7b/adjudication/adjudication.json"
+     ]
+    },
+    {
+     "id": "cp7b.reachable_precision",
+     "label": "REACHABLE paths adjudicated as able to run (precision)",
+     "kind": "rate",
+     "k": 0,
+     "n": 7,
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.35433,
+     "source": [
+      "docs/results/cp7b/d3_triage.json",
+      "docs/results/cp7b/adjudication/adjudication.json"
+     ]
+    },
+    {
+     "id": "cp7b.path_exists",
+     "label": "REACHABLE paths whose every step exists in the code (the path as a whole may still be infeasible)",
+     "kind": "rate",
+     "k": 7,
+     "n": 7,
+     "value": 1.0,
+     "ci_low": 0.64567,
+     "ci_high": 1.0,
+     "source": [
+      "docs/results/cp7b/d3_triage.json",
+      "docs/results/cp7b/adjudication/adjudication.json"
+     ]
+    },
+    {
+     "id": "cp7b.nr_correct",
+     "label": "NOT_REACHABLE verdicts adjudicated as correct",
+     "kind": "rate",
+     "k": 4,
+     "n": 4,
+     "value": 1.0,
+     "ci_low": 0.510109,
+     "ci_high": 1.0,
+     "source": [
+      "docs/results/cp7b/d3_triage.json",
+      "docs/results/cp7b/adjudication/adjudication.json"
+     ]
+    },
+    {
+     "id": "cp7b.cd_clear",
+     "label": "CANT_DETERMINE cases where reading the code gives a clear NOT_REACHABLE answer",
+     "kind": "count",
+     "k": 3,
+     "n": 3,
+     "source": [
+      "docs/results/cp7b/d3_triage.json",
+      "docs/results/cp7b/adjudication/adjudication.json"
+     ]
+    },
+    {
+     "id": "cp7b.govulncheck_agree",
+     "label": "govulncheck (reference, not truth) agrees where both gave REACHABLE or NOT_REACHABLE",
+     "kind": "rate",
+     "k": 9,
+     "n": 11,
+     "value": 0.818182,
+     "ci_low": 0.523019,
+     "ci_high": 0.948632,
+     "source": [
+      "docs/results/cp7b/d3_triage.json"
+     ]
+    },
+    {
+     "id": "cp7b.govulncheck_disagree",
+     "label": "Cases where govulncheck disagreed with this pipeline",
+     "kind": "count",
+     "k": 2,
+     "n": 14,
+     "source": [
+      "docs/results/cp7b/d3_triage.json"
+     ]
+    },
+    {
+     "id": "cp7b.govulncheck_disagree_infeasible",
+     "label": "...of those, cases where the reviewers found this pipeline's REACHABLE path infeasible",
+     "kind": "count",
+     "k": 2,
+     "n": 2,
+     "source": [
+      "docs/results/cp7b/d3_triage.json",
+      "docs/results/cp7b/adjudication/adjudication.json"
+     ]
+    }
+   ]
+  }
+ ],
+ "sources": {
+  "docs/results/cp4/cases.json": "c2d6a46da49cc1fb3c8525b6fb3608cd5574ebb70ca21937114b9d70a3b2e43f",
+  "docs/results/cp4/runs/bid-only__any.json": "52fef91efddecc6b801e49229f4f4f8586b4cd365b064a86370c701d32918855",
+  "docs/results/cp4/runs/bid__any.json": "6c2fbecaa4d791d05a439f75c8542616209bcead521f4060484a68babb8b12fb",
+  "docs/results/cp4/runs/bm25__code-commits.json": "cca1794e34f10747187e14bd0a895649e7e4c8e859809e70c5f27b1281bf9ad6",
+  "docs/results/cp4/runs/bm25__code-commits_idmasked.json": "c7d2ae3639a824ff137c44212469faa869530e29602696e9fbd803109bdc77e0",
+  "docs/results/cp4/runs/bm25__code_only.json": "ce8aab93990abe5a6428a588472cdc43a46818a36505d286ff037f498ed7663f",
+  "docs/results/cp4/runs/dense_bge-small__code-commits.json": "7fd6ec24231255229113f491fb0027e1210fa1ab52021d2e16f4d673243349ba",
+  "docs/results/cp4/runs/dense_bge-small__code-commits_idmasked.json": "89743515cf42aebb584c35cde22fd3cddd5a91e257a80e5ecb0c2b4abf19e26d",
+  "docs/results/cp4/runs/dense_bge-small__code_only.json": "42204d8e3ce023009afb1242d8bd43175c44c2abb48db1f2f1339bfb40112603",
+  "docs/results/cp4/runs/dense_codesearch__code-commits.json": "d235cc2d2865665764f334692ee83e0ef543d6dc7d97822ff3c8b239267cc937",
+  "docs/results/cp4/runs/dense_codesearch__code-commits_idmasked.json": "56331bbad3517253ee362c2470558ccd39caca874d987ee14692ccaf71e20003",
+  "docs/results/cp4/runs/dense_codesearch__code_only.json": "7e1a59a50b4160d82259ab961cf9c515f20a11830f53b8c82be936e1af43ef55",
+  "docs/results/cp4/runs/hybrid-rerank_bge-small-bge-reranker__code-commits.json": "c0102e1a79d9e9a90acd2275c808d4e734e2142f1ae89500693dd160b6b2d9b8",
+  "docs/results/cp4/runs/hybrid-rerank_bge-small-bge-reranker__code-commits_idmasked.json": "5fa0737219657f395b34703a21aa99418a327263f9d0361610a631adfec8c873",
+  "docs/results/cp4/runs/hybrid-rerank_bge-small-bge-reranker__code_only.json": "0722fbf68ee51ddde6ce8ca6b40a6c8f42dafa19e5fd73a97e7c6d68d42ba14b",
+  "docs/results/cp4/runs/hybrid-rerank_bge-small-minilm__code-commits.json": "67fa26e713dd5c6761001063ea9ac519b62cacc6eff6017ab264b897d64a9fe1",
+  "docs/results/cp4/runs/hybrid-rerank_bge-small-minilm__code-commits_idmasked.json": "f1607708c914bb8d988b624c1e6a3eb895c5cf2fbb158c224c229a4e5aa954b8",
+  "docs/results/cp4/runs/hybrid-rerank_bge-small-minilm__code_only.json": "80bec2b9b3226267a0b7dbd8a048844e700b975445558f39f5c0f053d0cd86e6",
+  "docs/results/cp4/runs/hybrid-rerank_codesearch-bge-reranker__code-commits.json": "ae422662115a7d1e50ab9d3a446a087f2858f84838205984b4e986911be6ba26",
+  "docs/results/cp4/runs/hybrid-rerank_codesearch-bge-reranker__code-commits_idmasked.json": "84e38832738cc83608c063615da7bdcb80db67dabb7d546176769288f41ec33d",
+  "docs/results/cp4/runs/hybrid-rerank_codesearch-bge-reranker__code_only.json": "6b88d7179042bebd18cf569c51d0a95d07c519512b35dbe585b630b3f0091643",
+  "docs/results/cp4/runs/hybrid-rerank_codesearch-minilm__code-commits.json": "a950453d62df9ab4a00260f52b7570d09c1eceeec4fcc08caa0a1818c73b3723",
+  "docs/results/cp4/runs/hybrid-rerank_codesearch-minilm__code-commits_idmasked.json": "c2fd3efab60348a534778c8f4e7179f983a4ff5a4e9e1f9f2ce1ab8da086995c",
+  "docs/results/cp4/runs/hybrid-rerank_codesearch-minilm__code_only.json": "6eaf2d6e35ccb27f31da966e3291bd740f2f178a3a744caebdc80f86898af02e",
+  "docs/results/cp4/runs/hybrid_bge-small__code-commits.json": "dc67a548466fb351111d2e9be896ca24dfc93c607fac0be2164d458eec081c07",
+  "docs/results/cp4/runs/hybrid_bge-small__code-commits_idmasked.json": "51485a0c0395096a91236c8ac58e205e4eb5fd516f905201683de6c5e89d26e1",
+  "docs/results/cp4/runs/hybrid_bge-small__code_only.json": "8e391586c04cb7d1da311ea41325060578ec59b5357a07817f230bbb30411510",
+  "docs/results/cp4/runs/hybrid_codesearch__code-commits.json": "b2c18b19c39f8c58401679a6b7bdc37e8da9a5a8ff7b2cea242523b87e557c05",
+  "docs/results/cp4/runs/hybrid_codesearch__code-commits_idmasked.json": "c003309be58a8787a43cf46ecd849af6e1c77e8d97bb8667b31355e4f91f205f",
+  "docs/results/cp4/runs/hybrid_codesearch__code_only.json": "d417088dc4342537a82f3974a9e1030fe828d4230ced30bd6782f53fe7e0df5a",
+  "docs/results/cp4/runs/random__any.json": "a3c1f90bd073ebf32ffa9e04280894e050ebd073f8db8b1721be6ccc977e0ef1",
+  "docs/results/cp4/runs/size__any.json": "2d369ed93b675486678cc4146a28e447d844d0be438c478e3c1a603a1193743d",
+  "docs/results/cp5/D1_materialize_colab.json": "7d2a2fb9724e075c93fd6339866dc7bcd98b91c7122f35da1e0ab67526e5d71d",
+  "docs/results/cp5/D4_materialize_colab.json": "32ed888af537da59029daa3aeb01ddbe0a3f6559dbad07563f78bdfc6c2b5683",
+  "docs/results/cp5/colab_run.json": "c834979c91fb02bbb323b72092d49f0f17001abbbf57b66b8793b4916ede320a",
+  "docs/results/cp5/hyde__llama3.1-8b/cases.json": "c2d6a46da49cc1fb3c8525b6fb3608cd5574ebb70ca21937114b9d70a3b2e43f",
+  "docs/results/cp5/hyde__llama3.1-8b/hyde_meta.json": "757e79832c4ad32493a6b3927c8df8c4f1f327667a4f7f201f6be9aa065a37fb",
+  "docs/results/cp5/hyde__llama3.1-8b/runs/bm25__hyde-hyde-only.json": "e1a30a7cd9f41d96b731917bca59e8e08ebf367fcfaca83cdd20c92129beab91",
+  "docs/results/cp5/hyde__llama3.1-8b/runs/bm25__hyde-query-hyde.json": "307c9503b220731b280707d12474a469402d9c4ca4832005ed060361b6c33a96",
+  "docs/results/cp5/hyde__llama3.1-8b/runs/bm25__hyde-query.json": "611946775cfb42c5cf9544f8f40b81470fc600bdf630c8fdda828f94c3543571",
+  "docs/results/cp5/hyde__llama3.1-8b/runs/hybrid_bge-small__hyde-hyde-only.json": "8729f82b4fc3a324a56e277339726e257545de34f298877fd952b4414d91fb45",
+  "docs/results/cp5/hyde__llama3.1-8b/runs/hybrid_bge-small__hyde-query-hyde.json": "cd89cc8841d1152831c1b76d38a90b4f2f663b3f0f0abff6ec6b161d62f628c5",
+  "docs/results/cp5/hyde__llama3.1-8b/runs/hybrid_bge-small__hyde-query.json": "f7359fd1ce49b218865e2515d28f827a1ab83c854a4670990ebffe979eea94bb",
+  "docs/results/cp5/hyde__qwen2.5-coder-7b/cases.json": "c2d6a46da49cc1fb3c8525b6fb3608cd5574ebb70ca21937114b9d70a3b2e43f",
+  "docs/results/cp5/hyde__qwen2.5-coder-7b/hyde_meta.json": "24c07d74da8343d298d9ec95e3e4f573d775e4205a77574d47a1612965fa572f",
+  "docs/results/cp5/hyde__qwen2.5-coder-7b/runs/bm25__hyde-hyde-only.json": "55b15db9b48c04e5758fbd6c4d9089d0c3bcdab3b487236f50d61f7a9f35fd67",
+  "docs/results/cp5/hyde__qwen2.5-coder-7b/runs/bm25__hyde-query-hyde.json": "4875dd10a9f573490b21dd873bb87d035053575fa101862cf2073237e0643945",
+  "docs/results/cp5/hyde__qwen2.5-coder-7b/runs/bm25__hyde-query.json": "9dec2ec0a20331ee05c3a7e8d447e8804093c143d888e5b3732ce66df9ecb094",
+  "docs/results/cp5/hyde__qwen2.5-coder-7b/runs/hybrid_bge-small__hyde-hyde-only.json": "0a4e9725f643c9f71799dd2766eeb68b533752c5d1bf79ff38f3ff5a328ba106",
+  "docs/results/cp5/hyde__qwen2.5-coder-7b/runs/hybrid_bge-small__hyde-query-hyde.json": "ff32d5e2509d99928621c06c9b8808ede668f0aeeddeaf41c1bcf00825abbd41",
+  "docs/results/cp5/hyde__qwen2.5-coder-7b/runs/hybrid_bge-small__hyde-query.json": "09072fbf9ea4c734c6452967862e849997d48b3bf242ffec925e814dd1dc34ae",
+  "docs/results/cp5/model_problems.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "docs/results/cp5/select_fix__llama3.1-8b.json": "af8ca29eb24e379f7517c452adc3b7919c0a1d6f628d51eb5a37a0f4f2db8176",
+  "docs/results/cp5/select_fix__qwen2.5-coder-7b.json": "17e0994031cc5bed3760c645ddbe3fdc0b2a5af7805d7b3a37d1a0e7cbc6ec9c",
+  "docs/results/cp5/select_release__llama3.1-8b__k10.json": "57e979204c6d2be9aa6535203261d35c2bb43fdaf5493ad4959686622a50f3f5",
+  "docs/results/cp5/select_release__llama3.1-8b__k5.json": "ae5086a7d08426d51307ad837a137e5b9ff42b8b153b5e2c46d22224c3091fca",
+  "docs/results/cp5/select_release__qwen2.5-coder-7b__k10.json": "cf27b8ada996b9ba10aeafff367d6254bc37a3f4b3c67d84606e7815a246c971",
+  "docs/results/cp5/select_release__qwen2.5-coder-7b__k5.json": "a720d3fe99e5ee6011a35f5fec4bb74e692a26282ac6079285fd4504c9fc8c52",
+  "docs/results/cp5b/lift_d1.json": "7762632a93fd1816d7e8195c40dbd3e4d1bd7fdb4847bddd2424a2a5dd65ac7a",
+  "docs/results/cp5b/lift_d4_ceiling.json": "788d6f3fa6ed67600a7b47198ecb019f1b9e1cedfc1794bc5aa1cfa137574859",
+  "docs/results/cp6/D4_materialize_colab.json": "b9fb267ce55898eb1205181d5aca93e4fd57498e82b23331efa3db2ba9a3c7a9",
+  "docs/results/cp6/agent__A2__llama3.1-8b.json": "d780df6a0c77a8e95551b3b7e66fab995135121d33d78f8f9cfa3f02abe42349",
+  "docs/results/cp6/agent__A2__qwen2.5-coder-7b.json": "e03799be3d3a38a5aedd8c91af0bf9a254a4479144ddbbab08661178d3c5bc1b",
+  "docs/results/cp6/agent__A3__llama3.1-8b.json": "6ed9de84ad0fbad5e98727d7acd1444e55a309c8ff07a54d7127ba857d042598",
+  "docs/results/cp6/agent__A3__qwen2.5-coder-7b.json": "a6899f828191ebffb39e6e61c7ddc6444f6ee059f8d22515a792fddecb6f57e4",
+  "docs/results/cp6/agent_evidence.json": "aefb7d186f493ec7f2cc1764b9ba259d0dacdccae5ece8a6797b6a106efebc30",
+  "docs/results/cp6/agent_evidence_colab.json": "a70e687b83050faa1e3b4ddcc79661d047ae216526386f5d7d3a3b837c355f8b",
+  "docs/results/cp6/colab_run.json": "29d202570e135390e0217b69aaa09f47c7e5fcad93623d18a2f7e58ea1c47c7d",
+  "docs/results/cp6/failure_analysis.json": "666d6c14013736433674d7c648cefb46c26cd64ba318b59001df34f646c15df2",
+  "docs/results/cp7/d1.json": "6e689713f65b7420786263c2ab7dcf68263d2b4fc623f8e737effd2c591bd89c",
+  "docs/results/cp7/d4.json": "28b85c81bb24d6cbaa5b34d215a3d236bd998a2adbe1d5add671474370d95e9c",
+  "docs/results/cp7/fixtures.json": "0f9fc4daa1579638e5e4aca9dc985e509d052bb3fe91d17c05a175eb3d25d4aa",
+  "docs/results/cp7/mode2_policy.json": "73596a73efdfa1565e10b0340a4c17f8ba45627024fa066e2b91eb5260b9e33f",
+  "docs/results/cp7b/adjudication/adjudication.json": "e2b59061014b78dfc0e3b820a1d7fb3a284d6f5906ab33dd867c150be45e885e",
+  "docs/results/cp7b/d3_triage.json": "bbdaf10b40c30bfb86c30336183395582bca549f98b0d1358a0668708fb9b596",
+  "docs/results/datasets/D1_cases.json": "2a914aceed75742de4713d3bc2bcbec367dd84a778b080bd3c5199e216c2e184",
+  "docs/results/datasets/D4_cases.json": "b98e526d62ea7d7930eaf3378130eecda1e0b79e1707ec7edc755c8be32c4856"
+ }
+}

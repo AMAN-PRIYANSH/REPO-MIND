@@ -35,6 +35,10 @@ def build_parser() -> argparse.ArgumentParser:
     rr.add_argument("--input", required=True,
                     help="cp1: linker score JSON; cp2/cp3: directory with the relevant score JSON files")
     rr.add_argument("--out", required=True, help="Markdown file to write")
+    rsum = rsub.add_parser("summary", help="write docs/results/SUMMARY.md and summary.json (and the README key-results table) "
+                                           "from the committed result files")
+    rsum.add_argument("--check", action="store_true", help="write nothing; exit 1 if a generated file differs from the committed one")
+    rsum.add_argument("--root", default=None, help="repository root (default: this checkout)")
 
     ds = sub.add_parser("dataset", help="D1/D4 dataset construction (CP3)")
     dsub = ds.add_subparsers(dest="dataset_command", required=True)
@@ -576,6 +580,10 @@ def main(argv: list[str] | None = None) -> int:
             return _cmd_helper(args)
         if args.command == "results" and args.results_command == "render":
             return _cmd_render(args)
+        if args.command == "results" and args.results_command == "summary":
+            from vulntrace.eval import summary
+
+            return summary.cmd_summary(args)
         if args.command == "dataset":
             return _cmd_dataset(args)
         if args.command == "eval" and args.eval_command == "symbols" and args.strategy == "agent":
