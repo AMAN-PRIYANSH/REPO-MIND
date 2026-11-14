@@ -133,6 +133,7 @@ No paid API is used anywhere. Language models run locally through an OpenAI-comp
 | `docs/FINAL_REPORT.md` | The final report |
 | `docs/INTERVIEW_NOTES.md` | A pitch and likely questions with evidence links |
 | `docs/DEMO.md` | Offline demo commands |
+| `docs/DEVELOPMENT.md` | Evaluation and development commands (datasets, retrieval, LLM, lifting, agent runs) |
 | `docs/architecture/`, `docs/design/`, `docs/decisions/` | Design documents and decisions (design history, see the notes in them for what was superseded) |
 | `docs/evaluation/`, `docs/testing/` | Evaluation plan, dataset strategy, testing strategy |
 | `docs/progress/` | Checkpoint ledger, per-checkpoint reports, supervisor handoff |

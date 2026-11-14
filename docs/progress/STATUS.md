@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP8 - Final report, README and interview notes**
-- State: `IN_PROGRESS`
+- State: `AWAITING_REVIEW`
 - Branch in use: `claude/vulntrace-ai-build-5f8jgi`
 - Specification: [checkpoints/CP8.md](../implementation/checkpoints/CP8.md)
 
@@ -24,22 +24,22 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP6 | LangGraph investigation agent (negative result) | APPROVED | claude/vulntrace-ai-build-1wfa8e | [CP6_REPORT](reports/CP6_REPORT.md) |
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
 | CP7b | Real applications (D3) and demo | APPROVED | claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
-| CP8 | Final report, README and interview notes (multi-agent dropped) | IN_PROGRESS | claude/vulntrace-ai-build-5f8jgi | - |
+| CP8 | Final report, README and interview notes (multi-agent dropped) | AWAITING_REVIEW | claude/vulntrace-ai-build-5f8jgi | [CP8_REPORT](reports/CP8_REPORT.md) |
 
 ## Current checkpoint task list
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-- [ ] 1. Results summary generator: `python -m vulntrace results summary` -> `docs/results/SUMMARY.md` + `summary.json`; regeneration test
-- [ ] 2. README.md (repo root): what/how (Mermaid)/key results/negative results/quickstart/map/licence; number-check test
-- [ ] 3. `docs/FINAL_REPORT.md`
-- [ ] 4. `docs/INTERVIEW_NOTES.md`; number-check test
-- [ ] 5. Housekeeping: list stale/contradictory docs; "superseded by" notes where needed (SUPERVISOR_HANDOFF.md is NOT touched)
-- [ ] 6. Tests: summary regeneration, README/interview number checks, relative-link check; CI green on the last commit
-- [ ] 7. Quickstart run offline on a fixture (output pasted into report); `CP8_REPORT.md`; STATUS `AWAITING_REVIEW`
+- [x] 1. Results summary generator: `python -m vulntrace results summary` -> `docs/results/SUMMARY.md` + `summary.json`; regeneration test
+- [x] 2. README.md (repo root): what/how (Mermaid)/key results/negative results/quickstart/map/licence; number-check test
+- [x] 3. `docs/FINAL_REPORT.md`
+- [x] 4. `docs/INTERVIEW_NOTES.md`; number-check test
+- [x] 5. Housekeeping: list stale/contradictory docs; "superseded by" notes where needed (SUPERVISOR_HANDOFF.md is NOT touched)
+- [x] 6. Tests: summary regeneration, README/interview number checks, relative-link check; CI green on the last commit
+- [x] 7. Quickstart run offline on a fixture (output pasted into report); `CP8_REPORT.md`; STATUS `AWAITING_REVIEW`
 
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-(CP7b was approved on 14 Nov 2026; read the review notes at the end of checkpoints/CP3.md to CP7b.md - they bind CP8, especially the wording limits. CP8 needs no `data/`, no models and no network beyond GitHub.)
+(CP8 is complete and awaits review: see reports/CP8_REPORT.md. Open items for the supervisor: refresh SUPERVISOR_HANDOFF.md (not touched); owner to add their own contribution sentence in docs/INTERVIEW_NOTES.md; licence undecided. CP7b was approved on 14 Nov 2026; read the review notes at the end of checkpoints/CP3.md to CP7b.md - they bind CP8, especially the wording limits. CP8 needs no `data/`, no models and no network beyond GitHub.)
