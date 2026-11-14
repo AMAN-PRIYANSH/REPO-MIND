@@ -10,7 +10,7 @@ It returns one of three verdicts:
 
 **Reachability, never exploitability.** No output says an application can be attacked.
 
-The repository is named `REPO-MIND` for historical reasons (the project began as a codebase-chat idea). Everything runs on free, open models or on none at all; the cost of building and running it was zero.
+The repository is named `REPO-MIND` for historical reasons (the project began as a codebase-chat idea). Everything runs on free, open models or on none at all; no code, test or script in this repository calls a paid API.
 
 ## How it works
 

@@ -22,6 +22,7 @@ import hashlib
 import json
 import math
 import os
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -140,6 +141,12 @@ def _datasets(rd: _Reader) -> dict[str, Any]:
         _count("d4.large", "D4 cases with more than 100 candidate functions", buckets[">100"], d4["sample_count"], [c4]),
         _count("d4.no_gold", "D4 cases with no labelled vulnerable function among the candidates (a ceiling for Mode 2)",
                no_gold, d4["sample_count"], [c4]),
+        _count("d4.post_cutoff", "D4 cases created after the 2026-06-30 cut-off used for the contamination split (date skew)",
+               sum(1 for c in rows4 if c["date_bucket"] == "post"), d4["sample_count"], [c4]),
+        _count("d4.undated", "D4 cases with no creation date (counted as pre-cutoff by the split)",
+               sum(1 for c in rows4 if c["date_bucket"] == "undated"), d4["sample_count"], [c4]),
+        _count("d4.truncated", "D4 cases whose release range was cut at the commit limit (a lower bound for commit-message search)",
+               d4["status_counts"].get("TRUNCATED", 0), d4["sample_count"], [s4]),
         _count("d2.fixtures", "D2: synthetic fixture cases (truth by construction)", fx["stability"]["cases"], fx["stability"]["cases"],
                ["docs/results/cp7/fixtures.json"]),
         _count("d3.cases", "D3: real-application cases (application x advisory)", d3["summary"]["cases"], d3["summary"]["cases"],
@@ -513,6 +520,7 @@ def build_summary(root: Path = REPO_ROOT) -> dict[str, Any]:
     s1_k = sorted({int(r["id"].split(".k")[1].split(".")[0]) for r in sections[2]["rows"] if ".s1." in r["id"]}, reverse=True)
     # constants the prose may quote; they are not results
     parameters = {"interval_percent": 95, "s1_top_k_values": s1_k, "mode2_policy_min_raw_not_reachable": POLICY_MIN_NR,
+                  "candidate_size_bucket_bounds": sorted({int(x) for b in rr.SIZE_BUCKETS for x in re.findall(r"\d+", b)}),
                   "stability_cases_per_set": rd.json(RESULTS / "cp7/d1.json")["stability"]["cases"].__len__()}
     return {"schema_version": SCHEMA_VERSION, "generated_by": "python -m vulntrace results summary", "go_versions": go,
             "parameters": parameters, "sections": sections, "sources": rd.sources()}

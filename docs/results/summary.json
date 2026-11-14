@@ -12,6 +12,11 @@
    5
   ],
   "mode2_policy_min_raw_not_reachable": 20,
+  "candidate_size_bucket_bounds": [
+   10,
+   11,
+   100
+  ],
   "stability_cases_per_set": 10
  },
  "sections": [
@@ -113,6 +118,36 @@
      "n": 120,
      "source": [
       "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "d4.post_cutoff",
+     "label": "D4 cases created after the 2026-06-30 cut-off used for the contamination split (date skew)",
+     "kind": "count",
+     "k": 87,
+     "n": 120,
+     "source": [
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "d4.undated",
+     "label": "D4 cases with no creation date (counted as pre-cutoff by the split)",
+     "kind": "count",
+     "k": 14,
+     "n": 120,
+     "source": [
+      "docs/results/cp4/cases.json"
+     ]
+    },
+    {
+     "id": "d4.truncated",
+     "label": "D4 cases whose release range was cut at the commit limit (a lower bound for commit-message search)",
+     "kind": "count",
+     "k": 14,
+     "n": 120,
+     "source": [
+      "docs/results/datasets/D4_cases.json"
      ]
     },
     {

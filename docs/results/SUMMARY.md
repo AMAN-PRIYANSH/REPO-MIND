@@ -23,6 +23,9 @@ Contents: [Datasets](#datasets), [CP4: Mode 2 retrieval on D4](#cp4-mode-2-retri
 | D4 cases with 11 to 100 candidate functions |  | 48 of 120 | [cases.json](cp4/cases.json) |
 | D4 cases with more than 100 candidate functions |  | 38 of 120 | [cases.json](cp4/cases.json) |
 | D4 cases with no labelled vulnerable function among the candidates (a ceiling for Mode 2) |  | 19 of 120 | [cases.json](cp4/cases.json) |
+| D4 cases created after the 2026-06-30 cut-off used for the contamination split (date skew) |  | 87 of 120 | [cases.json](cp4/cases.json) |
+| D4 cases with no creation date (counted as pre-cutoff by the split) |  | 14 of 120 | [cases.json](cp4/cases.json) |
+| D4 cases whose release range was cut at the commit limit (a lower bound for commit-message search) |  | 14 of 120 | [D4_cases.json](datasets/D4_cases.json) |
 | D2: synthetic fixture cases (truth by construction) |  | 22 of 22 | [fixtures.json](cp7/fixtures.json) |
 | D3: real-application cases (application x advisory) |  | 14 of 14 | [d3_triage.json](cp7b/d3_triage.json) |
 | D3: real applications |  | 5 of 5 | [d3_triage.json](cp7b/d3_triage.json) |
