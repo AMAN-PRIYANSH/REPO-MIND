@@ -33,9 +33,9 @@ Claude Code: copy the deliverables of the current checkpoint here as a checklist
 
 CP9 (session branch `claude/intelligent-planck-krrtgg`):
 
-- [ ] 1. Feasibility check in the Go helper (F1-F3 on SSA, one level of call-site context, N examined paths, conservative when undecidable)
-- [ ] 2. Pipeline and verifier integration (`PATHS_INFEASIBLE`, schema extension, verifier checks of infeasible steps and of the filtered path, downgrade-only tests, `--no-feasibility`)
-- [ ] 3. Fixtures by construction: >= 2 infeasible and >= 2 feasible look-alikes per pattern; CP2/CP7 fixtures keep their verdicts
+- [x] 1. Feasibility check in the Go helper (F1-F3 on SSA, one level of call-site context, N examined paths, conservative when undecidable)
+- [x] 2. Pipeline and verifier integration (`PATHS_INFEASIBLE`, schema extension, verifier checks of infeasible steps and of the filtered path, downgrade-only tests, `--no-feasibility`)
+- [x] 3. Fixtures by construction: >= 2 infeasible and >= 2 feasible look-alikes per pattern; CP2/CP7 fixtures keep their verdicts
 - [ ] 4a. Evaluation: fixtures (downgrades, false downgrades)
 - [ ] 4b. Evaluation: D3 before/after (in-sample, labelled so)
 - [ ] 4c. Evaluation: D3b selection (code, D3 rules, D3 apps excluded, seed fixed before runs), triage with/without filter, adjudication sheets -> `AWAITING_ADJUDICATION`
@@ -48,4 +48,10 @@ CP9 (session branch `claude/intelligent-planck-krrtgg`):
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-(CP8 was approved on 17 Nov 2026 and the project was complete; CP9 was added at the owner's request. Read the review notes at the end of checkpoints/CP2.md, CP7.md, CP7b.md and CP8.md. The D3 evidence and checkouts are not in the repository: rebuild them with the CP7b commands. If CP9 stops at AWAITING_ADJUDICATION, the supervisor sets IN_PROGRESS on the builder branch once the D3b sheets are filled.)
+CP9 session `claude/intelligent-planck-krrtgg` (17 Nov 2026):
+
+- Done and pushed: helper filter (`helper/feasible.go`, reach option `feasibility`), CP9 fixture module `fixtures/feasibility` (16 cases + manifest), pipeline stage `src/vulntrace/pipeline/feasibility.py`, verifier checks FILTERED_PATH / INFEASIBLE_STEP, `--no-feasibility`, `eval feasibility --set fixtures`, unit/contract/integration/Go tests (918 passed, 10 skipped locally).
+- Design deviations to report: (1) the INFEASIBLE decision uses an exhaustive state search over (function, parameter facts); the N=20 shortest paths are examined only for the explanation (fewer downgrades than the spec's rule, never more); (2) context follows direct parameter pass-through along the path (needed for Once.Do -> doSlow and put -> executeAndPut); (3) CP9 fixtures live in a separate module so CP2/CP7 results stay byte-identical.
+- Next: run `python -m vulntrace eval feasibility --set fixtures` (writes docs/results/cp9/fixtures.json), then D3 before/after (needs go1.26.10 from the module proxy on PATH, as in CP7b), then D3b selection with a new seed recorded first, D3b triage both ways, sheets, stop at AWAITING_ADJUDICATION.
+
+(Earlier: CP8 was approved on 17 Nov 2026 and CP9 was added at the owner's request. The D3 evidence and checkouts are not in the repository: rebuild them with the CP7b commands. If CP9 stops at AWAITING_ADJUDICATION, the supervisor sets IN_PROGRESS on the builder branch once the D3b sheets are filled.)
