@@ -1,0 +1,778 @@
+{
+ "advisory_index": {
+  "entries": 578,
+  "modules": 329
+ },
+ "candidates": [
+  {
+   "detail": "v2.13.2: 376 require entries > 150",
+   "domain": "developer-cli",
+   "go_directive": "1.25.5",
+   "module": "github.com/goreleaser/goreleaser/v2",
+   "order": 1,
+   "owner": "goreleaser",
+   "pin": {
+    "commit": "bde54b47f0e27169880d43a8469f4d805942e2e3",
+    "commit_date": "2025-12-24T17:45:42+00:00",
+    "tag": "v2.13.2"
+   },
+   "repo": "github.com/goreleaser/goreleaser",
+   "requires": 376,
+   "rule": "A6",
+   "stable_tags": 602,
+   "status": "TOO_LARGE",
+   "tags_probed": 22
+  },
+  {
+   "detail": "v0.67.0: no D1-eligible advisory covers a required version",
+   "domain": "terminal-ui",
+   "eligible_by_go_mod": [],
+   "go_directive": "1.23.0",
+   "module": "github.com/junegunn/fzf",
+   "order": 2,
+   "owner": "junegunn",
+   "pin": {
+    "commit": "2ab923f3ae04d5e915e5ff4a9cd3bd515bfd1ea5",
+    "commit_date": "2025-11-16T20:02:39+09:00",
+    "tag": "v0.67.0"
+   },
+   "repo": "github.com/junegunn/fzf",
+   "requires": 11,
+   "rule": "A7",
+   "stable_tags": 42,
+   "status": "NO_ELIGIBLE_ADVISORY",
+   "tags_probed": 14,
+   "unparseable_versions": []
+  },
+  {
+   "cases": [
+    {
+     "advisory": "GO-2026-5841",
+     "created": "2026-07-21",
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "klauspost",
+      "repo": "compress",
+      "sha": "8668e357e776d5152ed62f33c17f21b8690664fa"
+     },
+     "module": "github.com/klauspost/compress",
+     "packages": [
+      "github.com/klauspost/compress/s2"
+     ],
+     "version_go_mod": "v1.18.0",
+     "version_selected": "v1.18.0"
+    },
+    {
+     "advisory": "GO-2026-6348",
+     "created": "2026-09-09",
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "grpc",
+      "repo": "grpc-go",
+      "sha": "7354d9c8debb4bcf2225bf429857078de310c176"
+     },
+     "module": "google.golang.org/grpc",
+     "packages": [
+      "google.golang.org/grpc/internal/transport",
+      "google.golang.org/grpc/mem"
+     ],
+     "version_go_mod": "v1.56.3",
+     "version_selected": "v1.56.3"
+    },
+    {
+     "advisory": "GO-2026-6061",
+     "created": "2026-07-23",
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "grpc",
+      "repo": "grpc-go",
+      "sha": "4ea465d4ab98013f72a142fe0fc89c19770b2935"
+     },
+     "module": "google.golang.org/grpc",
+     "packages": [
+      "google.golang.org/grpc/internal/transport",
+      "google.golang.org/grpc/internal/xds/rbac"
+     ],
+     "version_go_mod": "v1.56.3",
+     "version_selected": "v1.56.3"
+    }
+   ],
+   "detail": "v3.46.4 (179bde1f3756), 3 main(s), 3 eligible advisories, 3 taken",
+   "domain": "developer-cli",
+   "eligible_by_go_mod": [
+    "GO-2026-5841",
+    "GO-2026-6061",
+    "GO-2026-6348"
+   ],
+   "eligible_selected": [
+    "GO-2026-5841",
+    "GO-2026-6061",
+    "GO-2026-6348"
+   ],
+   "go_directive": "1.24.0",
+   "mains": [
+    "github.com/go-task/task/v3/cmd/release",
+    "github.com/go-task/task/v3/cmd/sleepit",
+    "github.com/go-task/task/v3/cmd/task"
+   ],
+   "module": "github.com/go-task/task/v3",
+   "order": 3,
+   "owner": "go-task",
+   "package_errors": [],
+   "pin": {
+    "commit": "179bde1f37561b0d5e96e99688de735ce9eef05c",
+    "commit_date": "2025-12-24T18:57:17-03:00",
+    "tag": "v3.46.4"
+   },
+   "repo": "github.com/go-task/task",
+   "requires": 84,
+   "rule": "A1-A11",
+   "selected_versions": {
+    "github.com/klauspost/compress": "v1.18.0",
+    "google.golang.org/grpc": "v1.56.3"
+   },
+   "stable_tags": 125,
+   "status": "KEPT",
+   "tags_probed": 11,
+   "unparseable_versions": []
+  },
+  {
+   "detail": "v1.25.3: 274 require entries > 150",
+   "domain": "git-forge",
+   "go_directive": "1.25.0",
+   "module": "code.gitea.io/gitea",
+   "order": 4,
+   "owner": "go-gitea",
+   "pin": {
+    "commit": "9a7cfd8620989d9de6dc4ca0c95d9fd42c1768ed",
+    "commit_date": "2025-12-18T09:36:38-08:00",
+    "tag": "v1.25.3"
+   },
+   "repo": "github.com/go-gitea/gitea",
+   "requires": 274,
+   "rule": "A6",
+   "stable_tags": 188,
+   "status": "TOO_LARGE",
+   "tags_probed": 17
+  },
+  {
+   "detail": "v0.50.16: 381 require entries > 150",
+   "domain": "terminal-ui",
+   "go_directive": "1.24.4",
+   "module": "github.com/derailed/k9s",
+   "order": 5,
+   "owner": "derailed",
+   "pin": {
+    "commit": "3c37ca2197ca48591566d1f599b7b3a50d54a408",
+    "commit_date": "2025-10-19T09:06:48-06:00",
+    "tag": "v0.50.16"
+   },
+   "repo": "github.com/derailed/k9s",
+   "requires": 381,
+   "rule": "A6",
+   "stable_tags": 178,
+   "status": "TOO_LARGE",
+   "tags_probed": 4
+  },
+  {
+   "detail": "v0.68.2: 494 require entries > 150",
+   "domain": "security-tools",
+   "go_directive": "1.25",
+   "module": "github.com/aquasecurity/trivy",
+   "order": 6,
+   "owner": "aquasecurity",
+   "pin": {
+    "commit": "0c40a8d4b9b943f1b679a20f8ba3cb61c94831de",
+    "commit_date": "2025-12-17T11:57:32+06:00",
+    "tag": "v0.68.2"
+   },
+   "repo": "github.com/aquasecurity/trivy",
+   "requires": 494,
+   "rule": "A6",
+   "stable_tags": 193,
+   "status": "TOO_LARGE",
+   "tags_probed": 16
+  },
+  {
+   "detail": "domain developer-cli already kept",
+   "domain": "developer-cli",
+   "order": 7,
+   "owner": "cli",
+   "repo": "github.com/cli/cli",
+   "rule": "A1",
+   "status": "DIVERSITY_DOMAIN"
+  },
+  {
+   "detail": "v0.35.0: no D1-eligible advisory covers a required version",
+   "domain": "web-app",
+   "eligible_by_go_mod": [],
+   "go_directive": "1.24.0",
+   "module": "github.com/pocketbase/pocketbase",
+   "order": 8,
+   "owner": "pocketbase",
+   "pin": {
+    "commit": "b1da83e5165f938453fbb21e748bca317b08239d",
+    "commit_date": "2025-12-21T09:24:07+02:00",
+    "tag": "v0.35.0"
+   },
+   "repo": "github.com/pocketbase/pocketbase",
+   "requires": 41,
+   "rule": "A7",
+   "stable_tags": 271,
+   "status": "NO_ELIGIBLE_ADVISORY",
+   "tags_probed": 40,
+   "unparseable_versions": []
+  },
+  {
+   "detail": "v0.57.0: no D1-eligible advisory covers a required version",
+   "domain": "terminal-ui",
+   "eligible_by_go_mod": [],
+   "go_directive": "1.25.0",
+   "module": "github.com/jesseduffield/lazygit",
+   "order": 9,
+   "owner": "jesseduffield",
+   "pin": {
+    "commit": "17d03ec8cb89d4c65fd129228164562a220abefb",
+    "commit_date": "2025-12-06T13:58:23+01:00",
+    "tag": "v0.57.0"
+   },
+   "repo": "github.com/jesseduffield/lazygit",
+   "requires": 75,
+   "rule": "A7",
+   "stable_tags": 214,
+   "status": "NO_ELIGIBLE_ADVISORY",
+   "tags_probed": 20,
+   "unparseable_versions": []
+  },
+  {
+   "detail": "0 stable tags, 0 probed, none dated on or before 2025-12-31T23:59:59Z",
+   "domain": "storage-messaging",
+   "order": 10,
+   "owner": "minio",
+   "repo": "github.com/minio/minio",
+   "rule": "A3",
+   "stable_tags": 0,
+   "status": "NO_TAG_BEFORE_CUTOFF",
+   "tags_probed": 0
+  },
+  {
+   "detail": "v3.8.1: 228 require entries > 150",
+   "domain": "monitoring",
+   "go_directive": "1.24.0",
+   "module": "github.com/prometheus/prometheus",
+   "order": 11,
+   "owner": "prometheus",
+   "pin": {
+    "commit": "ed753444ffec98097399d0cfa9073c70a840b812",
+    "commit_date": "2025-12-16T08:21:17+00:00",
+    "tag": "v3.8.1"
+   },
+   "repo": "github.com/prometheus/prometheus",
+   "requires": 228,
+   "rule": "A6",
+   "stable_tags": 318,
+   "status": "TOO_LARGE",
+   "tags_probed": 19
+  },
+  {
+   "detail": "v2.0.15: no D1-eligible advisory covers a required version",
+   "domain": "terminal-ui",
+   "eligible_by_go_mod": [],
+   "go_directive": "1.19",
+   "module": "github.com/zyedidia/micro/v2",
+   "order": 12,
+   "owner": "zyedidia",
+   "pin": {
+    "commit": "6a62575bcfdf4965f187eedafceb3400316e612b",
+    "commit_date": "2025-12-31T12:47:43+01:00",
+    "tag": "v2.0.15"
+   },
+   "repo": "github.com/zyedidia/micro",
+   "requires": 27,
+   "rule": "A7",
+   "stable_tags": 32,
+   "status": "NO_ELIGIBLE_ADVISORY",
+   "tags_probed": 1,
+   "unparseable_versions": []
+  },
+  {
+   "detail": "v4.30.1: 215 require entries > 150",
+   "domain": "pki-acme",
+   "go_directive": "1.24.0",
+   "module": "github.com/go-acme/lego/v4",
+   "order": 13,
+   "owner": "go-acme",
+   "pin": {
+    "commit": "27075d562add17f782773c44dfd10992e9be9de0",
+    "commit_date": "2025-12-16T21:35:22+01:00",
+    "tag": "v4.30.1"
+   },
+   "repo": "github.com/go-acme/lego",
+   "requires": 215,
+   "rule": "A6",
+   "stable_tags": 126,
+   "status": "TOO_LARGE",
+   "tags_probed": 25
+  },
+  {
+   "detail": "v1.72.1: 266 require entries > 150",
+   "domain": "file-sync-transfer",
+   "go_directive": "1.24.4",
+   "module": "github.com/rclone/rclone",
+   "order": 14,
+   "owner": "rclone",
+   "pin": {
+    "commit": "73bcae2245467725880653db714b936d58ea4f13",
+    "commit_date": "2025-12-10T12:54:18+00:00",
+    "tag": "v1.72.1"
+   },
+   "repo": "github.com/rclone/rclone",
+   "requires": 266,
+   "rule": "A6",
+   "stable_tags": 84,
+   "status": "TOO_LARGE",
+   "tags_probed": 16
+  },
+  {
+   "cases": [
+    {
+     "advisory": "GO-2026-5676",
+     "created": "2026-07-07",
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "quic-go",
+      "repo": "quic-go",
+      "sha": "c56e8c79d1627cc1ed6005b421b4b0adadd83665"
+     },
+     "module": "github.com/quic-go/quic-go",
+     "packages": [
+      "github.com/quic-go/quic-go/http3"
+     ],
+     "version_go_mod": "v0.53.0",
+     "version_selected": "v0.53.0"
+    },
+    {
+     "advisory": "GO-2026-5543",
+     "created": "2026-07-23",
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "Azure",
+      "repo": "go-ntlmssp",
+      "sha": "bd8579c18d41bf5d91a5f74b1117c958f635b866"
+     },
+     "module": "github.com/Azure/go-ntlmssp",
+     "packages": [
+      "github.com/Azure/go-ntlmssp"
+     ],
+     "version_go_mod": "v0.0.0-20221128193559-754e69321358",
+     "version_selected": "v0.0.0-20221128193559-754e69321358"
+    },
+    {
+     "advisory": "GO-2025-4233",
+     "created": "2025-12-15",
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "quic-go",
+      "repo": "quic-go",
+      "sha": "5b2d2129f8315da41e01eff0a847ab38a34e83a8"
+     },
+     "module": "github.com/quic-go/quic-go",
+     "packages": [
+      "github.com/quic-go/quic-go/http3"
+     ],
+     "version_go_mod": "v0.53.0",
+     "version_selected": "v0.53.0"
+    },
+    {
+     "advisory": "GO-2025-4017",
+     "created": "2025-11-03",
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "quic-go",
+      "repo": "quic-go",
+      "sha": "bc5bccf10fd02728eef150683eb4dfaa5c0e749c"
+     },
+     "module": "github.com/quic-go/quic-go",
+     "packages": [
+      "github.com/quic-go/quic-go"
+     ],
+     "version_go_mod": "v0.53.0",
+     "version_selected": "v0.53.0"
+    }
+   ],
+   "detail": "v0.65.0 (2f5e1f79457b), 2 main(s), 4 eligible advisories, 4 taken",
+   "domain": "network-tunnel",
+   "eligible_by_go_mod": [
+    "GO-2025-4017",
+    "GO-2025-4233",
+    "GO-2026-5543",
+    "GO-2026-5676"
+   ],
+   "eligible_selected": [
+    "GO-2025-4017",
+    "GO-2025-4233",
+    "GO-2026-5543",
+    "GO-2026-5676"
+   ],
+   "go_directive": "1.24.0",
+   "mains": [
+    "github.com/fatedier/frp/cmd/frpc",
+    "github.com/fatedier/frp/cmd/frps"
+   ],
+   "module": "github.com/fatedier/frp",
+   "order": 15,
+   "owner": "fatedier",
+   "package_errors": [],
+   "pin": {
+    "commit": "2f5e1f79457b5e9d769f2ac063443b62640185a9",
+    "commit_date": "2025-09-25T20:23:42+08:00",
+    "tag": "v0.65.0"
+   },
+   "repo": "github.com/fatedier/frp",
+   "requires": 73,
+   "rule": "A1-A11",
+   "selected_versions": {
+    "github.com/Azure/go-ntlmssp": "v0.0.0-20221128193559-754e69321358",
+    "github.com/quic-go/quic-go": "v0.53.0"
+   },
+   "stable_tags": 119,
+   "status": "KEPT",
+   "tags_probed": 12,
+   "unparseable_versions": []
+  },
+  {
+   "detail": "v2.0.13: 18 main packages > 10",
+   "domain": "file-sync-transfer",
+   "eligible_by_go_mod": [
+    "GO-2022-0635",
+    "GO-2022-0646",
+    "GO-2025-4233",
+    "GO-2026-5543",
+    "GO-2026-5676",
+    "GO-2026-6700"
+   ],
+   "go_directive": "1.24.0",
+   "mains": [
+    "github.com/syncthing/syncthing/cmd/dev/stcompdirs",
+    "github.com/syncthing/syncthing/cmd/dev/stdisco",
+    "github.com/syncthing/syncthing/cmd/dev/stevents",
+    "github.com/syncthing/syncthing/cmd/dev/stfileinfo",
+    "github.com/syncthing/syncthing/cmd/dev/stfinddevice",
+    "github.com/syncthing/syncthing/cmd/dev/stfindignored",
+    "github.com/syncthing/syncthing/cmd/dev/stgenfiles",
+    "github.com/syncthing/syncthing/cmd/dev/stsigtool",
+    "github.com/syncthing/syncthing/cmd/dev/stvanity",
+    "github.com/syncthing/syncthing/cmd/dev/stwatchfile",
+    "github.com/syncthing/syncthing/cmd/infra/stcrashreceiver",
+    "github.com/syncthing/syncthing/cmd/infra/strelaypoolsrv",
+    "github.com/syncthing/syncthing/cmd/infra/stupgrades",
+    "github.com/syncthing/syncthing/cmd/infra/ursrv",
+    "github.com/syncthing/syncthing/cmd/stdiscosrv",
+    "github.com/syncthing/syncthing/cmd/strelaysrv",
+    "github.com/syncthing/syncthing/cmd/strelaysrv/testutil",
+    "github.com/syncthing/syncthing/cmd/syncthing"
+   ],
+   "module": "github.com/syncthing/syncthing",
+   "order": 16,
+   "owner": "syncthing",
+   "package_errors": [],
+   "pin": {
+    "commit": "962b91715039252c5b3ce1885f3358aa2ed78bb1",
+    "commit_date": "2025-12-23T09:10:48+01:00",
+    "tag": "v2.0.13"
+   },
+   "repo": "github.com/syncthing/syncthing",
+   "requires": 99,
+   "rule": "A9",
+   "stable_tags": 339,
+   "status": "TOO_MANY_MAINS",
+   "tags_probed": 12,
+   "unparseable_versions": []
+  },
+  {
+   "detail": "v2.10.2: 151 require entries > 150",
+   "domain": "web-server-proxy",
+   "go_directive": "1.25",
+   "module": "github.com/caddyserver/caddy/v2",
+   "order": 17,
+   "owner": "caddyserver",
+   "pin": {
+    "commit": "551f793700fe1550845c824470b623fd1aa03d36",
+    "commit_date": "2025-08-22T21:29:34+00:00",
+    "tag": "v2.10.2"
+   },
+   "repo": "github.com/caddyserver/caddy",
+   "requires": 151,
+   "rule": "A6",
+   "stable_tags": 96,
+   "status": "TOO_LARGE",
+   "tags_probed": 11
+  },
+  {
+   "cases": [
+    {
+     "advisory": "GO-2026-5543",
+     "created": "2026-07-23",
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "Azure",
+      "repo": "go-ntlmssp",
+      "sha": "bd8579c18d41bf5d91a5f74b1117c958f635b866"
+     },
+     "module": "github.com/Azure/go-ntlmssp",
+     "packages": [
+      "github.com/Azure/go-ntlmssp"
+     ],
+     "version_go_mod": "v0.0.0-20220621081337-cb9428e4ac1e",
+     "version_selected": "v0.0.0-20220621081337-cb9428e4ac1e"
+    },
+    {
+     "advisory": "GO-2024-2606",
+     "created": null,
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "jackc",
+      "repo": "pgproto3",
+      "sha": "945c2126f6db8f3bea7eeebe307c01fe92bca007"
+     },
+     "module": "github.com/jackc/pgx/v5",
+     "packages": [
+      "github.com/jackc/pgx/v5/internal/sanitize",
+      "github.com/jackc/pgx/v5/pgproto3",
+      "github.com/jackc/pgx/v5/pgconn",
+      "github.com/jackc/pgx/v5/pgproto3/example/pgfortune"
+     ],
+     "version_go_mod": "v5.3.0",
+     "version_selected": "v5.3.0"
+    },
+    {
+     "advisory": "GO-2024-2567",
+     "created": "2024-07-02",
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "jackc",
+      "repo": "pgx",
+      "sha": "dfd198003a03dbb96e4607b0d3a0bb9a7398ccb7"
+     },
+     "module": "github.com/jackc/pgx/v5",
+     "packages": [
+      "github.com/jackc/pgx/v5/pgconn"
+     ],
+     "version_go_mod": "v5.3.0",
+     "version_selected": "v5.3.0"
+    },
+    {
+     "advisory": "GO-2026-5004",
+     "created": "2026-05-21",
+     "fix_commit": {
+      "host": "github.com",
+      "owner": "jackc",
+      "repo": "pgx",
+      "sha": "60644f84918a8af66d14a4b0d865d4edafd955da"
+     },
+     "module": "github.com/jackc/pgx/v5",
+     "packages": [
+      "github.com/jackc/pgx/v5/internal/sanitize"
+     ],
+     "version_go_mod": "v5.3.0",
+     "version_selected": "v5.3.0"
+    }
+   ],
+   "detail": "v0.13.3 (5084b4a9b77a), 2 main(s), 4 eligible advisories, 4 taken",
+   "domain": "git-forge",
+   "eligible_by_go_mod": [
+    "GO-2024-2567",
+    "GO-2024-2606",
+    "GO-2026-5004",
+    "GO-2026-5543"
+   ],
+   "eligible_selected": [
+    "GO-2024-2567",
+    "GO-2024-2606",
+    "GO-2026-5004",
+    "GO-2026-5543"
+   ],
+   "go_directive": "1.18",
+   "mains": [
+    "gogs.io/gogs",
+    "gogs.io/gogs/internal/db/schemadoc"
+   ],
+   "module": "gogs.io/gogs",
+   "order": 18,
+   "owner": "gogs",
+   "package_errors": [],
+   "pin": {
+    "commit": "5084b4a9b77a506f5e287e82e945e1c6882b827a",
+    "commit_date": "2025-06-08T18:55:56-04:00",
+    "tag": "v0.13.3"
+   },
+   "repo": "github.com/gogs/gogs",
+   "requires": 135,
+   "rule": "A1-A11",
+   "selected_versions": {
+    "github.com/Azure/go-ntlmssp": "v0.0.0-20220621081337-cb9428e4ac1e",
+    "github.com/jackc/pgx/v5": "v5.3.0"
+   },
+   "stable_tags": 74,
+   "status": "KEPT",
+   "tags_probed": 7,
+   "unparseable_versions": []
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "site-generator",
+   "order": 19,
+   "owner": "gohugoio",
+   "repo": "github.com/gohugoio/hugo",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "dns",
+   "order": 20,
+   "owner": "adguardteam",
+   "repo": "github.com/AdguardTeam/AdGuardHome",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "web-app",
+   "order": 21,
+   "owner": "miniflux",
+   "repo": "github.com/miniflux/v2",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "security-tools",
+   "order": 22,
+   "owner": "sigstore",
+   "repo": "github.com/sigstore/cosign",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "dns",
+   "order": 23,
+   "owner": "coredns",
+   "repo": "github.com/coredns/coredns",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "developer-cli",
+   "order": 24,
+   "owner": "mikefarah",
+   "repo": "github.com/mikefarah/yq",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "web-app",
+   "order": 25,
+   "owner": "filebrowser",
+   "repo": "github.com/filebrowser/filebrowser",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "file-sync-transfer",
+   "order": 26,
+   "owner": "schollz",
+   "repo": "github.com/schollz/croc",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "security-tools",
+   "order": 27,
+   "owner": "anchore",
+   "repo": "github.com/anchore/grype",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "storage-messaging",
+   "order": 28,
+   "owner": "nats-io",
+   "repo": "github.com/nats-io/nats-server",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "developer-cli",
+   "order": 29,
+   "owner": "nektos",
+   "repo": "github.com/nektos/act",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "container-tools",
+   "order": 30,
+   "owner": "helm",
+   "repo": "github.com/helm/helm",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "monitoring",
+   "order": 31,
+   "owner": "influxdata",
+   "repo": "github.com/influxdata/telegraf",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  },
+  {
+   "detail": "five applications were already kept",
+   "domain": "web-server-proxy",
+   "order": 32,
+   "owner": "traefik",
+   "repo": "github.com/traefik/traefik",
+   "rule": "quota",
+   "status": "NOT_EVALUATED_QUOTA_FILLED"
+  }
+ ],
+ "candidates_file": "d3b_candidates.json",
+ "diversity_note": "3 applications, 3 distinct owners, 3 distinct domains (developer-cli, network-tunnel, git-forge); no two share an owner or a domain (fork relations are not checked by code)",
+ "env": {
+  "CGO_ENABLED": "0",
+  "GOFLAGS": "-mod=readonly",
+  "GOTOOLCHAIN": "local"
+ },
+ "pin_cutoff": "2025-12-31T23:59:59Z",
+ "rules": "docs/evaluation/D3_SELECTION_RULES.md",
+ "run": {
+  "command": "python -m vulntrace d3 select --candidates docs/evaluation/d3b_candidates.json --out docs/results/cp9/d3b --work data/cp9/d3b/shared/apps",
+  "go": "go version go1.26.10 linux/amd64",
+  "os": "Linux-6.18.44-fc-v553-x86_64-with-glibc2.39",
+  "python": "3.13.18",
+  "repo_commit": "ebba1d3",
+  "repo_dirty": false
+ },
+ "schema_version": "1.0",
+ "seed": 20261117,
+ "status_counts": {
+  "DIVERSITY_DOMAIN": 1,
+  "KEPT": 3,
+  "NOT_EVALUATED_QUOTA_FILLED": 14,
+  "NO_ELIGIBLE_ADVISORY": 4,
+  "NO_TAG_BEFORE_CUTOFF": 1,
+  "TOO_LARGE": 8,
+  "TOO_MANY_MAINS": 1
+ },
+ "toolchain": "go1.26.10",
+ "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+}
