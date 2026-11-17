@@ -5,8 +5,8 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP9 - Path-feasibility filter for REACHABLE (downgrade-only)**
-- State: `READY`
-- Branch in use: (none yet; the CP9 session records its own `claude/...` branch)
+- State: `IN_PROGRESS`
+- Branch in use: `claude/intelligent-planck-krrtgg`
 - Specification: [checkpoints/CP9.md](../implementation/checkpoints/CP9.md)
 
 State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDICATION` →) `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
@@ -25,13 +25,24 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
 | CP7b | Real applications (D3) and demo | APPROVED | claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
 | CP8 | Final report, README and interview notes (multi-agent dropped) | APPROVED | claude/vulntrace-ai-build-5f8jgi | [CP8_REPORT](reports/CP8_REPORT.md) |
-| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | READY | - | - |
+| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | IN_PROGRESS | claude/intelligent-planck-krrtgg | - |
 
 ## Current checkpoint task list
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-(CP9: not started.)
+CP9 (session branch `claude/intelligent-planck-krrtgg`):
+
+- [ ] 1. Feasibility check in the Go helper (F1-F3 on SSA, one level of call-site context, N examined paths, conservative when undecidable)
+- [ ] 2. Pipeline and verifier integration (`PATHS_INFEASIBLE`, schema extension, verifier checks of infeasible steps and of the filtered path, downgrade-only tests, `--no-feasibility`)
+- [ ] 3. Fixtures by construction: >= 2 infeasible and >= 2 feasible look-alikes per pattern; CP2/CP7 fixtures keep their verdicts
+- [ ] 4a. Evaluation: fixtures (downgrades, false downgrades)
+- [ ] 4b. Evaluation: D3 before/after (in-sample, labelled so)
+- [ ] 4c. Evaluation: D3b selection (code, D3 rules, D3 apps excluded, seed fixed before runs), triage with/without filter, adjudication sheets -> `AWAITING_ADJUDICATION`
+- [ ] 4d. Evaluation: D1/D4 downgrade counts by pattern
+- [ ] 4e. Results renderer with headline fixed before any D3b result -> `docs/results/CP9_FEASIBILITY_RESULTS.md`, files under `docs/results/cp9/` (< 512 KiB each)
+- [ ] 5. Tests: unit per pattern (SSA snippets), contract tests for new fields, integration on fixtures; CI green
+- [ ] 6. After adjudication (second session): scoring, results document, report `CP9_REPORT.md`, STATUS `AWAITING_REVIEW`
 
 ## Handoff notes
 
