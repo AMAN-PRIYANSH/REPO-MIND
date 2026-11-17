@@ -73,6 +73,9 @@ def build_parser() -> argparse.ArgumentParser:
     from vulntrace.pipeline import cli as triage_cli
 
     triage_cli.add_parser(sub)
+    from vulntrace.eval import feasibility_cli as _fcli
+
+    _fcli.add_cp9_parser(sub)
 
     from vulntrace.d3 import cli as d3_cli
 
@@ -623,6 +626,10 @@ def main(argv: list[str] | None = None) -> int:
             from vulntrace.eval import triage_cli
 
             return triage_cli.cmd_eval_triage(args, argv)
+        if args.command == "cp9":
+            from vulntrace.eval import feasibility_cli
+
+            return feasibility_cli.cmd_cp9(args)
         if args.command == "eval" and args.eval_command == "feasibility":
             from vulntrace.eval import feasibility_cli
 
