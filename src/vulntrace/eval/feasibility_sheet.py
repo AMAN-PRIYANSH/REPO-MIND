@@ -52,6 +52,25 @@ def first_reachable_entries(v: dict[str, Any] | None, on_rule_table: bool = Fals
     return sorted(out, key=lambda e: not e.get("decides_verdict", True))
 
 
+def chosen(off: dict[str, Any] | None, on: dict[str, Any] | None) -> tuple[dict | None, dict | None]:
+    """(entry for path A, entry for path B): the target is chosen as in CP7b (`d3.sheet.reachable_paths`:
+    deciding entries first, then targets the fix really changed before context-only ones) from the verdict
+    without the filter; path B is the same target and main package in the verdict with the filter."""
+    first = s7.reachable_paths(off or {})
+    if not first:
+        return None, None
+    key = (first[0]["target"], first[0]["main"])
+
+    def find(v, rule_table=False):
+        for e in (v or {}).get("per_symbol") or []:
+            if (s7._target(e["target"]), e.get("main_package")) == key and \
+                    (e.get("pre_feasibility_result") == "REACHABLE" if rule_table else e.get("result") == "REACHABLE"):
+                return e
+        return None
+
+    return find(off), (find(on) or find(on, rule_table=True))
+
+
 def path_md(p: dict[str, Any], row: dict[str, Any], roots: dict[str, Path], go_version: str | None) -> list[str]:
     out = []
     for j, e in enumerate(p["edges"], start=1):
@@ -81,20 +100,28 @@ def case_markdown(row: dict[str, Any], off: dict[str, Any], on: dict[str, Any] |
                                          f"({s7.md(', '.join(row.get('reason_codes_on') or []) or 'no reason codes')})"),
              ("filter answers (REACHABLE entries)", s7.md(row.get("filter_statuses")))]
     out += [f"- {k}: {v}" for k, v in facts]
-    a = first_reachable_entries(off)
+    a, b = chosen(off, on)
     if a:
-        e = a[0]
+        e = a
         out += ["", f"### Path A (without the filter): {s7.code_span(e['target']['package'] + '.' + e['target']['symbol'])} "
                     f"from {s7.code_span(e.get('main_package'))}", ""]
         out += path_md(e["verified_path"], row, roots, go_version)
-    b = first_reachable_entries(on)
-    if row["verdict_on"] == "REACHABLE" and b:
-        e = b[0]
-        same = a and e["verified_path"] == a[0]["verified_path"]
+    if row["verdict_on"] == "REACHABLE" and b is not None and b.get("result") == "REACHABLE":
+        e = b
+        same = a is not None and e["verified_path"] == a["verified_path"]
         out += ["", f"### Path B (the path that passed the filter): "
                     f"{s7.code_span(e['target']['package'] + '.' + e['target']['symbol'])}", ""]
         out += ["Same as path A."] if same else path_md(e["verified_path"], row, roots, go_version)
-    elif row["verdict_on"] != "REACHABLE":
+    elif row["verdict_on"] == "REACHABLE":
+        other = first_reachable_entries(on)
+        out += ["", "With the filter, path A's target is no longer REACHABLE (PATHS_INFEASIBLE); the case stays REACHABLE "
+                    "through another target. Path B is that target's path."]
+        if other:
+            e = other[0]
+            out += ["", f"### Path B (the path that passed the filter): "
+                        f"{s7.code_span(e['target']['package'] + '.' + e['target']['symbol'])}", ""]
+            out += path_md(e["verified_path"], row, roots, go_version)
+    if row["verdict_on"] != "REACHABLE":
         out += ["", "### Infeasible steps reported by the filter", ""]
         for e in first_reachable_entries(on, on_rule_table=True)[:MAX_ENTRIES]:
             f = e.get("feasibility") or {}
@@ -120,8 +147,8 @@ def sheet_cases(rows: list[dict[str, Any]], off: dict[str, dict], on: dict[str, 
     for r in rows:
         if r["verdict_off"] != "REACHABLE" and r["verdict_on"] != "REACHABLE":
             continue
-        a, b = first_reachable_entries(off.get(r["id"])), first_reachable_entries(on.get(r["id"]))
-        same = bool(a and b and a[0]["verified_path"] == b[0]["verified_path"])
+        a, b = chosen(off.get(r["id"]), on.get(r["id"]))
+        same = bool(a and b and b.get("result") == "REACHABLE" and a["verified_path"] == b["verified_path"])
         c = {"id": r["id"], "app_repo": r["app_repo"], "advisory": r["advisory"], "verdict_off": r["verdict_off"],
              "verdict_on": r["verdict_on"], "reason_codes_on": r.get("reason_codes_on") or [],
              "downgraded_by_filter": r["downgraded_by_filter"], "adjudication_off": None,
