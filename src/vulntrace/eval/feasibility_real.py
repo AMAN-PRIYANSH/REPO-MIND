@@ -23,6 +23,7 @@ from typing import Any
 
 from vulntrace.dataset import build as dataset_build
 from vulntrace.dataset import datasets
+from vulntrace.eval import triage_eval as te
 from vulntrace.eval.triage_cli import EXIT_MISSING_PREREQUISITE, EXIT_OK, _log, _write
 from vulntrace.paths import REPO_ROOT
 from vulntrace.pipeline import feasibility as fz
@@ -71,6 +72,40 @@ def _steps(e: dict[str, Any]) -> list[dict[str, Any]]:
             out.append({"path_length": ex["length"], "pattern": st["pattern"], "edge_index": st["edge_index"],
                         "caller": st["edge"]["caller"], "callee": st["edge"]["callee"], "site": st["edge"]["call_site"],
                         "context_sites": [c["call_site"] for c in st["context_edges"]], "reason": st["reason"]})
+    return out
+
+
+def write_verdict(directory: Path, cid: str, v: dict[str, Any]) -> str:
+    """`<cid>.json`, or, when that would be over 512 KiB, the same content as `<cid>.json.gz` (which must be
+    under 512 KiB). Nothing is dropped. Returns the file name written."""
+    import gzip
+
+    from vulntrace.eval.triage_cli import MAX_RESULT_BYTES
+
+    v = te.example_verdict(v)
+    text = json.dumps(v, indent=1, sort_keys=True) + "\n"
+    directory.mkdir(parents=True, exist_ok=True)
+    for stale in (directory / f"{cid}.json", directory / f"{cid}.json.gz"):
+        stale.unlink(missing_ok=True)
+    if len(text.encode("utf-8")) <= MAX_RESULT_BYTES:
+        (directory / f"{cid}.json").write_text(text, encoding="utf-8")
+        return f"{cid}.json"
+    data = gzip.compress(text.encode("utf-8"), mtime=0)
+    if len(data) > MAX_RESULT_BYTES:
+        raise SystemExit(f"error: {directory / cid}.json.gz is {len(data)} bytes, over the 512 KiB limit")
+    (directory / f"{cid}.json.gz").write_bytes(data)
+    _log(f"wrote {directory / cid}.json.gz ({len(data)} bytes; {len(text)} bytes uncompressed)")
+    return f"{cid}.json.gz"
+
+
+def read_verdicts(directory: Path) -> dict[str, dict[str, Any]]:
+    import gzip
+
+    out = {}
+    for p in sorted(directory.glob("*.json")):
+        out[p.stem] = json.loads(p.read_text(encoding="utf-8"))
+    for p in sorted(directory.glob("*.json.gz")):
+        out[p.name[: -len(".json.gz")]] = json.loads(gzip.decompress(p.read_bytes()).decode("utf-8"))
     return out
 
 
@@ -244,11 +279,15 @@ def cmd(args, argv, binary, off_factory, on_factory, feas, env, out_dir: Path) -
         doc, off_v, on_v = run_d3_both(args, binary, off_factory, on_factory, feas, env, args.dataset_set,
                                        case_path, data_dir)
         base = out_dir / args.dataset_set
-        _write(base / f"{args.dataset_set}_feasibility.json", doc)
+        gz = []
         for label, vs in (("off", off_v), ("on", on_v)):
             for cid, v in sorted(vs.items()):
-                _write(base / f"verdicts_{label}" / f"{cid}.json",
-                       compact_for_commit(v, off_v.get(cid) if label == "on" else None))
+                name = write_verdict(base / f"verdicts_{label}", cid,
+                                     compact_for_commit(v, off_v.get(cid) if label == "on" else None))
+                if name.endswith(".gz"):
+                    gz.append(f"verdicts_{label}/{name}")
+        doc["verdict_files_gzipped"] = gz
+        _write(base / f"{args.dataset_set}_feasibility.json", doc)
         return EXIT_OK
     from vulntrace.eval import feasibility_dist as fd
 

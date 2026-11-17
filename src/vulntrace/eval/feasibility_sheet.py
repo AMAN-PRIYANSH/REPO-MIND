@@ -136,8 +136,9 @@ def sheet_cases(rows: list[dict[str, Any]], off: dict[str, dict], on: dict[str, 
 def build(results_dir: Path, roots_for: Any, go_version: str | None, summaries: dict[str, str]) -> dict[str, Any]:
     """Writes `adjudication/<app>.md` and `adjudication/adjudication.json` under `results_dir` (D3b)."""
     doc = json.loads((results_dir / "d3b_feasibility.json").read_text(encoding="utf-8"))
-    off = {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in (results_dir / "verdicts_off").glob("*.json")}
-    on = {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in (results_dir / "verdicts_on").glob("*.json")}
+    from vulntrace.eval.feasibility_real import read_verdicts
+
+    off, on = read_verdicts(results_dir / "verdicts_off"), read_verdicts(results_dir / "verdicts_on")
     cases = sheet_cases(doc["rows"], off, on)
     ids = {c["id"] for c in cases}
     by_app: dict[str, list[dict[str, Any]]] = {}
