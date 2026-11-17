@@ -2,8 +2,9 @@
 
 Stages: mode choice -> target symbols (Mode 1: every changed non-test function; Mode 2: the
 retriever's top-k) -> optional lifting (extra, non-deciding seeds) -> two methods per symbol and
-main package -> rule table -> evidence verifier (downgrade-only) -> case verdict -> Mode 2
-policy -> output. A data problem (no evidence, no candidate, app does not load) is a
+main package -> rule table -> path-feasibility filter (CP9, downgrade-only; only when the runners
+ask the helper for it) -> evidence verifier (downgrade-only) -> case verdict -> Mode 2 policy ->
+output. A data problem (no evidence, no candidate, app does not load) is a
 CANT_DETERMINE verdict with a reason code, never an exception.
 """
 
@@ -17,7 +18,7 @@ from typing import Any
 
 from vulntrace import __version__
 from vulntrace.methods.helper import CONTRACT_VERSION
-from vulntrace.pipeline import aggregate, analyse as an, app as app_mod, symbols as sy
+from vulntrace.pipeline import aggregate, analyse as an, app as app_mod, feasibility as fz, symbols as sy
 from vulntrace.verdict import (APP_LOAD_FAILED, CANT_DETERMINE, NO_FIX_EVIDENCE, NO_RELEASE_EVIDENCE,
                                NO_TARGET_SYMBOLS, REACHABLE, SCHEMA_VERSION, STATEMENT, UNSUPPORTED_TARGET)
 
@@ -55,6 +56,9 @@ class Runners:
     inspect: Callable[..., app_mod.AppInfo] = app_mod.inspect_app
     lift: Callable[[Path, list[dict[str, str]], str], list[dict[str, Any]]] | None = None
     rank: Callable[..., Any] | None = None                                 # retrieve.rank_candidates
+    # CP9: the helper settings the vta runner was built with (`fz.helper_settings`), or None when the
+    # filter is off; then the output is exactly the pre-CP9 output.
+    feasibility: dict[str, int] | None = None
 
 
 @dataclass
@@ -252,9 +256,21 @@ def run_triage(req: TriageRequest, runners: Runners) -> dict[str, Any]:
         entries, facts = an.analyse(info.module_dir, info.mains, all_symbols, level, runners.vta, runners.linker)
         timing["methods_seconds"] = round(time.monotonic() - t0, 2)
     incomplete = bool(info.mains_skipped)
+    feas_note: dict[str, Any] | None = None
+    if runners.feasibility is not None:
+        pre_entries = entries
+        pre_verdict, pre_reasons = aggregate.case_result(pre_entries, blocking, incomplete)
+        entries, n_down = fz.apply_filter(pre_entries)
+        feas_note = {"enabled": True, "max_examined_paths": runners.feasibility.get("max_examined_paths"),
+                     "downgraded": n_down, "by_status": fz.status_counts(entries),
+                     "pre_filter_verdict": pre_verdict, "pre_filter_reason_codes": pre_reasons}
     verdict, reasons = aggregate.case_result(entries, blocking, incomplete)
+    if feas_note is not None:
+        fz.assert_filter_downgrade_only(pre_entries, entries, feas_note["pre_filter_verdict"], verdict)
     if entries and info.mains and all(m["load_failed"] for m in facts["per_main"].values()) and verdict == CANT_DETERMINE:
         reasons = sorted(set(reasons) | {APP_LOAD_FAILED})
+        if feas_note is not None and feas_note["pre_filter_verdict"] == CANT_DETERMINE:
+            feas_note["pre_filter_reason_codes"] = sorted(set(feas_note["pre_filter_reason_codes"]) | {APP_LOAD_FAILED})
 
     out: dict[str, Any] = {
         "schema_version": SCHEMA_VERSION,
@@ -285,6 +301,8 @@ def run_triage(req: TriageRequest, runners: Runners) -> dict[str, Any]:
         },
         "toolchain": {**facts["toolchain"], "env": dict(ENV_FLAGS)},
     }
+    if feas_note is not None:
+        out["feasibility"] = feas_note
     pre_verifier = copy.deepcopy(out)
     if req.run_verifier and entries and runners.verifier_ctx is not None:
         from vulntrace.verifier.verify import verify

@@ -30,8 +30,14 @@ def _timed_run(timeout: float, *args, **kwargs):
     return subprocess.run(*args, timeout=timeout, **kwargs)
 
 
-def default_vta(timeout: float = DEFAULT_TIMEOUT_S, limits: dict[str, int] | None = None, binary=None) -> MethodFn:
-    return partial(run_vta_method, timeout=timeout, limits=limits or DEFAULT_LIMITS, binary=binary)
+def default_vta(timeout: float = DEFAULT_TIMEOUT_S, limits: dict[str, int] | None = None, binary=None,
+                feasibility: dict[str, int] | None = None) -> MethodFn:
+    """`feasibility` (CP9): helper settings of the path-feasibility filter, or None for none (the
+    pre-CP9 request, byte for byte)."""
+    if feasibility is None:
+        return partial(run_vta_method, timeout=timeout, limits=limits or DEFAULT_LIMITS, binary=binary)
+    return partial(run_vta_method, timeout=timeout, limits=limits or DEFAULT_LIMITS, binary=binary,
+                   feasibility=feasibility)
 
 
 def default_linker(timeout: float = DEFAULT_BUILD_TIMEOUT_S) -> MethodFn:
@@ -61,7 +67,7 @@ def make_entry(symbol: dict[str, Any], main: str, vta: dict[str, Any], linker: d
     result, code = symbol_verdict(vta["result"], linker["result"], None)
     errors = {m: r["error"]["code"] for m, r in (("CALLGRAPH_VTA", vta), ("LINKER_PRESENCE", linker)) if r["error"]}
     d = vta.get("details") or {}
-    return {
+    entry = {
         "target": {"package": symbol["package"], "symbol": symbol["symbol"]},
         "result": result, "reason_code": code,
         "methods": {"CALLGRAPH_VTA": vta["result"], "LINKER_PRESENCE": linker["result"]},
@@ -79,6 +85,9 @@ def make_entry(symbol: dict[str, Any], main: str, vta: dict[str, Any], linker: d
         "linker_matched": list((linker.get("details") or {}).get("matched_binary_symbols") or []),
         "verifier_failures": [],
     }
+    if d.get("feasibility") is not None:  # CP9: present only when the filter ran on a PATH_FOUND target
+        entry["feasibility"] = d["feasibility"]
+    return entry
 
 
 def analyse(module_dir: Path, mains: list[str], symbols: list[dict[str, Any]], evidence_level: str,

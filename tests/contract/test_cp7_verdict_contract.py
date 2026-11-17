@@ -44,6 +44,9 @@ def test_every_verdict_and_reason_code_is_recorded():
     schema = load_schema("verdict")
     codes = set(schema["$defs"]["reason_code"]["enum"])
     recorded = {c for x in INDEX.values() for c in x["reason_codes"]}
+    # CP9 added PATHS_INFEASIBLE; its recordings live with the other CP9 recordings
+    cp9 = json.loads((DIR.parent / "cp9" / "verdicts" / "index.json").read_text(encoding="utf-8"))
+    recorded |= {c for x in cp9.values() for c in x["reason_codes"]}
     assert codes <= recorded, f"no recording for {sorted(codes - recorded)}"
     assert {x["verdict"] for x in INDEX.values()} == {"REACHABLE", "NOT_REACHABLE", "CANT_DETERMINE"}
 

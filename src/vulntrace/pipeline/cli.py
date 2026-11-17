@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from vulntrace.methods.helper import DEFAULT_TIMEOUT_S, HelperError, ensure_helper
-from vulntrace.pipeline import aggregate, analyse as an, app as app_mod, inputs, triage
+from vulntrace.pipeline import aggregate, analyse as an, app as app_mod, feasibility as fz, inputs, triage
 from vulntrace.schemas import validation_errors
 
 EXIT_OK, EXIT_UNEXPECTED, EXIT_INVALID_INPUT, EXIT_MISSING_PREREQUISITE = 0, 1, 2, 3
@@ -44,15 +44,28 @@ def add_parser(sub) -> None:
                     choices=[aggregate.MODE2_POLICY_DOWNGRADE, aggregate.MODE2_POLICY_KEEP],
                     help="what a Mode 2 NOT_REACHABLE becomes (default DOWNGRADE to CANT_DETERMINE; see the CP7 report)")
     tr.add_argument("--no-verify", action="store_true", help="skip the evidence verifier (verification NOT_RUN)")
+    tr.add_argument("--no-feasibility", action="store_true",
+                    help="CP9: skip the path-feasibility filter (the pre-CP9 pipeline, byte for byte)")
+    tr.add_argument("--max-examined-paths", type=int, default=fz.DEFAULT_MAX_EXAMINED_PATHS,
+                    help="CP9: shortest call paths examined per target for the filter's explanation (N, default "
+                         f"{fz.DEFAULT_MAX_EXAMINED_PATHS}; the decision itself searches every path)")
     tr.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT_S, help="seconds per helper call (default 300)")
     tr.add_argument("--build-timeout", type=float, default=an.DEFAULT_BUILD_TIMEOUT_S,
                     help="seconds per linker build (default 600)")
     tr.add_argument("--out", default=None, help="also write the verdict JSON to this file")
 
 
+def feasibility_settings(args) -> dict[str, int] | None:
+    """CP9: the helper's filter settings from --no-feasibility / --max-examined-paths (None: off)."""
+    if getattr(args, "no_feasibility", False):
+        return None
+    return fz.helper_settings(getattr(args, "max_examined_paths", fz.DEFAULT_MAX_EXAMINED_PATHS))
+
+
 def default_runners(timeout: float = DEFAULT_TIMEOUT_S, build_timeout: float = an.DEFAULT_BUILD_TIMEOUT_S,
-                    binary: Path | None = None) -> triage.Runners:
-    """The real methods: Go helper (VTA, edges, funcs, lift), `go build` + `go tool nm`, `go list`."""
+                    binary: Path | None = None, feasibility: dict[str, int] | None = None) -> triage.Runners:
+    """The real methods: Go helper (VTA, edges, funcs, lift), `go build` + `go tool nm`, `go list`.
+    `feasibility` (CP9): the filter's helper settings, or None for the pre-CP9 pipeline."""
     from vulntrace.methods.lift import run_lift
     from vulntrace.verifier import verify as vf
     from vulntrace.verifier.sources import FileSource
@@ -67,8 +80,9 @@ def default_runners(timeout: float = DEFAULT_TIMEOUT_S, build_timeout: float = a
     def lift(module_dir: Path, seeds: list[dict[str, str]], rule: str) -> list[dict[str, Any]]:
         return run_lift(module_dir, seeds, rules=[rule], timeout=timeout, binary=binary)
 
-    return triage.Runners(vta=an.default_vta(timeout, binary=binary), linker=an.default_linker(build_timeout),
-                          verifier_ctx=verifier_ctx, lift=lift)
+    return triage.Runners(vta=an.default_vta(timeout, binary=binary, feasibility=feasibility),
+                          linker=an.default_linker(build_timeout), verifier_ctx=verifier_ctx, lift=lift,
+                          feasibility=feasibility)
 
 
 def repo_commit() -> str | None:
@@ -118,7 +132,8 @@ def cmd_triage(args) -> int:
     except HelperError as exc:
         print(f"missing prerequisite: {exc.code}: {exc.message}", file=sys.stderr)
         return EXIT_MISSING_PREREQUISITE
-    verdict = triage.run_triage(req, default_runners(args.timeout, args.build_timeout, binary))
+    verdict = triage.run_triage(req, default_runners(args.timeout, args.build_timeout, binary,
+                                                     feasibility_settings(args)))
     errors = validation_errors("verdict", verdict)
     if errors:
         print("internal error: verdict violates schemas/verdict.schema.json: " + "; ".join(errors[:5]), file=sys.stderr)

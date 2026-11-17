@@ -81,7 +81,10 @@ def assert_downgrade_only(before: dict[str, Any], after: dict[str, Any]) -> None
         if not not_stronger(b["result"], a["result"]):
             raise DowngradeViolation(f"{_entry_key(b)}: {b['result']} -> {a['result']}")
         vp = a.get("verified_path")
-        if vp is not None and (a["result"] != REACHABLE or vp not in (b.get("paths") or [])):
+        evidence = (b.get("feasibility") or {}).get("evidence_path")  # CP9: the path that passed the filter
+        if vp is not None and (a["result"] != REACHABLE or (vp not in (b.get("paths") or []) and vp != evidence)):
             raise DowngradeViolation(f"{_entry_key(b)}: verified path is not one of the method's paths")
+        if a.get("feasibility") != b.get("feasibility"):
+            raise DowngradeViolation(f"feasibility answer changed for {_entry_key(b)}")
     if not not_stronger(before["verdict"], after["verdict"]):
         raise DowngradeViolation(f"case verdict {before['verdict']} -> {after['verdict']}")

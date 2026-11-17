@@ -1,0 +1,27 @@
+{
+ "build": {
+  "goarch": null,
+  "goos": null,
+  "tags": []
+ },
+ "contract_version": "1.0",
+ "feasibility": {
+  "max_examined_paths": 20,
+  "max_states": 2
+ },
+ "limits": {
+  "max_path_length": 40,
+  "max_paths_per_target": 3
+ },
+ "main_packages": [
+  "vtfeas/cmd/f1_iface_splice"
+ ],
+ "mode": "reach",
+ "module_dir": "<local>",
+ "targets": [
+  {
+   "package": "vtfeas/vulnlib",
+   "symbol": "Parse"
+  }
+ ]
+}

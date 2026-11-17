@@ -1,0 +1,152 @@
+{
+ "contract_version": "1.0",
+ "mode": "reach",
+ "ok": true,
+ "results": [
+  {
+   "error": null,
+   "feasibility": {
+    "evidence_path": null,
+    "evidence_source": null,
+    "examined": [
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/f1_iface_splice/main.go",
+          "line": 31
+         },
+         "callee": "vtfeas/cmd/f1_iface_splice.emit",
+         "caller": "vtfeas/cmd/f1_iface_splice.main",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "cmd/f1_iface_splice/main.go",
+         "line": 21
+        },
+        "callee": "vtfeas/cmd/f1_iface_splice.evil.Write",
+        "caller": "vtfeas/cmd/f1_iface_splice.emit",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 1,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/f1_iface_splice/main.go:31 is `*os.File`; the dynamic call at cmd/f1_iface_splice/main.go:21 can only reach its method, not vtfeas/cmd/f1_iface_splice.evil.Write (receiver `vtfeas/cmd/f1_iface_splice.evil`)"
+      },
+      "length": 3
+     },
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/f1_iface_splice/main.go",
+          "line": 32
+         },
+         "callee": "vtfeas/cmd/f1_iface_splice.report",
+         "caller": "vtfeas/cmd/f1_iface_splice.main",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "cmd/f1_iface_splice/main.go",
+         "line": 26
+        },
+        "callee": "vtfeas/cmd/f1_iface_splice.emit",
+        "caller": "vtfeas/cmd/f1_iface_splice.report",
+        "kind": "STATIC"
+       },
+       "edge_index": 1,
+       "pattern": "F2",
+       "reason": "the call at cmd/f1_iface_splice/main.go:26 runs only if `verbose` is true; with the argument passed at cmd/f1_iface_splice/main.go:32 it is false"
+      },
+      "length": 4
+     }
+    ],
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "status": "UNDECIDED",
+    "undecided_reason": "STATE_LIMIT"
+   },
+   "matched_functions": [
+    "vtfeas/vulnlib.Parse"
+   ],
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_splice/main.go",
+        "line": 31
+       },
+       "callee": "vtfeas/cmd/f1_iface_splice.emit",
+       "caller": "vtfeas/cmd/f1_iface_splice.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_splice/main.go",
+        "line": 21
+       },
+       "callee": "vtfeas/cmd/f1_iface_splice.evil.Write",
+       "caller": "vtfeas/cmd/f1_iface_splice.emit",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_splice/main.go",
+        "line": 18
+       },
+       "callee": "vtfeas/vulnlib.Parse",
+       "caller": "vtfeas/cmd/f1_iface_splice.evil.Write",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "vtfeas/cmd/f1_iface_splice",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "vtfeas/vulnlib",
+      "symbol": "Parse"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "result": "PATH_FOUND",
+   "shortest_length": 3,
+   "target": {
+    "package": "vtfeas/vulnlib",
+    "symbol": "Parse"
+   }
+  }
+ ],
+ "stats": {
+  "callgraph_edges": 2937,
+  "callgraph_nodes": 922,
+  "duration_ms": 957,
+  "feasibility": {
+   "approximate_states": 0,
+   "duration_ms": 0,
+   "field_index_functions": 0,
+   "max_contexts_per_node": 64,
+   "max_examined_paths": 20,
+   "max_states": 2,
+   "nodes_over_context_cap": 0,
+   "state_limit_hit": true,
+   "states": 2
+  },
+  "packages_loaded": 53,
+  "peak_rss_kb": 197064
+ },
+ "toolchain": {
+  "go_version": "go1.24.7",
+  "goarch": "amd64",
+  "goos": "linux",
+  "x_tools_version": "v0.42.0"
+ }
+}

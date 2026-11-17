@@ -1,0 +1,84 @@
+{
+ "cd_evidence_rejected": {
+  "case": "f1_iface_both",
+  "entry_reason": "VERIFIER_REJECTED",
+  "failed_check": "FILTERED_PATH",
+  "filter_enabled": true,
+  "filter_status": "FEASIBLE",
+  "reason_codes": [
+   "VERIFIER_REJECTED"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_infeasible_step_rejected": {
+  "case": "f2_const_port",
+  "entry_reason": "VERIFIER_REJECTED",
+  "failed_check": "INFEASIBLE_STEP",
+  "filter_enabled": true,
+  "filter_status": "INFEASIBLE",
+  "reason_codes": [
+   "VERIFIER_REJECTED"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_paths_infeasible": {
+  "case": "f2_const_port",
+  "entry_reason": "PATHS_INFEASIBLE",
+  "failed_check": null,
+  "filter_enabled": true,
+  "filter_status": "INFEASIBLE",
+  "reason_codes": [
+   "PATHS_INFEASIBLE"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_paths_infeasible_f1": {
+  "case": "f1_iface_splice",
+  "entry_reason": "PATHS_INFEASIBLE",
+  "failed_check": null,
+  "filter_enabled": true,
+  "filter_status": "INFEASIBLE",
+  "reason_codes": [
+   "PATHS_INFEASIBLE"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "cd_paths_infeasible_f3": {
+  "case": "f3_field_never_set",
+  "entry_reason": "PATHS_INFEASIBLE",
+  "failed_check": null,
+  "filter_enabled": true,
+  "filter_status": "INFEASIBLE",
+  "reason_codes": [
+   "PATHS_INFEASIBLE"
+  ],
+  "verdict": "CANT_DETERMINE"
+ },
+ "reachable_filter_off": {
+  "case": "f2_const_port",
+  "entry_reason": null,
+  "failed_check": null,
+  "filter_enabled": false,
+  "filter_status": null,
+  "reason_codes": [],
+  "verdict": "REACHABLE"
+ },
+ "reachable_filtered": {
+  "case": "f1_iface_both",
+  "entry_reason": null,
+  "failed_check": null,
+  "filter_enabled": true,
+  "filter_status": "FEASIBLE",
+  "reason_codes": [],
+  "verdict": "REACHABLE"
+ },
+ "reachable_undecided": {
+  "case": "f1_iface_splice",
+  "entry_reason": null,
+  "failed_check": null,
+  "filter_enabled": true,
+  "filter_status": "UNDECIDED",
+  "reason_codes": [],
+  "verdict": "REACHABLE"
+ }
+}

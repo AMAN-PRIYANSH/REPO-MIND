@@ -1,0 +1,22 @@
+{
+ "reach_feasible": {
+  "case": "f1_iface_both",
+  "exit_code": 0,
+  "status": "FEASIBLE"
+ },
+ "reach_infeasible": {
+  "case": "f2_const_port",
+  "exit_code": 0,
+  "status": "INFEASIBLE"
+ },
+ "reach_no_feasibility": {
+  "case": "f2_const_port",
+  "exit_code": 0,
+  "status": null
+ },
+ "reach_undecided": {
+  "case": "f1_iface_splice",
+  "exit_code": 0,
+  "status": "UNDECIDED"
+ }
+}

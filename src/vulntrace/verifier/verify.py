@@ -7,6 +7,8 @@
 | EDGE_EXISTS | helper `edges` mode confirms caller -> callee at that exact call site | same |
 | PATH_STRUCTURE | starts at main/init of the analysed main package, edges chain, ends at the target | same |
 | REACHABLE_HAS_PATH | at least one path passes all of the above | REACHABLE entries |
+| FILTERED_PATH | CP9: the path that passed the feasibility filter passes every path check too | REACHABLE entries with a FEASIBLE filter answer |
+| INFEASIBLE_STEP | CP9: every reported infeasible step and its context edges exist (call site, call-graph edge) | CANT_DETERMINE entries with PATHS_INFEASIBLE |
 
 A NOT_REACHABLE whose package is not in the program (CP2 exception) passes TARGET_EXISTS only if
 the package cannot be in the build at all (its module is not in the app's build list); a package
@@ -14,7 +16,11 @@ that should exist but cannot be found, or a symbol its package does not declare,
 That catches import-path mapping errors that would otherwise read as NOT_REACHABLE.
 
 Downgrade-only: every change is REACHABLE/NOT_REACHABLE -> CANT_DETERMINE (VERIFIER_REJECTED);
-`aggregate.assert_downgrade_only` runs on every result before it is returned.
+`aggregate.assert_downgrade_only` runs on every result before it is returned. With the CP9 filter, a
+REACHABLE entry needs both a method path that passes (as before) and the filter's evidence path, which
+becomes the verified path; so the filter can never make the verifier accept what it rejected without it.
+A PATHS_INFEASIBLE claim whose reported steps do not check out keeps CANT_DETERMINE with reason
+VERIFIER_REJECTED.
 """
 
 import copy
@@ -29,11 +35,14 @@ from typing import Any
 from vulntrace.env import go_env
 from vulntrace.methods.helper import CONTRACT_VERSION, DEFAULT_TIMEOUT_S, HelperError, run_helper
 from vulntrace.pipeline.aggregate import assert_downgrade_only, case_result
-from vulntrace.verdict import CANT_DETERMINE, NOT_REACHABLE, REACHABLE, VERIFIER_REJECTED, symbol_verdict
+from vulntrace.verdict import (CANT_DETERMINE, NOT_REACHABLE, PATHS_INFEASIBLE, REACHABLE, VERIFIER_REJECTED,
+                               symbol_verdict)
 from vulntrace.verifier import checks as ck
 from vulntrace.verifier.sources import FileSource
 
 FOUND, NOT_IN_BUILD, MISSING, UNKNOWN = "FOUND", "NOT_IN_BUILD", "MISSING", "UNKNOWN"
+FEASIBLE = "FEASIBLE"   # CP9 filter answer (pipeline.feasibility)
+EVIDENCE, STEP0 = -1, -2  # path_failures keys for the filter's evidence path and reported infeasible steps
 
 
 class VerifierError(Exception):
@@ -222,25 +231,42 @@ def verify(verdict: dict[str, Any], ctx: VerifyContext) -> dict[str, Any]:
         if f:
             failures_by_entry.setdefault(i, []).append(f)
 
-    # 2. paths of REACHABLE entries: structure and call sites, then edges (one helper call per main)
+    # 2. paths of REACHABLE entries: structure and call sites, then edges (one helper call per main).
+    # Keys: (entry, path index) for the method's paths, (entry, EVIDENCE) for the CP9 filter's evidence
+    # path, (entry, STEP0 - k) for the reported infeasible step of examined path k (and its context).
     path_failures: dict[tuple[int, int], list[ck.Failure]] = {}
     edges_wanted: dict[str, list[tuple[int, int, int, dict[str, Any]]]] = {}
+
+    def check_edges(i: int, key: int, pi: int | None, edges: list[dict[str, Any]], fl: list[ck.Failure],
+                    main: str) -> None:
+        for ei, edge in enumerate(edges):
+            site = edge.get("call_site") or {}
+            n, decls = files.info(site["file"]) if site.get("file") else (None, None)
+            f = ck.check_site(edge, ei, n, decls)
+            count(ck.CALL_SITE, f is not None)
+            if f:
+                fl.append(ck.Failure(f.check, f.reason, pi, ei))
+            edges_wanted.setdefault(main, []).append((i, key, ei, edge))
+        path_failures[(i, key)] = fl
+
     for i, e in enumerate(entries):
-        if e["result"] != REACHABLE:
-            continue
-        for pi, path in enumerate(e.get("paths") or []):
-            fl = [ck.Failure(x.check, x.reason, pi, x.edge_index)
-                  for x in ck.check_structure(path, e.get("main_package") or "", e["target"])]
-            count(ck.PATH_STRUCTURE, bool(fl))
-            for ei, edge in enumerate(path.get("edges") or []):
-                site = edge.get("call_site") or {}
-                n, decls = files.info(site["file"]) if site.get("file") else (None, None)
-                f = ck.check_site(edge, ei, n, decls)
-                count(ck.CALL_SITE, f is not None)
-                if f:
-                    fl.append(ck.Failure(f.check, f.reason, pi, ei))
-                edges_wanted.setdefault(e.get("main_package") or "", []).append((i, pi, ei, edge))
-            path_failures[(i, pi)] = fl
+        if e["result"] == REACHABLE:
+            candidates = list(enumerate(e.get("paths") or []))
+            feas = e.get("feasibility") or {}
+            if feas.get("status") == FEASIBLE and feas.get("evidence_path"):
+                candidates.append((EVIDENCE, feas["evidence_path"]))
+            for pi, path in candidates:
+                shown = pi if pi >= 0 else None
+                fl = [ck.Failure(x.check, x.reason, shown, x.edge_index)
+                      for x in ck.check_structure(path, e.get("main_package") or "", e["target"])]
+                count(ck.PATH_STRUCTURE, bool(fl))
+                check_edges(i, pi, shown, path.get("edges") or [], fl, e.get("main_package") or "")
+        elif e["result"] == CANT_DETERMINE and e["reason_code"] == PATHS_INFEASIBLE:
+            for k, ex in enumerate((e.get("feasibility") or {}).get("examined") or []):
+                st = ex.get("first_infeasible")
+                if st:
+                    check_edges(i, STEP0 - k, k, list(st.get("context_edges") or []) + [st["edge"]], [],
+                                e.get("main_package") or "")
     for main, wanted in edges_wanted.items():
         uniq: list[dict[str, Any]] = []
         index: dict[str, int] = {}
@@ -272,19 +298,44 @@ def verify(verdict: dict[str, Any], ctx: VerifyContext) -> dict[str, Any]:
 
     # 3. decide per entry (only downwards)
     changed = 0
+    claims_rejected = 0
     for i, e in enumerate(entries):
+        feas = e.get("feasibility") or {}
         if e["result"] == REACHABLE:
             paths = e.get("paths") or []
             good = next((pi for pi in range(len(paths)) if not path_failures.get((i, pi))), None)
             count(ck.REACHABLE_HAS_PATH, good is None)
+            evidence_ok = True
+            if feas.get("status") == FEASIBLE and feas.get("evidence_path"):
+                ev_fail = path_failures.get((i, EVIDENCE), [])
+                evidence_ok = not ev_fail
+                count(ck.FILTERED_PATH, not evidence_ok)
+                if not evidence_ok:
+                    failures_by_entry.setdefault(i, []).extend(
+                        ck.Failure(ck.FILTERED_PATH, f"{x.check}: {x.reason}", None, x.edge_index) for x in ev_fail)
+            elif feas:
+                count(ck.FILTERED_PATH, False, skipped=True)  # UNDECIDED: the filter could not decide
             if good is None:
                 for pi in range(len(paths)):
                     failures_by_entry.setdefault(i, []).extend(path_failures.get((i, pi), []))
                 why = "no call path returned" + (f" (paths_omitted={e.get('paths_omitted')})" if e.get("paths_omitted") else "") \
                     if not paths else f"none of {len(paths)} path(s) passed every check"
                 failures_by_entry.setdefault(i, []).append(ck.Failure(ck.REACHABLE_HAS_PATH, why))
-            elif not failures_by_entry.get(i):
-                e["verified_path"] = copy.deepcopy(paths[good])
+            elif not failures_by_entry.get(i) and evidence_ok:
+                e["verified_path"] = copy.deepcopy(feas["evidence_path"] if feas.get("status") == FEASIBLE
+                                                   and feas.get("evidence_path") else paths[good])
+        elif e["result"] == CANT_DETERMINE and e["reason_code"] == PATHS_INFEASIBLE:
+            step_fail: list[ck.Failure] = []
+            for k, ex in enumerate(feas.get("examined") or []):
+                if not ex.get("first_infeasible"):
+                    continue
+                fl_k = path_failures.get((i, STEP0 - k), [])
+                count(ck.INFEASIBLE_STEP, bool(fl_k))
+                step_fail.extend(ck.Failure(ck.INFEASIBLE_STEP, f"{x.check}: {x.reason}", k, None) for x in fl_k)
+            if step_fail:
+                failures_by_entry.setdefault(i, []).extend(step_fail)
+                e["reason_code"] = VERIFIER_REJECTED  # the PATHS_INFEASIBLE claim is not supported
+                claims_rejected += 1
         fl = failures_by_entry.get(i)
         if fl and e["result"] in (REACHABLE, NOT_REACHABLE):
             if e["result"] == REACHABLE:
@@ -299,7 +350,7 @@ def verify(verdict: dict[str, Any], ctx: VerifyContext) -> dict[str, Any]:
 
     all_failures = [dict(x.to_json(entries[i]["target"], entries[i].get("main_package")))
                     for i, fl in sorted(failures_by_entry.items()) for x in fl]
-    if changed:
+    if changed or claims_rejected:
         after["verdict"], after["reason_codes"] = case_result(entries, incomplete=ctx.incomplete)
     checks_run = sum(v["run"] for v in stats.values())
     after["verification"] = {
@@ -308,5 +359,7 @@ def verify(verdict: dict[str, Any], ctx: VerifyContext) -> dict[str, Any]:
         "checks_by_kind": {k: v for k, v in stats.items() if any(v.values())},
         "downgraded": changed, "file_source": ctx.source.description,
     }
+    if claims_rejected:
+        after["verification"]["infeasible_claims_rejected"] = claims_rejected
     assert_downgrade_only(verdict, after)
     return after

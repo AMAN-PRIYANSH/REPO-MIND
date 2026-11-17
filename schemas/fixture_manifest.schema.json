@@ -26,7 +26,10 @@
             "items": {"$ref": "#/$defs/target"}
           },
           "truth": {"enum": ["REACHABLE", "NOT_REACHABLE"]},
-          "rationale": {"type": "string", "minLength": 10}
+          "rationale": {"type": "string", "minLength": 10},
+          "pattern": {"description": "CP9 feasibility fixtures: the pattern the case is about", "enum": ["F1", "F2", "F3", "NONE"]},
+          "kind": {"description": "CP9: INFEASIBLE (must be downgraded), FEASIBLE_LOOKALIKE (must stay REACHABLE), OUT_OF_SCOPE (a known miss; must stay REACHABLE)", "enum": ["INFEASIBLE", "FEASIBLE_LOOKALIKE", "OUT_OF_SCOPE"]},
+          "expected_filter": {"description": "CP9: the filter answer the construction requires", "enum": ["INFEASIBLE", "FEASIBLE"]}
         }
       }
     }

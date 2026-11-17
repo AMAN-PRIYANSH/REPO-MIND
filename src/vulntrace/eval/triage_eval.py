@@ -126,7 +126,8 @@ class MemoMethod:
 
 def memo_runners(base: triage.Runners, extras: list[dict[str, str]] | None = None) -> triage.Runners:
     return triage.Runners(vta=MemoMethod(base.vta, extras), linker=MemoMethod(base.linker, extras),
-                          verifier_ctx=base.verifier_ctx, inspect=base.inspect, lift=base.lift, rank=base.rank)
+                          verifier_ctx=base.verifier_ctx, inspect=base.inspect, lift=base.lift, rank=base.rank,
+                          feasibility=base.feasibility)
 
 
 # --- compact rows ----------------------------------------------------------------------------------

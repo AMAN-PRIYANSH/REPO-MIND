@@ -33,7 +33,7 @@ def _write(path: Path, obj) -> int:
 
 
 def cmd_eval_triage(args, argv) -> int:
-    from vulntrace.pipeline.cli import default_runners
+    from vulntrace.pipeline.cli import default_runners, feasibility_settings
 
     try:
         binary = ensure_helper()
@@ -42,8 +42,10 @@ def cmd_eval_triage(args, argv) -> int:
         return EXIT_MISSING_PREREQUISITE
     out_dir = Path(args.out) if args.out else DEFAULT_OUT
 
+    feas = feasibility_settings(args)
+
     def factory():
-        return default_runners(args.timeout, args.build_timeout, binary)
+        return default_runners(args.timeout, args.build_timeout, binary, feas)
 
     env = run_info(["eval", "triage", *argv[2:]] if argv[:2] == ["eval", "triage"] else argv)
     if args.dataset_set == "d3":

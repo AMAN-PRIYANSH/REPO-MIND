@@ -152,6 +152,25 @@ def build_parser() -> argparse.ArgumentParser:
                     help="d1/d4: re-run this many triaged cases from scratch and compare the verdicts (default 0)")
     et.add_argument("--example", action="append", default=None,
                     help="commit this case's full verdict as an example under <out>/examples/ (repeatable)")
+    et.add_argument("--no-feasibility", action="store_true",
+                    help="CP9: skip the path-feasibility filter (the pre-CP9 pipeline, byte for byte)")
+    et.add_argument("--max-examined-paths", type=int, default=20,
+                    help="CP9: shortest call paths examined per target for the filter's explanation (default 20)")
+    ef = esub.add_parser("feasibility", help="CP9: the path-feasibility filter, with and without, on fixtures, D3, D3b, D1, D4")
+    ef.add_argument("--set", required=True, choices=["fixtures", "d3", "d3b", "d1", "d4"], dest="dataset_set")
+    ef.add_argument("--out", default=None, help="results directory (default: docs/results/cp9)")
+    ef.add_argument("--max-examined-paths", type=int, default=20,
+                    help="N: shortest call paths examined per target for the explanation (default 20)")
+    ef.add_argument("--data-dir", default=None, help="working data directory (default: data/cp9/<set>)")
+    ef.add_argument("--gomodcache", default=None, help="Go module cache for the analysed modules")
+    ef.add_argument("--cache", default=None, help="vulndb cache directory")
+    ef.add_argument("--repo-cache", default=None, help="git cache that `dataset materialize` used (d1/d4)")
+    ef.add_argument("--cases", default=None, help="case list (d3b: docs/results/cp9/d3b_cases.json)")
+    ef.add_argument("--only", action="append", default=None, help="only this case id (repeatable)")
+    ef.add_argument("--rerun", action="store_true", help="ignore finished cases (default: resume)")
+    ef.add_argument("--no-govulncheck", action="store_true", help="d3/d3b: skip the govulncheck reference")
+    ef.add_argument("--timeout", type=float, default=300.0, help="seconds per helper call (default 300)")
+    ef.add_argument("--build-timeout", type=float, default=600.0, help="seconds per linker build (default 600)")
     er = esub.add_parser("retrieval", help="Mode 2 retrieval evaluation on D4 (CP4)")
     er.add_argument("--config", action="append", default=None,
                     help="random | size | bid | bid-only | bm25 | dense:<e> | hybrid:<e> | hybrid+rerank:<e>+<r> "
@@ -604,6 +623,10 @@ def main(argv: list[str] | None = None) -> int:
             from vulntrace.eval import triage_cli
 
             return triage_cli.cmd_eval_triage(args, argv)
+        if args.command == "eval" and args.eval_command == "feasibility":
+            from vulntrace.eval import feasibility_cli
+
+            return feasibility_cli.cmd_eval_feasibility(args, argv)
         if args.command == "eval" and args.eval_command == "retrieval":
             return _cmd_eval_retrieval(args, argv)
         if args.command == "eval" and args.eval_command == "select":

@@ -16,7 +16,12 @@ EDGE_EXISTS = "EDGE_EXISTS"
 PATH_STRUCTURE = "PATH_STRUCTURE"
 REACHABLE_HAS_PATH = "REACHABLE_HAS_PATH"
 VERIFIER_ERROR = "VERIFIER_ERROR"
-CHECK_KINDS = (TARGET_EXISTS, CALL_SITE, EDGE_EXISTS, PATH_STRUCTURE, REACHABLE_HAS_PATH, VERIFIER_ERROR)
+# CP9: the path that passed the feasibility filter passes every path check; each reported infeasible step
+# (and the edges that carry its context) exists at the recorded file and line and in the call graph.
+FILTERED_PATH = "FILTERED_PATH"
+INFEASIBLE_STEP = "INFEASIBLE_STEP"
+CHECK_KINDS = (TARGET_EXISTS, CALL_SITE, EDGE_EXISTS, PATH_STRUCTURE, REACHABLE_HAS_PATH, VERIFIER_ERROR,
+               FILTERED_PATH, INFEASIBLE_STEP)
 
 ENTRY_SYMBOLS = ("main", "init")
 FORWARDER_SUFFIXES = ("$bound", "$thunk", "$wrapper", "$instwrapper")

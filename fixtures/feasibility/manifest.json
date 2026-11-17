@@ -1,0 +1,263 @@
+{
+ "schema_version": "1.0",
+ "module_dir": "fixtures/feasibility",
+ "vulnerable_package": "vtfeas/vulnlib",
+ "cases": [
+  {
+   "id": "f1_iface_splice",
+   "category": "FEAS_F1_INFEASIBLE",
+   "main_package": "vtfeas/cmd/f1_iface_splice",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "NOT_REACHABLE",
+   "rationale": "F1, infeasible. emit's w.Write is joined by VTA to *os.File.Write and evil.Write, because two call sites pass those types. main's call passes os.Stdout, so on the shortest path the dynamic step to evil.Write cannot run. The only call that passes evil{} is in report(), under `if verbose`, and report is called only with the constant false (an F2 step). Truth: Parse never runs.",
+   "pattern": "F1",
+   "kind": "INFEASIBLE",
+   "expected_filter": "INFEASIBLE"
+  },
+  {
+   "id": "f1_once_closure",
+   "category": "FEAS_F1_INFEASIBLE",
+   "main_package": "vtfeas/cmd/f1_once_closure",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "NOT_REACHABLE",
+   "rationale": "F1, infeasible, two levels of parameter pass-through (the sync.Once pattern of CP7b). once.Do(f) passes f on to doSlow(f), which calls f(). VTA joins both closures given to Do at that call. main reaches Do only through setup(), which passes setup's own closure; the closure that calls Parse is passed only in dangerous(), under `if c.hook != nil`, and no code ever assigns config.hook (an F3 step). Truth: Parse never runs.",
+   "pattern": "F1",
+   "kind": "INFEASIBLE",
+   "expected_filter": "INFEASIBLE"
+  },
+  {
+   "id": "f1_iface_both",
+   "category": "FEAS_F1_FEASIBLE_LOOKALIKE",
+   "main_package": "vtfeas/cmd/f1_iface_both",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "REACHABLE",
+   "rationale": "F1 look-alike, feasible. Same shape as f1_iface_splice, but report() is called with a value that depends on the command line, so emit(evil{}, ...) can run and evil.Write calls Parse. The path through main -> emit(os.Stdout) is infeasible, but another path runs. Truth: REACHABLE.",
+   "pattern": "F1",
+   "kind": "FEASIBLE_LOOKALIKE",
+   "expected_filter": "FEASIBLE"
+  },
+  {
+   "id": "f1_once_both",
+   "category": "FEAS_F1_FEASIBLE_LOOKALIKE",
+   "main_package": "vtfeas/cmd/f1_once_both",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "REACHABLE",
+   "rationale": "F1 look-alike, feasible. Same once.Do / doSlow shape as f1_once_closure, but the closure that calls Parse is passed to Do unconditionally from main. Truth: REACHABLE.",
+   "pattern": "F1",
+   "kind": "FEASIBLE_LOOKALIKE",
+   "expected_filter": "FEASIBLE"
+  },
+  {
+   "id": "f1_iface_unknown",
+   "category": "FEAS_F1_FEASIBLE_LOOKALIKE",
+   "main_package": "vtfeas/cmd/f1_iface_unknown",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "REACHABLE",
+   "rationale": "F1 look-alike, feasible. emit's w.Write is joined to *os.File.Write and evil.Write. The second call passes a package variable, whose dynamic type the filter cannot know, so the step must count as feasible; at run time the variable holds evil{}, so Parse runs. Truth: REACHABLE.",
+   "pattern": "F1",
+   "kind": "FEASIBLE_LOOKALIKE",
+   "expected_filter": "FEASIBLE"
+  },
+  {
+   "id": "f2_const_port",
+   "category": "FEAS_F2_INFEASIBLE",
+   "main_package": "vtfeas/cmd/f2_const_port",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "NOT_REACHABLE",
+   "rationale": "F2, infeasible (the ListenUnix pattern of CP7b). listen() starts serveH3 only when port != 0. Its only caller, listenUnix, reaches it through a function value from a map and passes the constant 0. Truth: Parse never runs.",
+   "pattern": "F2",
+   "kind": "INFEASIBLE",
+   "expected_filter": "INFEASIBLE"
+  },
+  {
+   "id": "f2_variadic_empty",
+   "category": "FEAS_F2_INFEASIBLE",
+   "main_package": "vtfeas/cmd/f2_variadic_empty",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "NOT_REACHABLE",
+   "rationale": "F2, infeasible (the pgx Exec pattern of CP7b). exec passes its variadic arguments on to execSimple, which sanitizes (and calls Parse) only if len(args) > 0. The only call passes no variadic arguments (a nil slice). Truth: Parse never runs.",
+   "pattern": "F2",
+   "kind": "INFEASIBLE",
+   "expected_filter": "INFEASIBLE"
+  },
+  {
+   "id": "f2_string_driver",
+   "category": "FEAS_F2_INFEASIBLE",
+   "main_package": "vtfeas/cmd/f2_string_driver",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "NOT_REACHABLE",
+   "rationale": "F2, infeasible (a hard-coded driver name). open() picks a driver by a string switch; the only caller passes the constant \"badgerv2\", so the \"postgresql\" branch, which calls Parse, never runs. Truth: Parse never runs.",
+   "pattern": "F2",
+   "kind": "INFEASIBLE",
+   "expected_filter": "INFEASIBLE"
+  },
+  {
+   "id": "f2_const_and_variable",
+   "category": "FEAS_F2_FEASIBLE_LOOKALIKE",
+   "main_package": "vtfeas/cmd/f2_const_and_variable",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "REACHABLE",
+   "rationale": "F2 look-alike, feasible. Same listen() as f2_const_port; one caller passes the constant 0, but a second caller passes a port read from the command line, so serveH3 can run. Truth: REACHABLE.",
+   "pattern": "F2",
+   "kind": "FEASIBLE_LOOKALIKE",
+   "expected_filter": "FEASIBLE"
+  },
+  {
+   "id": "f2_variadic_nonempty",
+   "category": "FEAS_F2_FEASIBLE_LOOKALIKE",
+   "main_package": "vtfeas/cmd/f2_variadic_nonempty",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "REACHABLE",
+   "rationale": "F2 look-alike, feasible. Same exec/execSimple as f2_variadic_empty, but one call passes one variadic argument, so len(args) > 0 holds and sanitize calls Parse. Truth: REACHABLE.",
+   "pattern": "F2",
+   "kind": "FEASIBLE_LOOKALIKE",
+   "expected_filter": "FEASIBLE"
+  },
+  {
+   "id": "f3_field_never_set",
+   "category": "FEAS_F3_INFEASIBLE",
+   "main_package": "vtfeas/cmd/f3_field_never_set",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "NOT_REACHABLE",
+   "rationale": "F3, infeasible (the archives Rar.FS pattern of CP7b). Rar.Extract calls fileSystem (which calls Parse) only if r.FS != nil. Rar values are registered as zero values in an interface slice and no code assigns Rar.FS. Truth: Parse never runs.",
+   "pattern": "F3",
+   "kind": "INFEASIBLE",
+   "expected_filter": "INFEASIBLE"
+  },
+  {
+   "id": "f3_map_field_never_set",
+   "category": "FEAS_F3_INFEASIBLE",
+   "main_package": "vtfeas/cmd/f3_map_field_never_set",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "NOT_REACHABLE",
+   "rationale": "F3, infeasible (a nil map field). client.get calls flushCache (which calls Parse) only if c.cache != nil; clients are built with a name only and no code assigns client.cache. Truth: Parse never runs.",
+   "pattern": "F3",
+   "kind": "INFEASIBLE",
+   "expected_filter": "INFEASIBLE"
+  },
+  {
+   "id": "f3_field_set_rarely",
+   "category": "FEAS_F3_FEASIBLE_LOOKALIKE",
+   "main_package": "vtfeas/cmd/f3_field_set_rarely",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "REACHABLE",
+   "rationale": "F3 look-alike, feasible. Same Rar.Extract as f3_field_never_set, but withFS() sets Rar.FS and is called when the command line has more than three arguments, so fileSystem can run. Truth: REACHABLE.",
+   "pattern": "F3",
+   "kind": "FEASIBLE_LOOKALIKE",
+   "expected_filter": "FEASIBLE"
+  },
+  {
+   "id": "f3_field_set_via_pointer",
+   "category": "FEAS_F3_FEASIBLE_LOOKALIKE",
+   "main_package": "vtfeas/cmd/f3_field_set_via_pointer",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "REACHABLE",
+   "rationale": "F3 look-alike, feasible. client.cache is never assigned by a direct field store, but its address is passed to configure(), which stores through the pointer, so c.cache != nil holds and flushCache calls Parse. The filter must treat the escaped address as unknown. Truth: REACHABLE.",
+   "pattern": "F3",
+   "kind": "FEASIBLE_LOOKALIKE",
+   "expected_filter": "FEASIBLE"
+  },
+  {
+   "id": "f3_field_set_by_reflection",
+   "category": "FEAS_F3_FEASIBLE_LOOKALIKE",
+   "main_package": "vtfeas/cmd/f3_field_set_by_reflection",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "REACHABLE",
+   "rationale": "F3 look-alike, feasible. No code assigns client.Cache directly, but main sets it through reflection on a pointer to the struct, so c.Cache != nil holds and flushCache calls Parse. The filter must not claim the field is never set. Truth: REACHABLE.",
+   "pattern": "F3",
+   "kind": "FEASIBLE_LOOKALIKE",
+   "expected_filter": "FEASIBLE"
+  },
+  {
+   "id": "oos_struct_constant",
+   "category": "FEAS_OUT_OF_SCOPE",
+   "main_package": "vtfeas/cmd/oos_struct_constant",
+   "targets": [
+    {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   ],
+   "truth": "NOT_REACHABLE",
+   "rationale": "Out of scope (the go-pkcs12 pattern of CP7b): the MAC algorithm comes from a field of a package-level encoder value, not from a parameter or a never-set field. computeMac calls doPBMAC1 (which calls Parse) only for \"pbmac1\", and no encoder uses it, so Parse never runs (truth NOT_REACHABLE). F1-F3 do not cover this, so the filter must leave the verdict REACHABLE: this case measures a known miss, not a false downgrade.",
+   "pattern": "NONE",
+   "kind": "OUT_OF_SCOPE",
+   "expected_filter": "FEASIBLE"
+  }
+ ]
+}

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "helper_request.schema.json",
   "title": "HelperRequest",
-  "description": "Request file for vt-helper (contract 1.x). Modes: funcs, reach, edges, naive (CP2); lift, callers, callees (CP5b, additive).",
+  "description": "Request file for vt-helper (contract 1.x). Modes: funcs, reach, edges, naive (CP2); lift, callers, callees (CP5b, additive). CP9 adds the optional `feasibility` object (reach only); a request without it is unchanged.",
   "type": "object",
   "additionalProperties": false,
   "required": ["contract_version", "mode"],
@@ -35,6 +35,16 @@
     "packages": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
     "lift_rules": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["NEAREST", "ALL"]}},
     "external": {"type": "boolean"},
+    "feasibility": {
+      "description": "CP9: run the path-feasibility filter (F1-F3) after the path search; reach mode only. Absent limits mean the defaults (20, 4000000, 64).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_examined_paths": {"type": "integer", "minimum": 1},
+        "max_states": {"type": "integer", "minimum": 1},
+        "max_contexts_per_node": {"type": "integer", "minimum": 1}
+      }
+    },
     "files": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
     "edges": {
       "type": "array",
