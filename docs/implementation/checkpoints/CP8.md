@@ -54,3 +54,9 @@ New experiments, multi-agent work, path-feasibility checking, retrieval or promp
 ## Review notes
 
 (The supervising assistant adds notes here.)
+
+**Supervisor review, 17 Nov 2026 - APPROVED** (branch `claude/vulntrace-ai-build-5f8jgi` at `3113659`).
+
+Checked by the supervisor: `pytest tests/unit tests/contract` -> 887 passed, 10 skipped; CI green on every commit including the last; `results summary` is a new command only (no behaviour change in `src/`). Wording limits checked in README, FINAL_REPORT and INTERVIEW_NOTES: reachability not exploitability; REACHABLE = "a call-graph path exists; needs a human look"; the D3 adjudication is described as two Claude reviewers reconciled by the supervising assistant with an owner spot-check, not expert ground truth; govulncheck agreement (9/11) and the two cases where it was right; BM25 fallback for the measured Mode 2 run; go1.26.10 outside CI. The claim "most Go advisories do not name symbols" comes from the pre-design feasibility measurement and is labelled as such.
+
+The project is complete at CP8. Any further work (for example path-feasibility checking for REACHABLE) would be a new checkpoint with its own specification.
