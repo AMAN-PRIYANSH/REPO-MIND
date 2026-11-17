@@ -1,0 +1,2788 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "grpc",
+    "repo": "grpc-go",
+    "sha": "7354d9c8debb4bcf2225bf429857078de310c176"
+   }
+  ],
+  "fixed_in": "1.83.1",
+  "id": "GO-2026-6348",
+  "module": "google.golang.org/grpc",
+  "source": "vulndb",
+  "vulnerable_at": "1.83.0"
+ },
+ "case_id": "task__GO-2026-6348",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/go-task/task/v3/cmd/release",
+   "github.com/go-task/task/v3/cmd/sleepit",
+   "github.com/go-task/task/v3/cmd/task"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [
+   {
+    "candidate_id": "c2",
+    "package_dir": "internal/mem",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "init"
+   },
+   {
+    "candidate_id": "c7",
+    "package_dir": "internal/transport",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "recvBuffer.compactBacklogLocked"
+   }
+  ],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/go-task/task/v3/cmd/release": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.59,
+    "load_failed": false,
+    "vta_seconds": 4.15
+   },
+   "github.com/go-task/task/v3/cmd/sleepit": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.36,
+    "load_failed": false,
+    "vta_seconds": 1.39
+   },
+   "github.com/go-task/task/v3/cmd/task": {
+    "error_codes": [
+     "TARGET_NOT_FOUND"
+    ],
+    "first_error": "symbol init not found in package google.golang.org/grpc/internal/transport",
+    "linker_seconds": 1.99,
+    "load_failed": false,
+    "vta_seconds": 12.83
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 10,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {
+   "FEASIBLE": 4
+  },
+  "committed_copy": {
+   "examined_per_entry": 3,
+   "method_paths": "left out: identical to the filter-off verdict committed beside this file"
+  },
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "2 candidate function(s) not analysed: ADDED_BY_FIX.",
+  "18 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/release",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/envconfig",
+    "symbol": "boolFromEnv"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/release",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "serverHandlerTransport.HandleStreams"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c4",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/release",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "http2Client.newStream"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c5",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/release",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "http2Server.operateHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c6",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/release",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "init"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package google.golang.org/grpc/internal/transport does not declare init"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c8",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/release",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "recvBuffer.init"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package google.golang.org/grpc/internal/transport does not declare recvBuffer.init"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c9",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/release",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "recvBuffer.load"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c10",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/release",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "recvBuffer.put"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c11",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/release",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/mem",
+    "symbol": "init"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c12",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/release",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/mem",
+    "symbol": "IsBelowBufferPoolingThreshold"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/envconfig",
+    "symbol": "boolFromEnv"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "serverHandlerTransport.HandleStreams"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c4",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "http2Client.newStream"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c5",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "http2Server.operateHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c6",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "init"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package google.golang.org/grpc/internal/transport does not declare init"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c8",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "recvBuffer.init"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package google.golang.org/grpc/internal/transport does not declare recvBuffer.init"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c9",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "recvBuffer.load"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c10",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "recvBuffer.put"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c11",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/mem",
+    "symbol": "init"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c12",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/mem",
+    "symbol": "IsBelowBufferPoolingThreshold"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/go-task/task/v3.init",
+       "caller": "github.com/go-task/task/v3/cmd/task.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/go-task/task/v3/taskfile.init",
+       "caller": "github.com/go-task/task/v3.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/hashicorp/go-getter.init",
+       "caller": "github.com/go-task/task/v3/taskfile.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "cloud.google.com/go/storage.init",
+       "caller": "github.com/hashicorp/go-getter.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "google.golang.org/grpc.init",
+       "caller": "cloud.google.com/go/storage.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "google.golang.org/grpc/internal/envconfig.init",
+       "caller": "google.golang.org/grpc.init",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/envconfig/envconfig.go",
+        "line": 30
+       },
+       "callee": "google.golang.org/grpc/internal/envconfig.boolFromEnv",
+       "caller": "google.golang.org/grpc/internal/envconfig.init",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/go-task/task/v3/cmd/task",
+      "symbol": "init"
+     },
+     "target": {
+      "package": "google.golang.org/grpc/internal/envconfig",
+      "symbol": "boolFromEnv"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "first_infeasible": null,
+      "length": 7
+     },
+     {
+      "first_infeasible": null,
+      "length": 7
+     },
+     {
+      "first_infeasible": null,
+      "length": 7
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "google.golang.org/grpc/internal/envconfig.boolFromEnv"
+   ],
+   "main_package": "github.com/go-task/task/v3/cmd/task",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/envconfig",
+    "symbol": "boolFromEnv"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/go-task/task/v3.init",
+      "caller": "github.com/go-task/task/v3/cmd/task.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/go-task/task/v3/taskfile.init",
+      "caller": "github.com/go-task/task/v3.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/hashicorp/go-getter.init",
+      "caller": "github.com/go-task/task/v3/taskfile.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "cloud.google.com/go/storage.init",
+      "caller": "github.com/hashicorp/go-getter.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "google.golang.org/grpc.init",
+      "caller": "cloud.google.com/go/storage.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "google.golang.org/grpc/internal/envconfig.init",
+      "caller": "google.golang.org/grpc.init",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/envconfig/envconfig.go",
+       "line": 30
+      },
+      "callee": "google.golang.org/grpc/internal/envconfig.boolFromEnv",
+      "caller": "google.golang.org/grpc/internal/envconfig.init",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/go-task/task/v3/cmd/task",
+     "symbol": "init"
+    },
+    "target": {
+     "package": "google.golang.org/grpc/internal/envconfig",
+     "symbol": "boolFromEnv"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "google.golang.org/grpc/internal/transport.(*serverHandlerTransport).HandleStreams"
+   ],
+   "main_package": "github.com/go-task/task/v3/cmd/task",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "METHOD_DISAGREEMENT",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "serverHandlerTransport.HandleStreams"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c4",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/task/task.go",
+        "line": 24
+       },
+       "callee": "github.com/go-task/task/v3/cmd/task.run",
+       "caller": "github.com/go-task/task/v3/cmd/task.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/task/task.go",
+        "line": 199
+       },
+       "callee": "github.com/go-task/task/v3.Executor.Status",
+       "caller": "github.com/go-task/task/v3/cmd/task.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "status.go",
+        "line": 28
+       },
+       "callee": "github.com/go-task/task/v3/internal/fingerprint.IsTaskUpToDate",
+       "caller": "github.com/go-task/task/v3.Executor.Status",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/fingerprint/task.go",
+        "line": 108
+       },
+       "callee": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.IsUpToDate",
+       "caller": "github.com/go-task/task/v3/internal/fingerprint.IsTaskUpToDate",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/fingerprint/sources_checksum.go",
+        "line": 41
+       },
+       "callee": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.checksum",
+       "caller": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.IsUpToDate",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/fingerprint/sources_checksum.go",
+        "line": 100
+       },
+       "callee": "io.CopyBuffer",
+       "caller": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.checksum",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 402
+       },
+       "callee": "io.copyBuffer",
+       "caller": "io.CopyBuffer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 411
+       },
+       "callee": "bufio.Reader.WriteTo",
+       "caller": "io.copyBuffer",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/bufio/bufio.go",
+        "line": 533
+       },
+       "callee": "bufio.Writer.ReadFrom",
+       "caller": "bufio.Reader.WriteTo",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/bufio/bufio.go",
+        "line": 804
+       },
+       "callee": "cloud.google.com/go/storage.Reader.Read",
+       "caller": "bufio.Writer.ReadFrom",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/cloud.google.com/go/storage@v1.29.0/reader.go",
+        "line": 207
+       },
+       "callee": "cloud.google.com/go/storage.gRPCReader.Read",
+       "caller": "cloud.google.com/go/storage.Reader.Read",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/cloud.google.com/go/storage@v1.29.0/grpc_client.go",
+        "line": 1365
+       },
+       "callee": "cloud.google.com/go/storage.gRPCReader.recv",
+       "caller": "cloud.google.com/go/storage.gRPCReader.Read",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/cloud.google.com/go/storage@v1.29.0/grpc_client.go",
+        "line": 1411
+       },
+       "callee": "cloud.google.com/go/storage/internal/apiv2/stubs.storageReadObjectClient.Recv",
+       "caller": "cloud.google.com/go/storage.gRPCReader.recv",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/cloud.google.com/go/storage@v1.29.0/internal/apiv2/stubs/storage.pb.go",
+        "line": 9681
+       },
+       "callee": "google.golang.org/grpc.clientStream.RecvMsg",
+       "caller": "cloud.google.com/go/storage/internal/apiv2/stubs.storageReadObjectClient.Recv",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+        "line": 916
+       },
+       "callee": "google.golang.org/grpc.clientStream.withRetry",
+       "caller": "google.golang.org/grpc.clientStream.RecvMsg",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+        "line": 782
+       },
+       "callee": "google.golang.org/grpc.clientStream.retryLocked",
+       "caller": "google.golang.org/grpc.clientStream.withRetry",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+        "line": 727
+       },
+       "callee": "google.golang.org/grpc.clientStream.replayBufferLocked",
+       "caller": "google.golang.org/grpc.clientStream.retryLocked",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+        "line": 843
+       },
+       "callee": "google.golang.org/grpc.newClientStreamWithParams$2",
+       "caller": "google.golang.org/grpc.clientStream.replayBufferLocked",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+        "line": 344
+       },
+       "callee": "google.golang.org/grpc.csAttempt.newStream",
+       "caller": "google.golang.org/grpc.newClientStreamWithParams$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+        "line": 494
+       },
+       "callee": "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+       "caller": "google.golang.org/grpc.csAttempt.newStream",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/http2_client.go",
+        "line": 721
+       },
+       "callee": "google.golang.org/grpc/internal/transport.http2Client.newStream",
+       "caller": "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/go-task/task/v3/cmd/task",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "google.golang.org/grpc/internal/transport",
+      "symbol": "http2Client.newStream"
+     }
+    },
+    "evidence_source": "STATE_SEARCH",
+    "examined": [
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "internal/fingerprint/sources_checksum.go",
+          "line": 100
+         },
+         "callee": "io.CopyBuffer",
+         "caller": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.checksum",
+         "kind": "STATIC"
+        },
+        {
+         "call_site": {
+          "file": "$GOROOT/src/io/io.go",
+          "line": 402
+         },
+         "callee": "io.copyBuffer",
+         "caller": "io.CopyBuffer",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/io/io.go",
+         "line": 429
+        },
+        "callee": "cloud.google.com/go/storage.Reader.Read",
+        "caller": "io.copyBuffer",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 7,
+       "pattern": "F1",
+       "reason": "the argument passed at internal/fingerprint/sources_checksum.go:100 is `*strings.Reader`; the dynamic call at $GOROOT/src/io/io.go:429 can only reach its method, not cloud.google.com/go/storage.Reader.Read (receiver `*cloud.google.com/go/storage.Reader`)"
+      },
+      "length": 17
+     },
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "internal/fingerprint/sources_checksum.go",
+          "line": 107
+         },
+         "callee": "io.CopyBuffer",
+         "caller": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.checksum",
+         "kind": "STATIC"
+        },
+        {
+         "call_site": {
+          "file": "$GOROOT/src/io/io.go",
+          "line": 402
+         },
+         "callee": "io.copyBuffer",
+         "caller": "io.CopyBuffer",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/io/io.go",
+         "line": 429
+        },
+        "callee": "cloud.google.com/go/storage.Reader.Read",
+        "caller": "io.copyBuffer",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 7,
+       "pattern": "F1",
+       "reason": "the argument passed at internal/fingerprint/sources_checksum.go:107 is `*os.File`; the dynamic call at $GOROOT/src/io/io.go:429 can only reach its method, not cloud.google.com/go/storage.Reader.Read (receiver `*cloud.google.com/go/storage.Reader`)"
+      },
+      "length": 17
+     },
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "internal/fingerprint/sources_checksum.go",
+          "line": 100
+         },
+         "callee": "io.CopyBuffer",
+         "caller": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.checksum",
+         "kind": "STATIC"
+        },
+        {
+         "call_site": {
+          "file": "$GOROOT/src/io/io.go",
+          "line": 402
+         },
+         "callee": "io.copyBuffer",
+         "caller": "io.CopyBuffer",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/io/io.go",
+         "line": 429
+        },
+        "callee": "cloud.google.com/go/storage.Reader.Read",
+        "caller": "io.copyBuffer",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 7,
+       "pattern": "F1",
+       "reason": "the argument passed at internal/fingerprint/sources_checksum.go:100 is `*strings.Reader`; the dynamic call at $GOROOT/src/io/io.go:429 can only reach its method, not cloud.google.com/go/storage.Reader.Read (receiver `*cloud.google.com/go/storage.Reader`)"
+      },
+      "length": 17
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "google.golang.org/grpc/internal/transport.(*http2Client).newStream"
+   ],
+   "main_package": "github.com/go-task/task/v3/cmd/task",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "http2Client.newStream"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/task/task.go",
+       "line": 24
+      },
+      "callee": "github.com/go-task/task/v3/cmd/task.run",
+      "caller": "github.com/go-task/task/v3/cmd/task.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/task/task.go",
+       "line": 199
+      },
+      "callee": "github.com/go-task/task/v3.Executor.Status",
+      "caller": "github.com/go-task/task/v3/cmd/task.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "status.go",
+       "line": 28
+      },
+      "callee": "github.com/go-task/task/v3/internal/fingerprint.IsTaskUpToDate",
+      "caller": "github.com/go-task/task/v3.Executor.Status",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/fingerprint/task.go",
+       "line": 108
+      },
+      "callee": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.IsUpToDate",
+      "caller": "github.com/go-task/task/v3/internal/fingerprint.IsTaskUpToDate",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/fingerprint/sources_checksum.go",
+       "line": 41
+      },
+      "callee": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.checksum",
+      "caller": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.IsUpToDate",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/fingerprint/sources_checksum.go",
+       "line": 100
+      },
+      "callee": "io.CopyBuffer",
+      "caller": "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.checksum",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/io/io.go",
+       "line": 402
+      },
+      "callee": "io.copyBuffer",
+      "caller": "io.CopyBuffer",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/io/io.go",
+       "line": 411
+      },
+      "callee": "bufio.Reader.WriteTo",
+      "caller": "io.copyBuffer",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/bufio/bufio.go",
+       "line": 533
+      },
+      "callee": "bufio.Writer.ReadFrom",
+      "caller": "bufio.Reader.WriteTo",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/bufio/bufio.go",
+       "line": 804
+      },
+      "callee": "cloud.google.com/go/storage.Reader.Read",
+      "caller": "bufio.Writer.ReadFrom",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/cloud.google.com/go/storage@v1.29.0/reader.go",
+       "line": 207
+      },
+      "callee": "cloud.google.com/go/storage.gRPCReader.Read",
+      "caller": "cloud.google.com/go/storage.Reader.Read",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/cloud.google.com/go/storage@v1.29.0/grpc_client.go",
+       "line": 1365
+      },
+      "callee": "cloud.google.com/go/storage.gRPCReader.recv",
+      "caller": "cloud.google.com/go/storage.gRPCReader.Read",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/cloud.google.com/go/storage@v1.29.0/grpc_client.go",
+       "line": 1411
+      },
+      "callee": "cloud.google.com/go/storage/internal/apiv2/stubs.storageReadObjectClient.Recv",
+      "caller": "cloud.google.com/go/storage.gRPCReader.recv",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/cloud.google.com/go/storage@v1.29.0/internal/apiv2/stubs/storage.pb.go",
+       "line": 9681
+      },
+      "callee": "google.golang.org/grpc.clientStream.RecvMsg",
+      "caller": "cloud.google.com/go/storage/internal/apiv2/stubs.storageReadObjectClient.Recv",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+       "line": 916
+      },
+      "callee": "google.golang.org/grpc.clientStream.withRetry",
+      "caller": "google.golang.org/grpc.clientStream.RecvMsg",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+       "line": 782
+      },
+      "callee": "google.golang.org/grpc.clientStream.retryLocked",
+      "caller": "google.golang.org/grpc.clientStream.withRetry",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+       "line": 727
+      },
+      "callee": "google.golang.org/grpc.clientStream.replayBufferLocked",
+      "caller": "google.golang.org/grpc.clientStream.retryLocked",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+       "line": 843
+      },
+      "callee": "google.golang.org/grpc.newClientStreamWithParams$2",
+      "caller": "google.golang.org/grpc.clientStream.replayBufferLocked",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+       "line": 344
+      },
+      "callee": "google.golang.org/grpc.csAttempt.newStream",
+      "caller": "google.golang.org/grpc.newClientStreamWithParams$2",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/stream.go",
+       "line": 494
+      },
+      "callee": "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+      "caller": "google.golang.org/grpc.csAttempt.newStream",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/http2_client.go",
+       "line": 721
+      },
+      "callee": "google.golang.org/grpc/internal/transport.http2Client.newStream",
+      "caller": "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/go-task/task/v3/cmd/task",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "google.golang.org/grpc/internal/transport",
+     "symbol": "http2Client.newStream"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c5",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "google.golang.org/grpc/internal/transport.(*http2Server).operateHeaders"
+   ],
+   "main_package": "github.com/go-task/task/v3/cmd/task",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "METHOD_DISAGREEMENT",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "http2Server.operateHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c6",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "google.golang.org/grpc/internal/transport.init"
+   ],
+   "main_package": "github.com/go-task/task/v3/cmd/task",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "init"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c8",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/task",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "recvBuffer.init"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c9",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/task/task.go",
+        "line": 33
+       },
+       "callee": "github.com/go-task/task/v3/internal/logger.Logger.Errf",
+       "caller": "github.com/go-task/task/v3/cmd/task.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/logger/logger.go",
+        "line": 169
+       },
+       "callee": "github.com/fatih/color.Color.FprintfFunc$1",
+       "caller": "github.com/go-task/task/v3/internal/logger.Logger.Errf",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/fatih/color@v1.18.0/color.go",
+        "line": 349
+       },
+       "callee": "github.com/fatih/color.Color.Fprintf",
+       "caller": "github.com/fatih/color.Color.FprintfFunc$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/fatih/color@v1.18.0/color.go",
+        "line": 284
+       },
+       "callee": "fmt.Fprintf",
+       "caller": "github.com/fatih/color.Color.Fprintf",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/fmt/print.go",
+        "line": 225
+       },
+       "callee": "crypto/tls.Conn.Write",
+       "caller": "fmt.Fprintf",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/crypto/tls/conn.go",
+        "line": 1246
+       },
+       "callee": "crypto/tls.Conn.writeRecordLocked",
+       "caller": "crypto/tls.Conn.Write",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/crypto/tls/conn.go",
+        "line": 1031
+       },
+       "callee": "crypto/tls.halfConn.encrypt",
+       "caller": "crypto/tls.Conn.writeRecordLocked",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/crypto/tls/conn.go",
+        "line": 499
+       },
+       "callee": "io.ReadFull",
+       "caller": "crypto/tls.halfConn.encrypt",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 354
+       },
+       "callee": "io.ReadAtLeast",
+       "caller": "io.ReadFull",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 335
+       },
+       "callee": "google.golang.org/grpc/internal/transport.transportReader.Read",
+       "caller": "io.ReadAtLeast",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+        "line": 514
+       },
+       "callee": "google.golang.org/grpc/internal/transport.recvBufferReader.Read",
+       "caller": "google.golang.org/grpc/internal/transport.transportReader.Read",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+        "line": 177
+       },
+       "callee": "google.golang.org/grpc/internal/transport.recvBufferReader.read",
+       "caller": "google.golang.org/grpc/internal/transport.recvBufferReader.Read",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+        "line": 187
+       },
+       "callee": "google.golang.org/grpc/internal/transport.recvBufferReader.readAdditional",
+       "caller": "google.golang.org/grpc/internal/transport.recvBufferReader.read",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+        "line": 219
+       },
+       "callee": "google.golang.org/grpc/internal/transport.recvBuffer.load",
+       "caller": "google.golang.org/grpc/internal/transport.recvBufferReader.readAdditional",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/go-task/task/v3/cmd/task",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "google.golang.org/grpc/internal/transport",
+      "symbol": "recvBuffer.load"
+     }
+    },
+    "evidence_source": "STATE_SEARCH",
+    "examined": [
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/task/task.go",
+          "line": 54
+         },
+         "callee": "fmt.Fprintf",
+         "caller": "github.com/go-task/task/v3/cmd/task.emitCIErrorAnnotation",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/fmt/print.go",
+         "line": 225
+        },
+        "callee": "crypto/tls.Conn.Write",
+        "caller": "fmt.Fprintf",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 2,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/task/task.go:54 is `*os.File`; the dynamic call at $GOROOT/src/fmt/print.go:225 can only reach its method, not crypto/tls.Conn.Write (receiver `*crypto/tls.Conn`)"
+      },
+      "length": 12
+     },
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/task/task.go",
+          "line": 54
+         },
+         "callee": "fmt.Fprintf",
+         "caller": "github.com/go-task/task/v3/cmd/task.emitCIErrorAnnotation",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/fmt/print.go",
+         "line": 225
+        },
+        "callee": "crypto/tls.Conn.Write",
+        "caller": "fmt.Fprintf",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 2,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/task/task.go:54 is `*os.File`; the dynamic call at $GOROOT/src/fmt/print.go:225 can only reach its method, not crypto/tls.Conn.Write (receiver `*crypto/tls.Conn`)"
+      },
+      "length": 12
+     },
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/task/task.go",
+          "line": 54
+         },
+         "callee": "fmt.Fprintf",
+         "caller": "github.com/go-task/task/v3/cmd/task.emitCIErrorAnnotation",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/fmt/print.go",
+         "line": 225
+        },
+        "callee": "crypto/tls.Conn.Write",
+        "caller": "fmt.Fprintf",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 2,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/task/task.go:54 is `*os.File`; the dynamic call at $GOROOT/src/fmt/print.go:225 can only reach its method, not crypto/tls.Conn.Write (receiver `*crypto/tls.Conn`)"
+      },
+      "length": 12
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "google.golang.org/grpc/internal/transport.(*recvBuffer).load"
+   ],
+   "main_package": "github.com/go-task/task/v3/cmd/task",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "recvBuffer.load"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/task/task.go",
+       "line": 33
+      },
+      "callee": "github.com/go-task/task/v3/internal/logger.Logger.Errf",
+      "caller": "github.com/go-task/task/v3/cmd/task.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/logger/logger.go",
+       "line": 169
+      },
+      "callee": "github.com/fatih/color.Color.FprintfFunc$1",
+      "caller": "github.com/go-task/task/v3/internal/logger.Logger.Errf",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/fatih/color@v1.18.0/color.go",
+       "line": 349
+      },
+      "callee": "github.com/fatih/color.Color.Fprintf",
+      "caller": "github.com/fatih/color.Color.FprintfFunc$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/fatih/color@v1.18.0/color.go",
+       "line": 284
+      },
+      "callee": "fmt.Fprintf",
+      "caller": "github.com/fatih/color.Color.Fprintf",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/fmt/print.go",
+       "line": 225
+      },
+      "callee": "crypto/tls.Conn.Write",
+      "caller": "fmt.Fprintf",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/crypto/tls/conn.go",
+       "line": 1246
+      },
+      "callee": "crypto/tls.Conn.writeRecordLocked",
+      "caller": "crypto/tls.Conn.Write",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/crypto/tls/conn.go",
+       "line": 1031
+      },
+      "callee": "crypto/tls.halfConn.encrypt",
+      "caller": "crypto/tls.Conn.writeRecordLocked",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/crypto/tls/conn.go",
+       "line": 499
+      },
+      "callee": "io.ReadFull",
+      "caller": "crypto/tls.halfConn.encrypt",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/io/io.go",
+       "line": 354
+      },
+      "callee": "io.ReadAtLeast",
+      "caller": "io.ReadFull",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/io/io.go",
+       "line": 335
+      },
+      "callee": "google.golang.org/grpc/internal/transport.transportReader.Read",
+      "caller": "io.ReadAtLeast",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+       "line": 514
+      },
+      "callee": "google.golang.org/grpc/internal/transport.recvBufferReader.Read",
+      "caller": "google.golang.org/grpc/internal/transport.transportReader.Read",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+       "line": 177
+      },
+      "callee": "google.golang.org/grpc/internal/transport.recvBufferReader.read",
+      "caller": "google.golang.org/grpc/internal/transport.recvBufferReader.Read",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+       "line": 187
+      },
+      "callee": "google.golang.org/grpc/internal/transport.recvBufferReader.readAdditional",
+      "caller": "google.golang.org/grpc/internal/transport.recvBufferReader.read",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+       "line": 219
+      },
+      "callee": "google.golang.org/grpc/internal/transport.recvBuffer.load",
+      "caller": "google.golang.org/grpc/internal/transport.recvBufferReader.readAdditional",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/go-task/task/v3/cmd/task",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "google.golang.org/grpc/internal/transport",
+     "symbol": "recvBuffer.load"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c10",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/task/task.go",
+        "line": 33
+       },
+       "callee": "github.com/go-task/task/v3/internal/logger.Logger.Errf",
+       "caller": "github.com/go-task/task/v3/cmd/task.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/logger/logger.go",
+        "line": 169
+       },
+       "callee": "github.com/fatih/color.Color.FprintfFunc$1",
+       "caller": "github.com/go-task/task/v3/internal/logger.Logger.Errf",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/fatih/color@v1.18.0/color.go",
+        "line": 349
+       },
+       "callee": "github.com/fatih/color.Color.Fprintf",
+       "caller": "github.com/fatih/color.Color.FprintfFunc$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/fatih/color@v1.18.0/color.go",
+        "line": 284
+       },
+       "callee": "fmt.Fprintf",
+       "caller": "github.com/fatih/color.Color.Fprintf",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/fmt/print.go",
+        "line": 225
+       },
+       "callee": "crypto/tls.Conn.Write",
+       "caller": "fmt.Fprintf",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/crypto/tls/conn.go",
+        "line": 1246
+       },
+       "callee": "crypto/tls.Conn.writeRecordLocked",
+       "caller": "crypto/tls.Conn.Write",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/crypto/tls/conn.go",
+        "line": 1031
+       },
+       "callee": "crypto/tls.halfConn.encrypt",
+       "caller": "crypto/tls.Conn.writeRecordLocked",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/crypto/tls/conn.go",
+        "line": 499
+       },
+       "callee": "io.ReadFull",
+       "caller": "crypto/tls.halfConn.encrypt",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 354
+       },
+       "callee": "io.ReadAtLeast",
+       "caller": "io.ReadFull",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 335
+       },
+       "callee": "google.golang.org/grpc/internal/transport.transportReader.Read",
+       "caller": "io.ReadAtLeast",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+        "line": 514
+       },
+       "callee": "google.golang.org/grpc/internal/transport.recvBufferReader.Read",
+       "caller": "google.golang.org/grpc/internal/transport.transportReader.Read",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+        "line": 175
+       },
+       "callee": "google.golang.org/grpc/internal/transport.recvBufferReader.readClient",
+       "caller": "google.golang.org/grpc/internal/transport.recvBufferReader.Read",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+        "line": 210
+       },
+       "callee": "google.golang.org/grpc/internal/transport.http2Client.newStream$2",
+       "caller": "google.golang.org/grpc/internal/transport.recvBufferReader.readClient",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/http2_client.go",
+        "line": 483
+       },
+       "callee": "google.golang.org/grpc/internal/transport.http2Client.CloseStream",
+       "caller": "google.golang.org/grpc/internal/transport.http2Client.newStream$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/http2_client.go",
+        "line": 884
+       },
+       "callee": "google.golang.org/grpc/internal/transport.http2Client.closeStream",
+       "caller": "google.golang.org/grpc/internal/transport.http2Client.CloseStream",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/http2_client.go",
+        "line": 904
+       },
+       "callee": "google.golang.org/grpc/internal/transport.Stream.write",
+       "caller": "google.golang.org/grpc/internal/transport.http2Client.closeStream",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+        "line": 488
+       },
+       "callee": "google.golang.org/grpc/internal/transport.recvBuffer.put",
+       "caller": "google.golang.org/grpc/internal/transport.Stream.write",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/go-task/task/v3/cmd/task",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "google.golang.org/grpc/internal/transport",
+      "symbol": "recvBuffer.put"
+     }
+    },
+    "evidence_source": "STATE_SEARCH",
+    "examined": [
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/task/task.go",
+          "line": 54
+         },
+         "callee": "fmt.Fprintf",
+         "caller": "github.com/go-task/task/v3/cmd/task.emitCIErrorAnnotation",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/fmt/print.go",
+         "line": 225
+        },
+        "callee": "crypto/tls.Conn.Write",
+        "caller": "fmt.Fprintf",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 2,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/task/task.go:54 is `*os.File`; the dynamic call at $GOROOT/src/fmt/print.go:225 can only reach its method, not crypto/tls.Conn.Write (receiver `*crypto/tls.Conn`)"
+      },
+      "length": 15
+     },
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/task/task.go",
+          "line": 54
+         },
+         "callee": "fmt.Fprintf",
+         "caller": "github.com/go-task/task/v3/cmd/task.emitCIErrorAnnotation",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/fmt/print.go",
+         "line": 225
+        },
+        "callee": "crypto/tls.Conn.Write",
+        "caller": "fmt.Fprintf",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 2,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/task/task.go:54 is `*os.File`; the dynamic call at $GOROOT/src/fmt/print.go:225 can only reach its method, not crypto/tls.Conn.Write (receiver `*crypto/tls.Conn`)"
+      },
+      "length": 15
+     },
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/task/task.go",
+          "line": 54
+         },
+         "callee": "fmt.Fprintf",
+         "caller": "github.com/go-task/task/v3/cmd/task.emitCIErrorAnnotation",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/fmt/print.go",
+         "line": 225
+        },
+        "callee": "crypto/tls.Conn.Write",
+        "caller": "fmt.Fprintf",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 2,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/task/task.go:54 is `*os.File`; the dynamic call at $GOROOT/src/fmt/print.go:225 can only reach its method, not crypto/tls.Conn.Write (receiver `*crypto/tls.Conn`)"
+      },
+      "length": 15
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "google.golang.org/grpc/internal/transport.(*recvBuffer).put"
+   ],
+   "main_package": "github.com/go-task/task/v3/cmd/task",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/internal/transport",
+    "symbol": "recvBuffer.put"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/task/task.go",
+       "line": 33
+      },
+      "callee": "github.com/go-task/task/v3/internal/logger.Logger.Errf",
+      "caller": "github.com/go-task/task/v3/cmd/task.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/logger/logger.go",
+       "line": 169
+      },
+      "callee": "github.com/fatih/color.Color.FprintfFunc$1",
+      "caller": "github.com/go-task/task/v3/internal/logger.Logger.Errf",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/fatih/color@v1.18.0/color.go",
+       "line": 349
+      },
+      "callee": "github.com/fatih/color.Color.Fprintf",
+      "caller": "github.com/fatih/color.Color.FprintfFunc$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/fatih/color@v1.18.0/color.go",
+       "line": 284
+      },
+      "callee": "fmt.Fprintf",
+      "caller": "github.com/fatih/color.Color.Fprintf",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/fmt/print.go",
+       "line": 225
+      },
+      "callee": "crypto/tls.Conn.Write",
+      "caller": "fmt.Fprintf",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/crypto/tls/conn.go",
+       "line": 1246
+      },
+      "callee": "crypto/tls.Conn.writeRecordLocked",
+      "caller": "crypto/tls.Conn.Write",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/crypto/tls/conn.go",
+       "line": 1031
+      },
+      "callee": "crypto/tls.halfConn.encrypt",
+      "caller": "crypto/tls.Conn.writeRecordLocked",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/crypto/tls/conn.go",
+       "line": 499
+      },
+      "callee": "io.ReadFull",
+      "caller": "crypto/tls.halfConn.encrypt",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/io/io.go",
+       "line": 354
+      },
+      "callee": "io.ReadAtLeast",
+      "caller": "io.ReadFull",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/io/io.go",
+       "line": 335
+      },
+      "callee": "google.golang.org/grpc/internal/transport.transportReader.Read",
+      "caller": "io.ReadAtLeast",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+       "line": 514
+      },
+      "callee": "google.golang.org/grpc/internal/transport.recvBufferReader.Read",
+      "caller": "google.golang.org/grpc/internal/transport.transportReader.Read",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+       "line": 175
+      },
+      "callee": "google.golang.org/grpc/internal/transport.recvBufferReader.readClient",
+      "caller": "google.golang.org/grpc/internal/transport.recvBufferReader.Read",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+       "line": 210
+      },
+      "callee": "google.golang.org/grpc/internal/transport.http2Client.newStream$2",
+      "caller": "google.golang.org/grpc/internal/transport.recvBufferReader.readClient",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/http2_client.go",
+       "line": 483
+      },
+      "callee": "google.golang.org/grpc/internal/transport.http2Client.CloseStream",
+      "caller": "google.golang.org/grpc/internal/transport.http2Client.newStream$2",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/http2_client.go",
+       "line": 884
+      },
+      "callee": "google.golang.org/grpc/internal/transport.http2Client.closeStream",
+      "caller": "google.golang.org/grpc/internal/transport.http2Client.CloseStream",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/http2_client.go",
+       "line": 904
+      },
+      "callee": "google.golang.org/grpc/internal/transport.Stream.write",
+      "caller": "google.golang.org/grpc/internal/transport.http2Client.closeStream",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/google.golang.org/grpc@v1.56.3/internal/transport/transport.go",
+       "line": 488
+      },
+      "callee": "google.golang.org/grpc/internal/transport.recvBuffer.put",
+      "caller": "google.golang.org/grpc/internal/transport.Stream.write",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/go-task/task/v3/cmd/task",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "google.golang.org/grpc/internal/transport",
+     "symbol": "recvBuffer.put"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c11",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/task",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/mem",
+    "symbol": "init"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c12",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/go-task/task/v3/cmd/task",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "google.golang.org/grpc/mem",
+    "symbol": "IsBelowBufferPoolingThreshold"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:"
+    }
+   ]
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-11-17T20:45:19Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "c546837",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": true,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "google.golang.org/grpc/internal/envconfig",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "boolFromEnv"
+  },
+  {
+   "candidate_id": "c3",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "google.golang.org/grpc/internal/transport",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "serverHandlerTransport.HandleStreams"
+  },
+  {
+   "candidate_id": "c4",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "google.golang.org/grpc/internal/transport",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "http2Client.newStream"
+  },
+  {
+   "candidate_id": "c5",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "google.golang.org/grpc/internal/transport",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "http2Server.operateHeaders"
+  },
+  {
+   "candidate_id": "c6",
+   "context_only": true,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "google.golang.org/grpc/internal/transport",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "init"
+  },
+  {
+   "candidate_id": "c8",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "google.golang.org/grpc/internal/transport",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "recvBuffer.init"
+  },
+  {
+   "candidate_id": "c9",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "google.golang.org/grpc/internal/transport",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "recvBuffer.load"
+  },
+  {
+   "candidate_id": "c10",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "google.golang.org/grpc/internal/transport",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "recvBuffer.put"
+  },
+  {
+   "candidate_id": "c11",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "google.golang.org/grpc/mem",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "init"
+  },
+  {
+   "candidate_id": "c12",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "google.golang.org/grpc/mem",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "IsBelowBufferPoolingThreshold"
+  }
+ ],
+ "target_app": {
+  "commit": "179bde1f37561b0d5e96e99688de735ce9eef05c",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/go-task/task/v3",
+  "path": "<local>/data/cp9/d3b/on/apps/github.com_go-task_task/179bde1f3756"
+ },
+ "timing": {
+  "inspect_seconds": 0.13,
+  "methods_seconds": 21.32,
+  "symbols_seconds": 0.0,
+  "total_seconds": 33.33,
+  "verifier_seconds": 11.87
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 212,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 212,
+    "skipped": 0
+   },
+   "FILTERED_PATH": {
+    "failed": 0,
+    "run": 4,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 16,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 4,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 10,
+    "run": 26,
+    "skipped": 0
+   }
+  },
+  "checks_run": 474,
+  "downgraded": 10,
+  "failures": [
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/go-task/task/v3/cmd/release",
+    "path_index": null,
+    "reason": "package google.golang.org/grpc/internal/transport does not declare init",
+    "target": {
+     "package": "google.golang.org/grpc/internal/transport",
+     "symbol": "init"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/go-task/task/v3/cmd/release",
+    "path_index": null,
+    "reason": "package google.golang.org/grpc/internal/transport does not declare recvBuffer.init",
+    "target": {
+     "package": "google.golang.org/grpc/internal/transport",
+     "symbol": "recvBuffer.init"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/go-task/task/v3/cmd/release",
+    "path_index": null,
+    "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:",
+    "target": {
+     "package": "google.golang.org/grpc/mem",
+     "symbol": "init"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/go-task/task/v3/cmd/release",
+    "path_index": null,
+    "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:",
+    "target": {
+     "package": "google.golang.org/grpc/mem",
+     "symbol": "IsBelowBufferPoolingThreshold"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+    "path_index": null,
+    "reason": "package google.golang.org/grpc/internal/transport does not declare init",
+    "target": {
+     "package": "google.golang.org/grpc/internal/transport",
+     "symbol": "init"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+    "path_index": null,
+    "reason": "package google.golang.org/grpc/internal/transport does not declare recvBuffer.init",
+    "target": {
+     "package": "google.golang.org/grpc/internal/transport",
+     "symbol": "recvBuffer.init"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+    "path_index": null,
+    "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:",
+    "target": {
+     "package": "google.golang.org/grpc/mem",
+     "symbol": "init"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/go-task/task/v3/cmd/sleepit",
+    "path_index": null,
+    "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:",
+    "target": {
+     "package": "google.golang.org/grpc/mem",
+     "symbol": "IsBelowBufferPoolingThreshold"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/go-task/task/v3/cmd/task",
+    "path_index": null,
+    "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:",
+    "target": {
+     "package": "google.golang.org/grpc/mem",
+     "symbol": "init"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/go-task/task/v3/cmd/task",
+    "path_index": null,
+    "reason": "MISSING: module google.golang.org/grpc is in the build but package google.golang.org/grpc/mem was not found: no required module provides package google.golang.org/grpc/mem; to add it:",
+    "target": {
+     "package": "google.golang.org/grpc/mem",
+     "symbol": "IsBelowBufferPoolingThreshold"
+    }
+   }
+  ],
+  "file_source": "analysed tree on disk",
+  "status": "FAILED"
+ }
+}

@@ -1,0 +1,3198 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "quic-go",
+    "repo": "quic-go",
+    "sha": "bc5bccf10fd02728eef150683eb4dfaa5c0e749c"
+   },
+   {
+    "host": "github.com",
+    "owner": "quic-go",
+    "repo": "quic-go",
+    "sha": "ce7c9ea8834b9d2ed79efa9269467f02c0895d42"
+   }
+  ],
+  "fixed_in": "0.54.1",
+  "id": "GO-2025-4017",
+  "module": "github.com/quic-go/quic-go",
+  "source": "vulndb",
+  "vulnerable_at": "0.54.0"
+ },
+ "case_id": "frp__GO-2025-4017",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/fatedier/frp/cmd/frpc",
+   "github.com/fatedier/frp/cmd/frps"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/fatedier/frp/cmd/frpc": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.06,
+    "load_failed": false,
+    "vta_seconds": 8.05
+   },
+   "github.com/fatedier/frp/cmd/frps": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.61,
+    "load_failed": false,
+    "vta_seconds": 10.57
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 2,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "8 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "github.com/quic-go/quic-go.(*Conn).handleHandshakeComplete"
+   ],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/frpc/main.go",
+        "line": 25
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 102
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1039
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1115
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 987
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/proxy.go",
+        "line": 91
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 167
+       },
+       "callee": "github.com/fatedier/frp/client.Service.Run",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 219
+       },
+       "callee": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+       "caller": "github.com/fatedier/frp/client.Service.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 233
+       },
+       "callee": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "caller": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "pkg/util/wait/backoff.go",
+        "line": 133
+       },
+       "callee": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "caller": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 326
+       },
+       "callee": "github.com/fatedier/frp/client.Service.login",
+       "caller": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 263
+       },
+       "callee": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "caller": "github.com/fatedier/frp/client.Service.login",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/connector.go",
+        "line": 91
+       },
+       "callee": "github.com/quic-go/quic-go.DialAddr",
+       "caller": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/client.go",
+        "line": 32
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.dial",
+       "caller": "github.com/quic-go/quic-go.DialAddr",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 255
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial",
+       "caller": "github.com/quic-go/quic-go.Transport.dial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 330
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 331
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.run",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 571
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "caller": "github.com/quic-go/quic-go.Conn.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 968
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1159
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1388
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1482
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/fatedier/frp/cmd/frpc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go",
+      "symbol": "Conn.handleHandshakeComplete"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/frpc/main.go",
+        "line": 25
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 102
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1039
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1115
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 987
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.NewVisitorCommand$1",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/proxy.go",
+        "line": 120
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.NewVisitorCommand$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 167
+       },
+       "callee": "github.com/fatedier/frp/client.Service.Run",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 219
+       },
+       "callee": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+       "caller": "github.com/fatedier/frp/client.Service.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 233
+       },
+       "callee": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "caller": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "pkg/util/wait/backoff.go",
+        "line": 133
+       },
+       "callee": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "caller": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 326
+       },
+       "callee": "github.com/fatedier/frp/client.Service.login",
+       "caller": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 263
+       },
+       "callee": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "caller": "github.com/fatedier/frp/client.Service.login",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/connector.go",
+        "line": 91
+       },
+       "callee": "github.com/quic-go/quic-go.DialAddr",
+       "caller": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/client.go",
+        "line": 32
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.dial",
+       "caller": "github.com/quic-go/quic-go.DialAddr",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 255
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial",
+       "caller": "github.com/quic-go/quic-go.Transport.dial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 330
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 331
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.run",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 571
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "caller": "github.com/quic-go/quic-go.Conn.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 968
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1159
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1388
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1482
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/fatedier/frp/cmd/frpc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go",
+      "symbol": "Conn.handleHandshakeComplete"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/frpc/main.go",
+        "line": 25
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 102
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1039
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1115
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 987
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/proxy.go",
+        "line": 91
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 167
+       },
+       "callee": "github.com/fatedier/frp/client.Service.Run",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 212
+       },
+       "callee": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess",
+       "caller": "github.com/fatedier/frp/client.Service.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 371
+       },
+       "callee": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "caller": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "pkg/util/wait/backoff.go",
+        "line": 133
+       },
+       "callee": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "caller": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 326
+       },
+       "callee": "github.com/fatedier/frp/client.Service.login",
+       "caller": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 263
+       },
+       "callee": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "caller": "github.com/fatedier/frp/client.Service.login",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/connector.go",
+        "line": 91
+       },
+       "callee": "github.com/quic-go/quic-go.DialAddr",
+       "caller": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/client.go",
+        "line": 32
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.dial",
+       "caller": "github.com/quic-go/quic-go.DialAddr",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 255
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial",
+       "caller": "github.com/quic-go/quic-go.Transport.dial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 330
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 331
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.run",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 571
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "caller": "github.com/quic-go/quic-go.Conn.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 968
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1159
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1388
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1482
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/fatedier/frp/cmd/frpc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go",
+      "symbol": "Conn.handleHandshakeComplete"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go",
+    "symbol": "Conn.handleHandshakeComplete"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/frpc/main.go",
+       "line": 25
+      },
+      "callee": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+      "caller": "github.com/fatedier/frp/cmd/frpc.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frpc/sub/root.go",
+       "line": 102
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 1039
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 1115
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 987
+      },
+      "callee": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frpc/sub/proxy.go",
+       "line": 91
+      },
+      "callee": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+      "caller": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frpc/sub/root.go",
+       "line": 167
+      },
+      "callee": "github.com/fatedier/frp/client.Service.Run",
+      "caller": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "client/service.go",
+       "line": 219
+      },
+      "callee": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+      "caller": "github.com/fatedier/frp/client.Service.Run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "client/service.go",
+       "line": 233
+      },
+      "callee": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+      "caller": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "pkg/util/wait/backoff.go",
+       "line": 133
+      },
+      "callee": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+      "caller": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "client/service.go",
+       "line": 326
+      },
+      "callee": "github.com/fatedier/frp/client.Service.login",
+      "caller": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "client/service.go",
+       "line": 263
+      },
+      "callee": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+      "caller": "github.com/fatedier/frp/client.Service.login",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "client/connector.go",
+       "line": 91
+      },
+      "callee": "github.com/quic-go/quic-go.DialAddr",
+      "caller": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/client.go",
+       "line": 32
+      },
+      "callee": "github.com/quic-go/quic-go.Transport.dial",
+      "caller": "github.com/quic-go/quic-go.DialAddr",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+       "line": 255
+      },
+      "callee": "github.com/quic-go/quic-go.Transport.doDial",
+      "caller": "github.com/quic-go/quic-go.Transport.dial",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+       "line": 330
+      },
+      "callee": "github.com/quic-go/quic-go.Transport.doDial$1",
+      "caller": "github.com/quic-go/quic-go.Transport.doDial",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+       "line": 331
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.run",
+      "caller": "github.com/quic-go/quic-go.Transport.doDial$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 571
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+      "caller": "github.com/quic-go/quic-go.Conn.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 968
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+      "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1159
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+      "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1388
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+      "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1482
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+      "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/fatedier/frp/cmd/frpc",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/quic-go/quic-go",
+     "symbol": "Conn.handleHandshakeComplete"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "github.com/quic-go/quic-go.(*Conn).handleHandshakeConfirmed"
+   ],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/frpc/main.go",
+        "line": 25
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 102
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1039
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1115
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 987
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/proxy.go",
+        "line": 91
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 167
+       },
+       "callee": "github.com/fatedier/frp/client.Service.Run",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 219
+       },
+       "callee": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+       "caller": "github.com/fatedier/frp/client.Service.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 233
+       },
+       "callee": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "caller": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "pkg/util/wait/backoff.go",
+        "line": 133
+       },
+       "callee": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "caller": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 326
+       },
+       "callee": "github.com/fatedier/frp/client.Service.login",
+       "caller": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 263
+       },
+       "callee": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "caller": "github.com/fatedier/frp/client.Service.login",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/connector.go",
+        "line": 91
+       },
+       "callee": "github.com/quic-go/quic-go.DialAddr",
+       "caller": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/client.go",
+        "line": 32
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.dial",
+       "caller": "github.com/quic-go/quic-go.DialAddr",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 255
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial",
+       "caller": "github.com/quic-go/quic-go.Transport.dial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 330
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 331
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.run",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 571
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "caller": "github.com/quic-go/quic-go.Conn.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 968
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1159
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1388
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1482
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 816
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeConfirmed",
+       "caller": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/fatedier/frp/cmd/frpc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go",
+      "symbol": "Conn.handleHandshakeConfirmed"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/frpc/main.go",
+        "line": 25
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 102
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1039
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1115
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 987
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.NewVisitorCommand$1",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/proxy.go",
+        "line": 120
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.NewVisitorCommand$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 167
+       },
+       "callee": "github.com/fatedier/frp/client.Service.Run",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 219
+       },
+       "callee": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+       "caller": "github.com/fatedier/frp/client.Service.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 233
+       },
+       "callee": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "caller": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "pkg/util/wait/backoff.go",
+        "line": 133
+       },
+       "callee": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "caller": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 326
+       },
+       "callee": "github.com/fatedier/frp/client.Service.login",
+       "caller": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 263
+       },
+       "callee": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "caller": "github.com/fatedier/frp/client.Service.login",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/connector.go",
+        "line": 91
+       },
+       "callee": "github.com/quic-go/quic-go.DialAddr",
+       "caller": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/client.go",
+        "line": 32
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.dial",
+       "caller": "github.com/quic-go/quic-go.DialAddr",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 255
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial",
+       "caller": "github.com/quic-go/quic-go.Transport.dial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 330
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 331
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.run",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 571
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "caller": "github.com/quic-go/quic-go.Conn.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 968
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1159
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1388
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1482
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 816
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeConfirmed",
+       "caller": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/fatedier/frp/cmd/frpc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go",
+      "symbol": "Conn.handleHandshakeConfirmed"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/frpc/main.go",
+        "line": 25
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 102
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1039
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1115
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 987
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/proxy.go",
+        "line": 91
+       },
+       "callee": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frpc/sub/root.go",
+        "line": 167
+       },
+       "callee": "github.com/fatedier/frp/client.Service.Run",
+       "caller": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 212
+       },
+       "callee": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess",
+       "caller": "github.com/fatedier/frp/client.Service.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 371
+       },
+       "callee": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "caller": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "pkg/util/wait/backoff.go",
+        "line": 133
+       },
+       "callee": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "caller": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 326
+       },
+       "callee": "github.com/fatedier/frp/client.Service.login",
+       "caller": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "client/service.go",
+        "line": 263
+       },
+       "callee": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "caller": "github.com/fatedier/frp/client.Service.login",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "client/connector.go",
+        "line": 91
+       },
+       "callee": "github.com/quic-go/quic-go.DialAddr",
+       "caller": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/client.go",
+        "line": 32
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.dial",
+       "caller": "github.com/quic-go/quic-go.DialAddr",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 255
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial",
+       "caller": "github.com/quic-go/quic-go.Transport.dial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 330
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 331
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.run",
+       "caller": "github.com/quic-go/quic-go.Transport.doDial$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 571
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "caller": "github.com/quic-go/quic-go.Conn.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 968
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1159
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1388
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1482
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 816
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeConfirmed",
+       "caller": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/fatedier/frp/cmd/frpc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go",
+      "symbol": "Conn.handleHandshakeConfirmed"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go",
+    "symbol": "Conn.handleHandshakeConfirmed"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/frpc/main.go",
+       "line": 25
+      },
+      "callee": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+      "caller": "github.com/fatedier/frp/cmd/frpc.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frpc/sub/root.go",
+       "line": 102
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/fatedier/frp/cmd/frpc/sub.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 1039
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 1115
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 987
+      },
+      "callee": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frpc/sub/proxy.go",
+       "line": 91
+      },
+      "callee": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+      "caller": "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frpc/sub/root.go",
+       "line": 167
+      },
+      "callee": "github.com/fatedier/frp/client.Service.Run",
+      "caller": "github.com/fatedier/frp/cmd/frpc/sub.startService",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "client/service.go",
+       "line": 219
+      },
+      "callee": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+      "caller": "github.com/fatedier/frp/client.Service.Run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "client/service.go",
+       "line": 233
+      },
+      "callee": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+      "caller": "github.com/fatedier/frp/client.Service.keepControllerWorking",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "pkg/util/wait/backoff.go",
+       "line": 133
+      },
+      "callee": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+      "caller": "github.com/fatedier/frp/pkg/util/wait.BackoffUntil",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "client/service.go",
+       "line": 326
+      },
+      "callee": "github.com/fatedier/frp/client.Service.login",
+      "caller": "github.com/fatedier/frp/client.Service.loopLoginUntilSuccess$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "client/service.go",
+       "line": 263
+      },
+      "callee": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+      "caller": "github.com/fatedier/frp/client.Service.login",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "client/connector.go",
+       "line": 91
+      },
+      "callee": "github.com/quic-go/quic-go.DialAddr",
+      "caller": "github.com/fatedier/frp/client.defaultConnectorImpl.Open",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/client.go",
+       "line": 32
+      },
+      "callee": "github.com/quic-go/quic-go.Transport.dial",
+      "caller": "github.com/quic-go/quic-go.DialAddr",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+       "line": 255
+      },
+      "callee": "github.com/quic-go/quic-go.Transport.doDial",
+      "caller": "github.com/quic-go/quic-go.Transport.dial",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+       "line": 330
+      },
+      "callee": "github.com/quic-go/quic-go.Transport.doDial$1",
+      "caller": "github.com/quic-go/quic-go.Transport.doDial",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+       "line": 331
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.run",
+      "caller": "github.com/quic-go/quic-go.Transport.doDial$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 571
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+      "caller": "github.com/quic-go/quic-go.Conn.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 968
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+      "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1159
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+      "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1388
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+      "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1482
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+      "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 816
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeConfirmed",
+      "caller": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/fatedier/frp/cmd/frpc",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/quic-go/quic-go",
+     "symbol": "Conn.handleHandshakeConfirmed"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "github.com/quic-go/quic-go.(*Conn).handleHandshakeComplete"
+   ],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/frps/main.go",
+        "line": 25
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frps.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 99
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frps.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1039
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1115
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 983
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.init$1",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 89
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.runServer",
+       "caller": "github.com/fatedier/frp/cmd/frps.init$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 113
+       },
+       "callee": "github.com/fatedier/frp/server.NewService",
+       "caller": "github.com/fatedier/frp/cmd/frps.runServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "server/service.go",
+        "line": 252
+       },
+       "callee": "github.com/quic-go/quic-go.ListenAddr",
+       "caller": "github.com/fatedier/frp/server.NewService",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 185
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.Listen",
+       "caller": "github.com/quic-go/quic-go.ListenAddr",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 172
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.createServer",
+       "caller": "github.com/quic-go/quic-go.Transport.Listen",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 215
+       },
+       "callee": "github.com/quic-go/quic-go.newServer",
+       "caller": "github.com/quic-go/quic-go.Transport.createServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 280
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.run",
+       "caller": "github.com/quic-go/quic-go.newServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 298
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+       "caller": "github.com/quic-go/quic-go.baseServer.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 487
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+       "caller": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 758
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.run",
+       "caller": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 571
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "caller": "github.com/quic-go/quic-go.Conn.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 968
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1159
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1388
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1482
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/fatedier/frp/cmd/frps",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go",
+      "symbol": "Conn.handleHandshakeComplete"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/frps/main.go",
+        "line": 25
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frps.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 99
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frps.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1039
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1115
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 983
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.init$1",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 89
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.runServer",
+       "caller": "github.com/fatedier/frp/cmd/frps.init$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 113
+       },
+       "callee": "github.com/fatedier/frp/server.NewService",
+       "caller": "github.com/fatedier/frp/cmd/frps.runServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "server/service.go",
+        "line": 252
+       },
+       "callee": "github.com/quic-go/quic-go.ListenAddr",
+       "caller": "github.com/fatedier/frp/server.NewService",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 185
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.Listen",
+       "caller": "github.com/quic-go/quic-go.ListenAddr",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 172
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.createServer",
+       "caller": "github.com/quic-go/quic-go.Transport.Listen",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 215
+       },
+       "callee": "github.com/quic-go/quic-go.newServer",
+       "caller": "github.com/quic-go/quic-go.Transport.createServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 280
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.run",
+       "caller": "github.com/quic-go/quic-go.newServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 298
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+       "caller": "github.com/quic-go/quic-go.baseServer.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 487
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+       "caller": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 758
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.run",
+       "caller": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 571
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "caller": "github.com/quic-go/quic-go.Conn.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 980
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleShortHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1057
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedShortHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleShortHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1407
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedShortHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1482
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/fatedier/frp/cmd/frps",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go",
+      "symbol": "Conn.handleHandshakeComplete"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go",
+    "symbol": "Conn.handleHandshakeComplete"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/frps/main.go",
+       "line": 25
+      },
+      "callee": "github.com/fatedier/frp/cmd/frps.Execute",
+      "caller": "github.com/fatedier/frp/cmd/frps.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frps/root.go",
+       "line": 99
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/fatedier/frp/cmd/frps.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 1039
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 1115
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 983
+      },
+      "callee": "github.com/fatedier/frp/cmd/frps.init$1",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frps/root.go",
+       "line": 89
+      },
+      "callee": "github.com/fatedier/frp/cmd/frps.runServer",
+      "caller": "github.com/fatedier/frp/cmd/frps.init$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frps/root.go",
+       "line": 113
+      },
+      "callee": "github.com/fatedier/frp/server.NewService",
+      "caller": "github.com/fatedier/frp/cmd/frps.runServer",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "server/service.go",
+       "line": 252
+      },
+      "callee": "github.com/quic-go/quic-go.ListenAddr",
+      "caller": "github.com/fatedier/frp/server.NewService",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+       "line": 185
+      },
+      "callee": "github.com/quic-go/quic-go.Transport.Listen",
+      "caller": "github.com/quic-go/quic-go.ListenAddr",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+       "line": 172
+      },
+      "callee": "github.com/quic-go/quic-go.Transport.createServer",
+      "caller": "github.com/quic-go/quic-go.Transport.Listen",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+       "line": 215
+      },
+      "callee": "github.com/quic-go/quic-go.newServer",
+      "caller": "github.com/quic-go/quic-go.Transport.createServer",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+       "line": 280
+      },
+      "callee": "github.com/quic-go/quic-go.baseServer.run",
+      "caller": "github.com/quic-go/quic-go.newServer",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+       "line": 298
+      },
+      "callee": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+      "caller": "github.com/quic-go/quic-go.baseServer.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+       "line": 487
+      },
+      "callee": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+      "caller": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+       "line": 758
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.run",
+      "caller": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 571
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+      "caller": "github.com/quic-go/quic-go.Conn.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 968
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+      "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1159
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+      "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1388
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+      "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1482
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+      "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/fatedier/frp/cmd/frps",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/quic-go/quic-go",
+     "symbol": "Conn.handleHandshakeComplete"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [
+    "github.com/quic-go/quic-go.(*Conn).handleHandshakeConfirmed"
+   ],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/frps/main.go",
+        "line": 25
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frps.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 99
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frps.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1039
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1115
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 983
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.init$1",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 89
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.runServer",
+       "caller": "github.com/fatedier/frp/cmd/frps.init$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 113
+       },
+       "callee": "github.com/fatedier/frp/server.NewService",
+       "caller": "github.com/fatedier/frp/cmd/frps.runServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "server/service.go",
+        "line": 252
+       },
+       "callee": "github.com/quic-go/quic-go.ListenAddr",
+       "caller": "github.com/fatedier/frp/server.NewService",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 185
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.Listen",
+       "caller": "github.com/quic-go/quic-go.ListenAddr",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 172
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.createServer",
+       "caller": "github.com/quic-go/quic-go.Transport.Listen",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 215
+       },
+       "callee": "github.com/quic-go/quic-go.newServer",
+       "caller": "github.com/quic-go/quic-go.Transport.createServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 280
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.run",
+       "caller": "github.com/quic-go/quic-go.newServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 298
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+       "caller": "github.com/quic-go/quic-go.baseServer.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 487
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+       "caller": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 758
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.run",
+       "caller": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 571
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "caller": "github.com/quic-go/quic-go.Conn.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 968
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1159
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1388
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1482
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 816
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeConfirmed",
+       "caller": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/fatedier/frp/cmd/frps",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go",
+      "symbol": "Conn.handleHandshakeConfirmed"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/frps/main.go",
+        "line": 25
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frps.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 99
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/fatedier/frp/cmd/frps.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1039
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 1115
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+        "line": 983
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.init$1",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 89
+       },
+       "callee": "github.com/fatedier/frp/cmd/frps.runServer",
+       "caller": "github.com/fatedier/frp/cmd/frps.init$1",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/frps/root.go",
+        "line": 113
+       },
+       "callee": "github.com/fatedier/frp/server.NewService",
+       "caller": "github.com/fatedier/frp/cmd/frps.runServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "server/service.go",
+        "line": 252
+       },
+       "callee": "github.com/quic-go/quic-go.ListenAddr",
+       "caller": "github.com/fatedier/frp/server.NewService",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 185
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.Listen",
+       "caller": "github.com/quic-go/quic-go.ListenAddr",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 172
+       },
+       "callee": "github.com/quic-go/quic-go.Transport.createServer",
+       "caller": "github.com/quic-go/quic-go.Transport.Listen",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+        "line": 215
+       },
+       "callee": "github.com/quic-go/quic-go.newServer",
+       "caller": "github.com/quic-go/quic-go.Transport.createServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 280
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.run",
+       "caller": "github.com/quic-go/quic-go.newServer",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 298
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+       "caller": "github.com/quic-go/quic-go.baseServer.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 487
+       },
+       "callee": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+       "caller": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+        "line": 758
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.run",
+       "caller": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 571
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "caller": "github.com/quic-go/quic-go.Conn.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 980
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleShortHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1057
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedShortHeaderPacket",
+       "caller": "github.com/quic-go/quic-go.Conn.handleShortHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1407
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedShortHeaderPacket",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 1482
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+        "line": 816
+       },
+       "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeConfirmed",
+       "caller": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/fatedier/frp/cmd/frps",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/quic-go/quic-go",
+      "symbol": "Conn.handleHandshakeConfirmed"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go",
+    "symbol": "Conn.handleHandshakeConfirmed"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/frps/main.go",
+       "line": 25
+      },
+      "callee": "github.com/fatedier/frp/cmd/frps.Execute",
+      "caller": "github.com/fatedier/frp/cmd/frps.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frps/root.go",
+       "line": 99
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/fatedier/frp/cmd/frps.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 1039
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 1115
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.8.0/command.go",
+       "line": 983
+      },
+      "callee": "github.com/fatedier/frp/cmd/frps.init$1",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frps/root.go",
+       "line": 89
+      },
+      "callee": "github.com/fatedier/frp/cmd/frps.runServer",
+      "caller": "github.com/fatedier/frp/cmd/frps.init$1",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/frps/root.go",
+       "line": 113
+      },
+      "callee": "github.com/fatedier/frp/server.NewService",
+      "caller": "github.com/fatedier/frp/cmd/frps.runServer",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "server/service.go",
+       "line": 252
+      },
+      "callee": "github.com/quic-go/quic-go.ListenAddr",
+      "caller": "github.com/fatedier/frp/server.NewService",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+       "line": 185
+      },
+      "callee": "github.com/quic-go/quic-go.Transport.Listen",
+      "caller": "github.com/quic-go/quic-go.ListenAddr",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+       "line": 172
+      },
+      "callee": "github.com/quic-go/quic-go.Transport.createServer",
+      "caller": "github.com/quic-go/quic-go.Transport.Listen",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/transport.go",
+       "line": 215
+      },
+      "callee": "github.com/quic-go/quic-go.newServer",
+      "caller": "github.com/quic-go/quic-go.Transport.createServer",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+       "line": 280
+      },
+      "callee": "github.com/quic-go/quic-go.baseServer.run",
+      "caller": "github.com/quic-go/quic-go.newServer",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+       "line": 298
+      },
+      "callee": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+      "caller": "github.com/quic-go/quic-go.baseServer.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+       "line": 487
+      },
+      "callee": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+      "caller": "github.com/quic-go/quic-go.baseServer.handlePacketImpl",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/server.go",
+       "line": 758
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.run",
+      "caller": "github.com/quic-go/quic-go.baseServer.handleInitialImpl",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 571
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+      "caller": "github.com/quic-go/quic-go.Conn.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 968
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+      "caller": "github.com/quic-go/quic-go.Conn.handleOnePacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1159
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+      "caller": "github.com/quic-go/quic-go.Conn.handleLongHeaderPacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1388
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleFrames",
+      "caller": "github.com/quic-go/quic-go.Conn.handleUnpackedLongHeaderPacket",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 1482
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+      "caller": "github.com/quic-go/quic-go.Conn.handleFrames",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/quic-go/quic-go@v0.53.0/connection.go",
+       "line": 816
+      },
+      "callee": "github.com/quic-go/quic-go.Conn.handleHandshakeConfirmed",
+      "caller": "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/fatedier/frp/cmd/frps",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/quic-go/quic-go",
+     "symbol": "Conn.handleHandshakeConfirmed"
+    }
+   },
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-11-17T20:40:19Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "3a81afd",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": true,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/quic-go/quic-go",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Conn.handleHandshakeComplete"
+  },
+  {
+   "candidate_id": "c2",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/quic-go/quic-go",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Conn.handleHandshakeConfirmed"
+  }
+ ],
+ "target_app": {
+  "commit": "2f5e1f79457b5e9d769f2ac063443b62640185a9",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/fatedier/frp",
+  "path": "<local>/data/cp9/d3b/off/apps/github.com_fatedier_frp/2f5e1f79457b"
+ },
+ "timing": {
+  "inspect_seconds": 0.15,
+  "methods_seconds": 21.3,
+  "symbols_seconds": 0.0,
+  "total_seconds": 42.57,
+  "verifier_seconds": 21.12
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 217,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 217,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 10,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 4,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 4,
+    "skipped": 0
+   }
+  },
+  "checks_run": 452,
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}
