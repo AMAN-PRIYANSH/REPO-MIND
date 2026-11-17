@@ -36,12 +36,12 @@ CP9 (session branch `claude/intelligent-planck-krrtgg`):
 - [x] 1. Feasibility check in the Go helper (F1-F3 on SSA, one level of call-site context, N examined paths, conservative when undecidable)
 - [x] 2. Pipeline and verifier integration (`PATHS_INFEASIBLE`, schema extension, verifier checks of infeasible steps and of the filtered path, downgrade-only tests, `--no-feasibility`)
 - [x] 3. Fixtures by construction: >= 2 infeasible and >= 2 feasible look-alikes per pattern; CP2/CP7 fixtures keep their verdicts
-- [ ] 4a. Evaluation: fixtures (downgrades, false downgrades)
+- [x] 4a. Evaluation: fixtures (downgrades, false downgrades)
 - [ ] 4b. Evaluation: D3 before/after (in-sample, labelled so)
 - [ ] 4c. Evaluation: D3b selection (code, D3 rules, D3 apps excluded, seed fixed before runs), triage with/without filter, adjudication sheets -> `AWAITING_ADJUDICATION`
 - [ ] 4d. Evaluation: D1/D4 downgrade counts by pattern
 - [ ] 4e. Results renderer with headline fixed before any D3b result -> `docs/results/CP9_FEASIBILITY_RESULTS.md`, files under `docs/results/cp9/` (< 512 KiB each)
-- [ ] 5. Tests: unit per pattern (SSA snippets), contract tests for new fields, integration on fixtures; CI green
+- [x] 5. Tests (CI still to be checked on the last commit): unit per pattern (SSA snippets), contract tests for new fields, integration on fixtures; CI green
 - [ ] 6. After adjudication (second session): scoring, results document, report `CP9_REPORT.md`, STATUS `AWAITING_REVIEW`
 
 ## Handoff notes
@@ -52,6 +52,8 @@ CP9 session `claude/intelligent-planck-krrtgg` (17 Nov 2026):
 
 - Done and pushed: helper filter (`helper/feasible.go`, reach option `feasibility`), CP9 fixture module `fixtures/feasibility` (16 cases + manifest), pipeline stage `src/vulntrace/pipeline/feasibility.py`, verifier checks FILTERED_PATH / INFEASIBLE_STEP, `--no-feasibility`, `eval feasibility --set fixtures`, unit/contract/integration/Go tests (918 passed, 10 skipped locally).
 - Design deviations to report: (1) the INFEASIBLE decision uses an exhaustive state search over (function, parameter facts); the N=20 shortest paths are examined only for the explanation (fewer downgrades than the spec's rule, never more); (2) context follows direct parameter pass-through along the path (needed for Once.Do -> doSlow and put -> executeAndPut); (3) CP9 fixtures live in a separate module so CP2/CP7 results stay byte-identical.
-- Next: run `python -m vulntrace eval feasibility --set fixtures` (writes docs/results/cp9/fixtures.json), then D3 before/after (needs go1.26.10 from the module proxy on PATH, as in CP7b), then D3b selection with a new seed recorded first, D3b triage both ways, sheets, stop at AWAITING_ADJUDICATION.
+- Done: fixture results `docs/results/cp9/fixtures.json` (7/7 infeasible downgraded, 0 false downgrades; `--no-feasibility` reproduces all 66 CP7 rows); D3b selection committed (`docs/results/cp9/d3b/`, seed 20261117 fixed in `82868ed` before probing): go-task/task, fatedier/frp, gogs/gogs, 11 cases. Note for the report: 4 D3b cases share advisories with D3; the selection log's quota text says "five" (cosmetic, not changed).
+- Caution: `dataset materialize --cases <subset>` rewrites `docs/results/datasets/D1|D4_materialize.json`; never commit that; revert it (`git checkout`) or pass `--summary-out` to the scratchpad.
+- Was next (kept for the record): run `python -m vulntrace eval feasibility --set fixtures` (writes docs/results/cp9/fixtures.json), then D3 before/after (needs go1.26.10 from the module proxy on PATH, as in CP7b), then D3b selection with a new seed recorded first, D3b triage both ways, sheets, stop at AWAITING_ADJUDICATION.
 
 (Earlier: CP8 was approved on 17 Nov 2026 and CP9 was added at the owner's request. The D3 evidence and checkouts are not in the repository: rebuild them with the CP7b commands. If CP9 stops at AWAITING_ADJUDICATION, the supervisor sets IN_PROGRESS on the builder branch once the D3b sheets are filled.)
