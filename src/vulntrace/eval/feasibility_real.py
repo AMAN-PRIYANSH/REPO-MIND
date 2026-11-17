@@ -33,6 +33,34 @@ CP7B = REPO_ROOT / "docs" / "results" / "cp7b"
 IN_SAMPLE_LABEL = ("IN-SAMPLE: the filter's patterns F1-F3 were designed from these D3 cases (the CP7b reviewers' "
                    "notes), so this before/after is not evidence that the filter generalises. Only D3b is.")
 MAX_STEPS_PER_ENTRY = 3
+COMMITTED_EXAMINED = 3   # committed verdict copies keep this many examined paths per entry (the full list stays in data/)
+
+
+def compact_for_commit(v: dict[str, Any], off: dict[str, Any] | None = None) -> dict[str, Any]:
+    """A committed copy small enough for the 512 KiB limit: each entry's `feasibility.examined` keeps its
+    first COMMITTED_EXAMINED paths (shortest first) and records how many there were; for a filter-on verdict
+    whose method paths are identical to the filter-off verdict's (`off`, committed next to it), the method
+    paths are left out and the top-level `feasibility.committed_copy` says so. Status, evidence path,
+    results, reasons and verified paths are unchanged."""
+    import copy
+
+    v = copy.deepcopy(v)
+    for e in v.get("per_symbol") or []:
+        f = e.get("feasibility")
+        if f and len(f.get("examined") or []) > COMMITTED_EXAMINED:
+            f["examined_total"] = len(f["examined"])
+            f["examined"] = f["examined"][:COMMITTED_EXAMINED]
+            f["examined_committed"] = COMMITTED_EXAMINED
+    if off is not None and v.get("feasibility") is not None:
+        same = [a.get("paths") for a in v["per_symbol"]] == [b.get("paths") for b in off.get("per_symbol") or []]
+        if same:
+            for e in v["per_symbol"]:
+                e.pop("paths", None)
+        v["feasibility"]["committed_copy"] = {
+            "examined_per_entry": COMMITTED_EXAMINED,
+            "method_paths": "left out: identical to the filter-off verdict committed beside this file" if same
+            else "kept (they differ from the filter-off verdict)"}
+    return v
 
 
 def _steps(e: dict[str, Any]) -> list[dict[str, Any]]:
@@ -219,7 +247,8 @@ def cmd(args, argv, binary, off_factory, on_factory, feas, env, out_dir: Path) -
         _write(base / f"{args.dataset_set}_feasibility.json", doc)
         for label, vs in (("off", off_v), ("on", on_v)):
             for cid, v in sorted(vs.items()):
-                _write(base / f"verdicts_{label}" / f"{cid}.json", v)
+                _write(base / f"verdicts_{label}" / f"{cid}.json",
+                       compact_for_commit(v, off_v.get(cid) if label == "on" else None))
         return EXIT_OK
     from vulntrace.eval import feasibility_dist as fd
 
