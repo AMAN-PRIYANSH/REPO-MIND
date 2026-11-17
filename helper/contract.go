@@ -102,6 +102,8 @@ type Request struct {
 	Packages  []string `json:"packages"`
 	LiftRules []string `json:"lift_rules"` // NEAREST and/or ALL; default both
 	External  bool     `json:"external"`   // callers/callees: also report functions outside the loaded module
+	// CP9: reach only. Absent means the old behaviour, byte for byte (no filter, no new fields).
+	Feasibility *FeasibilityRequest `json:"feasibility,omitempty"`
 }
 
 type Error struct {
@@ -126,6 +128,8 @@ type Stats struct {
 	CallgraphEdges int    `json:"callgraph_edges"`
 	DurationMS     int64  `json:"duration_ms"`
 	PeakRSSKB      *int64 `json:"peak_rss_kb"`
+	// CP9: only when the request asked for the feasibility filter.
+	Feasibility *FeasibilityStats `json:"feasibility,omitempty"`
 }
 
 type Response struct {
@@ -171,6 +175,8 @@ type TargetResult struct {
 	MatchedFunctions    []string   `json:"matched_functions"`
 	Error               *Error     `json:"error"`
 	PackageNotInProgram bool       `json:"package_not_in_program"`
+	// CP9: only for PATH_FOUND targets of a request with "feasibility".
+	Feasibility *FeasibilityResult `json:"feasibility,omitempty"`
 }
 
 type EdgeResult struct {

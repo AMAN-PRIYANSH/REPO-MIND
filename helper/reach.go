@@ -21,6 +21,11 @@ type analysis struct {
 	roots []int
 	byObj map[*types.Func][]int // declared function -> graph nodes implementing it
 	npkgs int
+	// Kept for the CP9 feasibility filter (feasible.go); unused otherwise.
+	cg   *callgraph.Graph
+	fnOf []*ssa.Function // graph node id -> SSA function
+	idOf map[*ssa.Function]int
+	rel  relativizer
 }
 
 func analyse(req *Request, stderr io.Writer) (*analysis, *Error) {
@@ -46,8 +51,10 @@ func analyse(req *Request, stderr io.Writer) (*analysis, *Error) {
 		rootFns = append(rootFns, mainFn)
 	}
 	cg := vtaCallGraph(prog, rootFns)
-	a := &analysis{prog: prog, byObj: map[*types.Func][]int{}, npkgs: countPackages(pkgs)}
-	a.g, a.roots, a.byObj = reduce(prog, cg, rootFns, newRelativizer(dir))
+	a := &analysis{prog: prog, byObj: map[*types.Func][]int{}, npkgs: countPackages(pkgs), cg: cg, rel: newRelativizer(dir)}
+	var r reduced
+	a.g, a.roots, a.byObj, r = reduceFull(prog, cg, rootFns, a.rel)
+	a.fnOf, a.idOf = r.fnOf, r.idOf
 	fmt.Fprintf(stderr, "vt-helper: %d packages, %d call-graph nodes, %d edges\n", a.npkgs, len(a.g.nodes), a.g.edgeCount())
 	return a, nil
 }
@@ -88,8 +95,28 @@ func forwardSlice(roots []*ssa.Function, cg *callgraph.Graph) map[*ssa.Function]
 	return seen
 }
 
-// reduce converts an SSA call graph into a graph, keeping only what is reachable from roots.
-func reduce(prog *ssa.Program, cg *callgraph.Graph, rootFns []*ssa.Function, rel relativizer) (*graph, []int, map[*types.Func][]int) {
+// reduced maps graph node ids back to SSA functions (CP9).
+type reduced struct {
+	fnOf []*ssa.Function
+	idOf map[*ssa.Function]int
+}
+
+// edgeSiteKind is the call site and kind of an SSA call-graph edge, as stored in the reduced graph.
+func edgeSiteKind(prog *ssa.Program, rel relativizer, e *callgraph.Edge) (Site, string) {
+	site, kind := Site{}, KindStatic
+	if e.Site != nil {
+		pos := prog.Fset.Position(e.Site.Pos())
+		site = Site{File: rel.file(pos.Filename), Line: pos.Line}
+		if e.Site.Common().StaticCallee() == nil {
+			kind = KindDynamic
+		}
+	}
+	return site, kind
+}
+
+// reduceFull converts an SSA call graph into a graph, keeping only what is reachable from roots,
+// and returns the node -> function mapping as well.
+func reduceFull(prog *ssa.Program, cg *callgraph.Graph, rootFns []*ssa.Function, rel relativizer) (*graph, []int, map[*types.Func][]int, reduced) {
 	b := newGraphBuilder()
 	keys := map[*ssa.Function]string{}
 	used := map[string]bool{}
@@ -122,14 +149,7 @@ func reduce(prog *ssa.Program, cg *callgraph.Graph, rootFns []*ssa.Function, rel
 			continue
 		}
 		for _, e := range n.Out {
-			site, kind := Site{}, KindStatic
-			if e.Site != nil {
-				pos := prog.Fset.Position(e.Site.Pos())
-				site = Site{File: rel.file(pos.Filename), Line: pos.Line}
-				if e.Site.Common().StaticCallee() == nil {
-					kind = KindDynamic
-				}
-			}
+			site, kind := edgeSiteKind(prog, rel, e)
 			b.edge(from, add(e.Callee.Func), site, kind)
 		}
 	}
@@ -147,7 +167,13 @@ func reduce(prog *ssa.Program, cg *callgraph.Graph, rootFns []*ssa.Function, rel
 	for _, v := range byObj {
 		sort.Ints(v)
 	}
-	return g, roots, byObj
+	r := reduced{fnOf: make([]*ssa.Function, len(g.nodes)), idOf: make(map[*ssa.Function]int, len(keys))}
+	for fn, k := range keys {
+		if id, ok := ids[k]; ok {
+			r.fnOf[id], r.idOf[fn] = fn, id
+		}
+	}
+	return g, roots, byObj, r
 }
 
 func (a *analysis) stats() *Stats {
@@ -160,8 +186,10 @@ func runReach(req *Request, stderr io.Writer) (any, *Stats, *Error) {
 		return nil, nil, err
 	}
 	results := make([]TargetResult, 0, len(req.Targets))
+	targetIDs := make([][]int, 0, len(req.Targets))
 	for _, t := range req.Targets {
 		obj, notInProgram, terr := lookupTarget(a.prog, t)
+		targetIDs = append(targetIDs, nil)
 		if terr != nil {
 			results = append(results, TargetResult{Target: t, Result: ResultError, Paths: []CallPath{},
 				MatchedFunctions: []string{}, Error: terr})
@@ -172,9 +200,15 @@ func runReach(req *Request, stderr io.Writer) (any, *Stats, *Error) {
 				MatchedFunctions: []string{}, PackageNotInProgram: true})
 			continue
 		}
+		targetIDs[len(targetIDs)-1] = a.byObj[obj]
 		results = append(results, targetResult(a.g, t, a.roots, a.byObj[obj], req.Limits))
 	}
-	return results, a.stats(), nil
+	stats := a.stats()
+	if req.Feasibility != nil {
+		// CP9: runs after the unchanged path search; it only annotates PATH_FOUND results.
+		stats.Feasibility = applyFeasibility(a, req, results, targetIDs)
+	}
+	return results, stats, nil
 }
 
 func runEdges(req *Request, stderr io.Writer) (any, *Stats, *Error) {

@@ -142,6 +142,9 @@ func validate(req *Request) *Error {
 		}
 		return errf(CodeBadRequest, req.Mode+" request needs "+what)
 	}
+	if req.Feasibility != nil && req.Mode != "reach" {
+		return errf(CodeBadRequest, "feasibility is only supported in reach mode (CP9)")
+	}
 	switch req.Mode {
 	case "funcs":
 		return need(len(req.Files) > 0, "a non-empty files list")
@@ -176,6 +179,9 @@ func validate(req *Request) *Error {
 		}
 		if req.Limits.MaxPathsPerTarget < 0 || req.Limits.MaxPathLength < 0 {
 			return errf(CodeBadRequest, "limits must not be negative")
+		}
+		if f := req.Feasibility; f != nil && (f.MaxExaminedPaths < 0 || f.MaxStates < 0 || f.MaxContextsPerNode < 0) {
+			return errf(CodeBadRequest, "feasibility limits must not be negative")
 		}
 		if req.Limits.MaxPathsPerTarget == 0 {
 			req.Limits.MaxPathsPerTarget = defaultMaxPaths
