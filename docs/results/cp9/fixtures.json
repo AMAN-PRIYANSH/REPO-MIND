@@ -1,0 +1,798 @@
+{
+ "cp7_fixtures_with_filter": {
+  "changed": [],
+  "false_downgrades": [],
+  "on_summary": {
+   "FIX": {
+    "accuracy": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "cant_determine": 4,
+    "coverage": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 0,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 6,
+      "REACHABLE": 0
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.6096657083436265,
+     "k": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.7575059904469021,
+     "k": 12,
+     "n": 12,
+     "rate": 1.0
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 1.0,
+     "ci_low": 0.8241207740667156,
+     "k": 18,
+     "n": 18,
+     "rate": 1.0
+    }
+   },
+   "RELEASE": {
+    "accuracy": {
+     "ci_high": 0.7307970593927182,
+     "ci_low": 0.34659795182499575,
+     "k": 12,
+     "n": 22,
+     "rate": 0.5454545454545454
+    },
+    "cant_determine": 6,
+    "coverage": {
+     "ci_high": 0.8684923978853596,
+     "ci_low": 0.5184826582032107,
+     "k": 16,
+     "n": 22,
+     "rate": 0.7272727272727273
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 4,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 4,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 4
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 0.0,
+     "ci_low": 0.0,
+     "k": 0,
+     "n": 0,
+     "rate": 0.0
+    },
+    "reachable_precision": {
+     "ci_high": 0.8981793257983292,
+     "ci_low": 0.5050168327029684,
+     "k": 12,
+     "n": 16,
+     "rate": 0.75
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 0.8981793257983292,
+     "ci_low": 0.5050168327029684,
+     "k": 12,
+     "n": 16,
+     "rate": 0.75
+    }
+   },
+   "TARGETS": {
+    "accuracy": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "cant_determine": 4,
+    "coverage": {
+     "ci_high": 0.9269311546747105,
+     "ci_low": 0.6148339238492879,
+     "k": 18,
+     "n": 22,
+     "rate": 0.8181818181818182
+    },
+    "false_not_reachable": 0,
+    "false_reachable": 0,
+    "matrix": {
+     "NOT_REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 6,
+      "REACHABLE": 0
+     },
+     "REACHABLE": {
+      "CANT_DETERMINE": 2,
+      "NOT_REACHABLE": 0,
+      "REACHABLE": 12
+     }
+    },
+    "n": 22,
+    "not_reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.6096657083436265,
+     "k": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "reachable_precision": {
+     "ci_high": 1.0,
+     "ci_low": 0.7575059904469021,
+     "k": 12,
+     "n": 12,
+     "rate": 1.0
+    },
+    "reachable_recall": {
+     "ci_high": 0.959906079092351,
+     "ci_low": 0.600586202762663,
+     "k": 12,
+     "n": 14,
+     "rate": 0.8571428571428571
+    },
+    "selective_accuracy": {
+     "ci_high": 1.0,
+     "ci_low": 0.8241207740667156,
+     "k": 18,
+     "n": 18,
+     "rate": 1.0
+    }
+   }
+  },
+  "rows": 66,
+  "true_reachable_rows_checked": 36
+ },
+ "cp7_reproduction": {
+  "committed_environment": {
+   "command": "python -m vulntrace eval triage --set fixtures",
+   "go": "go version go1.24.7 linux/amd64",
+   "os": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
+   "python": "3.13.17",
+   "repo_commit": "ed46380",
+   "repo_dirty": false
+  },
+  "corruption_probe_equal": true,
+  "differences": [],
+  "identical": true,
+  "row_count_equal": true,
+  "rows_compared": 66,
+  "stability_equal": true,
+  "summary_equal_except_seconds": true
+ },
+ "cp9_fixtures": {
+  "by_kind": {
+   "FEASIBLE_LOOKALIKE": {
+    "as_expected": 8,
+    "cases": 8,
+    "downgraded": 0
+   },
+   "INFEASIBLE": {
+    "as_expected": 7,
+    "cases": 7,
+    "downgraded": 7
+   },
+   "OUT_OF_SCOPE": {
+    "as_expected": 1,
+    "cases": 1,
+    "downgraded": 0
+   }
+  },
+  "false_downgrades": [],
+  "method_calls": {
+   "vta": 32
+  },
+  "not_as_expected": [],
+  "per_pattern": {
+   "F1": {
+    "downgraded": 2,
+    "infeasible_cases": 2,
+    "lookalikes": 3,
+    "lookalikes_downgraded": 0
+   },
+   "F2": {
+    "downgraded": 3,
+    "infeasible_cases": 3,
+    "lookalikes": 2,
+    "lookalikes_downgraded": 0
+   },
+   "F3": {
+    "downgraded": 2,
+    "infeasible_cases": 2,
+    "lookalikes": 3,
+    "lookalikes_downgraded": 0
+   }
+  },
+  "rows": [
+   {
+    "as_expected": true,
+    "deciding_pattern": "F1",
+    "evidence_source": null,
+    "examined": 2,
+    "expected_filter": "INFEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "INFEASIBLE",
+    "first_patterns": [
+     "F1",
+     "F2"
+    ],
+    "id": "f1_iface_splice",
+    "infeasible_steps": [
+     {
+      "pattern": "F1",
+      "reason": "the argument passed at cmd/f1_iface_splice/main.go:31 is `*os.File`; the dynamic call at cmd/f1_iface_splice/main.go:21 can only reach its method, not vtfeas/cmd/f1_iface_splice.evil.Write (receiver `vtfeas/cmd/f1_iface_splice.evil`)",
+      "site": {
+       "file": "cmd/f1_iface_splice/main.go",
+       "line": 21
+      }
+     },
+     {
+      "pattern": "F2",
+      "reason": "the call at cmd/f1_iface_splice/main.go:26 runs only if `verbose` is true; with the argument passed at cmd/f1_iface_splice/main.go:32 it is false",
+      "site": {
+       "file": "cmd/f1_iface_splice/main.go",
+       "line": 26
+      }
+     }
+    ],
+    "kind": "INFEASIBLE",
+    "pattern": "F1",
+    "reason_codes_on": [
+     "PATHS_INFEASIBLE"
+    ],
+    "schema_errors_on": [],
+    "seconds_on": 2.05,
+    "truth": "NOT_REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "CANT_DETERMINE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": false
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F3",
+    "evidence_source": null,
+    "examined": 2,
+    "expected_filter": "INFEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "INFEASIBLE",
+    "first_patterns": [
+     "F3",
+     "F1"
+    ],
+    "id": "f1_once_closure",
+    "infeasible_steps": [
+     {
+      "pattern": "F3",
+      "reason": "the call at cmd/f1_once_closure/main.go:42 runs only if `vtfeas/cmd/f1_once_closure.config.hook != nil` is true; field vtfeas/cmd/f1_once_closure.config.hook is never assigned in the analysed program, so it is always its zero value",
+      "site": {
+       "file": "cmd/f1_once_closure/main.go",
+       "line": 42
+      }
+     },
+     {
+      "pattern": "F1",
+      "reason": "the function value passed at cmd/f1_once_closure/main.go:37 is `vtfeas/cmd/f1_once_closure.setup$1`; the dynamic call at cmd/f1_once_closure/main.go:26 can only reach it, not vtfeas/cmd/f1_once_closure.dangerous$1",
+      "site": {
+       "file": "cmd/f1_once_closure/main.go",
+       "line": 26
+      }
+     }
+    ],
+    "kind": "INFEASIBLE",
+    "pattern": "F1",
+    "reason_codes_on": [
+     "PATHS_INFEASIBLE"
+    ],
+    "schema_errors_on": [],
+    "seconds_on": 2.26,
+    "truth": "NOT_REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "CANT_DETERMINE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": false
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F1",
+    "evidence_source": "EXAMINED_PATH",
+    "examined": 2,
+    "expected_filter": "FEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "FEASIBLE",
+    "first_patterns": [
+     "F1"
+    ],
+    "id": "f1_iface_both",
+    "infeasible_steps": [
+     {
+      "pattern": "F1",
+      "reason": "the argument passed at cmd/f1_iface_both/main.go:29 is `*os.File`; the dynamic call at cmd/f1_iface_both/main.go:19 can only reach its method, not vtfeas/cmd/f1_iface_both.evil.Write (receiver `vtfeas/cmd/f1_iface_both.evil`)",
+      "site": {
+       "file": "cmd/f1_iface_both/main.go",
+       "line": 19
+      }
+     }
+    ],
+    "kind": "FEASIBLE_LOOKALIKE",
+    "pattern": "F1",
+    "reason_codes_on": [],
+    "schema_errors_on": [],
+    "seconds_on": 1.93,
+    "truth": "REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "REACHABLE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": true
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F1",
+    "evidence_source": "EXAMINED_PATH",
+    "examined": 2,
+    "expected_filter": "FEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "FEASIBLE",
+    "first_patterns": [
+     "F1"
+    ],
+    "id": "f1_once_both",
+    "infeasible_steps": [
+     {
+      "pattern": "F1",
+      "reason": "the function value passed at cmd/f1_once_both/main.go:29 is `vtfeas/cmd/f1_once_both.setup$1`; the dynamic call at cmd/f1_once_both/main.go:23 can only reach it, not vtfeas/cmd/f1_once_both.main$1",
+      "site": {
+       "file": "cmd/f1_once_both/main.go",
+       "line": 23
+      }
+     }
+    ],
+    "kind": "FEASIBLE_LOOKALIKE",
+    "pattern": "F1",
+    "reason_codes_on": [],
+    "schema_errors_on": [],
+    "seconds_on": 2.34,
+    "truth": "REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "REACHABLE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": true
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F1",
+    "evidence_source": "EXAMINED_PATH",
+    "examined": 2,
+    "expected_filter": "FEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "FEASIBLE",
+    "first_patterns": [
+     "F1"
+    ],
+    "id": "f1_iface_unknown",
+    "infeasible_steps": [
+     {
+      "pattern": "F1",
+      "reason": "the argument passed at cmd/f1_iface_unknown/main.go:24 is `*os.File`; the dynamic call at cmd/f1_iface_unknown/main.go:21 can only reach its method, not vtfeas/cmd/f1_iface_unknown.evil.Write (receiver `vtfeas/cmd/f1_iface_unknown.evil`)",
+      "site": {
+       "file": "cmd/f1_iface_unknown/main.go",
+       "line": 21
+      }
+     }
+    ],
+    "kind": "FEASIBLE_LOOKALIKE",
+    "pattern": "F1",
+    "reason_codes_on": [],
+    "schema_errors_on": [],
+    "seconds_on": 1.84,
+    "truth": "REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "REACHABLE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": true
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F2",
+    "evidence_source": null,
+    "examined": 1,
+    "expected_filter": "INFEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "INFEASIBLE",
+    "first_patterns": [
+     "F2"
+    ],
+    "id": "f2_const_port",
+    "infeasible_steps": [
+     {
+      "pattern": "F2",
+      "reason": "the call at cmd/f2_const_port/main.go:17 runs only if `port == 0` is false; with the argument passed at cmd/f2_const_port/main.go:27 it is true",
+      "site": {
+       "file": "cmd/f2_const_port/main.go",
+       "line": 17
+      }
+     }
+    ],
+    "kind": "INFEASIBLE",
+    "pattern": "F2",
+    "reason_codes_on": [
+     "PATHS_INFEASIBLE"
+    ],
+    "schema_errors_on": [],
+    "seconds_on": 2.22,
+    "truth": "NOT_REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "CANT_DETERMINE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": false
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F2",
+    "evidence_source": null,
+    "examined": 1,
+    "expected_filter": "INFEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "INFEASIBLE",
+    "first_patterns": [
+     "F2"
+    ],
+    "id": "f2_variadic_empty",
+    "infeasible_steps": [
+     {
+      "pattern": "F2",
+      "reason": "the call at cmd/f2_variadic_empty/main.go:18 runs only if `len(args) > 0` is true; with the argument passed at cmd/f2_variadic_empty/main.go:26 it is false",
+      "site": {
+       "file": "cmd/f2_variadic_empty/main.go",
+       "line": 18
+      }
+     }
+    ],
+    "kind": "INFEASIBLE",
+    "pattern": "F2",
+    "reason_codes_on": [
+     "PATHS_INFEASIBLE"
+    ],
+    "schema_errors_on": [],
+    "seconds_on": 2.33,
+    "truth": "NOT_REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "CANT_DETERMINE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": false
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F2",
+    "evidence_source": null,
+    "examined": 1,
+    "expected_filter": "INFEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "INFEASIBLE",
+    "first_patterns": [
+     "F2"
+    ],
+    "id": "f2_string_driver",
+    "infeasible_steps": [
+     {
+      "pattern": "F2",
+      "reason": "the call at cmd/f2_string_driver/main.go:18 runs only if `driver == \"postgresql\"` is true; with the argument passed at cmd/f2_string_driver/main.go:26 it is false",
+      "site": {
+       "file": "cmd/f2_string_driver/main.go",
+       "line": 18
+      }
+     }
+    ],
+    "kind": "INFEASIBLE",
+    "pattern": "F2",
+    "reason_codes_on": [
+     "PATHS_INFEASIBLE"
+    ],
+    "schema_errors_on": [],
+    "seconds_on": 2.17,
+    "truth": "NOT_REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "CANT_DETERMINE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": false
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F2",
+    "evidence_source": "EXAMINED_PATH",
+    "examined": 2,
+    "expected_filter": "FEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "FEASIBLE",
+    "first_patterns": [
+     "F2"
+    ],
+    "id": "f2_const_and_variable",
+    "infeasible_steps": [
+     {
+      "pattern": "F2",
+      "reason": "the call at cmd/f2_const_and_variable/main.go:17 runs only if `port == 0` is false; with the argument passed at cmd/f2_const_and_variable/main.go:25 it is true",
+      "site": {
+       "file": "cmd/f2_const_and_variable/main.go",
+       "line": 17
+      }
+     }
+    ],
+    "kind": "FEASIBLE_LOOKALIKE",
+    "pattern": "F2",
+    "reason_codes_on": [],
+    "schema_errors_on": [],
+    "seconds_on": 2.13,
+    "truth": "REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "REACHABLE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": true
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F2",
+    "evidence_source": "EXAMINED_PATH",
+    "examined": 2,
+    "expected_filter": "FEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "FEASIBLE",
+    "first_patterns": [
+     "F2"
+    ],
+    "id": "f2_variadic_nonempty",
+    "infeasible_steps": [
+     {
+      "pattern": "F2",
+      "reason": "the call at cmd/f2_variadic_nonempty/main.go:17 runs only if `len(args) > 0` is true; with the argument passed at cmd/f2_variadic_nonempty/main.go:26 it is false",
+      "site": {
+       "file": "cmd/f2_variadic_nonempty/main.go",
+       "line": 17
+      }
+     }
+    ],
+    "kind": "FEASIBLE_LOOKALIKE",
+    "pattern": "F2",
+    "reason_codes_on": [],
+    "schema_errors_on": [],
+    "seconds_on": 2.14,
+    "truth": "REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "REACHABLE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": true
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F3",
+    "evidence_source": null,
+    "examined": 1,
+    "expected_filter": "INFEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "INFEASIBLE",
+    "first_patterns": [
+     "F3"
+    ],
+    "id": "f3_field_never_set",
+    "infeasible_steps": [
+     {
+      "pattern": "F3",
+      "reason": "the call at cmd/f3_field_never_set/main.go:28 runs only if `vtfeas/cmd/f3_field_never_set.Rar.FS != nil` is true; field vtfeas/cmd/f3_field_never_set.Rar.FS is never assigned in the analysed program, so it is always its zero value",
+      "site": {
+       "file": "cmd/f3_field_never_set/main.go",
+       "line": 28
+      }
+     }
+    ],
+    "kind": "INFEASIBLE",
+    "pattern": "F3",
+    "reason_codes_on": [
+     "PATHS_INFEASIBLE"
+    ],
+    "schema_errors_on": [],
+    "seconds_on": 2.11,
+    "truth": "NOT_REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "CANT_DETERMINE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": false
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": "F3",
+    "evidence_source": null,
+    "examined": 1,
+    "expected_filter": "INFEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "INFEASIBLE",
+    "first_patterns": [
+     "F3"
+    ],
+    "id": "f3_map_field_never_set",
+    "infeasible_steps": [
+     {
+      "pattern": "F3",
+      "reason": "the call at cmd/f3_map_field_never_set/main.go:21 runs only if `vtfeas/cmd/f3_map_field_never_set.client.cache != nil` is true; field vtfeas/cmd/f3_map_field_never_set.client.cache is never assigned in the analysed program, so it is always its zero value",
+      "site": {
+       "file": "cmd/f3_map_field_never_set/main.go",
+       "line": 21
+      }
+     }
+    ],
+    "kind": "INFEASIBLE",
+    "pattern": "F3",
+    "reason_codes_on": [
+     "PATHS_INFEASIBLE"
+    ],
+    "schema_errors_on": [],
+    "seconds_on": 2.18,
+    "truth": "NOT_REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "CANT_DETERMINE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": false
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": null,
+    "evidence_source": "EXAMINED_PATH",
+    "examined": 1,
+    "expected_filter": "FEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "FEASIBLE",
+    "first_patterns": [],
+    "id": "f3_field_set_rarely",
+    "infeasible_steps": [],
+    "kind": "FEASIBLE_LOOKALIKE",
+    "pattern": "F3",
+    "reason_codes_on": [],
+    "schema_errors_on": [],
+    "seconds_on": 2.25,
+    "truth": "REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "REACHABLE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": true
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": null,
+    "evidence_source": "EXAMINED_PATH",
+    "examined": 1,
+    "expected_filter": "FEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "FEASIBLE",
+    "first_patterns": [],
+    "id": "f3_field_set_via_pointer",
+    "infeasible_steps": [],
+    "kind": "FEASIBLE_LOOKALIKE",
+    "pattern": "F3",
+    "reason_codes_on": [],
+    "schema_errors_on": [],
+    "seconds_on": 2.32,
+    "truth": "REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "REACHABLE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": true
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": null,
+    "evidence_source": "EXAMINED_PATH",
+    "examined": 1,
+    "expected_filter": "FEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "FEASIBLE",
+    "first_patterns": [],
+    "id": "f3_field_set_by_reflection",
+    "infeasible_steps": [],
+    "kind": "FEASIBLE_LOOKALIKE",
+    "pattern": "F3",
+    "reason_codes_on": [],
+    "schema_errors_on": [],
+    "seconds_on": 2.25,
+    "truth": "REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "REACHABLE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": true
+   },
+   {
+    "as_expected": true,
+    "deciding_pattern": null,
+    "evidence_source": "EXAMINED_PATH",
+    "examined": 1,
+    "expected_filter": "FEASIBLE",
+    "false_downgrade": false,
+    "filter_status": "FEASIBLE",
+    "first_patterns": [],
+    "id": "oos_struct_constant",
+    "infeasible_steps": [],
+    "kind": "OUT_OF_SCOPE",
+    "pattern": "NONE",
+    "reason_codes_on": [],
+    "schema_errors_on": [],
+    "seconds_on": 2.23,
+    "truth": "NOT_REACHABLE",
+    "undecided_reason": null,
+    "verdict_off": "REACHABLE",
+    "verdict_on": "REACHABLE",
+    "verification_on": "PASSED",
+    "verified_path_is_evidence": true
+   }
+  ]
+ },
+ "environment": {
+  "command": "python -m vulntrace eval feasibility --set fixtures",
+  "go": "go version go1.24.7 linux/amd64",
+  "os": "Linux-6.18.44-fc-v553-x86_64-with-glibc2.39",
+  "python": "3.13.18",
+  "repo_commit": "3e6574b",
+  "repo_dirty": false
+ },
+ "feasibility_settings": {
+  "max_examined_paths": 20
+ },
+ "schema_version": "1.0",
+ "set": "fixtures"
+}
