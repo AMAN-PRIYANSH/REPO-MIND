@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP9 - Path-feasibility filter for REACHABLE (downgrade-only)**
-- State: `IN_PROGRESS`
+- State: `AWAITING_ADJUDICATION` (D3b sheets in `docs/results/cp9/d3b/adjudication/`; report `reports/CP9_REPORT.md`, scoring sections pending)
 - Branch in use: `claude/intelligent-planck-krrtgg`
 - Specification: [checkpoints/CP9.md](../implementation/checkpoints/CP9.md)
 
@@ -25,7 +25,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
 | CP7b | Real applications (D3) and demo | APPROVED | claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
 | CP8 | Final report, README and interview notes (multi-agent dropped) | APPROVED | claude/vulntrace-ai-build-5f8jgi | [CP8_REPORT](reports/CP8_REPORT.md) |
-| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | IN_PROGRESS | claude/intelligent-planck-krrtgg | - |
+| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | AWAITING_ADJUDICATION | claude/intelligent-planck-krrtgg | [CP9_REPORT](reports/CP9_REPORT.md) (scoring pending) |
 
 ## Current checkpoint task list
 
@@ -37,10 +37,10 @@ CP9 (session branch `claude/intelligent-planck-krrtgg`):
 - [x] 2. Pipeline and verifier integration (`PATHS_INFEASIBLE`, schema extension, verifier checks of infeasible steps and of the filtered path, downgrade-only tests, `--no-feasibility`)
 - [x] 3. Fixtures by construction: >= 2 infeasible and >= 2 feasible look-alikes per pattern; CP2/CP7 fixtures keep their verdicts
 - [x] 4a. Evaluation: fixtures (downgrades, false downgrades)
-- [ ] 4b. Evaluation: D3 before/after (in-sample, labelled so)
-- [ ] 4c. Evaluation: D3b selection (code, D3 rules, D3 apps excluded, seed fixed before runs), triage with/without filter, adjudication sheets -> `AWAITING_ADJUDICATION`
-- [ ] 4d. Evaluation: D1/D4 downgrade counts by pattern
-- [ ] 4e. Results renderer with headline fixed before any D3b result -> `docs/results/CP9_FEASIBILITY_RESULTS.md`, files under `docs/results/cp9/` (< 512 KiB each)
+- [x] 4b. Evaluation: D3 before/after (in-sample, labelled so)
+- [x] 4c. Evaluation: D3b selection (code, D3 rules, D3 apps excluded, seed fixed before runs), triage with/without filter, adjudication sheets -> `AWAITING_ADJUDICATION`
+- [x] 4d. Evaluation: D1/D4 downgrade counts by pattern
+- [x] 4e. Results renderer with headline fixed before any D3b result -> `docs/results/CP9_FEASIBILITY_RESULTS.md`, files under `docs/results/cp9/` (< 512 KiB each)
 - [x] 5. Tests (CI still to be checked on the last commit): unit per pattern (SSA snippets), contract tests for new fields, integration on fixtures; CI green
 - [ ] 6. After adjudication (second session): scoring, results document, report `CP9_REPORT.md`, STATUS `AWAITING_REVIEW`
 
@@ -48,12 +48,18 @@ CP9 (session branch `claude/intelligent-planck-krrtgg`):
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-CP9 session `claude/intelligent-planck-krrtgg` (17 Nov 2026):
+CP9 session `claude/intelligent-planck-krrtgg` (17-18 Nov 2026), stopped at `AWAITING_ADJUDICATION`:
 
-- Done and pushed: helper filter (`helper/feasible.go`, reach option `feasibility`), CP9 fixture module `fixtures/feasibility` (16 cases + manifest), pipeline stage `src/vulntrace/pipeline/feasibility.py`, verifier checks FILTERED_PATH / INFEASIBLE_STEP, `--no-feasibility`, `eval feasibility --set fixtures`, unit/contract/integration/Go tests (918 passed, 10 skipped locally).
-- Design deviations to report: (1) the INFEASIBLE decision uses an exhaustive state search over (function, parameter facts); the N=20 shortest paths are examined only for the explanation (fewer downgrades than the spec's rule, never more); (2) context follows direct parameter pass-through along the path (needed for Once.Do -> doSlow and put -> executeAndPut); (3) CP9 fixtures live in a separate module so CP2/CP7 results stay byte-identical.
-- Done: fixture results `docs/results/cp9/fixtures.json` (7/7 infeasible downgraded, 0 false downgrades; `--no-feasibility` reproduces all 66 CP7 rows); D3b selection committed (`docs/results/cp9/d3b/`, seed 20261117 fixed in `82868ed` before probing): go-task/task, fatedier/frp, gogs/gogs, 11 cases. Note for the report: 4 D3b cases share advisories with D3; the selection log's quota text says "five" (cosmetic, not changed).
-- Caution: `dataset materialize --cases <subset>` rewrites `docs/results/datasets/D1|D4_materialize.json`; never commit that; revert it (`git checkout`) or pass `--summary-out` to the scratchpad.
-- Was next (kept for the record): run `python -m vulntrace eval feasibility --set fixtures` (writes docs/results/cp9/fixtures.json), then D3 before/after (needs go1.26.10 from the module proxy on PATH, as in CP7b), then D3b selection with a new seed recorded first, D3b triage both ways, sheets, stop at AWAITING_ADJUDICATION.
+- Done: tasks 1-5 and 4a-4e. Results: `docs/results/cp9/` and `docs/results/CP9_FEASIBILITY_RESULTS.md` (headline
+  pending). Report `docs/progress/reports/CP9_REPORT.md` (sections 5 criterion 5 and 6 headline pending).
+- For the supervisor: fill `docs/results/cp9/d3b/adjudication/adjudication.json` (7 cases; read the three Markdown
+  sheets beside it). Per case: `adjudication_off` (path A), `adjudication_on` (path B; none is pre-filled as
+  SAME_AS_OFF because path B differs in all 7), `truth` (target reachable by some path), `by`, `note`, `filled: true`.
+  No case was downgraded, so `steps_correct` stays null. Then set STATUS to IN_PROGRESS on this branch.
+- Scoring session: `python -m vulntrace cp9 report` (renders the fixed headline from the filled sheet), check
+  `python -m pytest tests/contract/test_cp9_committed.py`, complete the report (criterion 5, headline, section 6),
+  set `AWAITING_REVIEW`. No Go or network is needed for scoring.
+- D3b caveats to keep in the scoring: 4 of 11 D3b cases share advisories with D3; 3 applications only.
+- Never commit `docs/results/datasets/D1|D4_materialize.json` changes made by `dataset materialize --cases` (revert).
 
 (Earlier: CP8 was approved on 17 Nov 2026 and CP9 was added at the owner's request. The D3 evidence and checkouts are not in the repository: rebuild them with the CP7b commands. If CP9 stops at AWAITING_ADJUDICATION, the supervisor sets IN_PROGRESS on the builder branch once the D3b sheets are filled.)
