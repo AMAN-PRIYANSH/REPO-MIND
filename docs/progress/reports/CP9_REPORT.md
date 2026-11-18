@@ -70,9 +70,9 @@ Network checks: `proxy.golang.org` 200; `pypi.org` 200; `api.github.com` 200; `g
 | `python -m pytest tests/unit tests/contract -q` (last) | `929 passed, 10 skipped in 19.79s` |
 | `(cd helper && GOTOOLCHAIN=local CGO_ENABLED=0 go test -count=1 ./...)` | `ok  	vulntrace/helper	18.449s` |
 | `python -m pytest tests/integration/test_cp9_feasibility.py -q` | `38 passed in 263.18s (0:04:23)` |
-| `python -m pytest tests/integration -q` | *see the addendum at the end (run started before this report was written)* |
+| `python -m pytest tests/integration -q` | `172 passed, 2 skipped in 366.09s (0:06:06)` (the 2 skips: opt-in network tests, `VULNTRACE_NETWORK_TESTS` not set) |
 | `python tests/contract/record_cp9.py` | 8 verdict scenarios and 4 responses recorded; every built-in assertion held |
-| GitHub Actions CI on this branch | `success` on runs 156-164 (commits `3e6574b` ... `a682c01`); later runs: see the addendum |
+| GitHub Actions CI on this branch | `success` on every completed run, 156-168 (commits `3e6574b` ... `6af94c4`, the last code and results commit); see the addendum for the documentation commits after it |
 
 ## 5. Acceptance criteria
 
@@ -177,14 +177,35 @@ longer the parameter and counts as unknown (checked by reading the downloaded mo
 
 ## 10. Git
 
-Branch `claude/intelligent-planck-krrtgg`; every commit pushed (no push failed). `git log --oneline f066158..HEAD`:
+Branch `claude/intelligent-planck-krrtgg`; every commit was pushed (no push failed). `git log --oneline f066158..HEAD`
+before the commit that adds this list:
 
 ```
+16110e9 CP9: report (scoring pending) and STATUS AWAITING_ADJUDICATION; D3b sheets ready for the supervisor
 6af94c4 CP9 task 4e: results document rendered by code (headline pending D3b adjudication); regeneration test; clearer D1/D4 entry wording
-20bdd5b CP9 task 4d: D4 distribution ...
-(full list: see the addendum)
+4840d6d CP9 task 4d: D4 distribution: filter off reproduces CP7 on all 32 CP7-REACHABLE cases; filter on downgrades 0 cases (2 of 276 REACHABLE entries INFEASIBLE by F2, in GO-2026-6665)
+20bdd5b CP9 task 4d: D1 distribution: filter off reproduces CP7 on all 38 CP7-REACHABLE cases; filter on downgrades 0 (275 REACHABLE entries, all FEASIBLE)
+d627428 CP9 task 4c: D3b adjudication sheets (7 cases, path A without and path B with the filter for the same changed target); contract test for committed CP9 results
+24d833e CP9 task 4c: D3b triage with and without the filter (held-out): 7 REACHABLE without the filter, 0 downgraded; every REACHABLE entry has a path that passes the filter
+fa6aa37 CP9: a committed verdict copy over 512 KiB is written in full as .json.gz (under 512 KiB) instead of being cut; the sheet reads both
+a682c01 CP9 task 4b: D3 before/after (IN-SAMPLE): filter off reproduces all 14 CP7b verdicts; filter on downgrades 1 of 7 REACHABLE (gitleaks GO-2025-4020), 6 stay REACHABLE with paths that pass the filter
+c546837 CP9: committed D3/D3b verdict copies keep 3 examined paths per entry and leave out method paths identical to the filter-off copy (512 KiB limit); full verdicts stay in data/
+4b4c374 CP9: STATUS: fixture results done, D3b selected, handoff notes
+3a81afd CP9 task 4c: D3b selection by the D3 rules (seed 20261117, D3 apps excluded): go-task/task, fatedier/frp, gogs/gogs; 11 cases. Committed before any D3b triage.
+ebba1d3 CP9 task 4a: fixture results (7/7 infeasible downgraded, 0/8 look-alikes and 0/36 true-REACHABLE CP7 runs downgraded; --no-feasibility reproduces all 66 CP7 fixture rows)
+3d40a11 CP9: D3b adjudication sheet generator (cp9 sheet) and cp9 report command
+bd92d72 CP9: results renderer with the D3b headline fixed before any D3b result; D3/D3b (off/on) and D1/D4 harnesses
+82868ed CP9: D3b selection rules and candidate list (seed 20261117, D3 apps excluded, quota 3), fixed before any D3b probe or run
+722dfd1 CP9: STATUS ticks tasks 1-3 and records handoff notes
+3e6574b CP9 task 2: pipeline and verifier integration of the feasibility filter
+634d4e0 CP9 task 1: feasibility filter in the Go helper (reach option), F1-F3 on SSA with parameter pass-through context; CP9 fixture module (16 cases); Go unit tests per pattern, conservativeness, caps, compatibility
+e06d06f CP9: session starts; STATUS IN_PROGRESS, branch claude/intelligent-planck-krrtgg, task list
 ```
 
-## Addendum (filled at the end of this session)
+## Addendum (end of this session)
 
-*pending: integration-suite summary, CI on the last commit, full commit list.*
+- Local: unit + contract `929 passed, 10 skipped`; Go `ok vulntrace/helper`; integration `172 passed, 2 skipped`.
+- CI: `success` on runs 156-168. Run 169 (`16110e9`, report and STATUS only) and the run for the commit that adds this
+  addendum (documentation only) were still running when this was written; their result is stated in the session's
+  final message and must be checked by the scoring session before `AWAITING_REVIEW`.
+- Stopped at `AWAITING_ADJUDICATION`; nothing of the next checkpoint was started.
