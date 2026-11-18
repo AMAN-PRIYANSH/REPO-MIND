@@ -1,0 +1,647 @@
+{
+ "environment": {
+  "command": "python -m vulntrace eval feasibility --set d4",
+  "go": "go version go1.24.7 linux/amd64",
+  "os": "Linux-6.18.44-fc-v595-x86_64-with-glibc2.39",
+  "python": "3.13.18",
+  "repo_commit": "20bdd5b",
+  "repo_dirty": false
+ },
+ "feasibility_settings": {
+  "max_examined_paths": 20
+ },
+ "note": "Distribution only, no truth: these are library modules analysed as their own app (CP7). Only the cases whose CP7 verdict was REACHABLE are re-run, because the filter can change nothing else.",
+ "rows": [
+  {
+   "cluster_key": "github.com/pion/dtls@1.5.1..1.5.2",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 14
+   },
+   "id": "GO-2020-0038",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/sigstore/cosign@1.5.1..1.5.2",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 14
+   },
+   "id": "GO-2022-0326",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/ntbosscher/gobase@0.7.1..0.7.2",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 2
+   },
+   "id": "GO-2022-0400",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/pion/dtls/v2@2.1.4..2.1.5",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 5
+   },
+   "id": "GO-2022-0462",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/flyteorg/flyteadmin@1.1.30..1.1.31",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2022-0519",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/microcosm-cc/bluemonday@1.0.15..1.0.16",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 4
+   },
+   "id": "GO-2022-0588",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/codenotary/immudb@1.4.0..1.4.1",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 9
+   },
+   "id": "GO-2022-1118",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "helm.sh/helm/v3@3.11.0..3.11.1",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 6
+   },
+   "id": "GO-2023-1547",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/russellhaering/gosaml2@0.8.1..0.9.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 4
+   },
+   "id": "GO-2023-1602",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/crewjam/saml@0.4.12..0.4.13",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2023-1664",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/consensys/gnark@0.9.0-alpha..0.9.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2023-2098",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/cometbft/cometbft@0.38.11..0.38.12",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 4
+   },
+   "id": "GO-2024-3112",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/osrg/gobgp/v3@3.19.0..3.20.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 6
+   },
+   "id": "GO-2024-3124",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/nats-io/nats-server/v2@2.10.26..2.10.27",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {},
+   "id": "GO-2025-3600",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [
+    "ANALYSIS_FAILED"
+   ],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "CANT_DETERMINE"
+  },
+  {
+   "cluster_key": "github.com/pion/interceptor@0.1.38..0.1.39",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2025-3748",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/quic-go/quic-go@0.54.0..0.54.1",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 3
+   },
+   "id": "GO-2025-4017",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/distribution/distribution/v3@3.0.0..3.1.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 10
+   },
+   "id": "GO-2026-4942",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/gomarkdown/markdown@0.0.0-20260217112301-37c66b85d6ab..0.0.0-20260411013819-759bbc3e3207",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2026-5208",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 17
+   },
+   "id": "GO-2026-5427",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/MontFerret/ferret/v2@2.0.0-alpha.3..2.0.0-alpha.4",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 2
+   },
+   "id": "GO-2026-5452",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/osrg/gobgp/v4@4.4.0..4.5.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 10
+   },
+   "id": "GO-2026-5525",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 10
+   },
+   "id": "GO-2026-5665",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/quic-go/quic-go@0.59.0..0.59.1",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 6
+   },
+   "id": "GO-2026-5676",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 7
+   },
+   "id": "GO-2026-5699",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 9
+   },
+   "id": "GO-2026-5713",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/osrg/gobgp/v4@4.6.0..4.7.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 10
+   },
+   "id": "GO-2026-5954",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/osrg/gobgp/v4@4.5.0..4.6.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 11
+   },
+   "id": "GO-2026-5955",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/osrg/gobgp/v4@4.3.0..4.4.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 20
+   },
+   "id": "GO-2026-5971",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/prebid/prebid-server/v4@4.3.0..4.4.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 7
+   },
+   "id": "GO-2026-6139",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/pion/dtls/v3@3.1.3..3.1.4",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 5
+   },
+   "id": "GO-2026-6165",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/cilium/ebpf@0.21.0..0.22.0",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 50
+   },
+   "id": "GO-2026-6238",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "github.com/snowflakedb/gosnowflake/v2@2.1.0..2.2.0",
+   "deciding_patterns": {
+    "F2": 2
+   },
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 24,
+    "INFEASIBLE": 2
+   },
+   "id": "GO-2026-6665",
+   "mode": "RELEASE",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  }
+ ],
+ "schema_version": "1.0",
+ "set": "d4",
+ "summary": {
+  "cp7_reachable_cases": 32,
+  "downgraded": 0,
+  "downgraded_by_case_pattern": {},
+  "downgraded_ids": [],
+  "entry_deciding_patterns": {
+   "F2": 2
+  },
+  "entry_statuses": {
+   "FEASIBLE": 274,
+   "INFEASIBLE": 2
+  },
+  "not_reproduced": [],
+  "reachable_off": 32,
+  "reproduced_cp7": 32,
+  "rerun": 32,
+  "undecided_reasons": {}
+ }
+}
