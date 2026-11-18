@@ -1,0 +1,755 @@
+{
+ "environment": {
+  "command": "python -m vulntrace eval feasibility --set d1",
+  "go": "go version go1.24.7 linux/amd64",
+  "os": "Linux-6.18.44-fc-v595-x86_64-with-glibc2.39",
+  "python": "3.13.18",
+  "repo_commit": "d627428",
+  "repo_dirty": false
+ },
+ "feasibility_settings": {
+  "max_examined_paths": 20
+ },
+ "note": "Distribution only, no truth: these are library modules analysed as their own app (CP7). Only the cases whose CP7 verdict was REACHABLE are re-run, because the filter can change nothing else.",
+ "rows": [
+  {
+   "cluster_key": "GO-2020-0023",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2020-0023",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2020-0038",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 4
+   },
+   "id": "GO-2020-0038",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2021-0076",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2021-0076",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2022-0246",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 3
+   },
+   "id": "GO-2022-0246",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2022-0316",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 3
+   },
+   "id": "GO-2022-0316",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2022-0346",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 2
+   },
+   "id": "GO-2022-0346",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2022-0461",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 10
+   },
+   "id": "GO-2022-0461",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2022-0588",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 2
+   },
+   "id": "GO-2022-0588",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2022-0762",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 4
+   },
+   "id": "GO-2022-0762",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2022-1040",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 14
+   },
+   "id": "GO-2022-1040",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2022-1188",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 5
+   },
+   "id": "GO-2022-1188",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2023-1664",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2023-1664",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2023-2000",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 2
+   },
+   "id": "GO-2023-2000",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2023-2074",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 4
+   },
+   "id": "GO-2023-2074",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2023-2333",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 3
+   },
+   "id": "GO-2023-2333",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2023-2413",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2023-2413",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2024-2567",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 3
+   },
+   "id": "GO-2024-2567",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2024-2682",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 12
+   },
+   "id": "GO-2024-2682",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2024-2978",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 6
+   },
+   "id": "GO-2024-2978",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2024-3344",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 5
+   },
+   "id": "GO-2024-3344",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2025-3600",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {},
+   "id": "GO-2025-3600",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [
+    "ANALYSIS_FAILED"
+   ],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "CANT_DETERMINE"
+  },
+  {
+   "cluster_key": "GO-2025-3638",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 3
+   },
+   "id": "GO-2025-3638",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2025-3735",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 6
+   },
+   "id": "GO-2025-3735",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2025-4025",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 12
+   },
+   "id": "GO-2025-4025",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-4736",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2026-4736",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-5208",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2026-5208",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-5427",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2026-5427",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-5452",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 118
+   },
+   "id": "GO-2026-5452",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-5525",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 2
+   },
+   "id": "GO-2026-5525",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-5665",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 2
+   },
+   "id": "GO-2026-5665",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-5699",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 2
+   },
+   "id": "GO-2026-5699",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-5713",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 4
+   },
+   "id": "GO-2026-5713",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-5954",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 1
+   },
+   "id": "GO-2026-5954",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-5955",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 10
+   },
+   "id": "GO-2026-5955",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-5971",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 2
+   },
+   "id": "GO-2026-5971",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-6139",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 16
+   },
+   "id": "GO-2026-6139",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-6163",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 3
+   },
+   "id": "GO-2026-6163",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  },
+  {
+   "cluster_key": "GO-2026-6165",
+   "deciding_patterns": {},
+   "downgraded": false,
+   "error": null,
+   "filter_statuses": {
+    "FEASIBLE": 5
+   },
+   "id": "GO-2026-6165",
+   "mode": "FIX",
+   "reason_codes_cp7": [],
+   "reason_codes_off": [],
+   "reason_codes_on": [],
+   "reproduces_cp7": true,
+   "undecided_reasons": {},
+   "verdict_cp7": "REACHABLE",
+   "verdict_off": "REACHABLE",
+   "verdict_on": "REACHABLE"
+  }
+ ],
+ "schema_version": "1.0",
+ "set": "d1",
+ "summary": {
+  "cp7_reachable_cases": 38,
+  "downgraded": 0,
+  "downgraded_by_case_pattern": {},
+  "downgraded_ids": [],
+  "entry_deciding_patterns": {},
+  "entry_statuses": {
+   "FEASIBLE": 275
+  },
+  "not_reproduced": [],
+  "reachable_off": 38,
+  "reproduced_cp7": 38,
+  "rerun": 38,
+  "undecided_reasons": {}
+ }
+}
