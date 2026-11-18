@@ -56,3 +56,9 @@ def test_d3b_selection_and_sheet():
     sheet = load("d3b/adjudication/adjudication.json")
     want = {r["id"] for r in rows if "REACHABLE" in (r["verdict_off"], r["verdict_on"])}
     assert {c["id"] for c in sheet["cases"]} == want
+
+
+def test_results_document_is_regenerated():
+    from vulntrace.eval import feasibility_report as fr
+
+    assert fr.OUT.read_text(encoding="utf-8") == fr.render(), "run `python -m vulntrace cp9 report`"

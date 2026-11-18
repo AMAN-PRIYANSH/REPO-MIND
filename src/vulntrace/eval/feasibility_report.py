@@ -160,8 +160,10 @@ def render_dist(name: str, d: dict[str, Any] | None) -> list[str]:
     s = d["summary"]
     return [f"## {name}: downgrades by pattern (cost of the filter; no truth)", "", d["note"], "",
             f"Re-run {s['rerun']} of the CP7 REACHABLE cases; filter off reproduced CP7 in {s['reproduced_cp7']}; "
-            f"REACHABLE without the filter {s['reachable_off']}; downgraded {s['downgraded']}; by deciding pattern of the "
-            f"downgraded entries {_md(s['entry_deciding_patterns'])}; filter answers per entry {_md(s['entry_statuses'])}.", ""]
+            f"REACHABLE without the filter {s['reachable_off']}; cases downgraded {s['downgraded']}. Per REACHABLE entry (one target "
+            f"symbol from one main package) the filter answered {_md(s['entry_statuses'])}; INFEASIBLE entries by deciding "
+            f"pattern {_md(s['entry_deciding_patterns'] or 'none')} (an INFEASIBLE entry leaves its case REACHABLE when another "
+            f"entry of the case is FEASIBLE).", ""]
 
 
 def write(out: Path = OUT) -> Path:
