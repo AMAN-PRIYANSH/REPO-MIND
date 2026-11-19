@@ -6,7 +6,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 
 - Current checkpoint: **CP9 - Path-feasibility filter for REACHABLE (downgrade-only)**
 - State: `IN_PROGRESS` (D3b adjudication filled on 20 Nov 2026; the next session runs the scoring steps in the handoff notes)
-- Branch in use: `claude/intelligent-planck-krrtgg`
+- Branch in use: `claude/elegant-mccarthy-wq32ck` (scoring session; continues `claude/intelligent-planck-krrtgg`, fast-forwarded at `4ebcfa2`)
 - Specification: [checkpoints/CP9.md](../implementation/checkpoints/CP9.md)
 
 State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDICATION` →) `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
@@ -25,7 +25,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
 | CP7b | Real applications (D3) and demo | APPROVED | claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
 | CP8 | Final report, README and interview notes (multi-agent dropped) | APPROVED | claude/vulntrace-ai-build-5f8jgi | [CP8_REPORT](reports/CP8_REPORT.md) |
-| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | IN_PROGRESS | claude/intelligent-planck-krrtgg | [CP9_REPORT](reports/CP9_REPORT.md) (scoring pending) |
+| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | IN_PROGRESS | claude/intelligent-planck-krrtgg, claude/elegant-mccarthy-wq32ck | [CP9_REPORT](reports/CP9_REPORT.md) (scoring pending) |
 
 ## Current checkpoint task list
 
