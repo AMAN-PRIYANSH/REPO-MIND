@@ -71,3 +71,18 @@ Changing VTA or the verdict rule, making any `NOT_REACHABLE` from the filter, ge
 ## Review notes
 
 (The supervising assistant adds notes here.)
+
+**Supervisor review, 20 Nov 2026 - APPROVED as a negative result** (branches `claude/intelligent-planck-krrtgg` at `4ebcfa2` and the scoring session `claude/elegant-mccarthy-wq32ck` at `a5ff207`).
+
+Checked by the supervisor: `pytest tests/unit tests/contract` -> 929 passed, 10 skipped; CI green on both scoring commits; the scoring session left the rendered results document unchanged (it only completed the report and STATUS).
+
+How the D3b adjudication was done (the supervisor ran it): two independent Claude reviewer agents read the real source at the pinned versions; they agreed on all 14 path judgements (7 cases x path A and path B) and on `truth` for 5 cases; they split on the two go-task cases (A REACHABLE with low confidence through an unescaped `ref` in the go-getter URL; B NOT_REACHABLE with high confidence). The supervisor confirmed the first premise of A's route (`taskfile/node_git.go:113`) but not the rest, so those two are UNKNOWN. The owner spot-checked 8 lines of 3 cases chosen by a fixed rule before any review was seen; all matched, and check 8 (`tx.conn.Exec(ctx, "commit")`) supports the reviewers' reason for path B of the gogs cases.
+
+What the results say:
+
+1. **Fixtures:** 7/7 infeasible cases downgraded, 0/8 look-alikes and 0/36 true-REACHABLE CP7 runs downgraded; `--no-feasibility` reproduces CP7 exactly.
+2. **In-sample D3:** 1 of 7 REACHABLE downgraded (gitleaks GO-2025-4020).
+3. **Held-out D3b (the evidence):** 0 of 7 REACHABLE downgraded; REACHABLE path precision 0/7 without and 0/7 with the filter. The filter did not hide any real path (0 downgrades), and the targets were reachable by some other path in 5 of 7 (2 UNKNOWN). The infeasibility reasons in D3b were mostly outside F1-F3 as implemented (closures passed through helpers such as `withLock` and `BackoffUntil`, run-time state such as "inside a transaction", client-side versus server-side branches).
+4. **Lesson:** three hand-written patterns do not generalise; real infeasibility is long-tailed. Keep the held-out discipline.
+
+Important distinction for everything after CP9: **path precision** (is the shown route runnable) is not **verdict precision** (is the target reachable by some route). On D3b, verdict-level REACHABLE was right in 5/7, wrong in 0/7, unknown in 2/7. Verdict-level accuracy has never been measured on all D3 cases. CP10 measures it.

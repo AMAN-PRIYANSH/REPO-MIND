@@ -27,6 +27,7 @@ Only CP1 has a full specification now. Each later specification is written by th
 | CP7b | Sonnet 5.5 | high | D3 real applications, adjudication sheets, static demo page (Streamlit dropped) |
 | CP8 | Sonnet 5.5 | high | Final report, README, interview notes (no new experiments) |
 | CP9 | Opus 5.5 | high | Path-feasibility filter, D3b held-out set |
+| CP10 | Opus 5.5 | high | Verdict-level trust vs govulncheck, target hygiene, D3c |
 
 Never use Fable or 1M-context models (they can use paid credits). Avoid `max` effort.
 
@@ -103,6 +104,11 @@ Full spec: [checkpoints/CP5.md](checkpoints/CP5.md). `LLMClient` (any OpenAI-com
 - Downgrade-only filter for three infeasibility patterns found in CP7b (context mismatch at dynamic calls, guards on constant arguments, guards on never-set fields).
 - Measured on fixtures, on D3 (in-sample) and on a new held-out set D3b of 3 applications, adjudicated like CP7b.
 - Gate: false downgrades reported; held-out before/after precision reported with intervals.
+
+### CP10 - Verdict-level trust against govulncheck (added after CP9 at the owner's request)
+
+- Target hygiene (curated vulndb symbols first; context-only targets never decide REACHABLE), honest evidence labels, verdict-level adjudication.
+- New held-out set D3c with two strata: advisories with and without curated symbols; compared with govulncheck on the same cases.
 
 ## If time runs short
 

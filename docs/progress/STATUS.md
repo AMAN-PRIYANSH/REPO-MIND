@@ -4,10 +4,10 @@ This file is the single source of truth for where the build stands. Claude Code 
 
 ## Current
 
-- Current checkpoint: **CP9 - Path-feasibility filter for REACHABLE (downgrade-only)**
-- State: `AWAITING_REVIEW` (scoring done; report `reports/CP9_REPORT.md`; headline: 0/7 downgraded on held-out D3b, REACHABLE path precision 0/7 before and after, a negative result)
-- Branch in use: `claude/elegant-mccarthy-wq32ck` (scoring session; continues `claude/intelligent-planck-krrtgg`, fast-forwarded at `4ebcfa2`)
-- Specification: [checkpoints/CP9.md](../implementation/checkpoints/CP9.md)
+- Current checkpoint: **CP10 - Verdict-level trust against govulncheck, target hygiene and honest evidence**
+- State: `READY`
+- Branch in use: (none yet; the CP10 session records its own `claude/...` branch)
+- Specification: [checkpoints/CP10.md](../implementation/checkpoints/CP10.md)
 
 State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDICATION` →) `AWAITING_REVIEW` → `APPROVED` (or `CHANGES_REQUESTED`).
 
@@ -25,45 +25,17 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
 | CP7b | Real applications (D3) and demo | APPROVED | claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
 | CP8 | Final report, README and interview notes (multi-agent dropped) | APPROVED | claude/vulntrace-ai-build-5f8jgi | [CP8_REPORT](reports/CP8_REPORT.md) |
-| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | AWAITING_REVIEW | claude/intelligent-planck-krrtgg, claude/elegant-mccarthy-wq32ck | [CP9_REPORT](reports/CP9_REPORT.md) |
+| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | APPROVED | claude/intelligent-planck-krrtgg, claude/elegant-mccarthy-wq32ck | [CP9_REPORT](reports/CP9_REPORT.md) |
+| CP10 | Verdict-level trust against govulncheck | READY | - | - |
 
 ## Current checkpoint task list
 
 Claude Code: copy the deliverables of the current checkpoint here as a checklist when you start, and tick them as you commit.
 
-CP9 (session branch `claude/intelligent-planck-krrtgg`):
-
-- [x] 1. Feasibility check in the Go helper (F1-F3 on SSA, one level of call-site context, N examined paths, conservative when undecidable)
-- [x] 2. Pipeline and verifier integration (`PATHS_INFEASIBLE`, schema extension, verifier checks of infeasible steps and of the filtered path, downgrade-only tests, `--no-feasibility`)
-- [x] 3. Fixtures by construction: >= 2 infeasible and >= 2 feasible look-alikes per pattern; CP2/CP7 fixtures keep their verdicts
-- [x] 4a. Evaluation: fixtures (downgrades, false downgrades)
-- [x] 4b. Evaluation: D3 before/after (in-sample, labelled so)
-- [x] 4c. Evaluation: D3b selection (code, D3 rules, D3 apps excluded, seed fixed before runs), triage with/without filter, adjudication sheets -> `AWAITING_ADJUDICATION`
-- [x] 4d. Evaluation: D1/D4 downgrade counts by pattern
-- [x] 4e. Results renderer with headline fixed before any D3b result -> `docs/results/CP9_FEASIBILITY_RESULTS.md`, files under `docs/results/cp9/` (< 512 KiB each)
-- [x] 5. Tests (CI still to be checked on the last commit): unit per pattern (SSA snippets), contract tests for new fields, integration on fixtures; CI green
-- [x] 6. After adjudication (second session, branch `claude/elegant-mccarthy-wq32ck`): scoring, results document (re-rendered, unchanged), report `CP9_REPORT.md`, STATUS `AWAITING_REVIEW`
+(CP10: not started.)
 
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-**Scoring session (20 Nov 2026) finished; the checkpoint awaits the owner's and supervisor's review.** Nothing is half-done. Report: `reports/CP9_REPORT.md`.
-
-**Supervisor note, 20 Nov 2026:** `docs/results/cp9/d3b/adjudication/adjudication.json` is filled for all 7 cases by the CP7b method: two independent Claude reviewer agents on the real source at the pinned versions (`docs/results/cp9/d3b/adjudication_reviews/reviewA.json`, `reviewB.json`), supervisor reconciliation, owner spot-check (`owner_spotcheck.json`; cases fixed before any review, `owner_card_selection.json`). Reviewers agree on all 14 path judgements; they split on `truth` for the two go-task cases, recorded as UNKNOWN. Not expert ground truth. The supervisor also ran `python -m vulntrace cp9 report` once (mechanical render from the filled sheet; headline template unchanged) so the regeneration test and CI stay green; the scoring session re-runs it, checks the committed copy is unchanged, and completes the report (criterion 5, headline, section 6). State set to IN_PROGRESS so a new session continues here.
-
-CP9 session `claude/intelligent-planck-krrtgg` (17-18 Nov 2026), stopped at `AWAITING_ADJUDICATION`:
-
-- Done: tasks 1-5 and 4a-4e. Results: `docs/results/cp9/` and `docs/results/CP9_FEASIBILITY_RESULTS.md` (headline
-  pending). Report `docs/progress/reports/CP9_REPORT.md` (sections 5 criterion 5 and 6 headline pending).
-- For the supervisor: fill `docs/results/cp9/d3b/adjudication/adjudication.json` (7 cases; read the three Markdown
-  sheets beside it). Per case: `adjudication_off` (path A), `adjudication_on` (path B; none is pre-filled as
-  SAME_AS_OFF because path B differs in all 7), `truth` (target reachable by some path), `by`, `note`, `filled: true`.
-  No case was downgraded, so `steps_correct` stays null. Then set STATUS to IN_PROGRESS on this branch.
-- Scoring session: `python -m vulntrace cp9 report` (renders the fixed headline from the filled sheet), check
-  `python -m pytest tests/contract/test_cp9_committed.py`, complete the report (criterion 5, headline, section 6),
-  set `AWAITING_REVIEW`. No Go or network is needed for scoring.
-- D3b caveats to keep in the scoring: 4 of 11 D3b cases share advisories with D3; 3 applications only.
-- Never commit `docs/results/datasets/D1|D4_materialize.json` changes made by `dataset materialize --cases` (revert).
-
-(Earlier: CP8 was approved on 17 Nov 2026 and CP9 was added at the owner's request. The D3 evidence and checkouts are not in the repository: rebuild them with the CP7b commands. If CP9 stops at AWAITING_ADJUDICATION, the supervisor sets IN_PROGRESS on the builder branch once the D3b sheets are filled.)
+(CP9 was approved on 20 Nov 2026 as a negative result; read the review notes at the end of CP7.md, CP7b.md and CP9.md - they bind CP10. D3/D3b evidence and checkouts are not in the repository: rebuild them with the CP7b/CP9 commands. When CP10 stops at AWAITING_ADJUDICATION, the supervisor fills the sheets and sets IN_PROGRESS on the builder branch.)
