@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP9 - Path-feasibility filter for REACHABLE (downgrade-only)**
-- State: `AWAITING_ADJUDICATION` (D3b sheets in `docs/results/cp9/d3b/adjudication/`; report `reports/CP9_REPORT.md`, scoring sections pending)
+- State: `IN_PROGRESS` (D3b adjudication filled on 20 Nov 2026; the next session runs the scoring steps in the handoff notes)
 - Branch in use: `claude/intelligent-planck-krrtgg`
 - Specification: [checkpoints/CP9.md](../implementation/checkpoints/CP9.md)
 
@@ -25,7 +25,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
 | CP7b | Real applications (D3) and demo | APPROVED | claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
 | CP8 | Final report, README and interview notes (multi-agent dropped) | APPROVED | claude/vulntrace-ai-build-5f8jgi | [CP8_REPORT](reports/CP8_REPORT.md) |
-| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | AWAITING_ADJUDICATION | claude/intelligent-planck-krrtgg | [CP9_REPORT](reports/CP9_REPORT.md) (scoring pending) |
+| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | IN_PROGRESS | claude/intelligent-planck-krrtgg | [CP9_REPORT](reports/CP9_REPORT.md) (scoring pending) |
 
 ## Current checkpoint task list
 
@@ -47,6 +47,8 @@ CP9 (session branch `claude/intelligent-planck-krrtgg`):
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
+
+**Supervisor note, 20 Nov 2026:** `docs/results/cp9/d3b/adjudication/adjudication.json` is filled for all 7 cases by the CP7b method: two independent Claude reviewer agents on the real source at the pinned versions (`docs/results/cp9/d3b/adjudication_reviews/reviewA.json`, `reviewB.json`), supervisor reconciliation, owner spot-check (`owner_spotcheck.json`; cases fixed before any review, `owner_card_selection.json`). Reviewers agree on all 14 path judgements; they split on `truth` for the two go-task cases, recorded as UNKNOWN. Not expert ground truth. The supervisor also ran `python -m vulntrace cp9 report` once (mechanical render from the filled sheet; headline template unchanged) so the regeneration test and CI stay green; the scoring session re-runs it, checks the committed copy is unchanged, and completes the report (criterion 5, headline, section 6). State set to IN_PROGRESS so a new session continues here.
 
 CP9 session `claude/intelligent-planck-krrtgg` (17-18 Nov 2026), stopped at `AWAITING_ADJUDICATION`:
 

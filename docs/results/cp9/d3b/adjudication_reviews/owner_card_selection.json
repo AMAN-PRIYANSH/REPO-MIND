@@ -1,0 +1,1 @@
+{"rule":"3 smallest sha256('20261118:'+id) among the 7 D3b sheet cases; checks = first, app-to-library boundary and last STATIC step of path B","fixed_at":"2026-11-18T17:28:24Z","before_reviews":true,"cases":["gogs__GO-2024-2606","frp__GO-2025-4017","gogs__GO-2024-2567"]}

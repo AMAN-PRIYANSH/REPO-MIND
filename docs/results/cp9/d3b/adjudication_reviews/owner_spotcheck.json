@@ -1,0 +1,64 @@
+{
+ "by": "owner (Aman)",
+ "date": "2026-11-20",
+ "method": "GitHub permalinks at the pinned commits/tags; cases fixed by sha256('20261118:'+id) before any review (owner_card_selection.json); first, app-to-library boundary and last STATIC step of path B, duplicates removed, plus one feasibility check.",
+ "checks": [
+  {
+   "n": 1,
+   "case": "gogs__GO-2024-2606",
+   "line": "gogs gogs.go:39",
+   "question": "word Run",
+   "answer": "yes"
+  },
+  {
+   "n": 2,
+   "case": "gogs__GO-2024-2606",
+   "line": "gogs internal/db/repo.go:1731",
+   "question": "word Commit",
+   "answer": "yes"
+  },
+  {
+   "n": 3,
+   "case": "gogs__GO-2024-2606",
+   "line": "pgx v5.3.0 pgproto3/frontend.go:123",
+   "question": "word Encode",
+   "answer": "yes"
+  },
+  {
+   "n": 4,
+   "case": "frp__GO-2025-4017",
+   "line": "frp cmd/frpc/main.go:25",
+   "question": "word Execute",
+   "answer": "yes"
+  },
+  {
+   "n": 5,
+   "case": "frp__GO-2025-4017",
+   "line": "frp client/connector.go:91",
+   "question": "word DialAddr",
+   "answer": "yes"
+  },
+  {
+   "n": 6,
+   "case": "frp__GO-2025-4017",
+   "line": "quic-go v0.53.0 connection.go:816",
+   "question": "word handleHandshakeConfirmed",
+   "answer": "yes"
+  },
+  {
+   "n": 7,
+   "case": "gogs__GO-2024-2567",
+   "line": "pgx v5.3.0 conn.go:1329",
+   "question": "word Sync",
+   "answer": "yes"
+  },
+  {
+   "n": 8,
+   "case": "gogs__GO-2024-2606 / 2567 / 5004",
+   "line": "pgx v5.3.0 tx.go:173",
+   "question": "arguments of Exec(...)",
+   "answer": "ctx, \"commit\""
+  }
+ ],
+ "summary": "7 of 7 step checks confirmed; check 8 confirms Exec is called with no query arguments (supports the reviewers' INFEASIBLE_PATH for path B of the gogs cases)."
+}

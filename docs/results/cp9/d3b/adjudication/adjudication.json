@@ -36,13 +36,13 @@
    "verdict_on": "REACHABLE",
    "reason_codes_on": [],
    "downgraded_by_filter": false,
-   "adjudication_off": null,
-   "adjudication_on": null,
+   "adjudication_off": "INFEASIBLE_PATH",
+   "adjudication_on": "INFEASIBLE_PATH",
    "steps_correct": null,
-   "truth": null,
-   "by": null,
-   "note": null,
-   "filled": false
+   "truth": "UNKNOWN",
+   "by": "reviewers A+B (Claude, independent), reconciled by supervisor",
+   "note": "Both reviewers: path A and path B are INFEASIBLE_PATH (calls exist, path cannot run as a whole). Path A and path B both break at internal/fingerprint/sources_checksum.go:100: the source passed to io.CopyBuffer there is a *strings.Reader, which has WriteTo, so io.copyBuffer always returns strings.Reader.WriteTo. That means storage.Reader.Read (path A step 8) and bufio.Reader.WriteTo (path B step 8) are never the callee in this context; the *os.File copy on line 104 also takes WriteTo. Truth: GCS is only reachable through go-getter, and normally never, because taskfile/node_git.go:113 forces the 'git::' getter. However the ref value is put into the URL unescaped, so ref=...%26checksum%3Dfile%3Agcs%3A%3A<url> makes go-getter's extractChecksum/ChecksumFromFile download through the default GCSGetter. With STORAGE_USE_GRPC set, storage.NewClient then builds the gRPC client, and ReadObject reac Reviewers split on truth (A REACHABLE, low confidence; B NOT_REACHABLE, high). The supervisor confirmed one premise of A's route (taskfile/node_git.go:113 puts `ref` into the go-getter URL unescaped) but did not verify the rest (go-getter checksum fetch through the GCS getter, gRPC transport switch), so UNKNOWN.",
+   "filled": true
   },
   {
    "id": "task__GO-2026-6061",
@@ -52,13 +52,13 @@
    "verdict_on": "REACHABLE",
    "reason_codes_on": [],
    "downgraded_by_filter": false,
-   "adjudication_off": null,
-   "adjudication_on": null,
+   "adjudication_off": "INFEASIBLE_PATH",
+   "adjudication_on": "INFEASIBLE_PATH",
    "steps_correct": null,
-   "truth": null,
-   "by": null,
-   "note": null,
-   "filled": false
+   "truth": "UNKNOWN",
+   "by": "reviewers A+B (Claude, independent), reconciled by supervisor",
+   "note": "Both reviewers: path A and path B are INFEASIBLE_PATH (calls exist, path cannot run as a whole). In path A, fmt.Fprintf writes to os.Stdout (cmd/task/task.go:54), so w.Write is (*os.File).Write and never crypto/tls.Conn.Write. In path B, Logger.Errf writes to l.Stderr, which is os.Stderr (task.go:25-29), with the same result. In both paths, tls halfConn.encrypt reads from config.rand(), never from a gRPC transportReader. Truth: cleanupStream.isTransportResponseFrame runs on every gRPC client stream close (http2_client.go:940 -> controlbuf.go:357). Task only gets a gRPC client through the same contrived go-getter checksum-injection plus STORAGE_USE_GRPC GCS route as GO-2026-6348, hence low confidence. Reviewers split on truth (A REACHABLE, low confidence; B NOT_REACHABLE, high). The supervisor confirmed one premise of A's route (taskfile/node_git.go:113 puts `ref` into the go-getter URL unescaped) but did not verify the rest (go-getter checksum fetch through the GCS getter, gRPC transport switch), so UNKNOWN.",
+   "filled": true
   },
   {
    "id": "frp__GO-2026-5543",
@@ -68,13 +68,13 @@
    "verdict_on": "REACHABLE",
    "reason_codes_on": [],
    "downgraded_by_filter": false,
-   "adjudication_off": null,
-   "adjudication_on": null,
+   "adjudication_off": "INFEASIBLE_PATH",
+   "adjudication_on": "INFEASIBLE_PATH",
    "steps_correct": null,
-   "truth": null,
-   "by": null,
-   "note": null,
-   "filled": false
+   "truth": "REACHABLE",
+   "by": "reviewers A+B (Claude, independent), reconciled by supervisor",
+   "note": "Both reviewers: path A and path B are INFEASIBLE_PATH (calls exist, path cannot run as a whole). Path A: when BackoffUntil is called from keepControllerWorking (client/service.go:233) it runs keepControllerWorking$1, never loopLoginUntilSuccess$1, so step 10 is a context mismatch. Path B (and A) also fail at login -> Connect -> realConnect (connector.go:144). In the NewProxyCommand entrypoint, TCPMux is never set by flags, and Complete() defaults it to true (pkg/config/v1/client.go:147). Open therefore always creates a mux session (or quic conn) or fails, and Connect never calls realConnect. Truth: in the same proxy subcommand, Open -> realConnect (connector.go:110) -> golib DialContext -> ntlm after-hook -> ProcessChallenge -> UnmarshalBinary -> TargetInfo.ReadFrom runs when http_proxy/transport.proxyURL is ntlm://user:pass@host and the proxy answers 407 Negotiate.",
+   "filled": true
   },
   {
    "id": "frp__GO-2025-4017",
@@ -84,13 +84,13 @@
    "verdict_on": "REACHABLE",
    "reason_codes_on": [],
    "downgraded_by_filter": false,
-   "adjudication_off": null,
-   "adjudication_on": null,
+   "adjudication_off": "INFEASIBLE_PATH",
+   "adjudication_on": "INFEASIBLE_PATH",
    "steps_correct": null,
-   "truth": null,
-   "by": null,
-   "note": null,
-   "filled": false
+   "truth": "REACHABLE",
+   "by": "reviewers A+B (Claude, independent), reconciled by supervisor; owner spot-check",
+   "note": "Both reviewers: path A and path B are INFEASIBLE_PATH (calls exist, path cannot run as a whole). Both paths end with handleHandshakeComplete -> handleHandshakeConfirmed (connection.go:816), but frpc dials with quic.DialAddr (client perspective), and handleHandshakeComplete returns at the PerspectiveClient check (lines 809-812) before that call. So the last step never runs on these paths. Path A also has the keepControllerWorking/BackoffUntil context mismatch (service.go:233); path B's prefix through Run -> loopLoginUntilSuccess -> login -> Open is fine. Truth: on the same frpc -p quic client, handleHandshakeDoneFrame (line 1690) or handleAckFrame (line 1707) calls handleHandshakeConfirmed on every completed handshake; frps with a QUIC listener also reaches it through the server branch.",
+   "filled": true
   },
   {
    "id": "gogs__GO-2024-2606",
@@ -100,13 +100,13 @@
    "verdict_on": "REACHABLE",
    "reason_codes_on": [],
    "downgraded_by_filter": false,
-   "adjudication_off": null,
-   "adjudication_on": null,
+   "adjudication_off": "INFEASIBLE_PATH",
+   "adjudication_on": "INFEASIBLE_PATH",
    "steps_correct": null,
-   "truth": null,
-   "by": null,
-   "note": null,
-   "filled": false
+   "truth": "REACHABLE",
+   "by": "reviewers A+B (Claude, independent), reconciled by supervisor; owner spot-check",
+   "note": "Both reviewers: path A and path B are INFEASIBLE_PATH (calls exist, path cannot run as a whole). Path A: Rows.Next calls withLock with its own closure (Rows.Next$1 -> nextLocked, sql.go:3040-3042), never DB.queryDC$1, so step 9 cannot happen from public_keys.go:70. Path B: dbTx.Commit runs Exec(ctx, \"commit\") with no arguments (tx.go:173), and Conn.exec forces QueryExecModeSimpleProtocol when there are no arguments (conn.go:450-453), so the execParams branch (conn.go:486) is never taken. Truth: with database TYPE=postgres (pgx is used by both xorm 'pgx' and the gorm postgres driver), any parameterised query in the default cache_statement mode goes Query/exec -> ExecPrepared -> Frontend.SendBind -> Bind.Encode (pgconn.go:1020).",
+   "filled": true
   },
   {
    "id": "gogs__GO-2024-2567",
@@ -116,13 +116,13 @@
    "verdict_on": "REACHABLE",
    "reason_codes_on": [],
    "downgraded_by_filter": false,
-   "adjudication_off": null,
-   "adjudication_on": null,
+   "adjudication_off": "INFEASIBLE_PATH",
+   "adjudication_on": "INFEASIBLE_PATH",
    "steps_correct": null,
-   "truth": null,
-   "by": null,
-   "note": null,
-   "filled": false
+   "truth": "REACHABLE",
+   "by": "reviewers A+B (Claude, independent), reconciled by supervisor; owner spot-check",
+   "note": "Both reviewers: path A and path B are INFEASIBLE_PATH (calls exist, path cannot run as a whole). Path A: the withLock call made from Rows.Next (sql.go:3040) only ever runs Rows.Next$1, never DB.execDC$2. Path B: deallocateInvalidatedCachedStatements returns immediately unless TxStatus()=='I' (conn.go:1304-1306). On this path it is called from dbTx.Commit's Exec(\"commit\") inside an open transaction (status 'T' or 'E'), so Pipeline.Sync at conn.go:1329 cannot run. Truth: outside a transaction, any Exec/Query on a postgres connection reaches Pipeline.Sync once a cached statement has been invalidated, either by LRU eviction past the 512-statement capacity (lru_cache.go:47-48) or by a statement-invalid error (rows.go:164-172). This is runtime-dependent but real code, hence medium confidence.",
+   "filled": true
   },
   {
    "id": "gogs__GO-2026-5004",
@@ -132,13 +132,13 @@
    "verdict_on": "REACHABLE",
    "reason_codes_on": [],
    "downgraded_by_filter": false,
-   "adjudication_off": null,
-   "adjudication_on": null,
+   "adjudication_off": "INFEASIBLE_PATH",
+   "adjudication_on": "INFEASIBLE_PATH",
    "steps_correct": null,
-   "truth": null,
-   "by": null,
-   "note": null,
-   "filled": false
+   "truth": "REACHABLE",
+   "by": "reviewers A+B (Claude, independent), reconciled by supervisor",
+   "note": "Both reviewers: path A and path B are INFEASIBLE_PATH (calls exist, path cannot run as a whole). Path A: the same Rows.Next/withLock context mismatch (step 9, DB.queryDC$1) as the other gogs cases; also, Query only sanitizes in simple-protocol mode, and the default is cache_statement. Path B: Exec(\"commit\") has no arguments, and execSimpleProtocol only calls sanitizeForSimpleQuery when len(arguments)>0 (conn.go:503-504), so SanitizeSQL is never reached. Truth: gogs's DSN does not set simple protocol and gorm PreferSimpleProtocol is not used. However pgconn merges PGSERVICE/PGSERVICEFILE service-file settings into RuntimeParams (pgconn/config.go:245-252,296-310), and pgx honours default_query_exec_mode=simple_protocol from there (conn.go:167-179). Every parameterised query then goes Query -> sanitizeForSimpleQuery -> SanitizeSQL -> NewQuery -> placeholderState, so it is config-dependent, ",
+   "filled": true
   }
  ]
 }
