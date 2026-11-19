@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP9 - Path-feasibility filter for REACHABLE (downgrade-only)**
-- State: `IN_PROGRESS` (D3b adjudication filled on 20 Nov 2026; the next session runs the scoring steps in the handoff notes)
+- State: `AWAITING_REVIEW` (scoring done; report `reports/CP9_REPORT.md`; headline: 0/7 downgraded on held-out D3b, REACHABLE path precision 0/7 before and after, a negative result)
 - Branch in use: `claude/elegant-mccarthy-wq32ck` (scoring session; continues `claude/intelligent-planck-krrtgg`, fast-forwarded at `4ebcfa2`)
 - Specification: [checkpoints/CP9.md](../implementation/checkpoints/CP9.md)
 
@@ -25,7 +25,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP7 | End-to-end triage and evidence verifier | APPROVED | claude/vulntrace-ai-build-exhh01 | [CP7_REPORT](reports/CP7_REPORT.md) |
 | CP7b | Real applications (D3) and demo | APPROVED | claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
 | CP8 | Final report, README and interview notes (multi-agent dropped) | APPROVED | claude/vulntrace-ai-build-5f8jgi | [CP8_REPORT](reports/CP8_REPORT.md) |
-| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | IN_PROGRESS | claude/intelligent-planck-krrtgg, claude/elegant-mccarthy-wq32ck | [CP9_REPORT](reports/CP9_REPORT.md) (scoring pending) |
+| CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | AWAITING_REVIEW | claude/intelligent-planck-krrtgg, claude/elegant-mccarthy-wq32ck | [CP9_REPORT](reports/CP9_REPORT.md) |
 
 ## Current checkpoint task list
 
@@ -42,11 +42,13 @@ CP9 (session branch `claude/intelligent-planck-krrtgg`):
 - [x] 4d. Evaluation: D1/D4 downgrade counts by pattern
 - [x] 4e. Results renderer with headline fixed before any D3b result -> `docs/results/CP9_FEASIBILITY_RESULTS.md`, files under `docs/results/cp9/` (< 512 KiB each)
 - [x] 5. Tests (CI still to be checked on the last commit): unit per pattern (SSA snippets), contract tests for new fields, integration on fixtures; CI green
-- [ ] 6. After adjudication (second session): scoring, results document, report `CP9_REPORT.md`, STATUS `AWAITING_REVIEW`
+- [x] 6. After adjudication (second session, branch `claude/elegant-mccarthy-wq32ck`): scoring, results document (re-rendered, unchanged), report `CP9_REPORT.md`, STATUS `AWAITING_REVIEW`
 
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
+
+**Scoring session (20 Nov 2026) finished; the checkpoint awaits the owner's and supervisor's review.** Nothing is half-done. Report: `reports/CP9_REPORT.md`.
 
 **Supervisor note, 20 Nov 2026:** `docs/results/cp9/d3b/adjudication/adjudication.json` is filled for all 7 cases by the CP7b method: two independent Claude reviewer agents on the real source at the pinned versions (`docs/results/cp9/d3b/adjudication_reviews/reviewA.json`, `reviewB.json`), supervisor reconciliation, owner spot-check (`owner_spotcheck.json`; cases fixed before any review, `owner_card_selection.json`). Reviewers agree on all 14 path judgements; they split on `truth` for the two go-task cases, recorded as UNKNOWN. Not expert ground truth. The supervisor also ran `python -m vulntrace cp9 report` once (mechanical render from the filled sheet; headline template unchanged) so the regeneration test and CI stay green; the scoring session re-runs it, checks the committed copy is unchanged, and completes the report (criterion 5, headline, section 6). State set to IN_PROGRESS so a new session continues here.
 

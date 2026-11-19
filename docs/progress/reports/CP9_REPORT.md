@@ -1,9 +1,10 @@
 # CP9 report - Path-feasibility filter for REACHABLE (downgrade-only)
 
-Branch `claude/intelligent-planck-krrtgg` (one session, 17-18 Nov 2026). State at the end of this session:
-**`AWAITING_ADJUDICATION`**. The D3b adjudication sheets are prepared; the D3b precision and miss numbers
-(acceptance criterion 5) do not exist yet and are not claimed anywhere. A second, short session scores the filled
-sheet and completes this report (sections marked *pending*).
+Builder session: branch `claude/intelligent-planck-krrtgg` (17-18 Nov 2026), stopped at `AWAITING_ADJUDICATION`.
+Scoring session: branch `claude/elegant-mccarthy-wq32ck` (19-20 Nov 2026), fast-forwarded onto the builder branch at `4ebcfa2`
+(the supervisor had filled the D3b adjudication and set `IN_PROGRESS`). State at the end of the scoring session:
+**`AWAITING_REVIEW`**. The scoring session wrote no analysis code and changed no result file; it re-rendered the results
+document (byte-identical to the committed copy), ran the tests, and completed this report.
 
 **Summary of what was measured.** On fixtures built for the purpose, the filter downgrades every infeasible case
 (7/7) and no feasible look-alike (0/8) or truly REACHABLE CP2/CP7 fixture run (0/36). On the 14 D3 cases it was designed
@@ -12,10 +13,20 @@ downgrades **0 of 7** REACHABLE verdicts, and on the CP7-REACHABLE cases of D1 (
 With the filter off, the pipeline reproduces CP7 (66/66 fixture rows), CP7b (14/14 D3 verdicts), D1 (38/38) and D4
 (32/32) exactly. The filter is safe but, outside the cases it was designed from, it almost never fires: every REACHABLE
 target in D3b, D1 and D4 has at least one call-graph path with no F1-F3 step. What it does change on D3b is the
-**reported path** (all 7 cases now report a different path, "path B"); whether path B is better than path A is exactly
-what the pending adjudication measures.
+**reported path** (all 7 cases report a different path, "path B"). **The adjudication then found path B no better than
+path A: both reviewers judged all 14 paths (7 path A, 7 path B) `INFEASIBLE_PATH`, so adjudicated REACHABLE path precision is
+0/7 [Wilson 0.00 to 0.35] both without and with the filter.** On held-out applications the filter therefore
+neither removed a false alarm nor improved the reported path. Safety (no real path hidden) holds trivially, because it
+downgraded nothing: the filter's misses are n/a (0 downgraded cases). The target itself was judged reachable by some
+path in 5 of the 7 cases and UNKNOWN in 2 (reviewers split); no case was judged NOT_REACHABLE. Evidence for the filter's
+benefit is therefore: fixtures yes, in-sample D3 one case, held-out D3b none.
 
 ## 1. Environment
+
+Scoring session (19-20 Nov 2026), as printed: `Linux vm 6.18.44-fc-v653 ... x86_64 GNU/Linux`; `Python 3.13.18`; `go version go1.24.7 linux/amd64`;
+`git version 2.43.0`; `Docker version 29.10.0, build fdd4b8e` (not used). Python packages in a venv in the session scratchpad
+(`pip install -e ".[dev,db,agent]"`), nothing system-wide. No network was needed (scoring reads committed files). The tables
+below describe the builder session.
 
 | Item | As printed |
 |---|---|
@@ -59,7 +70,7 @@ Network checks: `proxy.golang.org` 200; `pypi.org` 200; `api.github.com` 200; `g
 | 1 | Feasibility check in the Go helper | **Done.** Option `feasibility` of `reach` (one load and one VTA graph; the filter needs the SSA program the graph came from; a request without it is byte-identical to before). F1-F3, conservative when undecidable, N = 20 recorded in every result, first infeasible step with pattern, file, line, reason and context edges |
 | 2 | Pipeline and verifier integration | **Done.** `PATHS_INFEASIBLE`, additive schemas, verifier FILTERED_PATH / INFEASIBLE_STEP, property tests, `--no-feasibility` |
 | 3 | Fixtures | **Done.** 16 cases: F1 2 infeasible + 3 look-alikes, F2 3 + 2, F3 2 + 3, 1 out-of-scope (pkcs12 pattern) |
-| 4 | Evaluation | **Partly done (by design).** Fixtures, D3 (in-sample), D3b runs and sheets, D1/D4 done; D3b scoring waits for the adjudication |
+| 4 | Evaluation | **Done.** Fixtures, D3 (in-sample), D3b runs, sheets, adjudication (by the supervisor) and scoring, D1/D4 |
 | 5 | Tests | **Done**; CI green on every completed run of the branch (see section 4) |
 
 ## 4. Test evidence
@@ -72,6 +83,12 @@ Network checks: `proxy.golang.org` 200; `pypi.org` 200; `api.github.com` 200; `g
 | `python -m pytest tests/integration/test_cp9_feasibility.py -q` | `38 passed in 263.18s (0:04:23)` |
 | `python -m pytest tests/integration -q` | `172 passed, 2 skipped in 366.09s (0:06:06)` (the 2 skips: opt-in network tests, `VULNTRACE_NETWORK_TESTS` not set) |
 | `python tests/contract/record_cp9.py` | 8 verdict scenarios and 4 responses recorded; every built-in assertion held |
+| Scoring session: `python -m vulntrace cp9 report` | `wrote .../docs/results/CP9_FEASIBILITY_RESULTS.md`; `git status` clean afterwards (committed copy unchanged) |
+| Scoring session: `python -m pytest tests/contract/test_cp9_committed.py -q` | `5 passed in 1.43s` |
+| Scoring session: `python -m pytest tests/unit tests/contract -q` | `929 passed, 10 skipped in 16.51s` |
+| Scoring session: `(cd helper && GOTOOLCHAIN=local CGO_ENABLED=0 go test -count=1 ./...)` | `ok  	vulntrace/helper	10.392s` |
+| Scoring session: `find docs/results/cp9 -type f -size +512k`; `git ls-files` grep for `data/`, venv, binaries | no output (no file over 512 KiB; none tracked) |
+| GitHub Actions CI on the builder branch, last code/results commit `4ebcfa2` (run 171) | `success` |
 | GitHub Actions CI on this branch | `success` on every completed run, 156-168 (commits `3e6574b` ... `6af94c4`, the last code and results commit); see the addendum for the documentation commits after it |
 
 ## 5. Acceptance criteria
@@ -82,15 +99,17 @@ Network checks: `proxy.golang.org` 200; `pypi.org` 200; `api.github.com` 200; `g
 | 2 | Fixtures: every infeasible case downgraded; false downgrades reported | **Met** | `fixtures.json`: 7/7 infeasible downgraded; false downgrades 0 of 8 look-alikes, 0 of 36 truly REACHABLE CP2/CP7 runs |
 | 3 | D3 before/after reported and labelled in-sample | **Met** | `d3/d3_feasibility.json` (`label` IN-SAMPLE), results document section |
 | 4 | D3b chosen by code with the D3 rules, seed fixed before runs, D3 apps excluded, sheets prepared, stop at AWAITING_ADJUDICATION | **Met** | seed and list committed in `82868ed` before probing; selection `3a81afd` before triage; sheets `d627428`; STATUS |
-| 5 | After adjudication: precision before vs after, downgrades, misses, intervals | **Pending** | needs the filled sheet |
+| 5 | After adjudication: precision before vs after, downgrades, misses, intervals | **Met** (the result is negative: no improvement) | `docs/results/cp9/d3b/adjudication/adjudication.json` (filled, 7/7 cases, `filled: true`), rendered in `CP9_FEASIBILITY_RESULTS.md`: precision 0/7 = 0.00 [95% Wilson 0.00 to 0.35] without and with the filter; downgraded 0 of 7; misses n/a (n = 0); `steps_correct` n/a (nothing downgraded) |
 | 6 | D1/D4 downgrade counts by pattern | **Met** | `d1_feasibility.json`, `d4_feasibility.json` |
 | 7 | `--no-feasibility` reproduces CP7/CP7b exactly | **Met** | fixtures 66/66 rows identical (and corruption probe, summaries); D3 14/14 verdicts identical (verdict, reasons, every entry's result, reason, methods, verified path); D1 38/38 and D4 32/32 case verdicts; integration test |
 | 8 | No analysed code executed; toolchain flags; nothing cached committed | **Met** | only the helper, `go list`, `go build -o <temp>` (deleted, never run), `go tool nm`; `GOTOOLCHAIN=local`, `CGO_ENABLED=0`; `git ls-files` shows no `data/`, binaries or venv |
-| 9 | Tests pass locally and in CI (last commit); report; STATUS AWAITING_REVIEW after scoring | **Partly** | tests and CI as in section 4; report written; STATUS is AWAITING_ADJUDICATION (AWAITING_REVIEW after scoring) |
+| 9 | Tests pass locally and in CI (last commit); report; STATUS AWAITING_REVIEW after scoring | **Met for the code; CI of the last commit stated in the session's final message** | section 4 (local runs in both sessions; CI `success` on run 171, `4ebcfa2`, the last code/results commit); the scoring session's own commits change only this report and STATUS; STATUS `AWAITING_REVIEW` |
 
 ## 6. Results (copied from `docs/results/CP9_FEASIBILITY_RESULTS.md`, generated by code)
 
-Headline: *pending* (the template was fixed in `bd92d72` before any D3b result).
+Headline (the template was fixed in `bd92d72` before any D3b result; rendered from the filled sheet, unchanged by this session):
+
+> On the held-out set D3b (3 real Go applications, 11 cases), the path-feasibility filter downgraded 0 of 7 REACHABLE verdicts to CANT_DETERMINE; adjudicated REACHABLE path precision was 0/7 = 0.00 [95% Wilson 0.00 to 0.35] without the filter and 0/7 = 0.00 [95% Wilson 0.00 to 0.35] with it, and 0 of 0 downgraded cases were judged reachable by some path (the filter's misses).
 
 | Set | Cases | REACHABLE without filter | Downgraded by filter | Filter answers per REACHABLE entry | Filter off reproduces earlier results |
 |---|---|---|---|---|---|
@@ -113,6 +132,49 @@ evidence path; only gitleaks is downgraded. Not recognised: pkcs12 (out of scope
 `len(arguments) > 0` (cli GO-2026-5004): in pgx v5.7.5 `Conn.exec` reassigns `arguments` in its option loop
 (`conn.go:484`, `:487`) and through `RewriteQuery` (`:494`), so at the `execSimpleProtocol` call (`:547`) the value is no
 longer the parameter and counts as unknown (checked by reading the downloaded module source, not run).
+
+### D3b adjudication (criterion 5), from `adjudication.json` and the reviewers' files
+
+Method (supervisor, 20 Nov 2026, the CP7b method): two independent Claude reviewer agents on the real source at the pinned
+versions (`reviewA.json`, `reviewB.json`), supervisor reconciliation, owner spot-check (`owner_spotcheck.json`: 7 of 7 step
+checks confirmed, plus one check that `Exec` is called with no query arguments in pgx `tx.go:173`; cases fixed by hash
+before any review, `owner_card_selection.json`). Not expert ground truth. The reviewers agreed on all 14 path
+judgements and split on `truth` for the two go-task cases (recorded UNKNOWN).
+
+| Case | Path A (no filter) | Path B (filter on) | Target reachable by some path (`truth`) |
+|---|---|---|---|
+| task GO-2026-6348 | INFEASIBLE_PATH | INFEASIBLE_PATH | UNKNOWN (reviewers split) |
+| task GO-2026-6061 | INFEASIBLE_PATH | INFEASIBLE_PATH | UNKNOWN (reviewers split) |
+| frp GO-2026-5543 | INFEASIBLE_PATH | INFEASIBLE_PATH | REACHABLE |
+| frp GO-2025-4017 | INFEASIBLE_PATH | INFEASIBLE_PATH | REACHABLE |
+| gogs GO-2024-2606 | INFEASIBLE_PATH | INFEASIBLE_PATH | REACHABLE |
+| gogs GO-2024-2567 | INFEASIBLE_PATH | INFEASIBLE_PATH | REACHABLE |
+| gogs GO-2026-5004 | INFEASIBLE_PATH | INFEASIBLE_PATH | REACHABLE |
+
+| Measure | Value |
+|---|---|
+| REACHABLE path precision without the filter (CORRECT paths / REACHABLE cases) | 0/7 = 0.00 [95% Wilson 0.00 to 0.35] |
+| REACHABLE path precision with the filter | 0/7 = 0.00 [95% Wilson 0.00 to 0.35] |
+| REACHABLE verdicts downgraded by the filter | 0 of 7 |
+| Downgraded cases judged reachable by some path (misses) | n/a (n = 0) |
+| Cases where the target is reachable by some path (tally, not rendered) | 5 REACHABLE, 2 UNKNOWN, 0 NOT_REACHABLE |
+
+What the reviewers say broke path B (their words condensed; I read the notes, I did not re-check the source):
+go-task: the source passed to `io.CopyBuffer` is a `*strings.Reader`, which has `WriteTo`, so the reported callee is
+never taken; `fmt.Fprintf` / `Logger.Errf` write to `os.Stdout` / `os.Stderr`, not a `tls.Conn`. frp: `Connect` never
+calls `realConnect` because `TCPMux` defaults to true; for QUIC, `handleHandshakeComplete` returns at the client-perspective
+check before the reported last step. gogs (pgx): `dbTx.Commit` runs `Exec(ctx, "commit")` with no arguments, so the
+`execParams` branch (`conn.go:486`), the `SanitizeSQL` branch (`conn.go:503-504`) are not taken, and
+`deallocateInvalidatedCachedStatements` returns unless the transaction status is idle (`conn.go:1304-1306`). Several
+of these are guard-on-argument and dynamic-call-through-parameter situations of the kind F1/F2 target, but the filter
+did not flag them. I did not investigate why for each case; the pgx `arguments` reassignment limitation was already
+recorded in section 6 (D3 in-sample detail) and the QUIC perspective check, the `TCPMux` default and the `*strings.Reader`
+`WriteTo` shortcut are outside F1-F3 as specified.
+
+Reading of the result: the REACHABLE verdict (a target-level claim) was probably right in 5 of 7 cases, but in none of the
+7 did either reported path run as a whole. The filter did not improve that, and on held-out applications it removed
+no false alarm. The headline claim of the checkpoint (the filter removes false alarms without hiding real ones) is
+supported only for the safety half (nothing hidden, 0 downgrades) and only on the fixtures for the benefit half.
 
 ## 7. Design deviations
 
@@ -153,8 +215,10 @@ longer the parameter and counts as unknown (checked by reading the downloaded mo
   (GO-2026-5841, GO-2026-6061, GO-2026-5676, GO-2026-5004), so some vulnerable library code, including the pgx code the
   F2-variadic idea came from, is shared; the applications are new.
 - D3b cases of one application share code and are not independent.
-- The filter changes the reported path in all 7 D3b REACHABLE cases; whether path B is more often runnable than path A
-  is unknown until adjudication.
+- The filter changes the reported path in all 7 D3b REACHABLE cases; adjudication found path B infeasible in all 7 (as path A), so the changed path is not better.
+- The adjudication was done by Claude reviewer agents, not human experts, with an owner spot-check of 8 line checks; two cases have `truth` UNKNOWN. With n = 7 an interval of 0.00 to 0.35 means a large improvement is unlikely but a small one cannot be excluded.
+- Same-family reviewers (and the same model family as the builder) can share blind spots; the 14/14 agreement is not independent confirmation.
+- Not checked this session: the Go-based D1/D3/D3b/D4 runs were not repeated (the scoring session needed no network and used none); the numbers in section 6 come from the committed result files produced by the builder session. This session re-ran only the Python and Go unit/contract tests and the results renderer.
 - Per-case seconds are not a clean cost measure (the second run benefits from warm build and module caches); the
   helper records the filter's own time in `stats.feasibility.duration_ms`.
 - The D1/D4 background job was stopped at the 2-hour limit with 5 D4 filter-on cases left; they were finished by a
@@ -169,16 +233,17 @@ longer the parameter and counts as unknown (checked by reading the downloaded mo
 
 ## 9. Suggestions for the next checkpoint
 
-- Score D3b (second session), and if path B turns out no better than path A, keep the filter off by default for the
-  reported path and use it only as a downgrade guard.
+- Do not claim the filter improves reported paths: D3b says it does not. If the owner wants to keep it, keep it as a downgrade-only guard (it is safe and idle outside its design cases), and describe it in the README/final report with the 0/7 -> 0/7 result.
 - Handle loop phis of a parameter and its own slices (`arguments = arguments[1:]`) for F2; that is the pgx case.
+- Path infeasibility on D3b is dominated by guards the filter does not model (zero-argument `Exec`, QUIC client perspective, defaults set in `Complete()`); a path-level fix looks like per-library special cases and probably does not generalise. Consider reporting REACHABLE as 'target reachable, path unverified' instead.
 - Look again at the clear-answer CANT_DETERMINE cases of CP7b (all three had a clear NOT_REACHABLE), which matter more
   than REACHABLE paths for users.
 
 ## 10. Git
 
-Branch `claude/intelligent-planck-krrtgg`; every commit was pushed (no push failed). `git log --oneline f066158..HEAD`
-before the commit that adds this list:
+Builder branch `claude/intelligent-planck-krrtgg`; every commit was pushed (no push failed). Scoring branch `claude/elegant-mccarthy-wq32ck`
+(starts at the builder branch's `4ebcfa2`); its commits: `CP9: scoring session starts; STATUS records branch ...` and the one that adds this
+scoring text; both pushed. Builder-session list, `git log --oneline f066158..16110e9`:
 
 ```
 16110e9 CP9: report (scoring pending) and STATUS AWAITING_ADJUDICATION; D3b sheets ready for the supervisor
@@ -208,4 +273,5 @@ e06d06f CP9: session starts; STATUS IN_PROGRESS, branch claude/intelligent-planc
 - CI: `success` on runs 156-168. Run 169 (`16110e9`, report and STATUS only) and the run for the commit that adds this
   addendum (documentation only) were still running when this was written; their result is stated in the session's
   final message and must be checked by the scoring session before `AWAITING_REVIEW`.
-- Stopped at `AWAITING_ADJUDICATION`; nothing of the next checkpoint was started.
+- Builder session stopped at `AWAITING_ADJUDICATION`; the run 169-171 results are: 169 and 170 `success`, 171 (`4ebcfa2`) `success`.
+- Scoring session: see section 4; nothing of any later checkpoint was started; no pull request was opened.
