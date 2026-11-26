@@ -140,16 +140,15 @@ def paired_section(scores: dict[str, Any]) -> list[str]:
     return out
 
 
-def changes_section(scores: dict[str, Any], summary: dict[str, Any]) -> list[str]:
-    ch = scores["ALL"]["hygiene_changes"] if scores else None
+def changes_section(scores: dict[str, Any], summary: dict[str, Any], rows: list[dict[str, Any]]) -> list[str]:
+    ch = scores["ALL"]["hygiene_changes"] if scores else sc.hygiene_changes(rows, {})
     made_nr_s = summary["S"]["hygiene_made_not_reachable"]
     made_nr_n = summary["N"]["hygiene_made_not_reachable"]
     out = [f"- hygiene-induced NOT_REACHABLE in stratum N: **{len(made_nr_n)}** (the rules make this impossible; "
            f"listed if any: {esc(made_nr_n) or 'none'})",
            f"- hygiene-induced NOT_REACHABLE in stratum S: **{len(made_nr_s)}** ({esc(made_nr_s) or 'none'}); each is "
            "adjudicated below"]
-    rows = ch if ch is not None else [{"id": i, "stratum": None, "legacy": None, "hygiene": None, "truth": None}
-                                      for i in summary["ALL"]["hygiene_changed"]]
+    rows = ch
     if rows:
         out += ["", "| case | stratum | legacy | hygiene | truth | hygiene right | legacy right |", "|---|---|---|---|---|---|---|"]
         out += [f"| {esc(c['id'])} | {c.get('stratum')} | {c.get('legacy')} {esc(', '.join(c.get('legacy_reasons') or []))} | "
@@ -262,7 +261,7 @@ def render(d3c_doc: dict[str, Any], selection: dict[str, Any] | None, sheet: dic
     if scores:
         lines += ["## Verdict-level scores against adjudicated truth (D3c)", ""] + tool_table(scores) + [""]
         lines += ["## Paired comparison with govulncheck (same cases)", ""] + paired_section(scores) + [""]
-    lines += ["## What the target hygiene changed (D3c)", ""] + changes_section(scores, s) + [""]
+    lines += ["## What the target hygiene changed (D3c)", ""] + changes_section(scores, s, d3c_doc["rows"]) + [""]
     if scores:
         lines += ["## Path precision by evidence level (D3c, CP10 verdicts)", ""] + path_section(scores) + [""]
     lines += ["## D3 (CP7b applications), IN-SAMPLE", ""] + in_sample_section("d3", sheet) + [""]
