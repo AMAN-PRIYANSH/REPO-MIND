@@ -192,11 +192,12 @@ def _check_schema(v: dict[str, Any]) -> list[str]:
 
 
 # --- fixtures --------------------------------------------------------------------------------------
-def _fixture_requests(case: dict[str, Any], pack: dict[str, dict[str, Any]]) -> dict[str, triage.TriageRequest]:
+def _fixture_requests(case: dict[str, Any], pack: dict[str, dict[str, Any]],
+                      target_policy: str = sy.POLICY_LEGACY) -> dict[str, triage.TriageRequest]:
     target = case["targets"][0]
     p = pack[target["symbol"]]
-    # CP10: the CP7 evaluation keeps its own (legacy) Mode 1 targets, so its committed results reproduce
-    common = dict(app=FIXTURES_DIR, mains=[case["main_package"]], max_mains=1, target_policy=sy.POLICY_LEGACY)
+    # CP10: the CP7 evaluation keeps its own (legacy) Mode 1 targets by default, so its committed results reproduce
+    common = dict(app=FIXTURES_DIR, mains=[case["main_package"]], max_mains=1, target_policy=target_policy)
     return {
         triage.MODE_TARGETS: triage.TriageRequest(case_id=f"fixture:{case['id']}", mode="targets", targets=case["targets"],
                                                   target_origin=sy.FIXTURE, advisory=p["advisory"], **common),
@@ -286,7 +287,8 @@ def _stable_view(v: dict[str, Any]) -> Any:
              for e in v["per_symbol"]]]
 
 
-def eval_fixtures(runners_factory: Callable[[], triage.Runners], work_dir: Path, binary=None, log=print) -> dict[str, Any]:
+def eval_fixtures(runners_factory: Callable[[], triage.Runners], work_dir: Path, binary=None, log=print,
+                  target_policy: str = sy.POLICY_LEGACY) -> dict[str, Any]:
     manifest = json.loads((FIXTURES_DIR / "manifest.json").read_text(encoding="utf-8"))
     pack = tfx.build_pack(work_dir, binary)
     base = runners_factory()
@@ -294,7 +296,7 @@ def eval_fixtures(runners_factory: Callable[[], triage.Runners], work_dir: Path,
     rows, schema_problems, pre_for_probe, verdicts = [], [], [], {}
     repo_commit = run_info([])["repo_commit"]
     for case in manifest["cases"]:
-        for mode, req in _fixture_requests(case, pack).items():
+        for mode, req in _fixture_requests(case, pack, target_policy).items():
             req.repo_commit = repo_commit
             v = triage.run_triage(req, runners)
             probs = _check_schema(v)
@@ -326,7 +328,7 @@ def eval_fixtures(runners_factory: Callable[[], triage.Runners], work_dir: Path,
     unstable = []
     t0 = time.monotonic()
     for case in manifest["cases"]:
-        v2 = triage.run_triage(_fixture_requests(case, pack)[triage.MODE_TARGETS], runners_factory())
+        v2 = triage.run_triage(_fixture_requests(case, pack, target_policy)[triage.MODE_TARGETS], runners_factory())
         if _stable_view(v2) != _stable_view(verdicts[(case["id"], triage.MODE_TARGETS)]):
             unstable.append(case["id"])
     stability = {"cases": len(manifest["cases"]), "mode": triage.MODE_TARGETS, "unstable": unstable,

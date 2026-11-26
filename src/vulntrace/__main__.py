@@ -84,6 +84,9 @@ def build_parser() -> argparse.ArgumentParser:
     from vulntrace.demo import cli as demo_cli
 
     demo_cli.add_parser(sub)
+    from vulntrace.cp10 import cli as cp10_cli
+
+    cp10_cli.add_parser(sub)
 
     ev = sub.add_parser("eval", help="baselines and evaluation (CP3+)")
     esub = ev.add_subparsers(dest="eval_command", required=True)
@@ -596,6 +599,10 @@ def main(argv: list[str] | None = None) -> int:
             from vulntrace.d3 import cli as d3_cli
 
             return d3_cli.dispatch(args, argv)
+        if args.command == "cp10":
+            from vulntrace.cp10 import cli as cp10_cli
+
+            return cp10_cli.dispatch(args, argv)
         if args.command == "fixtures" and args.fixtures_command == "score":
             return _cmd_score(args, argv)
         if args.command == "helper":

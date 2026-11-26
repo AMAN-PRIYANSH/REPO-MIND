@@ -241,7 +241,8 @@ def eligible_advisories(versions: dict[str, str], index: dict[str, list[dict[str
                 bad.append({"id": entry["id"], "module": path, "version": ver})
             elif hit:
                 out.append({**{k: entry[k] for k in ("id", "module", "created", "fix_commit", "packages",
-                                                     "core_symbols")}, "version": ver})
+                                                     "core_symbols")}, "version": ver,
+                            **({"stratum": entry["stratum"]} if "stratum" in entry else {})})
     return out, bad
 
 
@@ -450,7 +451,8 @@ def _done(rec: dict[str, Any], status: str, detail: str, log) -> None:
 
 
 def evaluate_candidate(rec: dict[str, Any], config: dict[str, Any], index: dict[str, list[dict[str, Any]]],
-                       probe: Probe, toolchain: str, cutoff: str, log) -> dict[str, Any] | None:
+                       probe: Probe, toolchain: str, cutoff: str, log, pick=None) -> dict[str, Any] | None:
+    """`pick` (CP10, D3c): the case choice (default `pick_cases` with `max_cases_per_app`)."""
     repo = rec["repo"]
     refs, err = probe.list_tags(repo)
     if refs is None:
@@ -525,10 +527,14 @@ def evaluate_candidate(rec: dict[str, Any], config: dict[str, Any], index: dict[
         _done(rec, NO_ELIGIBLE_ADVISORY_SELECTED, f"{pin['tag']}: build-list versions are outside every range", log)
         return None
     gomod_ver = gm["requires"]
+    picked = pick(repo, elig_sel) if pick else pick_cases(repo, elig_sel, config["seed"], config["max_cases_per_app"])
     rec["cases"] = [{"advisory": e["id"], "module": e["module"], "version_go_mod": gomod_ver.get(e["module"]),
                      "version_selected": e["version"], "created": e["created"], "fix_commit": e["fix_commit"],
-                     "packages": e["packages"]}
-                    for e in pick_cases(repo, elig_sel, config["seed"], config["max_cases_per_app"])]
+                     "packages": e["packages"], **({"stratum": e["stratum"]} if "stratum" in e else {})}
+                    for e in picked]
+    if "stratum" in (elig_sel[0] if elig_sel else {}):
+        rec["eligible_selected_by_stratum"] = {st: sorted({e["id"] for e in elig_sel if e["stratum"] == st})
+                                               for st in (STRATUM_S, STRATUM_N)}
     _done(rec, KEPT, f"{pin['tag']} ({pin['commit'][:12]}), {len(mains)} main(s), "
                      f"{len(elig_sel)} eligible advisories, {len(rec['cases'])} taken", log)
     return rec
@@ -559,3 +565,106 @@ def case_list(kept: list[dict[str, Any]]) -> list[dict[str, Any]]:
                          "app_url": "https://" + k["repo"], "app_tag": k["pin"]["tag"], "app_commit": k["pin"]["commit"],
                          "app_module": k["module"], "app_domain": k["domain"], "mains": k["mains"], **c})
     return rows
+
+
+# --- CP10: D3c, two strata with quotas (docs/evaluation/D3C_SELECTION_RULES.md) ---------------------
+STRATUM_S, STRATUM_N = "S", "N"
+D3C_RULES_DOC = "docs/evaluation/D3C_SELECTION_RULES.md"
+D3C_CANDIDATES_PATH = REPO_ROOT / "docs" / "evaluation" / "d3c_candidates.json"
+N_REVIEW_STATUSES = ("REVIEWED", "UNREVIEWED")
+
+
+def eligible_for_stratum_n(case: dict[str, Any]) -> bool:
+    """V1N: REVIEWED or UNREVIEWED, not withdrawn, not the standard library or toolchain, at least
+    one GitHub fix commit (curated symbols are not required; the module entry is checked apart)."""
+    return (case["review_status"] in N_REVIEW_STATUSES and not case["withdrawn"]
+            and not datasets.is_stdlib_or_toolchain(case) and bool(case["fix_commits"]))
+
+
+def advisory_index_strata(cache_dir: Path | None = None) -> dict[str, list[dict[str, Any]]]:
+    """V1S and V1N applied to the pinned snapshot: {module: [entries]}, each with `stratum`. S: the
+    D3 rule V1 (`eligible_for_d1`) and the module entry has curated symbols (exactly the D3 index);
+    N: V1N and the module entry has no curated symbols."""
+    cases, _ = datasets.load_all_cases(cache_dir)
+    index: dict[str, list[dict[str, Any]]] = {}
+    rdir = vulndb.reports_dir(cache_dir)
+    for case in cases:
+        s_ok, n_ok = datasets.eligible_for_d1(case), eligible_for_stratum_n(case)
+        if not (s_ok or n_ok):
+            continue
+        raw = yaml.safe_load((rdir / f"{case['id']}.yaml").read_text(encoding="utf-8")) or {}
+        raw_versions = {m.get("module"): m.get("versions") or [] for m in raw.get("modules") or []}
+        for m in case["modules"]:
+            curated = any(p["core_symbols"] for p in m["packages"])
+            if curated and s_ok:
+                stratum = STRATUM_S
+            elif not curated and n_ok:
+                stratum = STRATUM_N
+            else:
+                continue
+            index.setdefault(m["module"], []).append({
+                "id": case["id"], "module": m["module"], "events": raw_versions.get(m["module"], []),
+                "created": case.get("created"), "fix_commit": case["fix_commits"][0], "stratum": stratum,
+                "review_status": case["review_status"],
+                "packages": [p["package"] for p in m["packages"] if p["core_symbols"]] if curated
+                else [p["package"] for p in m["packages"]],
+                "core_symbols": sum(len(p["core_symbols"]) for p in m["packages"])})
+    return index
+
+
+def pick_cases_strata(app_repo: str, eligible: list[dict[str, Any]], seed: int,
+                      max_per_stratum: int) -> list[dict[str, Any]]:
+    """The D3 case choice (`pick_cases`) run once per stratum, S first, with at most
+    `max_per_stratum` cases each; an advisory taken in S is not taken again in N."""
+    out: list[dict[str, Any]] = []
+    for st in (STRATUM_S, STRATUM_N):
+        taken = {e["id"] for e in out}
+        pool = [e for e in eligible if e["stratum"] == st and e["id"] not in taken]
+        out += pick_cases(app_repo, pool, seed, max_per_stratum)
+    return out
+
+
+def quotas_met(kept: list[dict[str, Any]], config: dict[str, Any]) -> bool:
+    n = {st: sum(1 for k in kept for c in k["cases"] if c["stratum"] == st) for st in (STRATUM_S, STRATUM_N)}
+    return len(kept) >= config["min_apps"] and n[STRATUM_S] >= config["quota_s"] and n[STRATUM_N] >= config["quota_n"]
+
+
+def select_d3c(config: dict[str, Any], index: dict[str, list[dict[str, Any]]], probe: Probe, toolchain: str,
+               log=print) -> dict[str, Any]:
+    """A1-A11 in the D3 order, with the strata index and case choice; applications are kept until
+    at least `min_apps` are kept and both quotas are met, or `max_apps` are kept, or the candidates
+    run out. The excluded D3/D3b applications never enter."""
+    seed = config["seed"]
+    excluded = {r.lower() for r in config["excluded_apps"]}
+    cands = [c for c in config["candidates"] if c["repo"].lower() not in excluded]
+    if len(cands) != len(config["candidates"]):
+        raise ValueError("the D3c candidate list must not contain an excluded D3/D3b application")
+    ordered = candidate_order(cands, seed)
+    kept: list[dict[str, Any]] = []
+    records: list[dict[str, Any]] = []
+
+    def pick(repo, elig):
+        return pick_cases_strata(repo, elig, seed, config["max_cases_per_stratum_per_app"])
+
+    for pos, cand in enumerate(ordered, start=1):
+        repo = cand["repo"]
+        rec: dict[str, Any] = {"order": pos, "repo": repo, "domain": cand["domain"], "owner": owner_of(repo),
+                               "source_list": cand.get("source_list")}
+        records.append(rec)
+        if quotas_met(kept, config) or len(kept) >= config["max_apps"]:
+            _done(rec, NOT_EVALUATED, "quotas met" if quotas_met(kept, config) else
+                  f"{config['max_apps']} applications were already kept", log)
+            continue
+        if any(k["owner"] == rec["owner"] for k in kept):
+            _done(rec, DIVERSITY_OWNER, f"owner {rec['owner']} already kept", log)
+            continue
+        if any(k["domain"] == cand["domain"] for k in kept):
+            _done(rec, DIVERSITY_DOMAIN, f"domain {cand['domain']} already kept", log)
+            continue
+        if evaluate_candidate(rec, config, index, probe, toolchain, config["pin_cutoff"], log, pick=pick) is not None:
+            kept.append(rec)
+            ns = {st: sum(1 for k in kept for c in k["cases"] if c["stratum"] == st) for st in (STRATUM_S, STRATUM_N)}
+            log(f"     totals after {len(kept)} app(s): S={ns[STRATUM_S]} N={ns[STRATUM_N]}")
+    totals = {st: sum(1 for k in kept for c in k["cases"] if c["stratum"] == st) for st in (STRATUM_S, STRATUM_N)}
+    return {"records": records, "kept": kept, "totals": totals, "quotas_met": quotas_met(kept, config),
+            "candidates_evaluated": sum(1 for r in records if r["status"] != NOT_EVALUATED)}

@@ -1,0 +1,312 @@
+{
+ "schema_version": "1.0",
+ "note": "D3c candidate applications (CP10, held-out set). The 29 D3 candidates that are not D3/D3b applications (unchanged, source_list d3_candidates.json) plus 28 well-known open-source Go applications added for CP10, written down from memory without probing any of them (source_list 'd3c_candidates.json (added for CP10)'). Domain labels are coarse and only used by the diversity rule A1. Fixed and committed before any D3c probe or run; see D3C_SELECTION_RULES.md.",
+ "seed": 20261126,
+ "pin_cutoff": "2025-12-31T23:59:59Z",
+ "min_apps": 4,
+ "max_apps": 8,
+ "quota_s": 8,
+ "quota_n": 8,
+ "max_cases_per_stratum_per_app": 3,
+ "max_requires": 150,
+ "max_mains": 10,
+ "max_tag_probes": 60,
+ "excluded_apps": [
+  "github.com/XTLS/Xray-core",
+  "github.com/gitleaks/gitleaks",
+  "github.com/smallstep/cli",
+  "github.com/sosedoff/pgweb",
+  "github.com/wagoodman/dive",
+  "github.com/go-task/task",
+  "github.com/fatedier/frp",
+  "github.com/gogs/gogs"
+ ],
+ "derived_from": "docs/evaluation/d3_candidates.json",
+ "candidates": [
+  {
+   "repo": "github.com/jesseduffield/lazygit",
+   "domain": "terminal-ui",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/derailed/k9s",
+   "domain": "terminal-ui",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/junegunn/fzf",
+   "domain": "terminal-ui",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/zyedidia/micro",
+   "domain": "terminal-ui",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/cli/cli",
+   "domain": "developer-cli",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/goreleaser/goreleaser",
+   "domain": "developer-cli",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/nektos/act",
+   "domain": "developer-cli",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/mikefarah/yq",
+   "domain": "developer-cli",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/helm/helm",
+   "domain": "container-tools",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/caddyserver/caddy",
+   "domain": "web-server-proxy",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/traefik/traefik",
+   "domain": "web-server-proxy",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/gohugoio/hugo",
+   "domain": "site-generator",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/go-gitea/gitea",
+   "domain": "git-forge",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/prometheus/prometheus",
+   "domain": "monitoring",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/influxdata/telegraf",
+   "domain": "monitoring",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/syncthing/syncthing",
+   "domain": "file-sync-transfer",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/rclone/rclone",
+   "domain": "file-sync-transfer",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/schollz/croc",
+   "domain": "file-sync-transfer",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/filebrowser/filebrowser",
+   "domain": "web-app",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/miniflux/v2",
+   "domain": "web-app",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/pocketbase/pocketbase",
+   "domain": "web-app",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/minio/minio",
+   "domain": "storage-messaging",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/nats-io/nats-server",
+   "domain": "storage-messaging",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/aquasecurity/trivy",
+   "domain": "security-tools",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/anchore/grype",
+   "domain": "security-tools",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/sigstore/cosign",
+   "domain": "security-tools",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/go-acme/lego",
+   "domain": "pki-acme",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/coredns/coredns",
+   "domain": "dns",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/AdguardTeam/AdGuardHome",
+   "domain": "dns",
+   "source_list": "d3_candidates.json"
+  },
+  {
+   "repo": "github.com/charmbracelet/glow",
+   "domain": "terminal-ui",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/dundee/gdu",
+   "domain": "system-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/muesli/duf",
+   "domain": "system-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/cheat/cheat",
+   "domain": "developer-cli",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/tomnomnom/gron",
+   "domain": "developer-cli",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/hairyhenderson/gomplate",
+   "domain": "developer-cli",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/containrrr/watchtower",
+   "domain": "container-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/jesseduffield/lazydocker",
+   "domain": "container-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/stern/stern",
+   "domain": "kubernetes-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/ahmetb/kubectx",
+   "domain": "kubernetes-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/kubernetes-sigs/kind",
+   "domain": "kubernetes-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/jpillora/chisel",
+   "domain": "network-tunnel",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/ginuerzh/gost",
+   "domain": "network-tunnel",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/cloudflare/cloudflared",
+   "domain": "network-tunnel",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/go-shiori/shiori",
+   "domain": "web-app",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/gotify/server",
+   "domain": "web-app",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/usememos/memos",
+   "domain": "web-app",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/navidrome/navidrome",
+   "domain": "media",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/AlexxIT/go2rtc",
+   "domain": "media",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/ffuf/ffuf",
+   "domain": "security-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/OJ/gobuster",
+   "domain": "security-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/getsops/sops",
+   "domain": "security-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/securego/gosec",
+   "domain": "security-tools",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/restic/restic",
+   "domain": "backup",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/prometheus/node_exporter",
+   "domain": "monitoring",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/prometheus/alertmanager",
+   "domain": "monitoring",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/nsqio/nsq",
+   "domain": "storage-messaging",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  },
+  {
+   "repo": "github.com/dexidp/dex",
+   "domain": "auth-identity",
+   "source_list": "d3c_candidates.json (added for CP10)"
+  }
+ ]
+}
