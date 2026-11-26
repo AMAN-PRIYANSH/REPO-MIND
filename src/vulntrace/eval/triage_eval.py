@@ -195,7 +195,8 @@ def _check_schema(v: dict[str, Any]) -> list[str]:
 def _fixture_requests(case: dict[str, Any], pack: dict[str, dict[str, Any]]) -> dict[str, triage.TriageRequest]:
     target = case["targets"][0]
     p = pack[target["symbol"]]
-    common = dict(app=FIXTURES_DIR, mains=[case["main_package"]], max_mains=1)
+    # CP10: the CP7 evaluation keeps its own (legacy) Mode 1 targets, so its committed results reproduce
+    common = dict(app=FIXTURES_DIR, mains=[case["main_package"]], max_mains=1, target_policy=sy.POLICY_LEGACY)
     return {
         triage.MODE_TARGETS: triage.TriageRequest(case_id=f"fixture:{case['id']}", mode="targets", targets=case["targets"],
                                                   target_origin=sy.FIXTURE, advisory=p["advisory"], **common),
@@ -415,6 +416,7 @@ def run_real_case(dataset: str, entry: dict[str, Any], case: dict[str, Any], evi
     if prep["status"] == lift_prep.READY or (prep["status"] == lift_prep.PREP_FAILED and prep.get("module_dir")):
         runners = memo_runners(base, reference_targets)
         common = dict(app=Path(prep["module_dir"]), commit=sha, module_rel=prep["module_rel"] or "", max_mains=max_mains,
+                      target_policy=sy.POLICY_LEGACY,
                       advisory=adv, vulndb_commit=(case.get("source") or {}).get("vulndb_commit"))
         if dataset == "d1":
             req = triage.TriageRequest(case_id=cid, mode="auto", fix_evidence=evidence["fix_evidence"], **common)

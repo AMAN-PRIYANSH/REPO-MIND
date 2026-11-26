@@ -9,7 +9,7 @@ reason codes. LIFTED symbols are reported but never decide (CP5b finding).
 from typing import Any
 
 from vulntrace.verdict import (CANT_DETERMINE, INCOMPLETE_COVERAGE, MODE2_NOT_REACHABLE_DOWNGRADED,
-                               NO_TARGET_SYMBOLS, NOT_REACHABLE, REACHABLE)
+                               NO_TARGET_SYMBOLS, NOT_REACHABLE, ONLY_CONTEXT_TARGETS_REACHABLE, REACHABLE)
 
 MODE2_POLICY_NAME = "MODE2_NOT_REACHABLE_POLICY"
 MODE2_POLICY_DOWNGRADE = "DOWNGRADE"
@@ -40,6 +40,26 @@ def case_result(entries: list[dict[str, Any]], blocking: list[str] | tuple[str, 
     if incomplete:
         codes.add(INCOMPLETE_COVERAGE)
     return CANT_DETERMINE, sorted(codes)
+
+
+def hygiene_case_result(entries: list[dict[str, Any]], blocking: list[str] | tuple[str, ...] = (),
+                        incomplete: bool = False, stratum: str | None = None) -> tuple[str, list[str]]:
+    """CP10 case result under the target-hygiene rules (`symbols.hygiene_mode1_symbols`).
+
+    stratum None (legacy targets, Mode 2, given targets) and stratum "S" (curated vulndb symbols
+    decide; changed functions are non-deciding extras): `case_result` unchanged. Stratum "N": the
+    legacy result over every changed function, except that a REACHABLE resting only on context-only
+    targets becomes CANT_DETERMINE with ONLY_CONTEXT_TARGETS_REACHABLE. So in stratum N hygiene can
+    only turn REACHABLE into CANT_DETERMINE, never create NOT_REACHABLE (CP10 acceptance 2)."""
+    if stratum != "N":
+        return case_result(entries, blocking, incomplete)
+    as_legacy = [dict(e, decides_verdict=True) if e.get("extra_reason") == "CONTEXT_ONLY_EXTRA" else e
+                 for e in entries]
+    legacy_v, legacy_r = case_result(as_legacy, blocking, incomplete)
+    hyg_v, _ = case_result(entries, blocking, incomplete)
+    if legacy_v == REACHABLE and hyg_v != REACHABLE:
+        return CANT_DETERMINE, [ONLY_CONTEXT_TARGETS_REACHABLE]
+    return legacy_v, legacy_r
 
 
 def apply_mode2_policy(verdict: str, reasons: list[str], policy: str = MODE2_POLICY_DOWNGRADE) -> tuple[str, list[str], bool]:

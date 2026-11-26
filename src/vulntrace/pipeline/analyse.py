@@ -85,6 +85,8 @@ def make_entry(symbol: dict[str, Any], main: str, vta: dict[str, Any], linker: d
         "linker_matched": list((linker.get("details") or {}).get("matched_binary_symbols") or []),
         "verifier_failures": [],
     }
+    if symbol.get("extra_reason"):  # CP10 target hygiene: a non-deciding extra target, and why
+        entry["extra_reason"] = symbol["extra_reason"]
     if d.get("feasibility") is not None:  # CP9: present only when the filter ran on a PATH_FOUND target
         entry["feasibility"] = d["feasibility"]
     return entry

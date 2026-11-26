@@ -1,0 +1,53 @@
+{
+ "cd_only_context_targets_reachable": {
+  "curated": [],
+  "main": "direct_call",
+  "parse_context_only": true,
+  "policy": "HYGIENE",
+  "reason_codes": [
+   "ONLY_CONTEXT_TARGETS_REACHABLE"
+  ],
+  "stratum": "N",
+  "verdict": "CANT_DETERMINE"
+ },
+ "not_reachable_stratum_s_extra_reachable": {
+  "curated": [
+   "Safe"
+  ],
+  "main": "direct_call",
+  "parse_context_only": false,
+  "policy": "HYGIENE",
+  "reason_codes": [],
+  "stratum": "S",
+  "verdict": "NOT_REACHABLE"
+ },
+ "reachable_only_context_legacy": {
+  "curated": [],
+  "main": "direct_call",
+  "parse_context_only": true,
+  "policy": "LEGACY",
+  "reason_codes": [],
+  "stratum": null,
+  "verdict": "REACHABLE"
+ },
+ "reachable_stratum_n": {
+  "curated": [],
+  "main": "direct_call",
+  "parse_context_only": false,
+  "policy": "HYGIENE",
+  "reason_codes": [],
+  "stratum": "N",
+  "verdict": "REACHABLE"
+ },
+ "reachable_stratum_s": {
+  "curated": [
+   "Parse"
+  ],
+  "main": "direct_call",
+  "parse_context_only": false,
+  "policy": "HYGIENE",
+  "reason_codes": [],
+  "stratum": "S",
+  "verdict": "REACHABLE"
+ }
+}

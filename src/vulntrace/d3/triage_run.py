@@ -27,6 +27,7 @@ from vulntrace.dataset import datasets, fix_evidence, git_fetch
 from vulntrace.dataset import materialize as mat
 from vulntrace.eval import triage_eval as te
 from vulntrace.paths import REPO_ROOT
+from vulntrace.pipeline import symbols as sy_
 from vulntrace.pipeline import triage
 from vulntrace.verdict import CANT_DETERMINE, NOT_REACHABLE, REACHABLE
 
@@ -107,8 +108,10 @@ def sanitise(obj: Any, gomodcache: Path, goroot: str | None = None) -> Any:
 def run_case(case: dict[str, Any], vcase: dict[str, Any] | None, *, evidence_dir: Path, app_dir: Path | None,
              app_error: str | None, runners: triage.Runners, binary, gv: dict[str, Any] | None,
              vulndb_commit: str, repo_commit: str | None,
-             build_fix: Callable | None = None, build_range: Callable | None = None) -> tuple[dict, dict | None]:
-    """(compact row, full verdict or None)."""
+             build_fix: Callable | None = None, build_range: Callable | None = None,
+             target_policy: str = sy_.POLICY_LEGACY) -> tuple[dict, dict | None]:
+    """(compact row, full verdict or None). `target_policy` (CP10): LEGACY (the CP7b/CP9 targets, the
+    default, so the committed D3/D3b results reproduce) or HYGIENE."""
     t0 = time.monotonic()
     row: dict[str, Any] = {k: case[k] for k in ("id", "advisory", "app_repo", "app_tag", "app_commit", "module",
                                                 "version_selected", "created")}
@@ -127,7 +130,7 @@ def run_case(case: dict[str, Any], vcase: dict[str, Any] | None, *, evidence_dir
     req = triage.TriageRequest(case_id=case["id"], app=app_dir, mode="auto", advisory=advisory_for(vcase, case["module"]),
                                fix_evidence=ev["fix_evidence"], release_range=ev["release_range"],
                                candidate_code=ev["candidate_code"], max_mains=MAX_MAINS, commit=case["app_commit"],
-                               vulndb_commit=vulndb_commit, repo_commit=repo_commit)
+                               vulndb_commit=vulndb_commit, repo_commit=repo_commit, target_policy=target_policy)
     v = triage.run_triage(req, runners)
     row.update(te.verdict_row(v))
     row["schema_errors"] = te._check_schema(v)[:3]
@@ -186,7 +189,8 @@ def summarise(rows: list[dict[str, Any]]) -> dict[str, Any]:
 def eval_d3(case_doc: dict[str, Any], *, cases_by_id: dict[str, dict], data_dir: Path, gomodcache: Path,
             cache_root: Path, base: triage.Runners, binary, vulndb_commit: str, repo_commit: str | None,
             gv_exe: Path | None, gv_db: Path | None, only: list[str] | None = None, rerun: bool = False,
-            log=print) -> tuple[dict[str, Any], dict[str, dict]]:
+            log=print, target_policy: str = sy_.POLICY_LEGACY,
+            set_name: str = "d3") -> tuple[dict[str, Any], dict[str, dict]]:
     """(results document, {case id: full verdict}). Cases of one application share memoised
     methods (one call graph and one build per main package and target)."""
     cases = case_doc["cases"]
@@ -226,7 +230,7 @@ def eval_d3(case_doc: dict[str, Any], *, cases_by_id: dict[str, dict], data_dir:
                 ran_now += 1
                 row, v = run_case(c, cases_by_id.get(c["advisory"]), evidence_dir=evidence_dir, app_dir=app_dir,
                                   app_error=app_err, runners=runners, binary=binary, gv=gv, vulndb_commit=vulndb_commit,
-                                  repo_commit=repo_commit)
+                                  repo_commit=repo_commit, target_policy=target_policy)
                 if gv is not None:
                     row.setdefault("govulncheck", {})["run"] = {k: gv.get(k) for k in ("scanner", "go_version", "exit_code",
                                                                                       "seconds", "error")}
@@ -245,7 +249,7 @@ def eval_d3(case_doc: dict[str, Any], *, cases_by_id: dict[str, dict], data_dir:
                     verdicts[c["id"]] = json.load(f)
     prov = [v.get("provenance") or {} for v in verdicts.values()]
     created = sorted(p.get("created_at") for p in prov if p.get("created_at"))
-    doc = {"schema_version": SCHEMA_VERSION, "set": "d3", "rows": rows, "summary": summarise(rows),
+    doc = {"schema_version": SCHEMA_VERSION, "set": set_name, "rows": rows, "summary": summarise(rows),
            # cases finished by an earlier invocation are resumed, not recomputed: say where verdicts come from
            "verdict_provenance": {"repo_commits": sorted({p.get("repo_commit") or "unknown" for p in prov}),
                                   "created_at_first": created[0] if created else None,

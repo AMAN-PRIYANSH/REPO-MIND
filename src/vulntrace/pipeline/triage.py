@@ -85,6 +85,10 @@ class TriageRequest:
     repo_commit: str | None = None
     created_at: str | None = None
     extra_limitations: list[str] = field(default_factory=list)
+    # CP10: HYGIENE (the default: curated vulndb symbols decide when the advisory has them, context-only
+    # changed functions never decide) or LEGACY (the CP7/CP9 targets: every changed function decides).
+    # Only Mode 1 is affected; LEGACY reproduces the CP7/CP9 output exactly.
+    target_policy: str = sy.POLICY_HYGIENE
 
 
 def _fix_usable(fe: dict[str, Any] | None) -> bool:
@@ -142,7 +146,10 @@ def select_symbols(req: TriageRequest, mode: str, runners: Runners) -> tuple[lis
     if mode == MODE_FIX:
         if not _fix_usable(req.fix_evidence) or not module:
             return [], [], [NO_FIX_EVIDENCE], None
-        t, nc = sy.mode1_symbols(req.fix_evidence, module, _module_rel(req))
+        if req.target_policy == sy.POLICY_HYGIENE:
+            t, nc, _ = sy.hygiene_mode1_symbols(req.fix_evidence, req.advisory, module, _module_rel(req))
+        else:
+            t, nc = sy.mode1_symbols(req.fix_evidence, module, _module_rel(req))
         return t, nc, ([] if t else [NO_TARGET_SYMBOLS]), None
     if not _range_usable(req.release_range) or req.candidate_code is None or not module:
         return [], [], [NO_RELEASE_EVIDENCE], None
@@ -156,6 +163,26 @@ def select_symbols(req: TriageRequest, mode: str, runners: Runners) -> tuple[lis
                    config=req.retriever, k=req.k)
     t, nc = sy.mode2_symbols(req.release_range, ranking.ranked, ranking.k, module, _module_rel(req))
     return t, nc, ([] if t else [NO_TARGET_SYMBOLS]), ranking.summary()
+
+
+def target_stratum(req: TriageRequest, mode: str) -> str | None:
+    """CP10: "S" or "N" when the hygiene rules apply (Mode 1, HYGIENE), else None (legacy rules)."""
+    if req.target_policy not in (sy.POLICY_HYGIENE, sy.POLICY_LEGACY):
+        raise ValueError(f"unknown target policy {req.target_policy!r}")
+    if mode != MODE_FIX or req.target_policy != sy.POLICY_HYGIENE:
+        return None
+    return sy.stratum_of(req.advisory, (req.advisory or {}).get("module"))
+
+
+HYGIENE_RULE = {
+    sy.STRATUM_S: "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they "
+                  "decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence "
+                  "only (decides_verdict false).",
+    sy.STRATUM_N: "CP10 target hygiene, stratum N: the advisory has no curated vulndb symbols for this module; the "
+                  "fix's changed non-test functions decide, except context-only ones (none of their lines changed). "
+                  "A REACHABLE resting only on context-only targets is CANT_DETERMINE "
+                  "(ONLY_CONTEXT_TARGETS_REACHABLE); hygiene changes nothing else in this stratum.",
+}
 
 
 def lifted_symbols(req: TriageRequest, info: app_mod.AppInfo, targets: list[dict], runners: Runners) -> tuple[list[dict], dict]:
@@ -189,7 +216,15 @@ def lifted_symbols(req: TriageRequest, info: app_mod.AppInfo, targets: list[dict
 def _limitations(mode: str, req: TriageRequest, info: app_mod.AppInfo, not_covered: list[dict], entries: list[dict],
                  retrieval: dict | None, lift_note: dict) -> list[str]:
     out = list(BASE_LIMITATIONS)
-    if mode == MODE_FIX:
+    stratum = target_stratum(req, mode)
+    if mode == MODE_FIX and stratum == sy.STRATUM_S:
+        out.append("Mode 1 with curated vulndb symbols (CP10 stratum S): the verdict is decided by the advisory's curated "
+                   "symbols; the functions the fix changed are reported as extra evidence only.")
+    elif mode == MODE_FIX and stratum == sy.STRATUM_N:
+        out.append("Mode 1 without curated vulndb symbols (CP10 stratum N): the verdict is decided by the functions the "
+                   "fix changed (CHANGED_FUNCTION_LEVEL), context-only ones excluded; a reachable changed function need "
+                   "not be the vulnerable one.")
+    elif mode == MODE_FIX:
         out.append("Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function "
                    "need not be the vulnerable one.")
     if mode == MODE_RELEASE:
@@ -227,6 +262,7 @@ def run_triage(req: TriageRequest, runners: Runners) -> dict[str, Any]:
     sel = choose_mode(req)
     mode = sel["chosen"]
     level = LEVEL[mode]
+    stratum = target_stratum(req, mode)
 
     t0 = time.monotonic()
     targets, not_covered, blocking, retrieval = select_symbols(req, mode, runners)
@@ -259,12 +295,12 @@ def run_triage(req: TriageRequest, runners: Runners) -> dict[str, Any]:
     feas_note: dict[str, Any] | None = None
     if runners.feasibility is not None:
         pre_entries = entries
-        pre_verdict, pre_reasons = aggregate.case_result(pre_entries, blocking, incomplete)
+        pre_verdict, pre_reasons = aggregate.hygiene_case_result(pre_entries, blocking, incomplete, stratum)
         entries, n_down = fz.apply_filter(pre_entries)
         feas_note = {"enabled": True, "max_examined_paths": runners.feasibility.get("max_examined_paths"),
                      "downgraded": n_down, "by_status": fz.status_counts(entries),
                      "pre_filter_verdict": pre_verdict, "pre_filter_reason_codes": pre_reasons}
-    verdict, reasons = aggregate.case_result(entries, blocking, incomplete)
+    verdict, reasons = aggregate.hygiene_case_result(entries, blocking, incomplete, stratum)
     if feas_note is not None:
         fz.assert_filter_downgrade_only(pre_entries, entries, feas_note["pre_filter_verdict"], verdict)
     if entries and info.mains and all(m["load_failed"] for m in facts["per_main"].values()) and verdict == CANT_DETERMINE:
@@ -303,6 +339,8 @@ def run_triage(req: TriageRequest, runners: Runners) -> dict[str, Any]:
     }
     if feas_note is not None:
         out["feasibility"] = feas_note
+    if stratum is not None:
+        out["target_policy"] = _policy_note(req, stratum, targets)
     pre_verifier = copy.deepcopy(out)
     if req.run_verifier and entries and runners.verifier_ctx is not None:
         from vulntrace.verifier.verify import verify
@@ -310,6 +348,10 @@ def run_triage(req: TriageRequest, runners: Runners) -> dict[str, Any]:
         t0 = time.monotonic()
         out = verify(out, runners.verifier_ctx(info, incomplete))
         timing["verifier_seconds"] = round(time.monotonic() - t0, 2)
+        if stratum == sy.STRATUM_N:
+            # the verifier re-aggregates with the plain rule when it downgrades; stratum N keeps the hygiene rule
+            out["verdict"], out["reason_codes"] = aggregate.hygiene_case_result(out["per_symbol"], blocking, incomplete,
+                                                                                stratum)
 
     out["pre_policy_verdict"], out["pre_policy_reason_codes"] = out["verdict"], list(out["reason_codes"])
     if mode == MODE_RELEASE:
@@ -323,6 +365,15 @@ def run_triage(req: TriageRequest, runners: Runners) -> dict[str, Any]:
     timing["total_seconds"] = round(time.monotonic() - t_start, 2)
     out["timing"] = timing
     return out
+
+
+def _policy_note(req: TriageRequest, stratum: str, targets: list[dict]) -> dict[str, Any]:
+    deciding = [t for t in targets if t.get("decides_verdict", True)]
+    return {"policy": req.target_policy, "stratum": stratum, "rule": HYGIENE_RULE[stratum],
+            "curated_symbols": len(sy.curated_symbols(req.advisory, (req.advisory or {}).get("module"))),
+            "deciding_targets": len(deciding), "extra_targets": len(targets) - len(deciding),
+            "extra_by_reason": {r: sum(1 for t in targets if t.get("extra_reason") == r)
+                                for r in sorted({t["extra_reason"] for t in targets if t.get("extra_reason")})}}
 
 
 def _advisory_summary(req: TriageRequest) -> dict[str, Any]:

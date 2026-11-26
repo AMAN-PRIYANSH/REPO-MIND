@@ -47,6 +47,9 @@ def test_every_verdict_and_reason_code_is_recorded():
     # CP9 added PATHS_INFEASIBLE; its recordings live with the other CP9 recordings
     cp9 = json.loads((DIR.parent / "cp9" / "verdicts" / "index.json").read_text(encoding="utf-8"))
     recorded |= {c for x in cp9.values() for c in x["reason_codes"]}
+    # CP10 added ONLY_CONTEXT_TARGETS_REACHABLE (tests/contract/record_cp10.py)
+    cp10 = json.loads((DIR.parent / "cp10" / "verdicts" / "index.json").read_text(encoding="utf-8"))
+    recorded |= {c for x in cp10.values() for c in x["reason_codes"]}
     assert codes <= recorded, f"no recording for {sorted(codes - recorded)}"
     assert {x["verdict"] for x in INDEX.values()} == {"REACHABLE", "NOT_REACHABLE", "CANT_DETERMINE"}
 

@@ -141,3 +141,61 @@ def given_symbols(targets: list[dict[str, str]], origin: str) -> list[dict[str, 
     """Symbols given directly (fixtures, curated reference runs, a user's own list)."""
     return dedupe([{"package": t["package"], "symbol": t["symbol"], "origin": origin, "rank": None, "score": None,
                     "candidate_id": None, "side": None, "decides_verdict": True} for t in targets])
+
+
+# --- CP10: target hygiene (Mode 1) ------------------------------------------------------------------
+# Rules fixed in code before any D3c run (docs/implementation/checkpoints/CP10.md, deliverable 1):
+#   stratum S - the advisory has curated vulndb symbols for the module: those symbols decide the
+#     verdict (origin VULNDB); the fix's changed functions are analysed as extra evidence only.
+#   stratum N - no curated symbols: the fix's changed non-test functions decide, except the
+#     `context_only` ones (none of their lines changed), which are extra evidence only. A REACHABLE
+#     that rests only on context-only targets becomes CANT_DETERMINE (ONLY_CONTEXT_TARGETS_REACHABLE);
+#     in stratum N hygiene never changes anything else (`aggregate.hygiene_case_result`), so it can
+#     never create a NOT_REACHABLE there.
+# POLICY_LEGACY is the CP7/CP9 behaviour, byte for byte: every changed function decides.
+VULNDB = "VULNDB"
+POLICY_HYGIENE, POLICY_LEGACY = "HYGIENE", "LEGACY"
+STRATUM_S, STRATUM_N = "S", "N"
+EXTRA_FIX_CHANGED = "FIX_CHANGED_EXTRA"          # stratum S: a changed function, extra evidence only
+EXTRA_CONTEXT_ONLY = "CONTEXT_ONLY_EXTRA"        # stratum N: a context-only changed function
+
+
+def curated_symbols(advisory: dict[str, Any] | None, module: str | None) -> list[dict[str, str]]:
+    """The report's curated `symbols` (VulnCase `core_symbols`) of the advisory's module entry, in
+    report order; vulndb's machine-derived symbols are not curated and are not used."""
+    if not advisory or not module:
+        return []
+    out = []
+    for m in advisory.get("modules") or []:
+        if m.get("module") != module:
+            continue
+        for p in m.get("packages") or []:
+            for s in p.get("core_symbols") or []:
+                out.append({"package": p["package"], "symbol": s})
+    return out
+
+
+def stratum_of(advisory: dict[str, Any] | None, module: str | None) -> str:
+    return STRATUM_S if curated_symbols(advisory, module) else STRATUM_N
+
+
+def hygiene_mode1_symbols(fix_evidence: dict[str, Any], advisory: dict[str, Any] | None, module: str,
+                          module_rel: str) -> tuple[list[dict], list[dict], str]:
+    """(targets, not covered, stratum) under the CP10 hygiene rules. Every target keeps
+    `decides_verdict`; extra-evidence targets carry `extra_reason`. Deciding targets come first,
+    so a curated symbol that is also a changed function is kept once, as VULNDB."""
+    changed, not_covered = mode1_symbols(fix_evidence, module, module_rel)
+    curated = curated_symbols(advisory, module)
+    if curated:
+        targets = [{**s, "origin": VULNDB, "rank": None, "score": None, "candidate_id": None, "side": None,
+                    "decides_verdict": True} for s in curated]
+        for c in changed:
+            targets.append({**c, "decides_verdict": False, "extra_reason": EXTRA_FIX_CHANGED})
+        return dedupe(targets), not_covered, STRATUM_S
+    targets = []
+    for c in changed:
+        if c.get("context_only") is True:
+            targets.append({**c, "decides_verdict": False, "extra_reason": EXTRA_CONTEXT_ONLY})
+        else:
+            targets.append(c)
+    return targets, not_covered, STRATUM_N

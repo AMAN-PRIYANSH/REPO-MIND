@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "verdict.schema.json",
   "title": "Verdict",
-  "description": "CP2 created this schema; CP7 extended it by adding optional properties and enum values only, so every CP2 verdict still validates; CP9 added the reason PATHS_INFEASIBLE and optional feasibility fields the same way. Reachability only, never exploitability.",
+  "description": "CP2 created this schema; CP7 extended it by adding optional properties and enum values only, so every CP2 verdict still validates; CP9 added the reason PATHS_INFEASIBLE and optional feasibility fields the same way; CP10 added the reason ONLY_CONTEXT_TARGETS_REACHABLE, the origin VULNDB and optional target-policy and path-evidence fields the same way. Reachability only, never exploitability.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "case_id", "target_app", "verdict", "reason_codes", "per_symbol", "verification", "statement", "provenance"],
@@ -74,7 +74,8 @@
               "evidence_path": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/call_path"}]}
             }
           },
-          "pre_feasibility_result": {"description": "CP9: the rule-table result before the feasibility filter, which only turns REACHABLE into CANT_DETERMINE (PATHS_INFEASIBLE)", "$ref": "#/$defs/verdict_value"}
+          "pre_feasibility_result": {"description": "CP9: the rule-table result before the feasibility filter, which only turns REACHABLE into CANT_DETERMINE (PATHS_INFEASIBLE)", "$ref": "#/$defs/verdict_value"},
+          "extra_reason": {"$ref": "#/$defs/extra_reason"}
         },
         "allOf": [
           {
@@ -154,6 +155,21 @@
     "toolchain": {"type": "object"},
     "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "timing": {"type": "object"},
+    "target_policy": {
+      "description": "CP10: the target-hygiene rules applied to this Mode 1 verdict (absent with --legacy-targets, in Mode 2 and with given targets)",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "stratum", "rule"],
+      "properties": {
+        "policy": {"const": "HYGIENE"},
+        "stratum": {"enum": ["S", "N"]},
+        "rule": {"type": "string", "minLength": 1},
+        "curated_symbols": {"type": "integer", "minimum": 0},
+        "deciding_targets": {"type": "integer", "minimum": 0},
+        "extra_targets": {"type": "integer", "minimum": 0},
+        "extra_by_reason": {"type": "object"}
+      }
+    },
     "feasibility": {
       "description": "CP9: whether the path-feasibility filter ran, its setting N, and what it changed",
       "type": "object",
@@ -183,8 +199,9 @@
     "verdict_value": {"enum": ["REACHABLE", "NOT_REACHABLE", "CANT_DETERMINE"]},
     "reason_code": {"enum": ["NO_TARGET_SYMBOLS", "NO_FIX_EVIDENCE", "METHOD_DISAGREEMENT", "ANALYSIS_FAILED", "VERIFIER_REJECTED", "UNSUPPORTED_TARGET",
                              "APP_LOAD_FAILED", "NO_RELEASE_EVIDENCE", "INCOMPLETE_COVERAGE", "MODE2_NOT_REACHABLE_DOWNGRADED",
-                             "PATHS_INFEASIBLE"]},
-    "origin": {"enum": ["CURATED_CORE", "CURATED_DERIVED", "ROOT_CAUSE", "LIFTED", "ROOT_ONLY", "FIXTURE", "FIX_CHANGED", "RANKED_CANDIDATE", "USER"]},
+                             "PATHS_INFEASIBLE", "ONLY_CONTEXT_TARGETS_REACHABLE"]},
+    "origin": {"enum": ["CURATED_CORE", "CURATED_DERIVED", "ROOT_CAUSE", "LIFTED", "ROOT_ONLY", "FIXTURE", "FIX_CHANGED", "RANKED_CANDIDATE", "USER", "VULNDB"]},
+    "extra_reason": {"description": "CP10 target hygiene: why a target is analysed but does not decide the verdict (FIX_CHANGED_EXTRA: a changed function where curated vulndb symbols decide; CONTEXT_ONLY_EXTRA: a changed function none of whose lines changed)", "enum": ["FIX_CHANGED_EXTRA", "CONTEXT_ONLY_EXTRA"]},
     "evidence_level": {"description": "TARGET_LEVEL: the symbols were given as the vulnerable ones; CHANGED_FUNCTION_LEVEL: Mode 1, any function the fix changed; CANDIDATE_LEVEL: Mode 2, a retrieved candidate", "enum": ["TARGET_LEVEL", "CHANGED_FUNCTION_LEVEL", "CANDIDATE_LEVEL"]},
     "target": {
       "type": "object",
@@ -206,7 +223,8 @@
         "side": {"enum": ["OLD", "NEW", "BOTH", null]},
         "lifted_from": {"type": "array", "items": {"type": "string"}},
         "decides_verdict": {"type": "boolean"},
-        "context_only": {"description": "Mode 1: true if none of the symbol's lines changed (a candidate only through diff context lines)", "type": ["boolean", "null"]}
+        "context_only": {"description": "Mode 1: true if none of the symbol's lines changed (a candidate only through diff context lines)", "type": ["boolean", "null"]},
+        "extra_reason": {"$ref": "#/$defs/extra_reason"}
       }
     },
     "verifier_failure": {

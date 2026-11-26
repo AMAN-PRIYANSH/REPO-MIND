@@ -30,6 +30,9 @@ INCOMPLETE_COVERAGE = "INCOMPLETE_COVERAGE"
 MODE2_NOT_REACHABLE_DOWNGRADED = "MODE2_NOT_REACHABLE_DOWNGRADED"
 # CP9: the path-feasibility filter found that every call path has a step that cannot run (downgrade-only)
 PATHS_INFEASIBLE = "PATHS_INFEASIBLE"
+# CP10 target hygiene (stratum N): the call graph reaches only changed functions none of whose lines
+# changed (diff context); such a REACHABLE is not trusted, and never becomes NOT_REACHABLE either
+ONLY_CONTEXT_TARGETS_REACHABLE = "ONLY_CONTEXT_TARGETS_REACHABLE"
 
 VTA_RESULTS = ("PATH_FOUND", "NO_PATH", "ERROR")
 LINKER_RESULTS = ("PRESENT", "ABSENT", "ERROR")

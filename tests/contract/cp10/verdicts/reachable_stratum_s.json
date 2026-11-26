@@ -1,0 +1,326 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "local",
+    "owner": "vtfixtures",
+    "repo": "vtfixtures",
+    "sha": "0000000000000000000000000000000000000000"
+   }
+  ],
+  "fixed_in": "1.0.1",
+  "id": "GO-CP10-FIXTURE",
+  "module": "vtfixtures",
+  "source": "vulndb",
+  "vulnerable_at": "1.0.0"
+ },
+ "case_id": "cp10:reachable_stratum_s",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "vtfixtures/cmd/direct_call"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 1,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "vtfixtures/cmd/direct_call": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.16,
+    "load_failed": false,
+    "vta_seconds": 0.95
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 2,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {
+   "FEASIBLE": 1
+  },
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 with curated vulndb symbols (CP10 stratum S): the verdict is decided by the advisory's curated symbols; the functions the fix changed are reported as extra evidence only."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "mode FIX was requested",
+  "reason": "REQUESTED",
+  "requested": "FIX"
+ },
+ "per_symbol": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/direct_call/main.go",
+        "line": 10
+       },
+       "callee": "vtfixtures/vulnlib.Parse",
+       "caller": "vtfixtures/cmd/direct_call.main",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "vtfixtures/cmd/direct_call",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "vtfixtures/vulnlib",
+      "symbol": "Parse"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "first_infeasible": null,
+      "length": 1
+     }
+    ],
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "vtfixtures/vulnlib.Parse"
+   ],
+   "main_package": "vtfixtures/cmd/direct_call",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/direct_call/main.go",
+        "line": 10
+       },
+       "callee": "vtfixtures/vulnlib.Parse",
+       "caller": "vtfixtures/cmd/direct_call.main",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "vtfixtures/cmd/direct_call",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "vtfixtures/vulnlib",
+      "symbol": "Parse"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "target": {
+    "package": "vtfixtures/vulnlib",
+    "symbol": "Parse"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/direct_call/main.go",
+       "line": 10
+      },
+      "callee": "vtfixtures/vulnlib.Parse",
+      "caller": "vtfixtures/cmd/direct_call.main",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "vtfixtures/cmd/direct_call",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "vtfixtures/vulnlib",
+     "symbol": "Parse"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "vtfixtures/cmd/direct_call",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "vtfixtures/vulnlib",
+    "symbol": "Safe"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-11-26T00:00:00Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": null,
+  "vulndb_commit": null
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "vtfixtures/vulnlib",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "Parse"
+  },
+  {
+   "candidate_id": "c2",
+   "context_only": false,
+   "decides_verdict": false,
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "vtfixtures/vulnlib",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Safe"
+  }
+ ],
+ "target_app": {
+  "commit": "a44929d36d50862a1fa52951bd128361670294c9",
+  "commit_source": "GIT_HEAD",
+  "dirty": false,
+  "module": "vtfixtures",
+  "path": "<local>"
+ },
+ "target_policy": {
+  "curated_symbols": 1,
+  "deciding_targets": 1,
+  "extra_by_reason": {
+   "FIX_CHANGED_EXTRA": 1
+  },
+  "extra_targets": 1,
+  "policy": "HYGIENE",
+  "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+  "stratum": "S"
+ },
+ "timing": {},
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.24.7",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.24.7",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "FILTERED_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   }
+  },
+  "checks_run": 10,
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "git show a44929d36d50862a1fa52951bd128361670294c9",
+  "status": "PASSED"
+ }
+}
