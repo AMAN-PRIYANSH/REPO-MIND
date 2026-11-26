@@ -79,7 +79,7 @@ Documents and results
 | `python -m pytest tests/unit tests/contract -q` (last code commit) | `995 passed, 10 skipped in 32.17s` |
 | `(cd helper && GOTOOLCHAIN=local CGO_ENABLED=0 GOPROXY=off go test ./...)` | `ok  	vulntrace/helper	15.732s` |
 | `python -m pytest tests/integration -q` (after task 1a) | `172 passed, 2 skipped in 295.59s (0:04:55)` |
-| `python -m pytest tests/integration -q` (final code) | still running when this report was first committed; the result is added in the next commit |
+| `python -m pytest tests/integration -q` (final code) | `172 passed, 2 skipped in 299.67s (0:04:59)` (run on `0c7e04a`, the last code commit) |
 | `python tests/contract/record_cp10.py` (real helper) | every scenario's assertion held (verdict, reasons, stratum, evidence level) |
 | `python -m vulntrace cp10 run --set fixtures` (go1.24.7) | `cp7_reproduction.identical: True`, 66 rows, 0 differences; hygiene changed 0 fixture rows |
 | `python -m vulntrace cp10 run --set d3` / `--set d3b` (go1.26.10) | `cp9_reproduction`: 14/14 and 11/11 identical, `all_identical: True` |
