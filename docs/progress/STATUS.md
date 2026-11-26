@@ -41,7 +41,7 @@ CP10 (from `docs/implementation/checkpoints/CP10.md`; ticked when committed):
 - [x] 2b. DYNAMIC steps carry `confirmed: false` and their kind; verdict records the path evidence level (`STATIC_PATH` / `HAS_DYNAMIC_STEPS` with count)
 - [x] 2c. Text output and demo page say "route shown is an example from the call graph; steps marked unconfirmed may not run in this context"
 - [x] 3a. D3c rules, candidate list and seed committed before any D3c probe; selection code with strata S/N and quotas, D3/D3b apps excluded
-- [ ] 3b. Scoring renderer with the headline fixed before any D3c result
+- [x] 3b. Scoring renderer with the headline fixed before any D3c result
 - [ ] 3c. D3c selection run (case list committed)
 - [ ] 3d. D3c triage: VulnTrace new rules and `--legacy-targets`, govulncheck (source, symbol scan, pinned vulndb)
 - [ ] 4. Verdict-level adjudication sheets: every D3c case; truth-only items for the 7 D3 REACHABLE and the D3b non-REACHABLE cases; STATUS `AWAITING_ADJUDICATION`
