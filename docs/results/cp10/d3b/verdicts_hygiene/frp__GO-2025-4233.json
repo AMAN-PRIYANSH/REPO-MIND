@@ -1,0 +1,1164 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "quic-go",
+    "repo": "quic-go",
+    "sha": "5b2d2129f8315da41e01eff0a847ab38a34e83a8"
+   }
+  ],
+  "fixed_in": "0.57.0",
+  "id": "GO-2025-4233",
+  "module": "github.com/quic-go/quic-go",
+  "source": "vulndb",
+  "vulnerable_at": "0.56.0"
+ },
+ "case_id": "frp__GO-2025-4233",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/fatedier/frp/cmd/frpc",
+   "github.com/fatedier/frp/cmd/frps"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [
+   {
+    "candidate_id": "c11",
+    "package_dir": "http3",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Server.rejectWithHeaderFieldsTooLarge"
+   }
+  ],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/fatedier/frp/cmd/frpc": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.2,
+    "load_failed": false,
+    "vta_seconds": 6.19
+   },
+   "github.com/fatedier/frp/cmd/frps": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.37,
+    "load_failed": false,
+    "vta_seconds": 7.21
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 11,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {},
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "NOT_REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 with curated vulndb symbols (CP10 stratum S): the verdict is decided by the advisory's curated symbols; the functions the fix changed are reported as extra evidence only.",
+  "1 candidate function(s) not analysed: ADDED_BY_FIX.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "path_evidence": {
+  "dynamic_steps": null,
+  "evidence_level": "NO_ROUTE_SHOWN",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ },
+ "per_symbol": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "Server.handleRequest"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "requestFromHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "parseHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "Server.maxHeaderBytes"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "Conn.decodeTrailers"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "updateResponseFromHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "RequestStream.ReadResponse"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "parseTrailers"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c4",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "qpackError.Error"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package github.com/quic-go/quic-go/http3 does not declare qpackError.Error"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c5",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "qpackError.Unwrap"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package github.com/quic-go/quic-go/http3 does not declare qpackError.Unwrap"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c8",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frpc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "Server.handleConn"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "Server.handleRequest"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "requestFromHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "parseHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "Server.maxHeaderBytes"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "Conn.decodeTrailers"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "updateResponseFromHeaders"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "RequestStream.ReadResponse"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "parseTrailers"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c4",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "qpackError.Error"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package github.com/quic-go/quic-go/http3 does not declare qpackError.Error"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c5",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "qpackError.Unwrap"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "package github.com/quic-go/quic-go/http3 does not declare qpackError.Unwrap"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c8",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/fatedier/frp/cmd/frps",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/quic-go/quic-go/http3",
+    "symbol": "Server.handleConn"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "NOT_REACHABLE",
+ "provenance": {
+  "created_at": "2026-11-26T02:18:50Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "9a0adbb",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "Server.handleRequest"
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "requestFromHeaders"
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "parseHeaders"
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "Server.maxHeaderBytes"
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "Conn.decodeTrailers"
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "updateResponseFromHeaders"
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "RequestStream.ReadResponse"
+  },
+  {
+   "candidate_id": "c3",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "parseTrailers"
+  },
+  {
+   "candidate_id": "c4",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "qpackError.Error"
+  },
+  {
+   "candidate_id": "c5",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "qpackError.Unwrap"
+  },
+  {
+   "candidate_id": "c8",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/quic-go/quic-go/http3",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Server.handleConn"
+  }
+ ],
+ "target_app": {
+  "commit": "2f5e1f79457b5e9d769f2ac063443b62640185a9",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/fatedier/frp",
+  "path": "<local>/data/cp10/d3b/hygiene/apps/github.com_fatedier_frp/2f5e1f79457b"
+ },
+ "target_policy": {
+  "curated_symbols": 7,
+  "deciding_targets": 7,
+  "extra_by_reason": {
+   "FIX_CHANGED_EXTRA": 4
+  },
+  "extra_targets": 4,
+  "policy": "HYGIENE",
+  "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+  "stratum": "S"
+ },
+ "timing": {
+  "inspect_seconds": 0.11,
+  "methods_seconds": 15.97,
+  "symbols_seconds": 0.0,
+  "total_seconds": 16.25,
+  "verifier_seconds": 0.17
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "NOT_REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "TARGET_EXISTS": {
+    "failed": 4,
+    "run": 22,
+    "skipped": 0
+   }
+  },
+  "checks_run": 22,
+  "downgraded": 4,
+  "failures": [
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/fatedier/frp/cmd/frpc",
+    "path_index": null,
+    "reason": "package github.com/quic-go/quic-go/http3 does not declare qpackError.Error",
+    "target": {
+     "package": "github.com/quic-go/quic-go/http3",
+     "symbol": "qpackError.Error"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/fatedier/frp/cmd/frpc",
+    "path_index": null,
+    "reason": "package github.com/quic-go/quic-go/http3 does not declare qpackError.Unwrap",
+    "target": {
+     "package": "github.com/quic-go/quic-go/http3",
+     "symbol": "qpackError.Unwrap"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/fatedier/frp/cmd/frps",
+    "path_index": null,
+    "reason": "package github.com/quic-go/quic-go/http3 does not declare qpackError.Error",
+    "target": {
+     "package": "github.com/quic-go/quic-go/http3",
+     "symbol": "qpackError.Error"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/fatedier/frp/cmd/frps",
+    "path_index": null,
+    "reason": "package github.com/quic-go/quic-go/http3 does not declare qpackError.Unwrap",
+    "target": {
+     "package": "github.com/quic-go/quic-go/http3",
+     "symbol": "qpackError.Unwrap"
+    }
+   }
+  ],
+  "file_source": "analysed tree on disk",
+  "status": "FAILED"
+ }
+}

@@ -1,0 +1,1347 @@
+{
+ "cp9_reproduction": {
+  "against": "docs/results/cp9/d3b/verdicts_on",
+  "all_identical": true,
+  "compared": 11,
+  "different": [],
+  "identical": [
+   "frp__GO-2025-4017",
+   "frp__GO-2025-4233",
+   "frp__GO-2026-5543",
+   "frp__GO-2026-5676",
+   "gogs__GO-2024-2567",
+   "gogs__GO-2024-2606",
+   "gogs__GO-2026-5004",
+   "gogs__GO-2026-5543",
+   "task__GO-2026-5841",
+   "task__GO-2026-6061",
+   "task__GO-2026-6348"
+  ],
+  "missing": []
+ },
+ "env": {
+  "CGO_ENABLED": "0",
+  "GOFLAGS": "-mod=readonly",
+  "GOPROXY": "off (analysis)",
+  "GOTOOLCHAIN": "local"
+ },
+ "environment": {
+  "command": "python -m vulntrace cp10 run --set d3b",
+  "go": "go version go1.26.10 linux/amd64",
+  "os": "Linux-6.18.44-fc-v880-x86_64-with-glibc2.39",
+  "python": "3.13.18",
+  "repo_commit": "9a0adbb",
+  "repo_dirty": true
+ },
+ "feasibility_settings": {
+  "max_examined_paths": 20,
+  "rank_evidence": true
+ },
+ "govulncheck": {
+  "db": "pinned vulndb snapshot e0bad56276e98711a598adbab976de7cd914013a data/osv (flat directory)",
+  "mode": "source, -scan symbol, main packages as roots, GOPROXY=off",
+  "module": "golang.org/x/vuln",
+  "scoring": "stratum S: REACHABLE claim = a symbol-level finding; stratum N: REACHABLE claim = any finding (symbol, package or module level)",
+  "version": "v1.9.0"
+ },
+ "label": "IN-SAMPLE for CP10: the target-hygiene rules were written after reading the CP9 adjudication of these D3b cases.",
+ "max_mains": 10,
+ "pipeline": {
+  "evidence_stage": "on",
+  "feasibility_filter": "on (N = 20 examined paths)",
+  "runs": [
+   "hygiene (CP10 target hygiene)",
+   "legacy (--legacy-targets)"
+  ]
+ },
+ "rows": [
+  {
+   "advisory": "GO-2026-5841",
+   "app_repo": "github.com/go-task/task",
+   "app_tag": "v3.46.4",
+   "cluster_key": "github.com/go-task/task",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "task__GO-2026-5841",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/klauspost/compress",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.18.0"
+  },
+  {
+   "advisory": "GO-2026-6348",
+   "app_repo": "github.com/go-task/task",
+   "app_tag": "v3.46.4",
+   "cluster_key": "github.com/go-task/task",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.83.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "google.golang.org/grpc/internal/transport.http2Client.Close",
+     "google.golang.org/grpc/internal/transport.http2Client.GracefulClose",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/transport.recvBuffer.put",
+     "google.golang.org/grpc/internal/transport.transportReader.Read"
+    ],
+    "trace": [
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream (internal/transport/http2_client.go:703)",
+     "google.golang.org/grpc.csAttempt.newStream (stream.go:494)",
+     "google.golang.org/grpc.newClientStreamWithParams$2 (stream.go:344)",
+     "google.golang.org/grpc.clientStream.withRetry (stream.go:752)",
+     "google.golang.org/grpc.clientStream.RecvMsg (stream.go:916)",
+     "cloud.google.com/go/storage/internal/apiv2/stubs.storageReadObjectClient.Recv (internal/apiv2/stubs/storage.pb.go:9681)",
+     "cloud.google.com/go/storage.gRPCReader.recv (grpc_client.go:1411)",
+     "cloud.google.com/go/storage.gRPCReader.Read (grpc_client.go:1365)",
+     "cloud.google.com/go/storage.Reader.Read (reader.go:207)",
+     "io.copyBuffer (src/io/io.go:429)",
+     "io.CopyBuffer (src/io/io.go:402)",
+     "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.checksum (internal/fingerprint/sources_checksum.go:100)",
+     "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.IsUpToDate (internal/fingerprint/sources_checksum.go:41)",
+     "github.com/go-task/task/v3/internal/fingerprint.IsTaskUpToDate (internal/fingerprint/task.go:108)",
+     "github.com/go-task/task/v3.Executor.Status (status.go:28)",
+     "github.com/go-task/task/v3/cmd/task.run (cmd/task/task.go:199)",
+     "github.com/go-task/task/v3/cmd/task.main (cmd/task/task.go:24)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.83.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "google.golang.org/grpc/internal/transport.http2Client.Close",
+     "google.golang.org/grpc/internal/transport.http2Client.GracefulClose",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/transport.recvBuffer.put",
+     "google.golang.org/grpc/internal/transport.transportReader.Read"
+    ],
+    "trace": [
+     "google.golang.org/grpc/internal/transport.recvBuffer.put (internal/transport/transport.go:104)",
+     "google.golang.org/grpc/internal/transport.Stream.write (internal/transport/transport.go:488)",
+     "google.golang.org/grpc/internal/transport.http2Client.closeStream (internal/transport/http2_client.go:904)",
+     "google.golang.org/grpc/internal/transport.http2Client.CloseStream (internal/transport/http2_client.go:884)",
+     "google.golang.org/grpc.csAttempt.finish (stream.go:1142)",
+     "google.golang.org/grpc.clientStream.finish (stream.go:996)",
+     "google.golang.org/grpc.clientStream.RecvMsg (stream.go:930)",
+     "cloud.google.com/go/storage/internal/apiv2/stubs.storageReadObjectClient.Recv (internal/apiv2/stubs/storage.pb.go:9681)",
+     "cloud.google.com/go/storage.gRPCReader.recv (grpc_client.go:1411)",
+     "cloud.google.com/go/storage.gRPCReader.Read (grpc_client.go:1365)",
+     "cloud.google.com/go/storage.Reader.Read (reader.go:207)",
+     "io.copyBuffer (src/io/io.go:429)",
+     "io.CopyBuffer (src/io/io.go:402)",
+     "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.checksum (internal/fingerprint/sources_checksum.go:100)",
+     "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.IsUpToDate (internal/fingerprint/sources_checksum.go:41)",
+     "github.com/go-task/task/v3/internal/fingerprint.IsTaskUpToDate (internal/fingerprint/task.go:108)",
+     "github.com/go-task/task/v3.Executor.Status (status.go:28)",
+     "github.com/go-task/task/v3/cmd/task.run (cmd/task/task.go:199)",
+     "github.com/go-task/task/v3/cmd/task.main (cmd/task/task.go:24)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "google.golang.org/grpc/internal/transport.http2Client.newStream",
+     "google.golang.org/grpc/internal/transport.recvBuffer.load",
+     "google.golang.org/grpc/internal/transport.recvBuffer.put"
+    ],
+    "dynamic_kinds": {
+     "FUNCTION_VALUE": 1,
+     "INTERFACE_METHOD": 3
+    },
+    "dynamic_steps": 4,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 7,
+     "deciding_targets": 7,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 3
+     },
+     "extra_targets": 3,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "task__GO-2026-6348",
+   "legacy": {
+    "deciding_reachable": [
+     "google.golang.org/grpc/internal/envconfig.boolFromEnv",
+     "google.golang.org/grpc/internal/transport.http2Client.newStream",
+     "google.golang.org/grpc/internal/transport.recvBuffer.load",
+     "google.golang.org/grpc/internal/transport.recvBuffer.put"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "google.golang.org/grpc",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.56.3"
+  },
+  {
+   "advisory": "GO-2026-6061",
+   "app_repo": "github.com/go-task/task",
+   "app_tag": "v3.46.4",
+   "cluster_key": "github.com/go-task/task",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.82.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "google.golang.org/grpc/internal/transport.controlBuffer.executeAndPut",
+     "google.golang.org/grpc/internal/transport.http2Client.Close",
+     "google.golang.org/grpc/internal/transport.http2Client.GracefulClose",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/transport.transportReader.Read"
+    ],
+    "trace": [
+     "google.golang.org/grpc/internal/transport.http2Client.GracefulClose (internal/transport/http2_client.go:1008)",
+     "google.golang.org/grpc.addrConn.tearDown (clientconn.go:1635)",
+     "google.golang.org/grpc.ClientConn.Close (clientconn.go:1233)",
+     "google.golang.org/api/transport/grpc.roundRobinConnPool.Close (transport/grpc/pool.go:48)",
+     "google.golang.org/api/transport/grpc.DialPool (transport/grpc/dial.go:110)",
+     "cloud.google.com/go/storage/internal/apiv2.NewClient (internal/apiv2/storage_client.go:510)",
+     "cloud.google.com/go/storage.newGRPCStorageClient (grpc_client.go:113)",
+     "cloud.google.com/go/storage.newGRPCClient (storage.go:225)",
+     "cloud.google.com/go/storage.NewClient (storage.go:137)",
+     "github.com/hashicorp/go-getter.GCSGetter.getClient (get_gcs.go:228)",
+     "github.com/hashicorp/go-getter.GCSGetter.ClientMode (get_gcs.go:54)",
+     "github.com/hashicorp/go-getter.Client.Get (client.go:233)",
+     "github.com/go-task/task/v3/taskfile.GitNode.getOrCloneRepo (taskfile/node_git.go:151)",
+     "github.com/go-task/task/v3/taskfile.GitNode.ReadContext (taskfile/node_git.go:161)",
+     "github.com/go-task/task/v3/taskfile.GitNode.Read (taskfile/node_git.go:100)",
+     "github.com/go-task/task/v3/taskfile.Reader.readNodeContent (taskfile/reader.go:414)",
+     "github.com/go-task/task/v3/taskfile.Reader.readNode (taskfile/reader.go:367)",
+     "github.com/go-task/task/v3/taskfile.Reader.include (taskfile/reader.go:272)",
+     "github.com/go-task/task/v3/taskfile.Reader.Read (taskfile/reader.go:212)",
+     "github.com/go-task/task/v3.Executor.readTaskfile (setup.go:92)",
+     "github.com/go-task/task/v3.Executor.Setup (setup.go:36)",
+     "github.com/go-task/task/v3/cmd/task.run (cmd/task/task.go:133)",
+     "github.com/go-task/task/v3/cmd/task.main (cmd/task/task.go:24)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.82.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "google.golang.org/grpc/internal/transport.controlBuffer.executeAndPut",
+     "google.golang.org/grpc/internal/transport.http2Client.Close",
+     "google.golang.org/grpc/internal/transport.http2Client.GracefulClose",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/transport.transportReader.Read"
+    ],
+    "trace": [
+     "google.golang.org/grpc/internal/transport.http2Client.Close (internal/transport/http2_client.go:951)",
+     "google.golang.org/grpc.addrConn.createTransport (clientconn.go:1481)",
+     "google.golang.org/grpc.addrConn.tryAllAddrs (clientconn.go:1400)",
+     "google.golang.org/grpc.addrConn.resetTransport (clientconn.go:1337)",
+     "google.golang.org/grpc.addrConn.connect (clientconn.go:978)",
+     "google.golang.org/grpc.acBalancerWrapper.Connect (balancer_conn_wrappers.go:398)",
+     "google.golang.org/grpc.idlePicker.Pick (pickfirst.go:221)",
+     "google.golang.org/grpc.pickerWrapper.pick (picker_wrapper.go:136)",
+     "google.golang.org/grpc.ClientConn.getTransport (clientconn.go:1111)",
+     "google.golang.org/grpc.csAttempt.getTransport (stream.go:458)",
+     "google.golang.org/grpc.newClientStreamWithParams$2 (stream.go:341)",
+     "google.golang.org/grpc.clientStream.withRetry (stream.go:752)",
+     "google.golang.org/grpc.clientStream.RecvMsg (stream.go:916)",
+     "cloud.google.com/go/storage/internal/apiv2/stubs.storageReadObjectClient.Recv (internal/apiv2/stubs/storage.pb.go:9681)",
+     "cloud.google.com/go/storage.gRPCReader.recv (grpc_client.go:1411)",
+     "cloud.google.com/go/storage.gRPCReader.Read (grpc_client.go:1365)",
+     "cloud.google.com/go/storage.Reader.Read (reader.go:207)",
+     "io.copyBuffer (src/io/io.go:429)",
+     "io.CopyBuffer (src/io/io.go:402)",
+     "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.checksum (internal/fingerprint/sources_checksum.go:100)",
+     "github.com/go-task/task/v3/internal/fingerprint.ChecksumChecker.IsUpToDate (internal/fingerprint/sources_checksum.go:41)",
+     "github.com/go-task/task/v3/internal/fingerprint.IsTaskUpToDate (internal/fingerprint/task.go:108)",
+     "github.com/go-task/task/v3.Executor.Status (status.go:28)",
+     "github.com/go-task/task/v3/cmd/task.run (cmd/task/task.go:199)",
+     "github.com/go-task/task/v3/cmd/task.main (cmd/task/task.go:24)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "google.golang.org/grpc/internal/transport.controlBuffer.executeAndPut"
+    ],
+    "dynamic_kinds": {
+     "FUNCTION_VALUE": 2,
+     "INTERFACE_METHOD": 2
+    },
+    "dynamic_steps": 4,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 4,
+     "deciding_targets": 4,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 33
+     },
+     "extra_targets": 33,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "task__GO-2026-6061",
+   "legacy": {
+    "deciding_reachable": [
+     "google.golang.org/grpc/internal/envconfig.boolFromEnv",
+     "google.golang.org/grpc/internal/transport.cleanupStream.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.controlBuffer.executeAndPut",
+     "google.golang.org/grpc/internal/transport.controlBuffer.finish",
+     "google.golang.org/grpc/internal/transport.dataFrame.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.goAway.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.headerFrame.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/transport.http2Client.handleData",
+     "google.golang.org/grpc/internal/transport.incomingGoAway.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.incomingSettings.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.incomingWindowUpdate.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.itemList.isEmpty",
+     "google.golang.org/grpc/internal/transport.loopyWriter.handle",
+     "google.golang.org/grpc/internal/transport.loopyWriter.headerHandler",
+     "google.golang.org/grpc/internal/transport.loopyWriter.originateStream",
+     "google.golang.org/grpc/internal/transport.loopyWriter.registerStreamHandler",
+     "google.golang.org/grpc/internal/transport.outgoingSettings.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.outgoingWindowUpdate.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.ping.isTransportResponseFrame"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "google.golang.org/grpc",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.56.3"
+  },
+  {
+   "advisory": "GO-2026-5676",
+   "app_repo": "github.com/fatedier/frp",
+   "app_tag": "v0.65.0",
+   "cluster_key": "github.com/fatedier/frp",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v0.59.1",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v0.59.1",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 3,
+     "deciding_targets": 3,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "frp__GO-2026-5676",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "github.com/quic-go/quic-go",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v0.53.0"
+  },
+  {
+   "advisory": "GO-2026-5543",
+   "app_repo": "github.com/fatedier/frp",
+   "app_tag": "v0.65.0",
+   "cluster_key": "github.com/fatedier/frp",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.1.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/Azure/go-ntlmssp.ProcessChallenge"
+    ],
+    "trace": [
+     "github.com/Azure/go-ntlmssp.ProcessChallenge (authenticate_message.go:85)",
+     "github.com/fatedier/golib/net.ntlmHTTPProxyAfterHook (net/dial_option.go:318)",
+     "github.com/fatedier/golib/net.WithProxy$1$3 (net/dial_option.go:142)",
+     "github.com/fatedier/golib/net.DialContext (net/dial.go:80)",
+     "github.com/fatedier/frp/client.defaultConnectorImpl.realConnect (client/connector.go:209)",
+     "github.com/fatedier/frp/client.defaultConnectorImpl.Open (client/connector.go:110)",
+     "github.com/fatedier/frp/client.Service.login (client/service.go:263)",
+     "github.com/fatedier/frp/client.loopLoginUntilSuccess$1 (client/service.go:326)",
+     "github.com/fatedier/frp/pkg/util/wait.BackoffUntil (pkg/util/wait/backoff.go:133)",
+     "github.com/fatedier/frp/client.Service.keepControllerWorking (client/service.go:233)",
+     "github.com/fatedier/frp/client.Service.Run (client/service.go:219)",
+     "github.com/fatedier/frp/cmd/frpc/sub.startService (cmd/frpc/sub/root.go:167)",
+     "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1 (cmd/frpc/sub/proxy.go:91)",
+     "github.com/spf13/cobra.Command.execute (command.go:987)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1115)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1039)",
+     "github.com/fatedier/frp/cmd/frpc/sub.Execute (cmd/frpc/sub/root.go:102)",
+     "github.com/fatedier/frp/cmd/frpc.main (cmd/frpc/main.go:25)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.1.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/Azure/go-ntlmssp.ProcessChallenge"
+    ],
+    "trace": [
+     "github.com/Azure/go-ntlmssp.ProcessChallenge (authenticate_message.go:85)",
+     "github.com/fatedier/golib/net.ntlmHTTPProxyAfterHook (net/dial_option.go:318)",
+     "github.com/fatedier/golib/net.WithProxy$1$3 (net/dial_option.go:142)",
+     "github.com/fatedier/golib/net.DialContext (net/dial.go:80)",
+     "github.com/fatedier/frp/client.defaultConnectorImpl.realConnect (client/connector.go:209)",
+     "github.com/fatedier/frp/client.defaultConnectorImpl.Open (client/connector.go:110)",
+     "github.com/fatedier/frp/client.Service.login (client/service.go:263)",
+     "github.com/fatedier/frp/client.loopLoginUntilSuccess$1 (client/service.go:326)",
+     "github.com/fatedier/frp/pkg/util/wait.BackoffUntil (pkg/util/wait/backoff.go:133)",
+     "github.com/fatedier/frp/client.Service.keepControllerWorking (client/service.go:233)",
+     "github.com/fatedier/frp/client.Service.Run (client/service.go:219)",
+     "github.com/fatedier/frp/cmd/frpc/sub.startService (cmd/frpc/sub/root.go:167)",
+     "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1 (cmd/frpc/sub/proxy.go:91)",
+     "github.com/spf13/cobra.Command.execute (command.go:987)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1115)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1039)",
+     "github.com/fatedier/frp/cmd/frpc/sub.Execute (cmd/frpc/sub/root.go:102)",
+     "github.com/fatedier/frp/cmd/frpc.main (cmd/frpc/main.go:25)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/Azure/go-ntlmssp.ProcessChallenge"
+    ],
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "FUNCTION_VALUE": 2,
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 4,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 2
+     },
+     "extra_targets": 2,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "frp__GO-2026-5543",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/Azure/go-ntlmssp.varField.ReadFrom",
+     "github.com/Azure/go-ntlmssp.varField.ReadStringFrom"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/Azure/go-ntlmssp",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v0.0.0-20221128193559-754e69321358"
+  },
+  {
+   "advisory": "GO-2025-4233",
+   "app_repo": "github.com/fatedier/frp",
+   "app_tag": "v0.65.0",
+   "cluster_key": "github.com/fatedier/frp",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v0.57.0",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v0.57.0",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 7,
+     "deciding_targets": 7,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 4
+     },
+     "extra_targets": 4,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": true,
+   "hygiene_made_not_reachable": true,
+   "id": "frp__GO-2025-4233",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "github.com/quic-go/quic-go",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v0.53.0"
+  },
+  {
+   "advisory": "GO-2025-4017",
+   "app_repo": "github.com/fatedier/frp",
+   "app_tag": "v0.65.0",
+   "cluster_key": "github.com/fatedier/frp",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.54.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/quic-go/quic-go.Dial",
+     "github.com/quic-go/quic-go.DialAddr",
+     "github.com/quic-go/quic-go.Listen",
+     "github.com/quic-go/quic-go.ListenAddr"
+    ],
+    "trace": [
+     "github.com/quic-go/quic-go.DialAddr (client.go:19)",
+     "github.com/fatedier/frp/client.defaultConnectorImpl.Open (client/connector.go:91)",
+     "github.com/fatedier/frp/client.Service.login (client/service.go:263)",
+     "github.com/fatedier/frp/client.loopLoginUntilSuccess$1 (client/service.go:326)",
+     "github.com/fatedier/frp/pkg/util/wait.BackoffUntil (pkg/util/wait/backoff.go:133)",
+     "github.com/fatedier/frp/client.Service.keepControllerWorking (client/service.go:233)",
+     "github.com/fatedier/frp/client.Service.Run (client/service.go:219)",
+     "github.com/fatedier/frp/cmd/frpc/sub.startService (cmd/frpc/sub/root.go:167)",
+     "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1 (cmd/frpc/sub/proxy.go:91)",
+     "github.com/spf13/cobra.Command.execute (command.go:987)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1115)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1039)",
+     "github.com/fatedier/frp/cmd/frpc/sub.Execute (cmd/frpc/sub/root.go:102)",
+     "github.com/fatedier/frp/cmd/frpc.main (cmd/frpc/main.go:25)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.54.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/quic-go/quic-go.Dial",
+     "github.com/quic-go/quic-go.DialAddr",
+     "github.com/quic-go/quic-go.Listen",
+     "github.com/quic-go/quic-go.ListenAddr"
+    ],
+    "trace": [
+     "github.com/quic-go/quic-go.Listen (server.go:223)",
+     "github.com/fatedier/frp/client/proxy.XTCPProxy.listenByQUIC (client/proxy/xtcp.go:181)",
+     "github.com/fatedier/frp/client/proxy.XTCPProxy.InWorkConn (client/proxy/xtcp.go:130)",
+     "github.com/fatedier/frp/client/proxy.Wrapper.InWorkConn (client/proxy/proxy_wrapper.go:266)",
+     "github.com/fatedier/frp/client/proxy.Manager.HandleWorkConn (client/proxy/proxy_manager.go:97)",
+     "github.com/fatedier/frp/client.Control.handleReqWorkConn (client/control.go:160)",
+     "github.com/fatedier/frp/pkg/msg.AsyncHandler$1 (pkg/msg/handler.go:24)",
+     "github.com/fatedier/frp/pkg/msg.Dispatcher.readLoop (pkg/msg/handler.go:73)",
+     "github.com/fatedier/frp/pkg/msg.Dispatcher.Run (pkg/msg/handler.go:50)",
+     "github.com/fatedier/frp/client.Control.worker (client/control.go:281)",
+     "github.com/fatedier/frp/client.Control.Run (client/control.go:112)",
+     "github.com/fatedier/frp/client.loopLoginUntilSuccess$1 (client/service.go:359)",
+     "github.com/fatedier/frp/pkg/util/wait.BackoffUntil (pkg/util/wait/backoff.go:133)",
+     "github.com/fatedier/frp/client.Service.keepControllerWorking (client/service.go:233)",
+     "github.com/fatedier/frp/client.Service.Run (client/service.go:219)",
+     "github.com/fatedier/frp/cmd/frpc/sub.startService (cmd/frpc/sub/root.go:167)",
+     "github.com/fatedier/frp/cmd/frpc/sub.NewProxyCommand$1 (cmd/frpc/sub/proxy.go:91)",
+     "github.com/spf13/cobra.Command.execute (command.go:987)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1115)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1039)",
+     "github.com/fatedier/frp/cmd/frpc/sub.Execute (cmd/frpc/sub/root.go:102)",
+     "github.com/fatedier/frp/cmd/frpc.main (cmd/frpc/main.go:25)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/quic-go/quic-go.Conn.handleHandshakeConfirmed"
+    ],
+    "dynamic_kinds": {
+     "FUNCTION_VALUE": 1
+    },
+    "dynamic_steps": 1,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 1
+     },
+     "extra_targets": 1,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "frp__GO-2025-4017",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/quic-go/quic-go.Conn.handleHandshakeComplete",
+     "github.com/quic-go/quic-go.Conn.handleHandshakeConfirmed"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/quic-go/quic-go",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v0.53.0"
+  },
+  {
+   "advisory": "GO-2026-5543",
+   "app_repo": "github.com/gogs/gogs",
+   "app_tag": "v0.13.3",
+   "cluster_key": "github.com/gogs/gogs",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v0.1.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v0.1.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 2
+     },
+     "extra_targets": 2,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "gogs__GO-2026-5543",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/Azure/go-ntlmssp",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v0.0.0-20220621081337-cb9428e4ac1e"
+  },
+  {
+   "advisory": "GO-2024-2606",
+   "app_repo": "github.com/gogs/gogs",
+   "app_tag": "v0.13.3",
+   "cluster_key": "github.com/gogs/gogs",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v5.5.4",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL",
+     "github.com/jackc/pgx/v5/pgconn.ConnectConfig",
+     "github.com/jackc/pgx/v5/pgconn.MultiResultReader.Close",
+     "github.com/jackc/pgx/v5/pgconn.MultiResultReader.NextResult",
+     "github.com/jackc/pgx/v5/pgconn.MultiResultReader.ReadAll",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.CheckConn",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.Close",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.Exec",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.ExecParams",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.ExecPrepared",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.Prepare",
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Close",
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.SendDeallocate",
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+     "github.com/jackc/pgx/v5/pgconn.ResultReader.Close",
+     "github.com/jackc/pgx/v5/pgconn.ResultReader.NextRow",
+     "github.com/jackc/pgx/v5/pgconn.ResultReader.Read",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.Flush",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.Send",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendBind",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendClose",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendDescribe",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendExecute",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendParse",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendQuery",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendSync"
+    ],
+    "trace": [
+     "github.com/jackc/pgx/v5/pgconn.PgConn.Exec (pgconn/pgconn.go:930)",
+     "github.com/jackc/pgx/v5.Conn.Deallocate (conn.go:325)",
+     "github.com/jackc/pgx/v5/stdlib.Stmt.Close (stdlib/sql.go:480)",
+     "database/sql.driverStmt.Close (src/database/sql/sql.go:727)",
+     "database/sql.driverConn.finalClose (src/database/sql/sql.go:691)",
+     "database/sql.DB.Close (src/database/sql/sql.go:945)",
+     "gogs.io/gogs/internal/db/schemadoc.main$2 (internal/db/schemadoc/main.go:36)",
+     "gogs.io/gogs/internal/db/schemadoc.main (internal/db/schemadoc/main.go:36)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v5.5.4",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL",
+     "github.com/jackc/pgx/v5/pgconn.ConnectConfig",
+     "github.com/jackc/pgx/v5/pgconn.MultiResultReader.Close",
+     "github.com/jackc/pgx/v5/pgconn.MultiResultReader.NextResult",
+     "github.com/jackc/pgx/v5/pgconn.MultiResultReader.ReadAll",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.CheckConn",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.Close",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.Exec",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.ExecParams",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.ExecPrepared",
+     "github.com/jackc/pgx/v5/pgconn.PgConn.Prepare",
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Close",
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.SendDeallocate",
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+     "github.com/jackc/pgx/v5/pgconn.ResultReader.Close",
+     "github.com/jackc/pgx/v5/pgconn.ResultReader.NextRow",
+     "github.com/jackc/pgx/v5/pgconn.ResultReader.Read",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.Flush",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.Send",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendBind",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendClose",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendDescribe",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendExecute",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendParse",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendQuery",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendSync"
+    ],
+    "trace": [
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Close (pgconn/pgconn.go:1940)",
+     "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements (conn.go:1323)",
+     "github.com/jackc/pgx/v5.Conn.Exec (conn.go:412)",
+     "github.com/jackc/pgx/v5.dbTx.Commit (tx.go:173)",
+     "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit (stdlib/sql.go:785)",
+     "database/sql.Commit$1 (src/database/sql/sql.go:2313)",
+     "database/sql.withLock (src/database/sql/sql.go:3572)",
+     "database/sql.driverConn.finalClose (src/database/sql/sql.go:683)",
+     "database/sql.DB.Close (src/database/sql/sql.go:945)",
+     "gogs.io/gogs/internal/db/schemadoc.main$2 (internal/db/schemadoc/main.go:36)",
+     "gogs.io/gogs/internal/db/schemadoc.main (internal/db/schemadoc/main.go:36)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/jackc/pgx/v5/internal/sanitize.Query.Sanitize",
+     "github.com/jackc/pgx/v5/pgproto3.Bind.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Close.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Describe.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Execute.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.Flush",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.Send",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendBind",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendClose",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendDescribe",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendExecute",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendParse",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendQuery",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendSync",
+     "github.com/jackc/pgx/v5/pgproto3.GSSResponse.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Parse.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.PasswordMessage.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Query.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.SASLInitialResponse.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.SASLResponse.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.StartupMessage.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Sync.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Terminate.Encode"
+    ],
+    "dynamic_kinds": {
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 1,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 67,
+     "deciding_targets": 67,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 163
+     },
+     "extra_targets": 163,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "gogs__GO-2024-2606",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/jackc/pgx/v5/internal/sanitize.Query.Sanitize",
+     "github.com/jackc/pgx/v5/pgproto3.AuthenticationCleartextPassword.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.AuthenticationGSS.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.AuthenticationGSSContinue.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.AuthenticationMD5Password.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.AuthenticationOk.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.AuthenticationSASL.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.AuthenticationSASLContinue.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.AuthenticationSASLFinal.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.BackendKeyData.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.Bind.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.BindComplete.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.Close.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.CloseComplete.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.CommandComplete.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.CopyBothResponse.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.CopyData.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.CopyDone.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.CopyInResponse.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.CopyOutResponse.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.DataRow.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.Describe.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.EmptyQueryResponse.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.ErrorResponse.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.Execute.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.Flush",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.Send",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendBind",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendClose",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendDescribe",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendExecute",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendParse",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendQuery",
+     "github.com/jackc/pgx/v5/pgproto3.Frontend.SendSync",
+     "github.com/jackc/pgx/v5/pgproto3.FunctionCallResponse.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.GSSResponse.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.NewFrontend",
+     "github.com/jackc/pgx/v5/pgproto3.NoData.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.NoticeResponse.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.NotificationResponse.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.ParameterDescription.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.ParameterStatus.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.Parse.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.ParseComplete.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.PasswordMessage.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.PortalSuspended.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.Query.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.ReadyForQuery.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.RowDescription.Decode",
+     "github.com/jackc/pgx/v5/pgproto3.SASLInitialResponse.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.SASLResponse.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.StartupMessage.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Sync.Encode",
+     "github.com/jackc/pgx/v5/pgproto3.Terminate.Encode"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/jackc/pgx/v5",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v5.3.0"
+  },
+  {
+   "advisory": "GO-2024-2567",
+   "app_repo": "github.com/gogs/gogs",
+   "app_tag": "v0.13.3",
+   "cluster_key": "github.com/gogs/gogs",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v5.5.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync"
+    ],
+    "trace": [
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync (pgconn/pgconn.go:1837)",
+     "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements (conn.go:1329)",
+     "github.com/jackc/pgx/v5.Conn.Exec (conn.go:412)",
+     "github.com/jackc/pgx/v5.dbTx.Commit (tx.go:173)",
+     "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit (stdlib/sql.go:785)",
+     "database/sql.Commit$1 (src/database/sql/sql.go:2313)",
+     "database/sql.withLock (src/database/sql/sql.go:3572)",
+     "database/sql.driverConn.finalClose (src/database/sql/sql.go:683)",
+     "database/sql.DB.Close (src/database/sql/sql.go:945)",
+     "gogs.io/gogs/internal/db/schemadoc.main$2 (internal/db/schemadoc/main.go:36)",
+     "gogs.io/gogs/internal/db/schemadoc.main (internal/db/schemadoc/main.go:36)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v5.5.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync"
+    ],
+    "trace": [
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync (pgconn/pgconn.go:1837)",
+     "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements (conn.go:1329)",
+     "github.com/jackc/pgx/v5.Conn.Exec (conn.go:412)",
+     "github.com/jackc/pgx/v5.dbTx.Commit (tx.go:173)",
+     "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit (stdlib/sql.go:785)",
+     "database/sql.Commit$1 (src/database/sql/sql.go:2313)",
+     "database/sql.withLock (src/database/sql/sql.go:3572)",
+     "database/sql.driverConn.finalClose (src/database/sql/sql.go:683)",
+     "database/sql.DB.Close (src/database/sql/sql.go:945)",
+     "gogs.io/gogs/internal/db/schemadoc.main$2 (internal/db/schemadoc/main.go:36)",
+     "gogs.io/gogs/internal/db/schemadoc.main (internal/db/schemadoc/main.go:36)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync"
+    ],
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 2,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "gogs__GO-2024-2567",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/jackc/pgx/v5",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v5.3.0"
+  },
+  {
+   "advisory": "GO-2026-5004",
+   "app_repo": "github.com/gogs/gogs",
+   "app_tag": "v0.13.3",
+   "cluster_key": "github.com/gogs/gogs",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v5.9.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL"
+    ],
+    "trace": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL (internal/sanitize/sanitize.go:316)",
+     "github.com/jackc/pgx/v5.Conn.sanitizeForSimpleQuery (conn.go:1161)",
+     "github.com/jackc/pgx/v5.Conn.Query (conn.go:769)",
+     "github.com/jackc/pgx/v5/stdlib.Conn.QueryContext (stdlib/sql.go:418)",
+     "database/sql.ctxDriverQuery (src/database/sql/ctxutil.go:48)",
+     "database/sql.queryDC$1 (src/database/sql/sql.go:1786)",
+     "database/sql.withLock (src/database/sql/sql.go:3572)",
+     "database/sql.driverConn.finalClose (src/database/sql/sql.go:683)",
+     "database/sql.DB.Close (src/database/sql/sql.go:945)",
+     "gogs.io/gogs/internal/db/schemadoc.main$2 (internal/db/schemadoc/main.go:36)",
+     "gogs.io/gogs/internal/db/schemadoc.main (internal/db/schemadoc/main.go:36)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v5.9.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL"
+    ],
+    "trace": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL (internal/sanitize/sanitize.go:316)",
+     "github.com/jackc/pgx/v5.Conn.sanitizeForSimpleQuery (conn.go:1161)",
+     "github.com/jackc/pgx/v5.Conn.Query (conn.go:769)",
+     "github.com/jackc/pgx/v5/stdlib.Conn.QueryContext (stdlib/sql.go:418)",
+     "database/sql.ctxDriverQuery (src/database/sql/ctxutil.go:48)",
+     "database/sql.queryDC$1 (src/database/sql/sql.go:1786)",
+     "database/sql.withLock (src/database/sql/sql.go:3572)",
+     "database/sql.driverConn.finalClose (src/database/sql/sql.go:683)",
+     "database/sql.DB.Close (src/database/sql/sql.go:945)",
+     "gogs.io/gogs/internal/db/schemadoc.main$2 (internal/db/schemadoc/main.go:36)",
+     "gogs.io/gogs/internal/db/schemadoc.main (internal/db/schemadoc/main.go:36)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/jackc/pgx/v5/internal/sanitize.Query.Sanitize",
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL"
+    ],
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "INTERFACE_METHOD": 2
+    },
+    "dynamic_steps": 3,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 2,
+     "deciding_targets": 2,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 4
+     },
+     "extra_targets": 4,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "gogs__GO-2026-5004",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/jackc/pgx/v5/internal/sanitize.QuoteBytes",
+     "github.com/jackc/pgx/v5/internal/sanitize.escapeStringState",
+     "github.com/jackc/pgx/v5/internal/sanitize.placeholderState",
+     "github.com/jackc/pgx/v5/internal/sanitize.rawState"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/jackc/pgx/v5",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v5.3.0"
+  }
+ ],
+ "schema_version": "1.0",
+ "seconds_per_case": {
+  "hygiene": {
+   "max": 63.2,
+   "n": 11,
+   "p50": 28.9,
+   "p95": 63.2,
+   "total": 360.6
+  },
+  "legacy": {
+   "max": 57.7,
+   "n": 11,
+   "p50": 26.7,
+   "p95": 57.7,
+   "total": 311.6
+  }
+ },
+ "set": "d3b",
+ "statement": "REACHABLE means reachable in the call graph from a main package, not exploitable. govulncheck is a reference, not truth; truth comes from the adjudication sheets.",
+ "summary": {
+  "ALL": {
+   "cases": 11,
+   "evidence_levels": {
+    "HAS_DYNAMIC_STEPS": 7
+   },
+   "govulncheck_claim": {
+    "NOT_REACHABLE": 4,
+    "REACHABLE": 7
+   },
+   "govulncheck_level": {
+    "MODULE": 3,
+    "PACKAGE": 1,
+    "SYMBOL": 7
+   },
+   "hygiene": {
+    "CANT_DETERMINE": 1,
+    "NOT_REACHABLE": 3,
+    "REACHABLE": 7
+   },
+   "hygiene_changed": [
+    "frp__GO-2025-4233"
+   ],
+   "hygiene_made_not_reachable": [
+    "frp__GO-2025-4233"
+   ],
+   "legacy": {
+    "CANT_DETERMINE": 2,
+    "NOT_REACHABLE": 2,
+    "REACHABLE": 7
+   }
+  },
+  "N": {
+   "cases": 0,
+   "evidence_levels": {},
+   "govulncheck_claim": {},
+   "govulncheck_level": {},
+   "hygiene": {},
+   "hygiene_changed": [],
+   "hygiene_made_not_reachable": [],
+   "legacy": {}
+  },
+  "S": {
+   "cases": 11,
+   "evidence_levels": {
+    "HAS_DYNAMIC_STEPS": 7
+   },
+   "govulncheck_claim": {
+    "NOT_REACHABLE": 4,
+    "REACHABLE": 7
+   },
+   "govulncheck_level": {
+    "MODULE": 3,
+    "PACKAGE": 1,
+    "SYMBOL": 7
+   },
+   "hygiene": {
+    "CANT_DETERMINE": 1,
+    "NOT_REACHABLE": 3,
+    "REACHABLE": 7
+   },
+   "hygiene_changed": [
+    "frp__GO-2025-4233"
+   ],
+   "hygiene_made_not_reachable": [
+    "frp__GO-2025-4233"
+   ],
+   "legacy": {
+    "CANT_DETERMINE": 2,
+    "NOT_REACHABLE": 2,
+    "REACHABLE": 7
+   }
+  },
+  "by_stratum": {
+   "S": 11
+  },
+  "cases": 11,
+  "govulncheck_runs_agree": false
+ },
+ "toolchain": {
+  "hygiene": {
+   "helper": [
+    "go1.26.10"
+   ],
+   "linker": [
+    "go1.26.10"
+   ]
+  },
+  "legacy": {
+   "helper": [
+    "go1.26.10"
+   ],
+   "linker": [
+    "go1.26.10"
+   ]
+  }
+ },
+ "verdict_files_gzipped": [
+  "verdicts_hygiene/gogs__GO-2024-2606.json.gz",
+  "verdicts_hygiene/task__GO-2026-6061.json.gz",
+  "verdicts_legacy/gogs__GO-2024-2606.json.gz",
+  "verdicts_legacy/task__GO-2026-6061.json.gz"
+ ],
+ "verdict_provenance": {
+  "hygiene": {
+   "cases_resumed": 0,
+   "cases_run_in_this_invocation": 11,
+   "created_at_first": "2026-11-26T02:16:36Z",
+   "created_at_last": "2026-11-26T02:22:14Z",
+   "repo_commits": [
+    "9a0adbb"
+   ]
+  },
+  "legacy": {
+   "cases_resumed": 0,
+   "cases_run_in_this_invocation": 11,
+   "created_at_first": "2026-11-26T02:22:57Z",
+   "created_at_last": "2026-11-26T02:27:51Z",
+   "repo_commits": [
+    "792b9df"
+   ]
+  }
+ }
+}

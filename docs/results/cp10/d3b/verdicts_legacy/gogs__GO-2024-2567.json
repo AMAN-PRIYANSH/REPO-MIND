@@ -1,0 +1,2366 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "jackc",
+    "repo": "pgx",
+    "sha": "dfd198003a03dbb96e4607b0d3a0bb9a7398ccb7"
+   }
+  ],
+  "fixed_in": "5.5.2",
+  "id": "GO-2024-2567",
+  "module": "github.com/jackc/pgx/v5",
+  "source": "vulndb",
+  "vulnerable_at": "5.5.1"
+ },
+ "case_id": "gogs__GO-2024-2567",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "gogs.io/gogs",
+   "gogs.io/gogs/internal/db/schemadoc"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "gogs.io/gogs": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.61,
+    "load_failed": false,
+    "vta_seconds": 10.9
+   },
+   "gogs.io/gogs/internal/db/schemadoc": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.1,
+    "load_failed": false,
+    "vta_seconds": 7.75
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 1,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {
+   "FEASIBLE": 2
+  },
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "7 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "path_evidence": {
+  "dynamic_kinds": {
+   "CLOSURE_VIA_PARAMETER": 1,
+   "INTERFACE_METHOD": 1
+  },
+  "dynamic_steps": 2,
+  "entry": {
+   "main_package": "gogs.io/gogs/internal/db/schemadoc",
+   "target": {
+    "package": "github.com/jackc/pgx/v5/pgconn",
+    "symbol": "Pipeline.Sync"
+   }
+  },
+  "evidence_level": "HAS_DYNAMIC_STEPS",
+  "length": 12,
+  "passes_filter": true,
+  "source": "FILTER_RANKED_PATH",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "gogs.go",
+        "line": 39
+       },
+       "callee": "github.com/urfave/cli.App.Run",
+       "caller": "gogs.io/gogs.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+        "line": 286
+       },
+       "callee": "github.com/urfave/cli.HandleAction",
+       "caller": "github.com/urfave/cli.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+        "line": 522
+       },
+       "callee": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+       "caller": "github.com/urfave/cli.HandleAction",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd/admin.go",
+        "line": 185
+       },
+       "callee": "gogs.io/gogs/internal/db.DeleteMissingRepositories",
+       "caller": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/repo.go",
+        "line": 2008
+       },
+       "callee": "gogs.io/gogs/internal/db.DeleteRepository",
+       "caller": "gogs.io/gogs/internal/db.DeleteMissingRepositories",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/repo.go",
+        "line": 1731
+       },
+       "callee": "xorm.io/xorm.Session.Commit",
+       "caller": "gogs.io/gogs/internal/db.DeleteRepository",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/xorm.io/xorm@v0.8.0/session_tx.go",
+        "line": 40
+       },
+       "callee": "database/sql.Tx.Commit",
+       "caller": "xorm.io/xorm.Session.Commit",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 2312
+       },
+       "callee": "database/sql.withLock",
+       "caller": "database/sql.Tx.Commit",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3572
+       },
+       "callee": "database/sql.Tx.Commit$1",
+       "caller": "database/sql.withLock",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 2313
+       },
+       "callee": "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit",
+       "caller": "database/sql.Tx.Commit$1",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+        "line": 785
+       },
+       "callee": "github.com/jackc/pgx/v5.dbTx.Commit",
+       "caller": "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/tx.go",
+        "line": 173
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+       "caller": "github.com/jackc/pgx/v5.dbTx.Commit",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 412
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 1329
+       },
+       "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+       "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "gogs.io/gogs",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/jackc/pgx/v5/pgconn",
+      "symbol": "Pipeline.Sync"
+     }
+    },
+    "evidence_source": "STATE_SEARCH",
+    "examined": [
+     {
+      "dynamic_steps": 3,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "$GOROOT/src/database/sql/sql.go",
+          "line": 3040
+         },
+         "callee": "database/sql.withLock",
+         "caller": "database/sql.Rows.Next",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/database/sql/sql.go",
+         "line": 3572
+        },
+        "callee": "database/sql.DB.pingDC$1",
+        "caller": "database/sql.withLock",
+        "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 8,
+       "pattern": "F1",
+       "reason": "the function value passed at $GOROOT/src/database/sql/sql.go:3040 is `database/sql.Rows.Next$1`; the dynamic call at $GOROOT/src/database/sql/sql.go:3572 can only reach it, not database/sql.DB.pingDC$1"
+      },
+      "length": 14
+     },
+     {
+      "dynamic_steps": 3,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "$GOROOT/src/database/sql/sql.go",
+          "line": 3040
+         },
+         "callee": "database/sql.withLock",
+         "caller": "database/sql.Rows.Next",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/database/sql/sql.go",
+         "line": 3572
+        },
+        "callee": "database/sql.DB.pingDC$1",
+        "caller": "database/sql.withLock",
+        "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 8,
+       "pattern": "F1",
+       "reason": "the function value passed at $GOROOT/src/database/sql/sql.go:3040 is `database/sql.Rows.Next$1`; the dynamic call at $GOROOT/src/database/sql/sql.go:3572 can only reach it, not database/sql.DB.pingDC$1"
+      },
+      "length": 14
+     },
+     {
+      "dynamic_steps": 6,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "$GOROOT/src/database/sql/sql.go",
+          "line": 3040
+         },
+         "callee": "database/sql.withLock",
+         "caller": "database/sql.Rows.Next",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/database/sql/sql.go",
+         "line": 3572
+        },
+        "callee": "database/sql.DB.pingDC$1",
+        "caller": "database/sql.withLock",
+        "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 8,
+       "pattern": "F1",
+       "reason": "the function value passed at $GOROOT/src/database/sql/sql.go:3040 is `database/sql.Rows.Next$1`; the dynamic call at $GOROOT/src/database/sql/sql.go:3572 can only reach it, not database/sql.DB.pingDC$1"
+      },
+      "length": 14
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "gogs.go",
+        "line": 39
+       },
+       "callee": "github.com/urfave/cli.App.Run",
+       "caller": "gogs.io/gogs.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+        "line": 286
+       },
+       "callee": "github.com/urfave/cli.HandleAction",
+       "caller": "github.com/urfave/cli.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+        "line": 522
+       },
+       "callee": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+       "caller": "github.com/urfave/cli.HandleAction",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd/admin.go",
+        "line": 185
+       },
+       "callee": "gogs.io/gogs/internal/db.DeleteMissingRepositories",
+       "caller": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/repo.go",
+        "line": 2008
+       },
+       "callee": "gogs.io/gogs/internal/db.DeleteRepository",
+       "caller": "gogs.io/gogs/internal/db.DeleteMissingRepositories",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/repo.go",
+        "line": 1731
+       },
+       "callee": "xorm.io/xorm.Session.Commit",
+       "caller": "gogs.io/gogs/internal/db.DeleteRepository",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/xorm.io/xorm@v0.8.0/session_tx.go",
+        "line": 40
+       },
+       "callee": "database/sql.Tx.Commit",
+       "caller": "xorm.io/xorm.Session.Commit",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 2312
+       },
+       "callee": "database/sql.withLock",
+       "caller": "database/sql.Tx.Commit",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3572
+       },
+       "callee": "database/sql.Tx.Commit$1",
+       "caller": "database/sql.withLock",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 2313
+       },
+       "callee": "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit",
+       "caller": "database/sql.Tx.Commit$1",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+        "line": 785
+       },
+       "callee": "github.com/jackc/pgx/v5.dbTx.Commit",
+       "caller": "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/tx.go",
+        "line": 173
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+       "caller": "github.com/jackc/pgx/v5.dbTx.Commit",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 412
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 1329
+       },
+       "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+       "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "gogs.io/gogs",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/jackc/pgx/v5/pgconn",
+      "symbol": "Pipeline.Sync"
+     }
+    },
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "github.com/jackc/pgx/v5/pgconn.(*Pipeline).Sync"
+   ],
+   "main_package": "gogs.io/gogs",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0,
+     1,
+     2
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 5,
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "FUNCTION_VALUE": 2,
+     "INTERFACE_METHOD": 2
+    },
+    "dynamic_steps": 5,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "examined_paths": 20,
+    "filter_status": "FEASIBLE",
+    "length": 14,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": true,
+    "source": "FILTER_RANKED_PATH"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "gogs.go",
+        "line": 39
+       },
+       "callee": "github.com/urfave/cli.App.Run",
+       "caller": "gogs.io/gogs.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+        "line": 286
+       },
+       "callee": "github.com/urfave/cli.HandleAction",
+       "caller": "github.com/urfave/cli.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+        "line": 522
+       },
+       "callee": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+       "caller": "github.com/urfave/cli.HandleAction",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd/admin.go",
+        "line": 185
+       },
+       "callee": "gogs.io/gogs/internal/cmd.init$1",
+       "caller": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd/admin.go",
+        "line": 55
+       },
+       "callee": "gogs.io/gogs/internal/db.users.DeleteInactivated",
+       "caller": "gogs.io/gogs/internal/cmd.init$1",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/users.go",
+        "line": 654
+       },
+       "callee": "gogs.io/gogs/internal/db.publicKeys.RewriteAuthorizedKeys",
+       "caller": "gogs.io/gogs/internal/db.users.DeleteInactivated",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/public_keys.go",
+        "line": 70
+       },
+       "callee": "database/sql.Rows.Next",
+       "caller": "gogs.io/gogs/internal/db.publicKeys.RewriteAuthorizedKeys",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3040
+       },
+       "callee": "database/sql.withLock",
+       "caller": "database/sql.Rows.Next",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3572
+       },
+       "callee": "database/sql.DB.execDC$2",
+       "caller": "database/sql.withLock",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 1713
+       },
+       "callee": "database/sql.ctxDriverExec",
+       "caller": "database/sql.DB.execDC$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/ctxutil.go",
+        "line": 31
+       },
+       "callee": "github.com/jackc/pgx/v5/stdlib.Conn.ExecContext",
+       "caller": "database/sql.ctxDriverExec",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+        "line": 400
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+       "caller": "github.com/jackc/pgx/v5/stdlib.Conn.ExecContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 412
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 1329
+       },
+       "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+       "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "gogs.io/gogs",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/jackc/pgx/v5/pgconn",
+      "symbol": "Pipeline.Sync"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "gogs.go",
+        "line": 39
+       },
+       "callee": "github.com/urfave/cli.App.Run",
+       "caller": "gogs.io/gogs.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+        "line": 286
+       },
+       "callee": "github.com/urfave/cli.HandleAction",
+       "caller": "github.com/urfave/cli.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+        "line": 524
+       },
+       "callee": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+       "caller": "github.com/urfave/cli.HandleAction",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd/admin.go",
+        "line": 185
+       },
+       "callee": "gogs.io/gogs/internal/cmd.init$1",
+       "caller": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd/admin.go",
+        "line": 55
+       },
+       "callee": "gogs.io/gogs/internal/db.users.DeleteInactivated",
+       "caller": "gogs.io/gogs/internal/cmd.init$1",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/users.go",
+        "line": 654
+       },
+       "callee": "gogs.io/gogs/internal/db.publicKeys.RewriteAuthorizedKeys",
+       "caller": "gogs.io/gogs/internal/db.users.DeleteInactivated",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/public_keys.go",
+        "line": 70
+       },
+       "callee": "database/sql.Rows.Next",
+       "caller": "gogs.io/gogs/internal/db.publicKeys.RewriteAuthorizedKeys",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3040
+       },
+       "callee": "database/sql.withLock",
+       "caller": "database/sql.Rows.Next",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3572
+       },
+       "callee": "database/sql.DB.execDC$2",
+       "caller": "database/sql.withLock",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 1713
+       },
+       "callee": "database/sql.ctxDriverExec",
+       "caller": "database/sql.DB.execDC$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/ctxutil.go",
+        "line": 31
+       },
+       "callee": "github.com/jackc/pgx/v5/stdlib.Conn.ExecContext",
+       "caller": "database/sql.ctxDriverExec",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+        "line": 400
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+       "caller": "github.com/jackc/pgx/v5/stdlib.Conn.ExecContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 412
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 1329
+       },
+       "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+       "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "gogs.io/gogs",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/jackc/pgx/v5/pgconn",
+      "symbol": "Pipeline.Sync"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "gogs.go",
+        "line": 39
+       },
+       "callee": "github.com/urfave/cli.App.Run",
+       "caller": "gogs.io/gogs.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+        "line": 286
+       },
+       "callee": "github.com/urfave/cli.HandleAction",
+       "caller": "github.com/urfave/cli.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+        "line": 522
+       },
+       "callee": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+       "caller": "github.com/urfave/cli.HandleAction",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd/admin.go",
+        "line": 185
+       },
+       "callee": "gogs.io/gogs/internal/db.DeleteRepositoryArchives",
+       "caller": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/repo.go",
+        "line": 1971
+       },
+       "callee": "xorm.io/xorm.Session.Iterate",
+       "caller": "gogs.io/gogs/internal/db.DeleteRepositoryArchives",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/xorm.io/xorm@v0.8.0/session_iterate.go",
+        "line": 41
+       },
+       "callee": "xorm.io/xorm.Rows.Next",
+       "caller": "xorm.io/xorm.Session.Iterate",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/xorm.io/xorm@v0.8.0/rows.go",
+        "line": 63
+       },
+       "callee": "database/sql.Rows.Next",
+       "caller": "xorm.io/xorm.Rows.Next",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3040
+       },
+       "callee": "database/sql.withLock",
+       "caller": "database/sql.Rows.Next",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3572
+       },
+       "callee": "database/sql.DB.execDC$2",
+       "caller": "database/sql.withLock",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 1713
+       },
+       "callee": "database/sql.ctxDriverExec",
+       "caller": "database/sql.DB.execDC$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/ctxutil.go",
+        "line": 31
+       },
+       "callee": "github.com/jackc/pgx/v5/stdlib.Conn.ExecContext",
+       "caller": "database/sql.ctxDriverExec",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+        "line": 400
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+       "caller": "github.com/jackc/pgx/v5/stdlib.Conn.ExecContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 412
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 1329
+       },
+       "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+       "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "gogs.io/gogs",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/jackc/pgx/v5/pgconn",
+      "symbol": "Pipeline.Sync"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "gogs.go",
+       "line": 39
+      },
+      "callee": "github.com/urfave/cli.App.Run",
+      "caller": "gogs.io/gogs.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+       "line": 286
+      },
+      "callee": "github.com/urfave/cli.HandleAction",
+      "caller": "github.com/urfave/cli.App.Run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+       "line": 522
+      },
+      "callee": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+      "caller": "github.com/urfave/cli.HandleAction",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/cmd/admin.go",
+       "line": 185
+      },
+      "callee": "gogs.io/gogs/internal/db.DeleteMissingRepositories",
+      "caller": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/db/repo.go",
+       "line": 2008
+      },
+      "callee": "gogs.io/gogs/internal/db.DeleteRepository",
+      "caller": "gogs.io/gogs/internal/db.DeleteMissingRepositories",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/db/repo.go",
+       "line": 1731
+      },
+      "callee": "xorm.io/xorm.Session.Commit",
+      "caller": "gogs.io/gogs/internal/db.DeleteRepository",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/xorm.io/xorm@v0.8.0/session_tx.go",
+       "line": 40
+      },
+      "callee": "database/sql.Tx.Commit",
+      "caller": "xorm.io/xorm.Session.Commit",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 2312
+      },
+      "callee": "database/sql.withLock",
+      "caller": "database/sql.Tx.Commit",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 3572
+      },
+      "callee": "database/sql.Tx.Commit$1",
+      "caller": "database/sql.withLock",
+      "confirmed": false,
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 2313
+      },
+      "callee": "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit",
+      "caller": "database/sql.Tx.Commit$1",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+       "line": 785
+      },
+      "callee": "github.com/jackc/pgx/v5.dbTx.Commit",
+      "caller": "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/tx.go",
+       "line": 173
+      },
+      "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+      "caller": "github.com/jackc/pgx/v5.dbTx.Commit",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+       "line": 412
+      },
+      "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+      "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+       "line": 1329
+      },
+      "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+      "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "gogs.io/gogs",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/jackc/pgx/v5/pgconn",
+     "symbol": "Pipeline.Sync"
+    }
+   },
+   "target": {
+    "package": "github.com/jackc/pgx/v5/pgconn",
+    "symbol": "Pipeline.Sync"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "gogs.go",
+       "line": 39
+      },
+      "callee": "github.com/urfave/cli.App.Run",
+      "caller": "gogs.io/gogs.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+       "line": 286
+      },
+      "callee": "github.com/urfave/cli.HandleAction",
+      "caller": "github.com/urfave/cli.App.Run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli@v1.22.16/app.go",
+       "line": 522
+      },
+      "callee": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+      "caller": "github.com/urfave/cli.HandleAction",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/cmd/admin.go",
+       "line": 185
+      },
+      "callee": "gogs.io/gogs/internal/db.DeleteMissingRepositories",
+      "caller": "gogs.io/gogs/internal/cmd.adminDashboardOperation$1",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/db/repo.go",
+       "line": 2008
+      },
+      "callee": "gogs.io/gogs/internal/db.DeleteRepository",
+      "caller": "gogs.io/gogs/internal/db.DeleteMissingRepositories",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/db/repo.go",
+       "line": 1731
+      },
+      "callee": "xorm.io/xorm.Session.Commit",
+      "caller": "gogs.io/gogs/internal/db.DeleteRepository",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/xorm.io/xorm@v0.8.0/session_tx.go",
+       "line": 40
+      },
+      "callee": "database/sql.Tx.Commit",
+      "caller": "xorm.io/xorm.Session.Commit",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 2312
+      },
+      "callee": "database/sql.withLock",
+      "caller": "database/sql.Tx.Commit",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 3572
+      },
+      "callee": "database/sql.Tx.Commit$1",
+      "caller": "database/sql.withLock",
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 2313
+      },
+      "callee": "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit",
+      "caller": "database/sql.Tx.Commit$1",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+       "line": 785
+      },
+      "callee": "github.com/jackc/pgx/v5.dbTx.Commit",
+      "caller": "github.com/jackc/pgx/v5/stdlib.wrapTx.Commit",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/tx.go",
+       "line": 173
+      },
+      "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+      "caller": "github.com/jackc/pgx/v5.dbTx.Commit",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+       "line": 412
+      },
+      "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+      "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+       "line": 1329
+      },
+      "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+      "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "gogs.io/gogs",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/jackc/pgx/v5/pgconn",
+     "symbol": "Pipeline.Sync"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "internal/db/schemadoc/main.go",
+        "line": 32
+       },
+       "callee": "gopkg.in/DATA-DOG/go-sqlmock.v2.New",
+       "caller": "gogs.io/gogs/internal/db/schemadoc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/gopkg.in/!d!a!t!a-!d!o!g/go-sqlmock.v2@v2.0.0-20180914054222-c19298f520d0/driver.go",
+        "line": 51
+       },
+       "callee": "gopkg.in/DATA-DOG/go-sqlmock.v2.sqlmock.open",
+       "caller": "gopkg.in/DATA-DOG/go-sqlmock.v2.New",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/gopkg.in/!d!a!t!a-!d!o!g/go-sqlmock.v2@v2.0.0-20180914054222-c19298f520d0/sqlmock.go",
+        "line": 92
+       },
+       "callee": "database/sql.DB.Ping",
+       "caller": "gopkg.in/DATA-DOG/go-sqlmock.v2.sqlmock.open",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 917
+       },
+       "callee": "database/sql.DB.PingContext",
+       "caller": "database/sql.DB.Ping",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 908
+       },
+       "callee": "database/sql.DB.pingDC",
+       "caller": "database/sql.DB.PingContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 885
+       },
+       "callee": "database/sql.withLock",
+       "caller": "database/sql.DB.pingDC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3572
+       },
+       "callee": "database/sql.DB.pingDC$1",
+       "caller": "database/sql.withLock",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 886
+       },
+       "callee": "github.com/jackc/pgx/v5/stdlib.Conn.Ping",
+       "caller": "database/sql.DB.pingDC$1",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+        "line": 440
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Ping",
+       "caller": "github.com/jackc/pgx/v5/stdlib.Conn.Ping",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 388
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+       "caller": "github.com/jackc/pgx/v5.Conn.Ping",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 412
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 1329
+       },
+       "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+       "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "gogs.io/gogs/internal/db/schemadoc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/jackc/pgx/v5/pgconn",
+      "symbol": "Pipeline.Sync"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "dynamic_steps": 4,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "$GOROOT/src/database/sql/sql.go",
+          "line": 683
+         },
+         "callee": "database/sql.withLock",
+         "caller": "database/sql.driverConn.finalClose",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/database/sql/sql.go",
+         "line": 3572
+        },
+        "callee": "database/sql.DB.pingDC$1",
+        "caller": "database/sql.withLock",
+        "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 5,
+       "pattern": "F1",
+       "reason": "the function value passed at $GOROOT/src/database/sql/sql.go:683 is `database/sql.driverConn.finalClose$1`; the dynamic call at $GOROOT/src/database/sql/sql.go:3572 can only reach it, not database/sql.DB.pingDC$1"
+      },
+      "length": 11
+     },
+     {
+      "dynamic_steps": 4,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "$GOROOT/src/database/sql/sql.go",
+          "line": 693
+         },
+         "callee": "database/sql.withLock",
+         "caller": "database/sql.driverConn.finalClose",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/database/sql/sql.go",
+         "line": 3572
+        },
+        "callee": "database/sql.DB.pingDC$1",
+        "caller": "database/sql.withLock",
+        "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 5,
+       "pattern": "F1",
+       "reason": "the function value passed at $GOROOT/src/database/sql/sql.go:693 is `database/sql.driverConn.finalClose$2`; the dynamic call at $GOROOT/src/database/sql/sql.go:3572 can only reach it, not database/sql.DB.pingDC$1"
+      },
+      "length": 11
+     },
+     {
+      "dynamic_steps": 5,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "$GOROOT/src/database/sql/sql.go",
+          "line": 683
+         },
+         "callee": "database/sql.withLock",
+         "caller": "database/sql.driverConn.finalClose",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/database/sql/sql.go",
+         "line": 3572
+        },
+        "callee": "database/sql.Tx.Commit$1",
+        "caller": "database/sql.withLock",
+        "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 5,
+       "pattern": "F1",
+       "reason": "the function value passed at $GOROOT/src/database/sql/sql.go:683 is `database/sql.driverConn.finalClose$1`; the dynamic call at $GOROOT/src/database/sql/sql.go:3572 can only reach it, not database/sql.Tx.Commit$1"
+      },
+      "length": 11
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_index": 10,
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "internal/db/schemadoc/main.go",
+        "line": 32
+       },
+       "callee": "gopkg.in/DATA-DOG/go-sqlmock.v2.New",
+       "caller": "gogs.io/gogs/internal/db/schemadoc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/gopkg.in/!d!a!t!a-!d!o!g/go-sqlmock.v2@v2.0.0-20180914054222-c19298f520d0/driver.go",
+        "line": 51
+       },
+       "callee": "gopkg.in/DATA-DOG/go-sqlmock.v2.sqlmock.open",
+       "caller": "gopkg.in/DATA-DOG/go-sqlmock.v2.New",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/gopkg.in/!d!a!t!a-!d!o!g/go-sqlmock.v2@v2.0.0-20180914054222-c19298f520d0/sqlmock.go",
+        "line": 92
+       },
+       "callee": "database/sql.DB.Ping",
+       "caller": "gopkg.in/DATA-DOG/go-sqlmock.v2.sqlmock.open",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 917
+       },
+       "callee": "database/sql.DB.PingContext",
+       "caller": "database/sql.DB.Ping",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 908
+       },
+       "callee": "database/sql.DB.pingDC",
+       "caller": "database/sql.DB.PingContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 885
+       },
+       "callee": "database/sql.withLock",
+       "caller": "database/sql.DB.pingDC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3572
+       },
+       "callee": "database/sql.DB.pingDC$1",
+       "caller": "database/sql.withLock",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 886
+       },
+       "callee": "github.com/jackc/pgx/v5/stdlib.Conn.Ping",
+       "caller": "database/sql.DB.pingDC$1",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+        "line": 440
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Ping",
+       "caller": "github.com/jackc/pgx/v5/stdlib.Conn.Ping",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 388
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+       "caller": "github.com/jackc/pgx/v5.Conn.Ping",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 412
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 1329
+       },
+       "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+       "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "gogs.io/gogs/internal/db/schemadoc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/jackc/pgx/v5/pgconn",
+      "symbol": "Pipeline.Sync"
+     }
+    },
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "github.com/jackc/pgx/v5/pgconn.(*Pipeline).Sync"
+   ],
+   "main_package": "gogs.io/gogs/internal/db/schemadoc",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0,
+     1,
+     2
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 5,
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 2,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "examined_paths": 20,
+    "filter_status": "FEASIBLE",
+    "length": 12,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": true,
+    "source": "FILTER_RANKED_PATH"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "internal/db/schemadoc/main.go",
+        "line": 36
+       },
+       "callee": "gogs.io/gogs/internal/db/schemadoc.main$2",
+       "caller": "gogs.io/gogs/internal/db/schemadoc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/schemadoc/main.go",
+        "line": 36
+       },
+       "callee": "database/sql.DB.Close",
+       "caller": "gogs.io/gogs/internal/db/schemadoc.main$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 945
+       },
+       "callee": "database/sql.finalCloser.finalClose$bound",
+       "caller": "database/sql.DB.Close",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "database/sql.driverConn.finalClose",
+       "caller": "database/sql.finalCloser.finalClose$bound",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 683
+       },
+       "callee": "database/sql.withLock",
+       "caller": "database/sql.driverConn.finalClose",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3572
+       },
+       "callee": "database/sql.DB.execDC$2",
+       "caller": "database/sql.withLock",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 1713
+       },
+       "callee": "database/sql.ctxDriverExec",
+       "caller": "database/sql.DB.execDC$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/ctxutil.go",
+        "line": 31
+       },
+       "callee": "github.com/jackc/pgx/v5/stdlib.Conn.ExecContext",
+       "caller": "database/sql.ctxDriverExec",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+        "line": 400
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+       "caller": "github.com/jackc/pgx/v5/stdlib.Conn.ExecContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 412
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 1329
+       },
+       "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+       "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "gogs.io/gogs/internal/db/schemadoc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/jackc/pgx/v5/pgconn",
+      "symbol": "Pipeline.Sync"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "internal/db/schemadoc/main.go",
+        "line": 36
+       },
+       "callee": "gogs.io/gogs/internal/db/schemadoc.main$2",
+       "caller": "gogs.io/gogs/internal/db/schemadoc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/schemadoc/main.go",
+        "line": 36
+       },
+       "callee": "database/sql.DB.Close",
+       "caller": "gogs.io/gogs/internal/db/schemadoc.main$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 945
+       },
+       "callee": "database/sql.finalCloser.finalClose$bound",
+       "caller": "database/sql.DB.Close",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "database/sql.driverConn.finalClose",
+       "caller": "database/sql.finalCloser.finalClose$bound",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 693
+       },
+       "callee": "database/sql.withLock",
+       "caller": "database/sql.driverConn.finalClose",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3572
+       },
+       "callee": "database/sql.DB.execDC$2",
+       "caller": "database/sql.withLock",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 1713
+       },
+       "callee": "database/sql.ctxDriverExec",
+       "caller": "database/sql.DB.execDC$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/ctxutil.go",
+        "line": 31
+       },
+       "callee": "github.com/jackc/pgx/v5/stdlib.Conn.ExecContext",
+       "caller": "database/sql.ctxDriverExec",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+        "line": 400
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+       "caller": "github.com/jackc/pgx/v5/stdlib.Conn.ExecContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 412
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 1329
+       },
+       "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+       "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "gogs.io/gogs/internal/db/schemadoc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/jackc/pgx/v5/pgconn",
+      "symbol": "Pipeline.Sync"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "internal/db/schemadoc/main.go",
+        "line": 36
+       },
+       "callee": "gogs.io/gogs/internal/db/schemadoc.main$2",
+       "caller": "gogs.io/gogs/internal/db/schemadoc.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/db/schemadoc/main.go",
+        "line": 36
+       },
+       "callee": "database/sql.DB.Close",
+       "caller": "gogs.io/gogs/internal/db/schemadoc.main$2",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 945
+       },
+       "callee": "database/sql.finalCloser.finalClose$bound",
+       "caller": "database/sql.DB.Close",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "database/sql.driverConn.finalClose",
+       "caller": "database/sql.finalCloser.finalClose$bound",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 683
+       },
+       "callee": "database/sql.withLock",
+       "caller": "database/sql.driverConn.finalClose",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 3572
+       },
+       "callee": "database/sql.DB.pingDC$1",
+       "caller": "database/sql.withLock",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/database/sql/sql.go",
+        "line": 886
+       },
+       "callee": "github.com/jackc/pgx/v5/stdlib.Conn.Ping",
+       "caller": "database/sql.DB.pingDC$1",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+        "line": 440
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Ping",
+       "caller": "github.com/jackc/pgx/v5/stdlib.Conn.Ping",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 388
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+       "caller": "github.com/jackc/pgx/v5.Conn.Ping",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 412
+       },
+       "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+        "line": 1329
+       },
+       "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+       "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "gogs.io/gogs/internal/db/schemadoc",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/jackc/pgx/v5/pgconn",
+      "symbol": "Pipeline.Sync"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "internal/db/schemadoc/main.go",
+       "line": 32
+      },
+      "callee": "gopkg.in/DATA-DOG/go-sqlmock.v2.New",
+      "caller": "gogs.io/gogs/internal/db/schemadoc.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/gopkg.in/!d!a!t!a-!d!o!g/go-sqlmock.v2@v2.0.0-20180914054222-c19298f520d0/driver.go",
+       "line": 51
+      },
+      "callee": "gopkg.in/DATA-DOG/go-sqlmock.v2.sqlmock.open",
+      "caller": "gopkg.in/DATA-DOG/go-sqlmock.v2.New",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/gopkg.in/!d!a!t!a-!d!o!g/go-sqlmock.v2@v2.0.0-20180914054222-c19298f520d0/sqlmock.go",
+       "line": 92
+      },
+      "callee": "database/sql.DB.Ping",
+      "caller": "gopkg.in/DATA-DOG/go-sqlmock.v2.sqlmock.open",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 917
+      },
+      "callee": "database/sql.DB.PingContext",
+      "caller": "database/sql.DB.Ping",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 908
+      },
+      "callee": "database/sql.DB.pingDC",
+      "caller": "database/sql.DB.PingContext",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 885
+      },
+      "callee": "database/sql.withLock",
+      "caller": "database/sql.DB.pingDC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 3572
+      },
+      "callee": "database/sql.DB.pingDC$1",
+      "caller": "database/sql.withLock",
+      "confirmed": false,
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 886
+      },
+      "callee": "github.com/jackc/pgx/v5/stdlib.Conn.Ping",
+      "caller": "database/sql.DB.pingDC$1",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+       "line": 440
+      },
+      "callee": "github.com/jackc/pgx/v5.Conn.Ping",
+      "caller": "github.com/jackc/pgx/v5/stdlib.Conn.Ping",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+       "line": 388
+      },
+      "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+      "caller": "github.com/jackc/pgx/v5.Conn.Ping",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+       "line": 412
+      },
+      "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+      "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+       "line": 1329
+      },
+      "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+      "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "gogs.io/gogs/internal/db/schemadoc",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/jackc/pgx/v5/pgconn",
+     "symbol": "Pipeline.Sync"
+    }
+   },
+   "target": {
+    "package": "github.com/jackc/pgx/v5/pgconn",
+    "symbol": "Pipeline.Sync"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "internal/db/schemadoc/main.go",
+       "line": 32
+      },
+      "callee": "gopkg.in/DATA-DOG/go-sqlmock.v2.New",
+      "caller": "gogs.io/gogs/internal/db/schemadoc.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/gopkg.in/!d!a!t!a-!d!o!g/go-sqlmock.v2@v2.0.0-20180914054222-c19298f520d0/driver.go",
+       "line": 51
+      },
+      "callee": "gopkg.in/DATA-DOG/go-sqlmock.v2.sqlmock.open",
+      "caller": "gopkg.in/DATA-DOG/go-sqlmock.v2.New",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/gopkg.in/!d!a!t!a-!d!o!g/go-sqlmock.v2@v2.0.0-20180914054222-c19298f520d0/sqlmock.go",
+       "line": 92
+      },
+      "callee": "database/sql.DB.Ping",
+      "caller": "gopkg.in/DATA-DOG/go-sqlmock.v2.sqlmock.open",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 917
+      },
+      "callee": "database/sql.DB.PingContext",
+      "caller": "database/sql.DB.Ping",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 908
+      },
+      "callee": "database/sql.DB.pingDC",
+      "caller": "database/sql.DB.PingContext",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 885
+      },
+      "callee": "database/sql.withLock",
+      "caller": "database/sql.DB.pingDC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 3572
+      },
+      "callee": "database/sql.DB.pingDC$1",
+      "caller": "database/sql.withLock",
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/database/sql/sql.go",
+       "line": 886
+      },
+      "callee": "github.com/jackc/pgx/v5/stdlib.Conn.Ping",
+      "caller": "database/sql.DB.pingDC$1",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/stdlib/sql.go",
+       "line": 440
+      },
+      "callee": "github.com/jackc/pgx/v5.Conn.Ping",
+      "caller": "github.com/jackc/pgx/v5/stdlib.Conn.Ping",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+       "line": 388
+      },
+      "callee": "github.com/jackc/pgx/v5.Conn.Exec",
+      "caller": "github.com/jackc/pgx/v5.Conn.Ping",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+       "line": 412
+      },
+      "callee": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+      "caller": "github.com/jackc/pgx/v5.Conn.Exec",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/jackc/pgx/v5@v5.3.0/conn.go",
+       "line": 1329
+      },
+      "callee": "github.com/jackc/pgx/v5/pgconn.Pipeline.Sync",
+      "caller": "github.com/jackc/pgx/v5.Conn.deallocateInvalidatedCachedStatements",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "gogs.io/gogs/internal/db/schemadoc",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/jackc/pgx/v5/pgconn",
+     "symbol": "Pipeline.Sync"
+    }
+   },
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-11-26T02:27:14Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "792b9df",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/jackc/pgx/v5/pgconn",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Pipeline.Sync"
+  }
+ ],
+ "target_app": {
+  "commit": "5084b4a9b77a506f5e287e82e945e1c6882b827a",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "gogs.io/gogs",
+  "path": "<local>/data/cp10/d3b/legacy/apps/github.com_gogs_gogs/5084b4a9b77a"
+ },
+ "timing": {
+  "inspect_seconds": 0.14,
+  "methods_seconds": 21.36,
+  "symbols_seconds": 0.0,
+  "total_seconds": 37.47,
+  "verifier_seconds": 15.97
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 101,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 101,
+    "skipped": 0
+   },
+   "FILTERED_PATH": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 8,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   }
+  },
+  "checks_run": 216,
+  "display_checks_by_kind": {},
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}
