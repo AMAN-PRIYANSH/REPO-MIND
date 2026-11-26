@@ -162,3 +162,32 @@ def test_decision_targets_are_curated_symbols_in_stratum_s():
     v = {"symbols": [{"package": "m/p", "symbol": "changed", "decides_verdict": True, "origin": "RANKED_CANDIDATE"}]}
     assert sh.decision_targets(v, vcase, "m", "S") == ["m/p.F", "m/p.T.M"]
     assert sh.decision_targets(v, vcase, "m", "N") == ["m/p.changed"]
+
+
+def test_reproduction_compares_after_cp10_keys_are_removed_and_paths_sanitised(tmp_path, monkeypatch):
+    import json
+
+    path = {"entry": {"package": "m", "symbol": "main"}, "target": {"package": "l", "symbol": "F"},
+            "edges": [{"caller": "m.main", "callee": "l.F", "kind": "DYNAMIC",
+                       "call_site": {"file": "$GOMODCACHE/l@v1/f.go", "line": 3}}]}
+    committed = {"verdict": "REACHABLE", "reason_codes": [], "verification": {"status": "PASSED"},
+                 "per_symbol": [{"main_package": "m", "target": {"package": "l", "symbol": "F"}, "result": "REACHABLE",
+                                 "reason_code": None, "methods": {}, "verified_path": path}]}
+    (tmp_path / "c1.json").write_text(json.dumps(committed), encoding="utf-8")
+    monkeypatch.setattr(rn, "committed_cp9_verdicts", lambda s: tmp_path)
+    monkeypatch.setattr(rn, "REPO_ROOT", tmp_path.parent)
+    mine = copy.deepcopy(committed)
+    mine["per_symbol"][0]["verified_path"]["edges"][0].update(dynamic_kind="INTERFACE_METHOD")
+    mine["per_symbol"][0]["shown_path"] = {"x": 1}
+    mine["path_evidence"] = {"evidence_level": "HAS_DYNAMIC_STEPS"}
+    local = copy.deepcopy(mine)
+    local["per_symbol"][0]["verified_path"]["edges"][0]["call_site"]["file"] = "/root/gomod/l@v1/f.go"
+    assert rn.reproduce_cp9("d3", {"c1": mine})["all_identical"] is True
+    unsanitised = rn.reproduce_cp9("d3", {"c1": local})
+    assert unsanitised["all_identical"] is False                     # the bug the sanitise step fixes
+    fixed = rn.reproduce_cp9("d3", {"c1": local}, sanitise=lambda v: json.loads(
+        json.dumps(v).replace("/root/gomod", "$GOMODCACHE")))
+    assert fixed["all_identical"] is True
+    changed = copy.deepcopy(mine)
+    changed["per_symbol"][0]["result"] = "CANT_DETERMINE"
+    assert rn.reproduce_cp9("d3", {"c1": changed})["different"]

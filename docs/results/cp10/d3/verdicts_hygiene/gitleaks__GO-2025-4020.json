@@ -1,0 +1,1136 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "nwaples",
+    "repo": "rardecode",
+    "sha": "52fb4e825c936636f251f7e7deded39ab11df9a9"
+   }
+  ],
+  "fixed_in": "2.2.0",
+  "id": "GO-2025-4020",
+  "module": "github.com/nwaples/rardecode/v2",
+  "source": "vulndb",
+  "vulnerable_at": "2.1.1"
+ },
+ "case_id": "gitleaks__GO-2025-4020",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/zricethezav/gitleaks/v8",
+   "github.com/zricethezav/gitleaks/v8/cmd/generate/config"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [
+   {
+    "candidate_id": "c4",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "MaxDictionarySize"
+   }
+  ],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/zricethezav/gitleaks/v8": {
+    "error_codes": [
+     "TARGET_NOT_FOUND"
+    ],
+    "first_error": "symbol getOptions not found in package github.com/nwaples/rardecode/v2",
+    "linker_seconds": 0.88,
+    "load_failed": false,
+    "vta_seconds": 6.06
+   },
+   "github.com/zricethezav/gitleaks/v8/cmd/generate/config": {
+    "error_codes": [
+     "TARGET_NOT_FOUND"
+    ],
+    "first_error": "symbol getOptions not found in package github.com/nwaples/rardecode/v2",
+    "linker_seconds": 1.2,
+    "load_failed": false,
+    "vta_seconds": 5.51
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 6,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {
+   "INFEASIBLE": 1
+  },
+  "downgraded": 1,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [
+   "ANALYSIS_FAILED"
+  ],
+  "pre_filter_verdict": "CANT_DETERMINE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 with curated vulndb symbols (CP10 stratum S): the verdict is decided by the advisory's curated symbols; the functions the fix changed are reported as extra evidence only.",
+  "1 candidate function(s) not analysed: ADDED_BY_FIX.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "path_evidence": {
+  "dynamic_steps": null,
+  "evidence_level": "NO_ROUTE_SHOWN",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ },
+ "per_symbol": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "getOptions"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "packedFileReader.newArchiveFileFrom"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "BufferSize"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "feasibility": {
+    "evidence_path": null,
+    "evidence_source": null,
+    "examined": [
+     {
+      "dynamic_steps": 3,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/detect.go",
+          "line": 76
+         },
+         "callee": "github.com/zricethezav/gitleaks/v8/detect.Detector.DetectSource",
+         "caller": "github.com/zricethezav/gitleaks/v8/cmd.runDetect",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "detect/detect.go",
+         "line": 209
+        },
+        "callee": "github.com/zricethezav/gitleaks/v8/sources.File.Fragments",
+        "caller": "github.com/zricethezav/gitleaks/v8/detect.Detector.DetectSource",
+        "dynamic_kind": "INTERFACE_METHOD",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 6,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/detect.go:76 is `*github.com/zricethezav/gitleaks/v8/sources.Files`; the dynamic call at detect/detect.go:209 can only reach its method, not github.com/zricethezav/gitleaks/v8/sources.File.Fragments (receiver `*github.com/zricethezav/gitleaks/v8/sources.File`)"
+      },
+      "length": 10
+     },
+     {
+      "dynamic_steps": 3,
+      "first_infeasible": {
+       "context_edges": [],
+       "edge": {
+        "call_site": {
+         "file": "$GOMODCACHE/github.com/mholt/archives@v0.1.2/rar.go",
+         "line": 92
+        },
+        "callee": "github.com/nwaples/rardecode/v2.FileSystem",
+        "caller": "github.com/mholt/archives.Rar.Extract",
+        "kind": "STATIC"
+       },
+       "edge_index": 9,
+       "pattern": "F3",
+       "reason": "the call at $GOMODCACHE/github.com/mholt/archives@v0.1.2/rar.go:92 runs only if `github.com/mholt/archives.Rar.FS != nil` is true; field github.com/mholt/archives.Rar.FS is never assigned in the analysed program, so it is always its zero value"
+      },
+      "length": 10
+     },
+     {
+      "dynamic_steps": 3,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/detect.go",
+          "line": 119
+         },
+         "callee": "github.com/zricethezav/gitleaks/v8/detect.Detector.DetectSource",
+         "caller": "github.com/zricethezav/gitleaks/v8/cmd.runDetect",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "detect/detect.go",
+         "line": 209
+        },
+        "callee": "github.com/zricethezav/gitleaks/v8/sources.File.Fragments",
+        "caller": "github.com/zricethezav/gitleaks/v8/detect.Detector.DetectSource",
+        "dynamic_kind": "INTERFACE_METHOD",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 6,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/detect.go:119 is `*github.com/zricethezav/gitleaks/v8/sources.Git`; the dynamic call at detect/detect.go:209 can only reach its method, not github.com/zricethezav/gitleaks/v8/sources.File.Fragments (receiver `*github.com/zricethezav/gitleaks/v8/sources.File`)"
+      },
+      "length": 10
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "status": "INFEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "github.com/nwaples/rardecode/v2.FileSystem"
+   ],
+   "main_package": "github.com/zricethezav/gitleaks/v8",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": 20,
+    "filter_status": "INFEASIBLE",
+    "max_examined_paths": 20,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 18
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/cmd.Execute",
+       "caller": "github.com/zricethezav/gitleaks/v8.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/root.go",
+        "line": 225
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/zricethezav/gitleaks/v8/cmd.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1019
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/cmd.runDetect",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/detect.go",
+        "line": 76
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/detect.Detector.DetectSource",
+       "caller": "github.com/zricethezav/gitleaks/v8/cmd.runDetect",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "detect/detect.go",
+        "line": 209
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/sources.File.Fragments",
+       "caller": "github.com/zricethezav/gitleaks/v8/detect.Detector.DetectSource",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "sources/file.go",
+        "line": 78
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/sources.File.extractorFragments",
+       "caller": "github.com/zricethezav/gitleaks/v8/sources.File.Fragments",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "sources/file.go",
+        "line": 114
+       },
+       "callee": "github.com/mholt/archives.Rar.Extract",
+       "caller": "github.com/zricethezav/gitleaks/v8/sources.File.extractorFragments",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/mholt/archives@v0.1.2/rar.go",
+        "line": 92
+       },
+       "callee": "github.com/nwaples/rardecode/v2.FileSystem",
+       "caller": "github.com/mholt/archives.Rar.Extract",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/zricethezav/gitleaks/v8",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/nwaples/rardecode/v2",
+      "symbol": "FileSystem"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 18
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/cmd.Execute",
+       "caller": "github.com/zricethezav/gitleaks/v8.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/root.go",
+        "line": 225
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/zricethezav/gitleaks/v8/cmd.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1019
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/cmd.runDetect",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/detect.go",
+        "line": 92
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/detect.Detector.DetectSource",
+       "caller": "github.com/zricethezav/gitleaks/v8/cmd.runDetect",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "detect/detect.go",
+        "line": 209
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/sources.File.Fragments",
+       "caller": "github.com/zricethezav/gitleaks/v8/detect.Detector.DetectSource",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "sources/file.go",
+        "line": 78
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/sources.File.extractorFragments",
+       "caller": "github.com/zricethezav/gitleaks/v8/sources.File.Fragments",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "sources/file.go",
+        "line": 114
+       },
+       "callee": "github.com/mholt/archives.Rar.Extract",
+       "caller": "github.com/zricethezav/gitleaks/v8/sources.File.extractorFragments",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/mholt/archives@v0.1.2/rar.go",
+        "line": 92
+       },
+       "callee": "github.com/nwaples/rardecode/v2.FileSystem",
+       "caller": "github.com/mholt/archives.Rar.Extract",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/zricethezav/gitleaks/v8",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/nwaples/rardecode/v2",
+      "symbol": "FileSystem"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 18
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/cmd.Execute",
+       "caller": "github.com/zricethezav/gitleaks/v8.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/root.go",
+        "line": 225
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/zricethezav/gitleaks/v8/cmd.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1019
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/cmd.runDetect",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/detect.go",
+        "line": 119
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/detect.Detector.DetectSource",
+       "caller": "github.com/zricethezav/gitleaks/v8/cmd.runDetect",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "detect/detect.go",
+        "line": 209
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/sources.File.Fragments",
+       "caller": "github.com/zricethezav/gitleaks/v8/detect.Detector.DetectSource",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "sources/file.go",
+        "line": 78
+       },
+       "callee": "github.com/zricethezav/gitleaks/v8/sources.File.extractorFragments",
+       "caller": "github.com/zricethezav/gitleaks/v8/sources.File.Fragments",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "sources/file.go",
+        "line": 114
+       },
+       "callee": "github.com/mholt/archives.Rar.Extract",
+       "caller": "github.com/zricethezav/gitleaks/v8/sources.File.extractorFragments",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/mholt/archives@v0.1.2/rar.go",
+        "line": 92
+       },
+       "callee": "github.com/nwaples/rardecode/v2.FileSystem",
+       "caller": "github.com/mholt/archives.Rar.Extract",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/zricethezav/gitleaks/v8",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/nwaples/rardecode/v2",
+      "symbol": "FileSystem"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "PATHS_INFEASIBLE",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "FileSystem"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c5",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "OpenFSCheck"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c7",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "osFS.Open"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8/cmd/generate/config",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "getOptions"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8/cmd/generate/config",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "packedFileReader.newArchiveFileFrom"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8/cmd/generate/config",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "BufferSize"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [
+    "github.com/nwaples/rardecode/v2.FileSystem"
+   ],
+   "main_package": "github.com/zricethezav/gitleaks/v8/cmd/generate/config",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "METHOD_DISAGREEMENT",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "FileSystem"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c5",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8/cmd/generate/config",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "OpenFSCheck"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c7",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/zricethezav/gitleaks/v8/cmd/generate/config",
+   "method_errors": {
+    "CALLGRAPH_VTA": "TARGET_NOT_FOUND"
+   },
+   "methods": {
+    "CALLGRAPH_VTA": "ERROR",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "CANT_DETERMINE",
+   "rank": null,
+   "reason_code": "ANALYSIS_FAILED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/nwaples/rardecode/v2",
+    "symbol": "osFS.Open"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [
+  "ANALYSIS_FAILED"
+ ],
+ "pre_policy_verdict": "CANT_DETERMINE",
+ "provenance": {
+  "created_at": "2026-11-26T01:40:14Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "4696a7c",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [
+  "ANALYSIS_FAILED"
+ ],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "github.com/nwaples/rardecode/v2",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "getOptions"
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "github.com/nwaples/rardecode/v2",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "packedFileReader.newArchiveFileFrom"
+  },
+  {
+   "candidate_id": "c2",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/nwaples/rardecode/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "BufferSize"
+  },
+  {
+   "candidate_id": "c3",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/nwaples/rardecode/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "FileSystem"
+  },
+  {
+   "candidate_id": "c5",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/nwaples/rardecode/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "OpenFSCheck"
+  },
+  {
+   "candidate_id": "c7",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/nwaples/rardecode/v2",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "osFS.Open"
+  }
+ ],
+ "target_app": {
+  "commit": "6eaad039603a4de39fddd1cf5f727391efe9974e",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/zricethezav/gitleaks/v8",
+  "path": "<local>/data/cp10/d3/hygiene/apps/github.com_gitleaks_gitleaks/6eaad039603a"
+ },
+ "target_policy": {
+  "curated_symbols": 2,
+  "deciding_targets": 2,
+  "extra_by_reason": {
+   "FIX_CHANGED_EXTRA": 4
+  },
+  "extra_targets": 4,
+  "policy": "HYGIENE",
+  "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+  "stratum": "S"
+ },
+ "timing": {
+  "inspect_seconds": 0.06,
+  "methods_seconds": 13.65,
+  "symbols_seconds": 0.0,
+  "total_seconds": 19.63,
+  "verifier_seconds": 5.9
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "CANT_DETERMINE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 34,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 34,
+    "skipped": 0
+   },
+   "INFEASIBLE_STEP": {
+    "failed": 0,
+    "run": 20,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   }
+  },
+  "checks_run": 90,
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}

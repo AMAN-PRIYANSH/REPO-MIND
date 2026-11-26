@@ -1,0 +1,1335 @@
+{
+ "cp9_reproduction": {
+  "against": "docs/results/cp9/d3/verdicts_on",
+  "all_identical": true,
+  "compared": 14,
+  "different": [],
+  "identical": [
+   "Xray-core__GO-2026-4512",
+   "Xray-core__GO-2026-5676",
+   "Xray-core__GO-2026-5841",
+   "Xray-core__GO-2026-6061",
+   "cli__GO-2026-4503",
+   "cli__GO-2026-5004",
+   "cli__GO-2026-5052",
+   "cli__GO-2026-5506",
+   "dive__GO-2025-3900",
+   "dive__GO-2026-4610",
+   "dive__GO-2026-5841",
+   "gitleaks__GO-2025-4020",
+   "gitleaks__GO-2026-5841",
+   "pgweb__GO-2025-4188"
+  ],
+  "missing": []
+ },
+ "env": {
+  "CGO_ENABLED": "0",
+  "GOFLAGS": "-mod=readonly",
+  "GOPROXY": "off (analysis)",
+  "GOTOOLCHAIN": "local"
+ },
+ "environment": {
+  "command": "python -m vulntrace cp10 run --set d3",
+  "go": "go version go1.26.10 linux/amd64",
+  "os": "Linux-6.18.44-fc-v880-x86_64-with-glibc2.39",
+  "python": "3.13.18",
+  "repo_commit": "9a0adbb",
+  "repo_dirty": true
+ },
+ "feasibility_settings": {
+  "max_examined_paths": 20,
+  "rank_evidence": true
+ },
+ "govulncheck": {
+  "db": "pinned vulndb snapshot e0bad56276e98711a598adbab976de7cd914013a data/osv (flat directory)",
+  "mode": "source, -scan symbol, main packages as roots, GOPROXY=off",
+  "module": "golang.org/x/vuln",
+  "scoring": "stratum S: REACHABLE claim = a symbol-level finding; stratum N: REACHABLE claim = any finding (symbol, package or module level)",
+  "version": "v1.9.0"
+ },
+ "label": "IN-SAMPLE for CP10: the target-hygiene rules were written after reading the CP7b adjudication of these D3 cases.",
+ "max_mains": 10,
+ "pipeline": {
+  "evidence_stage": "on",
+  "feasibility_filter": "on (N = 20 examined paths)",
+  "runs": [
+   "hygiene (CP10 target hygiene)",
+   "legacy (--legacy-targets)"
+  ]
+ },
+ "rows": [
+  {
+   "advisory": "GO-2026-4610",
+   "app_repo": "github.com/wagoodman/dive",
+   "app_tag": "v0.13.1",
+   "cluster_key": "github.com/wagoodman/dive",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v29.2.0+incompatible",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v29.2.0+incompatible",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "route_passes_filter": null,
+    "target_policy": null,
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "dive__GO-2026-4610",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "RELEASE",
+   "module": "github.com/docker/cli",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v28.0.2+incompatible"
+  },
+  {
+   "advisory": "GO-2026-5841",
+   "app_repo": "github.com/wagoodman/dive",
+   "app_tag": "v0.13.1",
+   "cluster_key": "github.com/wagoodman/dive",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "dive__GO-2026-5841",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/klauspost/compress",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.18.0"
+  },
+  {
+   "advisory": "GO-2025-3900",
+   "app_repo": "github.com/wagoodman/dive",
+   "app_tag": "v0.13.1",
+   "cluster_key": "github.com/wagoodman/dive",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v2.4.0",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v2.4.0",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "ANALYSIS_FAILED"
+    ],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 27,
+     "deciding_targets": 27,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 2
+     },
+     "extra_targets": 2,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "dive__GO-2025-3900",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "ANALYSIS_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "github.com/go-viper/mapstructure/v2",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v2.2.1"
+  },
+  {
+   "advisory": "GO-2025-4188",
+   "app_repo": "github.com/sosedoff/pgweb",
+   "app_tag": "v0.17.0",
+   "cluster_key": "github.com/sosedoff/pgweb",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.9.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.9.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "METHOD_DISAGREEMENT"
+    ],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 4
+     },
+     "extra_targets": 4,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "pgweb__GO-2025-4188",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "METHOD_DISAGREEMENT"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "github.com/sirupsen/logrus",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.9.0"
+  },
+  {
+   "advisory": "GO-2026-5841",
+   "app_repo": "github.com/gitleaks/gitleaks",
+   "app_tag": "v8.30.0",
+   "cluster_key": "github.com/gitleaks/gitleaks",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "gitleaks__GO-2026-5841",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/klauspost/compress",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.17.11"
+  },
+  {
+   "advisory": "GO-2025-4020",
+   "app_repo": "github.com/gitleaks/gitleaks",
+   "app_tag": "v8.30.0",
+   "cluster_key": "github.com/gitleaks/gitleaks",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v2.2.0",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v2.2.0",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "ANALYSIS_FAILED"
+    ],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 2,
+     "deciding_targets": 2,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 4
+     },
+     "extra_targets": 4,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": true,
+   "hygiene_made_not_reachable": false,
+   "id": "gitleaks__GO-2025-4020",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "ANALYSIS_FAILED",
+     "METHOD_DISAGREEMENT",
+     "PATHS_INFEASIBLE"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "github.com/nwaples/rardecode/v2",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v2.1.0"
+  },
+  {
+   "advisory": "GO-2026-5506",
+   "app_repo": "github.com/smallstep/cli",
+   "app_tag": "v0.29.0",
+   "cluster_key": "github.com/smallstep/cli",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.41.0",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+     "go.opentelemetry.io/otel/internal/global.GetErrorHandler"
+    ],
+    "trace": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle (internal/global/handler.go:26)",
+     "go.opentelemetry.io/otel.Handle (handler.go:33)",
+     "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler (stats_handler.go:206)",
+     "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1 (grpctransport/grpctransport.go:73)",
+     "sync.Once.doSlow (src/sync/once.go:78)",
+     "sync.Once.Do (src/sync/once.go:69)",
+     "strings.Replacer.Replace (src/strings/replace.go:96)",
+     "github.com/go-chi/chi/v5/middleware.init#2 (middleware/request_id.go:56)",
+     "github.com/go-chi/chi/v5/middleware.init (middleware/basic_auth.go:1)",
+     "github.com/smallstep/certificates/ca.init (ca/ca.go:20)",
+     "github.com/smallstep/cli/cmd/step.init (cmd/step/main.go:4)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.41.0",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+     "go.opentelemetry.io/otel/internal/global.GetErrorHandler"
+    ],
+    "trace": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle (internal/global/handler.go:26)",
+     "go.opentelemetry.io/otel.Handle (handler.go:33)",
+     "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler (stats_handler.go:206)",
+     "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1 (grpctransport/grpctransport.go:73)",
+     "sync.Once.doSlow (src/sync/once.go:78)",
+     "sync.Once.Do (src/sync/once.go:69)",
+     "strings.Replacer.Replace (src/strings/replace.go:96)",
+     "github.com/go-chi/chi/v5/middleware.init#2 (middleware/request_id.go:56)",
+     "github.com/go-chi/chi/v5/middleware.init (middleware/basic_auth.go:1)",
+     "github.com/smallstep/certificates/ca.init (ca/ca.go:20)",
+     "github.com/smallstep/cli/cmd/step.init (cmd/step/main.go:4)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+     "go.opentelemetry.io/otel/internal/global.GetErrorHandler"
+    ],
+    "dynamic_kinds": {},
+    "dynamic_steps": 0,
+    "evidence_level": "STATIC_PATH",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 6,
+     "deciding_targets": 6,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 7
+     },
+     "extra_targets": 7,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "cli__GO-2026-5506",
+   "legacy": {
+    "deciding_reachable": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+     "go.opentelemetry.io/otel/internal/global.GetErrorHandler",
+     "go.opentelemetry.io/otel/internal/global.defaultErrorHandler",
+     "go.opentelemetry.io/otel/internal/global.defaultTracerValue"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "go.opentelemetry.io/otel",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.38.0"
+  },
+  {
+   "advisory": "GO-2026-5052",
+   "app_repo": "github.com/smallstep/cli",
+   "app_tag": "v0.29.0",
+   "cluster_key": "github.com/smallstep/cli",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v0.7.2",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v0.7.2",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 4,
+     "deciding_targets": 4,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 1
+     },
+     "extra_targets": 1,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": true,
+   "hygiene_made_not_reachable": true,
+   "id": "cli__GO-2026-5052",
+   "legacy": {
+    "deciding_reachable": [
+     "software.sslmate.com/src/go-pkcs12.doPBMAC1"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "software.sslmate.com/src/go-pkcs12",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v0.6.0"
+  },
+  {
+   "advisory": "GO-2026-4503",
+   "app_repo": "github.com/smallstep/cli",
+   "app_tag": "v0.29.0",
+   "cluster_key": "github.com/smallstep/cli",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.1.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.1.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "cli__GO-2026-4503",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "filippo.io/edwards25519",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.1.0"
+  },
+  {
+   "advisory": "GO-2026-5004",
+   "app_repo": "github.com/smallstep/cli",
+   "app_tag": "v0.29.0",
+   "cluster_key": "github.com/smallstep/cli",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v5.9.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL"
+    ],
+    "trace": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL (internal/sanitize/sanitize.go:433)",
+     "github.com/jackc/pgx/v5.Conn.sanitizeForSimpleQuery (conn.go:1243)",
+     "github.com/jackc/pgx/v5.Conn.Query (conn.go:831)",
+     "github.com/jackc/pgx/v5/stdlib.Conn.QueryContext (stdlib/sql.go:494)",
+     "database/sql.ctxDriverQuery (src/database/sql/ctxutil.go:48)",
+     "database/sql.queryDC$1 (src/database/sql/sql.go:1786)",
+     "database/sql.withLock (src/database/sql/sql.go:3572)",
+     "database/sql.driverConn.finalClose (src/database/sql/sql.go:683)",
+     "os/exec.Start$2 (src/os/exec/exec.go:757)",
+     "os/exec.Cmd.Start (src/os/exec/exec.go:756)",
+     "github.com/smallstep/cli/command/ca/acme/eab.listAction (command/ca/acme/eab/list.go:137)",
+     "github.com/urfave/cli.HandleAction (app.go:522)",
+     "github.com/urfave/cli.App.Run (app.go:286)",
+     "github.com/smallstep/cli/internal/cmd.run (internal/cmd/root.go:62)",
+     "github.com/smallstep/cli/internal/cmd.Run (internal/cmd/root.go:47)",
+     "github.com/smallstep/cli/cmd/step.main (cmd/step/main.go:28)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v5.9.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL"
+    ],
+    "trace": [
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL (internal/sanitize/sanitize.go:433)",
+     "github.com/jackc/pgx/v5.Conn.sanitizeForSimpleQuery (conn.go:1243)",
+     "github.com/jackc/pgx/v5.Conn.Query (conn.go:831)",
+     "github.com/jackc/pgx/v5/stdlib.Conn.QueryContext (stdlib/sql.go:494)",
+     "database/sql.ctxDriverQuery (src/database/sql/ctxutil.go:48)",
+     "database/sql.queryDC$1 (src/database/sql/sql.go:1786)",
+     "database/sql.withLock (src/database/sql/sql.go:3572)",
+     "database/sql.driverConn.finalClose (src/database/sql/sql.go:683)",
+     "os/exec.Start$2 (src/os/exec/exec.go:757)",
+     "os/exec.Cmd.Start (src/os/exec/exec.go:756)",
+     "github.com/smallstep/cli/command/ca/acme/eab.listAction (command/ca/acme/eab/list.go:137)",
+     "github.com/urfave/cli.HandleAction (app.go:522)",
+     "github.com/urfave/cli.App.Run (app.go:286)",
+     "github.com/smallstep/cli/internal/cmd.run (internal/cmd/root.go:62)",
+     "github.com/smallstep/cli/internal/cmd.Run (internal/cmd/root.go:47)",
+     "github.com/smallstep/cli/cmd/step.main (cmd/step/main.go:28)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/jackc/pgx/v5/internal/sanitize.Query.Sanitize",
+     "github.com/jackc/pgx/v5/internal/sanitize.SanitizeSQL"
+    ],
+    "dynamic_kinds": {
+     "FUNCTION_VALUE": 1,
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 2,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 2,
+     "deciding_targets": 2,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 4
+     },
+     "extra_targets": 4,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "cli__GO-2026-5004",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/jackc/pgx/v5/internal/sanitize.QuoteBytes",
+     "github.com/jackc/pgx/v5/internal/sanitize.escapeStringState",
+     "github.com/jackc/pgx/v5/internal/sanitize.placeholderState",
+     "github.com/jackc/pgx/v5/internal/sanitize.rawState"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/jackc/pgx/v5",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v5.7.5"
+  },
+  {
+   "advisory": "GO-2026-5676",
+   "app_repo": "github.com/XTLS/Xray-core",
+   "app_tag": "v25.12.8",
+   "cluster_key": "github.com/XTLS/Xray-core",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.59.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/quic-go/quic-go/http3.ConfigureTLSConfig",
+     "github.com/quic-go/quic-go/http3.Error.Error",
+     "github.com/quic-go/quic-go/http3.RequestStream.Close",
+     "github.com/quic-go/quic-go/http3.RequestStream.Write",
+     "github.com/quic-go/quic-go/http3.Server.Close",
+     "github.com/quic-go/quic-go/http3.Server.ServeListener",
+     "github.com/quic-go/quic-go/http3.Transport.Close",
+     "github.com/quic-go/quic-go/http3.Transport.CloseIdleConnections",
+     "github.com/quic-go/quic-go/http3.Transport.RoundTrip",
+     "github.com/quic-go/quic-go/http3.body.Close",
+     "github.com/quic-go/quic-go/http3.body.Read",
+     "github.com/quic-go/quic-go/http3.cancelingReader.Read",
+     "github.com/quic-go/quic-go/http3.countingByteReader.Read",
+     "github.com/quic-go/quic-go/http3.countingByteReader.ReadByte",
+     "github.com/quic-go/quic-go/http3.errConnUnusable.Error",
+     "github.com/quic-go/quic-go/http3.gzipReader.Close",
+     "github.com/quic-go/quic-go/http3.gzipReader.Read",
+     "github.com/quic-go/quic-go/http3.hijackableBody.Close",
+     "github.com/quic-go/quic-go/http3.hijackableBody.Read",
+     "github.com/quic-go/quic-go/http3.qpackError.Error",
+     "github.com/quic-go/quic-go/http3.responseWriter.Flush",
+     "github.com/quic-go/quic-go/http3.responseWriter.Write",
+     "github.com/quic-go/quic-go/http3.responseWriter.WriteHeader",
+     "github.com/quic-go/quic-go/http3.stateTrackingStream.Read",
+     "github.com/quic-go/quic-go/http3.tracingReader.Read"
+    ],
+    "trace": [
+     "github.com/quic-go/quic-go/http3.gzipReader.Read (http3/gzip_reader.go:23)",
+     "io.ReadAll (src/io/io.go:722)",
+     "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson (main/commands/all/convert/json.go:56)",
+     "github.com/xtls/xray-core/main/commands/base.Execute (main/commands/base/execute.go:64)",
+     "github.com/xtls/xray-core/main.main (main/main.go:22)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.59.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/quic-go/quic-go/http3.ConfigureTLSConfig",
+     "github.com/quic-go/quic-go/http3.Error.Error",
+     "github.com/quic-go/quic-go/http3.RequestStream.Close",
+     "github.com/quic-go/quic-go/http3.RequestStream.Write",
+     "github.com/quic-go/quic-go/http3.Server.Close",
+     "github.com/quic-go/quic-go/http3.Server.ServeListener",
+     "github.com/quic-go/quic-go/http3.Transport.Close",
+     "github.com/quic-go/quic-go/http3.Transport.CloseIdleConnections",
+     "github.com/quic-go/quic-go/http3.Transport.RoundTrip",
+     "github.com/quic-go/quic-go/http3.body.Close",
+     "github.com/quic-go/quic-go/http3.body.Read",
+     "github.com/quic-go/quic-go/http3.cancelingReader.Read",
+     "github.com/quic-go/quic-go/http3.countingByteReader.Read",
+     "github.com/quic-go/quic-go/http3.countingByteReader.ReadByte",
+     "github.com/quic-go/quic-go/http3.errConnUnusable.Error",
+     "github.com/quic-go/quic-go/http3.gzipReader.Close",
+     "github.com/quic-go/quic-go/http3.gzipReader.Read",
+     "github.com/quic-go/quic-go/http3.hijackableBody.Close",
+     "github.com/quic-go/quic-go/http3.hijackableBody.Read",
+     "github.com/quic-go/quic-go/http3.qpackError.Error",
+     "github.com/quic-go/quic-go/http3.responseWriter.Flush",
+     "github.com/quic-go/quic-go/http3.responseWriter.Write",
+     "github.com/quic-go/quic-go/http3.responseWriter.WriteHeader",
+     "github.com/quic-go/quic-go/http3.stateTrackingStream.Read",
+     "github.com/quic-go/quic-go/http3.tracingReader.Read"
+    ],
+    "trace": [
+     "github.com/quic-go/quic-go/http3.gzipReader.Close (http3/gzip_reader.go:37)",
+     "github.com/xtls/xray-core/main/commands/all/api.fetchHTTPContent (main/commands/all/api/shared.go:97)",
+     "github.com/xtls/xray-core/main/commands/all/api.loadArg (main/commands/all/api/shared.go:59)",
+     "github.com/xtls/xray-core/main/commands/all/api.executeRemoveInbounds (main/commands/all/api/inbounds_remove.go:44)",
+     "github.com/xtls/xray-core/main/commands/base.Execute (main/commands/base/execute.go:64)",
+     "github.com/xtls/xray-core/main.main (main/main.go:22)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/quic-go/quic-go/http3.parseHeaders",
+     "github.com/quic-go/quic-go/http3.parseTrailers"
+    ],
+    "dynamic_kinds": {
+     "FUNCTION_VALUE": 2,
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 3,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 3,
+     "deciding_targets": 3,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "Xray-core__GO-2026-5676",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/quic-go/quic-go/http3.parseHeaders",
+     "github.com/quic-go/quic-go/http3.parseTrailers"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/quic-go/quic-go",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v0.57.1"
+  },
+  {
+   "advisory": "GO-2026-4512",
+   "app_repo": "github.com/XTLS/Xray-core",
+   "app_tag": "v25.12.8",
+   "cluster_key": "github.com/XTLS/Xray-core",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.8.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+     "github.com/refraction-networking/utls.UConn.Handshake",
+     "github.com/refraction-networking/utls.UConn.HandshakeContext",
+     "github.com/refraction-networking/utls.UConn.Read",
+     "github.com/refraction-networking/utls.UConn.Write"
+    ],
+    "trace": [
+     "github.com/refraction-networking/utls.UConn.HandshakeContext (u_conn.go:311)",
+     "github.com/xtls/xray-core/transport/internet/tls.UConn.WebsocketHandshakeContext (transport/internet/tls/tls.go:116)",
+     "github.com/xtls/xray-core/transport/internet/websocket.dialWebSocket$2 (transport/internet/websocket/dialer.go:76)",
+     "github.com/gorilla/websocket.DialContext$2 (client.go:263)",
+     "github.com/gorilla/websocket.Dialer.DialContext (client.go:321)",
+     "github.com/xtls/xray-core/transport/internet/websocket.dialWebSocket (transport/internet/websocket/dialer.go:120)",
+     "github.com/xtls/xray-core/transport/internet/websocket.delayDialConn.Write (transport/internet/websocket/dialer.go:152)",
+     "fmt.Fprintf (src/fmt/print.go:225)",
+     "fmt.Printf (src/fmt/print.go:233)",
+     "github.com/xtls/xray-core/infra/vprotogen.main (infra/vprotogen/main.go:199)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.8.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+     "github.com/refraction-networking/utls.UConn.Handshake",
+     "github.com/refraction-networking/utls.UConn.HandshakeContext",
+     "github.com/refraction-networking/utls.UConn.Read",
+     "github.com/refraction-networking/utls.UConn.Write"
+    ],
+    "trace": [
+     "github.com/refraction-networking/utls.UConn.HandshakeContext (u_conn.go:311)",
+     "github.com/xtls/xray-core/transport/internet/tls.UConn.WebsocketHandshakeContext (transport/internet/tls/tls.go:116)",
+     "github.com/xtls/xray-core/transport/internet/websocket.dialWebSocket$2 (transport/internet/websocket/dialer.go:76)",
+     "github.com/gorilla/websocket.DialContext$2 (client.go:263)",
+     "github.com/gorilla/websocket.Dialer.DialContext (client.go:321)",
+     "github.com/xtls/xray-core/transport/internet/websocket.dialWebSocket (transport/internet/websocket/dialer.go:120)",
+     "github.com/xtls/xray-core/transport/internet/websocket.delayDialConn.Write (transport/internet/websocket/dialer.go:152)",
+     "fmt.Fprintf (src/fmt/print.go:225)",
+     "fmt.Printf (src/fmt/print.go:233)",
+     "github.com/xtls/xray-core/infra/vprotogen.main (infra/vprotogen/main.go:199)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/refraction-networking/utls.utlsIdToSpec"
+    ],
+    "dynamic_kinds": {
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 1,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "Xray-core__GO-2026-4512",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/refraction-networking/utls.utlsIdToSpec"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/refraction-networking/utls",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.8.1"
+  },
+  {
+   "advisory": "GO-2026-5841",
+   "app_repo": "github.com/XTLS/Xray-core",
+   "app_tag": "v25.12.8",
+   "cluster_key": "github.com/XTLS/Xray-core",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "Xray-core__GO-2026-5841",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/klauspost/compress",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.17.4"
+  },
+  {
+   "advisory": "GO-2026-6061",
+   "app_repo": "github.com/XTLS/Xray-core",
+   "app_tag": "v25.12.8",
+   "cluster_key": "github.com/XTLS/Xray-core",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.82.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "google.golang.org/grpc/internal/transport.ClientStream.Close",
+     "google.golang.org/grpc/internal/transport.ClientStream.Header",
+     "google.golang.org/grpc/internal/transport.ClientStream.Read",
+     "google.golang.org/grpc/internal/transport.ClientStream.RecvCompress",
+     "google.golang.org/grpc/internal/transport.ClientStream.TrailersOnly",
+     "google.golang.org/grpc/internal/transport.ClientStream.Write",
+     "google.golang.org/grpc/internal/transport.NewHTTP2Client",
+     "google.golang.org/grpc/internal/transport.NewServerTransport",
+     "google.golang.org/grpc/internal/transport.ServerStream.Read",
+     "google.golang.org/grpc/internal/transport.ServerStream.Write",
+     "google.golang.org/grpc/internal/transport.ServerStream.WriteStatus",
+     "google.golang.org/grpc/internal/transport.Stream.ReadMessageHeader",
+     "google.golang.org/grpc/internal/transport.http2Client.Close",
+     "google.golang.org/grpc/internal/transport.http2Client.GracefulClose",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/transport.http2Server.Drain",
+     "google.golang.org/grpc/internal/transport.http2Server.HandleStreams"
+    ],
+    "trace": [
+     "google.golang.org/grpc/internal/transport.ServerStream.WriteStatus (internal/transport/server_stream.go:76)",
+     "google.golang.org/grpc.SendMsg$1 (stream.go:1691)",
+     "google.golang.org/grpc.serverStream.SendMsg (stream.go:1676)",
+     "google.golang.org/grpc.GenericServerStream[github.com/xtls/xray-core/transport/internet/grpc/encoding.Hunk, github.com/xtls/xray-core/transport/internet/grpc/encoding.Hunk].Send (stream_interfaces.go:219)",
+     "github.com/xtls/xray-core/transport/internet/grpc/encoding.HunkReaderWriter.Write (transport/internet/grpc/encoding/hunkconn.go:137)",
+     "github.com/xtls/xray-core/common/buf.BufferedWriter.Write (common/buf/writer.go:109)",
+     "fmt.Fprintf (src/fmt/print.go:225)",
+     "fmt.Printf (src/fmt/print.go:233)",
+     "github.com/xtls/xray-core/infra/vprotogen.main (infra/vprotogen/main.go:199)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.82.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "google.golang.org/grpc/internal/transport.ClientStream.Close",
+     "google.golang.org/grpc/internal/transport.ClientStream.Header",
+     "google.golang.org/grpc/internal/transport.ClientStream.Read",
+     "google.golang.org/grpc/internal/transport.ClientStream.RecvCompress",
+     "google.golang.org/grpc/internal/transport.ClientStream.TrailersOnly",
+     "google.golang.org/grpc/internal/transport.ClientStream.Write",
+     "google.golang.org/grpc/internal/transport.NewHTTP2Client",
+     "google.golang.org/grpc/internal/transport.NewServerTransport",
+     "google.golang.org/grpc/internal/transport.ServerStream.Read",
+     "google.golang.org/grpc/internal/transport.ServerStream.Write",
+     "google.golang.org/grpc/internal/transport.ServerStream.WriteStatus",
+     "google.golang.org/grpc/internal/transport.Stream.ReadMessageHeader",
+     "google.golang.org/grpc/internal/transport.http2Client.Close",
+     "google.golang.org/grpc/internal/transport.http2Client.GracefulClose",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/transport.http2Server.Drain",
+     "google.golang.org/grpc/internal/transport.http2Server.HandleStreams"
+    ],
+    "trace": [
+     "google.golang.org/grpc/internal/transport.ServerStream.Write (internal/transport/server_stream.go:70)",
+     "google.golang.org/grpc.serverStream.SendMsg (stream.go:1730)",
+     "google.golang.org/grpc.GenericServerStream[github.com/xtls/xray-core/transport/internet/grpc/encoding.Hunk, github.com/xtls/xray-core/transport/internet/grpc/encoding.Hunk].Send (stream_interfaces.go:219)",
+     "github.com/xtls/xray-core/transport/internet/grpc/encoding.HunkReaderWriter.Write (transport/internet/grpc/encoding/hunkconn.go:137)",
+     "github.com/xtls/xray-core/common/buf.BufferedWriter.Write (common/buf/writer.go:109)",
+     "fmt.Fprintf (src/fmt/print.go:225)",
+     "fmt.Printf (src/fmt/print.go:233)",
+     "github.com/xtls/xray-core/infra/vprotogen.main (infra/vprotogen/main.go:199)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "google.golang.org/grpc/internal/transport.controlBuffer.executeAndPut",
+     "google.golang.org/grpc/internal/transport.controlBuffer.getOnceLocked"
+    ],
+    "dynamic_kinds": {
+     "FUNCTION_VALUE": 1,
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 2,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 4,
+     "deciding_targets": 4,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 33
+     },
+     "extra_targets": 33,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "Xray-core__GO-2026-6061",
+   "legacy": {
+    "deciding_reachable": [
+     "google.golang.org/grpc/internal/envconfig.boolFromEnv",
+     "google.golang.org/grpc/internal/transport.cleanupStream.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.closeConnection.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.controlBuffer.executeAndPut",
+     "google.golang.org/grpc/internal/transport.controlBuffer.finish",
+     "google.golang.org/grpc/internal/transport.controlBuffer.getOnceLocked",
+     "google.golang.org/grpc/internal/transport.dataFrame.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.earlyAbortStream.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.goAway.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.headerFrame.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/transport.http2Server.deleteStream",
+     "google.golang.org/grpc/internal/transport.http2Server.finishStream",
+     "google.golang.org/grpc/internal/transport.http2Server.handleData",
+     "google.golang.org/grpc/internal/transport.http2Server.writeHeaderLocked",
+     "google.golang.org/grpc/internal/transport.http2Server.writeStatus",
+     "google.golang.org/grpc/internal/transport.incomingGoAway.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.incomingSettings.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.incomingWindowUpdate.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.itemList.isEmpty",
+     "google.golang.org/grpc/internal/transport.loopyWriter.handle",
+     "google.golang.org/grpc/internal/transport.loopyWriter.headerHandler",
+     "google.golang.org/grpc/internal/transport.loopyWriter.originateStream",
+     "google.golang.org/grpc/internal/transport.loopyWriter.registerStreamHandler",
+     "google.golang.org/grpc/internal/transport.outgoingSettings.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.outgoingWindowUpdate.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.ping.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.registerStream.isTransportResponseFrame"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "google.golang.org/grpc",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.77.0"
+  }
+ ],
+ "schema_version": "1.0",
+ "seconds_per_case": {
+  "hygiene": {
+   "max": 55.5,
+   "n": 14,
+   "p50": 24.4,
+   "p95": 48.4,
+   "total": 407.5
+  },
+  "legacy": {
+   "max": 48.7,
+   "n": 14,
+   "p50": 24.5,
+   "p95": 42.4,
+   "total": 365.4
+  }
+ },
+ "set": "d3",
+ "statement": "REACHABLE means reachable in the call graph from a main package, not exploitable. govulncheck is a reference, not truth; truth comes from the adjudication sheets.",
+ "summary": {
+  "ALL": {
+   "cases": 14,
+   "evidence_levels": {
+    "HAS_DYNAMIC_STEPS": 4,
+    "STATIC_PATH": 1
+   },
+   "govulncheck_claim": {
+    "NOT_REACHABLE": 9,
+    "REACHABLE": 5
+   },
+   "govulncheck_level": {
+    "MODULE": 3,
+    "PACKAGE": 6,
+    "SYMBOL": 5
+   },
+   "hygiene": {
+    "CANT_DETERMINE": 4,
+    "NOT_REACHABLE": 5,
+    "REACHABLE": 5
+   },
+   "hygiene_changed": [
+    "gitleaks__GO-2025-4020",
+    "cli__GO-2026-5052"
+   ],
+   "hygiene_made_not_reachable": [
+    "cli__GO-2026-5052"
+   ],
+   "legacy": {
+    "CANT_DETERMINE": 4,
+    "NOT_REACHABLE": 4,
+    "REACHABLE": 6
+   }
+  },
+  "N": {
+   "cases": 0,
+   "evidence_levels": {},
+   "govulncheck_claim": {},
+   "govulncheck_level": {},
+   "hygiene": {},
+   "hygiene_changed": [],
+   "hygiene_made_not_reachable": [],
+   "legacy": {}
+  },
+  "S": {
+   "cases": 14,
+   "evidence_levels": {
+    "HAS_DYNAMIC_STEPS": 4,
+    "STATIC_PATH": 1
+   },
+   "govulncheck_claim": {
+    "NOT_REACHABLE": 9,
+    "REACHABLE": 5
+   },
+   "govulncheck_level": {
+    "MODULE": 3,
+    "PACKAGE": 6,
+    "SYMBOL": 5
+   },
+   "hygiene": {
+    "CANT_DETERMINE": 4,
+    "NOT_REACHABLE": 5,
+    "REACHABLE": 5
+   },
+   "hygiene_changed": [
+    "gitleaks__GO-2025-4020",
+    "cli__GO-2026-5052"
+   ],
+   "hygiene_made_not_reachable": [
+    "cli__GO-2026-5052"
+   ],
+   "legacy": {
+    "CANT_DETERMINE": 4,
+    "NOT_REACHABLE": 4,
+    "REACHABLE": 6
+   }
+  },
+  "by_stratum": {
+   "S": 14
+  },
+  "cases": 14,
+  "govulncheck_runs_agree": false
+ },
+ "toolchain": {
+  "hygiene": {
+   "helper": [
+    "go1.26.10"
+   ],
+   "linker": [
+    "go1.26.10"
+   ]
+  },
+  "legacy": {
+   "helper": [
+    "go1.26.10"
+   ],
+   "linker": [
+    "go1.26.10"
+   ]
+  }
+ },
+ "verdict_files_gzipped": [
+  "verdicts_hygiene/Xray-core__GO-2026-6061.json.gz",
+  "verdicts_legacy/Xray-core__GO-2026-6061.json.gz"
+ ],
+ "verdict_provenance": {
+  "hygiene": {
+   "cases_resumed": 14,
+   "cases_run_in_this_invocation": 0,
+   "created_at_first": "2026-11-26T01:38:56Z",
+   "created_at_last": "2026-11-26T01:45:55Z",
+   "repo_commits": [
+    "4696a7c"
+   ]
+  },
+  "legacy": {
+   "cases_resumed": 14,
+   "cases_run_in_this_invocation": 0,
+   "created_at_first": "2026-11-26T01:46:24Z",
+   "created_at_last": "2026-11-26T01:53:08Z",
+   "repo_commits": [
+    "57e21e3"
+   ]
+  }
+ }
+}

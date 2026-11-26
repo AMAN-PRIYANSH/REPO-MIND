@@ -1,0 +1,396 @@
+{
+ "cp7_reproduction": {
+  "committed_environment": {
+   "command": "python -m vulntrace eval triage --set fixtures",
+   "go": "go version go1.24.7 linux/amd64",
+   "os": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
+   "python": "3.13.17",
+   "repo_commit": "ed46380",
+   "repo_dirty": false
+  },
+  "corruption_probe_equal": true,
+  "differences": [],
+  "identical": true,
+  "row_count_equal": true,
+  "rows_compared": 66,
+  "stability_equal": true,
+  "summary_equal_except_seconds": true
+ },
+ "environment": {
+  "command": "python -m vulntrace cp10 run --set fixtures",
+  "go": "go version go1.24.7 linux/amd64",
+  "os": "Linux-6.18.44-fc-v880-x86_64-with-glibc2.39",
+  "python": "3.13.18",
+  "repo_commit": "57e21e3",
+  "repo_dirty": false
+ },
+ "hygiene_changes": [],
+ "hygiene_false_not_reachable": [],
+ "hygiene_summary": {
+  "FIX": {
+   "accuracy": {
+    "ci_high": 0.9269311546747105,
+    "ci_low": 0.6148339238492879,
+    "k": 18,
+    "n": 22,
+    "rate": 0.8181818181818182
+   },
+   "cant_determine": 4,
+   "coverage": {
+    "ci_high": 0.9269311546747105,
+    "ci_low": 0.6148339238492879,
+    "k": 18,
+    "n": 22,
+    "rate": 0.8181818181818182
+   },
+   "false_not_reachable": 0,
+   "false_reachable": 0,
+   "matrix": {
+    "NOT_REACHABLE": {
+     "CANT_DETERMINE": 2,
+     "NOT_REACHABLE": 6,
+     "REACHABLE": 0
+    },
+    "REACHABLE": {
+     "CANT_DETERMINE": 2,
+     "NOT_REACHABLE": 0,
+     "REACHABLE": 12
+    }
+   },
+   "n": 22,
+   "not_reachable_precision": {
+    "ci_high": 1.0,
+    "ci_low": 0.6096657083436265,
+    "k": 6,
+    "n": 6,
+    "rate": 1.0
+   },
+   "reachable_precision": {
+    "ci_high": 1.0,
+    "ci_low": 0.7575059904469021,
+    "k": 12,
+    "n": 12,
+    "rate": 1.0
+   },
+   "reachable_recall": {
+    "ci_high": 0.959906079092351,
+    "ci_low": 0.600586202762663,
+    "k": 12,
+    "n": 14,
+    "rate": 0.8571428571428571
+   },
+   "selective_accuracy": {
+    "ci_high": 1.0,
+    "ci_low": 0.8241207740667156,
+    "k": 18,
+    "n": 18,
+    "rate": 1.0
+   }
+  },
+  "RELEASE": {
+   "accuracy": {
+    "ci_high": 0.7307970593927182,
+    "ci_low": 0.34659795182499575,
+    "k": 12,
+    "n": 22,
+    "rate": 0.5454545454545454
+   },
+   "cant_determine": 6,
+   "coverage": {
+    "ci_high": 0.8684923978853596,
+    "ci_low": 0.5184826582032107,
+    "k": 16,
+    "n": 22,
+    "rate": 0.7272727272727273
+   },
+   "false_not_reachable": 0,
+   "false_reachable": 4,
+   "matrix": {
+    "NOT_REACHABLE": {
+     "CANT_DETERMINE": 4,
+     "NOT_REACHABLE": 0,
+     "REACHABLE": 4
+    },
+    "REACHABLE": {
+     "CANT_DETERMINE": 2,
+     "NOT_REACHABLE": 0,
+     "REACHABLE": 12
+    }
+   },
+   "n": 22,
+   "not_reachable_precision": {
+    "ci_high": 0.0,
+    "ci_low": 0.0,
+    "k": 0,
+    "n": 0,
+    "rate": 0.0
+   },
+   "reachable_precision": {
+    "ci_high": 0.8981793257983292,
+    "ci_low": 0.5050168327029684,
+    "k": 12,
+    "n": 16,
+    "rate": 0.75
+   },
+   "reachable_recall": {
+    "ci_high": 0.959906079092351,
+    "ci_low": 0.600586202762663,
+    "k": 12,
+    "n": 14,
+    "rate": 0.8571428571428571
+   },
+   "selective_accuracy": {
+    "ci_high": 0.8981793257983292,
+    "ci_low": 0.5050168327029684,
+    "k": 12,
+    "n": 16,
+    "rate": 0.75
+   }
+  },
+  "TARGETS": {
+   "accuracy": {
+    "ci_high": 0.9269311546747105,
+    "ci_low": 0.6148339238492879,
+    "k": 18,
+    "n": 22,
+    "rate": 0.8181818181818182
+   },
+   "cant_determine": 4,
+   "coverage": {
+    "ci_high": 0.9269311546747105,
+    "ci_low": 0.6148339238492879,
+    "k": 18,
+    "n": 22,
+    "rate": 0.8181818181818182
+   },
+   "false_not_reachable": 0,
+   "false_reachable": 0,
+   "matrix": {
+    "NOT_REACHABLE": {
+     "CANT_DETERMINE": 2,
+     "NOT_REACHABLE": 6,
+     "REACHABLE": 0
+    },
+    "REACHABLE": {
+     "CANT_DETERMINE": 2,
+     "NOT_REACHABLE": 0,
+     "REACHABLE": 12
+    }
+   },
+   "n": 22,
+   "not_reachable_precision": {
+    "ci_high": 1.0,
+    "ci_low": 0.6096657083436265,
+    "k": 6,
+    "n": 6,
+    "rate": 1.0
+   },
+   "reachable_precision": {
+    "ci_high": 1.0,
+    "ci_low": 0.7575059904469021,
+    "k": 12,
+    "n": 12,
+    "rate": 1.0
+   },
+   "reachable_recall": {
+    "ci_high": 0.959906079092351,
+    "ci_low": 0.600586202762663,
+    "k": 12,
+    "n": 14,
+    "rate": 0.8571428571428571
+   },
+   "selective_accuracy": {
+    "ci_high": 1.0,
+    "ci_low": 0.8241207740667156,
+    "k": 18,
+    "n": 18,
+    "rate": 1.0
+   }
+  }
+ },
+ "legacy_summary": {
+  "FIX": {
+   "accuracy": {
+    "ci_high": 0.9269311546747105,
+    "ci_low": 0.6148339238492879,
+    "k": 18,
+    "n": 22,
+    "rate": 0.8181818181818182
+   },
+   "cant_determine": 4,
+   "coverage": {
+    "ci_high": 0.9269311546747105,
+    "ci_low": 0.6148339238492879,
+    "k": 18,
+    "n": 22,
+    "rate": 0.8181818181818182
+   },
+   "false_not_reachable": 0,
+   "false_reachable": 0,
+   "matrix": {
+    "NOT_REACHABLE": {
+     "CANT_DETERMINE": 2,
+     "NOT_REACHABLE": 6,
+     "REACHABLE": 0
+    },
+    "REACHABLE": {
+     "CANT_DETERMINE": 2,
+     "NOT_REACHABLE": 0,
+     "REACHABLE": 12
+    }
+   },
+   "n": 22,
+   "not_reachable_precision": {
+    "ci_high": 1.0,
+    "ci_low": 0.6096657083436265,
+    "k": 6,
+    "n": 6,
+    "rate": 1.0
+   },
+   "reachable_precision": {
+    "ci_high": 1.0,
+    "ci_low": 0.7575059904469021,
+    "k": 12,
+    "n": 12,
+    "rate": 1.0
+   },
+   "reachable_recall": {
+    "ci_high": 0.959906079092351,
+    "ci_low": 0.600586202762663,
+    "k": 12,
+    "n": 14,
+    "rate": 0.8571428571428571
+   },
+   "selective_accuracy": {
+    "ci_high": 1.0,
+    "ci_low": 0.8241207740667156,
+    "k": 18,
+    "n": 18,
+    "rate": 1.0
+   }
+  },
+  "RELEASE": {
+   "accuracy": {
+    "ci_high": 0.7307970593927182,
+    "ci_low": 0.34659795182499575,
+    "k": 12,
+    "n": 22,
+    "rate": 0.5454545454545454
+   },
+   "cant_determine": 6,
+   "coverage": {
+    "ci_high": 0.8684923978853596,
+    "ci_low": 0.5184826582032107,
+    "k": 16,
+    "n": 22,
+    "rate": 0.7272727272727273
+   },
+   "false_not_reachable": 0,
+   "false_reachable": 4,
+   "matrix": {
+    "NOT_REACHABLE": {
+     "CANT_DETERMINE": 4,
+     "NOT_REACHABLE": 0,
+     "REACHABLE": 4
+    },
+    "REACHABLE": {
+     "CANT_DETERMINE": 2,
+     "NOT_REACHABLE": 0,
+     "REACHABLE": 12
+    }
+   },
+   "n": 22,
+   "not_reachable_precision": {
+    "ci_high": 0.0,
+    "ci_low": 0.0,
+    "k": 0,
+    "n": 0,
+    "rate": 0.0
+   },
+   "reachable_precision": {
+    "ci_high": 0.8981793257983292,
+    "ci_low": 0.5050168327029684,
+    "k": 12,
+    "n": 16,
+    "rate": 0.75
+   },
+   "reachable_recall": {
+    "ci_high": 0.959906079092351,
+    "ci_low": 0.600586202762663,
+    "k": 12,
+    "n": 14,
+    "rate": 0.8571428571428571
+   },
+   "selective_accuracy": {
+    "ci_high": 0.8981793257983292,
+    "ci_low": 0.5050168327029684,
+    "k": 12,
+    "n": 16,
+    "rate": 0.75
+   }
+  },
+  "TARGETS": {
+   "accuracy": {
+    "ci_high": 0.9269311546747105,
+    "ci_low": 0.6148339238492879,
+    "k": 18,
+    "n": 22,
+    "rate": 0.8181818181818182
+   },
+   "cant_determine": 4,
+   "coverage": {
+    "ci_high": 0.9269311546747105,
+    "ci_low": 0.6148339238492879,
+    "k": 18,
+    "n": 22,
+    "rate": 0.8181818181818182
+   },
+   "false_not_reachable": 0,
+   "false_reachable": 0,
+   "matrix": {
+    "NOT_REACHABLE": {
+     "CANT_DETERMINE": 2,
+     "NOT_REACHABLE": 6,
+     "REACHABLE": 0
+    },
+    "REACHABLE": {
+     "CANT_DETERMINE": 2,
+     "NOT_REACHABLE": 0,
+     "REACHABLE": 12
+    }
+   },
+   "n": 22,
+   "not_reachable_precision": {
+    "ci_high": 1.0,
+    "ci_low": 0.6096657083436265,
+    "k": 6,
+    "n": 6,
+    "rate": 1.0
+   },
+   "reachable_precision": {
+    "ci_high": 1.0,
+    "ci_low": 0.7575059904469021,
+    "k": 12,
+    "n": 12,
+    "rate": 1.0
+   },
+   "reachable_recall": {
+    "ci_high": 0.959906079092351,
+    "ci_low": 0.600586202762663,
+    "k": 12,
+    "n": 14,
+    "rate": 0.8571428571428571
+   },
+   "selective_accuracy": {
+    "ci_high": 1.0,
+    "ci_low": 0.8241207740667156,
+    "k": 18,
+    "n": 18,
+    "rate": 1.0
+   }
+  }
+ },
+ "schema_version": "1.0",
+ "set": "fixtures",
+ "statement": "Fixture truth is about each case's target symbol. Mode 1 on fixtures uses synthetic advisories without curated symbols (stratum N), so hygiene can only exclude context-only targets there."
+}

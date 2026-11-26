@@ -1,0 +1,1306 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "refraction-networking",
+    "repo": "utls",
+    "sha": "8fe0b08e9a0e7e2d08b268f451f2c79962e6acd0"
+   }
+  ],
+  "fixed_in": "1.8.2",
+  "id": "GO-2026-4512",
+  "module": "github.com/refraction-networking/utls",
+  "source": "vulndb",
+  "vulnerable_at": "1.8.1"
+ },
+ "case_id": "Xray-core__GO-2026-4512",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/xtls/xray-core/infra/vformat",
+   "github.com/xtls/xray-core/infra/vprotogen",
+   "github.com/xtls/xray-core/main"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/xtls/xray-core/infra/vformat": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.28,
+    "load_failed": false,
+    "vta_seconds": 1.35
+   },
+   "github.com/xtls/xray-core/infra/vprotogen": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.37,
+    "load_failed": false,
+    "vta_seconds": 2.98
+   },
+   "github.com/xtls/xray-core/main": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.52,
+    "load_failed": false,
+    "vta_seconds": 12.17
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 1,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {
+   "FEASIBLE": 1
+  },
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "3 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "path_evidence": {
+  "dynamic_kinds": {
+   "INTERFACE_METHOD": 1
+  },
+  "dynamic_steps": 1,
+  "entry": {
+   "main_package": "github.com/xtls/xray-core/main",
+   "target": {
+    "package": "github.com/refraction-networking/utls",
+    "symbol": "utlsIdToSpec"
+   }
+  },
+  "evidence_level": "HAS_DYNAMIC_STEPS",
+  "length": 13,
+  "passes_filter": true,
+  "source": "FILTER_RANKED_PATH",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/xtls/xray-core/infra/vformat",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/refraction-networking/utls",
+    "symbol": "utlsIdToSpec"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/xtls/xray-core/infra/vprotogen",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "github.com/refraction-networking/utls",
+    "symbol": "utlsIdToSpec"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main/main.go",
+        "line": 22
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "caller": "github.com/xtls/xray-core/main.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/execute.go",
+        "line": 64
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+       "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/all/convert/json.go",
+        "line": 56
+       },
+       "callee": "io.ReadAll",
+       "caller": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 722
+       },
+       "callee": "io.LimitedReader.Read",
+       "caller": "io.ReadAll",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 479
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Read",
+       "caller": "io.LimitedReader.Read",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 879
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.handlePostHandshakeMessage",
+       "caller": "github.com/refraction-networking/utls.UConn.Read",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 959
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.handleRenegotiation",
+       "caller": "github.com/refraction-networking/utls.UConn.handlePostHandshakeMessage",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 945
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+       "caller": "github.com/refraction-networking/utls.UConn.handleRenegotiation",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 97
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+       "caller": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 129
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+       "caller": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+        "line": 2751
+       },
+       "callee": "github.com/refraction-networking/utls.UTLSIdToSpec",
+       "caller": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+        "line": 30
+       },
+       "callee": "github.com/refraction-networking/utls.utlsIdToSpec",
+       "caller": "github.com/refraction-networking/utls.UTLSIdToSpec",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/xtls/xray-core/main",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/refraction-networking/utls",
+      "symbol": "utlsIdToSpec"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "dynamic_steps": 3,
+      "first_infeasible": null,
+      "length": 12
+     },
+     {
+      "dynamic_steps": 1,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "main/commands/base/execute.go",
+          "line": 72
+         },
+         "callee": "fmt.Fprintf",
+         "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/fmt/print.go",
+         "line": 225
+        },
+        "callee": "github.com/refraction-networking/utls.UConn.Write$wrapper",
+        "caller": "fmt.Fprintf",
+        "dynamic_kind": "INTERFACE_METHOD",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 2,
+       "pattern": "F1",
+       "reason": "the argument passed at main/commands/base/execute.go:72 is `*os.File`; the dynamic call at $GOROOT/src/fmt/print.go:225 can only reach its method, not github.com/refraction-networking/utls.UConn.Write$wrapper (receiver `*github.com/xtls/xray-core/transport/internet/reality.UConn`)"
+      },
+      "length": 12
+     },
+     {
+      "dynamic_steps": 1,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "main/commands/base/execute.go",
+          "line": 72
+         },
+         "callee": "fmt.Fprintf",
+         "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "$GOROOT/src/fmt/print.go",
+         "line": 225
+        },
+        "callee": "github.com/refraction-networking/utls.UConn.Write$wrapper",
+        "caller": "fmt.Fprintf",
+        "dynamic_kind": "INTERFACE_METHOD",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 2,
+       "pattern": "F1",
+       "reason": "the argument passed at main/commands/base/execute.go:72 is `*os.File`; the dynamic call at $GOROOT/src/fmt/print.go:225 can only reach its method, not github.com/refraction-networking/utls.UConn.Write$wrapper (receiver `*github.com/xtls/xray-core/transport/internet/tls.UConn`)"
+      },
+      "length": 12
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_index": 12,
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main/main.go",
+        "line": 22
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "caller": "github.com/xtls/xray-core/main.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/execute.go",
+        "line": 20
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.PrintUsage",
+       "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/help.go",
+        "line": 130
+       },
+       "callee": "bufio.Writer.Flush",
+       "caller": "github.com/xtls/xray-core/main/commands/base.PrintUsage",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/bufio/bufio.go",
+        "line": 642
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Write$wrapper",
+       "caller": "bufio.Writer.Flush",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Write",
+       "caller": "github.com/refraction-networking/utls.UConn.Write$wrapper",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 440
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Handshake",
+       "caller": "github.com/refraction-networking/utls.UConn.Write",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 301
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.HandshakeContext",
+       "caller": "github.com/refraction-networking/utls.UConn.Handshake",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 314
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.handshakeContext",
+       "caller": "github.com/refraction-networking/utls.UConn.HandshakeContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 376
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+       "caller": "github.com/refraction-networking/utls.UConn.handshakeContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 97
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+       "caller": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 129
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+       "caller": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+        "line": 2751
+       },
+       "callee": "github.com/refraction-networking/utls.UTLSIdToSpec",
+       "caller": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+        "line": 30
+       },
+       "callee": "github.com/refraction-networking/utls.utlsIdToSpec",
+       "caller": "github.com/refraction-networking/utls.UTLSIdToSpec",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/xtls/xray-core/main",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/refraction-networking/utls",
+      "symbol": "utlsIdToSpec"
+     }
+    },
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "github.com/refraction-networking/utls.utlsIdToSpec"
+   ],
+   "main_package": "github.com/xtls/xray-core/main",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0,
+     1,
+     2
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 5,
+    "dynamic_kinds": {
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 1,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "examined_paths": 20,
+    "filter_status": "FEASIBLE",
+    "length": 13,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": false,
+    "source": "FILTER_RANKED_PATH"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main/main.go",
+        "line": 22
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "caller": "github.com/xtls/xray-core/main.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/execute.go",
+        "line": 72
+       },
+       "callee": "fmt.Fprintf",
+       "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/fmt/print.go",
+        "line": 225
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Write$wrapper",
+       "caller": "fmt.Fprintf",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Write",
+       "caller": "github.com/refraction-networking/utls.UConn.Write$wrapper",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 440
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Handshake",
+       "caller": "github.com/refraction-networking/utls.UConn.Write",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 301
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.HandshakeContext",
+       "caller": "github.com/refraction-networking/utls.UConn.Handshake",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 314
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.handshakeContext",
+       "caller": "github.com/refraction-networking/utls.UConn.HandshakeContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 376
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+       "caller": "github.com/refraction-networking/utls.UConn.handshakeContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 97
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+       "caller": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 129
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+       "caller": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+        "line": 2751
+       },
+       "callee": "github.com/refraction-networking/utls.UTLSIdToSpec",
+       "caller": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+        "line": 30
+       },
+       "callee": "github.com/refraction-networking/utls.utlsIdToSpec",
+       "caller": "github.com/refraction-networking/utls.UTLSIdToSpec",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/xtls/xray-core/main",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/refraction-networking/utls",
+      "symbol": "utlsIdToSpec"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main/main.go",
+        "line": 22
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "caller": "github.com/xtls/xray-core/main.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/execute.go",
+        "line": 72
+       },
+       "callee": "fmt.Fprintf",
+       "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/fmt/print.go",
+        "line": 225
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Write$wrapper",
+       "caller": "fmt.Fprintf",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Write",
+       "caller": "github.com/refraction-networking/utls.UConn.Write$wrapper",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 440
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Handshake",
+       "caller": "github.com/refraction-networking/utls.UConn.Write",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 301
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.HandshakeContext",
+       "caller": "github.com/refraction-networking/utls.UConn.Handshake",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 314
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.handshakeContext",
+       "caller": "github.com/refraction-networking/utls.UConn.HandshakeContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 376
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+       "caller": "github.com/refraction-networking/utls.UConn.handshakeContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 97
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+       "caller": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 129
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+       "caller": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+        "line": 2751
+       },
+       "callee": "github.com/refraction-networking/utls.UTLSIdToSpec",
+       "caller": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+        "line": 30
+       },
+       "callee": "github.com/refraction-networking/utls.utlsIdToSpec",
+       "caller": "github.com/refraction-networking/utls.UTLSIdToSpec",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/xtls/xray-core/main",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/refraction-networking/utls",
+      "symbol": "utlsIdToSpec"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main/main.go",
+        "line": 22
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "caller": "github.com/xtls/xray-core/main.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/base/execute.go",
+        "line": 64
+       },
+       "callee": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+       "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main/commands/all/convert/json.go",
+        "line": 56
+       },
+       "callee": "io.ReadAll",
+       "caller": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 722
+       },
+       "callee": "io.LimitedReader.Read",
+       "caller": "io.ReadAll",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/io/io.go",
+        "line": 479
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.Read",
+       "caller": "io.LimitedReader.Read",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 879
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.handlePostHandshakeMessage",
+       "caller": "github.com/refraction-networking/utls.UConn.Read",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 959
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.handleRenegotiation",
+       "caller": "github.com/refraction-networking/utls.UConn.handlePostHandshakeMessage",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 945
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+       "caller": "github.com/refraction-networking/utls.UConn.handleRenegotiation",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 97
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+       "caller": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+        "line": 129
+       },
+       "callee": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+       "caller": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+        "line": 2751
+       },
+       "callee": "github.com/refraction-networking/utls.UTLSIdToSpec",
+       "caller": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+        "line": 30
+       },
+       "callee": "github.com/refraction-networking/utls.utlsIdToSpec",
+       "caller": "github.com/refraction-networking/utls.UTLSIdToSpec",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/xtls/xray-core/main",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/refraction-networking/utls",
+      "symbol": "utlsIdToSpec"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main/main.go",
+       "line": 22
+      },
+      "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+      "caller": "github.com/xtls/xray-core/main.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main/commands/base/execute.go",
+       "line": 20
+      },
+      "callee": "github.com/xtls/xray-core/main/commands/base.PrintUsage",
+      "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main/commands/base/help.go",
+       "line": 130
+      },
+      "callee": "bufio.Writer.Flush",
+      "caller": "github.com/xtls/xray-core/main/commands/base.PrintUsage",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/bufio/bufio.go",
+       "line": 642
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.Write$wrapper",
+      "caller": "bufio.Writer.Flush",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.Write",
+      "caller": "github.com/refraction-networking/utls.UConn.Write$wrapper",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 440
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.Handshake",
+      "caller": "github.com/refraction-networking/utls.UConn.Write",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 301
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.HandshakeContext",
+      "caller": "github.com/refraction-networking/utls.UConn.Handshake",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 314
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.handshakeContext",
+      "caller": "github.com/refraction-networking/utls.UConn.HandshakeContext",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 376
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+      "caller": "github.com/refraction-networking/utls.UConn.handshakeContext",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 97
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+      "caller": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 129
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+      "caller": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+       "line": 2751
+      },
+      "callee": "github.com/refraction-networking/utls.UTLSIdToSpec",
+      "caller": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+       "line": 30
+      },
+      "callee": "github.com/refraction-networking/utls.utlsIdToSpec",
+      "caller": "github.com/refraction-networking/utls.UTLSIdToSpec",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/xtls/xray-core/main",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/refraction-networking/utls",
+     "symbol": "utlsIdToSpec"
+    }
+   },
+   "target": {
+    "package": "github.com/refraction-networking/utls",
+    "symbol": "utlsIdToSpec"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main/main.go",
+       "line": 22
+      },
+      "callee": "github.com/xtls/xray-core/main/commands/base.Execute",
+      "caller": "github.com/xtls/xray-core/main.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main/commands/base/execute.go",
+       "line": 64
+      },
+      "callee": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+      "caller": "github.com/xtls/xray-core/main/commands/base.Execute",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "main/commands/all/convert/json.go",
+       "line": 56
+      },
+      "callee": "io.ReadAll",
+      "caller": "github.com/xtls/xray-core/main/commands/all/convert.executeTypedMessageToJson",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/io/io.go",
+       "line": 722
+      },
+      "callee": "io.LimitedReader.Read",
+      "caller": "io.ReadAll",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/io/io.go",
+       "line": 479
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.Read",
+      "caller": "io.LimitedReader.Read",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 879
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.handlePostHandshakeMessage",
+      "caller": "github.com/refraction-networking/utls.UConn.Read",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 959
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.handleRenegotiation",
+      "caller": "github.com/refraction-networking/utls.UConn.handlePostHandshakeMessage",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 945
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+      "caller": "github.com/refraction-networking/utls.UConn.handleRenegotiation",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 97
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+      "caller": "github.com/refraction-networking/utls.UConn.BuildHandshakeState",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_conn.go",
+       "line": 129
+      },
+      "callee": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+      "caller": "github.com/refraction-networking/utls.UConn.buildHandshakeState",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+       "line": 2751
+      },
+      "callee": "github.com/refraction-networking/utls.UTLSIdToSpec",
+      "caller": "github.com/refraction-networking/utls.UConn.applyPresetByID",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/refraction-networking/utls@v1.8.1/u_parrots.go",
+       "line": 30
+      },
+      "callee": "github.com/refraction-networking/utls.utlsIdToSpec",
+      "caller": "github.com/refraction-networking/utls.UTLSIdToSpec",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/xtls/xray-core/main",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/refraction-networking/utls",
+     "symbol": "utlsIdToSpec"
+    }
+   },
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-11-26T01:52:18Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "57e21e3",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/refraction-networking/utls",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "utlsIdToSpec"
+  }
+ ],
+ "target_app": {
+  "commit": "81f8f398c7b2b845853b1e85087c6122acc6db0b",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/xtls/xray-core",
+  "path": "<local>/data/cp10/d3/legacy/apps/github.com_XTLS_Xray-core/81f8f398c7b2"
+ },
+ "timing": {
+  "inspect_seconds": 0.18,
+  "methods_seconds": 18.68,
+  "symbols_seconds": 0.0,
+  "total_seconds": 29.14,
+  "verifier_seconds": 10.28
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 48,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 48,
+    "skipped": 0
+   },
+   "FILTERED_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 4,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 3,
+    "skipped": 0
+   }
+  },
+  "checks_run": 105,
+  "display_checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 13,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 13,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   }
+  },
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}
