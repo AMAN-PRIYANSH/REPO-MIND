@@ -137,7 +137,9 @@ def stable(v: dict[str, Any]) -> Any:
              for e in v["per_symbol"]]]
 
 
-def reproduce_cp9(set_name: str, legacy: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
+def reproduce_cp9(set_name: str, legacy: dict[str, dict[str, Any]], sanitise=lambda v: v) -> dict[str, Any] | None:
+    """`legacy`: this run's legacy verdicts; `sanitise` rewrites their local paths exactly as the
+    committed copies were rewritten (`d3.triage_run.sanitise`), so module-cache files compare equal."""
     from vulntrace.eval.feasibility_real import read_verdicts
 
     d = committed_cp9_verdicts(set_name)
@@ -151,7 +153,7 @@ def reproduce_cp9(set_name: str, legacy: dict[str, dict[str, Any]]) -> dict[str,
             out["missing"].append(cid)
             continue
         out["compared"] += 1
-        a, b = stable(legacy[cid]), stable(cv)
+        a, b = stable(sanitise(legacy[cid])), stable(cv)
         if a == b:
             out["identical"].append(cid)
         else:
@@ -208,11 +210,12 @@ def run_set(set_name: str, case_doc: dict[str, Any], cases_by_id: dict[str, dict
                         "is a reference, not truth; truth comes from the adjudication sheets."}
     if set_name in IN_SAMPLE:
         doc["label"] = IN_SAMPLE[set_name]
-        doc["cp9_reproduction"] = reproduce_cp9(set_name, verdicts["legacy"])
-    if only:
-        doc["partial_run"] = {"only": only}
     sanitised = {label: {cid: tr.sanitise(v, gomodcache, root) for cid, v in verdicts[label].items()}
                  for _, label in POLICIES}
+    if set_name in IN_SAMPLE:
+        doc["cp9_reproduction"] = reproduce_cp9(set_name, sanitised["legacy"])
+    if only:
+        doc["partial_run"] = {"only": only}
     return tr.sanitise(doc, gomodcache, root), sanitised["hygiene"], sanitised["legacy"]
 
 

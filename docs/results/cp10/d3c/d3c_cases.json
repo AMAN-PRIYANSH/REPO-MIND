@@ -1,0 +1,662 @@
+{
+ "apps": 8,
+ "candidates_file": "d3c_candidates.json",
+ "case_count": 23,
+ "cases": [
+  {
+   "advisory": "GO-2026-6061",
+   "app_commit": "42a2653d3245313b6247ada092c66e2e11c72468",
+   "app_domain": "dns",
+   "app_module": "github.com/AdguardTeam/AdGuardHome",
+   "app_repo": "github.com/AdguardTeam/AdGuardHome",
+   "app_tag": "v0.107.71",
+   "app_url": "https://github.com/AdguardTeam/AdGuardHome",
+   "created": "2026-07-23",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "grpc",
+    "repo": "grpc-go",
+    "sha": "4ea465d4ab98013f72a142fe0fc89c19770b2935"
+   },
+   "id": "AdGuardHome__GO-2026-6061",
+   "mains": [
+    "github.com/AdguardTeam/AdGuardHome",
+    "github.com/AdguardTeam/AdGuardHome/scripts/blocked-services",
+    "github.com/AdguardTeam/AdGuardHome/scripts/translations",
+    "github.com/AdguardTeam/AdGuardHome/scripts/vetted-filters"
+   ],
+   "module": "google.golang.org/grpc",
+   "packages": [
+    "google.golang.org/grpc/internal/transport",
+    "google.golang.org/grpc/internal/xds/rbac"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v1.77.0",
+   "version_selected": "v1.77.0"
+  },
+  {
+   "advisory": "GO-2026-5676",
+   "app_commit": "42a2653d3245313b6247ada092c66e2e11c72468",
+   "app_domain": "dns",
+   "app_module": "github.com/AdguardTeam/AdGuardHome",
+   "app_repo": "github.com/AdguardTeam/AdGuardHome",
+   "app_tag": "v0.107.71",
+   "app_url": "https://github.com/AdguardTeam/AdGuardHome",
+   "created": "2026-07-07",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "quic-go",
+    "repo": "quic-go",
+    "sha": "c56e8c79d1627cc1ed6005b421b4b0adadd83665"
+   },
+   "id": "AdGuardHome__GO-2026-5676",
+   "mains": [
+    "github.com/AdguardTeam/AdGuardHome",
+    "github.com/AdguardTeam/AdGuardHome/scripts/blocked-services",
+    "github.com/AdguardTeam/AdGuardHome/scripts/translations",
+    "github.com/AdguardTeam/AdGuardHome/scripts/vetted-filters"
+   ],
+   "module": "github.com/quic-go/quic-go",
+   "packages": [
+    "github.com/quic-go/quic-go/http3"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v0.57.0",
+   "version_selected": "v0.57.0"
+  },
+  {
+   "advisory": "GO-2026-5506",
+   "app_commit": "42a2653d3245313b6247ada092c66e2e11c72468",
+   "app_domain": "dns",
+   "app_module": "github.com/AdguardTeam/AdGuardHome",
+   "app_repo": "github.com/AdguardTeam/AdGuardHome",
+   "app_tag": "v0.107.71",
+   "app_url": "https://github.com/AdguardTeam/AdGuardHome",
+   "created": "2026-07-23",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "open-telemetry",
+    "repo": "opentelemetry-go",
+    "sha": "aa1894e09e3fe66860c7885cb40f98901b35277f"
+   },
+   "id": "AdGuardHome__GO-2026-5506",
+   "mains": [
+    "github.com/AdguardTeam/AdGuardHome",
+    "github.com/AdguardTeam/AdGuardHome/scripts/blocked-services",
+    "github.com/AdguardTeam/AdGuardHome/scripts/translations",
+    "github.com/AdguardTeam/AdGuardHome/scripts/vetted-filters"
+   ],
+   "module": "go.opentelemetry.io/otel",
+   "packages": [
+    "go.opentelemetry.io/otel/internal/global",
+    "go.opentelemetry.io/otel/baggage",
+    "go.opentelemetry.io/otel/propagation"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v1.38.0",
+   "version_selected": "v1.38.0"
+  },
+  {
+   "advisory": "GO-2026-5756",
+   "app_commit": "42a2653d3245313b6247ada092c66e2e11c72468",
+   "app_domain": "dns",
+   "app_module": "github.com/AdguardTeam/AdGuardHome",
+   "app_repo": "github.com/AdguardTeam/AdGuardHome",
+   "app_tag": "v0.107.71",
+   "app_url": "https://github.com/AdguardTeam/AdGuardHome",
+   "created": "2026-06-25",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "AdguardTeam",
+    "repo": "dnsproxy",
+    "sha": "f00d992ce9567a50f596853978ad6500acfdcf1d"
+   },
+   "id": "AdGuardHome__GO-2026-5756",
+   "mains": [
+    "github.com/AdguardTeam/AdGuardHome",
+    "github.com/AdguardTeam/AdGuardHome/scripts/blocked-services",
+    "github.com/AdguardTeam/AdGuardHome/scripts/translations",
+    "github.com/AdguardTeam/AdGuardHome/scripts/vetted-filters"
+   ],
+   "module": "github.com/AdguardTeam/dnsproxy",
+   "packages": [],
+   "stratum": "N",
+   "version_go_mod": "v0.78.2",
+   "version_selected": "v0.78.2"
+  },
+  {
+   "advisory": "GO-2026-4503",
+   "app_commit": "e96a680fde609fce5d06bc8fb46cdfb64b959876",
+   "app_domain": "file-sync-transfer",
+   "app_module": "github.com/schollz/croc/v10",
+   "app_repo": "github.com/schollz/croc",
+   "app_tag": "v10.3.1",
+   "app_url": "https://github.com/schollz/croc",
+   "created": "2026-02-17",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "FiloSottile",
+    "repo": "edwards25519",
+    "sha": "d1c650afb95fad0742b98d95f2eb2cf031393abb"
+   },
+   "id": "croc__GO-2026-4503",
+   "mains": [
+    "github.com/schollz/croc/v10",
+    "github.com/schollz/croc/v10/src/install"
+   ],
+   "module": "filippo.io/edwards25519",
+   "packages": [
+    "filippo.io/edwards25519"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v1.1.0",
+   "version_selected": "v1.1.0"
+  },
+  {
+   "advisory": "GO-2026-5841",
+   "app_commit": "da56f82faac5bf350fc4175e5ff50726cb10d956",
+   "app_domain": "web-app",
+   "app_module": "github.com/go-shiori/shiori",
+   "app_repo": "github.com/go-shiori/shiori",
+   "app_tag": "v1.8.0",
+   "app_url": "https://github.com/go-shiori/shiori",
+   "created": "2026-07-21",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "klauspost",
+    "repo": "compress",
+    "sha": "8668e357e776d5152ed62f33c17f21b8690664fa"
+   },
+   "id": "shiori__GO-2026-5841",
+   "mains": [
+    "github.com/go-shiori/shiori"
+   ],
+   "module": "github.com/klauspost/compress",
+   "packages": [
+    "github.com/klauspost/compress/s2"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v1.18.0",
+   "version_selected": "v1.18.0"
+  },
+  {
+   "advisory": "GO-2025-3553",
+   "app_commit": "da56f82faac5bf350fc4175e5ff50726cb10d956",
+   "app_domain": "web-app",
+   "app_module": "github.com/go-shiori/shiori",
+   "app_repo": "github.com/go-shiori/shiori",
+   "app_tag": "v1.8.0",
+   "app_url": "https://github.com/go-shiori/shiori",
+   "created": "2025-03-25",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "golang-jwt",
+    "repo": "jwt",
+    "sha": "0951d184286dece21f73c85673fd308786ffe9c3"
+   },
+   "id": "shiori__GO-2025-3553",
+   "mains": [
+    "github.com/go-shiori/shiori"
+   ],
+   "module": "github.com/golang-jwt/jwt/v5",
+   "packages": [
+    "github.com/golang-jwt/jwt/v5"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v5.2.1",
+   "version_selected": "v5.2.1"
+  },
+  {
+   "advisory": "GO-2026-4503",
+   "app_commit": "da56f82faac5bf350fc4175e5ff50726cb10d956",
+   "app_domain": "web-app",
+   "app_module": "github.com/go-shiori/shiori",
+   "app_repo": "github.com/go-shiori/shiori",
+   "app_tag": "v1.8.0",
+   "app_url": "https://github.com/go-shiori/shiori",
+   "created": "2026-02-17",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "FiloSottile",
+    "repo": "edwards25519",
+    "sha": "d1c650afb95fad0742b98d95f2eb2cf031393abb"
+   },
+   "id": "shiori__GO-2026-4503",
+   "mains": [
+    "github.com/go-shiori/shiori"
+   ],
+   "module": "filippo.io/edwards25519",
+   "packages": [
+    "filippo.io/edwards25519"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v1.1.0",
+   "version_selected": "v1.1.0"
+  },
+  {
+   "advisory": "GO-2026-4887",
+   "app_commit": "da56f82faac5bf350fc4175e5ff50726cb10d956",
+   "app_domain": "web-app",
+   "app_module": "github.com/go-shiori/shiori",
+   "app_repo": "github.com/go-shiori/shiori",
+   "app_tag": "v1.8.0",
+   "app_url": "https://github.com/go-shiori/shiori",
+   "created": "2026-03-31",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "moby",
+    "repo": "moby",
+    "sha": "e89edb19ad7de0407a5d31e3111cb01aa10b5a38"
+   },
+   "id": "shiori__GO-2026-4887",
+   "mains": [
+    "github.com/go-shiori/shiori"
+   ],
+   "module": "github.com/docker/docker",
+   "packages": [],
+   "stratum": "N",
+   "version_go_mod": "v28.0.1+incompatible",
+   "version_selected": "v28.0.1+incompatible"
+  },
+  {
+   "advisory": "GO-2026-4883",
+   "app_commit": "da56f82faac5bf350fc4175e5ff50726cb10d956",
+   "app_domain": "web-app",
+   "app_module": "github.com/go-shiori/shiori",
+   "app_repo": "github.com/go-shiori/shiori",
+   "app_tag": "v1.8.0",
+   "app_url": "https://github.com/go-shiori/shiori",
+   "created": "2026-03-31",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "moby",
+    "repo": "moby",
+    "sha": "f4d6f25bf0c3fa12d4968320a45685947756a22a"
+   },
+   "id": "shiori__GO-2026-4883",
+   "mains": [
+    "github.com/go-shiori/shiori"
+   ],
+   "module": "github.com/docker/docker",
+   "packages": [],
+   "stratum": "N",
+   "version_go_mod": "v28.0.1+incompatible",
+   "version_selected": "v28.0.1+incompatible"
+  },
+  {
+   "advisory": "GO-2026-5052",
+   "app_commit": "e8410cad6cacf08b82e2f610055f636f0be61c40",
+   "app_domain": "security-tools",
+   "app_module": "github.com/OJ/gobuster/v3",
+   "app_repo": "github.com/OJ/gobuster",
+   "app_tag": "v3.8.2",
+   "app_url": "https://github.com/OJ/gobuster",
+   "created": "2026-06-22",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "SSLMate",
+    "repo": "go-pkcs12",
+    "sha": "03c441f6b0267f695ca02464133c0b373bf4dd55"
+   },
+   "id": "gobuster__GO-2026-5052",
+   "mains": [
+    "github.com/OJ/gobuster/v3",
+    "github.com/OJ/gobuster/v3/vhs"
+   ],
+   "module": "software.sslmate.com/src/go-pkcs12",
+   "packages": [
+    "software.sslmate.com/src/go-pkcs12"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v0.6.0",
+   "version_selected": "v0.6.0"
+  },
+  {
+   "advisory": "GO-2025-3900",
+   "app_commit": "6abb86789f54da787d1f8c32c1a295e0a9ecd0c3",
+   "app_domain": "developer-cli",
+   "app_module": "github.com/nektos/act",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "app_url": "https://github.com/nektos/act",
+   "created": "2025-08-27",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "go-viper",
+    "repo": "mapstructure",
+    "sha": "742921c9ba2854d27baa64272487fc5075d2c39c"
+   },
+   "id": "act__GO-2025-3900",
+   "mains": [
+    "github.com/nektos/act"
+   ],
+   "module": "github.com/go-viper/mapstructure/v2",
+   "packages": [
+    "github.com/go-viper/mapstructure/v2"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v2.3.0",
+   "version_selected": "v2.3.0"
+  },
+  {
+   "advisory": "GO-2026-4610",
+   "app_commit": "6abb86789f54da787d1f8c32c1a295e0a9ecd0c3",
+   "app_domain": "developer-cli",
+   "app_module": "github.com/nektos/act",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "app_url": "https://github.com/nektos/act",
+   "created": "2026-03-06",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "docker",
+    "repo": "cli",
+    "sha": "13759330b1f7e7cb0d67047ea42c5482548ba7fa"
+   },
+   "id": "act__GO-2026-4610",
+   "mains": [
+    "github.com/nektos/act"
+   ],
+   "module": "github.com/docker/cli",
+   "packages": [
+    "github.com/docker/cli/cli-plugins/manager"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v28.4.0+incompatible",
+   "version_selected": "v28.4.0+incompatible"
+  },
+  {
+   "advisory": "GO-2026-6686",
+   "app_commit": "6abb86789f54da787d1f8c32c1a295e0a9ecd0c3",
+   "app_domain": "developer-cli",
+   "app_module": "github.com/nektos/act",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "app_url": "https://github.com/nektos/act",
+   "created": "2026-10-09",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "moby",
+    "repo": "sys",
+    "sha": "85a71bbe1faa36c552a960e6a5f3d0cfb632fbbe"
+   },
+   "id": "act__GO-2026-6686",
+   "mains": [
+    "github.com/nektos/act"
+   ],
+   "module": "github.com/moby/sys/user",
+   "packages": [
+    "github.com/moby/sys/user"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v0.4.0",
+   "version_selected": "v0.4.0"
+  },
+  {
+   "advisory": "GO-2025-4098",
+   "app_commit": "6abb86789f54da787d1f8c32c1a295e0a9ecd0c3",
+   "app_domain": "developer-cli",
+   "app_module": "github.com/nektos/act",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "app_url": "https://github.com/nektos/act",
+   "created": "2025-11-17",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "3f925525b44d247e390e529e772a0dc0c0bc3557"
+   },
+   "id": "act__GO-2025-4098",
+   "mains": [
+    "github.com/nektos/act"
+   ],
+   "module": "github.com/opencontainers/selinux",
+   "packages": [],
+   "stratum": "N",
+   "version_go_mod": "v1.12.0",
+   "version_selected": "v1.12.0"
+  },
+  {
+   "advisory": "GO-2026-4883",
+   "app_commit": "6abb86789f54da787d1f8c32c1a295e0a9ecd0c3",
+   "app_domain": "developer-cli",
+   "app_module": "github.com/nektos/act",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "app_url": "https://github.com/nektos/act",
+   "created": "2026-03-31",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "moby",
+    "repo": "moby",
+    "sha": "f4d6f25bf0c3fa12d4968320a45685947756a22a"
+   },
+   "id": "act__GO-2026-4883",
+   "mains": [
+    "github.com/nektos/act"
+   ],
+   "module": "github.com/docker/docker",
+   "packages": [],
+   "stratum": "N",
+   "version_go_mod": "v28.4.0+incompatible",
+   "version_selected": "v28.4.0+incompatible"
+  },
+  {
+   "advisory": "GO-2026-4887",
+   "app_commit": "6abb86789f54da787d1f8c32c1a295e0a9ecd0c3",
+   "app_domain": "developer-cli",
+   "app_module": "github.com/nektos/act",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "app_url": "https://github.com/nektos/act",
+   "created": "2026-03-31",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "moby",
+    "repo": "moby",
+    "sha": "e89edb19ad7de0407a5d31e3111cb01aa10b5a38"
+   },
+   "id": "act__GO-2026-4887",
+   "mains": [
+    "github.com/nektos/act"
+   ],
+   "module": "github.com/docker/docker",
+   "packages": [],
+   "stratum": "N",
+   "version_go_mod": "v28.4.0+incompatible",
+   "version_selected": "v28.4.0+incompatible"
+  },
+  {
+   "advisory": "GO-2025-4098",
+   "app_commit": "654f19dee6a0c41de78a8d6d870e8c742cdb43b9",
+   "app_domain": "monitoring",
+   "app_module": "github.com/prometheus/node_exporter",
+   "app_repo": "github.com/prometheus/node_exporter",
+   "app_tag": "v1.10.2",
+   "app_url": "https://github.com/prometheus/node_exporter",
+   "created": "2025-11-17",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "3f925525b44d247e390e529e772a0dc0c0bc3557"
+   },
+   "id": "node_exporter__GO-2025-4098",
+   "mains": [
+    "github.com/prometheus/node_exporter",
+    "github.com/prometheus/node_exporter/tools"
+   ],
+   "module": "github.com/opencontainers/selinux",
+   "packages": [],
+   "stratum": "N",
+   "version_go_mod": "v1.12.0",
+   "version_selected": "v1.12.0"
+  },
+  {
+   "advisory": "GO-2026-6061",
+   "app_commit": "7d0aa7f2e30546fba7c8f1c0bae4d6704e3d8423",
+   "app_domain": "backup",
+   "app_module": "github.com/restic/restic",
+   "app_repo": "github.com/restic/restic",
+   "app_tag": "v0.18.1",
+   "app_url": "https://github.com/restic/restic",
+   "created": "2026-07-23",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "grpc",
+    "repo": "grpc-go",
+    "sha": "4ea465d4ab98013f72a142fe0fc89c19770b2935"
+   },
+   "id": "restic__GO-2026-6061",
+   "mains": [
+    "github.com/restic/restic/cmd/restic",
+    "github.com/restic/restic/helpers/build-release-binaries",
+    "github.com/restic/restic/helpers/prepare-release"
+   ],
+   "module": "google.golang.org/grpc",
+   "packages": [
+    "google.golang.org/grpc/internal/transport",
+    "google.golang.org/grpc/internal/xds/rbac"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v1.74.2",
+   "version_selected": "v1.74.2"
+  },
+  {
+   "advisory": "GO-2026-5506",
+   "app_commit": "7d0aa7f2e30546fba7c8f1c0bae4d6704e3d8423",
+   "app_domain": "backup",
+   "app_module": "github.com/restic/restic",
+   "app_repo": "github.com/restic/restic",
+   "app_tag": "v0.18.1",
+   "app_url": "https://github.com/restic/restic",
+   "created": "2026-07-23",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "open-telemetry",
+    "repo": "opentelemetry-go",
+    "sha": "aa1894e09e3fe66860c7885cb40f98901b35277f"
+   },
+   "id": "restic__GO-2026-5506",
+   "mains": [
+    "github.com/restic/restic/cmd/restic",
+    "github.com/restic/restic/helpers/build-release-binaries",
+    "github.com/restic/restic/helpers/prepare-release"
+   ],
+   "module": "go.opentelemetry.io/otel",
+   "packages": [
+    "go.opentelemetry.io/otel/internal/global",
+    "go.opentelemetry.io/otel/baggage",
+    "go.opentelemetry.io/otel/propagation"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v1.36.0",
+   "version_selected": "v1.36.0"
+  },
+  {
+   "advisory": "GO-2026-5841",
+   "app_commit": "7d0aa7f2e30546fba7c8f1c0bae4d6704e3d8423",
+   "app_domain": "backup",
+   "app_module": "github.com/restic/restic",
+   "app_repo": "github.com/restic/restic",
+   "app_tag": "v0.18.1",
+   "app_url": "https://github.com/restic/restic",
+   "created": "2026-07-21",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "klauspost",
+    "repo": "compress",
+    "sha": "8668e357e776d5152ed62f33c17f21b8690664fa"
+   },
+   "id": "restic__GO-2026-5841",
+   "mains": [
+    "github.com/restic/restic/cmd/restic",
+    "github.com/restic/restic/helpers/build-release-binaries",
+    "github.com/restic/restic/helpers/prepare-release"
+   ],
+   "module": "github.com/klauspost/compress",
+   "packages": [
+    "github.com/klauspost/compress/s2"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v1.18.0",
+   "version_selected": "v1.18.0"
+  },
+  {
+   "advisory": "GO-2025-3900",
+   "app_commit": "d37e9887875a2faa4baee6a7d090eb357dd63771",
+   "app_domain": "terminal-ui",
+   "app_module": "github.com/charmbracelet/glow/v2",
+   "app_repo": "github.com/charmbracelet/glow",
+   "app_tag": "v2.1.1",
+   "app_url": "https://github.com/charmbracelet/glow",
+   "created": "2025-08-27",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "go-viper",
+    "repo": "mapstructure",
+    "sha": "742921c9ba2854d27baa64272487fc5075d2c39c"
+   },
+   "id": "glow__GO-2025-3900",
+   "mains": [
+    "github.com/charmbracelet/glow/v2"
+   ],
+   "module": "github.com/go-viper/mapstructure/v2",
+   "packages": [
+    "github.com/go-viper/mapstructure/v2"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v2.2.1",
+   "version_selected": "v2.2.1"
+  },
+  {
+   "advisory": "GO-2026-5320",
+   "app_commit": "d37e9887875a2faa4baee6a7d090eb357dd63771",
+   "app_domain": "terminal-ui",
+   "app_module": "github.com/charmbracelet/glow/v2",
+   "app_repo": "github.com/charmbracelet/glow",
+   "app_tag": "v2.1.1",
+   "app_url": "https://github.com/charmbracelet/glow",
+   "created": "2026-07-07",
+   "fix_commit": {
+    "host": "github.com",
+    "owner": "yuin",
+    "repo": "goldmark",
+    "sha": "cb46bbc4eca29d55aa9721e04ad207c23ccc44f9"
+   },
+   "id": "glow__GO-2026-5320",
+   "mains": [
+    "github.com/charmbracelet/glow/v2"
+   ],
+   "module": "github.com/yuin/goldmark",
+   "packages": [
+    "github.com/yuin/goldmark/renderer/html"
+   ],
+   "stratum": "S",
+   "version_go_mod": "v1.7.8",
+   "version_selected": "v1.7.8"
+  }
+ ],
+ "env": {
+  "CGO_ENABLED": "0",
+  "GOFLAGS": "-mod=readonly",
+  "GOTOOLCHAIN": "local"
+ },
+ "rules": "docs/evaluation/D3C_SELECTION_RULES.md",
+ "run": {
+  "command": "python -m vulntrace cp10 select",
+  "go": "go version go1.26.10 linux/amd64",
+  "os": "Linux-6.18.44-fc-v880-x86_64-with-glibc2.39",
+  "python": "3.13.18",
+  "repo_commit": "57e21e3",
+  "repo_dirty": false
+ },
+ "schema_version": "1.0",
+ "toolchain": "go1.26.10",
+ "totals": {
+  "N": 7,
+  "S": 16
+ },
+ "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+}
