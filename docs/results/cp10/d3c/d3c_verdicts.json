@@ -1,0 +1,2520 @@
+{
+ "env": {
+  "CGO_ENABLED": "0",
+  "GOFLAGS": "-mod=readonly",
+  "GOPROXY": "off (analysis)",
+  "GOTOOLCHAIN": "local"
+ },
+ "environment": {
+  "command": "python -m vulntrace cp10 run --set d3c",
+  "go": "go version go1.26.10 linux/amd64",
+  "os": "Linux-6.18.44-fc-v880-x86_64-with-glibc2.39",
+  "python": "3.13.18",
+  "repo_commit": "792b9df",
+  "repo_dirty": true
+ },
+ "feasibility_settings": {
+  "max_examined_paths": 20,
+  "rank_evidence": true
+ },
+ "govulncheck": {
+  "db": "pinned vulndb snapshot e0bad56276e98711a598adbab976de7cd914013a data/osv (flat directory)",
+  "mode": "source, -scan symbol, main packages as roots, GOPROXY=off",
+  "module": "golang.org/x/vuln",
+  "scoring": "stratum S: REACHABLE claim = a symbol-level finding; stratum N: REACHABLE claim = any finding (symbol, package or module level)",
+  "version": "v1.9.0"
+ },
+ "max_mains": 10,
+ "pipeline": {
+  "evidence_stage": "on",
+  "feasibility_filter": "on (N = 20 examined paths)",
+  "runs": [
+   "hygiene (CP10 target hygiene)",
+   "legacy (--legacy-targets)"
+  ]
+ },
+ "rows": [
+  {
+   "advisory": "GO-2026-6061",
+   "app_repo": "github.com/AdguardTeam/AdGuardHome",
+   "app_tag": "v0.107.71",
+   "cluster_key": "github.com/AdguardTeam/AdGuardHome",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "NONE",
+    "not_affected": true,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_AFFECTED"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "NONE",
+    "not_affected": true,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_AFFECTED"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 4,
+     "deciding_targets": 4,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 33
+     },
+     "extra_targets": 33,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": true,
+   "hygiene_made_not_reachable": true,
+   "id": "AdGuardHome__GO-2026-6061",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "google.golang.org/grpc",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.77.0"
+  },
+  {
+   "advisory": "GO-2026-5676",
+   "app_repo": "github.com/AdguardTeam/AdGuardHome",
+   "app_tag": "v0.107.71",
+   "cluster_key": "github.com/AdguardTeam/AdGuardHome",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.59.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/quic-go/quic-go/http3.ConfigureTLSConfig",
+     "github.com/quic-go/quic-go/http3.Error.Error",
+     "github.com/quic-go/quic-go/http3.RequestStream.Write",
+     "github.com/quic-go/quic-go/http3.Server.Close",
+     "github.com/quic-go/quic-go/http3.Server.ListenAndServe",
+     "github.com/quic-go/quic-go/http3.Server.ServeListener",
+     "github.com/quic-go/quic-go/http3.Transport.Close",
+     "github.com/quic-go/quic-go/http3.Transport.RoundTrip",
+     "github.com/quic-go/quic-go/http3.Transport.RoundTripOpt",
+     "github.com/quic-go/quic-go/http3.body.Close",
+     "github.com/quic-go/quic-go/http3.body.Read",
+     "github.com/quic-go/quic-go/http3.cancelingReader.Read",
+     "github.com/quic-go/quic-go/http3.countingByteReader.Read",
+     "github.com/quic-go/quic-go/http3.errConnUnusable.Error",
+     "github.com/quic-go/quic-go/http3.gzipReader.Close",
+     "github.com/quic-go/quic-go/http3.gzipReader.Read",
+     "github.com/quic-go/quic-go/http3.hijackableBody.Close",
+     "github.com/quic-go/quic-go/http3.hijackableBody.Read",
+     "github.com/quic-go/quic-go/http3.qpackError.Error",
+     "github.com/quic-go/quic-go/http3.responseWriter.Flush",
+     "github.com/quic-go/quic-go/http3.responseWriter.FlushError",
+     "github.com/quic-go/quic-go/http3.responseWriter.Write",
+     "github.com/quic-go/quic-go/http3.responseWriter.WriteHeader",
+     "github.com/quic-go/quic-go/http3.stateTrackingStream.Read"
+    ],
+    "trace": [
+     "github.com/quic-go/quic-go/http3.RequestStream.Write (http3/stream.go:222)",
+     "io.copyBuffer (src/io/io.go:431)",
+     "io.Copy (src/io/io.go:388)",
+     "github.com/AdguardTeam/AdGuardHome/scripts/translations.prepareMultipartMsg (scripts/translations/upload.go:80)",
+     "github.com/AdguardTeam/AdGuardHome/scripts/translations.twoskyClient.upload (scripts/translations/upload.go:34)",
+     "github.com/AdguardTeam/AdGuardHome/scripts/translations.main (scripts/translations/main.go:97)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.59.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/quic-go/quic-go/http3.ConfigureTLSConfig",
+     "github.com/quic-go/quic-go/http3.Error.Error",
+     "github.com/quic-go/quic-go/http3.RequestStream.Write",
+     "github.com/quic-go/quic-go/http3.Server.Close",
+     "github.com/quic-go/quic-go/http3.Server.ListenAndServe",
+     "github.com/quic-go/quic-go/http3.Server.ServeListener",
+     "github.com/quic-go/quic-go/http3.Transport.Close",
+     "github.com/quic-go/quic-go/http3.Transport.RoundTrip",
+     "github.com/quic-go/quic-go/http3.Transport.RoundTripOpt",
+     "github.com/quic-go/quic-go/http3.body.Close",
+     "github.com/quic-go/quic-go/http3.body.Read",
+     "github.com/quic-go/quic-go/http3.cancelingReader.Read",
+     "github.com/quic-go/quic-go/http3.countingByteReader.Read",
+     "github.com/quic-go/quic-go/http3.errConnUnusable.Error",
+     "github.com/quic-go/quic-go/http3.gzipReader.Close",
+     "github.com/quic-go/quic-go/http3.gzipReader.Read",
+     "github.com/quic-go/quic-go/http3.hijackableBody.Close",
+     "github.com/quic-go/quic-go/http3.hijackableBody.Read",
+     "github.com/quic-go/quic-go/http3.qpackError.Error",
+     "github.com/quic-go/quic-go/http3.responseWriter.Flush",
+     "github.com/quic-go/quic-go/http3.responseWriter.FlushError",
+     "github.com/quic-go/quic-go/http3.responseWriter.Write",
+     "github.com/quic-go/quic-go/http3.responseWriter.WriteHeader",
+     "github.com/quic-go/quic-go/http3.stateTrackingStream.Read"
+    ],
+    "trace": [
+     "github.com/quic-go/quic-go/http3.body.Close (http3/body.go:70)",
+     "github.com/AdguardTeam/golibs/logutil/slogutil.CloseAndLog (logutil/slogutil/defer.go:30)",
+     "github.com/AdguardTeam/AdGuardHome/scripts/blocked-services.main (scripts/blocked-services/main.go:41)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/quic-go/quic-go/http3.parseHeaders",
+     "github.com/quic-go/quic-go/http3.parseTrailers"
+    ],
+    "dynamic_kinds": {},
+    "dynamic_steps": 0,
+    "evidence_level": "STATIC_PATH",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 3,
+     "deciding_targets": 3,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "AdGuardHome__GO-2026-5676",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/quic-go/quic-go/http3.parseHeaders",
+     "github.com/quic-go/quic-go/http3.parseTrailers"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/quic-go/quic-go",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v0.57.0"
+  },
+  {
+   "advisory": "GO-2026-5506",
+   "app_repo": "github.com/AdguardTeam/AdGuardHome",
+   "app_tag": "v0.107.71",
+   "cluster_key": "github.com/AdguardTeam/AdGuardHome",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "NONE",
+    "not_affected": true,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_AFFECTED"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "NONE",
+    "not_affected": true,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_AFFECTED"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 6,
+     "deciding_targets": 6,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 7
+     },
+     "extra_targets": 7,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "AdGuardHome__GO-2026-5506",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "go.opentelemetry.io/otel",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.38.0"
+  },
+  {
+   "advisory": "GO-2026-5756",
+   "app_repo": "github.com/AdguardTeam/AdGuardHome",
+   "app_tag": "v0.107.71",
+   "cluster_key": "github.com/AdguardTeam/AdGuardHome",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.81.3",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/AdguardTeam/dnsproxy/fastip.FastestAddr.ExchangeFastest",
+     "github.com/AdguardTeam/dnsproxy/fastip.New",
+     "github.com/AdguardTeam/dnsproxy/fastip.init",
+     "github.com/AdguardTeam/dnsproxy/internal/bootstrap.NewDialContext",
+     "github.com/AdguardTeam/dnsproxy/internal/bootstrap.NewDialContext$1",
+     "github.com/AdguardTeam/dnsproxy/internal/bootstrap.NewDialContext$2",
+     "github.com/AdguardTeam/dnsproxy/internal/bootstrap.ResolveDialContext",
+     "github.com/AdguardTeam/dnsproxy/internal/bootstrap.init",
+     "github.com/AdguardTeam/dnsproxy/internal/dnsmsg.DefaultMessageConstructor.NewMsgNOTIMPLEMENTED",
+     "github.com/AdguardTeam/dnsproxy/internal/dnsmsg.DefaultMessageConstructor.NewMsgNXDOMAIN",
+     "github.com/AdguardTeam/dnsproxy/internal/dnsmsg.DefaultMessageConstructor.NewMsgSERVFAIL",
+     "github.com/AdguardTeam/dnsproxy/internal/dnsmsg.init",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.ListenConfig",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.UDPGetOOBSize",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.UDPRead",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.UDPSetOptions",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.UDPWrite",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.defaultListenControl$1",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.init",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.listenControl.defaultListenControl",
+     "github.com/AdguardTeam/dnsproxy/proxy.BeforeRequestError.Error",
+     "github.com/AdguardTeam/dnsproxy/proxy.BeforeRequestError.Unwrap",
+     "github.com/AdguardTeam/dnsproxy/proxy.CustomUpstreamConfig.ClearCache",
+     "github.com/AdguardTeam/dnsproxy/proxy.CustomUpstreamConfig.Close",
+     "github.com/AdguardTeam/dnsproxy/proxy.New",
+     "github.com/AdguardTeam/dnsproxy/proxy.ParseError.Error",
+     "github.com/AdguardTeam/dnsproxy/proxy.ParseError.Unwrap",
+     "github.com/AdguardTeam/dnsproxy/proxy.ParseUpstreamsConfig",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.ClearCache",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.LookupNetIP",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.Resolve",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.ServeHTTP",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.Shutdown",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.Start",
+     "github.com/AdguardTeam/dnsproxy/proxy.UpstreamConfig.Close",
+     "github.com/AdguardTeam/dnsproxy/proxy.UpstreamMode.MarshalText",
+     "github.com/AdguardTeam/dnsproxy/proxy.ValidatePrivateConfig",
+     "github.com/AdguardTeam/dnsproxy/proxy.init",
+     "github.com/AdguardTeam/dnsproxy/proxy.quicAddrValidator.requiresValidation",
+     "github.com/AdguardTeam/dnsproxy/proxy.upstreamWithStats.Address",
+     "github.com/AdguardTeam/dnsproxy/proxy.upstreamWithStats.Close",
+     "github.com/AdguardTeam/dnsproxy/proxy.upstreamWithStats.Exchange",
+     "github.com/AdguardTeam/dnsproxy/proxyutil.AddPrefix",
+     "github.com/AdguardTeam/dnsproxy/proxyutil.IPFromRR",
+     "github.com/AdguardTeam/dnsproxy/proxyutil.init",
+     "github.com/AdguardTeam/dnsproxy/upstream.AddressToUpstream",
+     "github.com/AdguardTeam/dnsproxy/upstream.ExchangeAll",
+     "github.com/AdguardTeam/dnsproxy/upstream.ExchangeParallel",
+     "github.com/AdguardTeam/dnsproxy/upstream.NewCachingResolver",
+     "github.com/AdguardTeam/dnsproxy/upstream.NewHostsResolver",
+     "github.com/AdguardTeam/dnsproxy/upstream.NewUpstreamResolver",
+     "github.com/AdguardTeam/dnsproxy/upstream.NotBootstrapError.Error",
+     "github.com/AdguardTeam/dnsproxy/upstream.NotBootstrapError.Unwrap",
+     "github.com/AdguardTeam/dnsproxy/upstream.Options.Clone",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsCrypt.Address",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsCrypt.Close",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsCrypt.Exchange",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverHTTPS.Address",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverHTTPS.Close",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverHTTPS.Exchange",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverQUIC.Address",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverQUIC.Close",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverQUIC.Exchange",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverTLS.Address",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverTLS.Close",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverTLS.Exchange",
+     "github.com/AdguardTeam/dnsproxy/upstream.getBytesPool$1",
+     "github.com/AdguardTeam/dnsproxy/upstream.http3Transport.RoundTrip",
+     "github.com/AdguardTeam/dnsproxy/upstream.init",
+     "github.com/AdguardTeam/dnsproxy/upstream.plainDNS.Address",
+     "github.com/AdguardTeam/dnsproxy/upstream.plainDNS.Close",
+     "github.com/AdguardTeam/dnsproxy/upstream.plainDNS.Exchange"
+    ],
+    "trace": [
+     "github.com/AdguardTeam/dnsproxy/upstream.plainDNS.Exchange (upstream/plain.go:139)",
+     "github.com/AdguardTeam/AdGuardHome/internal/dnsforward.healthchecker.check (internal/dnsforward/configvalidator.go:422)",
+     "github.com/AdguardTeam/AdGuardHome/internal/dnsforward.checkSrv (internal/dnsforward/configvalidator.go:217)",
+     "github.com/AdguardTeam/AdGuardHome/internal/dnsforward.check$1 (internal/dnsforward/configvalidator.go:199)",
+     "sync.Go$1 (src/sync/waitgroup.go:258)",
+     "sync.WaitGroup.Go (src/sync/waitgroup.go:238)",
+     "github.com/AdguardTeam/AdGuardHome/scripts/translations.twoskyClient.download (scripts/translations/download.go:48)",
+     "github.com/AdguardTeam/AdGuardHome/scripts/translations.main (scripts/translations/main.go:89)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.81.3",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/AdguardTeam/dnsproxy/fastip.FastestAddr.ExchangeFastest",
+     "github.com/AdguardTeam/dnsproxy/fastip.New",
+     "github.com/AdguardTeam/dnsproxy/fastip.init",
+     "github.com/AdguardTeam/dnsproxy/internal/bootstrap.NewDialContext",
+     "github.com/AdguardTeam/dnsproxy/internal/bootstrap.NewDialContext$1",
+     "github.com/AdguardTeam/dnsproxy/internal/bootstrap.NewDialContext$2",
+     "github.com/AdguardTeam/dnsproxy/internal/bootstrap.ResolveDialContext",
+     "github.com/AdguardTeam/dnsproxy/internal/bootstrap.init",
+     "github.com/AdguardTeam/dnsproxy/internal/dnsmsg.DefaultMessageConstructor.NewMsgNOTIMPLEMENTED",
+     "github.com/AdguardTeam/dnsproxy/internal/dnsmsg.DefaultMessageConstructor.NewMsgNXDOMAIN",
+     "github.com/AdguardTeam/dnsproxy/internal/dnsmsg.DefaultMessageConstructor.NewMsgSERVFAIL",
+     "github.com/AdguardTeam/dnsproxy/internal/dnsmsg.init",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.ListenConfig",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.UDPGetOOBSize",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.UDPRead",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.UDPSetOptions",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.UDPWrite",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.defaultListenControl$1",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.init",
+     "github.com/AdguardTeam/dnsproxy/internal/netutil.listenControl.defaultListenControl",
+     "github.com/AdguardTeam/dnsproxy/proxy.BeforeRequestError.Error",
+     "github.com/AdguardTeam/dnsproxy/proxy.BeforeRequestError.Unwrap",
+     "github.com/AdguardTeam/dnsproxy/proxy.CustomUpstreamConfig.ClearCache",
+     "github.com/AdguardTeam/dnsproxy/proxy.CustomUpstreamConfig.Close",
+     "github.com/AdguardTeam/dnsproxy/proxy.New",
+     "github.com/AdguardTeam/dnsproxy/proxy.ParseError.Error",
+     "github.com/AdguardTeam/dnsproxy/proxy.ParseError.Unwrap",
+     "github.com/AdguardTeam/dnsproxy/proxy.ParseUpstreamsConfig",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.ClearCache",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.LookupNetIP",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.Resolve",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.ServeHTTP",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.Shutdown",
+     "github.com/AdguardTeam/dnsproxy/proxy.Proxy.Start",
+     "github.com/AdguardTeam/dnsproxy/proxy.UpstreamConfig.Close",
+     "github.com/AdguardTeam/dnsproxy/proxy.UpstreamMode.MarshalText",
+     "github.com/AdguardTeam/dnsproxy/proxy.ValidatePrivateConfig",
+     "github.com/AdguardTeam/dnsproxy/proxy.init",
+     "github.com/AdguardTeam/dnsproxy/proxy.quicAddrValidator.requiresValidation",
+     "github.com/AdguardTeam/dnsproxy/proxy.upstreamWithStats.Address",
+     "github.com/AdguardTeam/dnsproxy/proxy.upstreamWithStats.Close",
+     "github.com/AdguardTeam/dnsproxy/proxy.upstreamWithStats.Exchange",
+     "github.com/AdguardTeam/dnsproxy/proxyutil.AddPrefix",
+     "github.com/AdguardTeam/dnsproxy/proxyutil.IPFromRR",
+     "github.com/AdguardTeam/dnsproxy/proxyutil.init",
+     "github.com/AdguardTeam/dnsproxy/upstream.AddressToUpstream",
+     "github.com/AdguardTeam/dnsproxy/upstream.ExchangeAll",
+     "github.com/AdguardTeam/dnsproxy/upstream.ExchangeParallel",
+     "github.com/AdguardTeam/dnsproxy/upstream.NewCachingResolver",
+     "github.com/AdguardTeam/dnsproxy/upstream.NewHostsResolver",
+     "github.com/AdguardTeam/dnsproxy/upstream.NewUpstreamResolver",
+     "github.com/AdguardTeam/dnsproxy/upstream.NotBootstrapError.Error",
+     "github.com/AdguardTeam/dnsproxy/upstream.NotBootstrapError.Unwrap",
+     "github.com/AdguardTeam/dnsproxy/upstream.Options.Clone",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsCrypt.Address",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsCrypt.Close",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsCrypt.Exchange",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverHTTPS.Address",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverHTTPS.Close",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverHTTPS.Exchange",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverQUIC.Address",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverQUIC.Close",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverQUIC.Exchange",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverTLS.Address",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverTLS.Close",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverTLS.Exchange",
+     "github.com/AdguardTeam/dnsproxy/upstream.getBytesPool$1",
+     "github.com/AdguardTeam/dnsproxy/upstream.http3Transport.RoundTrip",
+     "github.com/AdguardTeam/dnsproxy/upstream.init",
+     "github.com/AdguardTeam/dnsproxy/upstream.plainDNS.Address",
+     "github.com/AdguardTeam/dnsproxy/upstream.plainDNS.Close",
+     "github.com/AdguardTeam/dnsproxy/upstream.plainDNS.Exchange"
+    ],
+    "trace": [
+     "github.com/AdguardTeam/dnsproxy/proxy.CustomUpstreamConfig.ClearCache (proxy/dnscontext.go:257)",
+     "github.com/AdguardTeam/AdGuardHome/internal/client.upstreamManager.clearUpstreamCache (internal/client/upstreammanager.go:169)",
+     "github.com/AdguardTeam/AdGuardHome/internal/client.Storage.ClearUpstreamCache (internal/client/storage.go:764)",
+     "github.com/AdguardTeam/AdGuardHome/internal/dnsforward.Server.handleCacheClear (internal/dnsforward/http.go:767)",
+     "net/http.HandlerFunc.ServeHTTP (src/net/http/server.go:2306)",
+     "net/http.serverHandler.ServeHTTP (src/net/http/server.go:3331)",
+     "net/http.conn.serve (src/net/http/server.go:2087)",
+     "net/http.Server.Serve (src/net/http/server.go:3484)",
+     "net/http.Server.ListenAndServe (src/net/http/server.go:3380)",
+     "github.com/AdguardTeam/AdGuardHome/internal/home.start$1 (internal/home/web.go:294)",
+     "github.com/AdguardTeam/AdGuardHome/internal/home.webAPI.start (internal/home/web.go:289)",
+     "github.com/AdguardTeam/AdGuardHome/internal/home.run (internal/home/home.go:795)",
+     "github.com/AdguardTeam/AdGuardHome/internal/home.Main (internal/home/home.go:144)",
+     "github.com/AdguardTeam/AdGuardHome.main (main.go:23)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverHTTPS.supportsH3",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverQUIC.getBytesPool",
+     "github.com/AdguardTeam/dnsproxy/upstream.logBegin",
+     "github.com/AdguardTeam/dnsproxy/upstream.plainDNS.dialExchange"
+    ],
+    "dynamic_kinds": {
+     "INTERFACE_METHOD": 2
+    },
+    "dynamic_steps": 2,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 0,
+     "deciding_targets": 5,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum N: the advisory has no curated vulndb symbols for this module; the fix's changed non-test functions decide, except context-only ones (none of their lines changed). A REACHABLE resting only on context-only targets is CANT_DETERMINE (ONLY_CONTEXT_TARGETS_REACHABLE); hygiene changes nothing else in this stratum.",
+     "stratum": "N"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "AdGuardHome__GO-2026-5756",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverHTTPS.supportsH3",
+     "github.com/AdguardTeam/dnsproxy/upstream.dnsOverQUIC.getBytesPool",
+     "github.com/AdguardTeam/dnsproxy/upstream.logBegin",
+     "github.com/AdguardTeam/dnsproxy/upstream.plainDNS.dialExchange"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/AdguardTeam/dnsproxy",
+   "review_status": "UNREVIEWED",
+   "stratum": "N",
+   "version_selected": "v0.78.2"
+  },
+  {
+   "advisory": "GO-2026-4503",
+   "app_repo": "github.com/schollz/croc",
+   "app_tag": "v10.3.1",
+   "cluster_key": "github.com/schollz/croc",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.1.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.1.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "croc__GO-2026-4503",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "filippo.io/edwards25519",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.1.0"
+  },
+  {
+   "advisory": "GO-2026-5841",
+   "app_repo": "github.com/go-shiori/shiori",
+   "app_tag": "v1.8.0",
+   "cluster_key": "github.com/go-shiori/shiori",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "NONE",
+    "not_affected": true,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_AFFECTED"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "NONE",
+    "not_affected": true,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_AFFECTED"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "shiori__GO-2026-5841",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/klauspost/compress",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.18.0"
+  },
+  {
+   "advisory": "GO-2025-3553",
+   "app_repo": "github.com/go-shiori/shiori",
+   "app_tag": "v1.8.0",
+   "cluster_key": "github.com/go-shiori/shiori",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v5.2.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified"
+    ],
+    "trace": [
+     "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified (parser.go:138)",
+     "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims (parser.go:56)",
+     "github.com/golang-jwt/jwt/v5.ParseWithClaims (parser.go:237)",
+     "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken (internal/domains/auth.go:25)",
+     "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest (internal/http/middleware/auth.go:37)",
+     "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1 (internal/http/http.go:17)",
+     "net/http.HandlerFunc.ServeHTTP (src/net/http/server.go:2306)",
+     "net/http.ServeMux.ServeHTTP (src/net/http/server.go:2848)",
+     "net/http.serverHandler.ServeHTTP (src/net/http/server.go:3331)",
+     "net/http.conn.serve (src/net/http/server.go:2087)",
+     "net/http.Server.Serve (src/net/http/server.go:3484)",
+     "net/http.Serve (src/net/http/server.go:2962)",
+     "github.com/go-shiori/shiori/internal/cmd.openHandler (internal/cmd/open.go:193)",
+     "github.com/spf13/cobra.Command.execute (command.go:1019)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1148)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1071)",
+     "github.com/go-shiori/shiori.main (main.go:26)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v5.2.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified"
+    ],
+    "trace": [
+     "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified (parser.go:138)",
+     "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims (parser.go:56)",
+     "github.com/golang-jwt/jwt/v5.ParseWithClaims (parser.go:237)",
+     "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken (internal/domains/auth.go:25)",
+     "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest (internal/http/middleware/auth.go:37)",
+     "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1 (internal/http/http.go:17)",
+     "net/http.HandlerFunc.ServeHTTP (src/net/http/server.go:2306)",
+     "net/http.ServeMux.ServeHTTP (src/net/http/server.go:2848)",
+     "net/http.serverHandler.ServeHTTP (src/net/http/server.go:3331)",
+     "net/http.conn.serve (src/net/http/server.go:2087)",
+     "net/http.Server.Serve (src/net/http/server.go:3484)",
+     "net/http.Serve (src/net/http/server.go:2962)",
+     "github.com/go-shiori/shiori/internal/cmd.openHandler (internal/cmd/open.go:193)",
+     "github.com/spf13/cobra.Command.execute (command.go:1019)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1148)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1071)",
+     "github.com/go-shiori/shiori.main (main.go:26)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified"
+    ],
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "FUNCTION_VALUE": 1,
+     "INTERFACE_METHOD": 4
+    },
+    "dynamic_steps": 6,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "shiori__GO-2025-3553",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/golang-jwt/jwt/v5",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v5.2.1"
+  },
+  {
+   "advisory": "GO-2026-4503",
+   "app_repo": "github.com/go-shiori/shiori",
+   "app_tag": "v1.8.0",
+   "cluster_key": "github.com/go-shiori/shiori",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.1.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.1.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "shiori__GO-2026-4503",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "filippo.io/edwards25519",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.1.0"
+  },
+  {
+   "advisory": "GO-2026-4887",
+   "app_repo": "github.com/go-shiori/shiori",
+   "app_tag": "v1.8.0",
+   "cluster_key": "github.com/go-shiori/shiori",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "NONE",
+    "not_affected": true,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_AFFECTED"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "NONE",
+    "not_affected": true,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_AFFECTED"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 0,
+     "deciding_targets": 3,
+     "extra_by_reason": {
+      "CONTEXT_ONLY_EXTRA": 2
+     },
+     "extra_targets": 2,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum N: the advisory has no curated vulndb symbols for this module; the fix's changed non-test functions decide, except context-only ones (none of their lines changed). A REACHABLE resting only on context-only targets is CANT_DETERMINE (ONLY_CONTEXT_TARGETS_REACHABLE); hygiene changes nothing else in this stratum.",
+     "stratum": "N"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "shiori__GO-2026-4887",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/docker/docker",
+   "review_status": "UNREVIEWED",
+   "stratum": "N",
+   "version_selected": "v28.0.1+incompatible"
+  },
+  {
+   "advisory": "GO-2026-4883",
+   "app_repo": "github.com/go-shiori/shiori",
+   "app_tag": "v1.8.0",
+   "cluster_key": "github.com/go-shiori/shiori",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "NONE",
+    "not_affected": true,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_AFFECTED"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "NONE",
+    "not_affected": true,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_AFFECTED"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 0,
+     "deciding_targets": 3,
+     "extra_by_reason": {
+      "CONTEXT_ONLY_EXTRA": 1
+     },
+     "extra_targets": 1,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum N: the advisory has no curated vulndb symbols for this module; the fix's changed non-test functions decide, except context-only ones (none of their lines changed). A REACHABLE resting only on context-only targets is CANT_DETERMINE (ONLY_CONTEXT_TARGETS_REACHABLE); hygiene changes nothing else in this stratum.",
+     "stratum": "N"
+    },
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "shiori__GO-2026-4883",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "github.com/docker/docker",
+   "review_status": "UNREVIEWED",
+   "stratum": "N",
+   "version_selected": "v28.0.1+incompatible"
+  },
+  {
+   "advisory": "GO-2026-5052",
+   "app_repo": "github.com/OJ/gobuster",
+   "app_tag": "v3.8.2",
+   "cluster_key": "github.com/OJ/gobuster",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.7.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "software.sslmate.com/src/go-pkcs12.DecodeChain"
+    ],
+    "trace": [
+     "software.sslmate.com/src/go-pkcs12.DecodeChain (pkcs12.go:413)",
+     "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions (cli/options.go:80)",
+     "github.com/OJ/gobuster/v3/cli/gcs.run (cli/gcs/gcs.go:36)",
+     "github.com/urfave/cli/v2.Command.Run (command.go:187)",
+     "github.com/urfave/cli/v2.App.RunContext (app.go:333)",
+     "github.com/urfave/cli/v2.App.Run (app.go:307)",
+     "github.com/OJ/gobuster/v3.main (main.go:59)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v0.7.2",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "software.sslmate.com/src/go-pkcs12.DecodeChain"
+    ],
+    "trace": [
+     "software.sslmate.com/src/go-pkcs12.DecodeChain (pkcs12.go:413)",
+     "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions (cli/options.go:80)",
+     "github.com/OJ/gobuster/v3/cli/gcs.run (cli/gcs/gcs.go:36)",
+     "github.com/urfave/cli/v2.Command.Run (command.go:187)",
+     "github.com/urfave/cli/v2.App.RunContext (app.go:333)",
+     "github.com/urfave/cli/v2.App.Run (app.go:307)",
+     "github.com/OJ/gobuster/v3.main (main.go:59)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "software.sslmate.com/src/go-pkcs12.DecodeChain"
+    ],
+    "dynamic_kinds": {
+     "FUNCTION_VALUE": 1
+    },
+    "dynamic_steps": 1,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 4,
+     "deciding_targets": 4,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 1
+     },
+     "extra_targets": 1,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "gobuster__GO-2026-5052",
+   "legacy": {
+    "deciding_reachable": [
+     "software.sslmate.com/src/go-pkcs12.doPBMAC1"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "software.sslmate.com/src/go-pkcs12",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v0.6.0"
+  },
+  {
+   "advisory": "GO-2025-3900",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "cluster_key": "github.com/nektos/act",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v2.4.0",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v2.4.0",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 27,
+     "deciding_targets": 27,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 2
+     },
+     "extra_targets": 2,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "act__GO-2025-3900",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/go-viper/mapstructure/v2",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v2.3.0"
+  },
+  {
+   "advisory": "GO-2026-4610",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "cluster_key": "github.com/nektos/act",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v29.2.0+incompatible",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v29.2.0+incompatible",
+    "level": "MODULE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "MODE2_NOT_REACHABLE_DOWNGRADED"
+    ],
+    "route_passes_filter": null,
+    "target_policy": null,
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "act__GO-2026-4610",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "MODE2_NOT_REACHABLE_DOWNGRADED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "RELEASE",
+   "module": "github.com/docker/cli",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v28.4.0+incompatible"
+  },
+  {
+   "advisory": "GO-2026-6686",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "cluster_key": "github.com/nektos/act",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v0.4.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v0.4.1",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 3,
+     "deciding_targets": 3,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 1
+     },
+     "extra_targets": 1,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "act__GO-2026-6686",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/moby/sys/user",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v0.4.0"
+  },
+  {
+   "advisory": "GO-2025-4098",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "cluster_key": "github.com/nektos/act",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.13.0",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/opencontainers/selinux/go-selinux.GetEnabled",
+     "github.com/opencontainers/selinux/go-selinux.attrPath$1",
+     "github.com/opencontainers/selinux/go-selinux.getSELinuxfs$1",
+     "github.com/opencontainers/selinux/go-selinux.init",
+     "github.com/opencontainers/selinux/go-selinux.policyRoot$1",
+     "github.com/opencontainers/selinux/pkg/pwalkdir.init"
+    ],
+    "trace": [
+     "github.com/opencontainers/selinux/go-selinux.GetEnabled (go-selinux/selinux.go:63)",
+     "github.com/nektos/act/pkg/runner.RunContext.GetBindsAndMounts (pkg/runner/run_context.go:175)",
+     "github.com/nektos/act/pkg/runner.startJobContainer$1 (pkg/runner/run_context.go:286)",
+     "github.com/nektos/act/pkg/runner.startContainer$1 (pkg/runner/run_context.go:671)",
+     "github.com/nektos/act/pkg/common.Finally$1 (pkg/common/executor.go:227)",
+     "github.com/nektos/act/cmd.newRunCommand$1 (cmd/root.go:708)",
+     "github.com/spf13/cobra.Command.execute (command.go:1015)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1148)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1071)",
+     "github.com/nektos/act/cmd.Execute (cmd/root.go:51)",
+     "github.com/nektos/act.main (main.go:18)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.13.0",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/opencontainers/selinux/go-selinux.GetEnabled",
+     "github.com/opencontainers/selinux/go-selinux.attrPath$1",
+     "github.com/opencontainers/selinux/go-selinux.getSELinuxfs$1",
+     "github.com/opencontainers/selinux/go-selinux.init",
+     "github.com/opencontainers/selinux/go-selinux.policyRoot$1",
+     "github.com/opencontainers/selinux/pkg/pwalkdir.init"
+    ],
+    "trace": [
+     "github.com/opencontainers/selinux/pkg/pwalkdir.init (pkg/pwalkdir/pwalkdir.go:4)",
+     "github.com/opencontainers/selinux/go-selinux.init (go-selinux/selinux_linux.go:20)",
+     "github.com/nektos/act/pkg/runner.init (pkg/runner/run_context.go:28)",
+     "github.com/nektos/act/cmd.init (cmd/root.go:34)",
+     "github.com/nektos/act.init (main.go:6)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 0,
+     "deciding_targets": 32,
+     "extra_by_reason": {
+      "CONTEXT_ONLY_EXTRA": 8
+     },
+     "extra_targets": 8,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum N: the advisory has no curated vulndb symbols for this module; the fix's changed non-test functions decide, except context-only ones (none of their lines changed). A REACHABLE resting only on context-only targets is CANT_DETERMINE (ONLY_CONTEXT_TARGETS_REACHABLE); hygiene changes nothing else in this stratum.",
+     "stratum": "N"
+    },
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "act__GO-2025-4098",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "github.com/opencontainers/selinux",
+   "review_status": "REVIEWED",
+   "stratum": "N",
+   "version_selected": "v1.12.0"
+  },
+  {
+   "advisory": "GO-2026-4883",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "cluster_key": "github.com/nektos/act",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/docker/docker/api.init",
+     "github.com/docker/docker/api/types.HijackedResponse.Close",
+     "github.com/docker/docker/api/types.NewHijackedResponse",
+     "github.com/docker/docker/api/types.init",
+     "github.com/docker/docker/api/types/blkiodev.ThrottleDevice.String",
+     "github.com/docker/docker/api/types/blkiodev.WeightDevice.String",
+     "github.com/docker/docker/api/types/blkiodev.init",
+     "github.com/docker/docker/api/types/build.init",
+     "github.com/docker/docker/api/types/checkpoint.init",
+     "github.com/docker/docker/api/types/common.init",
+     "github.com/docker/docker/api/types/container.CgroupnsMode.Valid",
+     "github.com/docker/docker/api/types/container.Isolation.IsDefault",
+     "github.com/docker/docker/api/types/container.NetworkMode.IsUserDefined",
+     "github.com/docker/docker/api/types/container.NetworkMode.NetworkName",
+     "github.com/docker/docker/api/types/container.PidMode.Valid",
+     "github.com/docker/docker/api/types/container.RestartPolicy.IsNone",
+     "github.com/docker/docker/api/types/container.UTSMode.Valid",
+     "github.com/docker/docker/api/types/container.UsernsMode.Valid",
+     "github.com/docker/docker/api/types/container.init",
+     "github.com/docker/docker/api/types/events.init",
+     "github.com/docker/docker/api/types/filters.Args.Len",
+     "github.com/docker/docker/api/types/filters.NewArgs",
+     "github.com/docker/docker/api/types/filters.ToParamWithVersion",
+     "github.com/docker/docker/api/types/filters.init",
+     "github.com/docker/docker/api/types/image.init",
+     "github.com/docker/docker/api/types/mount.init",
+     "github.com/docker/docker/api/types/network.init",
+     "github.com/docker/docker/api/types/registry.init",
+     "github.com/docker/docker/api/types/storage.init",
+     "github.com/docker/docker/api/types/strslice.init",
+     "github.com/docker/docker/api/types/swarm.init",
+     "github.com/docker/docker/api/types/swarm/runtime.init",
+     "github.com/docker/docker/api/types/system.init",
+     "github.com/docker/docker/api/types/time.init",
+     "github.com/docker/docker/api/types/versions.GreaterThanOrEqualTo",
+     "github.com/docker/docker/api/types/versions.LessThan",
+     "github.com/docker/docker/api/types/versions.init",
+     "github.com/docker/docker/api/types/volume.init",
+     "github.com/docker/docker/client.CheckRedirect",
+     "github.com/docker/docker/client.Client.Close",
+     "github.com/docker/docker/client.Client.ContainerAttach",
+     "github.com/docker/docker/client.Client.ContainerCreate",
+     "github.com/docker/docker/client.Client.ContainerExecAttach",
+     "github.com/docker/docker/client.Client.ContainerExecCreate",
+     "github.com/docker/docker/client.Client.ContainerExecInspect",
+     "github.com/docker/docker/client.Client.ContainerInspect",
+     "github.com/docker/docker/client.Client.ContainerList",
+     "github.com/docker/docker/client.Client.ContainerRemove",
+     "github.com/docker/docker/client.Client.ContainerStart",
+     "github.com/docker/docker/client.Client.ContainerWait",
+     "github.com/docker/docker/client.Client.CopyFromContainer",
+     "github.com/docker/docker/client.Client.CopyToContainer",
+     "github.com/docker/docker/client.Client.ImageBuild",
+     "github.com/docker/docker/client.Client.ImageInspect",
+     "github.com/docker/docker/client.Client.ImagePull",
+     "github.com/docker/docker/client.Client.ImageRemove",
+     "github.com/docker/docker/client.Client.Info",
+     "github.com/docker/docker/client.Client.NegotiateAPIVersion",
+     "github.com/docker/docker/client.Client.NetworkCreate",
+     "github.com/docker/docker/client.Client.NetworkInspect",
+     "github.com/docker/docker/client.Client.NetworkList",
+     "github.com/docker/docker/client.Client.NetworkRemove",
+     "github.com/docker/docker/client.Client.ServerVersion",
+     "github.com/docker/docker/client.Client.VolumeList",
+     "github.com/docker/docker/client.Client.VolumeRemove",
+     "github.com/docker/docker/client.NewClientWithOpts",
+     "github.com/docker/docker/client.NewClientWithOpts$1",
+     "github.com/docker/docker/client.WithDialContext",
+     "github.com/docker/docker/client.WithHost",
+     "github.com/docker/docker/client.emptyIDError.Error",
+     "github.com/docker/docker/client.errConnectionFailed.Error",
+     "github.com/docker/docker/client.errConnectionFailed.Unwrap",
+     "github.com/docker/docker/client.hijackedConn.Read",
+     "github.com/docker/docker/client.hijackedConn.RoundTrip",
+     "github.com/docker/docker/client.httpError.Error",
+     "github.com/docker/docker/client.httpError.Is",
+     "github.com/docker/docker/client.httpError.Unwrap",
+     "github.com/docker/docker/client.init",
+     "github.com/docker/docker/client.objectNotFoundError.Error",
+     "github.com/docker/docker/errdefs.InvalidParameter",
+     "github.com/docker/docker/errdefs.errInvalidParameter.Unwrap",
+     "github.com/docker/docker/errdefs.init",
+     "github.com/docker/docker/pkg/stdcopy.StdCopy",
+     "github.com/docker/docker/pkg/stdcopy.init",
+     "github.com/docker/docker/pkg/stdcopy.init$1"
+    ],
+    "trace": [
+     "github.com/docker/docker/client.Client.ContainerExecAttach (client/container_exec.go:61)",
+     "github.com/nektos/act/pkg/container.exec$1 (pkg/container/docker_run.go:586)",
+     "github.com/nektos/act/pkg/common.Finally$1 (pkg/common/executor.go:227)",
+     "github.com/nektos/act/cmd.newRunCommand$1 (cmd/root.go:708)",
+     "github.com/spf13/cobra.Command.execute (command.go:1015)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1148)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1071)",
+     "github.com/nektos/act/cmd.Execute (cmd/root.go:51)",
+     "github.com/nektos/act.main (main.go:18)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/docker/docker/api.init",
+     "github.com/docker/docker/api/types.HijackedResponse.Close",
+     "github.com/docker/docker/api/types.NewHijackedResponse",
+     "github.com/docker/docker/api/types.init",
+     "github.com/docker/docker/api/types/blkiodev.ThrottleDevice.String",
+     "github.com/docker/docker/api/types/blkiodev.WeightDevice.String",
+     "github.com/docker/docker/api/types/blkiodev.init",
+     "github.com/docker/docker/api/types/build.init",
+     "github.com/docker/docker/api/types/checkpoint.init",
+     "github.com/docker/docker/api/types/common.init",
+     "github.com/docker/docker/api/types/container.CgroupnsMode.Valid",
+     "github.com/docker/docker/api/types/container.Isolation.IsDefault",
+     "github.com/docker/docker/api/types/container.NetworkMode.IsUserDefined",
+     "github.com/docker/docker/api/types/container.NetworkMode.NetworkName",
+     "github.com/docker/docker/api/types/container.PidMode.Valid",
+     "github.com/docker/docker/api/types/container.RestartPolicy.IsNone",
+     "github.com/docker/docker/api/types/container.UTSMode.Valid",
+     "github.com/docker/docker/api/types/container.UsernsMode.Valid",
+     "github.com/docker/docker/api/types/container.init",
+     "github.com/docker/docker/api/types/events.init",
+     "github.com/docker/docker/api/types/filters.Args.Len",
+     "github.com/docker/docker/api/types/filters.NewArgs",
+     "github.com/docker/docker/api/types/filters.ToParamWithVersion",
+     "github.com/docker/docker/api/types/filters.init",
+     "github.com/docker/docker/api/types/image.init",
+     "github.com/docker/docker/api/types/mount.init",
+     "github.com/docker/docker/api/types/network.init",
+     "github.com/docker/docker/api/types/registry.init",
+     "github.com/docker/docker/api/types/storage.init",
+     "github.com/docker/docker/api/types/strslice.init",
+     "github.com/docker/docker/api/types/swarm.init",
+     "github.com/docker/docker/api/types/swarm/runtime.init",
+     "github.com/docker/docker/api/types/system.init",
+     "github.com/docker/docker/api/types/time.init",
+     "github.com/docker/docker/api/types/versions.GreaterThanOrEqualTo",
+     "github.com/docker/docker/api/types/versions.LessThan",
+     "github.com/docker/docker/api/types/versions.init",
+     "github.com/docker/docker/api/types/volume.init",
+     "github.com/docker/docker/client.CheckRedirect",
+     "github.com/docker/docker/client.Client.Close",
+     "github.com/docker/docker/client.Client.ContainerAttach",
+     "github.com/docker/docker/client.Client.ContainerCreate",
+     "github.com/docker/docker/client.Client.ContainerExecAttach",
+     "github.com/docker/docker/client.Client.ContainerExecCreate",
+     "github.com/docker/docker/client.Client.ContainerExecInspect",
+     "github.com/docker/docker/client.Client.ContainerInspect",
+     "github.com/docker/docker/client.Client.ContainerList",
+     "github.com/docker/docker/client.Client.ContainerRemove",
+     "github.com/docker/docker/client.Client.ContainerStart",
+     "github.com/docker/docker/client.Client.ContainerWait",
+     "github.com/docker/docker/client.Client.CopyFromContainer",
+     "github.com/docker/docker/client.Client.CopyToContainer",
+     "github.com/docker/docker/client.Client.ImageBuild",
+     "github.com/docker/docker/client.Client.ImageInspect",
+     "github.com/docker/docker/client.Client.ImagePull",
+     "github.com/docker/docker/client.Client.ImageRemove",
+     "github.com/docker/docker/client.Client.Info",
+     "github.com/docker/docker/client.Client.NegotiateAPIVersion",
+     "github.com/docker/docker/client.Client.NetworkCreate",
+     "github.com/docker/docker/client.Client.NetworkInspect",
+     "github.com/docker/docker/client.Client.NetworkList",
+     "github.com/docker/docker/client.Client.NetworkRemove",
+     "github.com/docker/docker/client.Client.ServerVersion",
+     "github.com/docker/docker/client.Client.VolumeList",
+     "github.com/docker/docker/client.Client.VolumeRemove",
+     "github.com/docker/docker/client.NewClientWithOpts",
+     "github.com/docker/docker/client.NewClientWithOpts$1",
+     "github.com/docker/docker/client.WithDialContext",
+     "github.com/docker/docker/client.WithHost",
+     "github.com/docker/docker/client.emptyIDError.Error",
+     "github.com/docker/docker/client.errConnectionFailed.Error",
+     "github.com/docker/docker/client.errConnectionFailed.Unwrap",
+     "github.com/docker/docker/client.hijackedConn.Read",
+     "github.com/docker/docker/client.hijackedConn.RoundTrip",
+     "github.com/docker/docker/client.httpError.Error",
+     "github.com/docker/docker/client.httpError.Is",
+     "github.com/docker/docker/client.httpError.Unwrap",
+     "github.com/docker/docker/client.init",
+     "github.com/docker/docker/client.objectNotFoundError.Error",
+     "github.com/docker/docker/errdefs.InvalidParameter",
+     "github.com/docker/docker/errdefs.errInvalidParameter.Unwrap",
+     "github.com/docker/docker/errdefs.init",
+     "github.com/docker/docker/pkg/stdcopy.StdCopy",
+     "github.com/docker/docker/pkg/stdcopy.init",
+     "github.com/docker/docker/pkg/stdcopy.init$1"
+    ],
+    "trace": [
+     "github.com/docker/docker/api/types.init (api/types/client.go:1)",
+     "github.com/nektos/act/pkg/container.init (pkg/container/docker_run.go:22)",
+     "github.com/nektos/act/cmd.init (cmd/root.go:31)",
+     "github.com/nektos/act.init (main.go:6)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 0,
+     "deciding_targets": 3,
+     "extra_by_reason": {
+      "CONTEXT_ONLY_EXTRA": 1
+     },
+     "extra_targets": 1,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum N: the advisory has no curated vulndb symbols for this module; the fix's changed non-test functions decide, except context-only ones (none of their lines changed). A REACHABLE resting only on context-only targets is CANT_DETERMINE (ONLY_CONTEXT_TARGETS_REACHABLE); hygiene changes nothing else in this stratum.",
+     "stratum": "N"
+    },
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "act__GO-2026-4883",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "github.com/docker/docker",
+   "review_status": "UNREVIEWED",
+   "stratum": "N",
+   "version_selected": "v28.4.0+incompatible"
+  },
+  {
+   "advisory": "GO-2026-4887",
+   "app_repo": "github.com/nektos/act",
+   "app_tag": "v0.2.83",
+   "cluster_key": "github.com/nektos/act",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/docker/docker/api.init",
+     "github.com/docker/docker/api/types.HijackedResponse.Close",
+     "github.com/docker/docker/api/types.NewHijackedResponse",
+     "github.com/docker/docker/api/types.init",
+     "github.com/docker/docker/api/types/blkiodev.ThrottleDevice.String",
+     "github.com/docker/docker/api/types/blkiodev.WeightDevice.String",
+     "github.com/docker/docker/api/types/blkiodev.init",
+     "github.com/docker/docker/api/types/build.init",
+     "github.com/docker/docker/api/types/checkpoint.init",
+     "github.com/docker/docker/api/types/common.init",
+     "github.com/docker/docker/api/types/container.CgroupnsMode.Valid",
+     "github.com/docker/docker/api/types/container.Isolation.IsDefault",
+     "github.com/docker/docker/api/types/container.NetworkMode.IsUserDefined",
+     "github.com/docker/docker/api/types/container.NetworkMode.NetworkName",
+     "github.com/docker/docker/api/types/container.PidMode.Valid",
+     "github.com/docker/docker/api/types/container.RestartPolicy.IsNone",
+     "github.com/docker/docker/api/types/container.UTSMode.Valid",
+     "github.com/docker/docker/api/types/container.UsernsMode.Valid",
+     "github.com/docker/docker/api/types/container.init",
+     "github.com/docker/docker/api/types/events.init",
+     "github.com/docker/docker/api/types/filters.Args.Len",
+     "github.com/docker/docker/api/types/filters.NewArgs",
+     "github.com/docker/docker/api/types/filters.ToParamWithVersion",
+     "github.com/docker/docker/api/types/filters.init",
+     "github.com/docker/docker/api/types/image.init",
+     "github.com/docker/docker/api/types/mount.init",
+     "github.com/docker/docker/api/types/network.init",
+     "github.com/docker/docker/api/types/registry.init",
+     "github.com/docker/docker/api/types/storage.init",
+     "github.com/docker/docker/api/types/strslice.init",
+     "github.com/docker/docker/api/types/swarm.init",
+     "github.com/docker/docker/api/types/swarm/runtime.init",
+     "github.com/docker/docker/api/types/system.init",
+     "github.com/docker/docker/api/types/time.init",
+     "github.com/docker/docker/api/types/versions.GreaterThanOrEqualTo",
+     "github.com/docker/docker/api/types/versions.LessThan",
+     "github.com/docker/docker/api/types/versions.init",
+     "github.com/docker/docker/api/types/volume.init",
+     "github.com/docker/docker/client.CheckRedirect",
+     "github.com/docker/docker/client.Client.Close",
+     "github.com/docker/docker/client.Client.ContainerAttach",
+     "github.com/docker/docker/client.Client.ContainerCreate",
+     "github.com/docker/docker/client.Client.ContainerExecAttach",
+     "github.com/docker/docker/client.Client.ContainerExecCreate",
+     "github.com/docker/docker/client.Client.ContainerExecInspect",
+     "github.com/docker/docker/client.Client.ContainerInspect",
+     "github.com/docker/docker/client.Client.ContainerList",
+     "github.com/docker/docker/client.Client.ContainerRemove",
+     "github.com/docker/docker/client.Client.ContainerStart",
+     "github.com/docker/docker/client.Client.ContainerWait",
+     "github.com/docker/docker/client.Client.CopyFromContainer",
+     "github.com/docker/docker/client.Client.CopyToContainer",
+     "github.com/docker/docker/client.Client.ImageBuild",
+     "github.com/docker/docker/client.Client.ImageInspect",
+     "github.com/docker/docker/client.Client.ImagePull",
+     "github.com/docker/docker/client.Client.ImageRemove",
+     "github.com/docker/docker/client.Client.Info",
+     "github.com/docker/docker/client.Client.NegotiateAPIVersion",
+     "github.com/docker/docker/client.Client.NetworkCreate",
+     "github.com/docker/docker/client.Client.NetworkInspect",
+     "github.com/docker/docker/client.Client.NetworkList",
+     "github.com/docker/docker/client.Client.NetworkRemove",
+     "github.com/docker/docker/client.Client.ServerVersion",
+     "github.com/docker/docker/client.Client.VolumeList",
+     "github.com/docker/docker/client.Client.VolumeRemove",
+     "github.com/docker/docker/client.NewClientWithOpts",
+     "github.com/docker/docker/client.NewClientWithOpts$1",
+     "github.com/docker/docker/client.WithDialContext",
+     "github.com/docker/docker/client.WithHost",
+     "github.com/docker/docker/client.emptyIDError.Error",
+     "github.com/docker/docker/client.errConnectionFailed.Error",
+     "github.com/docker/docker/client.errConnectionFailed.Unwrap",
+     "github.com/docker/docker/client.hijackedConn.Read",
+     "github.com/docker/docker/client.hijackedConn.RoundTrip",
+     "github.com/docker/docker/client.httpError.Error",
+     "github.com/docker/docker/client.httpError.Is",
+     "github.com/docker/docker/client.httpError.Unwrap",
+     "github.com/docker/docker/client.init",
+     "github.com/docker/docker/client.objectNotFoundError.Error",
+     "github.com/docker/docker/errdefs.InvalidParameter",
+     "github.com/docker/docker/errdefs.errInvalidParameter.Unwrap",
+     "github.com/docker/docker/errdefs.init",
+     "github.com/docker/docker/pkg/stdcopy.StdCopy",
+     "github.com/docker/docker/pkg/stdcopy.init",
+     "github.com/docker/docker/pkg/stdcopy.init$1"
+    ],
+    "trace": [
+     "github.com/docker/docker/api/types.HijackedResponse.Close (api/types/client.go:22)",
+     "github.com/nektos/act/pkg/container.exec$1 (pkg/container/docker_run.go:592)",
+     "github.com/nektos/act/pkg/common.Finally$1 (pkg/common/executor.go:227)",
+     "github.com/nektos/act/cmd.newRunCommand$1 (cmd/root.go:708)",
+     "github.com/spf13/cobra.Command.execute (command.go:1015)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1148)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1071)",
+     "github.com/nektos/act/cmd.Execute (cmd/root.go:51)",
+     "github.com/nektos/act.main (main.go:18)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": null,
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/docker/docker/api.init",
+     "github.com/docker/docker/api/types.HijackedResponse.Close",
+     "github.com/docker/docker/api/types.NewHijackedResponse",
+     "github.com/docker/docker/api/types.init",
+     "github.com/docker/docker/api/types/blkiodev.ThrottleDevice.String",
+     "github.com/docker/docker/api/types/blkiodev.WeightDevice.String",
+     "github.com/docker/docker/api/types/blkiodev.init",
+     "github.com/docker/docker/api/types/build.init",
+     "github.com/docker/docker/api/types/checkpoint.init",
+     "github.com/docker/docker/api/types/common.init",
+     "github.com/docker/docker/api/types/container.CgroupnsMode.Valid",
+     "github.com/docker/docker/api/types/container.Isolation.IsDefault",
+     "github.com/docker/docker/api/types/container.NetworkMode.IsUserDefined",
+     "github.com/docker/docker/api/types/container.NetworkMode.NetworkName",
+     "github.com/docker/docker/api/types/container.PidMode.Valid",
+     "github.com/docker/docker/api/types/container.RestartPolicy.IsNone",
+     "github.com/docker/docker/api/types/container.UTSMode.Valid",
+     "github.com/docker/docker/api/types/container.UsernsMode.Valid",
+     "github.com/docker/docker/api/types/container.init",
+     "github.com/docker/docker/api/types/events.init",
+     "github.com/docker/docker/api/types/filters.Args.Len",
+     "github.com/docker/docker/api/types/filters.NewArgs",
+     "github.com/docker/docker/api/types/filters.ToParamWithVersion",
+     "github.com/docker/docker/api/types/filters.init",
+     "github.com/docker/docker/api/types/image.init",
+     "github.com/docker/docker/api/types/mount.init",
+     "github.com/docker/docker/api/types/network.init",
+     "github.com/docker/docker/api/types/registry.init",
+     "github.com/docker/docker/api/types/storage.init",
+     "github.com/docker/docker/api/types/strslice.init",
+     "github.com/docker/docker/api/types/swarm.init",
+     "github.com/docker/docker/api/types/swarm/runtime.init",
+     "github.com/docker/docker/api/types/system.init",
+     "github.com/docker/docker/api/types/time.init",
+     "github.com/docker/docker/api/types/versions.GreaterThanOrEqualTo",
+     "github.com/docker/docker/api/types/versions.LessThan",
+     "github.com/docker/docker/api/types/versions.init",
+     "github.com/docker/docker/api/types/volume.init",
+     "github.com/docker/docker/client.CheckRedirect",
+     "github.com/docker/docker/client.Client.Close",
+     "github.com/docker/docker/client.Client.ContainerAttach",
+     "github.com/docker/docker/client.Client.ContainerCreate",
+     "github.com/docker/docker/client.Client.ContainerExecAttach",
+     "github.com/docker/docker/client.Client.ContainerExecCreate",
+     "github.com/docker/docker/client.Client.ContainerExecInspect",
+     "github.com/docker/docker/client.Client.ContainerInspect",
+     "github.com/docker/docker/client.Client.ContainerList",
+     "github.com/docker/docker/client.Client.ContainerRemove",
+     "github.com/docker/docker/client.Client.ContainerStart",
+     "github.com/docker/docker/client.Client.ContainerWait",
+     "github.com/docker/docker/client.Client.CopyFromContainer",
+     "github.com/docker/docker/client.Client.CopyToContainer",
+     "github.com/docker/docker/client.Client.ImageBuild",
+     "github.com/docker/docker/client.Client.ImageInspect",
+     "github.com/docker/docker/client.Client.ImagePull",
+     "github.com/docker/docker/client.Client.ImageRemove",
+     "github.com/docker/docker/client.Client.Info",
+     "github.com/docker/docker/client.Client.NegotiateAPIVersion",
+     "github.com/docker/docker/client.Client.NetworkCreate",
+     "github.com/docker/docker/client.Client.NetworkInspect",
+     "github.com/docker/docker/client.Client.NetworkList",
+     "github.com/docker/docker/client.Client.NetworkRemove",
+     "github.com/docker/docker/client.Client.ServerVersion",
+     "github.com/docker/docker/client.Client.VolumeList",
+     "github.com/docker/docker/client.Client.VolumeRemove",
+     "github.com/docker/docker/client.NewClientWithOpts",
+     "github.com/docker/docker/client.NewClientWithOpts$1",
+     "github.com/docker/docker/client.WithDialContext",
+     "github.com/docker/docker/client.WithHost",
+     "github.com/docker/docker/client.emptyIDError.Error",
+     "github.com/docker/docker/client.errConnectionFailed.Error",
+     "github.com/docker/docker/client.errConnectionFailed.Unwrap",
+     "github.com/docker/docker/client.hijackedConn.Read",
+     "github.com/docker/docker/client.hijackedConn.RoundTrip",
+     "github.com/docker/docker/client.httpError.Error",
+     "github.com/docker/docker/client.httpError.Is",
+     "github.com/docker/docker/client.httpError.Unwrap",
+     "github.com/docker/docker/client.init",
+     "github.com/docker/docker/client.objectNotFoundError.Error",
+     "github.com/docker/docker/errdefs.InvalidParameter",
+     "github.com/docker/docker/errdefs.errInvalidParameter.Unwrap",
+     "github.com/docker/docker/errdefs.init",
+     "github.com/docker/docker/pkg/stdcopy.StdCopy",
+     "github.com/docker/docker/pkg/stdcopy.init",
+     "github.com/docker/docker/pkg/stdcopy.init$1"
+    ],
+    "trace": [
+     "github.com/docker/docker/client.Client.ContainerInspect (client/container_inspect.go:14)",
+     "github.com/nektos/act/pkg/container.containerReference.GetHealth (pkg/container/docker_run.go:173)",
+     "github.com/nektos/act/pkg/runner.waitForServiceContainer$1 (pkg/runner/run_context.go:593)",
+     "github.com/nektos/act/pkg/common.Finally$1 (pkg/common/executor.go:227)",
+     "github.com/nektos/act/cmd.newRunCommand$1 (cmd/root.go:708)",
+     "github.com/spf13/cobra.Command.execute (command.go:1015)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1148)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1071)",
+     "github.com/nektos/act/cmd.Execute (cmd/root.go:51)",
+     "github.com/nektos/act.main (main.go:18)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 0,
+     "deciding_targets": 3,
+     "extra_by_reason": {
+      "CONTEXT_ONLY_EXTRA": 2
+     },
+     "extra_targets": 2,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum N: the advisory has no curated vulndb symbols for this module; the fix's changed non-test functions decide, except context-only ones (none of their lines changed). A REACHABLE resting only on context-only targets is CANT_DETERMINE (ONLY_CONTEXT_TARGETS_REACHABLE); hygiene changes nothing else in this stratum.",
+     "stratum": "N"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "act__GO-2026-4887",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/docker/docker",
+   "review_status": "UNREVIEWED",
+   "stratum": "N",
+   "version_selected": "v28.4.0+incompatible"
+  },
+  {
+   "advisory": "GO-2025-4098",
+   "app_repo": "github.com/prometheus/node_exporter",
+   "app_tag": "v1.10.2",
+   "cluster_key": "github.com/prometheus/node_exporter",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.13.0",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/opencontainers/selinux/go-selinux.DefaultEnforceMode",
+     "github.com/opencontainers/selinux/go-selinux.EnforceMode",
+     "github.com/opencontainers/selinux/go-selinux.GetEnabled",
+     "github.com/opencontainers/selinux/go-selinux.attrPath$1",
+     "github.com/opencontainers/selinux/go-selinux.getSELinuxfs$1",
+     "github.com/opencontainers/selinux/go-selinux.init",
+     "github.com/opencontainers/selinux/go-selinux.policyRoot$1",
+     "github.com/opencontainers/selinux/pkg/pwalkdir.init"
+    ],
+    "trace": [
+     "github.com/opencontainers/selinux/go-selinux.init (go-selinux/doc.go:13)",
+     "github.com/prometheus/node_exporter/collector.init (collector/selinux_linux.go:22)",
+     "github.com/prometheus/node_exporter.init (node_exporter.go:38)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.13.0",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/opencontainers/selinux/go-selinux.DefaultEnforceMode",
+     "github.com/opencontainers/selinux/go-selinux.EnforceMode",
+     "github.com/opencontainers/selinux/go-selinux.GetEnabled",
+     "github.com/opencontainers/selinux/go-selinux.attrPath$1",
+     "github.com/opencontainers/selinux/go-selinux.getSELinuxfs$1",
+     "github.com/opencontainers/selinux/go-selinux.init",
+     "github.com/opencontainers/selinux/go-selinux.policyRoot$1",
+     "github.com/opencontainers/selinux/pkg/pwalkdir.init"
+    ],
+    "trace": [
+     "github.com/opencontainers/selinux/go-selinux.init (go-selinux/doc.go:13)",
+     "github.com/prometheus/node_exporter/collector.init (collector/selinux_linux.go:22)",
+     "github.com/prometheus/node_exporter.init (node_exporter.go:38)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 0,
+     "deciding_targets": 32,
+     "extra_by_reason": {
+      "CONTEXT_ONLY_EXTRA": 8
+     },
+     "extra_targets": 8,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum N: the advisory has no curated vulndb symbols for this module; the fix's changed non-test functions decide, except context-only ones (none of their lines changed). A REACHABLE resting only on context-only targets is CANT_DETERMINE (ONLY_CONTEXT_TARGETS_REACHABLE); hygiene changes nothing else in this stratum.",
+     "stratum": "N"
+    },
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "node_exporter__GO-2025-4098",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "VERIFIER_REJECTED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "github.com/opencontainers/selinux",
+   "review_status": "REVIEWED",
+   "stratum": "N",
+   "version_selected": "v1.12.0"
+  },
+  {
+   "advisory": "GO-2026-6061",
+   "app_repo": "github.com/restic/restic",
+   "app_tag": "v0.18.1",
+   "cluster_key": "github.com/restic/restic",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.82.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "google.golang.org/grpc/internal/transport.ClientStream.Close",
+     "google.golang.org/grpc/internal/transport.ClientStream.Header",
+     "google.golang.org/grpc/internal/transport.ClientStream.Read",
+     "google.golang.org/grpc/internal/transport.ClientStream.RecvCompress",
+     "google.golang.org/grpc/internal/transport.ClientStream.TrailersOnly",
+     "google.golang.org/grpc/internal/transport.ClientStream.Write",
+     "google.golang.org/grpc/internal/transport.NewHTTP2Client",
+     "google.golang.org/grpc/internal/transport.Stream.ReadMessageHeader",
+     "google.golang.org/grpc/internal/transport.http2Client.Close",
+     "google.golang.org/grpc/internal/transport.http2Client.GracefulClose",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/xds/rbac.NewChainEngine"
+    ],
+    "trace": [
+     "google.golang.org/grpc/internal/transport.Stream.ReadMessageHeader (internal/transport/transport.go:353)",
+     "google.golang.org/grpc.parser.recvMsg (rpc_util.go:690)",
+     "google.golang.org/grpc.recvAndDecompress (rpc_util.go:850)",
+     "google.golang.org/grpc.recv (rpc_util.go:933)",
+     "google.golang.org/grpc.addrConnStream.RecvMsg (stream.go:1476)",
+     "github.com/cncf/xds/go/xds/service/orca/v3.openRcaServiceStreamCoreMetricsClient.Recv (xds/service/orca/v3/orca_grpc.pb.go:67)",
+     "google.golang.org/grpc/orca.producer.runStream (orca/producer.go:214)",
+     "google.golang.org/grpc/orca.run$1 (orca/producer.go:176)",
+     "google.golang.org/grpc/internal/backoff.RunF (internal/backoff/backoff.go:97)",
+     "google.golang.org/grpc/orca.producer.run (orca/producer.go:197)",
+     "google.golang.org/grpc/orca.producer.updateRunLocked (orca/producer.go:167)",
+     "google.golang.org/grpc/orca.producer.unregisterListener (orca/producer.go:137)",
+     "google.golang.org/grpc/orca.RegisterOOBListener$1 (orca/producer.go:88)",
+     "sync.OnceFunc$1$1 (src/sync/oncefunc.go:33)",
+     "sync.Once.doSlow (src/sync/once.go:78)",
+     "sync.Once.Do (src/sync/once.go:69)",
+     "github.com/restic/restic/internal/restic.init#1 (internal/restic/lock.go:414)",
+     "github.com/restic/restic/internal/restic.init (internal/restic/backend_find.go:1)",
+     "github.com/restic/restic/cmd/restic.init (cmd/restic/cmd_backup.go:27)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.82.1",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "google.golang.org/grpc/internal/transport.ClientStream.Close",
+     "google.golang.org/grpc/internal/transport.ClientStream.Header",
+     "google.golang.org/grpc/internal/transport.ClientStream.Read",
+     "google.golang.org/grpc/internal/transport.ClientStream.RecvCompress",
+     "google.golang.org/grpc/internal/transport.ClientStream.TrailersOnly",
+     "google.golang.org/grpc/internal/transport.ClientStream.Write",
+     "google.golang.org/grpc/internal/transport.NewHTTP2Client",
+     "google.golang.org/grpc/internal/transport.Stream.ReadMessageHeader",
+     "google.golang.org/grpc/internal/transport.http2Client.Close",
+     "google.golang.org/grpc/internal/transport.http2Client.GracefulClose",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/xds/rbac.NewChainEngine"
+    ],
+    "trace": [
+     "google.golang.org/grpc/internal/transport.ClientStream.Header (internal/transport/client_stream.go:121)",
+     "google.golang.org/grpc.Header$1 (stream.go:821)",
+     "google.golang.org/grpc.clientStream.withRetry (stream.go:780)",
+     "google.golang.org/grpc.clientStream.SendMsg (stream.go:946)",
+     "github.com/google/s2a-go/internal/proto/v2/s2a_go_proto.s2AServiceSetUpSessionClient.Send (internal/proto/v2/s2a_go_proto/s2a_grpc.pb.go:77)",
+     "github.com/google/s2a-go/internal/v2.s2AGrpcStream.Send (internal/v2/s2av2.go:343)",
+     "github.com/google/s2a-go/internal/v2/remotesigner.remoteSigner.Sign (internal/v2/remotesigner/remotesigner.go:65)",
+     "crypto/tls.clientHandshakeState.doFullHandshake (src/crypto/tls/handshake_client.go:839)",
+     "crypto/tls.clientHandshakeState.handshake (src/crypto/tls/handshake_client.go:600)",
+     "crypto/tls.Conn.clientHandshake (src/crypto/tls/handshake_client.go:349)",
+     "crypto/tls.Conn.handleRenegotiation (src/crypto/tls/conn.go:1297)",
+     "crypto/tls.Conn.handlePostHandshakeMessage (src/crypto/tls/conn.go:1307)",
+     "crypto/tls.Conn.Read (src/crypto/tls/conn.go:1397)",
+     "io.LimitedReader.Read (src/io/io.go:479)",
+     "bufio.Scanner.Scan (src/bufio/scan.go:219)",
+     "github.com/restic/restic/cmd/restic.main (cmd/restic/main.go:197)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "google.golang.org/grpc/internal/transport.controlBuffer.executeAndPut",
+     "google.golang.org/grpc/internal/transport.controlBuffer.getOnceLocked",
+     "google.golang.org/grpc/internal/xds/rbac.matchersFromPermissions",
+     "google.golang.org/grpc/internal/xds/rbac.matchersFromPrincipals"
+    ],
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "FUNCTION_VALUE": 2,
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 4,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 4,
+     "deciding_targets": 4,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 33
+     },
+     "extra_targets": 33,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "restic__GO-2026-6061",
+   "legacy": {
+    "deciding_reachable": [
+     "google.golang.org/grpc/internal/envconfig.boolFromEnv",
+     "google.golang.org/grpc/internal/transport.cleanupStream.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.controlBuffer.executeAndPut",
+     "google.golang.org/grpc/internal/transport.controlBuffer.finish",
+     "google.golang.org/grpc/internal/transport.controlBuffer.getOnceLocked",
+     "google.golang.org/grpc/internal/transport.dataFrame.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.goAway.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.headerFrame.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.http2Client.NewStream",
+     "google.golang.org/grpc/internal/transport.http2Client.handleData",
+     "google.golang.org/grpc/internal/transport.incomingGoAway.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.incomingSettings.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.incomingWindowUpdate.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.itemList.isEmpty",
+     "google.golang.org/grpc/internal/transport.loopyWriter.handle",
+     "google.golang.org/grpc/internal/transport.loopyWriter.headerHandler",
+     "google.golang.org/grpc/internal/transport.loopyWriter.originateStream",
+     "google.golang.org/grpc/internal/transport.loopyWriter.registerStreamHandler",
+     "google.golang.org/grpc/internal/transport.outgoingSettings.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.outgoingWindowUpdate.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/transport.ping.isTransportResponseFrame",
+     "google.golang.org/grpc/internal/xds/rbac.matchersFromPermissions",
+     "google.golang.org/grpc/internal/xds/rbac.matchersFromPrincipals"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "google.golang.org/grpc",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.74.2"
+  },
+  {
+   "advisory": "GO-2026-5506",
+   "app_repo": "github.com/restic/restic",
+   "app_tag": "v0.18.1",
+   "cluster_key": "github.com/restic/restic",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.41.0",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+     "go.opentelemetry.io/otel/internal/global.GetErrorHandler"
+    ],
+    "trace": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle (internal/global/handler.go:26)",
+     "go.opentelemetry.io/otel.Handle (handler.go:33)",
+     "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler (stats_handler.go:206)",
+     "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1 (grpctransport/grpctransport.go:72)",
+     "sync.Once.doSlow (src/sync/once.go:78)",
+     "sync.Once.Do (src/sync/once.go:69)",
+     "github.com/restic/restic/internal/restic.init#1 (internal/restic/lock.go:414)",
+     "github.com/restic/restic/internal/restic.init (internal/restic/backend_find.go:1)",
+     "github.com/restic/restic/cmd/restic.init (cmd/restic/cmd_backup.go:27)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.41.0",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+     "go.opentelemetry.io/otel/internal/global.GetErrorHandler"
+    ],
+    "trace": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle (internal/global/handler.go:26)",
+     "go.opentelemetry.io/otel.Handle (handler.go:33)",
+     "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc.NewClientHandler (stats_handler.go:206)",
+     "cloud.google.com/go/auth/grpctransport.otelGRPCStatsHandler$1 (grpctransport/grpctransport.go:72)",
+     "sync.Once.doSlow (src/sync/once.go:78)",
+     "sync.Once.Do (src/sync/once.go:69)",
+     "github.com/restic/restic/internal/restic.init#1 (internal/restic/lock.go:414)",
+     "github.com/restic/restic/internal/restic.init (internal/restic/backend_find.go:1)",
+     "github.com/restic/restic/cmd/restic.init (cmd/restic/cmd_backup.go:27)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+     "go.opentelemetry.io/otel/internal/global.GetErrorHandler"
+    ],
+    "dynamic_kinds": {},
+    "dynamic_steps": 0,
+    "evidence_level": "STATIC_PATH",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 6,
+     "deciding_targets": 6,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 7
+     },
+     "extra_targets": 7,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "restic__GO-2026-5506",
+   "legacy": {
+    "deciding_reachable": [
+     "go.opentelemetry.io/otel/internal/global.ErrDelegator.Handle",
+     "go.opentelemetry.io/otel/internal/global.GetErrorHandler",
+     "go.opentelemetry.io/otel/internal/global.defaultErrorHandler",
+     "go.opentelemetry.io/otel/internal/global.defaultTracerValue"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "go.opentelemetry.io/otel",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.36.0"
+  },
+  {
+   "advisory": "GO-2026-5841",
+   "app_repo": "github.com/restic/restic",
+   "app_tag": "v0.18.1",
+   "cluster_key": "github.com/restic/restic",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v1.18.7",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 1,
+     "deciding_targets": 1,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "NOT_REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "restic__GO-2026-5841",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [],
+    "verdict": "NOT_REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/klauspost/compress",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.18.0"
+  },
+  {
+   "advisory": "GO-2025-3900",
+   "app_repo": "github.com/charmbracelet/glow",
+   "app_tag": "v2.1.1",
+   "cluster_key": "github.com/charmbracelet/glow",
+   "govulncheck": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v2.4.0",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "NOT_REACHABLE",
+    "error": null,
+    "fixed_version": "v2.4.0",
+    "level": "PACKAGE",
+    "not_affected": false,
+    "symbols": [],
+    "trace": null,
+    "verdict": "NOT_REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [],
+    "dynamic_kinds": null,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "reason_codes": [
+     "ANALYSIS_FAILED"
+    ],
+    "route_passes_filter": null,
+    "target_policy": {
+     "curated_symbols": 27,
+     "deciding_targets": 27,
+     "extra_by_reason": {
+      "FIX_CHANGED_EXTRA": 2
+     },
+     "extra_targets": 2,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "CANT_DETERMINE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "glow__GO-2025-3900",
+   "legacy": {
+    "deciding_reachable": [],
+    "reason_codes": [
+     "ANALYSIS_FAILED"
+    ],
+    "verdict": "CANT_DETERMINE"
+   },
+   "mode": "FIX",
+   "module": "github.com/go-viper/mapstructure/v2",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v2.2.1"
+  },
+  {
+   "advisory": "GO-2026-5320",
+   "app_repo": "github.com/charmbracelet/glow",
+   "app_tag": "v2.1.1",
+   "cluster_key": "github.com/charmbracelet/glow",
+   "govulncheck": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.7.17",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink",
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderImage",
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderLink"
+    ],
+    "trace": [
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink (renderer/html/html.go:554)",
+     "github.com/yuin/goldmark/renderer.Render$2 (renderer/renderer.go:166)",
+     "github.com/yuin/goldmark/ast.walkHelper (ast/ast.go:505)",
+     "github.com/yuin/goldmark/ast.Walk (ast/ast.go:500)",
+     "github.com/yuin/goldmark/renderer.renderer.Render (renderer/renderer.go:161)",
+     "github.com/yuin/goldmark.markdown.Convert (markdown.go:118)",
+     "github.com/charmbracelet/glamour.TermRenderer.RenderBytes (glamour.go:293)",
+     "github.com/charmbracelet/glamour.TermRenderer.Render (glamour.go:286)",
+     "github.com/charmbracelet/glow/v2.executeCLI (main.go:308)",
+     "github.com/charmbracelet/glow/v2.execute (main.go:229)",
+     "github.com/spf13/cobra.Command.execute (command.go:1015)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1148)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1071)",
+     "github.com/charmbracelet/glow/v2.main (main.go:376)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "govulncheck_legacy_run": {
+    "claim": "REACHABLE",
+    "error": null,
+    "fixed_version": "v1.7.17",
+    "level": "SYMBOL",
+    "not_affected": false,
+    "symbols": [
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink",
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderImage",
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderLink"
+    ],
+    "trace": [
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderLink (renderer/html/html.go:632)",
+     "github.com/yuin/goldmark/renderer.Render$2 (renderer/renderer.go:166)",
+     "github.com/yuin/goldmark/ast.walkHelper (ast/ast.go:505)",
+     "github.com/yuin/goldmark/ast.Walk (ast/ast.go:500)",
+     "github.com/yuin/goldmark/renderer.renderer.Render (renderer/renderer.go:161)",
+     "github.com/yuin/goldmark.markdown.Convert (markdown.go:118)",
+     "github.com/charmbracelet/glamour.TermRenderer.RenderBytes (glamour.go:293)",
+     "github.com/charmbracelet/glamour.TermRenderer.Render (glamour.go:286)",
+     "github.com/charmbracelet/glow/v2.executeCLI (main.go:308)",
+     "github.com/charmbracelet/glow/v2.execute (main.go:229)",
+     "github.com/spf13/cobra.Command.execute (command.go:1015)",
+     "github.com/spf13/cobra.Command.ExecuteC (command.go:1148)",
+     "github.com/spf13/cobra.Command.Execute (command.go:1071)",
+     "github.com/charmbracelet/glow/v2.main (main.go:376)"
+    ],
+    "verdict": "REACHABLE"
+   },
+   "harness_error": null,
+   "hygiene": {
+    "deciding_reachable": [
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink",
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderImage",
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderLink"
+    ],
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "FUNCTION_VALUE": 2,
+     "INTERFACE_METHOD": 2
+    },
+    "dynamic_steps": 5,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "reason_codes": [],
+    "route_passes_filter": true,
+    "target_policy": {
+     "curated_symbols": 3,
+     "deciding_targets": 3,
+     "extra_by_reason": {},
+     "extra_targets": 0,
+     "policy": "HYGIENE",
+     "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+     "stratum": "S"
+    },
+    "verdict": "REACHABLE"
+   },
+   "hygiene_changed": false,
+   "hygiene_made_not_reachable": false,
+   "id": "glow__GO-2026-5320",
+   "legacy": {
+    "deciding_reachable": [
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink",
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderImage",
+     "github.com/yuin/goldmark/renderer/html.Renderer.renderLink"
+    ],
+    "reason_codes": [],
+    "verdict": "REACHABLE"
+   },
+   "mode": "FIX",
+   "module": "github.com/yuin/goldmark",
+   "review_status": "REVIEWED",
+   "stratum": "S",
+   "version_selected": "v1.7.8"
+  }
+ ],
+ "schema_version": "1.0",
+ "seconds_per_case": {
+  "hygiene": {
+   "max": 63.6,
+   "n": 23,
+   "p50": 17.3,
+   "p95": 46.1,
+   "total": 482.8
+  },
+  "legacy": {
+   "max": 43.4,
+   "n": 23,
+   "p50": 13.6,
+   "p95": 43.1,
+   "total": 410.5
+  }
+ },
+ "set": "d3c",
+ "statement": "REACHABLE means reachable in the call graph from a main package, not exploitable. govulncheck is a reference, not truth; truth comes from the adjudication sheets.",
+ "summary": {
+  "ALL": {
+   "cases": 23,
+   "evidence_levels": {
+    "HAS_DYNAMIC_STEPS": 5,
+    "STATIC_PATH": 2
+   },
+   "govulncheck_claim": {
+    "NOT_REACHABLE": 12,
+    "REACHABLE": 11
+   },
+   "govulncheck_level": {
+    "MODULE": 1,
+    "NONE": 5,
+    "PACKAGE": 6,
+    "SYMBOL": 11
+   },
+   "hygiene": {
+    "CANT_DETERMINE": 6,
+    "NOT_REACHABLE": 10,
+    "REACHABLE": 7
+   },
+   "hygiene_changed": [
+    "AdGuardHome__GO-2026-6061"
+   ],
+   "hygiene_made_not_reachable": [
+    "AdGuardHome__GO-2026-6061"
+   ],
+   "legacy": {
+    "CANT_DETERMINE": 7,
+    "NOT_REACHABLE": 9,
+    "REACHABLE": 7
+   }
+  },
+  "N": {
+   "cases": 7,
+   "evidence_levels": {
+    "HAS_DYNAMIC_STEPS": 1
+   },
+   "govulncheck_claim": {
+    "NOT_REACHABLE": 2,
+    "REACHABLE": 5
+   },
+   "govulncheck_level": {
+    "NONE": 2,
+    "SYMBOL": 5
+   },
+   "hygiene": {
+    "CANT_DETERMINE": 4,
+    "NOT_REACHABLE": 2,
+    "REACHABLE": 1
+   },
+   "hygiene_changed": [],
+   "hygiene_made_not_reachable": [],
+   "legacy": {
+    "CANT_DETERMINE": 4,
+    "NOT_REACHABLE": 2,
+    "REACHABLE": 1
+   }
+  },
+  "S": {
+   "cases": 16,
+   "evidence_levels": {
+    "HAS_DYNAMIC_STEPS": 4,
+    "STATIC_PATH": 2
+   },
+   "govulncheck_claim": {
+    "NOT_REACHABLE": 10,
+    "REACHABLE": 6
+   },
+   "govulncheck_level": {
+    "MODULE": 1,
+    "NONE": 3,
+    "PACKAGE": 6,
+    "SYMBOL": 6
+   },
+   "hygiene": {
+    "CANT_DETERMINE": 2,
+    "NOT_REACHABLE": 8,
+    "REACHABLE": 6
+   },
+   "hygiene_changed": [
+    "AdGuardHome__GO-2026-6061"
+   ],
+   "hygiene_made_not_reachable": [
+    "AdGuardHome__GO-2026-6061"
+   ],
+   "legacy": {
+    "CANT_DETERMINE": 3,
+    "NOT_REACHABLE": 7,
+    "REACHABLE": 6
+   }
+  },
+  "by_stratum": {
+   "N": 7,
+   "S": 16
+  },
+  "cases": 23,
+  "govulncheck_runs_agree": false
+ },
+ "toolchain": {
+  "hygiene": {
+   "helper": [
+    "go1.26.10"
+   ],
+   "linker": [
+    "go1.26.10"
+   ]
+  },
+  "legacy": {
+   "helper": [
+    "go1.26.10"
+   ],
+   "linker": [
+    "go1.26.10"
+   ]
+  }
+ },
+ "verdict_files_gzipped": [
+  "verdicts_hygiene/restic__GO-2026-6061.json.gz",
+  "verdicts_legacy/restic__GO-2026-6061.json.gz"
+ ],
+ "verdict_provenance": {
+  "hygiene": {
+   "cases_resumed": 0,
+   "cases_run_in_this_invocation": 23,
+   "created_at_first": "2026-11-26T02:28:56Z",
+   "created_at_last": "2026-11-26T02:37:26Z",
+   "repo_commits": [
+    "792b9df"
+   ]
+  },
+  "legacy": {
+   "cases_resumed": 0,
+   "cases_run_in_this_invocation": 23,
+   "created_at_first": "2026-11-26T02:38:02Z",
+   "created_at_last": "2026-11-26T02:45:17Z",
+   "repo_commits": [
+    "462166e"
+   ]
+  }
+ }
+}

@@ -1,0 +1,419 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "moby",
+    "repo": "moby",
+    "sha": "f4d6f25bf0c3fa12d4968320a45685947756a22a"
+   }
+  ],
+  "fixed_in": null,
+  "id": "GO-2026-4883",
+  "module": "github.com/docker/docker",
+  "source": "vulndb",
+  "vulnerable_at": "28.5.2+incompatible"
+ },
+ "case_id": "act__GO-2026-4883",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/nektos/act"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [
+   {
+    "candidate_id": "c4",
+    "package_dir": "daemon/pkg/plugin",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "normalizePrivileges"
+   }
+  ],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/nektos/act": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.31,
+    "load_failed": false,
+    "vta_seconds": 7.93
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 4,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {},
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "NOT_REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "1 candidate function(s) not analysed: ADDED_BY_FIX.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "path_evidence": {
+  "dynamic_steps": null,
+  "evidence_level": "NO_ROUTE_SHOWN",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/docker/docker/daemon/pkg/plugin",
+    "symbol": "isEqual"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/docker/docker is in the build but package github.com/docker/docker/daemon/pkg/plugin was not found: no required module provides package github.com/docker/docker/daemon/pkg/plugin; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/docker/docker/daemon/pkg/plugin",
+    "symbol": "isEqualPrivilege"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/docker/docker is in the build but package github.com/docker/docker/daemon/pkg/plugin was not found: no required module provides package github.com/docker/docker/daemon/pkg/plugin; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/docker/docker/daemon/pkg/plugin",
+    "symbol": "makeLoggerStreams"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/docker/docker is in the build but package github.com/docker/docker/daemon/pkg/plugin was not found: no required module provides package github.com/docker/docker/daemon/pkg/plugin; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c5",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/docker/docker/daemon/pkg/plugin",
+    "symbol": "validatePrivileges"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/docker/docker is in the build but package github.com/docker/docker/daemon/pkg/plugin was not found: no required module provides package github.com/docker/docker/daemon/pkg/plugin; to add it:"
+    }
+   ]
+  }
+ ],
+ "pre_policy_reason_codes": [
+  "VERIFIER_REJECTED"
+ ],
+ "pre_policy_verdict": "CANT_DETERMINE",
+ "provenance": {
+  "created_at": "2026-11-26T02:42:24Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "462166e",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [
+  "VERIFIER_REJECTED"
+ ],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/docker/docker/daemon/pkg/plugin",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "isEqual"
+  },
+  {
+   "candidate_id": "c2",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/docker/docker/daemon/pkg/plugin",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "isEqualPrivilege"
+  },
+  {
+   "candidate_id": "c3",
+   "context_only": true,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/docker/docker/daemon/pkg/plugin",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "makeLoggerStreams"
+  },
+  {
+   "candidate_id": "c5",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/docker/docker/daemon/pkg/plugin",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "validatePrivileges"
+  }
+ ],
+ "target_app": {
+  "commit": "6abb86789f54da787d1f8c32c1a295e0a9ecd0c3",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/nektos/act",
+  "path": "<local>/data/cp10/d3c/legacy/apps/github.com_nektos_act/6abb86789f54"
+ },
+ "timing": {
+  "inspect_seconds": 0.08,
+  "methods_seconds": 9.23,
+  "symbols_seconds": 0.0,
+  "total_seconds": 9.34,
+  "verifier_seconds": 0.03
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "CANT_DETERMINE",
+ "verification": {
+  "checks_by_kind": {
+   "TARGET_EXISTS": {
+    "failed": 4,
+    "run": 4,
+    "skipped": 0
+   }
+  },
+  "checks_run": 4,
+  "downgraded": 4,
+  "failures": [
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/docker/docker is in the build but package github.com/docker/docker/daemon/pkg/plugin was not found: no required module provides package github.com/docker/docker/daemon/pkg/plugin; to add it:",
+    "target": {
+     "package": "github.com/docker/docker/daemon/pkg/plugin",
+     "symbol": "isEqual"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/docker/docker is in the build but package github.com/docker/docker/daemon/pkg/plugin was not found: no required module provides package github.com/docker/docker/daemon/pkg/plugin; to add it:",
+    "target": {
+     "package": "github.com/docker/docker/daemon/pkg/plugin",
+     "symbol": "isEqualPrivilege"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/docker/docker is in the build but package github.com/docker/docker/daemon/pkg/plugin was not found: no required module provides package github.com/docker/docker/daemon/pkg/plugin; to add it:",
+    "target": {
+     "package": "github.com/docker/docker/daemon/pkg/plugin",
+     "symbol": "makeLoggerStreams"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/docker/docker is in the build but package github.com/docker/docker/daemon/pkg/plugin was not found: no required module provides package github.com/docker/docker/daemon/pkg/plugin; to add it:",
+    "target": {
+     "package": "github.com/docker/docker/daemon/pkg/plugin",
+     "symbol": "validatePrivileges"
+    }
+   }
+  ],
+  "file_source": "analysed tree on disk",
+  "status": "FAILED"
+ }
+}

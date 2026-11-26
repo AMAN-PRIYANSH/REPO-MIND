@@ -1,0 +1,3062 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "yuin",
+    "repo": "goldmark",
+    "sha": "cb46bbc4eca29d55aa9721e04ad207c23ccc44f9"
+   }
+  ],
+  "fixed_in": "1.7.17",
+  "id": "GO-2026-5320",
+  "module": "github.com/yuin/goldmark",
+  "source": "vulndb",
+  "vulnerable_at": "1.7.16"
+ },
+ "case_id": "glow__GO-2026-5320",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/charmbracelet/glow/v2"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/charmbracelet/glow/v2": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.81,
+    "load_failed": false,
+    "vta_seconds": 5.37
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 3,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {
+   "FEASIBLE": 3
+  },
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "15 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "path_evidence": {
+  "dynamic_kinds": {
+   "CLOSURE_VIA_PARAMETER": 1,
+   "FUNCTION_VALUE": 2,
+   "INTERFACE_METHOD": 2
+  },
+  "dynamic_steps": 5,
+  "entry": {
+   "main_package": "github.com/charmbracelet/glow/v2",
+   "target": {
+    "package": "github.com/yuin/goldmark/renderer/html",
+    "symbol": "Renderer.renderAutoLink"
+   }
+  },
+  "evidence_level": "HAS_DYNAMIC_STEPS",
+  "length": 14,
+  "passes_filter": true,
+  "source": "FILTER_RANKED_PATH",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 505
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderAutoLink"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "dynamic_steps": 5,
+      "first_infeasible": null,
+      "length": 14
+     },
+     {
+      "dynamic_steps": 5,
+      "first_infeasible": null,
+      "length": 14
+     },
+     {
+      "dynamic_steps": 5,
+      "first_infeasible": null,
+      "length": 15
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_index": 0,
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 505
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderAutoLink"
+     }
+    },
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "github.com/yuin/goldmark/renderer/html.(*Renderer).renderAutoLink"
+   ],
+   "main_package": "github.com/charmbracelet/glow/v2",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0,
+     1
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 4,
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "FUNCTION_VALUE": 2,
+     "INTERFACE_METHOD": 2
+    },
+    "dynamic_steps": 5,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "examined_paths": 20,
+    "filter_status": "FEASIBLE",
+    "length": 14,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": true,
+    "source": "FILTER_RANKED_PATH"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 505
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderAutoLink"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 516
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderAutoLink"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 376
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/charmbracelet/glow/v2.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1071
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1148
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1015
+      },
+      "callee": "github.com/charmbracelet/glow/v2.execute",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 229
+      },
+      "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+      "caller": "github.com/charmbracelet/glow/v2.execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 308
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 286
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 293
+      },
+      "callee": "github.com/yuin/goldmark.markdown.Convert",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+       "line": 118
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "caller": "github.com/yuin/goldmark.markdown.Convert",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 161
+      },
+      "callee": "github.com/yuin/goldmark/ast.Walk",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 500
+      },
+      "callee": "github.com/yuin/goldmark/ast.walkHelper",
+      "caller": "github.com/yuin/goldmark/ast.Walk",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 505
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "caller": "github.com/yuin/goldmark/ast.walkHelper",
+      "confirmed": false,
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 166
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink",
+      "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/charmbracelet/glow/v2",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/yuin/goldmark/renderer/html",
+     "symbol": "Renderer.renderAutoLink"
+    }
+   },
+   "target": {
+    "package": "github.com/yuin/goldmark/renderer/html",
+    "symbol": "Renderer.renderAutoLink"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 376
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/charmbracelet/glow/v2.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1071
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1148
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1015
+      },
+      "callee": "github.com/charmbracelet/glow/v2.execute",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 229
+      },
+      "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+      "caller": "github.com/charmbracelet/glow/v2.execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 308
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 286
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 293
+      },
+      "callee": "github.com/yuin/goldmark.markdown.Convert",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+       "line": 118
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "caller": "github.com/yuin/goldmark.markdown.Convert",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 161
+      },
+      "callee": "github.com/yuin/goldmark/ast.Walk",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 500
+      },
+      "callee": "github.com/yuin/goldmark/ast.walkHelper",
+      "caller": "github.com/yuin/goldmark/ast.Walk",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 505
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "caller": "github.com/yuin/goldmark/ast.walkHelper",
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 166
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink",
+      "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderAutoLink$bound",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/charmbracelet/glow/v2",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/yuin/goldmark/renderer/html",
+     "symbol": "Renderer.renderAutoLink"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 505
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderImage"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "dynamic_steps": 5,
+      "first_infeasible": null,
+      "length": 14
+     },
+     {
+      "dynamic_steps": 5,
+      "first_infeasible": null,
+      "length": 14
+     },
+     {
+      "dynamic_steps": 5,
+      "first_infeasible": null,
+      "length": 15
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_index": 0,
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 505
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderImage"
+     }
+    },
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "github.com/yuin/goldmark/renderer/html.(*Renderer).renderImage"
+   ],
+   "main_package": "github.com/charmbracelet/glow/v2",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0,
+     1
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 4,
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "FUNCTION_VALUE": 2,
+     "INTERFACE_METHOD": 2
+    },
+    "dynamic_steps": 5,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "examined_paths": 20,
+    "filter_status": "FEASIBLE",
+    "length": 14,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": true,
+    "source": "FILTER_RANKED_PATH"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 505
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderImage"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 516
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderImage"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 376
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/charmbracelet/glow/v2.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1071
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1148
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1015
+      },
+      "callee": "github.com/charmbracelet/glow/v2.execute",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 229
+      },
+      "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+      "caller": "github.com/charmbracelet/glow/v2.execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 308
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 286
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 293
+      },
+      "callee": "github.com/yuin/goldmark.markdown.Convert",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+       "line": 118
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "caller": "github.com/yuin/goldmark.markdown.Convert",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 161
+      },
+      "callee": "github.com/yuin/goldmark/ast.Walk",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 500
+      },
+      "callee": "github.com/yuin/goldmark/ast.walkHelper",
+      "caller": "github.com/yuin/goldmark/ast.Walk",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 505
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "caller": "github.com/yuin/goldmark/ast.walkHelper",
+      "confirmed": false,
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 166
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage",
+      "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/charmbracelet/glow/v2",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/yuin/goldmark/renderer/html",
+     "symbol": "Renderer.renderImage"
+    }
+   },
+   "target": {
+    "package": "github.com/yuin/goldmark/renderer/html",
+    "symbol": "Renderer.renderImage"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 376
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/charmbracelet/glow/v2.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1071
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1148
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1015
+      },
+      "callee": "github.com/charmbracelet/glow/v2.execute",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 229
+      },
+      "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+      "caller": "github.com/charmbracelet/glow/v2.execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 308
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 286
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 293
+      },
+      "callee": "github.com/yuin/goldmark.markdown.Convert",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+       "line": 118
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "caller": "github.com/yuin/goldmark.markdown.Convert",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 161
+      },
+      "callee": "github.com/yuin/goldmark/ast.Walk",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 500
+      },
+      "callee": "github.com/yuin/goldmark/ast.walkHelper",
+      "caller": "github.com/yuin/goldmark/ast.Walk",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 505
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "caller": "github.com/yuin/goldmark/ast.walkHelper",
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 166
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage",
+      "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderImage$bound",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/charmbracelet/glow/v2",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/yuin/goldmark/renderer/html",
+     "symbol": "Renderer.renderImage"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c3",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 505
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderLink"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "dynamic_steps": 5,
+      "first_infeasible": null,
+      "length": 14
+     },
+     {
+      "dynamic_steps": 5,
+      "first_infeasible": null,
+      "length": 14
+     },
+     {
+      "dynamic_steps": 5,
+      "first_infeasible": null,
+      "length": 15
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_index": 0,
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 505
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderLink"
+     }
+    },
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "github.com/yuin/goldmark/renderer/html.(*Renderer).renderLink"
+   ],
+   "main_package": "github.com/charmbracelet/glow/v2",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0,
+     1
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 4,
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "FUNCTION_VALUE": 2,
+     "INTERFACE_METHOD": 2
+    },
+    "dynamic_steps": 5,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "examined_paths": 20,
+    "filter_status": "FEASIBLE",
+    "length": 14,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": true,
+    "source": "FILTER_RANKED_PATH"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 505
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderLink"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 376
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/charmbracelet/glow/v2.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1015
+       },
+       "callee": "github.com/charmbracelet/glow/v2.execute",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 229
+       },
+       "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+       "caller": "github.com/charmbracelet/glow/v2.execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 308
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 286
+       },
+       "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+        "line": 293
+       },
+       "callee": "github.com/yuin/goldmark.markdown.Convert",
+       "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+        "line": 118
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "caller": "github.com/yuin/goldmark.markdown.Convert",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 161
+       },
+       "callee": "github.com/yuin/goldmark/ast.Walk",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 500
+       },
+       "callee": "github.com/yuin/goldmark/ast.walkHelper",
+       "caller": "github.com/yuin/goldmark/ast.Walk",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+        "line": 516
+       },
+       "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "caller": "github.com/yuin/goldmark/ast.walkHelper",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+        "line": 166
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+       "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "",
+        "line": 0
+       },
+       "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink",
+       "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/charmbracelet/glow/v2",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/yuin/goldmark/renderer/html",
+      "symbol": "Renderer.renderLink"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 376
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/charmbracelet/glow/v2.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1071
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1148
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1015
+      },
+      "callee": "github.com/charmbracelet/glow/v2.execute",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 229
+      },
+      "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+      "caller": "github.com/charmbracelet/glow/v2.execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 308
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 286
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 293
+      },
+      "callee": "github.com/yuin/goldmark.markdown.Convert",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+       "line": 118
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "caller": "github.com/yuin/goldmark.markdown.Convert",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 161
+      },
+      "callee": "github.com/yuin/goldmark/ast.Walk",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 500
+      },
+      "callee": "github.com/yuin/goldmark/ast.walkHelper",
+      "caller": "github.com/yuin/goldmark/ast.Walk",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 505
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "caller": "github.com/yuin/goldmark/ast.walkHelper",
+      "confirmed": false,
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 166
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink",
+      "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/charmbracelet/glow/v2",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/yuin/goldmark/renderer/html",
+     "symbol": "Renderer.renderLink"
+    }
+   },
+   "target": {
+    "package": "github.com/yuin/goldmark/renderer/html",
+    "symbol": "Renderer.renderLink"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 376
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/charmbracelet/glow/v2.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1071
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1148
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1015
+      },
+      "callee": "github.com/charmbracelet/glow/v2.execute",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 229
+      },
+      "callee": "github.com/charmbracelet/glow/v2.executeCLI",
+      "caller": "github.com/charmbracelet/glow/v2.execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 308
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "caller": "github.com/charmbracelet/glow/v2.executeCLI",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 286
+      },
+      "callee": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/charmbracelet/glamour@v0.10.0/glamour.go",
+       "line": 293
+      },
+      "callee": "github.com/yuin/goldmark.markdown.Convert",
+      "caller": "github.com/charmbracelet/glamour.TermRenderer.RenderBytes",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/markdown.go",
+       "line": 118
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "caller": "github.com/yuin/goldmark.markdown.Convert",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 161
+      },
+      "callee": "github.com/yuin/goldmark/ast.Walk",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 500
+      },
+      "callee": "github.com/yuin/goldmark/ast.walkHelper",
+      "caller": "github.com/yuin/goldmark/ast.Walk",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/ast/ast.go",
+       "line": 505
+      },
+      "callee": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "caller": "github.com/yuin/goldmark/ast.walkHelper",
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/yuin/goldmark@v1.7.8/renderer/renderer.go",
+       "line": 166
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+      "caller": "github.com/yuin/goldmark/renderer.renderer.Render$2",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "",
+       "line": 0
+      },
+      "callee": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink",
+      "caller": "github.com/yuin/goldmark/renderer/html.Renderer.renderLink$bound",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/charmbracelet/glow/v2",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/yuin/goldmark/renderer/html",
+     "symbol": "Renderer.renderLink"
+    }
+   },
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-11-26T02:45:17Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "462166e",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/yuin/goldmark/renderer/html",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Renderer.renderAutoLink"
+  },
+  {
+   "candidate_id": "c2",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/yuin/goldmark/renderer/html",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Renderer.renderImage"
+  },
+  {
+   "candidate_id": "c3",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/yuin/goldmark/renderer/html",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Renderer.renderLink"
+  }
+ ],
+ "target_app": {
+  "commit": "d37e9887875a2faa4baee6a7d090eb357dd63771",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/charmbracelet/glow/v2",
+  "path": "<local>/data/cp10/d3c/legacy/apps/github.com_charmbracelet_glow/d37e9887875a"
+ },
+ "timing": {
+  "inspect_seconds": 0.06,
+  "methods_seconds": 6.18,
+  "symbols_seconds": 0.0,
+  "total_seconds": 11.08,
+  "verifier_seconds": 4.84
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 126,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 126,
+    "skipped": 0
+   },
+   "FILTERED_PATH": {
+    "failed": 0,
+    "run": 3,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 9,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 3,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 3,
+    "skipped": 0
+   }
+  },
+  "checks_run": 270,
+  "display_checks_by_kind": {},
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}

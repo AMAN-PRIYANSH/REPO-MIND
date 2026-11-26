@@ -1,0 +1,1108 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "golang-jwt",
+    "repo": "jwt",
+    "sha": "0951d184286dece21f73c85673fd308786ffe9c3"
+   }
+  ],
+  "fixed_in": "5.2.2",
+  "id": "GO-2025-3553",
+  "module": "github.com/golang-jwt/jwt/v5",
+  "source": "vulndb",
+  "vulnerable_at": "5.2.1"
+ },
+ "case_id": "shiori__GO-2025-3553",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/go-shiori/shiori"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [
+   {
+    "candidate_id": "c2",
+    "package_dir": "",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "splitToken"
+   }
+  ],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/go-shiori/shiori": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.15,
+    "load_failed": false,
+    "vta_seconds": 12.6
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 1,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {
+   "FEASIBLE": 1
+  },
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 checks every function the fix changed (CHANGED_FUNCTION_LEVEL): a reachable changed function need not be the vulnerable one.",
+  "1 candidate function(s) not analysed: ADDED_BY_FIX.",
+  "6 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "path_evidence": {
+  "dynamic_kinds": {
+   "CLOSURE_VIA_PARAMETER": 1,
+   "FUNCTION_VALUE": 1,
+   "INTERFACE_METHOD": 4
+  },
+  "dynamic_steps": 6,
+  "entry": {
+   "main_package": "github.com/go-shiori/shiori",
+   "target": {
+    "package": "github.com/golang-jwt/jwt/v5",
+    "symbol": "Parser.ParseUnverified"
+   }
+  },
+  "evidence_level": "HAS_DYNAMIC_STEPS",
+  "length": 16,
+  "passes_filter": true,
+  "source": "FILTER_RANKED_PATH",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 26
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/go-shiori/shiori.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1019
+       },
+       "callee": "github.com/go-shiori/shiori/internal/cmd.openHandler",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd/open.go",
+        "line": 193
+       },
+       "callee": "net/http.Serve",
+       "caller": "github.com/go-shiori/shiori/internal/cmd.openHandler",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2962
+       },
+       "callee": "net/http.Server.Serve",
+       "caller": "net/http.Serve",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 3484
+       },
+       "callee": "net/http.conn.serve",
+       "caller": "net/http.Server.Serve",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2087
+       },
+       "callee": "net/http.serverHandler.ServeHTTP",
+       "caller": "net/http.conn.serve",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 3331
+       },
+       "callee": "net/http.ServeMux.ServeHTTP",
+       "caller": "net/http.serverHandler.ServeHTTP",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2848
+       },
+       "callee": "net/http.HandlerFunc.ServeHTTP",
+       "caller": "net/http.ServeMux.ServeHTTP",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2306
+       },
+       "callee": "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1",
+       "caller": "net/http.HandlerFunc.ServeHTTP",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/http/http.go",
+        "line": 17
+       },
+       "callee": "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest",
+       "caller": "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/http/middleware/auth.go",
+        "line": 37
+       },
+       "callee": "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken",
+       "caller": "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/domains/auth.go",
+        "line": 25
+       },
+       "callee": "github.com/golang-jwt/jwt/v5.ParseWithClaims",
+       "caller": "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/golang-jwt/jwt/v5@v5.2.1/parser.go",
+        "line": 237
+       },
+       "callee": "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims",
+       "caller": "github.com/golang-jwt/jwt/v5.ParseWithClaims",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/golang-jwt/jwt/v5@v5.2.1/parser.go",
+        "line": 56
+       },
+       "callee": "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified",
+       "caller": "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/go-shiori/shiori",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/golang-jwt/jwt/v5",
+      "symbol": "Parser.ParseUnverified"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "dynamic_steps": 6,
+      "first_infeasible": null,
+      "length": 16
+     },
+     {
+      "dynamic_steps": 6,
+      "first_infeasible": null,
+      "length": 18
+     },
+     {
+      "dynamic_steps": 6,
+      "first_infeasible": null,
+      "length": 20
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_index": 0,
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 26
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/go-shiori/shiori.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1019
+       },
+       "callee": "github.com/go-shiori/shiori/internal/cmd.openHandler",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd/open.go",
+        "line": 193
+       },
+       "callee": "net/http.Serve",
+       "caller": "github.com/go-shiori/shiori/internal/cmd.openHandler",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2962
+       },
+       "callee": "net/http.Server.Serve",
+       "caller": "net/http.Serve",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 3484
+       },
+       "callee": "net/http.conn.serve",
+       "caller": "net/http.Server.Serve",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2087
+       },
+       "callee": "net/http.serverHandler.ServeHTTP",
+       "caller": "net/http.conn.serve",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 3331
+       },
+       "callee": "net/http.ServeMux.ServeHTTP",
+       "caller": "net/http.serverHandler.ServeHTTP",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2848
+       },
+       "callee": "net/http.HandlerFunc.ServeHTTP",
+       "caller": "net/http.ServeMux.ServeHTTP",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2306
+       },
+       "callee": "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1",
+       "caller": "net/http.HandlerFunc.ServeHTTP",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/http/http.go",
+        "line": 17
+       },
+       "callee": "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest",
+       "caller": "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/http/middleware/auth.go",
+        "line": 37
+       },
+       "callee": "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken",
+       "caller": "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/domains/auth.go",
+        "line": 25
+       },
+       "callee": "github.com/golang-jwt/jwt/v5.ParseWithClaims",
+       "caller": "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/golang-jwt/jwt/v5@v5.2.1/parser.go",
+        "line": 237
+       },
+       "callee": "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims",
+       "caller": "github.com/golang-jwt/jwt/v5.ParseWithClaims",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/golang-jwt/jwt/v5@v5.2.1/parser.go",
+        "line": 56
+       },
+       "callee": "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified",
+       "caller": "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/go-shiori/shiori",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/golang-jwt/jwt/v5",
+      "symbol": "Parser.ParseUnverified"
+     }
+    },
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "github.com/golang-jwt/jwt/v5.(*Parser).ParseUnverified"
+   ],
+   "main_package": "github.com/go-shiori/shiori",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 3,
+    "dynamic_kinds": {
+     "CLOSURE_VIA_PARAMETER": 1,
+     "FUNCTION_VALUE": 1,
+     "INTERFACE_METHOD": 4
+    },
+    "dynamic_steps": 6,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "examined_paths": 20,
+    "filter_status": "FEASIBLE",
+    "length": 16,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": true,
+    "source": "FILTER_RANKED_PATH"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 26
+       },
+       "callee": "github.com/spf13/cobra.Command.Execute",
+       "caller": "github.com/go-shiori/shiori.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1071
+       },
+       "callee": "github.com/spf13/cobra.Command.ExecuteC",
+       "caller": "github.com/spf13/cobra.Command.Execute",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1148
+       },
+       "callee": "github.com/spf13/cobra.Command.execute",
+       "caller": "github.com/spf13/cobra.Command.ExecuteC",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+        "line": 1019
+       },
+       "callee": "github.com/go-shiori/shiori/internal/cmd.openHandler",
+       "caller": "github.com/spf13/cobra.Command.execute",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/cmd/open.go",
+        "line": 193
+       },
+       "callee": "net/http.Serve",
+       "caller": "github.com/go-shiori/shiori/internal/cmd.openHandler",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2962
+       },
+       "callee": "net/http.Server.Serve",
+       "caller": "net/http.Serve",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 3484
+       },
+       "callee": "net/http.conn.serve",
+       "caller": "net/http.Server.Serve",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2087
+       },
+       "callee": "net/http.serverHandler.ServeHTTP",
+       "caller": "net/http.conn.serve",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 3331
+       },
+       "callee": "net/http.ServeMux.ServeHTTP",
+       "caller": "net/http.serverHandler.ServeHTTP",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2848
+       },
+       "callee": "net/http.HandlerFunc.ServeHTTP",
+       "caller": "net/http.ServeMux.ServeHTTP",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOROOT/src/net/http/server.go",
+        "line": 2306
+       },
+       "callee": "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1",
+       "caller": "net/http.HandlerFunc.ServeHTTP",
+       "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/http/http.go",
+        "line": 17
+       },
+       "callee": "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest",
+       "caller": "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/http/middleware/auth.go",
+        "line": 37
+       },
+       "callee": "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken",
+       "caller": "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "internal/domains/auth.go",
+        "line": 25
+       },
+       "callee": "github.com/golang-jwt/jwt/v5.ParseWithClaims",
+       "caller": "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/golang-jwt/jwt/v5@v5.2.1/parser.go",
+        "line": 237
+       },
+       "callee": "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims",
+       "caller": "github.com/golang-jwt/jwt/v5.ParseWithClaims",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/golang-jwt/jwt/v5@v5.2.1/parser.go",
+        "line": 56
+       },
+       "callee": "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified",
+       "caller": "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/go-shiori/shiori",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "github.com/golang-jwt/jwt/v5",
+      "symbol": "Parser.ParseUnverified"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 26
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/go-shiori/shiori.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1071
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1148
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1019
+      },
+      "callee": "github.com/go-shiori/shiori/internal/cmd.openHandler",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/cmd/open.go",
+       "line": 193
+      },
+      "callee": "net/http.Serve",
+      "caller": "github.com/go-shiori/shiori/internal/cmd.openHandler",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 2962
+      },
+      "callee": "net/http.Server.Serve",
+      "caller": "net/http.Serve",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 3484
+      },
+      "callee": "net/http.conn.serve",
+      "caller": "net/http.Server.Serve",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 2087
+      },
+      "callee": "net/http.serverHandler.ServeHTTP",
+      "caller": "net/http.conn.serve",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 3331
+      },
+      "callee": "net/http.ServeMux.ServeHTTP",
+      "caller": "net/http.serverHandler.ServeHTTP",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 2848
+      },
+      "callee": "net/http.HandlerFunc.ServeHTTP",
+      "caller": "net/http.ServeMux.ServeHTTP",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 2306
+      },
+      "callee": "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1",
+      "caller": "net/http.HandlerFunc.ServeHTTP",
+      "confirmed": false,
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/http/http.go",
+       "line": 17
+      },
+      "callee": "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest",
+      "caller": "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/http/middleware/auth.go",
+       "line": 37
+      },
+      "callee": "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken",
+      "caller": "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/domains/auth.go",
+       "line": 25
+      },
+      "callee": "github.com/golang-jwt/jwt/v5.ParseWithClaims",
+      "caller": "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/golang-jwt/jwt/v5@v5.2.1/parser.go",
+       "line": 237
+      },
+      "callee": "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims",
+      "caller": "github.com/golang-jwt/jwt/v5.ParseWithClaims",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/golang-jwt/jwt/v5@v5.2.1/parser.go",
+       "line": 56
+      },
+      "callee": "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified",
+      "caller": "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/go-shiori/shiori",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/golang-jwt/jwt/v5",
+     "symbol": "Parser.ParseUnverified"
+    }
+   },
+   "target": {
+    "package": "github.com/golang-jwt/jwt/v5",
+    "symbol": "Parser.ParseUnverified"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 26
+      },
+      "callee": "github.com/spf13/cobra.Command.Execute",
+      "caller": "github.com/go-shiori/shiori.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1071
+      },
+      "callee": "github.com/spf13/cobra.Command.ExecuteC",
+      "caller": "github.com/spf13/cobra.Command.Execute",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1148
+      },
+      "callee": "github.com/spf13/cobra.Command.execute",
+      "caller": "github.com/spf13/cobra.Command.ExecuteC",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/spf13/cobra@v1.9.1/command.go",
+       "line": 1019
+      },
+      "callee": "github.com/go-shiori/shiori/internal/cmd.openHandler",
+      "caller": "github.com/spf13/cobra.Command.execute",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/cmd/open.go",
+       "line": 193
+      },
+      "callee": "net/http.Serve",
+      "caller": "github.com/go-shiori/shiori/internal/cmd.openHandler",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 2962
+      },
+      "callee": "net/http.Server.Serve",
+      "caller": "net/http.Serve",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 3484
+      },
+      "callee": "net/http.conn.serve",
+      "caller": "net/http.Server.Serve",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 2087
+      },
+      "callee": "net/http.serverHandler.ServeHTTP",
+      "caller": "net/http.conn.serve",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 3331
+      },
+      "callee": "net/http.ServeMux.ServeHTTP",
+      "caller": "net/http.serverHandler.ServeHTTP",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 2848
+      },
+      "callee": "net/http.HandlerFunc.ServeHTTP",
+      "caller": "net/http.ServeMux.ServeHTTP",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOROOT/src/net/http/server.go",
+       "line": 2306
+      },
+      "callee": "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1",
+      "caller": "net/http.HandlerFunc.ServeHTTP",
+      "dynamic_kind": "CLOSURE_VIA_PARAMETER",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/http/http.go",
+       "line": 17
+      },
+      "callee": "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest",
+      "caller": "github.com/go-shiori/shiori/internal/http.ToHTTPHandler$1",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/http/middleware/auth.go",
+       "line": 37
+      },
+      "callee": "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken",
+      "caller": "github.com/go-shiori/shiori/internal/http/middleware.AuthMiddleware.OnRequest",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "internal/domains/auth.go",
+       "line": 25
+      },
+      "callee": "github.com/golang-jwt/jwt/v5.ParseWithClaims",
+      "caller": "github.com/go-shiori/shiori/internal/domains.AuthDomain.CheckToken",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/golang-jwt/jwt/v5@v5.2.1/parser.go",
+       "line": 237
+      },
+      "callee": "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims",
+      "caller": "github.com/golang-jwt/jwt/v5.ParseWithClaims",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/golang-jwt/jwt/v5@v5.2.1/parser.go",
+       "line": 56
+      },
+      "callee": "github.com/golang-jwt/jwt/v5.Parser.ParseUnverified",
+      "caller": "github.com/golang-jwt/jwt/v5.Parser.ParseWithClaims",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/go-shiori/shiori",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "github.com/golang-jwt/jwt/v5",
+     "symbol": "Parser.ParseUnverified"
+    }
+   },
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-11-26T02:40:19Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "462166e",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/golang-jwt/jwt/v5",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Parser.ParseUnverified"
+  }
+ ],
+ "target_app": {
+  "commit": "da56f82faac5bf350fc4175e5ff50726cb10d956",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/go-shiori/shiori",
+  "path": "<local>/data/cp10/d3c/legacy/apps/github.com_go-shiori_shiori/da56f82faac5"
+ },
+ "timing": {
+  "inspect_seconds": 0.11,
+  "methods_seconds": 13.75,
+  "symbols_seconds": 0.0,
+  "total_seconds": 24.79,
+  "verifier_seconds": 10.93
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 32,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 32,
+    "skipped": 0
+   },
+   "FILTERED_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   }
+  },
+  "checks_run": 69,
+  "display_checks_by_kind": {},
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}

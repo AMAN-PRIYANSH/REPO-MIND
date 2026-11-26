@@ -1,0 +1,1905 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "SSLMate",
+    "repo": "go-pkcs12",
+    "sha": "03c441f6b0267f695ca02464133c0b373bf4dd55"
+   }
+  ],
+  "fixed_in": "0.7.2",
+  "id": "GO-2026-5052",
+  "module": "software.sslmate.com/src/go-pkcs12",
+  "source": "vulndb",
+  "vulnerable_at": "0.7.1"
+ },
+ "case_id": "gobuster__GO-2026-5052",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/OJ/gobuster/v3",
+   "github.com/OJ/gobuster/v3/vhs"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/OJ/gobuster/v3": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 1.68,
+    "load_failed": false,
+    "vta_seconds": 3.75
+   },
+   "github.com/OJ/gobuster/v3/vhs": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.59,
+    "load_failed": false,
+    "vta_seconds": 3.05
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 5,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {
+   "FEASIBLE": 2
+  },
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 with curated vulndb symbols (CP10 stratum S): the verdict is decided by the advisory's curated symbols; the functions the fix changed are reported as extra evidence only.",
+  "2 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "path_evidence": {
+  "dynamic_kinds": {
+   "FUNCTION_VALUE": 1
+  },
+  "dynamic_steps": 1,
+  "entry": {
+   "main_package": "github.com/OJ/gobuster/v3",
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "DecodeChain"
+   }
+  },
+  "evidence_level": "HAS_DYNAMIC_STEPS",
+  "length": 6,
+  "passes_filter": true,
+  "source": "FILTER_RANKED_PATH",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ },
+ "per_symbol": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/OJ/gobuster/v3",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "Decode"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 59
+       },
+       "callee": "github.com/urfave/cli/v2.App.Run",
+       "caller": "github.com/OJ/gobuster/v3.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 307
+       },
+       "callee": "github.com/urfave/cli/v2.App.RunContext",
+       "caller": "github.com/urfave/cli/v2.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 333
+       },
+       "callee": "github.com/urfave/cli/v2.Command.Run",
+       "caller": "github.com/urfave/cli/v2.App.RunContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+        "line": 187
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "caller": "github.com/urfave/cli/v2.Command.Run",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/gcs/gcs.go",
+        "line": 36
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/options.go",
+        "line": 80
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/OJ/gobuster/v3",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "DecodeChain"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "dynamic_steps": 1,
+      "first_infeasible": null,
+      "length": 6
+     },
+     {
+      "dynamic_steps": 1,
+      "first_infeasible": null,
+      "length": 6
+     },
+     {
+      "dynamic_steps": 1,
+      "first_infeasible": null,
+      "length": 6
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 15,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_index": 0,
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 59
+       },
+       "callee": "github.com/urfave/cli/v2.App.Run",
+       "caller": "github.com/OJ/gobuster/v3.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 307
+       },
+       "callee": "github.com/urfave/cli/v2.App.RunContext",
+       "caller": "github.com/urfave/cli/v2.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 333
+       },
+       "callee": "github.com/urfave/cli/v2.Command.Run",
+       "caller": "github.com/urfave/cli/v2.App.RunContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+        "line": 187
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "caller": "github.com/urfave/cli/v2.Command.Run",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/gcs/gcs.go",
+        "line": 36
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/options.go",
+        "line": 80
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/OJ/gobuster/v3",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "DecodeChain"
+     }
+    },
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "software.sslmate.com/src/go-pkcs12.DecodeChain"
+   ],
+   "main_package": "github.com/OJ/gobuster/v3",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0,
+     1,
+     2
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 5,
+    "dynamic_kinds": {
+     "FUNCTION_VALUE": 1
+    },
+    "dynamic_steps": 1,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "examined_paths": 15,
+    "filter_status": "FEASIBLE",
+    "length": 6,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": true,
+    "source": "FILTER_RANKED_PATH"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 59
+       },
+       "callee": "github.com/urfave/cli/v2.App.Run",
+       "caller": "github.com/OJ/gobuster/v3.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 307
+       },
+       "callee": "github.com/urfave/cli/v2.App.RunContext",
+       "caller": "github.com/urfave/cli/v2.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 333
+       },
+       "callee": "github.com/urfave/cli/v2.Command.Run",
+       "caller": "github.com/urfave/cli/v2.App.RunContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+        "line": 187
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "caller": "github.com/urfave/cli/v2.Command.Run",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/gcs/gcs.go",
+        "line": 36
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/options.go",
+        "line": 80
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/OJ/gobuster/v3",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "DecodeChain"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 59
+       },
+       "callee": "github.com/urfave/cli/v2.App.Run",
+       "caller": "github.com/OJ/gobuster/v3.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 307
+       },
+       "callee": "github.com/urfave/cli/v2.App.RunContext",
+       "caller": "github.com/urfave/cli/v2.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 333
+       },
+       "callee": "github.com/urfave/cli/v2.Command.Run",
+       "caller": "github.com/urfave/cli/v2.App.RunContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+        "line": 211
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "caller": "github.com/urfave/cli/v2.Command.Run",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/gcs/gcs.go",
+        "line": 36
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/options.go",
+        "line": 80
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/OJ/gobuster/v3",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "DecodeChain"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 59
+       },
+       "callee": "github.com/urfave/cli/v2.App.Run",
+       "caller": "github.com/OJ/gobuster/v3.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 307
+       },
+       "callee": "github.com/urfave/cli/v2.App.RunContext",
+       "caller": "github.com/urfave/cli/v2.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 333
+       },
+       "callee": "github.com/urfave/cli/v2.Command.Run",
+       "caller": "github.com/urfave/cli/v2.App.RunContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+        "line": 276
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "caller": "github.com/urfave/cli/v2.Command.Run",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/gcs/gcs.go",
+        "line": 36
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/options.go",
+        "line": 80
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/OJ/gobuster/v3",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "DecodeChain"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 59
+      },
+      "callee": "github.com/urfave/cli/v2.App.Run",
+      "caller": "github.com/OJ/gobuster/v3.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+       "line": 307
+      },
+      "callee": "github.com/urfave/cli/v2.App.RunContext",
+      "caller": "github.com/urfave/cli/v2.App.Run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+       "line": 333
+      },
+      "callee": "github.com/urfave/cli/v2.Command.Run",
+      "caller": "github.com/urfave/cli/v2.App.RunContext",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+       "line": 187
+      },
+      "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+      "caller": "github.com/urfave/cli/v2.Command.Run",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "cli/gcs/gcs.go",
+       "line": 36
+      },
+      "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+      "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cli/options.go",
+       "line": 80
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+      "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/OJ/gobuster/v3",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "software.sslmate.com/src/go-pkcs12",
+     "symbol": "DecodeChain"
+    }
+   },
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "DecodeChain"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 59
+      },
+      "callee": "github.com/urfave/cli/v2.App.Run",
+      "caller": "github.com/OJ/gobuster/v3.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+       "line": 307
+      },
+      "callee": "github.com/urfave/cli/v2.App.RunContext",
+      "caller": "github.com/urfave/cli/v2.App.Run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+       "line": 333
+      },
+      "callee": "github.com/urfave/cli/v2.Command.Run",
+      "caller": "github.com/urfave/cli/v2.App.RunContext",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+       "line": 187
+      },
+      "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+      "caller": "github.com/urfave/cli/v2.Command.Run",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "cli/gcs/gcs.go",
+       "line": 36
+      },
+      "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+      "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cli/options.go",
+       "line": 80
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+      "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/OJ/gobuster/v3",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "software.sslmate.com/src/go-pkcs12",
+     "symbol": "DecodeChain"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/OJ/gobuster/v3",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "DecodeTrustStore"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/OJ/gobuster/v3",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "ToPEM"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 59
+       },
+       "callee": "github.com/urfave/cli/v2.App.Run",
+       "caller": "github.com/OJ/gobuster/v3.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 307
+       },
+       "callee": "github.com/urfave/cli/v2.App.RunContext",
+       "caller": "github.com/urfave/cli/v2.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 333
+       },
+       "callee": "github.com/urfave/cli/v2.Command.Run",
+       "caller": "github.com/urfave/cli/v2.App.RunContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+        "line": 187
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "caller": "github.com/urfave/cli/v2.Command.Run",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/gcs/gcs.go",
+        "line": 36
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/options.go",
+        "line": 80
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 419
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+       "caller": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 546
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.verifyMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 152
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.verifyMac",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 127
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+       "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/OJ/gobuster/v3",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "doPBMAC1"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "dynamic_steps": 1,
+      "first_infeasible": null,
+      "length": 10
+     },
+     {
+      "dynamic_steps": 1,
+      "first_infeasible": null,
+      "length": 10
+     },
+     {
+      "dynamic_steps": 1,
+      "first_infeasible": null,
+      "length": 10
+     }
+    ],
+    "examined_committed": 3,
+    "examined_total": 20,
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_index": 0,
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 59
+       },
+       "callee": "github.com/urfave/cli/v2.App.Run",
+       "caller": "github.com/OJ/gobuster/v3.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 307
+       },
+       "callee": "github.com/urfave/cli/v2.App.RunContext",
+       "caller": "github.com/urfave/cli/v2.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 333
+       },
+       "callee": "github.com/urfave/cli/v2.Command.Run",
+       "caller": "github.com/urfave/cli/v2.App.RunContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+        "line": 187
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "caller": "github.com/urfave/cli/v2.Command.Run",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/gcs/gcs.go",
+        "line": 36
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/options.go",
+        "line": 80
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 419
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+       "caller": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 546
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.verifyMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 152
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.verifyMac",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 127
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+       "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/OJ/gobuster/v3",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "doPBMAC1"
+     }
+    },
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "software.sslmate.com/src/go-pkcs12.doPBMAC1"
+   ],
+   "main_package": "github.com/OJ/gobuster/v3",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0,
+     1,
+     2
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 5,
+    "dynamic_kinds": {
+     "FUNCTION_VALUE": 1
+    },
+    "dynamic_steps": 1,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "examined_paths": 20,
+    "filter_status": "FEASIBLE",
+    "length": 10,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": true,
+    "source": "FILTER_RANKED_PATH"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 59
+       },
+       "callee": "github.com/urfave/cli/v2.App.Run",
+       "caller": "github.com/OJ/gobuster/v3.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 307
+       },
+       "callee": "github.com/urfave/cli/v2.App.RunContext",
+       "caller": "github.com/urfave/cli/v2.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 333
+       },
+       "callee": "github.com/urfave/cli/v2.Command.Run",
+       "caller": "github.com/urfave/cli/v2.App.RunContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+        "line": 187
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "caller": "github.com/urfave/cli/v2.Command.Run",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/gcs/gcs.go",
+        "line": 36
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/options.go",
+        "line": 80
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 419
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+       "caller": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 546
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.verifyMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 152
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.verifyMac",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 127
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+       "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/OJ/gobuster/v3",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "doPBMAC1"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 59
+       },
+       "callee": "github.com/urfave/cli/v2.App.Run",
+       "caller": "github.com/OJ/gobuster/v3.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 307
+       },
+       "callee": "github.com/urfave/cli/v2.App.RunContext",
+       "caller": "github.com/urfave/cli/v2.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 333
+       },
+       "callee": "github.com/urfave/cli/v2.Command.Run",
+       "caller": "github.com/urfave/cli/v2.App.RunContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+        "line": 211
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "caller": "github.com/urfave/cli/v2.Command.Run",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/gcs/gcs.go",
+        "line": 36
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/options.go",
+        "line": 80
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 419
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+       "caller": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 546
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.verifyMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 152
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.verifyMac",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 127
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+       "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/OJ/gobuster/v3",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "doPBMAC1"
+     }
+    },
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "main.go",
+        "line": 59
+       },
+       "callee": "github.com/urfave/cli/v2.App.Run",
+       "caller": "github.com/OJ/gobuster/v3.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 307
+       },
+       "callee": "github.com/urfave/cli/v2.App.RunContext",
+       "caller": "github.com/urfave/cli/v2.App.Run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+        "line": 333
+       },
+       "callee": "github.com/urfave/cli/v2.Command.Run",
+       "caller": "github.com/urfave/cli/v2.App.RunContext",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+        "line": 276
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "caller": "github.com/urfave/cli/v2.Command.Run",
+       "dynamic_kind": "FUNCTION_VALUE",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/gcs/gcs.go",
+        "line": 36
+       },
+       "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cli/options.go",
+        "line": 80
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 419
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+       "caller": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+        "line": 546
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.verifyMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 152
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+       "caller": "software.sslmate.com/src/go-pkcs12.verifyMac",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+        "line": 127
+       },
+       "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+       "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "github.com/OJ/gobuster/v3",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "software.sslmate.com/src/go-pkcs12",
+      "symbol": "doPBMAC1"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 59
+      },
+      "callee": "github.com/urfave/cli/v2.App.Run",
+      "caller": "github.com/OJ/gobuster/v3.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+       "line": 307
+      },
+      "callee": "github.com/urfave/cli/v2.App.RunContext",
+      "caller": "github.com/urfave/cli/v2.App.Run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+       "line": 333
+      },
+      "callee": "github.com/urfave/cli/v2.Command.Run",
+      "caller": "github.com/urfave/cli/v2.App.RunContext",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+       "line": 187
+      },
+      "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+      "caller": "github.com/urfave/cli/v2.Command.Run",
+      "confirmed": false,
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "cli/gcs/gcs.go",
+       "line": 36
+      },
+      "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+      "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cli/options.go",
+       "line": 80
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+      "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+       "line": 419
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+      "caller": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+       "line": 546
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.verifyMac",
+      "caller": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+       "line": 152
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+      "caller": "software.sslmate.com/src/go-pkcs12.verifyMac",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+       "line": 127
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+      "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/OJ/gobuster/v3",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "software.sslmate.com/src/go-pkcs12",
+     "symbol": "doPBMAC1"
+    }
+   },
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "doPBMAC1"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "main.go",
+       "line": 59
+      },
+      "callee": "github.com/urfave/cli/v2.App.Run",
+      "caller": "github.com/OJ/gobuster/v3.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+       "line": 307
+      },
+      "callee": "github.com/urfave/cli/v2.App.RunContext",
+      "caller": "github.com/urfave/cli/v2.App.Run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/app.go",
+       "line": 333
+      },
+      "callee": "github.com/urfave/cli/v2.Command.Run",
+      "caller": "github.com/urfave/cli/v2.App.RunContext",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/github.com/urfave/cli/v2@v2.27.7/command.go",
+       "line": 187
+      },
+      "callee": "github.com/OJ/gobuster/v3/cli/gcs.run",
+      "caller": "github.com/urfave/cli/v2.Command.Run",
+      "dynamic_kind": "FUNCTION_VALUE",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "cli/gcs/gcs.go",
+       "line": 36
+      },
+      "callee": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+      "caller": "github.com/OJ/gobuster/v3/cli/gcs.run",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cli/options.go",
+       "line": 80
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+      "caller": "github.com/OJ/gobuster/v3/cli.ParseBasicHTTPOptions",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+       "line": 419
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+      "caller": "software.sslmate.com/src/go-pkcs12.DecodeChain",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/pkcs12.go",
+       "line": 546
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.verifyMac",
+      "caller": "software.sslmate.com/src/go-pkcs12.getSafeContents",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+       "line": 152
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.doMac",
+      "caller": "software.sslmate.com/src/go-pkcs12.verifyMac",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "$GOMODCACHE/software.sslmate.com/src/go-pkcs12@v0.6.0/mac.go",
+       "line": 127
+      },
+      "callee": "software.sslmate.com/src/go-pkcs12.doPBMAC1",
+      "caller": "software.sslmate.com/src/go-pkcs12.doMac",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "github.com/OJ/gobuster/v3",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "software.sslmate.com/src/go-pkcs12",
+     "symbol": "doPBMAC1"
+    }
+   },
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/OJ/gobuster/v3/vhs",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "Decode"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/OJ/gobuster/v3/vhs",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "DecodeChain"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/OJ/gobuster/v3/vhs",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "DecodeTrustStore"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/OJ/gobuster/v3/vhs",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "VULNDB",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "ToPEM"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  },
+  {
+   "candidate_id": "c1",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/OJ/gobuster/v3/vhs",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "NOT_REACHABLE",
+   "score": null,
+   "target": {
+    "package": "software.sslmate.com/src/go-pkcs12",
+    "symbol": "doPBMAC1"
+   },
+   "verified_path": null,
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-11-26T02:32:26Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "792b9df",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "software.sslmate.com/src/go-pkcs12",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "Decode"
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "software.sslmate.com/src/go-pkcs12",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "DecodeChain"
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "software.sslmate.com/src/go-pkcs12",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "DecodeTrustStore"
+  },
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "VULNDB",
+   "package": "software.sslmate.com/src/go-pkcs12",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "ToPEM"
+  },
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": false,
+   "extra_reason": "FIX_CHANGED_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "software.sslmate.com/src/go-pkcs12",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "doPBMAC1"
+  }
+ ],
+ "target_app": {
+  "commit": "e8410cad6cacf08b82e2f610055f636f0be61c40",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/OJ/gobuster/v3",
+  "path": "<local>/data/cp10/d3c/hygiene/apps/github.com_OJ_gobuster/e8410cad6cac"
+ },
+ "target_policy": {
+  "curated_symbols": 4,
+  "deciding_targets": 4,
+  "extra_by_reason": {
+   "FIX_CHANGED_EXTRA": 1
+  },
+  "extra_targets": 1,
+  "policy": "HYGIENE",
+  "rule": "CP10 target hygiene, stratum S: the advisory has curated vulndb symbols for this module; they decide the verdict (origin VULNDB). The fix's changed functions are analysed as extra evidence only (decides_verdict false).",
+  "stratum": "S"
+ },
+ "timing": {
+  "inspect_seconds": 0.06,
+  "methods_seconds": 9.08,
+  "symbols_seconds": 0.0,
+  "total_seconds": 12.57,
+  "verifier_seconds": 3.43
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 64,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 64,
+    "skipped": 0
+   },
+   "FILTERED_PATH": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 8,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 10,
+    "skipped": 0
+   }
+  },
+  "checks_run": 150,
+  "display_checks_by_kind": {},
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "analysed tree on disk",
+  "status": "PASSED"
+ }
+}

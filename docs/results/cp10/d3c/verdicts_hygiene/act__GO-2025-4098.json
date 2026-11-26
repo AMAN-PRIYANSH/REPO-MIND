@@ -1,0 +1,4532 @@
+{
+ "advisory": {
+  "fix_commits": [
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "3f925525b44d247e390e529e772a0dc0c0bc3557"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "435cc81be6b79cdec73b4002c0dae549b2f6ae6d"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "44a0fcf685db051c80b8c269812bb177f5802c58"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "4b37cd93f86e72feac866442988b549b5b7bf3e6"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "6fc191449109ea14bb7d61238f24a33fe08c651f"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "77889b56db939c323d29d1130f28f9aea2edb544"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "77d217c7c3775d8ca5af89e477e81568ef4572db"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "a41366e74080fa9f26a2cd3544e2801449697322"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "b3dd1bc562ed9996d1a0f249e056c16624046d28"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "d40b3439a9614a86e87b81a94c6811ec6fa2d7d2"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "d61fd29d854b416feaaf128bf650325cd2182165"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "db19bbed5348847da433faa9d69e9f90192bfa64"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "ed6b1693b8b3ae7eb0250a7e76fc888cdacf98c1"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "fdcc9d3cad2f85954a241ccb910a61aaa1ef47f3"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "ff6fe1324663538167eca8b3d3eec61e1bd4fa51"
+   },
+   {
+    "host": "github.com",
+    "owner": "opencontainers",
+    "repo": "runc",
+    "sha": "ff94f9991bd32076c871ef0ad8bc1b763458e480"
+   }
+  ],
+  "fixed_in": "1.13.0",
+  "id": "GO-2025-4098",
+  "module": "github.com/opencontainers/selinux",
+  "source": "vulndb",
+  "vulnerable_at": "1.12.0"
+ },
+ "case_id": "act__GO-2025-4098",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": "AVAILABLE",
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "github.com/nektos/act"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 10,
+  "not_covered": [
+   {
+    "candidate_id": "c3",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "MkdirAllInRoot"
+   },
+   {
+    "candidate_id": "c4",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "MkdirAllInRootOpen"
+   },
+   {
+    "candidate_id": "c7",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Reopen"
+   },
+   {
+    "candidate_id": "c13",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "MkdirAllInRoot"
+   },
+   {
+    "candidate_id": "c14",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "MkdirAllInRootOpen"
+   },
+   {
+    "candidate_id": "c15",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "IsLexicallyInRoot"
+   },
+   {
+    "candidate_id": "c25",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ProcPidOpen"
+   },
+   {
+    "candidate_id": "c26",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ProcSelfOpen"
+   },
+   {
+    "candidate_id": "c27",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ProcThreadSelfOpen"
+   },
+   {
+    "candidate_id": "c29",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "procOpenReopen"
+   },
+   {
+    "candidate_id": "c30",
+    "package_dir": "internal/sys",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "WriteSysctls"
+   },
+   {
+    "candidate_id": "c31",
+    "package_dir": "internal/sys",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "procfsOpenRoot"
+   },
+   {
+    "candidate_id": "c42",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "retryEAGAIN"
+   },
+   {
+    "candidate_id": "c43",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "retryEAGAIN2"
+   },
+   {
+    "candidate_id": "c48",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "CreateInRoot"
+   },
+   {
+    "candidate_id": "c49",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "OpenInRoot"
+   },
+   {
+    "candidate_id": "c57",
+    "package_dir": "libcontainer",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "mountEntry.createOpenMountpoint"
+   },
+   {
+    "candidate_id": "c58",
+    "package_dir": "libcontainer",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "mountEntry.mountPropagate"
+   },
+   {
+    "candidate_id": "c61",
+    "package_dir": "libcontainer",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "reopenAfterMount"
+   },
+   {
+    "candidate_id": "c64",
+    "package_dir": "libcontainer/utils",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "StripRoot"
+   },
+   {
+    "candidate_id": "c67",
+    "package_dir": "libcontainer/utils",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "WithProcfdFile"
+   },
+   {
+    "candidate_id": "c69",
+    "package_dir": "internal/sys",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "VerifyInode"
+   },
+   {
+    "candidate_id": "c70",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "FormatMountLabel"
+   },
+   {
+    "candidate_id": "c71",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "FormatMountLabelByType"
+   },
+   {
+    "candidate_id": "c72",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Init"
+   },
+   {
+    "candidate_id": "c73",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "InitLabels"
+   },
+   {
+    "candidate_id": "c74",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "IsShared"
+   },
+   {
+    "candidate_id": "c75",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Relabel"
+   },
+   {
+    "candidate_id": "c76",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "RelabelNeeded"
+   },
+   {
+    "candidate_id": "c77",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetFileCreateLabel"
+   },
+   {
+    "candidate_id": "c78",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetFileLabel"
+   },
+   {
+    "candidate_id": "c79",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Validate"
+   },
+   {
+    "candidate_id": "c80",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "DisableSecOpt"
+   },
+   {
+    "candidate_id": "c81",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "InitLabels"
+   },
+   {
+    "candidate_id": "c82",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "IsShared"
+   },
+   {
+    "candidate_id": "c83",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Relabel"
+   },
+   {
+    "candidate_id": "c84",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "RelabelNeeded"
+   },
+   {
+    "candidate_id": "c85",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetFileCreateLabel"
+   },
+   {
+    "candidate_id": "c86",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetFileLabel"
+   },
+   {
+    "candidate_id": "c87",
+    "package_dir": "internal/third_party/selinux/go-selinux/label",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Validate"
+   },
+   {
+    "candidate_id": "c88",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "CalculateGlbLub"
+   },
+   {
+    "candidate_id": "c89",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "CanonicalizeContext"
+   },
+   {
+    "candidate_id": "c90",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Chcon"
+   },
+   {
+    "candidate_id": "c91",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ClassIndex"
+   },
+   {
+    "candidate_id": "c92",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ClearLabels"
+   },
+   {
+    "candidate_id": "c93",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ComputeCreateContext"
+   },
+   {
+    "candidate_id": "c94",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ContainerLabels"
+   },
+   {
+    "candidate_id": "c95",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Context.Get"
+   },
+   {
+    "candidate_id": "c96",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "CopyLevel"
+   },
+   {
+    "candidate_id": "c97",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "CurrentLabel"
+   },
+   {
+    "candidate_id": "c98",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "DefaultEnforceMode"
+   },
+   {
+    "candidate_id": "c99",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "DisableSecOpt"
+   },
+   {
+    "candidate_id": "c100",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "DupSecOpt"
+   },
+   {
+    "candidate_id": "c101",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "EnforceMode"
+   },
+   {
+    "candidate_id": "c102",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ExecLabel"
+   },
+   {
+    "candidate_id": "c103",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "FSCreateLabel"
+   },
+   {
+    "candidate_id": "c104",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "FileLabel"
+   },
+   {
+    "candidate_id": "c105",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "GetDefaultContextWithLevel"
+   },
+   {
+    "candidate_id": "c106",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "GetEnabled"
+   },
+   {
+    "candidate_id": "c107",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "InitContainerLabels"
+   },
+   {
+    "candidate_id": "c108",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "KVMContainerLabels"
+   },
+   {
+    "candidate_id": "c109",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "KeyLabel"
+   },
+   {
+    "candidate_id": "c110",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "LfileLabel"
+   },
+   {
+    "candidate_id": "c111",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "LsetFileLabel"
+   },
+   {
+    "candidate_id": "c112",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "MLSEnabled"
+   },
+   {
+    "candidate_id": "c113",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "NewContext"
+   },
+   {
+    "candidate_id": "c114",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "PeerLabel"
+   },
+   {
+    "candidate_id": "c115",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "PidLabel"
+   },
+   {
+    "candidate_id": "c116",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "PrivContainerMountLabel"
+   },
+   {
+    "candidate_id": "c117",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ROFileLabel"
+   },
+   {
+    "candidate_id": "c118",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ReleaseLabel"
+   },
+   {
+    "candidate_id": "c119",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "ReserveLabel"
+   },
+   {
+    "candidate_id": "c120",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SecurityCheckContext"
+   },
+   {
+    "candidate_id": "c121",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetDisabled"
+   },
+   {
+    "candidate_id": "c122",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetEnforceMode"
+   },
+   {
+    "candidate_id": "c123",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetExecLabel"
+   },
+   {
+    "candidate_id": "c124",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetFSCreateLabel"
+   },
+   {
+    "candidate_id": "c125",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetFileLabel"
+   },
+   {
+    "candidate_id": "c126",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetKeyLabel"
+   },
+   {
+    "candidate_id": "c127",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetSocketLabel"
+   },
+   {
+    "candidate_id": "c128",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SetTaskLabel"
+   },
+   {
+    "candidate_id": "c129",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "SocketLabel"
+   },
+   {
+    "candidate_id": "c130",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Context.get"
+   },
+   {
+    "candidate_id": "c131",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "addMcs"
+   },
+   {
+    "candidate_id": "c132",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "bitsetToStr"
+   },
+   {
+    "candidate_id": "c133",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "calculateGlbLub"
+   },
+   {
+    "candidate_id": "c134",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "canonicalizeContext"
+   },
+   {
+    "candidate_id": "c135",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "catsToBitset"
+   },
+   {
+    "candidate_id": "c136",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "chcon"
+   },
+   {
+    "candidate_id": "c137",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "classIndex"
+   },
+   {
+    "candidate_id": "c138",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "clearLabels"
+   },
+   {
+    "candidate_id": "c139",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "computeCreateContext"
+   },
+   {
+    "candidate_id": "c140",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "containerLabels"
+   },
+   {
+    "candidate_id": "c141",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "copyLevel"
+   },
+   {
+    "candidate_id": "c142",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "currentLabel"
+   },
+   {
+    "candidate_id": "c143",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "defaultEnforceMode"
+   },
+   {
+    "candidate_id": "c144",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "dupSecOpt"
+   },
+   {
+    "candidate_id": "c145",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "enforceMode"
+   },
+   {
+    "candidate_id": "c146",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "execLabel"
+   },
+   {
+    "candidate_id": "c147",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "fileLabel"
+   },
+   {
+    "candidate_id": "c148",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "findSELinuxfs"
+   },
+   {
+    "candidate_id": "c149",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "findSELinuxfsMount"
+   },
+   {
+    "candidate_id": "c150",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "findUserInContext"
+   },
+   {
+    "candidate_id": "c151",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "fsCreateLabel"
+   },
+   {
+    "candidate_id": "c152",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "getDefaultContextFromReaders"
+   },
+   {
+    "candidate_id": "c153",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "getDefaultContextWithLevel"
+   },
+   {
+    "candidate_id": "c154",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "getEnabled"
+   },
+   {
+    "candidate_id": "c155",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "getSelinuxMountPoint"
+   },
+   {
+    "candidate_id": "c156",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "initContainerLabels"
+   },
+   {
+    "candidate_id": "c157",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "intToMcs"
+   },
+   {
+    "candidate_id": "c158",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "isMLSEnabled"
+   },
+   {
+    "candidate_id": "c159",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "keyLabel"
+   },
+   {
+    "candidate_id": "c160",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "kvmContainerLabels"
+   },
+   {
+    "candidate_id": "c161",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "lFileLabel"
+   },
+   {
+    "candidate_id": "c162",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "lSetFileLabel"
+   },
+   {
+    "candidate_id": "c163",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "label"
+   },
+   {
+    "candidate_id": "c164",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "level.equal"
+   },
+   {
+    "candidate_id": "c165",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "level.parseLevel"
+   },
+   {
+    "candidate_id": "c166",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "loadLabels"
+   },
+   {
+    "candidate_id": "c167",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "maxInt"
+   },
+   {
+    "candidate_id": "c168",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "mcsAdd"
+   },
+   {
+    "candidate_id": "c169",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "mcsDelete"
+   },
+   {
+    "candidate_id": "c170",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "minInt"
+   },
+   {
+    "candidate_id": "c171",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "mlsRange.String"
+   },
+   {
+    "candidate_id": "c172",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "newContext"
+   },
+   {
+    "candidate_id": "c173",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "openContextFile"
+   },
+   {
+    "candidate_id": "c174",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "openProcPid"
+   },
+   {
+    "candidate_id": "c175",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "openProcSelf"
+   },
+   {
+    "candidate_id": "c176",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "openProcThreadSelf"
+   },
+   {
+    "candidate_id": "c177",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "parseLevelItem"
+   },
+   {
+    "candidate_id": "c178",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "peerLabel"
+   },
+   {
+    "candidate_id": "c179",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "pidLabel"
+   },
+   {
+    "candidate_id": "c180",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "policyRoot"
+   },
+   {
+    "candidate_id": "c181",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "rangeStrToMLSRange"
+   },
+   {
+    "candidate_id": "c182",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "rchcon"
+   },
+   {
+    "candidate_id": "c183",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "readConFd"
+   },
+   {
+    "candidate_id": "c184",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "readConSelf"
+   },
+   {
+    "candidate_id": "c185",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "readConThreadSelf"
+   },
+   {
+    "candidate_id": "c186",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "readConfig"
+   },
+   {
+    "candidate_id": "c187",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "readWriteCon"
+   },
+   {
+    "candidate_id": "c188",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "releaseLabel"
+   },
+   {
+    "candidate_id": "c189",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "reserveLabel"
+   },
+   {
+    "candidate_id": "c190",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "roFileLabel"
+   },
+   {
+    "candidate_id": "c191",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "securityCheckContext"
+   },
+   {
+    "candidate_id": "c192",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "selinuxEnforcePath"
+   },
+   {
+    "candidate_id": "c193",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "selinuxState.getEnabled"
+   },
+   {
+    "candidate_id": "c194",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "selinuxState.getSELinuxfs"
+   },
+   {
+    "candidate_id": "c195",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "selinuxState.setEnable"
+   },
+   {
+    "candidate_id": "c196",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "setDisabled"
+   },
+   {
+    "candidate_id": "c197",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "setEnforceMode"
+   },
+   {
+    "candidate_id": "c198",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "setFSCreateLabel"
+   },
+   {
+    "candidate_id": "c199",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "setFileLabel"
+   },
+   {
+    "candidate_id": "c200",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "setKeyLabel"
+   },
+   {
+    "candidate_id": "c201",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "uniqMcs"
+   },
+   {
+    "candidate_id": "c202",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "verifySELinuxfsMount"
+   },
+   {
+    "candidate_id": "c203",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "writeConFd"
+   },
+   {
+    "candidate_id": "c204",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "writeConSelf"
+   },
+   {
+    "candidate_id": "c205",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "writeConThreadSelf"
+   },
+   {
+    "candidate_id": "c206",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Context.get"
+   },
+   {
+    "candidate_id": "c207",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "attrPath"
+   },
+   {
+    "candidate_id": "c208",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "calculateGlbLub"
+   },
+   {
+    "candidate_id": "c209",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "canonicalizeContext"
+   },
+   {
+    "candidate_id": "c210",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "chcon"
+   },
+   {
+    "candidate_id": "c211",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "classIndex"
+   },
+   {
+    "candidate_id": "c212",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "clearLabels"
+   },
+   {
+    "candidate_id": "c213",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "computeCreateContext"
+   },
+   {
+    "candidate_id": "c214",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "containerLabels"
+   },
+   {
+    "candidate_id": "c215",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "copyLevel"
+   },
+   {
+    "candidate_id": "c216",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "currentLabel"
+   },
+   {
+    "candidate_id": "c217",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "defaultEnforceMode"
+   },
+   {
+    "candidate_id": "c218",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "dupSecOpt"
+   },
+   {
+    "candidate_id": "c219",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "enforceMode"
+   },
+   {
+    "candidate_id": "c220",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "execLabel"
+   },
+   {
+    "candidate_id": "c221",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "fileLabel"
+   },
+   {
+    "candidate_id": "c222",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "fsCreateLabel"
+   },
+   {
+    "candidate_id": "c223",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "getDefaultContextWithLevel"
+   },
+   {
+    "candidate_id": "c224",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "getEnabled"
+   },
+   {
+    "candidate_id": "c225",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "initContainerLabels"
+   },
+   {
+    "candidate_id": "c226",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "isMLSEnabled"
+   },
+   {
+    "candidate_id": "c227",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "keyLabel"
+   },
+   {
+    "candidate_id": "c228",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "kvmContainerLabels"
+   },
+   {
+    "candidate_id": "c229",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "lFileLabel"
+   },
+   {
+    "candidate_id": "c230",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "lSetFileLabel"
+   },
+   {
+    "candidate_id": "c231",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "label"
+   },
+   {
+    "candidate_id": "c232",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "newContext"
+   },
+   {
+    "candidate_id": "c233",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "peerLabel"
+   },
+   {
+    "candidate_id": "c234",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "pidLabel"
+   },
+   {
+    "candidate_id": "c235",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "readConThreadSelf"
+   },
+   {
+    "candidate_id": "c236",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "releaseLabel"
+   },
+   {
+    "candidate_id": "c237",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "reserveLabel"
+   },
+   {
+    "candidate_id": "c238",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "roFileLabel"
+   },
+   {
+    "candidate_id": "c239",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "securityCheckContext"
+   },
+   {
+    "candidate_id": "c240",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "setDisabled"
+   },
+   {
+    "candidate_id": "c241",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "setEnforceMode"
+   },
+   {
+    "candidate_id": "c242",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "setFSCreateLabel"
+   },
+   {
+    "candidate_id": "c243",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "setFileLabel"
+   },
+   {
+    "candidate_id": "c244",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "setKeyLabel"
+   },
+   {
+    "candidate_id": "c245",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "writeConThreadSelf"
+   },
+   {
+    "candidate_id": "c246",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "doLgetxattr"
+   },
+   {
+    "candidate_id": "c247",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "dogetxattr"
+   },
+   {
+    "candidate_id": "c248",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "getxattr"
+   },
+   {
+    "candidate_id": "c249",
+    "package_dir": "internal/third_party/selinux/go-selinux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "lgetxattr"
+   },
+   {
+    "candidate_id": "c250",
+    "package_dir": "internal/third_party/selinux/pkg/pwalk",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Walk"
+   },
+   {
+    "candidate_id": "c251",
+    "package_dir": "internal/third_party/selinux/pkg/pwalk",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "WalkN"
+   },
+   {
+    "candidate_id": "c252",
+    "package_dir": "internal/third_party/selinux/pkg/pwalkdir",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Walk"
+   },
+   {
+    "candidate_id": "c253",
+    "package_dir": "internal/third_party/selinux/pkg/pwalkdir",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "WalkN"
+   },
+   {
+    "candidate_id": "c256",
+    "package_dir": "internal/linux",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Readlinkat"
+   },
+   {
+    "candidate_id": "c260",
+    "package_dir": "internal/pathrs",
+    "rank": null,
+    "reason": "ADDED_BY_FIX",
+    "side": "NEW",
+    "symbol": "Reopen"
+   }
+  ],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "github.com/nektos/act": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 2.47,
+    "load_failed": false,
+    "vta_seconds": 7.69
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 40,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "CHANGED_FUNCTION_LEVEL",
+ "feasibility": {
+  "by_status": {},
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "NOT_REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "Mode 1 without curated vulndb symbols (CP10 stratum N): the verdict is decided by the functions the fix changed (CHANGED_FUNCTION_LEVEL), context-only ones excluded; a reachable changed function need not be the vulnerable one.",
+  "208 candidate function(s) not analysed: ADDED_BY_FIX.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ ],
+ "mode": "FIX",
+ "mode_selection": {
+  "chosen": "FIX",
+  "explanation": "the advisory names a fix commit and its diff is available: Mode 1 analyses every changed non-test function",
+  "reason": "FIX_COMMIT_KNOWN",
+  "requested": "AUTO"
+ },
+ "path_evidence": {
+  "dynamic_steps": null,
+  "evidence_level": "NO_ROUTE_SHOWN",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ },
+ "per_symbol": [
+  {
+   "candidate_id": "c1",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "mountEntry.createOpenMountpoint"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c2",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "setupUser"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c5",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/internal/pathrs",
+    "symbol": "MkdirAllInRoot"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c6",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/internal/pathrs",
+    "symbol": "MkdirAllInRootOpen"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c8",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/internal/pathrs",
+    "symbol": "Reopen"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c9",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "cleanupTmp"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c10",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "mountCgroupV1"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c11",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "mountCgroupV2"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c12",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "mountToRootfs"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c16",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "createDeviceNode"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c17",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "createMountpoint"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c20",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/utils",
+    "symbol": "IsLexicallyInRoot"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c21",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/utils",
+    "symbol": "MkdirAllInRoot"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c22",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/utils",
+    "symbol": "MkdirAllInRootOpen"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c23",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/utils",
+    "symbol": "Openat"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c24",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/utils",
+    "symbol": "ProcThreadSelfFd"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c32",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "maskPaths"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c33",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "mountPropagate"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c34",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "writeSystemProperty"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c35",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "linuxStandardInit.Init"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c37",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/internal/pathrs",
+    "symbol": "ProcPidOpen"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c38",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/internal/pathrs",
+    "symbol": "ProcSelfOpen"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c39",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/internal/pathrs",
+    "symbol": "ProcThreadSelfOpen"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c41",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/internal/pathrs",
+    "symbol": "procOpenReopen"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c44",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/internal/pathrs",
+    "symbol": "OpenInRoot"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c45",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/apparmor",
+    "symbol": "setProcAttr"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/apparmor was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/apparmor; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c46",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/utils",
+    "symbol": "EnsureProcHandle"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c47",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/utils",
+    "symbol": "fdRangeFrom"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c50",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "Container.prepareCriuRestoreMounts"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c51",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "bindMountDeviceNode"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c53",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "doTmpfsCopyUp"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c62",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer",
+    "symbol": "setRecAttr"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c63",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/utils",
+    "symbol": "CleanPath"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c65",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/utils",
+    "symbol": "stripRoot"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c66",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/utils",
+    "symbol": "WithProcfd"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c68",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/system",
+    "symbol": "Stat"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/system was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/system; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c255",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/internal/linux",
+    "symbol": "GetPtyPeer"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/linux was not found: no required module provides package github.com/opencontainers/selinux/internal/linux; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c257",
+   "decides_verdict": false,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/internal/linux",
+    "symbol": "SetMempolicy"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/linux was not found: no required module provides package github.com/opencontainers/selinux/internal/linux; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c259",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux",
+    "symbol": "runner.run"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux was not found: no required module provides package github.com/opencontainers/selinux; to add it:"
+    }
+   ]
+  },
+  {
+   "candidate_id": "c261",
+   "decides_verdict": true,
+   "evidence_level": "CHANGED_FUNCTION_LEVEL",
+   "linker_matched": [],
+   "main_package": "github.com/nektos/act",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "NO_PATH",
+    "LINKER_PRESENCE": "ABSENT"
+   },
+   "origin": "FIX_CHANGED",
+   "package_not_in_program": true,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
+   "paths": [],
+   "paths_omitted": null,
+   "pre_verifier_result": "NOT_REACHABLE",
+   "rank": null,
+   "reason_code": "VERIFIER_REJECTED",
+   "result": "CANT_DETERMINE",
+   "score": null,
+   "target": {
+    "package": "github.com/opencontainers/selinux/libcontainer/exeseal",
+    "symbol": "sealFile"
+   },
+   "verified_path": null,
+   "verifier_failures": [
+    {
+     "check": "TARGET_EXISTS",
+     "edge_index": null,
+     "path_index": null,
+     "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/exeseal was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/exeseal; to add it:"
+    }
+   ]
+  }
+ ],
+ "pre_policy_reason_codes": [
+  "VERIFIER_REJECTED"
+ ],
+ "pre_policy_verdict": "CANT_DETERMINE",
+ "provenance": {
+  "created_at": "2026-11-26T02:33:44Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": "792b9df",
+  "vulndb_commit": "e0bad56276e98711a598adbab976de7cd914013a"
+ },
+ "reason_codes": [
+  "VERIFIER_REJECTED"
+ ],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": "c1",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "mountEntry.createOpenMountpoint"
+  },
+  {
+   "candidate_id": "c2",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "setupUser"
+  },
+  {
+   "candidate_id": "c5",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/internal/pathrs",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "MkdirAllInRoot"
+  },
+  {
+   "candidate_id": "c6",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/internal/pathrs",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "MkdirAllInRootOpen"
+  },
+  {
+   "candidate_id": "c8",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/internal/pathrs",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "Reopen"
+  },
+  {
+   "candidate_id": "c9",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "cleanupTmp"
+  },
+  {
+   "candidate_id": "c10",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "mountCgroupV1"
+  },
+  {
+   "candidate_id": "c11",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "mountCgroupV2"
+  },
+  {
+   "candidate_id": "c12",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "mountToRootfs"
+  },
+  {
+   "candidate_id": "c16",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "createDeviceNode"
+  },
+  {
+   "candidate_id": "c17",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "createMountpoint"
+  },
+  {
+   "candidate_id": "c20",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/utils",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "IsLexicallyInRoot"
+  },
+  {
+   "candidate_id": "c21",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/utils",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "MkdirAllInRoot"
+  },
+  {
+   "candidate_id": "c22",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/utils",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "MkdirAllInRootOpen"
+  },
+  {
+   "candidate_id": "c23",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/utils",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Openat"
+  },
+  {
+   "candidate_id": "c24",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/utils",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "ProcThreadSelfFd"
+  },
+  {
+   "candidate_id": "c32",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "maskPaths"
+  },
+  {
+   "candidate_id": "c33",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "mountPropagate"
+  },
+  {
+   "candidate_id": "c34",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "writeSystemProperty"
+  },
+  {
+   "candidate_id": "c35",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "linuxStandardInit.Init"
+  },
+  {
+   "candidate_id": "c37",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/internal/pathrs",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "ProcPidOpen"
+  },
+  {
+   "candidate_id": "c38",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/internal/pathrs",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "ProcSelfOpen"
+  },
+  {
+   "candidate_id": "c39",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/internal/pathrs",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "ProcThreadSelfOpen"
+  },
+  {
+   "candidate_id": "c41",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/internal/pathrs",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "procOpenReopen"
+  },
+  {
+   "candidate_id": "c44",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/internal/pathrs",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "OpenInRoot"
+  },
+  {
+   "candidate_id": "c45",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/apparmor",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "setProcAttr"
+  },
+  {
+   "candidate_id": "c46",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/utils",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "EnsureProcHandle"
+  },
+  {
+   "candidate_id": "c47",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/utils",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "fdRangeFrom"
+  },
+  {
+   "candidate_id": "c50",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Container.prepareCriuRestoreMounts"
+  },
+  {
+   "candidate_id": "c51",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "bindMountDeviceNode"
+  },
+  {
+   "candidate_id": "c53",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "doTmpfsCopyUp"
+  },
+  {
+   "candidate_id": "c62",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "setRecAttr"
+  },
+  {
+   "candidate_id": "c63",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/utils",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "CleanPath"
+  },
+  {
+   "candidate_id": "c65",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/utils",
+   "rank": null,
+   "score": null,
+   "side": "OLD",
+   "symbol": "stripRoot"
+  },
+  {
+   "candidate_id": "c66",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/utils",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "WithProcfd"
+  },
+  {
+   "candidate_id": "c68",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/system",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "Stat"
+  },
+  {
+   "candidate_id": "c255",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/internal/linux",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "GetPtyPeer"
+  },
+  {
+   "candidate_id": "c257",
+   "context_only": true,
+   "decides_verdict": false,
+   "extra_reason": "CONTEXT_ONLY_EXTRA",
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/internal/linux",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "SetMempolicy"
+  },
+  {
+   "candidate_id": "c259",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "runner.run"
+  },
+  {
+   "candidate_id": "c261",
+   "context_only": false,
+   "decides_verdict": true,
+   "origin": "FIX_CHANGED",
+   "package": "github.com/opencontainers/selinux/libcontainer/exeseal",
+   "rank": null,
+   "score": null,
+   "side": "BOTH",
+   "symbol": "sealFile"
+  }
+ ],
+ "target_app": {
+  "commit": "6abb86789f54da787d1f8c32c1a295e0a9ecd0c3",
+  "commit_source": "EVIDENCE",
+  "dirty": null,
+  "module": "github.com/nektos/act",
+  "path": "<local>/data/cp10/d3c/hygiene/apps/github.com_nektos_act/6abb86789f54"
+ },
+ "target_policy": {
+  "curated_symbols": 0,
+  "deciding_targets": 32,
+  "extra_by_reason": {
+   "CONTEXT_ONLY_EXTRA": 8
+  },
+  "extra_targets": 8,
+  "policy": "HYGIENE",
+  "rule": "CP10 target hygiene, stratum N: the advisory has no curated vulndb symbols for this module; the fix's changed non-test functions decide, except context-only ones (none of their lines changed). A REACHABLE resting only on context-only targets is CANT_DETERMINE (ONLY_CONTEXT_TARGETS_REACHABLE); hygiene changes nothing else in this stratum.",
+  "stratum": "N"
+ },
+ "timing": {
+  "inspect_seconds": 0.08,
+  "methods_seconds": 10.15,
+  "symbols_seconds": 0.0,
+  "total_seconds": 10.34,
+  "verifier_seconds": 0.1
+ },
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.26.10",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "CANT_DETERMINE",
+ "verification": {
+  "checks_by_kind": {
+   "TARGET_EXISTS": {
+    "failed": 40,
+    "run": 40,
+    "skipped": 0
+   }
+  },
+  "checks_run": 40,
+  "downgraded": 40,
+  "failures": [
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "mountEntry.createOpenMountpoint"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "setupUser"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/internal/pathrs",
+     "symbol": "MkdirAllInRoot"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/internal/pathrs",
+     "symbol": "MkdirAllInRootOpen"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/internal/pathrs",
+     "symbol": "Reopen"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "cleanupTmp"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "mountCgroupV1"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "mountCgroupV2"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "mountToRootfs"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "createDeviceNode"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "createMountpoint"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/utils",
+     "symbol": "IsLexicallyInRoot"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/utils",
+     "symbol": "MkdirAllInRoot"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/utils",
+     "symbol": "MkdirAllInRootOpen"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/utils",
+     "symbol": "Openat"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/utils",
+     "symbol": "ProcThreadSelfFd"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "maskPaths"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "mountPropagate"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "writeSystemProperty"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "linuxStandardInit.Init"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/internal/pathrs",
+     "symbol": "ProcPidOpen"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/internal/pathrs",
+     "symbol": "ProcSelfOpen"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/internal/pathrs",
+     "symbol": "ProcThreadSelfOpen"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/internal/pathrs",
+     "symbol": "procOpenReopen"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/pathrs was not found: no required module provides package github.com/opencontainers/selinux/internal/pathrs; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/internal/pathrs",
+     "symbol": "OpenInRoot"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/apparmor was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/apparmor; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/apparmor",
+     "symbol": "setProcAttr"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/utils",
+     "symbol": "EnsureProcHandle"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/utils",
+     "symbol": "fdRangeFrom"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "Container.prepareCriuRestoreMounts"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "bindMountDeviceNode"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "doTmpfsCopyUp"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer was not found: no required module provides package github.com/opencontainers/selinux/libcontainer; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer",
+     "symbol": "setRecAttr"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/utils",
+     "symbol": "CleanPath"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/utils",
+     "symbol": "stripRoot"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/utils was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/utils; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/utils",
+     "symbol": "WithProcfd"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/system was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/system; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/system",
+     "symbol": "Stat"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/linux was not found: no required module provides package github.com/opencontainers/selinux/internal/linux; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/internal/linux",
+     "symbol": "GetPtyPeer"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/internal/linux was not found: no required module provides package github.com/opencontainers/selinux/internal/linux; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/internal/linux",
+     "symbol": "SetMempolicy"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux was not found: no required module provides package github.com/opencontainers/selinux; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux",
+     "symbol": "runner.run"
+    }
+   },
+   {
+    "check": "TARGET_EXISTS",
+    "edge_index": null,
+    "main_package": "github.com/nektos/act",
+    "path_index": null,
+    "reason": "MISSING: module github.com/opencontainers/selinux is in the build but package github.com/opencontainers/selinux/libcontainer/exeseal was not found: no required module provides package github.com/opencontainers/selinux/libcontainer/exeseal; to add it:",
+    "target": {
+     "package": "github.com/opencontainers/selinux/libcontainer/exeseal",
+     "symbol": "sealFile"
+    }
+   }
+  ],
+  "file_source": "analysed tree on disk",
+  "status": "FAILED"
+ }
+}
