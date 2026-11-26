@@ -5,7 +5,7 @@ This file is the single source of truth for where the build stands. Claude Code 
 ## Current
 
 - Current checkpoint: **CP10 - Verdict-level trust against govulncheck, target hygiene and honest evidence**
-- State: `IN_PROGRESS` (builder session 1 started 26 Nov 2026)
+- State: `AWAITING_ADJUDICATION` (builder session finished 26 Nov 2026; sheets in `docs/results/cp10/adjudication/`; report `reports/CP10_REPORT.md`, scoring sections pending)
 - Branch in use: `claude/wizardly-hamilton-0ft7q0`
 - Specification: [checkpoints/CP10.md](../implementation/checkpoints/CP10.md)
 
@@ -26,7 +26,7 @@ State values: `READY` → `IN_PROGRESS` → (`AWAITING_COLAB` / `AWAITING_ADJUDI
 | CP7b | Real applications (D3) and demo | APPROVED | claude/eloquent-newton-vr2093 | [CP7b_REPORT](reports/CP7b_REPORT.md) |
 | CP8 | Final report, README and interview notes (multi-agent dropped) | APPROVED | claude/vulntrace-ai-build-5f8jgi | [CP8_REPORT](reports/CP8_REPORT.md) |
 | CP9 | Path-feasibility filter for REACHABLE (downgrade-only) | APPROVED | claude/intelligent-planck-krrtgg, claude/elegant-mccarthy-wq32ck | [CP9_REPORT](reports/CP9_REPORT.md) |
-| CP10 | Verdict-level trust against govulncheck | IN_PROGRESS | claude/wizardly-hamilton-0ft7q0 | - |
+| CP10 | Verdict-level trust against govulncheck | AWAITING_ADJUDICATION | claude/wizardly-hamilton-0ft7q0 | [CP10_REPORT](reports/CP10_REPORT.md) (scoring pending) |
 
 ## Current checkpoint task list
 
@@ -44,13 +44,32 @@ CP10 (from `docs/implementation/checkpoints/CP10.md`; ticked when committed):
 - [x] 3b. Scoring renderer with the headline fixed before any D3c result
 - [x] 3c. D3c selection run (case list committed)
 - [x] 3d. D3c triage: VulnTrace new rules and `--legacy-targets`, govulncheck (source, symbol scan, pinned vulndb)
-- [ ] 4. Verdict-level adjudication sheets: every D3c case; truth-only items for the 7 D3 REACHABLE and the D3b non-REACHABLE cases; STATUS `AWAITING_ADJUDICATION`
+- [x] 4. Verdict-level adjudication sheets: every D3c case; truth-only items for the 7 D3 REACHABLE and the D3b non-REACHABLE cases; STATUS `AWAITING_ADJUDICATION`
 - [ ] 5. (second session, after adjudication) scoring: `docs/results/CP10_VERDICT_RESULTS.md` rendered by code
-- [ ] 6. Tests for hygiene, legacy reproduction, ranking and labels, sheets and scoring; CI green on the last commit
+- [x] 6. Tests for hygiene, legacy reproduction, ranking and labels, sheets and scoring; CI green on the last commit
 - [ ] 7. Report `docs/progress/reports/CP10_REPORT.md`; STATUS `AWAITING_REVIEW` (after scoring)
 
 ## Handoff notes
 
 Claude Code: if you stop before the checkpoint is complete, write here exactly what is done, what is half-done, and the very next step.
 
-(CP9 was approved on 20 Nov 2026 as a negative result; read the review notes at the end of CP7.md, CP7b.md and CP9.md - they bind CP10. D3/D3b evidence and checkouts are not in the repository: rebuild them with the CP7b/CP9 commands. When CP10 stops at AWAITING_ADJUDICATION, the supervisor fills the sheets and sets IN_PROGRESS on the builder branch.)
+**CP10, end of the builder session (26 Nov 2026), branch `claude/wizardly-hamilton-0ft7q0`.**
+
+Done: tasks 0-4 and 6 (hygiene, `--legacy-targets` reproduction of CP7/CP9, evidence labels, D3c rules/selection/run,
+govulncheck, sheets, renderer with the headline fixed before D3c results, tests). Not done: task 5 (scores need the filled
+sheet) and task 7 (final report and `AWAITING_REVIEW`).
+
+For the supervisor (adjudication): fill `docs/results/cp10/adjudication/adjudication.json` (34 items: 23 D3c cases, 7 D3
+truth-only, 4 D3b truth-only). Per item: `truth` (REACHABLE / NOT_REACHABLE / UNKNOWN, about the listed decision targets),
+`confidence`, `route` (when REACHABLE), `path_judgement` (only where `path_judgement_asked` is true), `by`, `note`, and set
+`filled: true`. Read the per-application Markdown files beside it. Then set the state to `IN_PROGRESS` on this branch.
+Decision for the supervisor: stratum N has 7 cases, below its quota of 8 (the 8-application cap was reached; no rule was
+relaxed) - accept, or release a change.
+
+For the scoring session (next step, exactly):
+1. Fast-forward onto this branch (CLAUDE.md section 5).
+2. `python -m vulntrace cp10 report` (no `--allow-unfilled`); it refuses to run if any item is unfilled or invalid.
+3. Copy the headline and tables from `docs/results/CP10_VERDICT_RESULTS.md` into sections 4-6 of `reports/CP10_REPORT.md`,
+   complete acceptance criteria 2, 6 and 9, check CI on the last commit, set `AWAITING_REVIEW`, commit, push.
+No re-run of any analysis is needed for scoring (it reads committed files). Rebuilding the sheets' source lines would need
+`data/cp10/` (not committed); re-create it with `python -m vulntrace cp10 run --set d3c|d3|d3b` under go1.26.10.
