@@ -42,9 +42,11 @@
       "properties": {
         "max_examined_paths": {"type": "integer", "minimum": 1},
         "max_states": {"type": "integer", "minimum": 1},
-        "max_contexts_per_node": {"type": "integer", "minimum": 1}
+        "max_contexts_per_node": {"type": "integer", "minimum": 1},
+        "rank_evidence": {"description": "CP10: also rank the examined paths and report ranked_path", "type": "boolean"}
       }
     },
+    "label_dynamic": {"description": "CP10, reach only: report dynamic_kind on every DYNAMIC edge", "type": "boolean"},
     "files": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
     "edges": {
       "type": "array",

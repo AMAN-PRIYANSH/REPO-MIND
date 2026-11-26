@@ -31,13 +31,15 @@ def _timed_run(timeout: float, *args, **kwargs):
 
 
 def default_vta(timeout: float = DEFAULT_TIMEOUT_S, limits: dict[str, int] | None = None, binary=None,
-                feasibility: dict[str, int] | None = None) -> MethodFn:
+                feasibility: dict[str, int] | None = None, label_dynamic: bool = False) -> MethodFn:
     """`feasibility` (CP9): helper settings of the path-feasibility filter, or None for none (the
-    pre-CP9 request, byte for byte)."""
-    if feasibility is None:
-        return partial(run_vta_method, timeout=timeout, limits=limits or DEFAULT_LIMITS, binary=binary)
-    return partial(run_vta_method, timeout=timeout, limits=limits or DEFAULT_LIMITS, binary=binary,
-                   feasibility=feasibility)
+    pre-CP9 request, byte for byte). `label_dynamic` (CP10): ask for the kind of DYNAMIC edges."""
+    kw: dict[str, Any] = {}
+    if feasibility is not None:
+        kw["feasibility"] = feasibility
+    if label_dynamic:
+        kw["label_dynamic"] = True
+    return partial(run_vta_method, timeout=timeout, limits=limits or DEFAULT_LIMITS, binary=binary, **kw)
 
 
 def default_linker(timeout: float = DEFAULT_BUILD_TIMEOUT_S) -> MethodFn:

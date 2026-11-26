@@ -22,11 +22,16 @@ DEFAULT_MAX_EXAMINED_PATHS = 20
 PATTERNS = ("F1", "F2", "F3")
 
 
-def helper_settings(max_examined_paths: int = DEFAULT_MAX_EXAMINED_PATHS) -> dict[str, int]:
-    """The helper request's `feasibility` object (the other limits keep the helper's defaults)."""
+def helper_settings(max_examined_paths: int = DEFAULT_MAX_EXAMINED_PATHS,
+                    rank_evidence: bool = False) -> dict[str, Any]:
+    """The helper request's `feasibility` object (the other limits keep the helper's defaults).
+    `rank_evidence` (CP10): also rank the examined paths (`pipeline.evidence`); False is the CP9 request."""
     if max_examined_paths < 1:
         raise ValueError("max_examined_paths must be at least 1")
-    return {"max_examined_paths": int(max_examined_paths)}
+    out: dict[str, Any] = {"max_examined_paths": int(max_examined_paths)}
+    if rank_evidence:
+        out["rank_evidence"] = True
+    return out
 
 
 def apply_filter(entries: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:

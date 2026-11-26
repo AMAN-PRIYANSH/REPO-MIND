@@ -75,7 +75,10 @@
             }
           },
           "pre_feasibility_result": {"description": "CP9: the rule-table result before the feasibility filter, which only turns REACHABLE into CANT_DETERMINE (PATHS_INFEASIBLE)", "$ref": "#/$defs/verdict_value"},
-          "extra_reason": {"$ref": "#/$defs/extra_reason"}
+          "extra_reason": {"$ref": "#/$defs/extra_reason"},
+          "path_checks": {"description": "CP10: which candidate paths of a REACHABLE entry passed every verifier path check", "type": "object"},
+          "shown_path": {"description": "CP10: the route shown for this REACHABLE entry (best verified path; DYNAMIC steps labelled confirmed false)", "$ref": "#/$defs/call_path"},
+          "path_evidence": {"$ref": "#/$defs/path_evidence"}
         },
         "allOf": [
           {
@@ -96,6 +99,7 @@
         "failures": {"type": "array"},
         "checks_by_kind": {"description": "CP7: {check kind: {run, failed, skipped}}", "type": "object"},
         "downgraded": {"description": "CP7: entries whose result the verifier changed to CANT_DETERMINE", "type": "integer", "minimum": 0},
+        "display_checks_by_kind": {"description": "CP10: checks of the filter's ranked path, counted apart (display only; they never change a result)", "type": "object"},
         "infeasible_claims_rejected": {"description": "CP9: PATHS_INFEASIBLE entries whose reported steps did not check out (reason becomes VERIFIER_REJECTED)", "type": "integer", "minimum": 0},
         "file_source": {"description": "CP7: where call-site files were read from", "type": "string"}
       }
@@ -155,6 +159,7 @@
     "toolchain": {"type": "object"},
     "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "timing": {"type": "object"},
+    "path_evidence": {"$ref": "#/$defs/path_evidence"},
     "target_policy": {
       "description": "CP10: the target-hygiene rules applied to this Mode 1 verdict (absent with --legacy-targets, in Mode 2 and with given targets)",
       "type": "object",
@@ -201,6 +206,16 @@
                              "APP_LOAD_FAILED", "NO_RELEASE_EVIDENCE", "INCOMPLETE_COVERAGE", "MODE2_NOT_REACHABLE_DOWNGRADED",
                              "PATHS_INFEASIBLE", "ONLY_CONTEXT_TARGETS_REACHABLE"]},
     "origin": {"enum": ["CURATED_CORE", "CURATED_DERIVED", "ROOT_CAUSE", "LIFTED", "ROOT_ONLY", "FIXTURE", "FIX_CHANGED", "RANKED_CANDIDATE", "USER", "VULNDB"]},
+    "path_evidence": {
+      "description": "CP10: how sure the shown route is. STATIC_PATH: no dynamic step; HAS_DYNAMIC_STEPS: dynamic_steps of them, each unconfirmed; NO_ROUTE_SHOWN: no verified route (not REACHABLE, or nothing verified)",
+      "type": "object",
+      "required": ["evidence_level"],
+      "properties": {
+        "evidence_level": {"enum": ["STATIC_PATH", "HAS_DYNAMIC_STEPS", "NO_ROUTE_SHOWN"]},
+        "dynamic_steps": {"type": ["integer", "null"], "minimum": 0},
+        "statement": {"type": "string", "minLength": 1}
+      }
+    },
     "extra_reason": {"description": "CP10 target hygiene: why a target is analysed but does not decide the verdict (FIX_CHANGED_EXTRA: a changed function where curated vulndb symbols decide; CONTEXT_ONLY_EXTRA: a changed function none of whose lines changed)", "enum": ["FIX_CHANGED_EXTRA", "CONTEXT_ONLY_EXTRA"]},
     "evidence_level": {"description": "TARGET_LEVEL: the symbols were given as the vulnerable ones; CHANGED_FUNCTION_LEVEL: Mode 1, any function the fix changed; CANDIDATE_LEVEL: Mode 2, a retrieved candidate", "enum": ["TARGET_LEVEL", "CHANGED_FUNCTION_LEVEL", "CANDIDATE_LEVEL"]},
     "target": {
@@ -262,7 +277,9 @@
                 "required": ["file", "line"],
                 "properties": {"file": {"type": "string"}, "line": {"type": "integer", "minimum": 0}}
               },
-              "kind": {"enum": ["STATIC", "DYNAMIC"]}
+              "kind": {"enum": ["STATIC", "DYNAMIC"]},
+              "dynamic_kind": {"description": "CP10: the kind of a DYNAMIC step", "enum": ["INTERFACE_METHOD", "CLOSURE_VIA_PARAMETER", "FUNCTION_VALUE", "MIXED", "UNKNOWN"]},
+              "confirmed": {"description": "CP10: false on every DYNAMIC step of a shown route (it may not run in this context)", "const": false}
             }
           }
         }

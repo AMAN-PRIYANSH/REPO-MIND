@@ -15,6 +15,9 @@ from pathlib import Path
 from typing import Any
 
 TITLE = "VulnTrace verdicts"
+# CP10: said on the page whatever the verdict files contain (pipeline.evidence.ROUTE_STATEMENT)
+ROUTE_STATEMENT = ("Route shown is an example from the call graph; steps marked unconfirmed may not run in this "
+                   "context.")
 CSP = "default-src 'none'; style-src 'unsafe-inline'; img-src 'none'; base-uri 'none'; form-action 'none'"
 
 CSS = """
@@ -91,8 +94,11 @@ def _path(p: dict[str, Any] | None) -> str:
     for e in p.get("edges") or []:
         cs = e.get("call_site") if (e.get("call_site") or {}).get("file") else {}   # Go's synthetic edges have none
         where = f"<code>{esc(cs.get('file'))}:{esc(cs.get('line'))}</code>" if cs else '<span class="muted">synthetic edge, no call site</span>'
+        label = esc(e.get("kind"))
+        if e.get("kind") == "DYNAMIC" and e.get("confirmed") is False:   # CP10 evidence label
+            label = f"DYNAMIC {esc(e.get('dynamic_kind'))}, unconfirmed"
         items.append(f"<li><code>{esc(e.get('caller'))}</code> calls <code>{esc(e.get('callee'))}</code> at {where} "
-                     f'<span class="kind">{esc(e.get("kind"))}</span></li>')
+                     f'<span class="kind">{label}</span></li>')
     items.append(f"<li>target {_target(p.get('target'))}</li>")
     return '<ol class="path">' + "".join(items) + "</ol>"
 
@@ -101,12 +107,14 @@ def _symbols(v: dict[str, Any]) -> str:
     syms = v.get("symbols") or []
     if not syms:
         return '<p class="muted">No target symbols.</p>'
-    head = "<tr><th>package</th><th>symbol</th><th>origin</th><th>rank</th><th>score</th><th>decides verdict</th><th>context only</th></tr>"
+    head = ("<tr><th>package</th><th>symbol</th><th>origin</th><th>rank</th><th>score</th><th>decides verdict</th>"
+            "<th>context only</th><th>extra evidence (why)</th></tr>")
     rows = "".join(
         f"<tr><td><code>{esc(s.get('package'))}</code></td><td><code>{esc(s.get('symbol'))}</code></td>"
         f"<td>{esc(s.get('origin'))}</td><td>{esc(s.get('rank'))}</td>"
         f"<td>{esc(round(s['score'], 4) if isinstance(s.get('score'), (int, float)) else s.get('score'))}</td>"
-        f"<td>{esc(s.get('decides_verdict'))}</td><td>{esc(s.get('context_only'))}</td></tr>" for s in syms)
+        f"<td>{esc(s.get('decides_verdict'))}</td><td>{esc(s.get('context_only'))}</td>"
+        f"<td>{esc(s.get('extra_reason'))}</td></tr>" for s in syms)
     return f'<div class="wrap"><table>{head}{rows}</table></div>'
 
 
@@ -125,11 +133,19 @@ def _entries(v: dict[str, Any]) -> str:
                 ("call graph (VTA)", esc(methods.get("CALLGRAPH_VTA"))),
                 ("linker presence", esc(methods.get("LINKER_PRESENCE"))),
                 ("package not in program", esc(e.get("package_not_in_program"))),
-                ("evidence level", esc(e.get("evidence_level")))]
+                ("evidence level", esc(e.get("evidence_level"))),
+                ("route evidence", esc((e.get("path_evidence") or {}).get("evidence_level"))
+                 + (f" ({esc(e['path_evidence'].get('dynamic_steps'))} dynamic step(s))"
+                    if (e.get("path_evidence") or {}).get("dynamic_steps") else ""))]
+        if e.get("extra_reason"):
+            rows.append(("extra evidence only", esc(e.get("extra_reason"))))
         if e.get("method_errors"):
             rows.append(("method errors", esc(e.get("method_errors"))))
         body = _kv_table(rows)
-        if e.get("verified_path"):
+        if e.get("shown_path"):
+            body += ("<h3>Route shown (an example from the call graph)</h3>" + _path(e["shown_path"])
+                     + f'<p class="note">{esc(ROUTE_STATEMENT)}</p>')
+        elif e.get("verified_path"):
             body += "<h3>Verified call path</h3>" + _path(e["verified_path"])
         elif e.get("paths"):
             body += "<h3>Call path (not verified)</h3>" + _path(e["paths"][0])
@@ -188,18 +204,30 @@ def verdict_section(v: dict[str, Any], index: int) -> str:
             ("mode", esc(v.get("mode")) + (f" <span class=\"muted\">({esc(ms.get('reason'))}: {esc(ms.get('explanation'))})</span>"
                                            if ms else "")),
             ("evidence level", esc(v.get("evidence_level"))),
+            ("route evidence", esc((v.get("path_evidence") or {}).get("evidence_level"))
+             + (f" ({esc(v['path_evidence'].get('dynamic_steps'))} dynamic step(s), each unconfirmed)"
+                if (v.get("path_evidence") or {}).get("dynamic_steps") else "")),
+            ("target rules", esc(_policy(v))),
             ("advisory", f"<code>{esc(adv.get('id') or v.get('case_id'))}</code> {esc(adv.get('summary'))}"),
             ("vulnerable module", f"<code>{esc(adv.get('module'))}</code>"),
             ("application", f"<code>{esc(app.get('module'))}</code> at <code>{esc(app.get('commit'))}</code>"),
             ("toolchain", f"{esc(helper.get('go_version'))}, x/tools {esc(helper.get('x_tools_version'))}, "
                           f"{esc((tc.get('env') or {}))}")]
     return (f'<h2 id="{anchor(v.get("case_id"), index)}">{esc(v.get("case_id"))}</h2>'
-            + f'<p class="note">{esc(v.get("statement"))}</p>' + _kv_table(head)
+            + f'<p class="note">{esc(v.get("statement"))} {esc(ROUTE_STATEMENT)}</p>' + _kv_table(head)
             + "<h3>Target symbols</h3>" + _symbols(v) + _retrieval(v)
             + "<h3>Per symbol and main package</h3>" + _entries(v)
             + "<h3>Evidence verifier</h3>" + _verification(v)
             + "<h3>Coverage</h3>" + _coverage(v)
             + "<h3>Limitations</h3><ul>" + "".join(f"<li>{esc(x)}</li>" for x in v.get("limitations") or []) + "</ul>")
+
+
+def _policy(v: dict[str, Any]) -> str | None:
+    tp = v.get("target_policy")
+    if not tp:
+        return None
+    return (f"CP10 target hygiene, stratum {tp.get('stratum')}: {tp.get('deciding_targets')} deciding target(s), "
+            f"{tp.get('extra_targets')} extra (never deciding)")
 
 
 def build_page(verdicts: list[tuple[str, dict[str, Any]]]) -> str:
@@ -215,8 +243,8 @@ def build_page(verdicts: list[tuple[str, dict[str, Any]]]) -> str:
             f"<title>{esc(TITLE)}</title><style>{CSS}</style></head><body><main>"
             f"<h1>{esc(TITLE)}</h1>"
             '<p class="muted">Reachability only: a verdict says whether a call path from a <code>main</code> package to '
-            "the vulnerable code exists in the call graph, never whether it is exploitable. Generated offline from verdict "
-            "files; no data leaves this page.</p>"
+            "the vulnerable code exists in the call graph, never whether it is exploitable. "
+            f"{esc(ROUTE_STATEMENT)} Generated offline from verdict files; no data leaves this page.</p>"
             f"<nav><ul>{nav}</ul></nav>{sections}</main></body></html>\n")
 
 

@@ -37,9 +37,9 @@ CP10 (from `docs/implementation/checkpoints/CP10.md`; ticked when committed):
 - [x] 0. STATUS IN_PROGRESS, branch recorded; environment checked
 - [x] 1a. Target hygiene in code: curated vulndb symbols decide (`origin: VULNDB`), changed functions kept as extra evidence; no curated symbols: changed functions minus `context_only`; only context targets reachable -> `CANT_DETERMINE` / `ONLY_CONTEXT_TARGETS_REACHABLE`
 - [ ] 1b. `--legacy-targets` reproduces CP7/CP9 verdicts exactly (test); hygiene never creates NOT_REACHABLE in stratum N (test)
-- [ ] 2a. Evidence ranking among the examined paths (filter pass, fewer DYNAMIC, shorter; N recorded)
-- [ ] 2b. DYNAMIC steps carry `confirmed: false` and their kind; verdict records the path evidence level (`STATIC_PATH` / `HAS_DYNAMIC_STEPS` with count)
-- [ ] 2c. Text output and demo page say "route shown is an example from the call graph; steps marked unconfirmed may not run in this context"
+- [x] 2a. Evidence ranking among the examined paths (filter pass, fewer DYNAMIC, shorter; N recorded)
+- [x] 2b. DYNAMIC steps carry `confirmed: false` and their kind; verdict records the path evidence level (`STATIC_PATH` / `HAS_DYNAMIC_STEPS` with count)
+- [x] 2c. Text output and demo page say "route shown is an example from the call graph; steps marked unconfirmed may not run in this context"
 - [ ] 3a. D3c rules, candidate list and seed committed before any D3c probe; selection code with strata S/N and quotas, D3/D3b apps excluded
 - [ ] 3b. Scoring renderer with the headline fixed before any D3c result
 - [ ] 3c. D3c selection run (case list committed)

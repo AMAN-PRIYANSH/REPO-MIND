@@ -21,6 +21,9 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from vulntrace.eval.triage_eval import example_verdict  # noqa: E402
 from vulntrace.methods.helper import ensure_helper  # noqa: E402
+from vulntrace.methods.callgraph import build_request  # noqa: E402
+from vulntrace.methods.helper import default_runner  # noqa: E402
+from vulntrace.paths import FEASIBILITY_FIXTURES_DIR as FFX  # noqa: E402
 from vulntrace.paths import FIXTURES_DIR as FX  # noqa: E402
 from vulntrace.pipeline import symbols as sy  # noqa: E402
 from vulntrace.pipeline import triage  # noqa: E402
@@ -33,7 +36,8 @@ FILE = "vulnlib/vulnlib.go"
 
 
 def sanitise(obj):
-    return json.loads(json.dumps(obj).replace(FX.resolve().as_posix(), "<local>"))
+    text = json.dumps(obj).replace(FX.resolve().as_posix(), "<local>").replace(FFX.resolve().as_posix(), "<local>")
+    return json.loads(text)
 
 
 def write(path: Path, obj) -> None:
@@ -81,7 +85,7 @@ SCENARIOS = {
 
 
 def record_verdicts(binary) -> dict:
-    runners = default_runners(binary=binary, feasibility=FEAS)
+    runners = default_runners(binary=binary, feasibility=FEAS, evidence=True)
     index = {}
     for name, (main, ctx, curated, policy, verdict, reasons, stratum) in SCENARIOS.items():
         req = triage.TriageRequest(case_id=f"cp10:{name}", app=FX, mode="fix", advisory=advisory(curated),
@@ -99,9 +103,56 @@ def record_verdicts(binary) -> dict:
     return index
 
 
+PARSE_FEAS = {"package": "vtfeas/vulnlib", "symbol": "Parse"}
+PARSE_FX = {"package": "vtfixtures/vulnlib", "symbol": "Parse"}
+# evidence recordings: name -> (app, main package, target, filter on?, verdict, evidence level)
+EVIDENCE = {
+    "evidence_dynamic_route": (FFX, "vtfeas/cmd/f1_iface_both", PARSE_FEAS, True, "REACHABLE", "HAS_DYNAMIC_STEPS"),
+    "evidence_filter_off": (FFX, "vtfeas/cmd/f1_iface_both", PARSE_FEAS, False, "REACHABLE", "HAS_DYNAMIC_STEPS"),
+    "evidence_static_route": (FX, "vtfixtures/cmd/direct_call", PARSE_FX, True, "REACHABLE", "STATIC_PATH"),
+    "evidence_not_reachable": (FX, "vtfixtures/cmd/dead_code", PARSE_FX, True, "NOT_REACHABLE", "NO_ROUTE_SHOWN"),
+}
+
+
+def record_evidence(binary) -> dict:
+    index = {}
+    for name, (app, main, target, filt, verdict, level) in EVIDENCE.items():
+        runners = default_runners(binary=binary, feasibility=FEAS if filt else None, evidence=True)
+        req = triage.TriageRequest(case_id=f"cp10:{name}", app=app, mode="targets", targets=[target],
+                                   mains=[main], max_mains=1, created_at=CREATED, repo_commit=None)
+        v = triage.run_triage(req, runners)
+        v["timing"] = {}
+        v = example_verdict(sanitise(v))
+        got = v["path_evidence"]["evidence_level"]
+        assert (v["verdict"], got) == (verdict, level), (name, v["verdict"], got)
+        write(OUT / "verdicts_evidence" / f"{name}.json", v)
+        index[name] = {"main": main, "filter": filt, "verdict": verdict, "evidence_level": got,
+                       "dynamic_steps": v["path_evidence"]["dynamic_steps"]}
+    # one raw helper response with the CP10 options, and the same request without them
+    import tempfile
+    for label, kw in (("reach_rank_label", {"label_dynamic": True, "feasibility": {**FEAS, "rank_evidence": True}}),
+                      ("reach_cp9_request", {"feasibility": FEAS})):
+        req = build_request("reach", FFX, "vtfeas/cmd/f1_iface_both", [PARSE_FEAS], **kw)
+        with tempfile.TemporaryDirectory(prefix="vt_cp10_record_") as tmp:
+            path = Path(tmp) / "request.json"
+            path.write_text(json.dumps(req), encoding="utf-8")
+            rc, out, _ = default_runner([str(binary), "reach", "--request", str(path)], 300)
+        resp = sanitise(json.loads(out))
+        resp["stats"]["duration_ms"] = 0
+        if (resp["stats"] or {}).get("feasibility"):
+            resp["stats"]["feasibility"]["duration_ms"] = 0
+        resp["stats"]["peak_rss_kb"] = None
+        write(OUT / "responses" / f"{label}.request.json", sanitise(req))
+        write(OUT / "responses" / f"{label}.json", resp)
+        index[label] = {"exit_code": rc}
+    write(OUT / "verdicts_evidence" / "index.json", index)
+    return index
+
+
 def main() -> None:
     binary = ensure_helper()
     print(json.dumps(record_verdicts(binary), indent=1))
+    print(json.dumps(record_evidence(binary), indent=1))
 
 
 if __name__ == "__main__":

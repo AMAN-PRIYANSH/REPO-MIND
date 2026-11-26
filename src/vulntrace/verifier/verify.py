@@ -43,6 +43,7 @@ from vulntrace.verifier.sources import FileSource
 FOUND, NOT_IN_BUILD, MISSING, UNKNOWN = "FOUND", "NOT_IN_BUILD", "MISSING", "UNKNOWN"
 FEASIBLE = "FEASIBLE"   # CP9 filter answer (pipeline.feasibility)
 EVIDENCE, STEP0 = -1, -2  # path_failures keys for the filter's evidence path and reported infeasible steps
+RANKED = "RANKED"         # CP10: path_failures key of the filter's ranked path (display only, never decides)
 
 
 class VerifierError(Exception):
@@ -214,14 +215,18 @@ def verify(verdict: dict[str, Any], ctx: VerifyContext) -> dict[str, Any]:
     files = _Files(ctx)
     located: dict[str, PackageLocation] = {}
     stats = {k: {"run": 0, "failed": 0, "skipped": 0} for k in ck.CHECK_KINDS}
+    # CP10: checks of the ranked path are counted apart, so the CP9 counts (and verdicts) are unchanged
+    display_stats = {k: {"run": 0, "failed": 0, "skipped": 0} for k in ck.CHECK_KINDS}
     failures_by_entry: dict[int, list[ck.Failure]] = {}
 
-    def count(kind: str, failed: bool, skipped: bool = False) -> None:
-        stats[kind]["run" if not skipped else "skipped"] += 1
+    def count(kind: str, failed: bool, skipped: bool = False, display: bool = False) -> None:
+        st = display_stats if display else stats
+        st[kind]["run" if not skipped else "skipped"] += 1
         if failed:
-            stats[kind]["failed"] += 1
+            st[kind]["failed"] += 1
 
     entries = after["per_symbol"]
+    ranked_wanted = any(_ranked_path(e) is not None for e in entries)
     # 1. target symbol exists at the analysed version
     for i, e in enumerate(entries):
         if e["result"] not in (REACHABLE, NOT_REACHABLE):
@@ -243,7 +248,7 @@ def verify(verdict: dict[str, Any], ctx: VerifyContext) -> dict[str, Any]:
             site = edge.get("call_site") or {}
             n, decls = files.info(site["file"]) if site.get("file") else (None, None)
             f = ck.check_site(edge, ei, n, decls)
-            count(ck.CALL_SITE, f is not None)
+            count(ck.CALL_SITE, f is not None, display=key == RANKED)
             if f:
                 fl.append(ck.Failure(f.check, f.reason, pi, ei))
             edges_wanted.setdefault(main, []).append((i, key, ei, edge))
@@ -261,6 +266,12 @@ def verify(verdict: dict[str, Any], ctx: VerifyContext) -> dict[str, Any]:
                       for x in ck.check_structure(path, e.get("main_package") or "", e["target"])]
                 count(ck.PATH_STRUCTURE, bool(fl))
                 check_edges(i, pi, shown, path.get("edges") or [], fl, e.get("main_package") or "")
+            ranked = _ranked_path(e)
+            if ranked is not None and not _same_path_as(ranked, [p for _, p in candidates]):
+                fl = [ck.Failure(x.check, x.reason, None, x.edge_index)
+                      for x in ck.check_structure(ranked, e.get("main_package") or "", e["target"])]
+                count(ck.PATH_STRUCTURE, bool(fl), display=True)
+                check_edges(i, RANKED, None, ranked.get("edges") or [], fl, e.get("main_package") or "")
         elif e["result"] == CANT_DETERMINE and e["reason_code"] == PATHS_INFEASIBLE:
             for k, ex in enumerate((e.get("feasibility") or {}).get("examined") or []):
                 st = ex.get("first_infeasible")
@@ -285,12 +296,12 @@ def verify(verdict: dict[str, Any], ctx: VerifyContext) -> dict[str, Any]:
         for i, pi, ei, edge in wanted:
             key = json.dumps([edge["caller"], edge["callee"], edge["call_site"]], sort_keys=True)
             if results is None:
-                count(ck.VERIFIER_ERROR, True)
+                count(ck.VERIFIER_ERROR, True, display=pi == RANKED)
                 path_failures[(i, pi)].append(ck.Failure(ck.VERIFIER_ERROR, err or "edges failed", pi, ei))
                 continue
             r = results[index[key]]
             ok = bool(r.get("exists")) and r.get("caller") == edge["caller"] and r.get("callee") == edge["callee"]
-            count(ck.EDGE_EXISTS, not ok)
+            count(ck.EDGE_EXISTS, not ok, display=pi == RANKED)
             if not ok:
                 path_failures[(i, pi)].append(ck.Failure(
                     ck.EDGE_EXISTS, f"call graph has no edge {edge['caller']} -> {edge['callee']} at "
@@ -324,6 +335,8 @@ def verify(verdict: dict[str, Any], ctx: VerifyContext) -> dict[str, Any]:
             elif not failures_by_entry.get(i) and evidence_ok:
                 e["verified_path"] = copy.deepcopy(feas["evidence_path"] if feas.get("status") == FEASIBLE
                                                    and feas.get("evidence_path") else paths[good])
+                if ranked_wanted:
+                    e["path_checks"] = _path_checks(e, paths, path_failures, i)
         elif e["result"] == CANT_DETERMINE and e["reason_code"] == PATHS_INFEASIBLE:
             step_fail: list[ck.Failure] = []
             for k, ex in enumerate(feas.get("examined") or []):
@@ -361,5 +374,40 @@ def verify(verdict: dict[str, Any], ctx: VerifyContext) -> dict[str, Any]:
     }
     if claims_rejected:
         after["verification"]["infeasible_claims_rejected"] = claims_rejected
+    if ranked_wanted:
+        after["verification"]["display_checks_by_kind"] = {k: v for k, v in display_stats.items() if any(v.values())}
     assert_downgrade_only(verdict, after)
     return after
+
+
+# --- CP10: the ranked path (display only) -------------------------------------------------------------
+def _ranked_path(entry: dict[str, Any]) -> dict[str, Any] | None:
+    f = entry.get("feasibility") or {}
+    if entry.get("result") == REACHABLE and f.get("status") == FEASIBLE and f.get("ranked_path"):
+        return f["ranked_path"]
+    return None
+
+
+def _same_path_as(path: dict[str, Any], others: list[dict[str, Any]]) -> bool:
+    return any(path == o for o in others)
+
+
+def _path_checks(e: dict[str, Any], paths: list[dict[str, Any]], path_failures: dict, i: int) -> dict[str, Any]:
+    """Which candidate paths of a REACHABLE entry passed every path check (CP10: the evidence stage
+    shows the best one; `pipeline.evidence`). The ranked path, when it equals another candidate,
+    has that candidate's outcome."""
+    feas = e.get("feasibility") or {}
+    method_ok = [pi for pi in range(len(paths)) if not path_failures.get((i, pi))]
+    evidence = feas.get("evidence_path") if feas.get("status") == FEASIBLE else None
+    evidence_ok = (not path_failures.get((i, EVIDENCE))) if evidence else None
+    ranked = _ranked_path(e)
+    ranked_ok = None
+    if ranked is not None:
+        if (i, RANKED) in path_failures:
+            ranked_ok = not path_failures[(i, RANKED)]
+        elif evidence is not None and ranked == evidence:
+            ranked_ok = evidence_ok
+        else:
+            same = [pi for pi in range(len(paths)) if paths[pi] == ranked]
+            ranked_ok = bool(same) and same[0] in method_ok
+    return {"method_paths_passed": method_ok, "evidence_path_passed": evidence_ok, "ranked_path_passed": ranked_ok}

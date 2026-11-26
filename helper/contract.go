@@ -51,6 +51,15 @@ const (
 	KindDynamic = "DYNAMIC"
 )
 
+// CP10: the kind of a DYNAMIC edge (only reported when a request sets label_dynamic).
+const (
+	DynInterfaceMethod    = "INTERFACE_METHOD"      // an interface method call (invoke mode)
+	DynClosureViaParam    = "CLOSURE_VIA_PARAMETER" // an anonymous function called through a parameter or free variable
+	DynFunctionValue      = "FUNCTION_VALUE"        // any other call through a function value
+	DynMixed              = "MIXED"                 // two call instructions of different kinds share caller, callee and line
+	RankFilterDynShortest = "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST"
+)
+
 const (
 	defaultMaxPaths      = 3
 	defaultMaxPathLength = 40
@@ -104,6 +113,9 @@ type Request struct {
 	External  bool     `json:"external"`   // callers/callees: also report functions outside the loaded module
 	// CP9: reach only. Absent means the old behaviour, byte for byte (no filter, no new fields).
 	Feasibility *FeasibilityRequest `json:"feasibility,omitempty"`
+	// CP10: reach only. True adds dynamic_kind to every DYNAMIC edge of every reported path; absent
+	// or false means the old output, byte for byte.
+	LabelDynamic bool `json:"label_dynamic,omitempty"`
 }
 
 type Error struct {
@@ -157,6 +169,8 @@ type PathEdge struct {
 	Callee   string `json:"callee"`
 	CallSite Site   `json:"call_site"`
 	Kind     string `json:"kind"`
+	// CP10: only with label_dynamic, only on DYNAMIC edges.
+	DynamicKind string `json:"dynamic_kind,omitempty"`
 }
 
 type CallPath struct {

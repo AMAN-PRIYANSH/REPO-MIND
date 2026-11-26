@@ -1,0 +1,36 @@
+{
+ "evidence_dynamic_route": {
+  "dynamic_steps": 1,
+  "evidence_level": "HAS_DYNAMIC_STEPS",
+  "filter": true,
+  "main": "vtfeas/cmd/f1_iface_both",
+  "verdict": "REACHABLE"
+ },
+ "evidence_filter_off": {
+  "dynamic_steps": 1,
+  "evidence_level": "HAS_DYNAMIC_STEPS",
+  "filter": false,
+  "main": "vtfeas/cmd/f1_iface_both",
+  "verdict": "REACHABLE"
+ },
+ "evidence_not_reachable": {
+  "dynamic_steps": null,
+  "evidence_level": "NO_ROUTE_SHOWN",
+  "filter": true,
+  "main": "vtfixtures/cmd/dead_code",
+  "verdict": "NOT_REACHABLE"
+ },
+ "evidence_static_route": {
+  "dynamic_steps": 0,
+  "evidence_level": "STATIC_PATH",
+  "filter": true,
+  "main": "vtfixtures/cmd/direct_call",
+  "verdict": "REACHABLE"
+ },
+ "reach_cp9_request": {
+  "exit_code": 0
+ },
+ "reach_rank_label": {
+  "exit_code": 0
+ }
+}

@@ -114,6 +114,23 @@ func edgeSiteKind(prog *ssa.Program, rel relativizer, e *callgraph.Edge) (Site, 
 	return site, kind
 }
 
+// dynamicKind classifies a dynamic call edge (CP10): an interface method call; an anonymous
+// function called through a parameter or a free variable (a closure handed in by a caller); or
+// any other call through a function value.
+func dynamicKind(e *callgraph.Edge) string {
+	c := e.Site.Common()
+	if c.IsInvoke() {
+		return DynInterfaceMethod
+	}
+	if e.Callee.Func != nil && e.Callee.Func.Parent() != nil {
+		switch c.Value.(type) {
+		case *ssa.Parameter, *ssa.FreeVar:
+			return DynClosureViaParam
+		}
+	}
+	return DynFunctionValue
+}
+
 // reduceFull converts an SSA call graph into a graph, keeping only what is reachable from roots,
 // and returns the node -> function mapping as well.
 func reduceFull(prog *ssa.Program, cg *callgraph.Graph, rootFns []*ssa.Function, rel relativizer) (*graph, []int, map[*types.Func][]int, reduced) {
@@ -150,7 +167,11 @@ func reduceFull(prog *ssa.Program, cg *callgraph.Graph, rootFns []*ssa.Function,
 		}
 		for _, e := range n.Out {
 			site, kind := edgeSiteKind(prog, rel, e)
-			b.edge(from, add(e.Callee.Func), site, kind)
+			dyn := ""
+			if kind == KindDynamic {
+				dyn = dynamicKind(e)
+			}
+			b.edgeDyn(from, add(e.Callee.Func), site, kind, dyn)
 		}
 	}
 	g, ids := b.freeze()
@@ -185,6 +206,7 @@ func runReach(req *Request, stderr io.Writer) (any, *Stats, *Error) {
 	if err != nil {
 		return nil, nil, err
 	}
+	a.g.labelDyn = req.LabelDynamic
 	results := make([]TargetResult, 0, len(req.Targets))
 	targetIDs := make([][]int, 0, len(req.Targets))
 	for _, t := range req.Targets {

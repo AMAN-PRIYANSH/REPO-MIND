@@ -68,6 +68,9 @@ type FeasibilityRequest struct {
 	MaxExaminedPaths   int `json:"max_examined_paths"`
 	MaxStates          int `json:"max_states"`
 	MaxContextsPerNode int `json:"max_contexts_per_node"`
+	// CP10: also rank the examined paths (filter pass, then fewer DYNAMIC steps, then shorter) and
+	// report the best as ranked_path, with each examined path's dynamic_steps. False: the CP9 output.
+	RankEvidence bool `json:"rank_evidence,omitempty"`
 }
 
 // InfeasibleStep is the first step of a path that cannot run, with the edges that carry the
@@ -83,6 +86,7 @@ type InfeasibleStep struct {
 type ExaminedPath struct {
 	Length          int             `json:"length"`
 	FirstInfeasible *InfeasibleStep `json:"first_infeasible"`
+	DynamicSteps    *int            `json:"dynamic_steps,omitempty"` // CP10, with rank_evidence only
 }
 
 type FeasibilityResult struct {
@@ -93,6 +97,12 @@ type FeasibilityResult struct {
 	EvidencePath      *CallPath      `json:"evidence_path"`
 	EvidenceSource    *string        `json:"evidence_source"`
 	UndecidedReason   *string        `json:"undecided_reason"`
+	// CP10, with rank_evidence only, and only when the status is FEASIBLE: the best path by
+	// RankRule among the examined paths that pass the filter (RankedIndex: its position in
+	// Examined), or the state search's evidence path when none of them passes (RankedIndex nil).
+	RankRule    *string   `json:"rank_rule,omitempty"`
+	RankedPath  *CallPath `json:"ranked_path,omitempty"`
+	RankedIndex *int      `json:"ranked_index,omitempty"`
 }
 
 type FeasibilityStats struct {
@@ -1224,7 +1234,7 @@ func (fa *feas) checkPath(p foundPath) *InfeasibleStep {
 }
 
 func (fa *feas) pathEdge(e gEdge) PathEdge {
-	return PathEdge{Caller: fa.g.nodes[e.From].Name(), Callee: fa.g.nodes[e.To].Name(), CallSite: e.Site, Kind: e.Kind}
+	return fa.g.pathEdge(e)
 }
 
 func (fa *feas) edgeIndex(e gEdge) int {
@@ -1511,10 +1521,20 @@ func (fa *feas) forTarget(t Target, targetIDs []int, dist []int) *FeasibilityRes
 	sort.Ints(ids)
 	paths, truncated := fa.shortestN(ids, dist, fa.lim.MaxExaminedPaths)
 	res.ExaminedTruncated = truncated
-	var evidence *foundPath
+	var evidence, ranked *foundPath
+	rankedIdx, rankedDyn := -1, 0
 	for i := range paths {
 		step := fa.checkPath(paths[i])
-		res.Examined = append(res.Examined, ExaminedPath{Length: len(paths[i].Edges), FirstInfeasible: step})
+		ex := ExaminedPath{Length: len(paths[i].Edges), FirstInfeasible: step}
+		if fa.lim.RankEvidence {
+			d := dynamicSteps(paths[i])
+			ex.DynamicSteps = &d
+			// paths come shortest first, so a strict comparison keeps the shorter (then earlier) one
+			if step == nil && (ranked == nil || d < rankedDyn) {
+				ranked, rankedIdx, rankedDyn = &paths[i], i, d
+			}
+		}
+		res.Examined = append(res.Examined, ex)
 		if step == nil && evidence == nil {
 			evidence = &paths[i]
 			res.EvidenceSource = strp(EvidenceExamined)
@@ -1557,6 +1577,16 @@ func (fa *feas) forTarget(t Target, targetIDs []int, dist []int) *FeasibilityRes
 	}
 	if res.Status != FeasFeasible {
 		res.EvidenceSource = nil
+	}
+	if fa.lim.RankEvidence && res.Status == FeasFeasible {
+		res.RankRule = strp(RankFilterDynShortest)
+		if ranked != nil {
+			cp := toCallPath(fa.g, t, *ranked)
+			res.RankedPath, res.RankedIndex = &cp, &rankedIdx
+		} else if res.EvidencePath != nil {
+			cp := *res.EvidencePath
+			res.RankedPath = &cp
+		}
 	}
 	return res
 }

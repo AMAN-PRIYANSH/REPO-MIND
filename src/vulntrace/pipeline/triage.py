@@ -18,7 +18,7 @@ from typing import Any
 
 from vulntrace import __version__
 from vulntrace.methods.helper import CONTRACT_VERSION
-from vulntrace.pipeline import aggregate, analyse as an, app as app_mod, feasibility as fz, symbols as sy
+from vulntrace.pipeline import aggregate, analyse as an, app as app_mod, evidence as ev, feasibility as fz, symbols as sy
 from vulntrace.verdict import (APP_LOAD_FAILED, CANT_DETERMINE, NO_FIX_EVIDENCE, NO_RELEASE_EVIDENCE,
                                NO_TARGET_SYMBOLS, REACHABLE, SCHEMA_VERSION, STATEMENT, UNSUPPORTED_TARGET)
 
@@ -59,6 +59,9 @@ class Runners:
     # CP9: the helper settings the vta runner was built with (`fz.helper_settings`), or None when the
     # filter is off; then the output is exactly the pre-CP9 output.
     feasibility: dict[str, int] | None = None
+    # CP10: run the evidence stage (`pipeline.evidence`: shown route, `confirmed` labels, path evidence
+    # level). It only adds keys; False is the CP9 output.
+    evidence: bool = False
 
 
 @dataclass
@@ -362,6 +365,9 @@ def run_triage(req: TriageRequest, runners: Runners) -> dict[str, Any]:
                          else "KEEP: a Mode 2 NOT_REACHABLE is reported as it is."}
     aggregate.assert_downgrade_only(pre_verifier, out)
     out["limitations"] = _limitations(mode, req, info, not_covered, out["per_symbol"], retrieval, lift_note)
+    if runners.evidence:
+        out = ev.label_verdict(out)
+        out["limitations"].append(ev.ROUTE_STATEMENT)
     timing["total_seconds"] = round(time.monotonic() - t_start, 2)
     out["timing"] = timing
     return out

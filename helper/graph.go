@@ -8,6 +8,10 @@ type graph struct {
 	nodes []node
 	out   [][]gEdge
 	index map[string][]int // full name -> node ids (normally one)
+	// CP10: the kind of each DYNAMIC edge (reach graphs only; not part of edge identity, so the
+	// graph, its paths and its edge count are exactly as before) and whether to report it.
+	dyn      map[gEdge]string
+	labelDyn bool
 }
 
 type node struct {
@@ -33,6 +37,7 @@ type graphBuilder struct {
 	nodes []node
 	ids   map[string]int
 	edges []gEdge
+	dyn   []string // aligned with edges; "" when unknown or static
 }
 
 func newGraphBuilder() *graphBuilder { return &graphBuilder{ids: map[string]int{}} }
@@ -50,7 +55,13 @@ func (b *graphBuilder) node(key string, n node) int {
 }
 
 func (b *graphBuilder) edge(from, to int, site Site, kind string) {
+	b.edgeDyn(from, to, site, kind, "")
+}
+
+// edgeDyn is edge with the kind of a DYNAMIC call (CP10).
+func (b *graphBuilder) edgeDyn(from, to int, site Site, kind, dyn string) {
 	b.edges = append(b.edges, gEdge{From: from, To: to, Site: site, Kind: kind})
+	b.dyn = append(b.dyn, dyn)
 }
 
 // freeze renumbers nodes by (name, key) and sorts and de-duplicates edges.
@@ -75,8 +86,17 @@ func (b *graphBuilder) freeze() (*graph, map[string]int) {
 		g.index[name] = append(g.index[name], newID)
 	}
 	seen := map[gEdge]bool{}
-	for _, e := range b.edges {
+	for i, e := range b.edges {
 		e.From, e.To = remap[e.From], remap[e.To]
+		if d := b.dyn[i]; d != "" {
+			if g.dyn == nil {
+				g.dyn = map[gEdge]string{}
+			}
+			if old, ok := g.dyn[e]; ok && old != d {
+				d = DynMixed
+			}
+			g.dyn[e] = d
+		}
 		if !seen[e] {
 			seen[e] = true
 			g.out[e.From] = append(g.out[e.From], e)
@@ -231,9 +251,30 @@ func toCallPath(g *graph, t Target, p foundPath) CallPath {
 	cp := CallPath{Target: t, Edges: []PathEdge{}}
 	cp.Entry = Target{Package: g.nodes[p.Root].Pkg, Symbol: g.nodes[p.Root].Sym}
 	for _, e := range p.Edges {
-		cp.Edges = append(cp.Edges, PathEdge{
-			Caller: g.nodes[e.From].Name(), Callee: g.nodes[e.To].Name(), CallSite: e.Site, Kind: e.Kind,
-		})
+		cp.Edges = append(cp.Edges, g.pathEdge(e))
 	}
 	return cp
+}
+
+// pathEdge is the reported form of a graph edge; with labelDyn a DYNAMIC edge carries its kind.
+func (g *graph) pathEdge(e gEdge) PathEdge {
+	pe := PathEdge{Caller: g.nodes[e.From].Name(), Callee: g.nodes[e.To].Name(), CallSite: e.Site, Kind: e.Kind}
+	if g.labelDyn && e.Kind == KindDynamic {
+		pe.DynamicKind = g.dyn[e]
+		if pe.DynamicKind == "" {
+			pe.DynamicKind = DynFunctionValue
+		}
+	}
+	return pe
+}
+
+// dynamicSteps counts the DYNAMIC edges of a path.
+func dynamicSteps(p foundPath) int {
+	n := 0
+	for _, e := range p.Edges {
+		if e.Kind == KindDynamic {
+			n++
+		}
+	}
+	return n
 }

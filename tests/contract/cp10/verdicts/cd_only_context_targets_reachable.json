@@ -37,9 +37,9 @@
    "vtfixtures/cmd/direct_call": {
     "error_codes": [],
     "first_error": null,
-    "linker_seconds": 2.69,
+    "linker_seconds": 0.17,
     "load_failed": false,
-    "vta_seconds": 1.05
+    "vta_seconds": 0.93
    }
   },
   "release_range_status": null,
@@ -63,7 +63,8 @@
   "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
   "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
   "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
-  "Mode 1 without curated vulndb symbols (CP10 stratum N): the verdict is decided by the functions the fix changed (CHANGED_FUNCTION_LEVEL), context-only ones excluded; a reachable changed function need not be the vulnerable one."
+  "Mode 1 without curated vulndb symbols (CP10 stratum N): the verdict is decided by the functions the fix changed (CHANGED_FUNCTION_LEVEL), context-only ones excluded; a reachable changed function need not be the vulnerable one.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
  ],
  "mode": "FIX",
  "mode_selection": {
@@ -71,6 +72,11 @@
   "explanation": "mode FIX was requested",
   "reason": "REQUESTED",
   "requested": "FIX"
+ },
+ "path_evidence": {
+  "dynamic_steps": null,
+  "evidence_level": "NO_ROUTE_SHOWN",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
  },
  "per_symbol": [
   {
@@ -103,12 +109,36 @@
     "evidence_source": "EXAMINED_PATH",
     "examined": [
      {
+      "dynamic_steps": 0,
       "first_infeasible": null,
       "length": 1
      }
     ],
     "examined_truncated": false,
     "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_index": 0,
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/direct_call/main.go",
+        "line": 10
+       },
+       "callee": "vtfixtures/vulnlib.Parse",
+       "caller": "vtfixtures/cmd/direct_call.main",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "vtfixtures/cmd/direct_call",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "vtfixtures/vulnlib",
+      "symbol": "Parse"
+     }
+    },
     "status": "FEASIBLE",
     "undecided_reason": null
    },
@@ -123,6 +153,27 @@
    },
    "origin": "FIX_CHANGED",
    "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 3,
+    "dynamic_kinds": {},
+    "dynamic_steps": 0,
+    "evidence_level": "STATIC_PATH",
+    "examined_paths": 1,
+    "filter_status": "FEASIBLE",
+    "length": 1,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": true,
+    "source": "FILTER_RANKED_PATH"
+   },
    "paths": [
     {
      "edges": [
@@ -153,6 +204,27 @@
    "reason_code": null,
    "result": "REACHABLE",
    "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/direct_call/main.go",
+       "line": 10
+      },
+      "callee": "vtfixtures/vulnlib.Parse",
+      "caller": "vtfixtures/cmd/direct_call.main",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "vtfixtures/cmd/direct_call",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "vtfixtures/vulnlib",
+     "symbol": "Parse"
+    }
+   },
    "target": {
     "package": "vtfixtures/vulnlib",
     "symbol": "Parse"
@@ -193,6 +265,15 @@
    },
    "origin": "FIX_CHANGED",
    "package_not_in_program": false,
+   "path_evidence": {
+    "candidates": 0,
+    "dynamic_steps": null,
+    "evidence_level": "NO_ROUTE_SHOWN",
+    "examined_paths": null,
+    "filter_status": null,
+    "max_examined_paths": null,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter"
+   },
    "paths": [],
    "paths_omitted": null,
    "pre_verifier_result": "NOT_REACHABLE",
@@ -251,7 +332,7 @@
   }
  ],
  "target_app": {
-  "commit": "a44929d36d50862a1fa52951bd128361670294c9",
+  "commit": "02317a19a7d6a0fd5b03a78ed085a302233edad4",
   "commit_source": "GIT_HEAD",
   "dirty": false,
   "module": "vtfixtures",
@@ -325,9 +406,10 @@
    }
   },
   "checks_run": 10,
+  "display_checks_by_kind": {},
   "downgraded": 0,
   "failures": [],
-  "file_source": "git show a44929d36d50862a1fa52951bd128361670294c9",
+  "file_source": "git show 02317a19a7d6a0fd5b03a78ed085a302233edad4",
   "status": "PASSED"
  }
 }

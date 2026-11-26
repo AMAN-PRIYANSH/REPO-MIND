@@ -1,0 +1,518 @@
+{
+ "advisory": {
+  "fix_commits": [],
+  "fixed_in": null,
+  "id": "cp10:evidence_dynamic_route",
+  "module": null,
+  "source": "vulndb",
+  "vulnerable_at": null
+ },
+ "case_id": "cp10:evidence_dynamic_route",
+ "coverage": {
+  "app_list_error": null,
+  "complete": true,
+  "fix_evidence_status": null,
+  "lifting": {
+   "added": 0,
+   "reason": "not reached",
+   "rule": null,
+   "run": false
+  },
+  "main_packages": [
+   "vtfeas/cmd/f1_iface_both"
+  ],
+  "main_packages_skipped": [],
+  "max_mains": 1,
+  "not_covered": [],
+  "package_errors": [],
+  "package_errors_total": 0,
+  "per_main": {
+   "vtfeas/cmd/f1_iface_both": {
+    "error_codes": [],
+    "first_error": null,
+    "linker_seconds": 0.15,
+    "load_failed": false,
+    "vta_seconds": 0.76
+   }
+  },
+  "release_range_status": null,
+  "symbols_analysed": 1,
+  "symbols_lifted": 0
+ },
+ "evidence_level": "TARGET_LEVEL",
+ "feasibility": {
+  "by_status": {
+   "FEASIBLE": 1
+  },
+  "downgraded": 0,
+  "enabled": true,
+  "max_examined_paths": 20,
+  "pre_filter_reason_codes": [],
+  "pre_filter_verdict": "REACHABLE"
+ },
+ "limitations": [
+  "Reachability only: a call path from main or init to a symbol does not show that the vulnerable behaviour can be triggered or exploited.",
+  "Analysed for this machine's GOOS/GOARCH with CGO_ENABLED=0 and no build tags; other build configurations can differ.",
+  "Calls made only through reflect or unsafe can be missed by the call graph; a NOT_REACHABLE needs the linker method to agree (symbol absent from the binary), which guards against that (CP2).",
+  "1 edge(s) of the verified path(s) are DYNAMIC (interface or function-value calls resolved by VTA), which can over-approximate.",
+  "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ ],
+ "mode": "TARGETS",
+ "mode_selection": {
+  "chosen": "TARGETS",
+  "explanation": "target symbols were given directly",
+  "reason": "TARGETS_GIVEN",
+  "requested": "TARGETS"
+ },
+ "path_evidence": {
+  "dynamic_kinds": {
+   "INTERFACE_METHOD": 1
+  },
+  "dynamic_steps": 1,
+  "entry": {
+   "main_package": "vtfeas/cmd/f1_iface_both",
+   "target": {
+    "package": "vtfeas/vulnlib",
+    "symbol": "Parse"
+   }
+  },
+  "evidence_level": "HAS_DYNAMIC_STEPS",
+  "length": 4,
+  "passes_filter": true,
+  "source": "FILTER_RANKED_PATH",
+  "statement": "Route shown is an example from the call graph; steps marked unconfirmed may not run in this context."
+ },
+ "per_symbol": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "evidence_level": "TARGET_LEVEL",
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 30
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.report",
+       "caller": "vtfeas/cmd/f1_iface_both.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 24
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.emit",
+       "caller": "vtfeas/cmd/f1_iface_both.report",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 19
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.evil.Write",
+       "caller": "vtfeas/cmd/f1_iface_both.emit",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 16
+       },
+       "callee": "vtfeas/vulnlib.Parse",
+       "caller": "vtfeas/cmd/f1_iface_both.evil.Write",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "vtfeas/cmd/f1_iface_both",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "vtfeas/vulnlib",
+      "symbol": "Parse"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "dynamic_steps": 1,
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/f1_iface_both/main.go",
+          "line": 29
+         },
+         "callee": "vtfeas/cmd/f1_iface_both.emit",
+         "caller": "vtfeas/cmd/f1_iface_both.main",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "cmd/f1_iface_both/main.go",
+         "line": 19
+        },
+        "callee": "vtfeas/cmd/f1_iface_both.evil.Write",
+        "caller": "vtfeas/cmd/f1_iface_both.emit",
+        "dynamic_kind": "INTERFACE_METHOD",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 1,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/f1_iface_both/main.go:29 is `*os.File`; the dynamic call at cmd/f1_iface_both/main.go:19 can only reach its method, not vtfeas/cmd/f1_iface_both.evil.Write (receiver `vtfeas/cmd/f1_iface_both.evil`)"
+      },
+      "length": 3
+     },
+     {
+      "dynamic_steps": 1,
+      "first_infeasible": null,
+      "length": 4
+     }
+    ],
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "rank_rule": "FILTER_PASS_THEN_FEWEST_DYNAMIC_THEN_SHORTEST",
+    "ranked_index": 1,
+    "ranked_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 30
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.report",
+       "caller": "vtfeas/cmd/f1_iface_both.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 24
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.emit",
+       "caller": "vtfeas/cmd/f1_iface_both.report",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 19
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.evil.Write",
+       "caller": "vtfeas/cmd/f1_iface_both.emit",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 16
+       },
+       "callee": "vtfeas/vulnlib.Parse",
+       "caller": "vtfeas/cmd/f1_iface_both.evil.Write",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "vtfeas/cmd/f1_iface_both",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "vtfeas/vulnlib",
+      "symbol": "Parse"
+     }
+    },
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "linker_matched": [
+    "vtfeas/vulnlib.Parse"
+   ],
+   "main_package": "vtfeas/cmd/f1_iface_both",
+   "method_errors": {},
+   "methods": {
+    "CALLGRAPH_VTA": "PATH_FOUND",
+    "LINKER_PRESENCE": "PRESENT"
+   },
+   "origin": "USER",
+   "package_not_in_program": false,
+   "path_checks": {
+    "evidence_path_passed": true,
+    "method_paths_passed": [
+     0
+    ],
+    "ranked_path_passed": true
+   },
+   "path_evidence": {
+    "candidates": 3,
+    "dynamic_kinds": {
+     "INTERFACE_METHOD": 1
+    },
+    "dynamic_steps": 1,
+    "evidence_level": "HAS_DYNAMIC_STEPS",
+    "examined_paths": 2,
+    "filter_status": "FEASIBLE",
+    "length": 4,
+    "max_examined_paths": 20,
+    "passes_filter": true,
+    "rank_order": "passes the CP9 filter, then fewer DYNAMIC steps, then shorter",
+    "same_as_verified_path": true,
+    "source": "FILTER_RANKED_PATH"
+   },
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 29
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.emit",
+       "caller": "vtfeas/cmd/f1_iface_both.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 19
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.evil.Write",
+       "caller": "vtfeas/cmd/f1_iface_both.emit",
+       "dynamic_kind": "INTERFACE_METHOD",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 16
+       },
+       "callee": "vtfeas/vulnlib.Parse",
+       "caller": "vtfeas/cmd/f1_iface_both.evil.Write",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "vtfeas/cmd/f1_iface_both",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "vtfeas/vulnlib",
+      "symbol": "Parse"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "pre_feasibility_result": "REACHABLE",
+   "pre_verifier_result": "REACHABLE",
+   "rank": null,
+   "reason_code": null,
+   "result": "REACHABLE",
+   "score": null,
+   "shown_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/f1_iface_both/main.go",
+       "line": 30
+      },
+      "callee": "vtfeas/cmd/f1_iface_both.report",
+      "caller": "vtfeas/cmd/f1_iface_both.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/f1_iface_both/main.go",
+       "line": 24
+      },
+      "callee": "vtfeas/cmd/f1_iface_both.emit",
+      "caller": "vtfeas/cmd/f1_iface_both.report",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/f1_iface_both/main.go",
+       "line": 19
+      },
+      "callee": "vtfeas/cmd/f1_iface_both.evil.Write",
+      "caller": "vtfeas/cmd/f1_iface_both.emit",
+      "confirmed": false,
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/f1_iface_both/main.go",
+       "line": 16
+      },
+      "callee": "vtfeas/vulnlib.Parse",
+      "caller": "vtfeas/cmd/f1_iface_both.evil.Write",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "vtfeas/cmd/f1_iface_both",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   },
+   "target": {
+    "package": "vtfeas/vulnlib",
+    "symbol": "Parse"
+   },
+   "verified_path": {
+    "edges": [
+     {
+      "call_site": {
+       "file": "cmd/f1_iface_both/main.go",
+       "line": 30
+      },
+      "callee": "vtfeas/cmd/f1_iface_both.report",
+      "caller": "vtfeas/cmd/f1_iface_both.main",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/f1_iface_both/main.go",
+       "line": 24
+      },
+      "callee": "vtfeas/cmd/f1_iface_both.emit",
+      "caller": "vtfeas/cmd/f1_iface_both.report",
+      "kind": "STATIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/f1_iface_both/main.go",
+       "line": 19
+      },
+      "callee": "vtfeas/cmd/f1_iface_both.evil.Write",
+      "caller": "vtfeas/cmd/f1_iface_both.emit",
+      "dynamic_kind": "INTERFACE_METHOD",
+      "kind": "DYNAMIC"
+     },
+     {
+      "call_site": {
+       "file": "cmd/f1_iface_both/main.go",
+       "line": 16
+      },
+      "callee": "vtfeas/vulnlib.Parse",
+      "caller": "vtfeas/cmd/f1_iface_both.evil.Write",
+      "kind": "STATIC"
+     }
+    ],
+    "entry": {
+     "package": "vtfeas/cmd/f1_iface_both",
+     "symbol": "main"
+    },
+    "target": {
+     "package": "vtfeas/vulnlib",
+     "symbol": "Parse"
+    }
+   },
+   "verifier_failures": []
+  }
+ ],
+ "pre_policy_reason_codes": [],
+ "pre_policy_verdict": "REACHABLE",
+ "provenance": {
+  "created_at": "2026-11-26T00:00:00Z",
+  "helper_contract": "1.0",
+  "pipeline_version": "0.1.0",
+  "repo_commit": null,
+  "vulndb_commit": null
+ },
+ "reason_codes": [],
+ "retrieval": null,
+ "schema_version": "1.0",
+ "statement": "Reachability only. This verdict does not assess exploitability.",
+ "symbols": [
+  {
+   "candidate_id": null,
+   "decides_verdict": true,
+   "origin": "USER",
+   "package": "vtfeas/vulnlib",
+   "rank": null,
+   "score": null,
+   "side": null,
+   "symbol": "Parse"
+  }
+ ],
+ "target_app": {
+  "commit": "02317a19a7d6a0fd5b03a78ed085a302233edad4",
+  "commit_source": "GIT_HEAD",
+  "dirty": false,
+  "module": "vtfeas",
+  "path": "<local>"
+ },
+ "timing": {},
+ "toolchain": {
+  "env": {
+   "CGO_ENABLED": "0",
+   "GOPROXY": "off",
+   "GOTOOLCHAIN": "local"
+  },
+  "helper": {
+   "go_version": "go1.24.7",
+   "goarch": "amd64",
+   "goos": "linux",
+   "x_tools_version": "v0.42.0"
+  },
+  "linker": {
+   "build_flags": [
+    "-gcflags=all=-l"
+   ],
+   "go_version": "go1.24.7",
+   "goarch": "amd64",
+   "goos": "linux"
+  }
+ },
+ "verdict": "REACHABLE",
+ "verification": {
+  "checks_by_kind": {
+   "CALL_SITE": {
+    "failed": 0,
+    "run": 7,
+    "skipped": 0
+   },
+   "EDGE_EXISTS": {
+    "failed": 0,
+    "run": 7,
+    "skipped": 0
+   },
+   "FILTERED_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "PATH_STRUCTURE": {
+    "failed": 0,
+    "run": 2,
+    "skipped": 0
+   },
+   "REACHABLE_HAS_PATH": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   },
+   "TARGET_EXISTS": {
+    "failed": 0,
+    "run": 1,
+    "skipped": 0
+   }
+  },
+  "checks_run": 19,
+  "display_checks_by_kind": {},
+  "downgraded": 0,
+  "failures": [],
+  "file_source": "git show 02317a19a7d6a0fd5b03a78ed085a302233edad4",
+  "status": "PASSED"
+ }
+}

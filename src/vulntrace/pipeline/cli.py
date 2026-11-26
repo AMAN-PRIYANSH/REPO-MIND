@@ -7,7 +7,8 @@ from pathlib import Path
 from typing import Any
 
 from vulntrace.methods.helper import DEFAULT_TIMEOUT_S, HelperError, ensure_helper
-from vulntrace.pipeline import aggregate, analyse as an, app as app_mod, feasibility as fz, inputs, triage
+from vulntrace.pipeline import aggregate, analyse as an, app as app_mod, evidence as ev, feasibility as fz, inputs, triage
+from vulntrace.pipeline import symbols as sy
 from vulntrace.schemas import validation_errors
 
 EXIT_OK, EXIT_UNEXPECTED, EXIT_INVALID_INPUT, EXIT_MISSING_PREREQUISITE = 0, 1, 2, 3
@@ -49,23 +50,35 @@ def add_parser(sub) -> None:
     tr.add_argument("--max-examined-paths", type=int, default=fz.DEFAULT_MAX_EXAMINED_PATHS,
                     help="CP9: shortest call paths examined per target for the filter's explanation (N, default "
                          f"{fz.DEFAULT_MAX_EXAMINED_PATHS}; the decision itself searches every path)")
+    tr.add_argument("--legacy-targets", action="store_true",
+                    help="CP10: Mode 1 targets as in CP7/CP9 (every changed function decides); default: the CP10 "
+                         "target hygiene (curated vulndb symbols decide when the advisory has them; context-only "
+                         "changed functions never decide)")
+    tr.add_argument("--format", default="json", choices=["json", "text"],
+                    help="json: the verdict JSON (default); text: a short summary with the route shown and its labels")
     tr.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT_S, help="seconds per helper call (default 300)")
     tr.add_argument("--build-timeout", type=float, default=an.DEFAULT_BUILD_TIMEOUT_S,
                     help="seconds per linker build (default 600)")
     tr.add_argument("--out", default=None, help="also write the verdict JSON to this file")
 
 
-def feasibility_settings(args) -> dict[str, int] | None:
-    """CP9: the helper's filter settings from --no-feasibility / --max-examined-paths (None: off)."""
+def feasibility_settings(args, rank_evidence: bool = False) -> dict[str, int] | None:
+    """CP9: the helper's filter settings from --no-feasibility / --max-examined-paths (None: off).
+    `rank_evidence` (CP10): also rank the examined paths."""
     if getattr(args, "no_feasibility", False):
         return None
-    return fz.helper_settings(getattr(args, "max_examined_paths", fz.DEFAULT_MAX_EXAMINED_PATHS))
+    return fz.helper_settings(getattr(args, "max_examined_paths", fz.DEFAULT_MAX_EXAMINED_PATHS), rank_evidence)
 
 
 def default_runners(timeout: float = DEFAULT_TIMEOUT_S, build_timeout: float = an.DEFAULT_BUILD_TIMEOUT_S,
-                    binary: Path | None = None, feasibility: dict[str, int] | None = None) -> triage.Runners:
+                    binary: Path | None = None, feasibility: dict[str, int] | None = None,
+                    evidence: bool = False) -> triage.Runners:
     """The real methods: Go helper (VTA, edges, funcs, lift), `go build` + `go tool nm`, `go list`.
-    `feasibility` (CP9): the filter's helper settings, or None for the pre-CP9 pipeline."""
+    `feasibility` (CP9): the filter's helper settings, or None for the pre-CP9 pipeline.
+    `evidence` (CP10): the helper ranks the examined paths (when the filter runs) and labels DYNAMIC
+    edges, and the pipeline adds the evidence labels; False is the CP9 pipeline."""
+    if evidence and feasibility is not None and not feasibility.get("rank_evidence"):
+        feasibility = {**feasibility, "rank_evidence": True}
     from vulntrace.methods.lift import run_lift
     from vulntrace.verifier import verify as vf
     from vulntrace.verifier.sources import FileSource
@@ -80,9 +93,9 @@ def default_runners(timeout: float = DEFAULT_TIMEOUT_S, build_timeout: float = a
     def lift(module_dir: Path, seeds: list[dict[str, str]], rule: str) -> list[dict[str, Any]]:
         return run_lift(module_dir, seeds, rules=[rule], timeout=timeout, binary=binary)
 
-    return triage.Runners(vta=an.default_vta(timeout, binary=binary, feasibility=feasibility),
+    return triage.Runners(vta=an.default_vta(timeout, binary=binary, feasibility=feasibility, label_dynamic=evidence),
                           linker=an.default_linker(build_timeout), verifier_ctx=verifier_ctx, lift=lift,
-                          feasibility=feasibility)
+                          feasibility=feasibility, evidence=evidence)
 
 
 def repo_commit() -> str | None:
@@ -117,6 +130,7 @@ def build_request(args) -> triage.TriageRequest:
         fix_evidence=ev["fix_evidence"], release_range=ev["release_range"], candidate_code=ev["candidate_code"],
         module_rel=args.module_rel, mains=args.main, max_mains=args.max_mains, commit=args.commit, k=args.k,
         retriever=args.retriever, lift_rule=args.lift, mode2_policy=args.mode2_policy, run_verifier=not args.no_verify,
+        target_policy=sy.POLICY_LEGACY if getattr(args, "legacy_targets", False) else sy.POLICY_HYGIENE,
         vulndb_commit=vulndb.pinned_commit() if advisory.get("_source") == "vulndb" else advisory.get("source", {}).get("vulndb_commit"),
         repo_commit=repo_commit())
 
@@ -133,7 +147,7 @@ def cmd_triage(args) -> int:
         print(f"missing prerequisite: {exc.code}: {exc.message}", file=sys.stderr)
         return EXIT_MISSING_PREREQUISITE
     verdict = triage.run_triage(req, default_runners(args.timeout, args.build_timeout, binary,
-                                                     feasibility_settings(args)))
+                                                     feasibility_settings(args), evidence=True))
     errors = validation_errors("verdict", verdict)
     if errors:
         print("internal error: verdict violates schemas/verdict.schema.json: " + "; ".join(errors[:5]), file=sys.stderr)
@@ -142,5 +156,6 @@ def cmd_triage(args) -> int:
     if args.out:
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         Path(args.out).write_text(text + "\n", encoding="utf-8")
-    print(text)
+    print(ev.text_summary(verdict) if getattr(args, "format", "json") == "text" else text, end="" if
+          getattr(args, "format", "json") == "text" else "\n")
     return EXIT_OK

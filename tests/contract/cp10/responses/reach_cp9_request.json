@@ -1,0 +1,175 @@
+{
+ "contract_version": "1.0",
+ "mode": "reach",
+ "ok": true,
+ "results": [
+  {
+   "error": null,
+   "feasibility": {
+    "evidence_path": {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 30
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.report",
+       "caller": "vtfeas/cmd/f1_iface_both.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 24
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.emit",
+       "caller": "vtfeas/cmd/f1_iface_both.report",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 19
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.evil.Write",
+       "caller": "vtfeas/cmd/f1_iface_both.emit",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 16
+       },
+       "callee": "vtfeas/vulnlib.Parse",
+       "caller": "vtfeas/cmd/f1_iface_both.evil.Write",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "vtfeas/cmd/f1_iface_both",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "vtfeas/vulnlib",
+      "symbol": "Parse"
+     }
+    },
+    "evidence_source": "EXAMINED_PATH",
+    "examined": [
+     {
+      "first_infeasible": {
+       "context_edges": [
+        {
+         "call_site": {
+          "file": "cmd/f1_iface_both/main.go",
+          "line": 29
+         },
+         "callee": "vtfeas/cmd/f1_iface_both.emit",
+         "caller": "vtfeas/cmd/f1_iface_both.main",
+         "kind": "STATIC"
+        }
+       ],
+       "edge": {
+        "call_site": {
+         "file": "cmd/f1_iface_both/main.go",
+         "line": 19
+        },
+        "callee": "vtfeas/cmd/f1_iface_both.evil.Write",
+        "caller": "vtfeas/cmd/f1_iface_both.emit",
+        "kind": "DYNAMIC"
+       },
+       "edge_index": 1,
+       "pattern": "F1",
+       "reason": "the argument passed at cmd/f1_iface_both/main.go:29 is `*os.File`; the dynamic call at cmd/f1_iface_both/main.go:19 can only reach its method, not vtfeas/cmd/f1_iface_both.evil.Write (receiver `vtfeas/cmd/f1_iface_both.evil`)"
+      },
+      "length": 3
+     },
+     {
+      "first_infeasible": null,
+      "length": 4
+     }
+    ],
+    "examined_truncated": false,
+    "max_examined_paths": 20,
+    "status": "FEASIBLE",
+    "undecided_reason": null
+   },
+   "matched_functions": [
+    "vtfeas/vulnlib.Parse"
+   ],
+   "package_not_in_program": false,
+   "paths": [
+    {
+     "edges": [
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 29
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.emit",
+       "caller": "vtfeas/cmd/f1_iface_both.main",
+       "kind": "STATIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 19
+       },
+       "callee": "vtfeas/cmd/f1_iface_both.evil.Write",
+       "caller": "vtfeas/cmd/f1_iface_both.emit",
+       "kind": "DYNAMIC"
+      },
+      {
+       "call_site": {
+        "file": "cmd/f1_iface_both/main.go",
+        "line": 16
+       },
+       "callee": "vtfeas/vulnlib.Parse",
+       "caller": "vtfeas/cmd/f1_iface_both.evil.Write",
+       "kind": "STATIC"
+      }
+     ],
+     "entry": {
+      "package": "vtfeas/cmd/f1_iface_both",
+      "symbol": "main"
+     },
+     "target": {
+      "package": "vtfeas/vulnlib",
+      "symbol": "Parse"
+     }
+    }
+   ],
+   "paths_omitted": null,
+   "result": "PATH_FOUND",
+   "shortest_length": 3,
+   "target": {
+    "package": "vtfeas/vulnlib",
+    "symbol": "Parse"
+   }
+  }
+ ],
+ "stats": {
+  "callgraph_edges": 2937,
+  "callgraph_nodes": 922,
+  "duration_ms": 0,
+  "feasibility": {
+   "approximate_states": 0,
+   "duration_ms": 0,
+   "field_index_functions": 5897,
+   "max_contexts_per_node": 64,
+   "max_examined_paths": 20,
+   "max_states": 4000000,
+   "nodes_over_context_cap": 0,
+   "state_limit_hit": false,
+   "states": 934
+  },
+  "packages_loaded": 53,
+  "peak_rss_kb": null
+ },
+ "toolchain": {
+  "go_version": "go1.24.7",
+  "goarch": "amd64",
+  "goos": "linux",
+  "x_tools_version": "v0.42.0"
+ }
+}

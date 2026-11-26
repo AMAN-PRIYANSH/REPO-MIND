@@ -18,9 +18,10 @@ DEFAULT_LIMITS = {"max_paths_per_target": 3, "max_path_length": 40}
 
 def build_request(mode: str, module_dir: Path, main_package: str, targets: list[dict[str, str]],
                   limits: dict[str, int] | None = None, tags: list[str] | None = None,
-                  feasibility: dict[str, int] | None = None) -> dict[str, Any]:
+                  feasibility: dict[str, int] | None = None, label_dynamic: bool = False) -> dict[str, Any]:
     """`feasibility` (CP9, reach only): ask the helper to run the path-feasibility filter. None
-    leaves the request exactly as before CP9."""
+    leaves the request exactly as before CP9. `label_dynamic` (CP10, reach only): the helper reports
+    the kind of every DYNAMIC edge; False leaves the request as before."""
     req = {
         "contract_version": CONTRACT_VERSION,
         "mode": mode,
@@ -32,6 +33,8 @@ def build_request(mode: str, module_dir: Path, main_package: str, targets: list[
     }
     if feasibility is not None:
         req["feasibility"] = dict(feasibility)
+    if label_dynamic:
+        req["label_dynamic"] = True
     return req
 
 
@@ -79,11 +82,13 @@ def to_method_results(method: str, main_package: str, targets: list[dict[str, st
 def run_callgraph(module_dir: Path, main_package: str, targets: list[dict[str, str]], *,
                   mode: str = "reach", method: str = METHOD, timeout: float = DEFAULT_TIMEOUT_S,
                   limits: dict[str, int] | None = None, binary: Path | None = None,
-                  runner=None, feasibility: dict[str, int] | None = None) -> list[dict[str, Any]]:
+                  runner=None, feasibility: dict[str, int] | None = None,
+                  label_dynamic: bool = False) -> list[dict[str, Any]]:
     started = time.monotonic()
     response, error = None, None
     try:
-        request = build_request(mode, module_dir, main_package, targets, limits, feasibility=feasibility)
+        request = build_request(mode, module_dir, main_package, targets, limits, feasibility=feasibility,
+                                label_dynamic=label_dynamic)
         response = run_helper(mode, request, binary=binary, timeout=timeout, runner=runner)
     except HelperError as exc:
         error = exc
